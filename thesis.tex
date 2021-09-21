@@ -1,0 +1,102 @@
+\documentclass[12pt,a4paper, twoside]{book}
+\title{My beautiful dissertation}
+\author{My Name}
+\date{\today}
+\def\degree{Doctor of Philosophy}
+\def\discipline{Applied Mathematics}
+
+
+% Any packages should go here
+\usepackage{graphicx,natbib,thesis} 
+\usepackage[twoside,left=2cm,right=2cm,bindingoffset=1cm]{geometry}
+\usepackage{amssymb,amsmath}
+\usepackage{mathrsfs}
+\usepackage{color}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{multirow}
+\allowdisplaybreaks
+
+\newtheorem{defn}{Definition}[section]
+\newtheorem{lem}[defn]{Lemma}
+\newtheorem{prop}[defn]{Proposition}
+\newtheorem{theo}[defn]{Theorem}
+\newtheorem{thm}[defn]{Theorem}
+\newtheorem{cor}[defn]{Corollary}
+\newtheorem{rem}[defn]{Remark}
+\newtheorem{ass}[defn]{Assumption}
+\newtheorem{example}[defn]{Example}
+\newcounter{asu}[defn]
+\newtheorem{asu}[defn]{Assumptions}
+\newcounter{subassumption}[asu]
+\renewcommand{\thesubassumption}{(\textit{\roman{subassumption}})}
+\makeatletter
+\renewcommand{\p@subassumption}{\theasu}% Counter prefix.
+\makeatother
+\newcommand{\subasu}{% Just like \item in a list, but for an asu
+  \refstepcounter{subassumption}%
+  \thesubassumption~\ignorespaces}
+\newcounter{property}[defn]
+\newtheorem{property}[defn]{Properties}
+\newcounter{subproperty}[property]
+\renewcommand{\thesubproperty}{(\textit{\roman{subproperty}})}
+\makeatletter
+\renewcommand{\p@subproperty}{\theproperty}% Counter prefix.
+\makeatother
+\newcommand{\subproperty}{% Just like \item in a list, but for a property
+  \refstepcounter{subproperty}%
+  \thesubproperty~\ignorespaces}
+
+\newcommand{\wrt}{\, \mathrm{d}} 
+\newcommand{\diag}{\mathrm{diag}} 
+\newcommand{\var}{\mathrm{Var}} 
+\newcommand{\calD}{\mathcal{D}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\bs}{\boldsymbol}
+\newcommand{\bb}{\mathbb}
+\newcommand{\wt}{\widetilde}
+\newcommand{\vligne}[1]{\begin{bmatrix} #1 \end{bmatrix}}
+
+\begin{document}
+\frontmatter
+
+\maketitle
+
+% Make the following tables
+\tableofcontents
+\listoftables
+\listoffigures
+
+% Import the various things
+\include{front/statement}
+\include{front/acknowledgements}
+\include{front/dedication}
+\include{front/abstract}
+
+\mainmatter
+
+% Import the chapter files
+\include{chapter1/chapter}
+\include{chapter2/chapter}
+\include{chapter3/chapter}
+% add as many as you like
+
+\appendix
+% Import the appendices 
+\include{appendix1/appendix} 
+\include{appendix2/appendix} 
+
+\backmatter
+% Add the bibliography to the table of contents
+\addcontentsline{toc}{chapter}{Bibliography}
+
+% What style to use and what file to use for the bibliography
+\bibliographystyle{agsm}
+\bibliography{bibliography/thesis}
+
+\end{document}
+
