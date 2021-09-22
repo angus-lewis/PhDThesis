@@ -3,7 +3,7 @@
 \section{Some bounds for integrating against matrix exponential distributions.}\label{appendix: bounds}
 This appendix proves some technical Lemmas about integrating functions with respect to matrix exponential distributions. 
 
-As with Section~\ref{sec: conv}, we use the superscript \((p)\) to denote dependence on the underlying choice of matrix exponential random variable \(Z^{(p)}\). However, to simplify notation, we omit the super script \((p)\) where possible. We show results for an arbitrary parameter \(\varepsilon>0\). Keep in mind the ultimate intention is to show convergence, for which we choose this parameter to be \(\varepsilon^{(p)}=\var\left(Z^{(p)}\right)^{1/3}\). Other notations, previously defined and which depend on \(p\) are \(\bs\alpha^{(p)},\) \(\bs \alpha_0^{i,\ell_0,(p)}(x_0),\) \(\bs S^{(p)},\) \(\bs s^{(p)},\) \(\varepsilon^{(p)},\) \(R_{V,1}^{(p)},\) \(R_{V,2}^{(p)},\) \(\bs D^{(p)},\) \( \mathcal A^{(p)}\).
+As with Section~\ref{sec: conv}, we use the superscript \((p)\) to denote dependence on the underlying choice of matrix exponential random variable \(Z^{(p)}\). However, to simplify notation, we omit the super script \((p)\) where possible. We show results for an arbitrary parameter \(\varepsilon>0\). Keep in mind the ultimate intention is to show convergence, for which we choose this parameter to be \(\varepsilon^{(p)}=\var\left(Z^{(p)}\right)^{1/3}\). Other notations, previously defined and which depend on \(p\) are \(\bs\alpha^{(p)},\) \(\bs \alpha_0^{i,\ell_0,(p)}(x_0),\) \(\bs S^{(p)},\) \(\bs s^{(p)},\) \(\varepsilon^{(p)},\) \(V^{(p)}(x),\) \(R_{V,1}^{(p)},\) \(R_{V,2}^{(p)},\) \(\bs D^{(p)},\) \( \mathcal A^{(p)}\).
 
 \subsection{One integral}\label{appendix: int one}
  Here we show a collection of results that show that integrating functions against a ME density function, or against the density function of a ME conditional on the ME-life-time surviving until some time \(u<\Delta-\varepsilon\) where \(\Delta = \mathbb E[Z]\) is the mean of the matrix exponential distribution, approximates integrating said function against a Kronecker delta situated at the \(\Delta\), provided the variance of the ME is sufficiently low. %(Lemma~\ref{lemma:bound}, Corollaries \ref{cor: cond bnd}, \ref{cor: cond bnd 2}). 
@@ -302,72 +302,63 @@ The error term \(r_3^{(p)}\) depends on \(p\), as it is defined by \(Z^{(p)}\) a
 	Putting all the bounds together proves the result. 
 \end{proof}
 
-\begin{lem}
-	Let \(f:[0,\Delta)\to \mathbb R\) be any bounded, Lipschitz continuous function with \(|\psi(x)|\leq F\). Then for \(u\leq \Delta-\varepsilon\), \(v\in[0,\Delta)\)
-	\begin{align}
-		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E[f(\bar X(t))1(\varphi(t)=j, L(t)=\ell_0, L(s)=\ell_0, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid L(0)=\ell_0, \nonumber
-		\\&\qquad{} \bs A(0)=\bs a_{\ell_0,i}(x_0), \varphi(0)=i]\wrt t \nonumber
-		\\&= \int_{t=0}^\infty e^{-\lambda t}\mathbb E[\psi(X(t))1(\varphi(t)=j,X(s)\in\calD_{\ell_0}, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid X(0)=x_0, \varphi(0)=i]\wrt t \nonumber
-		\\&\qquad {} + r_{11}^{(p)}
-	\end{align}
-	where 
-	\[|r_{11}^{(p)}| \leq F R_{V,2}+ GF\varepsilon.\]
-\end{lem}
-\begin{proof}
-	Assume, without loss of generality \(\ell_0=0\) so \(\calD_{\ell_0}=[0,\Delta]\). First observe that 
-	\begin{align}
-		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E[f(\bar X(t))1(\varphi(t)=j, L(t)=\ell_0, L(s)=\ell_0, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid L(0)=\ell_0, \nonumber
-		\\&\qquad{} \bs A(0)=\bs a_{\ell_0,i}(x_0), \varphi(0)=i]\wrt t \nonumber 
-		\\&= \int_{x_1=0}^\infty \int_{x=[0,\Delta)} \cfrac{\bs \alpha e^{\bs S(x_1+x_0+x)}\bs s}{\bs \alpha e^{\bs S x_0} \bs e}h_{ij}^{++}(\lambda, x_1)f(\Delta-x)\wrt x\wrt x_1
-	\end{align}
-	and 
-	\begin{align}
-		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E[\psi(X(t))1(\varphi(t)=j,X(s)\in\calD_{\ell_0}, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid X(0)=x_0, \varphi(0)=i]\wrt t \nonumber
-		\\&=  \int_{x=0}^{\Delta-x_0} h_{ij}^{++}(\lambda, x)\psi(X_0 + x)\wrt x
-	\end{align}
-	In Property \ref{properties: 2} take \(g(x) = h_{ij}^{--}(\lambda, x)\), which states 
-	\begin{align}
-		&\int_{x_1=0}^\infty \int_{x=0}^\Delta\cfrac{\bs \alpha e^{\bs S(x_1+x_0+x)}\bs s}{\bs \alpha e^{\bs S x_0} \bs e}h_{ij}^{++}(\lambda, x_1)f(\Delta-x)\wrt x\wrt x_1 \nonumber
-		\\& = \int_{x=0}^{\Delta}h_{ij}^{++}(\lambda,\Delta - x_0 - x)1(x+x_0\leq \Delta-\varepsilon)f(\Delta - x)\wrt x + \int_{x=0}^\Delta r_V(x_0,x)\psi(x)\wrt x. 
-	\end{align}
-	The second term is less than or equal to 
-	\[F\int_{x=0}^\Delta r_V(x_0,x)\wrt x = FR_{V,1}.\]
-	The first term is 
-	\[\int_{x=0}^{\Delta-x_0}h_{ij}^{++}(\lambda,\Delta - x_0 - x)f(\Delta - x)\wrt x - \int_{x=\Delta-x_0-\varepsilon}^{\Delta-x_0}h_{ij}^{++}(\lambda,\Delta - x_0 - x)f(\Delta - x)\wrt x.\]
-	Now 
-	\[\int_{x=\Delta-x_0-\varepsilon}^{\Delta-x_0}h_{ij}^{++}(\lambda,\Delta - x_0 - x)f(\Delta - x)\wrt x\leq GF\varepsilon\]
-	and 
-	\[\int_{x=0}^{\Delta-x_0}h_{ij}^{++}(\lambda,\Delta - x_0 - x)f(\Delta - x)\wrt x=\int_{x=0}^{\Delta-x_0}h_{ij}^{++}(\lambda,x)\psi(x_0+x)\wrt x.\]
-\end{proof}
+%\begin{lem}
+%	Let \(f:[0,\Delta)\to \mathbb R\) be any bounded, Lipschitz continuous function with \(|\psi(x)|\leq F\). Then for \(u\leq \Delta-\varepsilon\), \(v\in[0,\Delta)\)
+%	\begin{align}
+%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E[f(\bar X(t))1(\varphi(t)=j, L(t)=\ell_0, L(s)=\ell_0, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid L(0)=\ell_0, \nonumber
+%		\\&\qquad{} \bs A(0)=\bs a_{\ell_0,i}(x_0), \varphi(0)=i]\wrt t \nonumber
+%		\\&= \int_{t=0}^\infty e^{-\lambda t}\mathbb E[\psi(X(t))1(\varphi(t)=j,X(s)\in\calD_{\ell_0}, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid X(0)=x_0, \varphi(0)=i]\wrt t \nonumber
+%		\\&\qquad {} + r_{11}^{(p)}
+%	\end{align}
+%	where 
+%	\[|r_{11}^{(p)}| \leq F R_{V,2}+ GF\varepsilon.\]
+%\end{lem}
+%\begin{proof}
+%	Assume, without loss of generality \(\ell_0=0\) so \(\calD_{\ell_0}=[0,\Delta]\). First observe that 
+%	\begin{align}
+%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E[f(\bar X(t))1(\varphi(t)=j, L(t)=\ell_0, L(s)=\ell_0, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid L(0)=\ell_0, \nonumber
+%		\\&\qquad{} \bs A(0)=\bs a_{\ell_0,i}(x_0), \varphi(0)=i]\wrt t \nonumber 
+%		\\&= \int_{x_1=0}^\infty \int_{x=[0,\Delta)} \cfrac{\bs \alpha e^{\bs S(x_1+x_0+x)}\bs s}{\bs \alpha e^{\bs S x_0} \bs e}h_{ij}^{++}(\lambda, x_1)f(\Delta-x)\wrt x\wrt x_1
+%	\end{align}
+%	and 
+%	\begin{align}
+%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E[\psi(X(t))1(\varphi(t)=j,X(s)\in\calD_{\ell_0}, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid X(0)=x_0, \varphi(0)=i]\wrt t \nonumber
+%		\\&=  \int_{x=0}^{\Delta-x_0} h_{ij}^{++}(\lambda, x)\psi(X_0 + x)\wrt x
+%	\end{align}
+%	In Property \ref{properties: 2} take \(g(x) = h_{ij}^{--}(\lambda, x)\), which states 
+%	\begin{align}
+%		&\int_{x_1=0}^\infty \int_{x=0}^\Delta\cfrac{\bs \alpha e^{\bs S(x_1+x_0+x)}\bs s}{\bs \alpha e^{\bs S x_0} \bs e}h_{ij}^{++}(\lambda, x_1)f(\Delta-x)\wrt x\wrt x_1 \nonumber
+%		\\& = \int_{x=0}^{\Delta}h_{ij}^{++}(\lambda,\Delta - x_0 - x)1(x+x_0\leq \Delta-\varepsilon)f(\Delta - x)\wrt x + \int_{x=0}^\Delta r_V(x_0,x)\psi(x)\wrt x. 
+%	\end{align}
+%	The second term is less than or equal to 
+%	\[F\int_{x=0}^\Delta r_V(x_0,x)\wrt x = FR_{V,1}.\]
+%	The first term is 
+%	\[\int_{x=0}^{\Delta-x_0}h_{ij}^{++}(\lambda,\Delta - x_0 - x)f(\Delta - x)\wrt x - \int_{x=\Delta-x_0-\varepsilon}^{\Delta-x_0}h_{ij}^{++}(\lambda,\Delta - x_0 - x)f(\Delta - x)\wrt x.\]
+%	Now 
+%	\[\int_{x=\Delta-x_0-\varepsilon}^{\Delta-x_0}h_{ij}^{++}(\lambda,\Delta - x_0 - x)f(\Delta - x)\wrt x\leq GF\varepsilon\]
+%	and 
+%	\[\int_{x=0}^{\Delta-x_0}h_{ij}^{++}(\lambda,\Delta - x_0 - x)f(\Delta - x)\wrt x=\int_{x=0}^{\Delta-x_0}h_{ij}^{++}(\lambda,x)\psi(x_0+x)\wrt x.\]
+%\end{proof}
 
 \begin{lem}\label{lem: ppp}
-	Let \(f:\calD_{\ell_0}\to \mathbb R\) be bounded \(|\psi(x)|\leq F\) and Lipschitz continuous function and let \(\lambda >0\). For \(i\in\mathcal S_-,j\in\mathcal S_-\cup\calS_{-0}\), \(x_0\in[0,\Delta)\), 
+	Let \(f:\calD_{\ell_0}\to \mathbb R\) be bounded \(|\psi(x)|\leq F\) and Lipschitz continuous function and let \(\lambda >0\). For \(i\in\mathcal S_-,j\in\mathcal S_-\cup\calS_{-0}\), \(x_0\in(0,\Delta)\), 
 	\begin{align}
-		&\int_{t=0}^\infty e^{-\lambda t} \mathbb E[f(\bar X^{(p)}(t))1(\varphi(t)=j, L(t)=\ell_0, L(s)=\ell_0,\varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t]) \mid L(0)=\ell_0, \nonumber
-		\\&\qquad{} \bs A^{(p)}(0)=\bs a^{(p)}(x_0)\bs D^{(p)}, \varphi(0)=i] \wrt t \nonumber 
-		\\& \to \int_{t=0}^\infty e^{-\lambda t} \mathbb E[\psi(X(t)) 1(\varphi(t)=j,X(s)\in\calD_{\ell_0},\varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t]) \mid X(0)=x_0,  
-		 \varphi(0)=i] \wrt t, \label{eqn: LLLlllL}
+		&\int_{x_1=0}^\infty \int_{x=0}^{\Delta}\bs a^{(p)}(x_0) \bs D^{(p)} e^{\bs S x_1} V(x) h_{ij}^{--}(\lambda, x_1) \psi(x) \wrt x \wrt x_1  
+		\to \int_{x=0}^{x_0} h_{ij}^{--}(\lambda,x_0-x)\psi(x)\wrt x, \label{eqn: LLLlllL}
 	\end{align}
 	as \(p\to\infty\). Similarly, for \(i\in\mathcal S_+,j\in\mathcal S_+\cup\calS_{+0}\)
 	\begin{align}
-		&\int_{t=0}^\infty e^{-\lambda t} \mathbb E[f(\bar X^{(p)}(t))1(\varphi(t)=j, L(t)=\ell_0, L(s)=\ell_0,\varphi(s)\in\mathcal S_+\cup\mathcal S_{+0}, s\in[0,t]) \mid L(0)=\ell_0, \nonumber
-		\\&\qquad{} \bs A^{(p)}(0)=\bs a^{(p)}(x_0)\bs D^{(p)}, \varphi(0)=i] \wrt t \nonumber 
-		\\& \to \int_{t=0}^\infty e^{-\lambda t} \mathbb E[\psi(X(t)) 1(\varphi(t)=j,X(s)\in\calD_{\ell_0},\varphi(s)\in\mathcal S_+\cup\mathcal S_{+0}, s\in[0,t]) \mid X(0)=x_0.
-		\varphi(0)=i] \wrt t, \label{eqn: LLLlllL2222}
+		&\int_{x_1=0}^\infty \int_{x=0}^{\Delta}\bs a^{(p)}(x_0) \bs D^{(p)} e^{\bs S x_1} V(x) h_{ij}^{++}(\lambda, x_1) \psi(\Delta-x) \wrt x \wrt x_1  
+		\to\int_{x=\Delta-x_0}^{\Delta} h_{ij}^{++}(\lambda,x-x_0)\psi(x)\wrt x, \label{eqn: LLLlllL2222}
 	\end{align}
 \end{lem}
 \begin{proof}
-	Assume, without loss of generality \(\ell_0=0\) so \(\calD_{\ell_0}=[0,\Delta]\). Consider 
+	Assume, without loss of generality \(\ell_0=0\) so \(\calD_{\ell_0}=[0,\Delta]\). Substituting the definition of \(\bs D\), then the left-hand side of (\ref{eqn: LLLlllL}) is
 	\begin{align}
-		&\Bigg|\int_{t=0}^\infty e^{-\lambda t} \mathbb E[f(\bar X^{(p)}(t))1(\varphi(t)=j, L(s)=\calD_{\ell_0}, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t]) \mid L(0)=\ell_0,
-		\\&\qquad{} \bs A^{(p)}(0)=\bs a^{(p)}(x_0)\bs D^{(p)}, \varphi(0)=i] \wrt t \nonumber 
-%		\\&{}\qquad {} 
-		- \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x\Bigg| \nonumber
+%		&\Bigg|\int_{x_1=0}^\infty \int_{x=0}^{\Delta}\bs a^{(p)}(x_0) \bs D^{(p)} e^{\bs S x_1} V(x) h_{ij}^{--}(\lambda, x_1) \psi(x) \wrt x \wrt x_1\nonumber
+%		 - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg| \nonumber
 		%
-		\\&= \Bigg|\int_{x_1=0}^\infty \int_{x=0}^{\Delta}\bs a^{(p)}(x_0) \bs D^{(p)} e^{\bs S x_1} V(x) h_{ij}^{--}(\lambda, x_1) \psi(x) \wrt x \wrt x_1\nonumber
-		 - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg| \nonumber
-		%
-		\\&= \Bigg|\int_{x_1=0}^\infty \int_{x=0}^{\Delta}\int_{u=0}^\infty \bs a^{(p)}(x_0)e^{\bs Su}\bs s \bs a(u) \wrt u e^{\bs S x_1} V(x) h_{ij}^{--}(\lambda, x_1) \psi(x) \wrt x \wrt x_1\nonumber
+		&\Bigg|\int_{x_1=0}^\infty \int_{x=0}^{\Delta}\int_{u=0}^\infty \bs a^{(p)}(x_0)e^{\bs Su}\bs s \bs a(u) \wrt u e^{\bs S x_1} V(x) h_{ij}^{--}(\lambda, x_1) \psi(x) \wrt x \wrt x_1\nonumber
 		\\&{}\qquad {} - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x\Bigg| \nonumber
 		%
 		\\&\leq \Bigg|\int_{x_1=0}^\infty \int_{x=0}^{\Delta}\int_{u=0}^{\Delta-\varepsilon} \bs a^{(p)}(x_0)e^{\bs Su}\bs s \bs a(u) \wrt u e^{\bs S x_1} V(x) h_{ij}^{--}(\lambda, x_1) \psi(x) \wrt x \wrt x_1\nonumber
@@ -375,17 +366,28 @@ The error term \(r_3^{(p)}\) depends on \(p\), as it is defined by \(Z^{(p)}\) a
 		%
 		\\&\qquad {}+\Bigg|\int_{x_1=0}^\infty \int_{x=0}^{\Delta}\int_{u= \Delta-\varepsilon}^\infty  \bs a^{(p)}(x_0)e^{\bs Su}\bs s \bs a(u) \wrt u e^{\bs S x_1} V(x) h_{ij}^{--}(\lambda, x_1) \psi(x) \wrt x \wrt x_1\Bigg| \label{eqn: llllL}
 	\end{align}
-	The third term in (\ref{eqn: llllL}) is less than or equal to 
+	Since \(|\phi(x)\leq F\) and \(|h_{ij}^{--}(\lambda,x)\leq G\), the third term in (\ref{eqn: llllL}) is less than or equal to 
 	\begin{align}
-		&\int_{x_1=0}^\infty \int_{x=0}^{\Delta}\int_{u= \Delta-\varepsilon}^\infty  \bs a^{(p)}(x_0)e^{\bs Su}\bs s \bs a(u) \wrt u e^{\bs S x_1} V(x) \wrt x \wrt x_1G F\nonumber
+		&\int_{x_1=0}^\infty \int_{x=0}^{\Delta}\int_{u= \Delta-\varepsilon}^\infty  \bs a^{(p)}(x_0)e^{\bs Su}\bs s \bs a(u) \wrt u e^{\bs S x_1} V(x) \wrt x \wrt x_1G F.\label{eqn: a big lola}
+	\end{align} 
+	Computing the integral over \(x_1\) in (\ref{eqn: a big lola}) gives
+	\begin{align}
+		& \int_{x=0}^{\Delta}\int_{u= \Delta-\varepsilon}^\infty  \bs a^{(p)}(x_0)e^{\bs Su}\bs s \bs a(u) \wrt u (-\bs S)^{-1}V(x) \wrt x G F\nonumber
 		%
-		\\&\leq  \int_{x=0}^{\Delta}\int_{u= \Delta-\varepsilon}^\infty  \bs a^{(p)}(x_0)e^{\bs Su}\bs s \bs a(u) \wrt u \bs e \wrt x G_V G F\nonumber
-		\\&=  \Delta \mathbb P(Z>x_0 + \Delta-\varepsilon) \wrt x G_V G F\nonumber
-		\\&=  \Delta \cfrac{\var(Z)}{(x_0-\varepsilon)^2} G_V G F \label{eqn: JjJ}
+		\\&\leq  \int_{x=0}^{\Delta}\int_{u= \Delta-\varepsilon}^\infty  \bs a^{(p)}(x_0)e^{\bs Su}\bs s \wrt u \wrt x G_V G F \nonumber
+		%
+		\\&= \int_{u= \Delta-\varepsilon}^\infty  \bs a^{(p)}(x_0)e^{\bs Su}\bs s  \wrt u\Delta G_V G F.\label{eqn: google the yes}
 	\end{align}
+	since, by property \ref{properties: 1}, \(\bs a(u)(-\bs S)^{-1}V(x)\leq \bs a (u)\bs e G_V=G_V\). The bound (\ref{eqn: google the yes}) is equal to 
+	\begin{align}
+		\Delta \mathbb P(Z>x_0 + \Delta-\varepsilon) \wrt x G_V G F
+		\leq  \Delta \cfrac{\var(Z)}{(x_0-\varepsilon)^2} G_V G F, \label{eqn: JjJ}
+	\end{align}
+	by Chebyshev's inequality. 
+	
 	The first and second terms in (\ref{eqn: llllL}) are
 	\begin{align}
-		&\Bigg|\int_{x=0}^{\Delta}\int_{u=0}^{\Delta-\varepsilon} \bs a^{(p)}(x_0)e^{\bs Su}\bs s \int_{x_1=0}^\infty \bs a(u) \wrt u e^{\bs S x_1} V(x) h_{ij}^{--}(\lambda, x_1) \wrt x_1 \psi(x) \wrt x \nonumber
+		&\Bigg|\int_{x=0}^{\Delta}\int_{u=0}^{\Delta-\varepsilon} \bs a^{(p)}(x_0)e^{\bs Su}\bs s \int_{x_1=0}^\infty \bs a(u)  e^{\bs S x_1} V(x) h_{ij}^{--}(\lambda, x_1) \wrt x_1 \wrt u \psi(x) \wrt x \nonumber
 		\\&{}\qquad {} - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x\Bigg| \nonumber
 		%
 		\\&=\Bigg|\int_{x=0}^{\Delta}\int_{u=0}^{\Delta-\varepsilon} \bs a^{(p)}(x_0)e^{\bs Su}\bs s \left[ h_{ij}^{--}(\lambda, \Delta - u - x)1(u+x\leq \Delta-\varepsilon) + r_V(u,x) \right] \psi(x) \wrt u \wrt x \nonumber
@@ -398,7 +400,7 @@ The error term \(r_3^{(p)}\) depends on \(p\), as it is defined by \(Z^{(p)}\) a
 	\begin{align}
 		\int_{u=0}^{\Delta-\varepsilon} \bs a^{(p)}(x_0)e^{\bs Su} \int_{x=0}^{\Delta} \bs s \left|r_V(u,x)\right|\wrt x \wrt u F 
 		%
-		&\leq \int_{u=0}^{\Delta-\varepsilon} \bs a^{(p)}(x_0)e^{\bs Su} R_{V,2} \wrt u F \nonumber 
+		&\leq \int_{u=0}^{\Delta-\varepsilon} \bs a^{(p)}(x_0)e^{\bs Su} \bs sR_{V,2} \wrt u F \nonumber 
 		%
 		\\&\leq R_{V,2} F, \label{eqn: HhHj}
 	\end{align}
@@ -407,15 +409,16 @@ The error term \(r_3^{(p)}\) depends on \(p\), as it is defined by \(Z^{(p)}\) a
 		& \Bigg|\int_{x=0}^{\Delta}\int_{u=0}^{\Delta-\varepsilon} \bs a^{(p)}(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x)1(u+x\leq \Delta-\varepsilon) \psi(x) \wrt u \wrt x \nonumber
 		\\&\qquad{} - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg| \nonumber 
 		\\&= \Bigg|\int_{x=0}^{\Delta-\varepsilon}\int_{u=0}^{\Delta-x-\varepsilon} \bs a^{(p)}(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u \wrt x \nonumber
-		  - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg| \nonumber 
-		\\&=\Bigg| \int_{x=0}^{\Delta-\varepsilon}\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs a^{(p)}(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u 1(\Delta-x_0+\varepsilon\leq \Delta-x-\varepsilon) \wrt x\nonumber
+		  \\&\qquad{}- \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg| \nonumber 
+		\\&\leq \Bigg| \int_{x=0}^{\Delta-\varepsilon}\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs a^{(p)}(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u 1(\Delta-x_0+\varepsilon\leq \Delta-x-\varepsilon) \wrt x\nonumber
 		\\&\qquad{} - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg| \nonumber 
 		\\&\qquad {}+\Bigg|\int_{x=0}^{\Delta-\varepsilon}\int_{u=0}^{\min(\Delta-x_0-\varepsilon,\Delta-x-\varepsilon)} \bs a^{(p)}(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u \wrt x\Bigg|\nonumber
-		\\&\qquad {}+\Bigg|\int_{x=0}^{\Delta-\varepsilon}\int_{u=\Delta-x_0+\varepsilon}^{\Delta-x-\varepsilon} \bs a^{(p)}(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u 1(\Delta-x_0+\varepsilon\leq \Delta - x -\varepsilon)\wrt x\Bigg|\nonumber
+		\\&\qquad {}+\Bigg|\int_{x=0}^{\Delta-\varepsilon}\int_{u=\Delta-x_0+\varepsilon}^{\Delta-x-\varepsilon} \bs a^{(p)}(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u \nonumber 
+		\\&\qquad\qquad \times1(\Delta-x_0+\varepsilon\leq \Delta - x -\varepsilon)\wrt x\Bigg|\nonumber
 		\\&\qquad {}+\Bigg|\int_{x=0}^{\Delta-\varepsilon}\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x-\varepsilon} \bs a^{(p)}(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u \nonumber
 		\\&\qquad\qquad \times 1(\Delta-x_0-\varepsilon\leq \Delta - x -\varepsilon < \Delta-x_0+\varepsilon)\wrt x\Bigg|   \label{eqn: LLkkK}
 	\end{align}
-	The third and fourth terms in (\ref{eqn: LLkkK}) are less than or equal to 
+	Since \(|\psi|\leq F\), the second and third terms in (\ref{eqn: LLkkK}) are less than or equal to 
 	\begin{align}
 		&\int_{x=0}^{\Delta-\varepsilon}\int_{u=0}^{\min(\Delta-x_0-\varepsilon,\Delta-x-\varepsilon)} \bs a^{(p)}(x_0)e^{\bs Su}\bs s  \wrt u \wrt xGF \nonumber
 		\\&\qquad {}+\int_{x=0}^{\Delta-\varepsilon}\int_{u=\Delta-x_0+\varepsilon}^{\Delta-x-\varepsilon} \bs a^{(p)}(x_0)e^{\bs Su}\bs s  \wrt u 1(\Delta-x_0+\varepsilon\leq \Delta - x -\varepsilon)\wrt x GF \nonumber
@@ -423,14 +426,14 @@ The error term \(r_3^{(p)}\) depends on \(p\), as it is defined by \(Z^{(p)}\) a
 		\\&\qquad {}+\int_{x=0}^{\Delta-\varepsilon}\int_{u=\Delta-x_0+\varepsilon}^{\infty} \bs a^{(p)}(x_0)e^{\bs Su}\bs s  \wrt u 1(\Delta-x_0+\varepsilon\leq \Delta - x -\varepsilon)\wrt x GF \nonumber
 		\\&\leq\Delta\int_{u=0}^{\Delta-x_0-\varepsilon} \bs a^{(p)}(x_0)e^{\bs Su}\bs s  \wrt u \wrt xGF 
 		+ \Delta \int_{u=\Delta-x_0+\varepsilon}^{\infty} \bs a^{(p)}(x_0)e^{\bs Su}\bs s  \wrt u GF \nonumber
-		\\&\leq \Delta \cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}GF \label{eqn:aaAAAAd}
+		\\&\leq \Delta \cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}GF. \label{eqn:aaAAAAd}
 	\end{align}
 	Since \(\displaystyle \int_{u=\Delta-x_0-\varepsilon}^{\Delta-x-\varepsilon} \bs a^{(p)}(x_0)e^{\bs Su}\bs s \leq 1\), the last term in (\ref{eqn: LLkkK}) is less than or equal to 
 	\begin{align}
 		&\int_{x=0}^{\Delta-\varepsilon}GF \wrt u 
 		 1(\Delta-x_0-\varepsilon\leq \Delta - x -\varepsilon < \Delta-x_0+\varepsilon)\wrt x =2\varepsilon GF. \label{eqn:Qwe}
 	\end{align}
-	Now consider the difference between the first and second terms in (\ref{eqn: LLkkK}),
+	Now consider the difference in the first absolute value in (\ref{eqn: LLkkK}),
 	\begin{align}
 		&\Bigg|\int_{x=0}^{\Delta-\varepsilon}\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs a^{(p)}(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u 1(x\leq x_0-2\varepsilon) \wrt x \nonumber
 		\\&{}\qquad {} - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg|\nonumber
@@ -449,32 +452,26 @@ The error term \(r_3^{(p)}\) depends on \(p\), as it is defined by \(Z^{(p)}\) a
 	\end{align}
 	In summary, we have shown 
 	\begin{align}
-		&\Bigg|\int_{t=0}^\infty e^{-\lambda t} \mathbb E[f(\bar X^{(p)}(t))1(\varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j) \mid \bs A^{(p)}(0)=\bs a^{(p)}(x_0)\bs D^{(p)}, \varphi(0)=i] \wrt t \nonumber
-		\\&\qquad{}- \int_{x=0}^{x_0} h_{ij}^{--}(\lambda,x_0-x)\psi(x)\wrt x \Bigg| \nonumber 
+		&\Bigg|\int_{x_1=0}^\infty \int_{x=0}^{\Delta}\bs a^{(p)}(x_0) \bs D^{(p)} e^{\bs S x_1} V(x) h_{ij}^{--}(\lambda, x_1) \psi(x) \wrt x \wrt x_1 
+		- \int_{x=0}^{x_0} h_{ij}^{--}(\lambda,x_0-x)\psi(x)\wrt x \Bigg| \nonumber 
 		%
 		\\& \leq  \Delta L\varepsilon   F 
-		+\Delta GF \cfrac{\var(Z)}{\varepsilon^2} + 2\varepsilon GF + 2\varepsilon GF + \Delta \cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}GF + R_{V,2} F +  \Delta \cfrac{\var(Z)}{(x_0-\varepsilon)^2} G_V G F.
+		+\Delta GF \cfrac{\var(Z)}{\varepsilon^2} + 4\varepsilon GF + \Delta \cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}GF + R_{V,2} F +  \Delta \cfrac{\var(Z)}{(x_0-\varepsilon)^2} G_V G F.
 	\end{align}
-	
-	Since the second term in (\ref{eqn: LLLlllL}) is, 
-	\begin{align}
-		& \int_{t=0}^\infty e^{-\lambda t} \mathbb E[\psi(X(t)) 1(\varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j) \mid X(0)=x_0, \varphi(0)=i] \wrt t \nonumber 
-		\\&= \int_{x=0}^{x_0} h_{ij}^{--}(\lambda,x_0-x)\psi(x)\wrt x,
-	\end{align}
-	then the result follows upon choosing \(\varepsilon^{(p)}=\var(Z)^{1/3}\) and letting \(p\to\infty\). 
+	The result follows upon choosing \(\varepsilon^{(p)}=\var(Z^{(p)})^{1/3}\) and letting \(p\to\infty\). 
 \end{proof}
 
-\begin{cor}\label{cor: Dcoajc2222}
-	Let \(\psi:[\calD_{\ell_0})\) be bounded, \(|\psi(x)|\leq F\), and Lipschitz continuous. Then, for \(k\in\calS_{0+}\), \(i\in\calS_-\), \(j\in\calS_-\cup\calS_{-0}\), there exists \(r_{10}^{(p)}\to 0\) as \(p \to \infty\), 
-	\begin{align}
-		\left|\int_{x\in\calD_{\ell_0}} \widehat f_{0,-0,-}^{\ell_0}(x,i,j;j,x_0)\psi(x)\wrt x  \to \int_{x\in\calD_{\ell_0}} \widehat \mu_{0,-0,-}^{\ell_0}(x,i,j;k,x_0)\psi(x)\wrt x\right|\leq r_{10}^{(p)}.\label{eqn:xs}
-	\end{align}
-	Similarly, for \(k\in\calS_{0-}\), \(i\in\calS_+\), \(j\in\calS_+\cup\calS_{+0}\)
-	\begin{align}
-		\left|\int_{x\in\calD_{\ell_0}} \widehat f_{0,+0,+}^{\ell_0}(x,i,j;j,x_0)\psi(x)\wrt x  - \int_{x\in\calD_{\ell_0}} \widehat \mu_{0,+0,+}^{\ell_0}(x,i,j;k,x_0)\psi(x)\wrt x\right|\leq r_{10}^{(p)}.\label{eqn:!124mcds}
-	\end{align}
-\end{cor}
-\begin{proof}
+%\begin{cor}\label{cor: Dcoajc2222}
+%	Let \(\psi:\calD_{\ell_0}\to \mathbb R\) be bounded, \(|\psi(x)|\leq F\), and Lipschitz continuous. Then, for \(x_0\in(y_{\ell_0}, y_{\ell+1}),\) \(k\in\calS_{0+}\), \(i\in\calS_-\), \(j\in\calS_-\cup\calS_{-0}\), there exists \(r_{10}^{(p)}\to 0\) as \(p \to \infty\), 
+%	\begin{align}
+%		\left|\int_{x\in\calD_{\ell_0}} \widehat f_{0,-0,-}^{\ell_0}(x,i,j;j,x_0)\psi(x)\wrt x  \to \int_{x\in\calD_{\ell_0}} \widehat \mu_{0,-0,-}^{\ell_0}(x,i,j;k,x_0)\psi(x)\wrt x\right|\leq r_{10}^{(p)}.\label{eqn:xvasfv}
+%	\end{align}
+%	Similarly, for \(k\in\calS_{0-}\), \(i\in\calS_+\), \(j\in\calS_+\cup\calS_{+0}\)
+%	\begin{align}
+%		\left|\int_{x\in\calD_{\ell_0}} \widehat f_{0,+0,+}^{\ell_0}(x,i,j;j,x_0)\psi(x)\wrt x  - \int_{x\in\calD_{\ell_0}} \widehat \mu_{0,+0,+}^{\ell_0}(x,i,j;k,x_0)\psi(x)\wrt x\right|\leq r_{10}^{(p)}.\label{eqn:!124msfvcds}
+%	\end{align}
+%\end{cor}
+\begin{proof}[Proof of Corollary \ref{cor: Dcoajc}]
 	We show the result for (\ref{eqn:xs}) only, with the result for (\ref{eqn:!124mcds}) following analogously. 
 	
 	Observe that, for \(k\in\calS_{0+}\), \(i\in\calS_-\), \(j\in\calS_-\cup\calS_{-0}\), 
@@ -1357,60 +1354,24 @@ By the definition of \(\bs D\) and Lemma~\ref{lem: akc},
 \end{proof}
 
 Let \(U^{(p)}(x)\) be the closing operator such that, for \(\bs a^{(p)} \in\mathcal A^{(p)}\), \(x\in[0,\Delta)\),
-\[\bs a^{(p)} U^{(p)}(x) = \bs a^{(p)}\bs e \cfrac{\bs a^{(p)} \left(e^{\bs{S}^{(p)}x}\bs s^{(p)} + e^{\bs{S}^{(p)}(2\Delta-x)}\bs s^{(p)}\right)}{ \bs a^{(p)}\bs e-\bs a ^{(p)}e^{\bs{S^{(p)}}2\Delta} \bs e}.\]
+\[\bs a^{(p)} U^{(p)}(x) = \bs a^{(p)} \left(e^{\bs{S}^{(p)}x}\bs s^{(p)} + e^{\bs{S}^{(p)}(2\Delta-x)}\bs s^{(p)}\right).\]
 \begin{lem}\label{lem: akxnj}
 	For \(x\in[0,\Delta),u\geq 0\),  
         \begin{align*}
-        		\bs \alpha  e^{\bs Su}(-\bs S)^{-1} U(x) &\leq \bs \alpha  e^{\bs Su} \bs e\cfrac{2}{1-\Delta \bs \pi e^{\bs S 2 \Delta}\bs e}\leq \bs \alpha  e^{\bs Su}\bs e\cfrac{2\Delta}{\Delta- {\var(Z)}}.
+        		\bs a   e^{\bs Su}(-\bs S)^{-1} U(x) &\leq 2 \bs a e^{\bs Su} \bs e.
 	\end{align*}
 \end{lem}
 \begin{proof}
-Let \(\bs \alpha  \in \mathcal A\) be arbitrary. By definition 
+Let \(\bs a   \in \mathcal A\) be arbitrary. By definition 
 	\begin{align*}
-        		\bs \alpha e^{\bs Su}(-\bs S)^{-1} U(x) & = \bs \alpha e^{\bs Su}(-\bs S)^{-1}\bs e \cfrac{\bs \alpha e^{\bs Su}(-\bs S)^{-1}  \left(e^{\bs{S}x}\bs s + e^{\bs{S}(2\Delta-x)}\bs s\right)}{\bs \alpha e^{\bs Su}(-\bs S)^{-1}\bs e-\bs \alpha e^{\bs Su}(-\bs S)^{-1}  e^{\bs{S}2\Delta} \bs e}
-		%
-		\\& = \bs \alpha e^{\bs Su}(-\bs S)^{-1}\bs e\cfrac{\bs \alpha e^{\bs Su} \left(e^{\bs{S}x}\bs e + e^{\bs{S}(2\Delta-x)}\bs e\right)}{\bs \alpha e^{\bs Su}(-\bs S)^{-1}\bs e-\bs \alpha e^{\bs Su}(-\bs S)^{-1}  e^{\bs{S}2\Delta} \bs e},
+        		\bs a  e^{\bs Su}(-\bs S)^{-1} U(x) & = \bs a  e^{\bs Su}(-\bs S)^{-1}  \left(e^{\bs{S}x}\bs s + e^{\bs{S}(2\Delta-x)}\bs s\right)
 	\end{align*}
-	since \((-\bs S)^{-1}\) and \(e^{\bs Sx}\) commute, \(\bs s = -\bs S e\) and \(\bs \pi = \cfrac{\bs \alpha (-\bs S)^{-1}}{\Delta}\). 
-	By applying Lemma~\ref{lem: akc} to the numerator, 
+	since \((-\bs S)^{-1}\) and \(e^{\bs Sx}\) commute and \(\bs s = -\bs S e\). 
+	By Lemma~\ref{lem: akc} this is less than or equal to, 
 	\begin{align}
-        		&\bs \alpha e^{\bs Su}(-\bs S)^{-1}\bs e \cfrac{\bs \alpha  e^{\bs Su} \left(\bs e + \bs e\right)}{\bs \alpha e^{\bs Su}(-\bs S)^{-1}\bs e-\bs \alpha e^{\bs Su}(-\bs S)^{-1}  e^{\bs{S}2\Delta} \bs e}. \label{eqn:mzm}
-%		\\&=\bs \alpha  e^{\bs Su}\bs e\cfrac{2}{1-\cfrac{\Delta\bs \pi e^{\bs{S}(u+2\Delta)} \bs e}{\bs \alpha e^{\bs Su}(-\bs S)^{-1}\bs e}}.
+        		& \bs a   e^{\bs Su} \left(\bs e + \bs e\right) = 2 \bs a   e^{\bs Su} \bs e \label{eqn:mzm}
 	\end{align}
-	Now, since 
-	\[\bs \alpha e^{\bs Su}(-\bs S)^{-1}\bs e-\bs \alpha e^{\bs Su}(-\bs S)^{-1}  e^{\bs{S}2\Delta} \bs e = \int_{y=u}^{2\Delta+u} \bs \alpha e^{\bs S y}\bs e\wrt y\]
-	and 
-	\[\bs \alpha e^{\bs Su}(-\bs S)^{-1}\bs e =  \int_{y=u}^{\infty} \bs \alpha e^{\bs S y}\bs e\wrt y, \]
-	then (\ref{eqn:mzm}) can be written as 
-	\begin{align}
-		\cfrac{2\bs \alpha  e^{\bs Su}\bs e\displaystyle\int_{y=u}^{\infty} \bs \alpha e^{\bs S y}\bs e \wrt y}{\displaystyle\int_{y=u}^{2\Delta+u} \bs \alpha e^{\bs S y}\bs e\wrt y}
-		%
-		&=\cfrac{2\bs \alpha  e^{\bs Su}\bs e\displaystyle\int_{y=u}^{2\Delta+u} \bs \alpha e^{\bs S y}\bs e \wrt y}{\displaystyle\int_{y=u}^{2\Delta+u} \bs \alpha e^{\bs S y}\bs e\wrt y} + \cfrac{2\bs \alpha  e^{\bs Su}\bs e\displaystyle\int_{y=2\Delta+u}^{\infty} \bs \alpha e^{\bs S y}\bs e \wrt y}{\displaystyle\int_{y=u}^{2\Delta+u} \bs \alpha e^{\bs S y}\bs e\wrt y} \nonumber
-		%
-		\\&\leq 2\bs \alpha  e^{\bs Su}\bs e + \cfrac{2\bs \alpha  e^{\bs Su}\bs e\displaystyle\int_{y=2\Delta+u}^{\infty} \bs \alpha e^{\bs S y}\bs e \wrt y}{2\Delta\bs \alpha e^{\bs S (2\Delta+u)}\bs e},
-	\end{align}
-	since 
-	\[\displaystyle\int_{y=u}^{2\Delta+u} \bs \alpha e^{\bs S y}\bs e\wrt y \geq \displaystyle\int_{y=u}^{2\Delta+u} \bs \alpha e^{\bs S (2\Delta+u)}\bs e\wrt y = 2\Delta\bs \alpha e^{\bs S (2\Delta+u)}\bs e,\]
-	as \(\bs \alpha e^{\bs S y}\bs e\) is a decreasing function. 
-	
-	Now, using Chebyshev's inequality, 
-	\begin{align*}
-        		\Delta\bs \pi e^{\bs S(u+2\Delta)} \bs e &= \int_{x=u+2\Delta}^\infty \bs \alpha e^{\bs Sx}\bs e \wrt x
-		%
-		\\&\leq \int_{x=u+2\Delta}^\infty \cfrac{\var(Z)}{(x-\Delta)^2}\wrt x
-		%
-		\\&= \cfrac{\var(Z)}{u+\Delta}
-		%
-		\\&\leq \cfrac{\var(Z)}{\Delta}
-	\end{align*}
-	Using this upper bound in (\ref{eqn:mzm}) completes the proof.
 \end{proof}
-\begin{rem}
-	Since \(\var(Z^{(p)})\to 0\) by assumption, then we can find a \(p_0\) such that for all \(p>p_0\) 
-	\[ \bs \alpha^{(p)}  e^{\bs S^{(p)}u}\bs e\cfrac{2\Delta}{\Delta- {\var(Z^{(p)})}} \]
-	is bounded independently of \(p>p_0\). For example, for \(p\) sufficiently large such that \(\var(Z^{(p)})\leq \Delta/3\) for all \(p>p_0\), then 
-	\[ \bs \alpha^{(p)}  e^{\bs S^{(p)}u}\bs e\cfrac{2\Delta}{\Delta- {\var(Z^{(p)})}} \leq 3 \bs \alpha^{(p)} e^{\bs S^{(p)}u}\bs e.\]
-\end{rem}
 
 %\begin{rem}\label{cor: lajd}
 %	For any valid orbit, \(\bs a\in\mathcal A\), \(x\in[0,\Delta),u\geq 0\), 
@@ -1426,23 +1387,19 @@ Let \(\bs \alpha  \in \mathcal A\) be arbitrary. By definition
 	Let \(g\) be a function satisfying the Assumptions \ref{asu: g}. For \(u\leq \Delta-\varepsilon \), \(v\in[ 0,\Delta)\), 
 	\[\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} U(v)g(x)\wrt x = g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon) + r_V (u,v),\]
 	where 
-	\[\left|r_V (u,v)\right|\leq r_3 (u+v) + r_3 (u+2\Delta - v) 
-		+ \cfrac{2\Delta}{\Delta- {\var(Z)}}G \cfrac{\var(Z)/\Delta}{1-\var(Z)/\varepsilon^2} G,\]
+	\[\left|r_V (u,v)\right|\leq r_3 (u+v) + r_3 (u+2\Delta - v).\]
 	Furthermore,  
 	\begin{align*}
 		&\int_{u=0}^{\Delta}| r_V(u,x)|\wrt u
 		\leq R_{V,1},
 	\end{align*}
-	where 
-	\[R_{V,1}= 2 \left(\Delta r_2 + 2\varepsilon G + 2\Delta G\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}\right)+\cfrac{2\Delta\var(Z)G^2}{(\Delta- {\var(Z)})(1- {\var(Z)/\varepsilon^2})},\] 
 	and
 	\begin{align*}
 		&\int_{v=0}^{\Delta}| r_V(u,x)|\wrt u
 		\leq R_{V,2},
 	\end{align*}
 	where 
-	\[R_{V,2} \leq 2\left( 2\varepsilon G + \Delta G \cfrac{\var(Z)/\varepsilon^{2}}{1-\var(Z)/\varepsilon^2}\right) 
-		+ \Delta r_2 + \cfrac{2\var(Z)\Delta G^2}{(\Delta- {\var(Z)})(1- {\var(Z)/\varepsilon^2})}. \]
+	\[R_{V,1},\, R_{V,2} \leq 2\left(\Delta r_2 + 2\varepsilon G + \Delta\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}\right).\]
 \end{cor}
 \begin{proof}
 	By the definition of the operator \(U(x)\), 
@@ -1450,7 +1407,6 @@ Let \(\bs \alpha  \in \mathcal A\) be arbitrary. By definition
 		\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} U(v)g(x)\wrt x 		
 		%
 		&=
-			\cfrac{
 			\displaystyle\int_{x=0}^\infty 
 				\cfrac{
 					\bs \alpha e^{\bs S(u+x)}
@@ -1464,56 +1420,7 @@ Let \(\bs \alpha  \in \mathcal A\) be arbitrary. By definition
 					}{
 					\bs \alpha e^{Su}\bs e
 					} 
-				e^{\bs{S}(2\Delta-v)}\bs sg(x) \wrt x
-				}{
-				1-\displaystyle\int_{x=0}^\infty \cfrac{
-					\bs \alpha e^{\bs{S}(u+x+2\Delta)} \bs e
-					}{
-					\bs \alpha e^{\bs Su} \bs e
-					}g(x)\wrt x
-				}  \nonumber
-		%
-%		\\&=
-%			\cfrac{\displaystyle\int_{x=0}^\infty \left(
-%				{
-%					\bs \alpha e^{\bs S(u+x)}
-%					}
-%				e^{\bs{S}(y_{\ell+1}-v)}\bs s 
-%				+
-%				{
-%					\bs \alpha e^{\bs S(u+x)}
-%					}
-%				e^{\bs{S}(\Delta+y_{\ell+1}-v)}\bs s
-%				\right)g(x) \wrt x}{
-%				\bs \alpha e^{\bs Su} \bs e-{
-%					\displaystyle\int_{x=0}^\infty\bs \alpha e^{\bs{S}(u+x+2\Delta)} \bs eg(x)\wrt x
-%					}
-%				}
-			.
-	\end{align}
-	Rearranging gives 
-	\begin{align}
-		\nonumber\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} U(v)g(x)\wrt x
-		&= \displaystyle\int_{x=0}^\infty 
-				\cfrac{
-					\bs \alpha e^{\bs S(u+x)}
-					}{
-					\bs \alpha e^{Su}\bs e
-					} 
-				e^{\bs{S}v}\bs s g(x)
-				+
-				\cfrac{
-					\bs \alpha e^{\bs S(u+x)}
-					}{
-					\bs \alpha e^{Su}\bs e
-					} 
-				e^{\bs{S}(2\Delta-v)}\bs sg(x) \wrt x
-				\\&{}+ \int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} U(v)g(x)\wrt x\label{eqn:gajknkag}
-		\int_{x=0}^\infty \cfrac{
-					\bs \alpha e^{\bs{S}(u+x+2\Delta)} \bs e
-					}{
-					\bs \alpha e^{\bs Su} \bs e
-					}g(x)\wrt x.
+				e^{\bs{S}(2\Delta-v)}\bs sg(x) \wrt x. \label{eqn: ghi is this a}
 	\end{align}
 	By Corollary~\ref{cor: cond bnd 2} 
 	\begin{align}
@@ -1532,64 +1439,24 @@ Let \(\bs \alpha  \in \mathcal A\) be arbitrary. By definition
 					\bs \alpha e^{Su}\bs e
 					} 
 				e^{\bs{S}(2\Delta-v)}\bs sg(x) \wrt x 
-				&= r_3 (u+2\Delta - v),
-		\intertext{and, by Chebyshev's inequality, }\nonumber
-		\int_{x=0}^\infty \cfrac{
-					\bs \alpha e^{\bs{S}(u+x+2\Delta)} \bs e
-					}{
-					\bs \alpha e^{\bs Su} \bs e
-					}g(x)\wrt x &\leq \int_{x=0}^\infty \cfrac{\mathbb P(Z>2\Delta + u + x)}{\mathbb P(Z>u)}\wrt x G
-					\\&\leq \int_{x=0}^\infty \cfrac{\mathbb P(Z>2\Delta + x)}{\mathbb P(Z>u)}\wrt x G\nonumber
-					\\&\leq \int_{x=0}^\infty \cfrac{\var(Z)/(\Delta+x)^2}{1-\var(Z)/\varepsilon^2}\wrt x G\nonumber
-					\\&=   \cfrac{\var(Z)/\Delta}{1-\var(Z)/\varepsilon^2} G. \label{eqn:kkkkasdf}
+				&= r_3 (u+2\Delta - v).
 	\end{align}
-	Therefore, from (\ref{eqn:gajknkag}) and (\ref{eqn: dkskkk}), (\ref{eqn: dkskkk2}) and (\ref{eqn:kkkkasdf}) above,  
+	Therefore, (\ref{eqn: ghi is this a}) is, 
 	\begin{align}
-		&\left|\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} U(v)g(x)\wrt x - g(\Delta-u-v)) 1(u+v)\leq\Delta-\varepsilon)\right|
-		\\& \leq r_3 (u+v) + r_3 (u+2\Delta - v) 
-		+ \int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} U(v)g(x)\wrt x \cfrac{\var(Z)/\Delta}{1-\var(Z)/\varepsilon^2} G.\label{eqn:sllll}
-	\end{align}
-	
-	Now, for any valid orbit, \(\bs a\in\mathcal A\), \(x\in[0,\Delta),u\geq 0\), 
-	\[\int_{x=0}^\infty \bs \alpha e^{\bs{S}u}e^{\bs{S}x} \wrt x U(x) = \bs \alpha e^{\bs{S} } (-\bs S)^{-1} U(x) \leq 2\bs \alpha e^{\bs{S}u}\bs e,\]
-	from Lemma~\ref{lem: akxnj}. 
-	Therefore, 
-	\begin{align*}
-		\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} U(v)g(x)\wrt x 
-		%
-		&\leq \int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} U(v)G\wrt x
-		%
-		\\&\leq \cfrac{ \bs \alpha e^{\bs{S}u}\bs e\cfrac{2\Delta}{\Delta- {\var(Z)}}}{\bs \alpha  e^{\bs{S} u} \bs e} G\wrt x
-		%
-		\\&= \cfrac{2\Delta}{\Delta- {\var(Z)}}G.
-	\end{align*}
-	Hence (\ref{eqn:sllll}) is less than or equal to 
-	\begin{align}
-		%&\left|\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} U_m(v)g(x)\wrt x - g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon) \right|\nonumber
-		 r_3 (u+v) + r_3 (u+2\Delta - v) 
-		+ \cfrac{2\Delta}{\Delta- {\var(Z)}}G \cfrac{\var(Z)/\Delta}{1-\var(Z)/\varepsilon^2} G.
-	\end{align}
-	Therefore, there exists an \(r_V(u,v)\) such that 
-	\[\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} U(v)g(x)\wrt x = g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon) + r_V (u,v),\]
-	where 
-	\[\left|r_V (u,v)\right| \leq r_3 (u+v) + r_3 (u+2\Delta - v) 
-		+ \cfrac{2\Delta}{\Delta- {\var(Z)}}G \cfrac{\var(Z)/\Delta}{1-\var(Z)/\varepsilon^2} G.\]
+		&g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon) + r_3 (u+v) + r_3 (u+2\Delta - v).
+	\end{align}	
 	
 	Now,
 	\begin{align*}
 		R_{V,1}&\leq \int_{u=0}^{\Delta}| r_V(u,v)|\wrt u
 		\\& \leq \int_{u=0}^{\Delta} |r_3 (u+v)| + |r_3 (u+2\Delta - v) |
-		{} +  \cfrac{2\var(Z)G^2}{(\Delta- {\var(Z)})(1- {\var(Z)/\varepsilon^2})} \wrt u
-		\\&\leq \int_{u=0}^{3\Delta} 2 |r_3(u)|\wrt u +  \cfrac{2\Delta\var(Z)G^2}{(\Delta- {\var(Z)})(1- {\var(Z)/\varepsilon^2})} 
-		\\&= 2 \left(\int_{u=0}^{\Delta-\varepsilon}|r_3(u)|\wrt u + \int_{u=\Delta-\varepsilon}^{\Delta+\varepsilon}|r_3(u)|\wrt u + \int_{u={\Delta+\varepsilon}}^{3\Delta} |r_3(u)|\wrt u\right)+\cfrac{2\Delta\var(Z)G^2}{(\Delta- {\var(Z)})(1- {\var(Z)/\varepsilon^2})}
-		\\&\leq 2 \left(\Delta r_2 + 2\varepsilon G + 2\Delta G\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}\right)+\cfrac{2\Delta\var(Z)G^2}{(\Delta- {\var(Z)})(1- {\var(Z)/\varepsilon^2})}.
+		\\&\leq 2\left(\Delta r_2 + 2\varepsilon G + \Delta\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}\right).
 	\end{align*}
-	Also 
+	Similarly 
 	\begin{align*}
 		R_{V,2}&\leq \int_{v=0}^{\Delta}| r_V(u,v)|\wrt v
-		\\&= \int_{v=0}^{\Delta} r_3(u+v) + r_3(u+2\Delta-v) + \cfrac{2\var(Z)G^2}{(\Delta- {\var(Z)})(1- {\var(Z)/\varepsilon^2})} \wrt u
-		\\& \leq \left(\Delta r_2 + 2\varepsilon G + \Delta G \cfrac{\var(Z)/\varepsilon^{2}}{1-\var(Z)/\varepsilon^2}\right) 
-		\\&\qquad {} + \left(2\varepsilon G + \Delta G \cfrac{\var(Z)/\varepsilon^{2}}{1-\var(Z)/\varepsilon^2}\right) + \cfrac{2\var(Z)\Delta G^2}{(\Delta- {\var(Z)})(1- {\var(Z)/\varepsilon^2})} 
+		\\&= \int_{v=0}^{\Delta} r_3(u+v) + r_3(u+2\Delta-v) 
+		\\& \leq 2\left(\Delta r_2 + 2\varepsilon G + \Delta\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}\right).
 	\end{align*}
 \end{proof}
 
@@ -1597,7 +1464,7 @@ The error term \(r_V(u,v)\) depends on \(p\) so we should write \(r_V^{(p)}(u,v)
 
 
 \section{Kronecker properties}\label{appendix: kronecker}
-Here we detail some properties of Kronecker sum, products, and exponentials (see \cite{MEinAP}, Appendix A.4). 
+Here we detail some properties of Kronecker sum, products, and exponentials (see \citep{MEinAP}, Appendix A.4). 
 
 Let 
 \[\bs A = \left[\begin{array}{ccc}a_{11} & \dots & a_{1m}\\\hdots & & \hdots \\ a_{n1}&\dots & a_{nm}\end{array}\right]
@@ -1701,7 +1568,7 @@ A property of the Kronecker sum is
 
 The exponential of a matrix \(\bs B\) is \[e^{\bs B} := \sum_{n=0}^\infty \cfrac{1}{n!}B^n.\]
 
-Latouche and Nguyen \cite{ln2015} show the following.
+\cite{ln2015} show the following.
 \begin{lem}\label{lem: sfkjgn}
 	Let \(\bs B\) be the block-partitioned matrix
 	\[\bs B = \left[\begin{array}{cc} \bs B_{11} & \bs B_{12} \\ \bs B_{21} & \bs B_{22} \end{array}\right]\]

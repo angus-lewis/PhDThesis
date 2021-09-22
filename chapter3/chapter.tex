@@ -1,6 +1,10 @@
 %!TEX root = ../thesis.tex
 \chapter{Weak convergence of the QBD-RAP scheme\label{sec: conv}}
-In this section we suppose that we have a sequence \(\{Z^{(p)}\}_{p\geq 1}\) of matrix exponential distributions, \(Z^{(p)}\sim ME(\bs\alpha^{(p)},\bs S^{(p)}, \bs s^{(p)})\), such that \(\var\left(Z^{(p)}\right)\to 0 \) as \(p\to \infty\). Ultimately, we show weak convergence (in both space and time) of the QBD-RAP approximation scheme via convergence of various Laplace transforms with respect to time of the QBD-RAP to the corresponding Laplace transforms of the fluid queue. We use the superscript \((p)\) to denote dependence on the underlying choice of matrix exponential distribution that is used in the construction of the QBD-RAP scheme. To simplify notation, we omit the super script \((p)\) where possible. In the following we show error bounds for an arbitrary parameter \(\varepsilon>0\). However, keep in mind the ultimate intention is to show convergence, for which we choose this parameter to be \(\varepsilon^{(p)}=\var\left(Z^{(p)}\right)^{1/3}\). Other notations which have been defined so far which are defined by \(Z^{(p)}\) and therefore also implicitly depend on \(p\) are \(\bs\alpha^{(p)},\,\bs S^{(p)},\,\bs s^{(p)},\, \bs S_i^{(p)},\, \bs s_i^{(p)},\, \bs D^{(p)},\,\mathcal A^{(p)}.\)
+This chapter details convergence of the approximation scheme constructed in Chapter~\ref{sec: construction and modelling}. The QBD-RAP is constructed using \emph{matrix-exponential distributions}. The main result shows the convergence of the approximation scheme under the assumption that the variance of the matrix-exponential distribution(s) used in the construction tends to 0. Given that there is no known simple closed form for the transient distributions of a fluid queue, and that we make minimal assumptions about the matrix-exponential distributions used in the construction of the approximation, it is somewhat remarkable that we are able to establish a convergence result. The generality of the result with respect to the assumptions on the matrix-exponential distributions used in the construction of the approximation is necessitated by the fact that we use a class of \emph{concentrated matrix-exponential distributions} found numerically in \citep{hhat2020}, and for which there is relatively little known about their properties.
+
+The structure of this chapter is as follows. First, in Section~\ref{sec: no change}, we derive expressions for certain Laplace transforms with respect to time of the QBD-RAP and fluid queue on the event that there is no change of level. Section~\ref{sec: no change convergence} provides error bounds between the Laplace transforms of the QBD-RAP and the fluid queue and also some domination conditions used so that we may apply the Dominated Convergence Theorem. Section~\ref{sec: local to global} uses the results of the preceding section to prove convergence Laplace transform with respect to time of the expected local time of the QBD-RAP to the Laplace transform with respect to time of the expected local time of the fluid queue. So as to not obscure the logical flow of the presentation, technical proofs which do not offer a great deal of insight are reserved for Appendix~\ref{app:tand}.
+
+We suppose that we have a sequence \(\{Z^{(p)}\}_{p\geq 1}\) of matrix exponential distributions, \(Z^{(p)}\sim ME(\bs\alpha^{(p)},\bs S^{(p)}, \bs s^{(p)})\), such that \(\var\left(Z^{(p)}\right)\to 0 \) as \(p\to \infty\). Ultimately, we show weak convergence (in both space and time) of the QBD-RAP approximation scheme via convergence of various Laplace transforms with respect to time of the QBD-RAP to the corresponding Laplace transforms of the fluid queue. We use the superscript \((p)\) to denote dependence on the underlying choice of matrix exponential distribution that is used in the construction of the QBD-RAP scheme. To simplify notation, we omit the super script \((p)\) where possible. In the following we show error bounds for an arbitrary parameter \(\varepsilon>0\). However, keep in mind the ultimate intention is to show convergence, for which we choose this parameter to be \(\varepsilon^{(p)}=\var\left(Z^{(p)}\right)^{1/3}\). Other notations which have been defined so far which are defined by \(Z^{(p)}\) and therefore also implicitly depend on \(p\) are \(\bs\alpha^{(p)},\,\bs S^{(p)},\,\bs s^{(p)},\, \bs S_i^{(p)},\, \bs s_i^{(p)},\, \bs D^{(p)},\,\mathcal A^{(p)}.\)
 
 In the following we show various results which involve integrating a function \(g\), or a sequence of functions \(g_1,g_2,\dots\). We make the following assumptions about such functions, 
 \begin{asu}\label{asu: g}
@@ -111,7 +115,7 @@ For \(m\in\{+,-,0\},\,n\in\{+,-\},\,m\neq n\), \(j\in\mathcal S_n\), denote \(\b
 \bs{B}_{mj} &= \bs B_{mn} \bs e_j\bs e_j'= \left[\begin{array}{cc} \bs{T}_{mj}\otimes \bs{D} & \bs 0 \\ \bs T_{0j}\otimes \bs D & \bs 0 \end{array}\right].
 \end{align}
 
-There is no simple expression for (\ref{eqn: sojourn}). There are expressions for the Laplace transform of (\ref{eqn: sojourn}) with respect to time. One is in terms of the of first return matrices \(\Psi(\lambda)\) and \(\Xi(\lambda)\) \cite{bean2009}. Here we opt for another expression for the Laplace transform which is obtained by partitioning as follows.
+There is no simple expression for (\ref{eqn: sojourn}). There are expressions for the Laplace transform of (\ref{eqn: sojourn}) with respect to time. One is in terms of the of first return matrices \(\Psi(\lambda)\) and \(\Xi(\lambda)\) \citep{bean2009}. Here we opt for another expression for the Laplace transform which is obtained by partitioning as follows.
 
 Suppose \(i\in\calS_+,j\in\mathcal S_+\cup\mathcal S_{+0}\). The arguments for all other combinations of \(i,j\in\mathcal S\) are analogous and notable differences will be pointed out where necessary. There are some issues pertaining to starting the QBD-RAP in phases \(i\in\calS_{+0}\), hence the restriction \(\varphi(0)=i\in\calS_+\) only. We will treat the case \(i\in\calS_0\) separately and in due course.
 
@@ -395,7 +399,7 @@ and the functions,
 	\\\bs H^{+-}(\lambda,x) &:= e^{\bs{Q}_{++}(\lambda)x}\bs{Q}_{+-}(\lambda) = \left[h_{ij}^{+-}(\lambda,x)\right]_{i\in\mathcal S_+,\,j\in\mathcal S_-}, 
 	\\\bs H^{-+}(\lambda,x) &:= e^{\bs{Q}_{--}(\lambda)x}\bs{Q}_{-+}(\lambda) = \left[h_{ij}^{-+}(\lambda,x)\right]_{i\in\mathcal S_-,\, j\in\mathcal S_+}, \label{eqn: lst 4}
 \end{align}
-for \(x,\lambda\geq 0\). The function \(h_{ij}^{++}(\lambda,x)\) (\(h_{ij}^{--}(\lambda,x)\)) is the Laplace transform with respect to time of the time taken for the fluid level to shift by an amount \(x\) whilst remaining in phases in \(\mathcal S_+\cup\calS_{+0}\) (\(\mathcal S_-\cup\calS_{-0}\)), given the phase was initially \(i\in\mathcal S_+\) (\(i\in\mathcal S_-\)) \cite{bean2005}. The function \(h_{ij}^{+-}(\lambda,x)\) (\(h_{ij}^{-+}(\lambda,x)\)) is the Laplace transform with respect to time of the time taken for the fluid level, \(\{X(t)\}\) to shift by an amount \(x\) whilst remaining in phases in \(\mathcal S_+\cup\calS_{+0}\) (\(\mathcal S_-\cup\calS_{-0}\)), after which time the phase instantaneously changes to \(j\in\mathcal S_-\) (\(\mathcal S_+\)), given the phase was initially \(i\in\mathcal S_+\) (\(\mathcal S_-\)) \cite{bean2005}.
+for \(x,\lambda\geq 0\). The function \(h_{ij}^{++}(\lambda,x)\) (\(h_{ij}^{--}(\lambda,x)\)) is the Laplace transform with respect to time of the time taken for the fluid level to shift by an amount \(x\) whilst remaining in phases in \(\mathcal S_+\cup\calS_{+0}\) (\(\mathcal S_-\cup\calS_{-0}\)), given the phase was initially \(i\in\mathcal S_+\) (\(i\in\mathcal S_-\)) \citep{bean2005}. The function \(h_{ij}^{+-}(\lambda,x)\) (\(h_{ij}^{-+}(\lambda,x)\)) is the Laplace transform with respect to time of the time taken for the fluid level, \(\{X(t)\}\) to shift by an amount \(x\) whilst remaining in phases in \(\mathcal S_+\cup\calS_{+0}\) (\(\mathcal S_-\cup\calS_{-0}\)), after which time the phase instantaneously changes to \(j\in\mathcal S_-\) (\(\mathcal S_+\)), given the phase was initially \(i\in\mathcal S_+\) (\(\mathcal S_-\)) \citep{bean2005}.
 
 Let \(\psi:[0,\Delta)\to\mathbb R\) be bounded and Lipschitz continuous and consider expectations with respect to measures (\ref{eqn: density part +})-(\ref{eqn: 63}). For example, 
 \begin{align}
@@ -409,7 +413,7 @@ and similarly for (\ref{eqn: gq er h})-(\ref{eqn: 63}). Consider taking the Lapl
 \end{align}
 where we use \(\widehat \mu^{\ell_0}_{m,+,+}(\lambda)( y_{\ell_0} + \wrt x, j_1,k_1,\dots,j_m,k_m, j; x_0,i) \) to denote the Laplace transform with respect to time of (\ref{eqn: density part +}). We now proceed to an expression for the Laplace transform with respect to time, \(\widehat \mu^{\ell_0}_{m,+,+}(\lambda)( \wrt x, j_1,k_1,\dots,j_m,k_m, j; x_0,i) \), from which an expression for (\ref{eqn: papPP2}) follows. 
 
-From the stochastic interpretations of the Laplace transforms (\ref{eqn: lst 1})-(\ref{eqn: lst 4}) given in \cite{bean2005} and summarised above, the Laplace transforms with respect to time, \(\widehat \mu^{\ell_0}_{m,+,+}(\lambda)( x, j_1,k_1,\dots,j_m,k_m, j; x_0,i)\), of (\ref{eqn: density part +}) are given by 
+From the stochastic interpretations of the Laplace transforms (\ref{eqn: lst 1})-(\ref{eqn: lst 4}) given in \citep{bean2005} and summarised above, the Laplace transforms with respect to time, \(\widehat \mu^{\ell_0}_{m,+,+}(\lambda)( x, j_1,k_1,\dots,j_m,k_m, j; x_0,i)\), of (\ref{eqn: density part +}) are given by 
 \begin{align*}
 	\widehat \mu^{\ell_0}_{m,+,+}(\lambda)( x,j;x_0,i) \wrt x&= h_{ij}^{++}(\lambda,x-x_0)1(x\geq x_0)\wrt x,
 \end{align*}
@@ -840,9 +844,9 @@ Moreover, since \(h_{ij}^{mn}(\lambda,x)\), \(m,n\in \{+,-\}\), \(i\in\mathcal S
                 
                 Using analogous arguments we can show  (\ref{eqn: anue2}).
 \end{proof}
-In a similar vein we have the following corollary. Since the proof is much like the proof of Lemma~\ref{lem: Dcoajc} it is left to Appendix~\ref{appendix: bounds}, Corollary \ref{cor: Dcoajc2222}. 
+In a similar vein we have the following corollary. Since the proof is much like the proof of Lemma~\ref{cor: Dcoajc} it is left to Appendix~\ref{appendix: bounds}, Corollary \ref{cor: Dcoajc2222}. 
 \begin{cor}\label{cor: Dcoajc}
-	Let \(\psi:[\calD_{\ell_0})\) be bounded, \(|\psi(x)|\leq F\), and Lipschitz continuous. Then, for \(k\in\calS_{0+}\), \(i\in\calS_-\), \(j\in\calS_-\cup\calS_{-0}\), there exists \(r_{10}^{(p)}\to 0\) as \(p \to \infty\), 
+	Let \(\psi:\calD_{\ell_0}\to \mathbb R\) be bounded, \(|\psi(x)|\leq F\), and Lipschitz continuous. Then, for \(x_0\in(y_{\ell_0},y_{\ell_0+1}\), \(k\in\calS_{0+}\), \(i\in\calS_-\), \(j\in\calS_-\cup\calS_{-0}\), there exists \(r_{10}^{(p)}\to 0\) as \(p \to \infty\), 
 	\begin{align}
 		\left|\int_{x\in\calD_{\ell_0}} \widehat f_{0,-0,-}^{\ell_0}(x,i,j;j,x_0)\psi(x)\wrt x  \to \int_{x\in\calD_{\ell_0}} \widehat \mu_{0,-0,-}^{\ell_0}(x,i,j;k,x_0)\psi(x)\wrt x\right|\leq r_{10}^{(p)}.\label{eqn:xs}
 	\end{align}
@@ -2611,7 +2615,7 @@ for almost all \(t\geq 0\). At such values of \(t\), since \(\psi\) is an arbitr
 %	By the extended continuity theorem for Laplace transforms \ref{thm: ext cont thm}, \(U_n \to U\). 
 %\end{proof}
 \begin{rem}
-	While the convergence result implies a loose bound on the rate of convergence, it applies to a wide class of QBD-RAP constructions. The main cause of the loose bound on the convergence rate is due to our reliance on Chebyshev's inequality. This is necessary as we try to make minimal assumptions about the matrix-exponential distributions used in the construction. In practice, we use a class of \emph{concentrated matrix-exponential distributions} found numerically in \cite{hhat2020}, and for which there is relatively little known about their properties. This necessitates the generality of the convergence result. 
+	While the convergence result implies a loose bound on the rate of convergence, it applies to a wide class of QBD-RAP constructions. The main cause of the loose bound on the convergence rate is due to our reliance on Chebyshev's inequality. This is necessary as we try to make minimal assumptions about the matrix-exponential distributions used in the construction. In practice, we use a class of \emph{concentrated matrix-exponential distributions} found numerically in \citep{hhat2020}, and for which there is relatively little known about their properties. This necessitates the generality of the convergence result. 
 \end{rem}
 
 \section{Extension to arbitrary (but fixed) discretisation structures}
@@ -2646,303 +2650,35 @@ Let the width of an interval \(\mathcal D_{\ell_0}\) be \(\Delta_{\ell_0}=y_{\el
 \end{proof}
 Given Lemma~\ref{lem: another bound sdfg}, then an equivalent of Lemma~\ref{lem: another bound 2} remains true, the proof of which follows verbatim except with the use of Lemma~\ref{lem: another bound} replaced by Lemma~\ref{lem: another bound sdfg}. Corollary \ref{vcor: cdks d} remains true without modification. Lemma \ref{lem: KajPOw} and Corollary \ref{cor: lk} remain true without modification provided that \(\lim\limits_{p\to\infty}\var(Z_\ell^{(p)})\to 0\) for all \(\ell\). 
 
-\section{Pointwise convergence (in time)}
-\begin{itemize}
-	\item We would like the convergence to hold pointwise with respect to \(t\). 
-	\item A converse to Scheffe's Theorem exists which states necessary and sufficient conditions for weak convergence to imply pointwise convergence (i.e.~convergence in distribution to imply convergence of density functions). 
-	\begin{itemize}
-		\item We require the sequence of density functions to be eventually equicontinuous. This essentially restricts the sequence of density functions becoming arbitrarily steep. 
-		\item A sufficient condition is to show the sequence if eventually Lipschitz with the same Lipschitz constant. A sufficient condition for this is that the function have bounded derivative. 
-	\end{itemize}
-\end{itemize}
-It would be nice if we could show that 
-\[\mathbb E\left[\psi(\bar X(t),\phi(t))  \mid L(0)=\ell_0, \bs A(0)=\bs  a_{\ell_0,i}(x_0), \phi(0)=i \right]\]
-is Lipschitz with the same Lipschitz constant for all \(p\). Observe that 
-\begin{align}
-	&\mathbb E\left[\psi(\bar X(t),\phi(t))  \mid L(0)=\ell_0, \bs A(0)=\bs  a_{\ell_0,i}(x_0), \phi(0)=i \right]
-	%
-	\\&\mathbb E\left[ \mathbb E\left[\psi(\bar X(t),\phi(t))  \mid L(t), \bs A(t), \phi(t) \right] \mid L(0)=\ell_0, \bs A(0)=\bs  a_{\ell_0,i}(x_0), \phi(0)=i \right]
-	%
-	\\&=\mathbb E\left[ \mathbb E\left[\psi(\bar X(t),\phi(t))  \mid L(t), \bs A(t), \phi(t) \right] \mid L(0)=\ell_0, \bs A(0)=\bs  a_{\ell_0,i}(x_0), \phi(0)=i \right].
-\end{align}
-Hence 
-\begin{align}
-	&\cfrac{\wrt}{\wrt t}\mathbb E\left[\psi(\bar X(t),\phi(t))  \mid L(0)=\ell_0, \bs A(0)=\bs  a_{\ell_0,i}(x_0), \phi(0)=i \right]
-	%
-	\\&=\mathbb E\left[ \cfrac{\wrt}{\wrt t} \mathbb E\left[\psi(\bar X(t),\phi(t))  \mid L(t), \bs A(t), \phi(t) \right] \mid L(0)=\ell_0, \bs A(0)=\bs  a_{\ell_0,i}(x_0), \phi(0)=i \right].
-\end{align}
-Let 
-\begin{align}
-	\Psi(\ell, \bs a, i) &= \mathbb E\left[\bar X(0) \mid L(0)=\ell, \bs A(0)=\bs a, \phi(0)=i \right]
-	\\&=\mathbb E\left[\bar X(t) \mid L(t)=\ell, \bs A(t)=\bs a, \phi(t)=i \right],
-\end{align}
-for all \(t\geq0\) by time-homogeneity. Also, let 
-\begin{align}
-	\mathcal T(t)f(\ell,\bs a, i) = \mathbb E\left[ f(L(t),\bs A(t), \psi(t)) \mid L(0)=\ell, \bs A(0)=\bs a, \phi(0)=i \right].
-\end{align}
-\(\{\mathcal T(t)\}_{t\geq 0}\) forms a semi-group since 
-\begin{align*}
-	&\mathcal T(t+s)f(\ell,\bs a, i) 
-	\\&=\mathbb E\left[ f(L(t+s),\bs A(t+s), \psi(t+s)) \mid L(0)=\ell, \bs A(0)=\bs a, \phi(0)=i  \right]
-	\\&=\mathbb E\left[ \mathbb E\left[ f(L(t+s),\bs A(t+s), \psi(t+s)) \mid L(t), \bs A(t), \phi(t) \right] \mid L(0)=\ell, \bs A(0)=\bs a, \phi(0)=i \right]
-	\\&=\mathbb E\left[ \mathcal T(s)f(L(t), \bs A(t), \phi(t))\mid L(0)=\ell, \bs A(0)=\bs a, \phi(0)=i \right]
-	\\&=\mathcal T(t) \left[\mathcal T(s)f \right](\ell, \bs a, i).
-\end{align*}
 
-Now, 
-	\begin{align}
-		\left.\cfrac{\wrt }{\wrt t}\mathcal T(t)\Psi(\ell,\bs a, i)\right|_{t=0}
-		&= \left.\cfrac{\wrt }{\wrt t}\mathbb E\left[  \Psi(L(t),\bs A(t), \varphi(t)) \mid L(0)=\ell, \bs A(0)=\bs a, \phi(0)=i \right]\right|_{t=0} \nonumber 
-		\\&= \left.\cfrac{\wrt }{\wrt t}\mathbb E\left[  \mathbb E\left[\bar X(t) \mid L(t), \bs A(t), \phi(t)\right] \mid L(0)=\ell, \bs A(0)=\bs a, \phi(0)=i \right]\right|_{t=0} \nonumber 
-		\\&=\left.\cfrac{\wrt }{\wrt t}\mathbb E\left[ \bar X(t) \mid L(0)=\ell, \bs A(0)=\bs a, \phi(0)=i \right]\right|_{t=0}
-	\end{align}
-which is given by the following result. 
-\begin{thm} For all \(i\in\calS_+\) and \(a\in\mathcal A\), 
-	\begin{align}
-		&\left. \cfrac{\wrt}{\wrt h} \mathbb E\left[\bar X(h)\mid L(0)=\ell,\bs A(0)=\bs a,\varphi(0)=i\right] \right|_{h=0} \nonumber 
-		\\&= -|c_i| + \sum_{j\in\mathcal S_-}T_{ij} \left[ \Delta - \bs a (-\bs S)^{-1}\bs e  +  \bs a\bs D(-\bs S)^{-1}\bs e \right] .
-	\end{align}
-\end{thm}
-\begin{cor}
-	Let \(\mathcal Q\) be the generator of \(\mathcal T(t)\). Then 
-%	\[\mathcal Q\Psi(\ell,\bs a,i) = -|c_i|+\sum_{j\in\calS_-}T_{ij}(\Psi(\ell,\bs a,j)-\Psi(\ell-1,\bs a\bs D,j))\]
-	\[\mathcal Q\Psi(\ell,\bs a,i) = -|c_i|+\sum_{j\in\calS_+}T_{ij}\Psi(\ell,\bs a,j)+\sum_{j\in\calS_-}T_{ij}\Psi(\ell,\bs a\bs D,j)\]
-	\begin{align}
-		\mathcal Q^2\Psi(\ell,\bs a,i) &= -|c_i|+\sum_{j\in\calS_+}T_{ij}\left[-|c_j|+\sum_{k\in\calS_+}T_{jk}\Psi(\ell,\bs a,k)+\sum_{k\in\calS_-}T_{jk}\Psi(\ell,\bs a\bs D,k)\right] \nonumber 
-		\\&\qquad +\sum_{j\in\calS_-}T_{ij}\left[-|c_j|+\sum_{k\in\calS_+}T_{jk}\Psi(\ell,\bs a\bs D,k)+\sum_{k\in\calS_-}T_{jk}\Psi(\ell,\bs a\bs D^2,k)\right]
-	\end{align}
-\end{cor}
-\begin{proof}
-	\begin{align}
-		\nonumber&\mathbb E\left[\bar X(t)\mid L(0)=\ell,\bs A(0)=\bs a,\varphi(0)=i\right]   
-%
-	\\&=  \begin{cases}
-			(\ell+1)\Delta - \int_{x=0}^\infty \mathbb E[\bs A(t) \mid L(0)=\ell,\bs A(0)=\bs a,\varphi(0)=i ]e^{\bs S x}\bs s x \wrt x & i \in\calS_+,\\
-			\ell\Delta + \int_{x=0}^\infty \mathbb E[\bs A(t) \mid L(0)=\ell,\bs A(0)=\bs a,\varphi(0)=i ] e^{\bs S x}\bs s x \wrt x & i \in\calS_-.
-		\end{cases}
-		\label{eqn: askgh q}
-	\end{align}
-	Assume first that \(i\in\calS_+\). Over the small time interval \([0,h)\) the events which may occur are either,
-	\begin{enumerate}
-		\item\label{item: kfj1} a change of phase to \(j\in\calS_+\), 
-		\item\label{item: kfj2} a change of phase to \(j\in\calS_-\), 
-		\item\label{item: kfj3} a change of level to \(\ell+1\), 
-		\item\label{item: kfj4} or there are no events, 
-	\end{enumerate}
-	and all other events occur with probability \(o(h^2)\). The probabilities of these events are 
-	\begin{enumerate}
-		\item\label{item: kfj12} \(\bs a T_{ij}\bs e h = T_{ij}h + o(h^2)\), 
-		\item\label{item: kfj22} \(\bs a \bs D T_{ij}\bs e h = T_{ij}h + o(h^2)\), 
-		\item\label{item: kfj32} \(\bs a \bs s_i h + o(h^2)\), 
-		\item\label{item: kfj42} \(\bs a e^{(\bs S_i + T_{ii}\bs I)h}\bs e\), 
-	\end{enumerate}
-	respectively. 
-	Partitioning with respect these four events then we can write 
-	\begin{align}
-		&\mathbb E\left[\bar X(h)\mid L(0)=\ell,\bs A(0)=\bs a,\varphi(0)=i\right] \nonumber
-		%
-		\\&= \sum_{\substack{j\in\mathcal S_+\\j\neq i}}(T_{ij}h + o(h^2)) \left[ (\ell+1)\Delta - \int_{x=0}^\infty \bs a e^{\bs Sx}\bs s x \wrt x\right] \nonumber 
-		%
-		\\&\qquad{} + \sum_{j\in\mathcal S_-}(T_{ij}h + o(h^2)) \left[ \ell\Delta + \int_{x=0}^\infty \bs a\bs D e^{\bs Sx}\bs s x \wrt x\right] \nonumber
-		%
-		\\&\qquad{} + (\bs a \bs s_i h + o(h^2)) \left[ (\ell+2)\Delta - \int_{x=0}^\infty \bs \alpha e^{\bs Sx}\bs s x \wrt x\right] \nonumber
-		%
-		\\&\qquad{} + \bs a e^{(\bs S_i + T_{ii}\bs I)h}\bs e \left[ (\ell+1)\Delta - \int_{x=0}^\infty \cfrac{\bs a e^{(\bs S_i + T_{ii}\bs I)h}}{\bs a e^{(\bs S_i + T_{ii}\bs I)h} \bs e} e^{\bs Sx}\bs s x \wrt x\right]. \label{eqn: rh 334}
-	\end{align}
-	Integrating by parts, then \(\int_{x=0}^\infty e^{\bs Sx} \bs s x \wrt x = \int_{x=0}^\infty e^{\bs Sx} \bs e \wrt x = (-\bs S)^{-1}\bs e\). Therefore (\ref{eqn: rh 334}) can be written as 
-	\begin{align}
-		&\sum_{\substack{j\in\mathcal S_+\\j\neq i}}T_{ij}h \left[ (\ell+1)\Delta - \bs a (-\bs S)^{-1}\bs e \right] \nonumber 
-		%
-		+ \sum_{j\in\mathcal S_-}T_{ij}h \left[ \ell\Delta + \bs a\bs D(-\bs S)^{-1}\bs e \right] \nonumber
-		%
-		\\&\quad {} + \bs a \bs s_i h \left[ (\ell+2)\Delta - \bs \alpha (-\bs S)^{-1}\bs e \right] \nonumber
-		%
-		+ \bs a e^{(\bs S_i + T_{ii}\bs I)h}\bs e \left[ (\ell+1)\Delta - \cfrac{\bs a e^{(\bs S_i + T_{ii}\bs I)h}}{\bs a e^{(\bs S_i + T_{ii}\bs I)h} \bs e} (-\bs S)^{-1}\bs e \right] + o(h^2)
-		%
-		\\&= \sum_{\substack{j\in\mathcal S_+\\j\neq i}}T_{ij}h \left[ (\ell+1)\Delta - \bs a (-\bs S)^{-1}\bs e \right] \nonumber 
-		%
-		+ \sum_{j\in\mathcal S_-}T_{ij}h \left[ \ell\Delta + \bs a\bs D(-\bs S)^{-1}\bs e \right] \nonumber
-		%
-		+ \bs a \bs s_i h \cdot (\ell+1)\Delta  \nonumber
-		%
-		\\&\quad {}+ \bs a e^{(\bs S_i + T_{ii}\bs I)h}\bs e \cdot (\ell+1)\Delta - \bs a e^{(\bs S_i + T_{ii}\bs I)h} (-\bs S)^{-1}\bs e + o(h^2).
-	\end{align}
-	Now, 
-	\[\mathbb E\left [\bar X(0)\mid L(0)= \ell,\bs A(0)=\bs a,\varphi(0)=i\right] =(\ell+1)\Delta - \int_{x=0}^\infty \bs a e^{\bs Sx} \bs s\wrt x = (\ell+1)\Delta - \bs a (-\bs S)^{-1}\bs e,\]
-	hence 
-	\begin{align}
-		&\mathbb E\left[\bar X(h)\mid L(0)=\ell,\bs A(0)=\bs a,\varphi(0)=i\right] - \mathbb E\left [\bar X(0)\mid L(0)=\ell,\bs A(0)=\bs a,\varphi(0)=i\right] \nonumber 
-		%
-		\\&= \sum_{\substack{j\in\mathcal S_+\\j\neq i}}T_{ij}h \left[ (\ell+1)\Delta - \bs a (-\bs S)^{-1}\bs e \right] \nonumber 
-		%
-		+ \sum_{j\in\mathcal S_-}T_{ij}h \left[ \ell\Delta + \bs a\bs D(-\bs S)^{-1}\bs e \right] \nonumber
-		%
-		+ \bs a \bs s_i h \cdot (\ell+1)\Delta  \nonumber
-		%
-		\\&\quad {} + \bs a e^{(\bs S_i + T_{ii}\bs I)h}\bs e \cdot (\ell+1)\Delta - \bs a e^{(\bs S_i + T_{ii}\bs I)h} (-\bs S)^{-1}\bs e - (\ell+1)\Delta + \bs a (-\bs S)^{-1}\bs e + o(h^2) \nonumber 
-		%
-		\\&= \sum_{\substack{j\in\mathcal S_+\\j\neq i}}T_{ij}h \left[ (\ell+1)\Delta - \bs a (-\bs S)^{-1}\bs e \right] \nonumber 
-		%
-		+ \sum_{j\in\mathcal S_-}T_{ij}h \left[ \ell\Delta + \bs a\bs D(-\bs S)^{-1}\bs e \right] \nonumber
-		%
-		+ \bs a \bs s_i h \cdot (\ell+1)\Delta  \nonumber
-		%
-		\\&\quad {} + \left[\bs a e^{(\bs S_i + T_{ii}\bs I)h}\bs e - 1\right] \cdot (\ell+1)\Delta + \left[\bs a (-\bs S)^{-1}\bs e - \bs a e^{(\bs S_i + T_{ii}\bs I)h} (-\bs S)^{-1}\bs e \right] + o(h^2). \label{eqnLc vwjb}
-	\end{align}
-	Now recall that for a matrix \(A\) the matrix exponential is given by \(\displaystyle e^{\bs At} = \sum_{n=0}^\infty \bs A^n\cfrac{t^n}{n!} = \bs I + \bs At + o(t^2)\), therefore  
-	\begin{align}\bs a e^{(\bs S_i + T_{ii}\bs I)h}\bs e - 1 &= \bs a \bs I \bs e + \bs a (\bs S_i + T_{ii}\bs I)h \bs e + o(h^2) - 1 \nonumber 
-	\\&= \bs a (\bs S_i + T_{ii}\bs I)h \bs e + o(h^2) \nonumber
-	\\&= -\bs a \bs s_ih  + T_{ii}h + o(h^2) ,\label{eqnLvskneq}\end{align}
-	and 
-	\begin{align}
-		\bs a (-\bs S)^{-1}\bs e - \bs a e^{(\bs S_i + T_{ii}\bs I)h} (-\bs S)^{-1}\bs e &= \bs a (-\bs S)^{-1}\bs e - \bs a \bs I (-\bs S)^{-1}\bs e - \bs a (\bs S_i + T_{ii}\bs I)h (-\bs S)^{-1}\bs e + o(h^2)\nonumber 
-		\\&= - \bs a (\bs S_i + T_{ii}\bs I)h (-\bs S)^{-1}\bs e + o(h^2)\nonumber 
-		\\&= -|c_i|  h  + -T_{ii}\bs a(-\bs S)^{-1}\bs eh + o(h^2).\label{eqn: vroq29}
-	\end{align}
-	Using (\ref{eqnLvskneq}) and (\ref{eqn: vroq29}) then (\ref{eqnLc vwjb}) can be written as 
-	\begin{align}
-		&\sum_{\substack{j\in\mathcal S_+\\j\neq i}}T_{ij}h \left[ (\ell+1)\Delta - \bs a (-\bs S)^{-1}\bs e \right] \nonumber 
-		%
-		+ \sum_{j\in\mathcal S_-}T_{ij}h \left[ \ell\Delta + \bs a\bs D(-\bs S)^{-1}\bs e \right] \nonumber
-		%
-		+ \bs a \bs s_i h \cdot (\ell+1)\Delta  \nonumber
-		%
-		\\&\quad {} + \left[-\bs a \bs s_ih  + T_{ii}h \right] \cdot (\ell+1)\Delta - \left[|c_i|  h  + T_{ii}\bs a(-\bs S)^{-1}\bs eh\right] + o(h^2). \label{eqnLc vwjb2}
-	\end{align}
-	Dividing by \(h\) and letting \(h\to 0\) gives 
-	\begin{align}
-		& \sum_{\substack{j\in\mathcal S_+\\j\neq i}}T_{ij} \left[ (\ell+1)\Delta - \bs a (-\bs S)^{-1}\bs e \right] \nonumber 
-		%
-		+ \sum_{j\in\mathcal S_-}T_{ij} \left[ \ell\Delta + \bs a\bs D(-\bs S)^{-1}\bs e \right] \nonumber
-		%
-		+ \bs a \bs s_i  \cdot (\ell+1)\Delta  \nonumber
-		%
-		-\bs a \bs s_i \cdot (\ell+1)\Delta \\&\quad{} + T_{ii} \cdot (\ell+1)\Delta - |c_i|  - T_{ii}\bs a(-\bs S)^{-1}\bs e \nonumber 
-		%
-		\\&= -|c_i| + \Bigg(\sum_{\substack{j\in\mathcal S_+\\j\neq i}}T_{ij}+T_{ii}\Bigg) \left[ \Delta - \bs a (-\bs S)^{-1}\bs e \right] \nonumber 
-		%
-		+ \sum_{j\in\mathcal S_-}T_{ij} \cdot \bs a\bs D(-\bs S)^{-1}\bs e 
-		%
-		%
-		\\&= -|c_i| + \sum_{j\in\mathcal S_-}T_{ij} \left[ \Delta - \bs a (-\bs S)^{-1}\bs e  +  \bs a\bs D(-\bs S)^{-1}\bs e \right] \nonumber 
-	\end{align}
-\end{proof}
-\begin{proof}
-	\begin{align}
-		\nonumber&\mathbb E\left[\bar X(t)\mid L(0)=\ell,\bs A(0)=\bs a,\varphi(0)=i\right]   
-%
-	\\&=  \begin{cases}
-			(\ell+1)\Delta - \int_{x=0}^\Delta \mathbb E[\bs A(t) \mid L(0)=\ell,\bs A(0)=\bs a,\varphi(0)=i ] \bs a V(x)\bs s x \wrt x & i \in\calS_+,\\
-			\ell\Delta + \int_{x=0}^\Delta \mathbb E[\bs A(t) \mid L(0)=\ell,\bs A(0)=\bs a,\varphi(0)=i ] \bs a V(x)\bs s x \wrt x & i \in\calS_-.
-		\end{cases}
-		\label{eqn: askgh q}
-	\end{align}
-	Assume first that \(i\in\calS_+\). Over the small time interval \([0,h)\) the events which may occur are either,
-	\begin{enumerate}
-		\item\label{item: kfj1} a change of phase to \(j\in\calS_+\), 
-		\item\label{item: kfj2} a change of phase to \(j\in\calS_-\), 
-		\item\label{item: kfj3} a change of level to \(\ell+1\), 
-		\item\label{item: kfj4} or there are no events, 
-	\end{enumerate}
-	and all other events occur with probability \(o(h^2)\). The probabilities of these events are 
-	\begin{enumerate}
-		\item\label{item: kfj12} \(\bs a T_{ij}\bs e h = T_{ij}h + o(h^2)\), 
-		\item\label{item: kfj22} \(\bs a \bs D T_{ij}\bs e h = T_{ij}h + o(h^2)\), 
-		\item\label{item: kfj32} \(\bs a \bs s_i h + o(h^2)\), 
-		\item\label{item: kfj42} \(\bs a e^{(\bs S_i + T_{ii}\bs I)h}\bs e\), 
-	\end{enumerate}
-	respectively. 
-	Partitioning with respect these four events then we can write 
-	\begin{align}
-		&\mathbb E\left[\bar X(h)\mid L(0)=\ell,\bs A(0)=\bs a,\varphi(0)=i\right] \nonumber
-		%
-		\\&= \sum_{\substack{j\in\mathcal S_+\\j\neq i}}(T_{ij}h + o(h^2)) \left[ (\ell+1)\Delta - \int_{x=0}^\Delta \bs a V(x) x \wrt x\right] \nonumber 
-		%
-		\\&\qquad{} + \sum_{j\in\mathcal S_-}(T_{ij}h + o(h^2)) \left[ \ell\Delta + \int_{x=0}^\Delta \bs a\bs D V(x) x \wrt x\right] \nonumber
-		%
-		\\&\qquad{} + (\bs a \bs s_i h + o(h^2)) \left[ (\ell+2)\Delta - \int_{x=0}^\Delta \bs \alpha V(x) x \wrt x\right] \nonumber
-		%
-		\\&\qquad{} + \bs a e^{(\bs S_i + T_{ii}\bs I)h}\bs e \left[ (\ell+1)\Delta - \int_{x=0}^\Delta \cfrac{\bs a e^{(\bs S_i + T_{ii}\bs I)h}}{\bs a e^{(\bs S_i + T_{ii}\bs I)h} \bs e} V(x) x \wrt x\right]. \label{eqn: rh 334}
-	\end{align}
-	Integrating by parts, then \(\bs a \int_{x=0}^\Delta V(x) x \wrt x = \mathbb E[\Delta - |Z_{\bs a}-\Delta|\mid Z_{\bs a}\leq 2\Delta]\). Therefore (\ref{eqn: rh 334}) can be written as 
-	\begin{align}
-		&\sum_{\substack{j\in\mathcal S_+\\j\neq i}}T_{ij}h \left[ (\ell+1)\Delta - \mathbb E[\Delta - |Z_{\bs a}-\Delta|\mid Z_{\bs a}\leq 2\Delta] \right] \nonumber 
-		%
-		+ \sum_{j\in\mathcal S_-}T_{ij}h \left[ \ell\Delta + \mathbb E[\Delta - |Z_{\bs a\bs D}-\Delta|\mid Z_{\bs a\bs D}\leq 2\Delta]\right] \nonumber
-		%
-		\\&\quad {} + \bs a \bs s_i h \left[ (\ell+2)\Delta - \mathbb E[\Delta - |Z_{\bs \alpha}-\Delta|\mid Z_{\bs \alpha}\leq 2\Delta]\right] \nonumber
-		%
-		\\&\quad{} + \bs a e^{(\bs S_i + T_{ii}\bs I)h}\bs e \left[ (\ell+1)\Delta - \mathbb E\left[\Delta - |Z_{\frac{\bs a e^{(\bs S_i + T_{ii}\bs I)h}}{\bs a e^{(\bs S_i + T_{ii}\bs I)h}\bs e}}-\Delta|\mid Z_{\frac{\bs a e^{(\bs S_i + T_{ii}\bs I)h}}{\bs a e^{(\bs S_i + T_{ii}\bs I)h}\bs e}}\leq 2\Delta\right] \right] + o(h^2)
-		%
-		\\&= \sum_{\substack{j\in\mathcal S_+\\j\neq i}}T_{ij}h \left[ \ell\Delta + \mathbb E[  |Z_{\bs a}-\Delta|\mid Z_{\bs a}\leq 2\Delta] \right] \nonumber 
-		%
-		+ \sum_{j\in\mathcal S_-}T_{ij}h \left[ (\ell+1)\Delta - \mathbb E[ |Z_{\bs a\bs D}-\Delta|\mid Z_{\bs a\bs D}\leq 2\Delta]\right] \nonumber
-		%
-		\\&\quad {} + \bs a \bs s_i h \left[ (\ell+1)\Delta + \mathbb E[|Z_{\bs \alpha}-\Delta|\mid Z_{\bs \alpha}\leq 2\Delta]\right] \nonumber
-		%
-		\\&\quad{} + \bs a e^{(\bs S_i + T_{ii}\bs I)h}\bs e \left[ (\ell+1)\Delta - \mathbb E\left[\Delta - |Z_{\frac{\bs a e^{(\bs S_i + T_{ii}\bs I)h}}{\bs a e^{(\bs S_i + T_{ii}\bs I)h}\bs e}}-\Delta|\mid Z_{\frac{\bs a e^{(\bs S_i + T_{ii}\bs I)h}}{\bs a e^{(\bs S_i + T_{ii}\bs I)h}\bs e}}\leq 2\Delta\right] \right] + o(h^2).
-	\end{align}
-	Now, 
-	\begin{align}
-		\mathbb E\left [\bar X(0)\mid L(0)= \ell,\bs A(0)=\bs a,\varphi(0)=i\right] &=(\ell+1)\Delta - \int_{x=0}^\infty \bs a V(x) x\wrt x \nonumber 
-		%
-		\\& = (\ell+1)\Delta - \mathbb E\left[\Delta - |Z_{\bs a}-\Delta|\mid Z_{\bs a}\leq 2\Delta\right],
-	\end{align}
-	hence 
-	\begin{align}
-		&\mathbb E\left[\bar X(h)\mid L(0)=\ell,\bs A(0)=\bs a,\varphi(0)=i\right] - \mathbb E\left [\bar X(0)\mid L(0)=\ell,\bs A(0)=\bs a,\varphi(0)=i\right] \nonumber 
-		%
-		\\&= \sum_{\substack{j\in\mathcal S_+\\j\neq i}}T_{ij}h \left[ (\ell+1)\Delta - \bs a (-\bs S)^{-1}\bs e \right] \nonumber 
-		%
-		+ \sum_{j\in\mathcal S_-}T_{ij}h \left[ \ell\Delta + \bs a\bs D(-\bs S)^{-1}\bs e \right] \nonumber
-		%
-		+ \bs a \bs s_i h \cdot (\ell+1)\Delta  \nonumber
-		%
-		\\&\quad {} + \bs a e^{(\bs S_i + T_{ii}\bs I)h}\bs e \cdot (\ell+1)\Delta - \bs a e^{(\bs S_i + T_{ii}\bs I)h} (-\bs S)^{-1}\bs e - (\ell+1)\Delta + \bs a (-\bs S)^{-1}\bs e + o(h^2) \nonumber 
-		%
-		\\&= \sum_{\substack{j\in\mathcal S_+\\j\neq i}}T_{ij}h \left[ (\ell+1)\Delta - \bs a (-\bs S)^{-1}\bs e \right] \nonumber 
-		%
-		+ \sum_{j\in\mathcal S_-}T_{ij}h \left[ \ell\Delta + \bs a\bs D(-\bs S)^{-1}\bs e \right] \nonumber
-		%
-		+ \bs a \bs s_i h \cdot (\ell+1)\Delta  \nonumber
-		%
-		\\&\quad {} + \left[\bs a e^{(\bs S_i + T_{ii}\bs I)h}\bs e - 1\right] \cdot (\ell+1)\Delta + \left[\bs a (-\bs S)^{-1}\bs e - \bs a e^{(\bs S_i + T_{ii}\bs I)h} (-\bs S)^{-1}\bs e \right] + o(h^2). \label{eqnLc vwjb}
-	\end{align}
-	Now recall that for a matrix \(A\) the matrix exponential is given by \(\displaystyle e^{\bs At} = \sum_{n=0}^\infty \bs A^n\cfrac{t^n}{n!} = \bs I + \bs At + o(t^2)\), therefore  
-	\begin{align}\bs a e^{(\bs S_i + T_{ii}\bs I)h}\bs e - 1 &= \bs a \bs I \bs e + \bs a (\bs S_i + T_{ii}\bs I)h \bs e + o(h^2) - 1 \nonumber 
-	\\&= \bs a (\bs S_i + T_{ii}\bs I)h \bs e + o(h^2) \nonumber
-	\\&= -\bs a \bs s_ih  + T_{ii}h + o(h^2) ,\label{eqnLvskneq}\end{align}
-	and 
-	\begin{align}
-		\bs a (-\bs S)^{-1}\bs e - \bs a e^{(\bs S_i + T_{ii}\bs I)h} (-\bs S)^{-1}\bs e &= \bs a (-\bs S)^{-1}\bs e - \bs a \bs I (-\bs S)^{-1}\bs e - \bs a (\bs S_i + T_{ii}\bs I)h (-\bs S)^{-1}\bs e + o(h^2)\nonumber 
-		\\&= - \bs a (\bs S_i + T_{ii}\bs I)h (-\bs S)^{-1}\bs e + o(h^2)\nonumber 
-		\\&= -|c_i|  h  + -T_{ii}\bs a(-\bs S)^{-1}\bs eh + o(h^2).\label{eqn: vroq29}
-	\end{align}
-	Using (\ref{eqnLvskneq}) and (\ref{eqn: vroq29}) then (\ref{eqnLc vwjb}) can be written as 
-	\begin{align}
-		&\sum_{\substack{j\in\mathcal S_+\\j\neq i}}T_{ij}h \left[ (\ell+1)\Delta - \bs a (-\bs S)^{-1}\bs e \right] \nonumber 
-		%
-		+ \sum_{j\in\mathcal S_-}T_{ij}h \left[ \ell\Delta + \bs a\bs D(-\bs S)^{-1}\bs e \right] \nonumber
-		%
-		+ \bs a \bs s_i h \cdot (\ell+1)\Delta  \nonumber
-		%
-		\\&\quad {} + \left[-\bs a \bs s_ih  + T_{ii}h \right] \cdot (\ell+1)\Delta - \left[|c_i|  h  + T_{ii}\bs a(-\bs S)^{-1}\bs eh\right] + o(h^2). \label{eqnLc vwjb2}
-	\end{align}
-	Dividing by \(h\) and letting \(h\to 0\) gives 
-	\begin{align}
-		& \sum_{\substack{j\in\mathcal S_+\\j\neq i}}T_{ij} \left[ (\ell+1)\Delta - \bs a (-\bs S)^{-1}\bs e \right] \nonumber 
-		%
-		+ \sum_{j\in\mathcal S_-}T_{ij} \left[ \ell\Delta + \bs a\bs D(-\bs S)^{-1}\bs e \right] \nonumber
-		%
-		+ \bs a \bs s_i  \cdot (\ell+1)\Delta  \nonumber
-		%
-		-\bs a \bs s_i \cdot (\ell+1)\Delta \\&\quad{} + T_{ii} \cdot (\ell+1)\Delta - |c_i|  - T_{ii}\bs a(-\bs S)^{-1}\bs e \nonumber 
-		%
-		\\&= -|c_i| + \Bigg(\sum_{\substack{j\in\mathcal S_+\\j\neq i}}T_{ij}+T_{ii}\Bigg) \left[ \Delta - \bs a (-\bs S)^{-1}\bs e \right] \nonumber 
-		%
-		+ \sum_{j\in\mathcal S_-}T_{ij} \cdot \bs a\bs D(-\bs S)^{-1}\bs e 
-		%
-		%
-		\\&= -|c_i| + \sum_{j\in\mathcal S_-}T_{ij} \left[ \Delta - \bs a (-\bs S)^{-1}\bs e  +  \bs a\bs D(-\bs S)^{-1}\bs e \right] \nonumber 
-	\end{align}
-\end{proof}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
