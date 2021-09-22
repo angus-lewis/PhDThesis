@@ -2,78 +2,8 @@
 \chapter{A stochastic modelling approach to approximating fluid queues\label{sec: construction and modelling}}
 In this chapter we develop a new discretisation of a fluid queue using a \emph{quasi-birth-and-death process with rational arrival process components} (QBD-RAP). In the following chapter, Chapter \ref{sec: conv} we prove the scheme converges weakly. To improve upon the discretisation of \cite{bo2013}, we argue that the shift from QBD to QBD-RAP is necessary. The approximation can be made arbitrarily accurate. Due to its stochastic interpretation, the QBD-RAP discretisation ensures solutions are positive, even when discontinuities are present. Unlike slope limiters and post-hoc filtering, for the QBD-RAP the positivity preserving nature is a property of the discretised operator. 
 
-The structure of this chapter is as follows. In Section~\ref{sec: prelim} we provide a brief background on matrix exponential random variables and and quasi-birth-and-death processes with rational arrival process components (QBD-RAPs). Section~\ref{sec: inspiration} motivates the idea using the QBD approximation of \cite{bo2014}. Sections \ref{sec: modelling} and \ref{sec: zero states} describe the modelling of certain events of the fluid queue with matrix exponential distributions to ultimately construct the behaviour of the QBD-RAP on the event that the QBD-RAP remains in a given level. Section~\ref{sec: dynamics} describes the dynamics of the construction and also constructs the level process of the QBD-RAP. Section~\ref{sec: boundary conditions} deals with modelling boundary behaviour. Section~\ref{sec: initial conditions} describes how to model initial conditions of the fluid queue. Section~\ref{sec: closing} introduces the concept of a \emph{closing operator} which maps the state space of the QBD-RAP to estimates of the density of the fluid queue. 
+The structure of this chapter is as follows. Section~\ref{sec: inspiration} motivates the idea using the QBD approximation of \cite{bo2014}. Sections \ref{sec: modelling} and \ref{sec: zero states} describe the modelling of certain events of the fluid queue with matrix exponential distributions to ultimately construct the behaviour of the QBD-RAP on the event that the QBD-RAP remains in a given level. Section~\ref{sec: dynamics} describes the dynamics of the construction and also constructs the level process of the QBD-RAP. Section~\ref{sec: boundary conditions} deals with modelling boundary behaviour. Section~\ref{sec: initial conditions} describes how to model initial conditions of the fluid queue. Section~\ref{sec: closing} introduces the concept of a \emph{closing operator} which maps the state space of the QBD-RAP to estimates of the density of the fluid queue. 
 
-
-\section{Preliminaries}\label{sec: prelim}
-%This work approximates fluid queues using other stochastic processes, specifically quasi-birth-and-death processes with rational arrival process components (QBD-RAPs). The building blocks of QBD-RAPs are rational arrival processes (RAPs) and the building blocks of RAPs are matrix-exponential distributions. In this section, we introduce these concepts. 
-
-\subsection{Matrix-exponential distributions}
-Here we recount some facts about matrix exponential distributions. See \citep{MEinAP} for a more detailed exposition. A random variable, \(Z\), is said to have a matrix-exponential distribution if it has a distribution function of the form \(1-\bs \alpha e^{\bs Sx}(-\bs S)^{-1}\bs s\), where \(\bs \alpha\) is a \(1\times p\) \emph{initial vector}, \(\bs S\) a \(p\times p\) matrix, and \(\bs s\) a \(p\times 1\) \emph{closing vector}, and \(\displaystyle e^{\bs S x} := \sum_{n=0}^\infty \cfrac{\left(\bs Sx\right)^n}{n!}\) is the matrix exponential. The density function of \(Z\) is given by \(f_Z(x) = \bs\alpha e^{\bs S x}\bs s\). The only restrictions on the parameters \((\bs \alpha, \bs S, \bs s)\) are that \(\bs \alpha e^{\bs S x} \bs s\) be a valid density function, i.e.~\(\bs \alpha e^{\bs S x} \bs s\geq 0,\) for all \(x\geq 0\) and \(\lim_{x\to\infty} 1-\bs \alpha e^{\bs Sx}(-\bs S)^{-1}\bs s = 1.\) There is the possibility of an \emph{atom} (a point mass) at 0, but here we do not consider this possibility. These condition that \(\bs \alpha e^{\bs Sx}\bs s\) be a valid density imposes some properties on representations \((\bs \alpha, \bs S, \bs s)\). However, in general there is no way to determine whether, given a triplet \((\bs \alpha, \bs S, \bs s)\) whether it is a representation of a matrix-exponential distribution, or not. Nonetheless, some properties of a triplet \((\bs \alpha, \bs S, \bs s)\) are known, such as the following, which is used in the characterisation of QBD-RAPs. 
-\begin{thm}[Theorem 4.1.3, \cite{MEinAP}]
-	The density function of a matrix-exponential distribution with representation \((\bs\alpha, \bs S, \bs s)\) can be expressed in terms of real-valued constants as 
-	\begin{align}
-		\psi(x)&=\sum_{j=1}^{m_1} \sum_{k=1}^{p_j} c_{jk} \cfrac{x^{k-1}}{(k-1)!} e^{\mu_jx} + \sum_{j=1}^{m+2}\sum_{k=1}^{q_j} d_{jk}\cfrac{x^{k-1}}{(k-1)!}e^{\eta_jx}\cos(\sigma_jx) + \sum_{j=1}^{m_2}\sum_{k=1}^{q_j}e_{jk}\cfrac{x^{k-1}}{(k-1)!}e^{\eta_jx}\sin(\sigma_jx), \label{eqn: spec}
-	\end{align}
-	for integers \(m_1,\,m_2,\,p_j,\) and \(q_j\) and some real constants \(c_{jk},\,d_{jk},\,e_{jk},\,\mu_j,\,\eta_j,\) and \(\sigma_j\). Here \(\mu_j,\, j=1,\dots,m_1\) are the real eigenvalues of \(\bs S\), while \(\eta_j+i\sigma_j, \, \eta_j-i\sigma_j,\, j=1,\dots,m_2\) denote its complex eigenvalues, which come in conjugate pairs. Thus \(m_1+2m_2\) is the total number of eigenvalues, while the dimension of the representation is given by \(\displaystyle p=\sum_{j=1}^{m+1}p_j + 2\sum_{j=1}^{m_2}q_j\). 
-\end{thm}
-\begin{thm}[Theorem 4.1.4, \cite{MEinAP}]\label{thm: 4.1.4}
-	Consider the nonvanishing terms of the matrix exponential density (\ref{eqn: spec}), \emph{i.e.}, the terms for which \(c_{jk}=0,\,d_{jk} =0,\) or \(e_{jk}=0\). Among the corresponding eigenvalues \(\lambda_j\), there is a real dominating eigenvalue \(\kappa\), say. That is, \(\kappa\) is real, \(\kappa \geq Re(\lambda_j)\) for all \(j\), and the multiplicity of \(\kappa\) is at least the multiplicity of every other eigenvalue with real part \(\kappa\).
-\end{thm}
-\begin{cor}[Corollary 4.1.5, \cite{MEinAP}]
-If \((\bs \alpha, \bs S, \bs s)\) is a representation for a matrix-exponential distribution, then \(\bs S\) has a real dominating eigenvalues.
-\end{cor}
-\begin{thm}[Theorem 4.1.6, \cite{MEinAP}]
-	Let \(Z\) be a matrix-exponentially distributed random variable with density (\ref{eqn: spec}). Then the dominant real eigenvalue \(\kappa\) of Theorem~\ref{thm: 4.1.4} is strictly negative. 
-\end{thm}
-We define \(dev(\bs S)\) to be the real dominating eigenvalue of \(\bs S\), that is \(dev(\bs S)=\kappa\) in Theorem~\ref{thm: 4.1.4}.
-
-The class of matrix-exponential distribution is characterised as the class of probability distributions which have a rational Laplace transform. That is, \(\displaystyle \int_{x=0}^\infty e^{-\lambda x}\bs \alpha e^{\bs S x}\bs s \wrt x\) is a ratio of two polynomial functions in \(\lambda\). Matrix exponential distributions are an extension of Phase-type distributions, where for the latter, \(\bs S\) must be a sub-generator matrix of a CTMC, \(\bs s = -\bs S\bs e\) where \(\bs e\) is a \(1\times p\) vector of ones, and \(\bs \alpha\) is a discrete probability distribution.  
-
-A \emph{representation} of a matrix exponential distribution is a triplet \((\bs \alpha, \bs S, \bs s)\), and we write \(Z\sim ME(\bs \alpha, \bs S, \bs s)\) to denote that \(Z\) has a matrix-exponential distribution with this representation. The order of the representation is the dimension of the square matrix \(\bs S\), i.e.~if \(\bs S\) is \(p\times p\), then the matrix exponential distribution is said to be of order \(p\). Representations of matrix-exponential distributions are not unique \citep{MEinAP}. A representation is called \emph{minimal} when \(\bs S\) has the smallest possible dimension. Throughout this work, we assume that the representation of any matrix exponential distribution is minimal. Let \(\bs e_i\) be a vector with a 1 in the \(i\)th position and zeros elsewhere. We assume that \(\bs s = -\bs S\bs e\), and that \((\bs e_i,\bs S,\bs s)\) for \(i=1,\dots,p\) are representations of matrix exponential distributions. It is always possible to find such a representation \cite[Theorem 4.5.17, Corollary 4.5.18]{MEinAP}. As such, we abbreviate our notation \(Z\sim ME(\bs \alpha, \bs S, \bs s)\) to \(Z\sim ME(\bs \alpha, \bs S)\). Further, given \(\bs s=-\bs S\bs e\) then observe that  \(\displaystyle \int_{x=0}^\infty e^{\bs S x} \bs s\wrt x = (-\bs S)^{-1}\bs s= \bs e\). 
-
-For a given \(p\times p\) matrix \(\bs S\), denote by \(\mathcal A\subset \mathbb R^p\) the space of all possible vectors \(\bs a\) such that \((\bs a, \bs S)\) is a valid representation of a matrix exponential distribution. %By CITE it is known that \(\mathcal A\) is a closed, bounded, convex, affine subspace of \(\mathbb R^p\). 
-
-
-
-%\subsection{Rational arrival processes}
-%Let \(N\) be a simple point process, with event time \(Y_0=0<Y_1<Y_2<\cdot\). Let \(\{N(t)\}_{t\geq0}\) be the right-continuous counting process associated with \(N\); \(N(t)\) returns the number of events by time \(t\). Denote by \(f_{N,n}(y_1,\dots,y_n)\) the joint density of \(Y_1, Y_2-Y_1, \dots,Y_n-Y_{n-1}\), the first \(n\) inter-arrival times. For a matrix \(\bs B\) let \(dev(\bs B)\) denote the dominant eigenvalue of \(\bs B\) (the one with maximal real part). Theorem 1.1 of Asmussen and Bladt CITE states that the point process \(N\) is a RAP if there exists matrices \(\bs S\), \(\bs D\), a row vector \(\bs\alpha\), and a column vector \(\bs s\) such that \(dev(\bs S)<1\), \(dev(\bs S+\bs D)=0\), \((\bs S+\bs D)\bs e=0,\) and 
-%\[f_{N,n}(y_1,\dots,y_n) = \bs \alpha e^{\bs Sy_1} \bs D e^{\bs Sy_1} \bs D \dots e^{\bs Sy_n} \bs s.\]
-%Here \(\bs s\) can be taken to be \(\bs D e\). The \(n\)th inter-arrival, \(T_n-T_{n-1}\), has a matrix exponential distribution with density \(\bs \alpha(-\bs S\bs D )^{n-1}e^{\bs S x_n}\bs s\). Denote such a process \(N \sim RAP(\bs \alpha, \bs S, \bs D)\). 
-%
-%Asmussen and Bladt CITE, Corollary 2.2, show that associated with the RAP is a row-vector-valued \emph{orbit} process, \(\{\bs A(t)\}_{t\geq0},\), 
-%\[\bs A(t) = \cfrac{\bs \alpha\left( \prod_{i=1}^{N(t)} e^{\bs S(Y_{i}-Y_{i-1})}\bs S\right)e^{\bs S t-Y_{N(t)}}}{\bs \alpha\left( \prod_{i=1}^{N(t)} e^{\bs S(Y_{i}-Y_{i-1})}\bs S\right)e^{\bs S( t-Y_{N(t)})}\bs e}.\]
-%Thus, \(\{\bs A(t)\}\) is a piecewise-deterministic Markov process where, in between jumps \(\{\bs A(t)\}\) according to 
-%\[\bs A(t) = \cfrac{\bs A(Y_{N(t)}^-)e^{\bs S(t-Y_{N(t)})}}{\bs A(Y_{N(t)}^-)e^{\bs S(t-Y_{N(t)})}\bs e},\]
-%where \(\bs A(Y_{N(t)}^-) = \lim_{u\to 0^+}\bs A(Y_{N(t)}-u)\). The process \(\{\bs A(t)\}\) jumps at event times of \(N\). At time \(t\) the intensity with which \(\{\bs A(t)\}\) has a jump is \(\bs A(t) \bs D\bs e\), and upon a jump at time \(t\), the new position of the orbit is \(\bs A(t) = \bs A(t^-) \bs D/\bs A(t^-) \bs D\bs e\). 
-%
-%RAPs are an extension of Markovian arrival processes (MAPs) to include matrix-exponential inter-arrival times. For MAPs, the vector \(\bs A(t)\) is a vector of posterior probabilities of a continuous-time Markov chain. 
-%
-%Intuitively, \(\bs A(t)\) encodes all of the information about the jump times of the RAP up to time \(t\). Let \(\mathcal F_{t}\) be the \(\sigma\)-algebra generated by \(N(u), u\in[0,t]\). Then \(N\mid \mathcal F_t \equiv N\mid \bs A(t) \sim ME(\bs A(t), \bs S, \bs S)\). In words, the future of the point process after time \(t\) given all of the information about the process up to and including time \(t\), is distributed as a RAP with initial vector \(\bs A(t)\). 
-
-\subsection{QBD-RAPs}
-As RAPs are an extension of Markovian arrival processes to include matrix-exponential inter-arrival times, QBD-RAPs are extensions of QBDs to include matrix-exponential times between level changes. To define a QBD-RAP we first need a Batch (Marked) RAP. 
-
-Let \(\mathscr K\subset \mathbb Z\) be a set of \emph{marks}. Let \(N\) be a point process, and \(Y_0=0<Y_1<Y_2\cdots\) be event times of \(N\). Let \(\{N(t)\}\) be the counting process associated with \(N\) such that \(N(t)\) returns the number of events by time \(t\). Associated with the \(n\)th event is a mark \(M_n\). For \(i\in\mathscr K\), let \(N_i\) be simple point processes associated with events with marks of type \(i\) only, and let \(\{N_i(t)\}_{t\geq 0}\) be the associated counting processes of events of mark \(i\). For a matrix \(\bs B\) let \(dev(\bs B)\) denote the real part of the dominant eigenvalue of \(\bs B\) (the one with maximal real part). Denote by \(f_{N,n}(y_1,m_1,y_2,m_2,\dots,y_n,m_n)\) the joint density, probability mass function of the first \(n\) inter-arrival times, \(Y_1,Y_2-Y_1,\dots,Y_n-Y_{n-1}\), and the associated marks \(M_n\). From Bean and Nielsen \cite[Theorem 1]{bn2010} we have the following. 
-\begin{thm}
-A process \(N\) is a Marked RAP if there exist matrices \(\bs S\), \(\bs D_i,\,i\in\mathscr K\), and a row vector \(\bs \alpha\) such that \(dev(\bs S)<0\), \(dev(\bs S+\bs D)=0\), \((\bs S+\bs D)\bs e = 0\), \(\bs D = \sum_{i\in\mathscr K} \bs D_i\), and 
-\begin{align}f_{N,n}(y_1,m_1,y_2,m_2,\dots,y_n,m_n) = \bs \alpha e^{\bs S y_1}\bs D_{m_1} e^{\bs S y_2} \bs D_{m_2}\dots e^{\bs S y_n} \bs D_{m_n}\bs e.\label{eqn: brap}\end{align}
-Conversely, if a point process has the property (\ref{eqn: brap}) then it is a Marked RAP.
-\end{thm}
-
-Denote such a process \(N\sim BRAP(\bs \alpha, \bs S, \bs D_i,\,i\in\mathscr K).\)
-
-Also from \cite{bn2010}, associated with a Marked RAP is a row-vector-valued \emph{orbit} process, \(\{\bs A(t)\}_{t\geq0},\)
-\[\bs A(t) = \cfrac{\bs \alpha\left( \prod\limits_{i=1}^{N(t)} e^{\bs S(Y_{i}-Y_{i-1})}\bs D_{M_i}\right)e^{\bs S (t-Y_{N(t)})}}{\bs \alpha\left( \prod\limits_{i=1}^{N(t)} e^{\bs S(Y_{i}-Y_{i-1})}\bs D_{M_i}\right)e^{\bs S( t-Y_{N(t)})}\bs e}.\]
-Thus, \(\{\bs A(t)\}\) is a piecewise-deterministic Markov process where, in between events \(\{\bs A(t)\}\) evolves deterministically according to 
-\[\bs A(t) = \cfrac{\bs A(Y_{N(t)}^-)e^{\bs S(t-Y_{N(t)})}}{\bs A(Y_{N(t)}^-)e^{\bs S(t-Y_{N(t)})}\bs e},\]
-where \(\bs A(Y_{N(t)}^-) = \lim_{u\to 0^+}\bs A(Y_{N(t)}-u)\). The process \(\{\bs A(t)\}\) "jumps" at event times of \(N\) (the process may not always jump at these times, but typically the dynamics change discontinuously at this point). At time \(t\) the intensity with which \(\{\bs A(t)\}\) has a jump is \(\bs A(t) \bs D\bs e\). Upon an event the event is associated with mark \(i\) with probability \(\bs A(t) \bs D_i\bs e/\bs A(t) \bs D\bs e\). Upon on an event at time \(t\) with mark \(i\), the new position of the orbit is \(\bs A(t) = \bs A(t^-) \bs D_i/\bs A(t^-) \bs D_i\bs e\). 
-
-Marked RAPs are an extension of Marked Markovian arrival processes to include matrix-exponential inter-arrival times. For Marked MAPs, the vector \(\bs A(t)\) is a vector of posterior probabilities of a continuous-time Markov chain. 
-
-Intuitively, \(\bs A(t)\) encodes all of the information about the event times of the Marked RAP and associated marks up to time \(t\) that is needed to determine the future behaviour of the point process. Let \(\mathcal F_{t}\) be the \(\sigma\)-algebra generated by \(N(u), u\in[0,t]\). Then \(N\mid \mathcal F_t \equiv N\mid \bs A(t) \sim BRAP(\bs A(t), \bs S, \bs D_i,i\in\mathscr K)\). In words, the future of the point process after time \(t\) given all of the information about the process up to and including time \(t\), is distributed as a Marked RAP with initial vector \(\bs A(t)\). 
-
-Now consider a Marked RAP, \(N\sim BRAP(\bs \alpha, \bs S, \bs D_i,\,i\in\{-1,0,+1\}).\) The process \(\{(L(t),\bs A(t))\}_{t\geq0}\) formed by letting \(L(t) = N_{+1}(t) - N_{-1}(t)\) is a QBD-RAP. 
 
 \section{Inspiration and motivation}\label{sec: inspiration}
 The inspiration for our approach stems from the QBD-based discretisation of \cite{bo2013}. A QBD can be seen as a two dimensional CTMC, \(\{(L(t),\phi(t))\}_{t\geq 0}\), where \(\{L(t)\}\) is the discrete level, and \(\{\phi(t)\}\) is the phase. \cite{bo2013} discretise the state space of the fluid into small intervals of width \(\Delta\); denote these by \(\mathcal D_k=[k\Delta,(k+1)\Delta]\). Their approximation captures the dynamics of the phase process exactly, but discretises the level process of the fluid queue. Their approximation supposes that when \(L(t)=k,\,\phi(t)=i\), then \(X(t)\approx k\Delta,\,\phi(t)=i\). 
@@ -115,15 +45,15 @@ To approximate the deterministic behaviour observed above, consider a matrix-exp
 After \(u\in[0,\Delta/|c_i|)\) amount of time has elapsed, on the event that \(\varphi(t+s)=i\), for all \(s\in[0,u)\), then \(X(t+u) = y_k + c_i u\). If the phase remains \(i\) for a further \(\Delta/|c_i|-u\) amount of time, then \(\{X(t)\}\) will leave \(\calD_{k,i}\) at exactly this time. Also at time \(t+u\), given \(Z_i>u\), the distribution of the residual time, \(R_i(u)\), has density 
 \[f_{R_i(u)}(r) = \cfrac{\bs\alpha e^{\bs S_i(u+ r) } \bs s_i}{\bs\alpha e^{\bs S_iu } \bs e} = \bs A(t+u) e^{\bs S_i r}  \bs s_i.\]
 Here, the event \(Z_i>u\) approximates the event \(X(t)\in\calD_{k,i}\) and we want the residual time, \(R_i(u)\), to approximate the time until \(\{X(t)\}\) leaves \(\calD_{k,i}\). That is, we want \(R_i(u)\) to approximate a deterministic random variable at \(\Delta/|c_i| - u\). To this end, we observe that, if the variance of \(Z_i\) is sufficiently low, then for \(\varepsilon>0\) and \(u<\Delta/|c_i|-\varepsilon\), then
-\begin{align}
-	\mathbb P(R_i(u) \in (\Delta/|c_i|-u-\varepsilon, \Delta/|c_i|-u + \varepsilon)) 
-	&= \mathbb P(Z_i\in (\Delta/|c_i|-\varepsilon, \Delta/|c_i| + \varepsilon)\mid Z_i > u) 
+\begin{align*}
+	&\mathbb P(R_i(u) \in (\Delta/|c_i|-u-\varepsilon, \Delta/|c_i|-u + \varepsilon)) 
+	\\&= \mathbb P(Z_i\in (\Delta/|c_i|-\varepsilon, \Delta/|c_i| + \varepsilon)\mid Z_i > u) 
 	\\&= \cfrac{\mathbb P(Z_i\in (\Delta/|c_i|-\varepsilon, \Delta/|c_i| + \varepsilon))}{\mathbb P(Z_i > u)} 
 	\\&= \cfrac{\mathbb P(Z\in (\Delta-\varepsilon, \Delta + \varepsilon))}{\mathbb P(Z_i > u)} 
 %	\\&= \cfrac{\mathbb P(Z_i-u\in (\Delta/|c_i|-u-\varepsilon, \Delta/|c_i|-u + \varepsilon))}{\mathbb P(Z_i-u > 0)} 
 %	\\&\geq \mathbb P(Z-u\in (\Delta-u-\varepsilon, \Delta-u + \varepsilon))
 	\\&\geq \cfrac{1-\cfrac{\var(Z)}{\varepsilon^2}}{1} 
-\end{align}
+\end{align*}
 since, by Chebyshev's inequality, \(\mathbb P(Z_i\in (\Delta/|c_i|-\varepsilon, \Delta/|c_i| + \varepsilon)) \geq 1- \cfrac{\var(Z_i)}{\varepsilon^2}\). Choosing \(\varepsilon = \var(X)^{1/3}\), then 
 \[\mathbb P(R_i(u) \in (\Delta/|c_i|-u-\varepsilon, \Delta/|c_i|-u + \varepsilon))\geq 1-\var(Z)^{1/3} \approx 1. \]
 That is, when the variance of \(Z_i\) is low, the residual time \(R_i(u)\) will be concentrated around \(\Delta/|c_i| - u\), as required. Figure \ref{fig:residual distributions} gives an example of a density function for a \(Z_i\) with mean \(\Delta=1\) and \(c_i=1\), as well as the density function of \(R_i(0.3)\) and \(R_i(0.5)\) for comparison. Observe that the density of the residual life \(R_i(0.3)\) is concentrated around \(\Delta-0.3 = 0.7\) and, similarly the density of the residual life \(R_i(0.6)\) is concentrated around \(\Delta-0.6 = 0.4\).
