@@ -1,12 +1,12 @@
 %!TEX root = ../thesis.tex
-\chapter{A stochastic modelling approach to approximation\label{sec: construction and modelling}}
-In this chapter we develop a new discretisation of a fluid queue using a \emph{quasi-birth-and-death process with rational arrival process components} (QBD-RAP), to be described in more detail later, and prove convergence of the approximation scheme. To improve upon the discretisation of \cite{bo2013}, we argue that the shift from QBD to QBD-RAP is necessary. The approximation can be made arbitrarily accurate. Due to its stochastic interpretation, the QBD-RAP discretisation ensures solutions are positive, even when discontinuities are present. Unlike slope limiters and post-hoc filtering, for the QBD-RAP the positivity preserving nature is a property of the discretised operator. 
+\chapter{A stochastic modelling approach to approximating fluid queues\label{sec: construction and modelling}}
+In this chapter we develop a new discretisation of a fluid queue using a \emph{quasi-birth-and-death process with rational arrival process components} (QBD-RAP). In the following chapter, Chapter \ref{sec: conv} we prove the scheme converges weakly. To improve upon the discretisation of \cite{bo2013}, we argue that the shift from QBD to QBD-RAP is necessary. The approximation can be made arbitrarily accurate. Due to its stochastic interpretation, the QBD-RAP discretisation ensures solutions are positive, even when discontinuities are present. Unlike slope limiters and post-hoc filtering, for the QBD-RAP the positivity preserving nature is a property of the discretised operator. 
 
-The structure of this chapter is as follows. In Section~\ref{sec: prelim} we provide a brief background on matrix exponential random variables and the stochastic processes appearing in this work, namely fluid queues, quasi-birth-and-death (QBD) processes, rational arrival processes (RAPs), and quasi-birth-and-death processes with rational arrival process components (QBD-RAPs). Section~\ref{sec: inspiration} motivates the idea using the QBD approximation of \citep{bo2014}. Sections \ref{sec: modelling} and \ref{sec: zero states} describe the modelling of certain events of the fluid queue with matrix exponential distributions to ultimately construct the behaviour of the QBD-RAP. Section~\ref{sec: dynamics} describes the dynamics of the resulting construction and constructs the level process of the QBD-RAP. Section~\ref{sec: boundary conditions} deals with modelling boundary behaviour. Section~\ref{sec: initial conditions} describes how to model initial conditions of the fluid queue. Section~\ref{sec: closing} introduces the concept of a \emph{closing operator} which maps states of the QBD-RAP to estimates of the distribution of the fluid queue. 
+The structure of this chapter is as follows. In Section~\ref{sec: prelim} we provide a brief background on matrix exponential random variables and and quasi-birth-and-death processes with rational arrival process components (QBD-RAPs). Section~\ref{sec: inspiration} motivates the idea using the QBD approximation of \cite{bo2014}. Sections \ref{sec: modelling} and \ref{sec: zero states} describe the modelling of certain events of the fluid queue with matrix exponential distributions to ultimately construct the behaviour of the QBD-RAP on the event that the QBD-RAP remains in a given level. Section~\ref{sec: dynamics} describes the dynamics of the construction and also constructs the level process of the QBD-RAP. Section~\ref{sec: boundary conditions} deals with modelling boundary behaviour. Section~\ref{sec: initial conditions} describes how to model initial conditions of the fluid queue. Section~\ref{sec: closing} introduces the concept of a \emph{closing operator} which maps the state space of the QBD-RAP to estimates of the density of the fluid queue. 
 
 
 \section{Preliminaries}\label{sec: prelim}
-This work approximates fluid queues using other stochastic processes, specifically quasi-birth-and-death processes with rational arrival process components (QBD-RAPs). The building blocks of QBD-RAPs are rational arrival processes (RAPs) and the building blocks of RAPs are matrix-exponential distributions. In this section, we introduce these concepts. 
+%This work approximates fluid queues using other stochastic processes, specifically quasi-birth-and-death processes with rational arrival process components (QBD-RAPs). The building blocks of QBD-RAPs are rational arrival processes (RAPs) and the building blocks of RAPs are matrix-exponential distributions. In this section, we introduce these concepts. 
 
 \subsection{Matrix-exponential distributions}
 Here we recount some facts about matrix exponential distributions. See \citep{MEinAP} for a more detailed exposition. A random variable, \(Z\), is said to have a matrix-exponential distribution if it has a distribution function of the form \(1-\bs \alpha e^{\bs Sx}(-\bs S)^{-1}\bs s\), where \(\bs \alpha\) is a \(1\times p\) \emph{initial vector}, \(\bs S\) a \(p\times p\) matrix, and \(\bs s\) a \(p\times 1\) \emph{closing vector}, and \(\displaystyle e^{\bs S x} := \sum_{n=0}^\infty \cfrac{\left(\bs Sx\right)^n}{n!}\) is the matrix exponential. The density function of \(Z\) is given by \(f_Z(x) = \bs\alpha e^{\bs S x}\bs s\). The only restrictions on the parameters \((\bs \alpha, \bs S, \bs s)\) are that \(\bs \alpha e^{\bs S x} \bs s\) be a valid density function, i.e.~\(\bs \alpha e^{\bs S x} \bs s\geq 0,\) for all \(x\geq 0\) and \(\lim_{x\to\infty} 1-\bs \alpha e^{\bs Sx}(-\bs S)^{-1}\bs s = 1.\) There is the possibility of an \emph{atom} (a point mass) at 0, but here we do not consider this possibility. These condition that \(\bs \alpha e^{\bs Sx}\bs s\) be a valid density imposes some properties on representations \((\bs \alpha, \bs S, \bs s)\). However, in general there is no way to determine whether, given a triplet \((\bs \alpha, \bs S, \bs s)\) whether it is a representation of a matrix-exponential distribution, or not. Nonetheless, some properties of a triplet \((\bs \alpha, \bs S, \bs s)\) are known, such as the following, which is used in the characterisation of QBD-RAPs. 
@@ -219,27 +219,27 @@ With this construction, and choosing \(Z\sim Erlang(p,\Delta/p)\), we recover th
 
 \paragraph{Upon exiting \(\calD_{k,i}\)} Suppose that upon exiting \(\calD_{k,i}\) at time \(t\) the phase is \(\varphi(t)=i\in\calS_+\). At this time \(X(t)=y_{k+1}\) which is the left-hand endpoint of \(\calD_{k+1,i}\). Hence, we restart the model of the sojourn time with the initial condition \(\bs A(t)=\bs \alpha\). Similarly, upon exiting \(\calD_{k,i}\) at time \(t\) in phase \(\varphi(t)=i\in\calS_-\), then \(X(t)=y_k\), which is the right-hand endpoint of \(\calD_{k,i}\), and so we restart the model of the sojourn time with the initial condition \(\bs A(t)=\bs \alpha\).
 
-\section{Computing \(\bs D\)}
-In practice we use the class of concentrated matrix exponential distributions (CMEs) found numerically in \citep{hhat2020}. For this class of CMEs, we take the index \(p\) to be the order of the representation. Since the variance of \(Z^{(2p)}\) and \(Z^{(2p-1)}\) are relatively similar \citep{hhat2020}, we take \(p\) to be odd. For a given CME, with representation \((\bs\alpha,\bs S)\), the matrix \(\bs S\) has one real eigenvalue, and \(p-1\) complex eigenvalues and all eigenvalues have the same real part. 
+\subsection{Computing \(\bs D\)}
+In practice we use the class of concentrated matrix exponential distributions (CMEs) found numerically in \citep{hhat2020}. For this class of CMEs, we take the index \(p\) to be the order of the representation. Moreover, we take \(p\) to be odd. The justification for considering representations of odd orders only is that the variance of CME representations of orders \(2p\) and \(2p-1\) are relatively similar and therefore have similar abilities to represent the delta function \citep{hhat2020}. Hence, if we construct a QBD-RAP approximation of with a representation of order \(2p\) we expect it to perform similarly to an approximation constructed with representations of order \(2p-1\). However, the computational cost of the latter is lower, so we opt for the order \(2p-1\) representation. 
 
-We numerically evaluate \(\bs{D}\) where
+For a given CME with odd order, \(p\), and representation \((\bs\alpha,\bs S)\), the matrix \(\bs S\) has one real eigenvalue, and \(p-1\) complex eigenvalues and all eigenvalues have the same real part. 
+
+We numerically evaluate the matrix \(\bs{D}\) where
 \begin{align*}
 	\bs{D} = \displaystyle \int_{t=0}^\infty e^{\bs{S}t}\bs s\cdot\cfrac{\bs \alpha e^{\bs{S}t}}{\bs \alpha e^{\bs{S}t} \bs e}\wrt t
 \end{align*}
-using a trapezoidal rule as follows.
-
-For CMEs, the vector function \(\bs a(t) := \cfrac{\bs \alpha e^{\bs St}}{\bs \alpha e^{\bs S t} \bs e}\) is periodic with period \(\rho = 2\pi/\omega\) where \(\omega=min_i(|\Im(\lambda_i)|)\), \(\lambda_i\) are the eigenvalues of \(\bs{S}\) and \(\Im(z)\) is the imaginary component of a complex number \(z\). Let \(\bs f(t) = e^{\bs S t}\bs s\). Then \(\bs f(t)e^{-\lambda t}\) where \(\lambda = \Re(\lambda_i)\) is the real part of the eigenvalues of \(\bs{S}\) (the all share the same real part), is also periodic with the same period. Hence we can simplify the integral to a finite one;
+using a trapezoidal rule as follows. For CMEs, the vector function \(\bs a(t) := \cfrac{\bs \alpha e^{\bs St}}{\bs \alpha e^{\bs S t} \bs e}\) is periodic with period \(\rho = 2\pi/\omega\) where \(\omega=min_i(|\Im(\lambda_i)|)\), \(\lambda_i\) are the eigenvalues of \(\bs{S}\) and \(\Im(z)\) is the imaginary component of a complex number \(z\). Let \(\bs f(t) = e^{\bs S t}\bs s\). Then \(\bs f(t)e^{-\lambda t}\) where \(\lambda = \Re(\lambda_i)\) is the real part of the eigenvalues of \(\bs{S}\) (the all share the same real part), is also periodic with the same period. Hence we can simplify the integral to a finite one;
 \begin{align}
 	\nonumber\bs{D} &= \displaystyle \int_{t=0}^\infty \bs f(t)\cdot\bs a(t)\wrt t  %\displaystyle \int_{t=0}^\infty e^{\bs{S}t}\bs s\cdot\cfrac{\bs \alpha e^{\bs{S}t}}{\bs \alpha e^{\bs{S}t} \bs e}\wrt t 
 	\\\nonumber&= \sum_{k=0}^\infty \int_{k\rho }^{(k+1)\rho } e^{\lambda t} e^{-\lambda t} \bs f(t)\cdot\bs a(t)\wrt t
 	\\&= \sum_{k=0}^\infty \int_{0}^{\rho }  e^{\lambda(k\rho +t)}e^{ -\lambda(k\rho  + t)} \bs f(k\rho +t)\cdot\bs a(k\rho +t)\wrt t. \label{eqn: sc6789gGHJ}
 	\intertext{By periodicity, then \(e^{ -\lambda(k\rho  + t)} \bs f(k\rho +t)\cdot\bs a(k\rho +t)=e^{ -\lambda t} \bs f(t)\cdot\bs a(t)\), hence (\ref{eqn: sc6789gGHJ}) is equal to}
-	&\sum_{k=0}^\infty (e^{\lambda \rho })^k\int_{0}^{\rho } e^{\lambda t}e^{-\lambda t}\bs f(t)\cdot\bs a(t)\wrt t \nonumber 
-	\\&= \cfrac{1}{1 - e^{\lambda \rho }}\int_{0}^{\rho } \bs f(t)\cdot\bs a(t)\wrt t,\label{eqn: hdsv45KJ}
+	&\sum_{k=0}^\infty (e^{\lambda \rho })^k\int_{0}^{\rho } e^{\lambda t}e^{-\lambda t}\bs f(t)\cdot\bs a(t)\wrt t  
+	= \cfrac{1}{1 - e^{\lambda \rho }}\int_{0}^{\rho } \bs f(t)\cdot\bs a(t)\wrt t,\label{eqn: hdsv45KJ}
 \end{align}
 where the sum converges as it is a geometric series and \(\lambda <0\), \(\rho >0\). 
 
-To approximate (\ref{eqn: hdsv45KJ}) numerically, we first partition \(\left[0,\rho \right]\) into \(N\) equal-width intervals \(\left[t_n,t_{n+1}\right)\), where \(t_n = (n-1)\rho /N\), \(n=1,2,...,N+1\). On \(\left[t_n,t_{n+1}\right)\) we approximate the orbit \(\bs a(t)\) by a constant \(\bs a(t) \approx \bs a_n := \cfrac{1}{2}\left( \bs a(t_n) + \bs a(t_{n+1}) \right), \, t \in \left[t_n,t_{n+1}\right)\). Substituting this approximation into the expression for \(\bs{D}\) gives 
+To approximate (\ref{eqn: hdsv45KJ}) numerically, we first partition \(\left[0,\rho \right)\) into \(N\) equal-width intervals \(\left[t_n,t_{n+1}\right)\), where \(t_n = (n-1)\rho /N\), \(n=1,2,...,N+1\). On \(\left[t_n,t_{n+1}\right)\) we approximate the orbit \(\bs a(t)\) by a constant \(\bs a(t) \approx \bs a_n := \cfrac{1}{2}\left( \bs a(t_n) + \bs a(t_{n+1}) \right), \, t \in \left[t_n,t_{n+1}\right)\). Substituting this approximation into the expression for \(\bs{D}\) gives 
 \begin{align*}
 	\bs{D} &\approx \cfrac{1}{1 - e^{\lambda \rho }}\sum_{n=1}^N\int_{t_n}^{t_{n+1}} \bs f(t)\cdot\bs a_n\wrt t
 	\\&=\cfrac{1}{1 - e^{\lambda \rho }}\sum_{n=1}^N\left[e^{\bs{S}t_{n+1}}-e^{\bs{S}t_{n}}\right]\bs e \cdot\bs a_n.
@@ -686,9 +686,11 @@ For phases \(j\in\mathcal S_0\), if phase \(j\) is associated with \(\mathcal S_
 
 This reasoning leads to an approximation of the distribution of the fluid at time \(t\), \(\mathbb P(X(t)\in \wrt x , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i) \), as
 \begin{align}
-		&\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs a_{\ell_0,i}(x_0), \phi(0) = i) \bs a e^{\bs{S}(y_{\ell+1}-x)} \bs s \wrt x,\label{eqn: density approx aug}
+		&\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs a_{\ell_0,i}(x_0), \phi(0) = i) \nonumber 
+		\\&\qquad\times\bs a e^{\bs{S}(y_{\ell+1}-x)} \bs s \wrt x,\label{eqn: density approx aug}
 		\intertext{for \(j\in\mathcal S_+\cup\calS_{+0}\) and}
-		&\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs a_{\ell_0,i}(x_0), \phi(0) = i) \bs a e^{\bs{S}(x-y_\ell)} \bs s \wrt x,\label{eqn: density approx aug2}
+		&\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs a_{\ell_0,i}(x_0), \phi(0) = i) \nonumber 
+		\\&\qquad\times\bs a e^{\bs{S}(x-y_\ell)} \bs s \wrt x,\label{eqn: density approx aug2}
 \end{align}
 for \( j\in\mathcal S_-\cup\calS_{-0}\), where \(x\in\mathcal D_{\ell,j}\), \(x_0\in\mathcal D_{\ell_0,i}\).
 %For example, for the augmented scheme in Section~\ref{subsec: augmented }, we approximate \(\mathbb P(X(t)\in \wrt x , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i)\) by 
@@ -703,8 +705,8 @@ While the estimates in the right-hand side of (\ref{eqn: density approx aug}) an
 \begin{align*}
 	&\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S_+\cup \calS_{+0}}\int_{x\in\mathcal D_{\ell,j}}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a, \phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), 
 	\\&\qquad{}\qquad{}\phi(0) = i) \bs a e^{ \bs{S}(y_{\ell+1}-x)} \bs s \wrt x
-	\\&\qquad{}{}+\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S_-\cup \calS_{-0}}\int_{x\in\mathcal D_{\ell,j}}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a, \phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), 
-	\\&\qquad{}\qquad{}\phi(0) = i) \bs a e^{ \bs{S}(x-y_\ell)} \bs s \wrt x
+	\\&\qquad{}{}+\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S_-\cup \calS_{-0}}\int_{x\in\mathcal D_{\ell,j}}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a, \phi(t) = j\mid L(0)=\ell_0, 
+	\\&\qquad{}\qquad{}\bs A(0) = \bs  a_{\ell,i}(x_0), \phi(0) = i) \bs a e^{ \bs{S}(x-y_\ell)} \bs s \wrt x
 	\\&= \sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S_+\cup \calS_{+0}}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a, \phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), 
 	\\&\qquad{}\qquad{}\phi(0) = i) (1-\bs a e^{ \bs{S}\Delta}\bs e  )
 	\\&\qquad{}{}+\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S_-\cup \calS_{-0}}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a, \phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), 
@@ -770,7 +772,7 @@ The operator \(V(x)\) is a choice which forms part of the definition of the appr
 
 In (\ref{eqn: alal})-(\ref{eqn:546}), since \(V\) is linear, then we actually have 
 \begin{align}
-	&\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs a_{\ell_0,i}(x_0), \phi(0) = i) \bs a V(x)
+	&\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs a_{\ell_0,i}(x_0), \phi(0) = i) \bs a V(x) \nonumber 
 	\\&= \mathbb E[\bs A(t)1(L(t)=\ell, \phi(t)=j) \mid L(0)=\ell_0, \bs A(0) = \bs a_{\ell_0,i}(x_0), \phi(0) = i]V(x).
 \end{align}
 
@@ -797,9 +799,9 @@ In (\ref{eqn: alal})-(\ref{eqn:546}), since \(V\) is linear, then we actually ha
 \end{rem}
 
 In practice, to ensure that the approximation integrates to \(1\), we do re-normalise the estimates of the density. Specifically, we use the estimates
-	\begin{align}
-		&\cfrac{\mathbb E[\bs A(t) 1(L(t)=\ell,\phi(t)=j) \mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), \phi(0) = i]V(x)}{\int_{x\in[0,\Delta)}\mathbb E[\bs A(t) 1(L(t)=\ell,\phi(t)=j) \mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), \phi(0) = i]V(x)\wrt x}.
-	\end{align}
+\begin{align}
+	&\cfrac{\mathbb E[\bs A(t) 1(L(t)=\ell,\phi(t)=j) \mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), \phi(0) = i]V(x)}{\int_{x\in[0,\Delta)}\mathbb E[\bs A(t) 1(L(t)=\ell,\phi(t)=j) \mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), \phi(0) = i]V(x)\wrt x}.
+\end{align}
 
 
 
