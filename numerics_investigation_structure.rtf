@@ -1,0 +1,142 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fswiss\fcharset0 Helvetica-Bold;\f2\fswiss\fcharset0 Helvetica-Oblique;
+\f3\fswiss\fcharset0 Helvetica-BoldOblique;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww18980\viewh16860\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs28 \cf0 + (last week) thesis structure\
++ Peter meeting overlap\
++ Nigels comments\
++ time integration\
+	+ story: 
+\f1\b vanilla DG vanilla RK => vanilla DG SSPRK => Flux limiting + SSPRK DG
+\f0\b0 \
+	+ SSPRK methods \
+		+ I have only implemented order 1, 2, 3
+\f1\b \
+		+ there is no 4 stage SSPRK method, but there is an order 4, 5 stage method
+\f0\b0 \
+	+ time step\
+		+ CFL condition of the form t-step = CFL * speed * Delta x 
+\f1\b (fix! t-step)
+\f0\b0 \
+		+ ^ where Delta x is the 
+\f2\i min node interval
+\f0\i0  (not cell width) \
+		+ I suppose the same CFL-type condition holds form FV methods\
+	+ other methods (not SSPRK, i.e. vanilla RK4)\
++ Equivalent
+\f1\b  FV (limited discussion on this, can\'92t sensibly partition the operator so kill it)
+\f0\b0  and DG schemes (same operator size?)\
++ need to decide on 
+\f1\b cell width (fix!)
+\f0\b0 \
++ no filtering or 
+\f1\b flux-limiting
+\f0\b0  \'97 discuss\
++ error metrics\
+	+ L1? How to evaluate numerically?\
+
+\f1\b 	+ KS statistic
+\f0\b0 \
+
+\f1\b 		+ cdf
+\f0\b0 \
+	
+\f1\b + Cell masses \'97 easy
+\f0\b0 \
++ models\
+	+ 0) no model, investigate reconstructing initial conditions \
+
+\f1\b 	+ 1) Travelling wave: simple, positivity, stability\
+
+\f0\b0 	
+\f1\b + 2) Hitting probs (bounded mode) paper: vanilla, faster T rates to explore D, more stochastic favours DG, non-regulated boundary model\
+	+ 3) Spatially coherent uniformisation paper: non-trivial\
+	+ 4) DG paper: exists as a SFFM\
+
+\f0\b0 \
+	+ Two-dimensional fluid queue paper\
+	
+\f2\i + Soon, Ramasawami MMBM paper (or alike?): beyond the scope\
+	+ Networks of queues (ad-hoc mobile network) \
+	+ Multilayer Fluid Queues\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f3\b \cf0 	
+\f2\b0 \
++ Annual review \
++ Julia talk\
+\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\i0 \cf0 The story: \
++ closing vectors and reconstruction (no model)\
+	+ unnormalised, naive normalised, geometric normalisation, DG, polynomial reconstruction on cell averages (FV/QBD-RAP)\
++ travelling wave model (fix cell width, time integration)\
+	+ vanilla DG \
+	+ flux-limiting DG \
+	+ FV method\
+	+ flux-limiting equivalent FV \
+	+ QBD-RAP method\
+	=> outcome: observe stability, positivity\
++ hitting probs model\
+	+ stationary distribution (vanilla)\
+		+ boundary conditions \
+			+ QBD-RAP, DG, FV \
+	+ transient distribution\
+		+ Regulated boundary \
+			+ initial condition \'97 point mass, smooth\
+				+ QBD-RAP, DG, FV \
+				+ vanilla & faster T versions\
+				+ sims\
+		+ boundary conditions (vanilla model)\
+			+ QBD-RAP, DG, FV \
+			+ sims\
+	+ hitting times (vanilla)\
+		+ initial conditions \
+			+ QBD-RAP, DG \
+		+ sims\
++ Uniformisation paper model\
+	+ transient distribution \
+		+ initial conditions \
+			+ QBD-RAP, DG, FV \
+		+ sims \
+	+ hitting times\
+		+ initial conditions \
+			+ QBD-RAP, DG \
+		+ sims \
++ DG paper SFFM \
+	+ First return \
+		+ initial conditions\
+			+ QBD-RAP, DG (no flux)\
+		+ sims \
+	+ stationary distribution (?)\
+\
+Code (to implement) \
++ closing vectors\
++ SSPRK4(5)\
++ flux-limiter\
+	+ DG \
+	+ FV\
++ SFFM partition\
++ error metrics\
+	+ KS \
+	+ L1 \
+	+ cell probs\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}
