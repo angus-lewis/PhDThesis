@@ -1285,7 +1285,7 @@ At this point, we have all the results we need to prove weak convergence of the 
             	%\int_{u_{n-1}=0}^{\Delta-u_{n-2}} g_{n-1}(\Delta - u_{n-1} - u_{n-2}) \wrt u_{n-2}
             	g_{n}(\Delta - x-u_{n-1})
 	\\&\qquad{} \times1(\Delta-x-u_{n-1}\geq0)\wrt u_{n-1}\psi(x)\wrt x \Bigg| \nonumber
-		\\&\leq \left(|r_8(n)|+|r_5(n)|+|r_6(n)| + (n-1)|r_4(n)|\right)F\Delta.\label{eqn: KAFnnmna}
+		\\&\leq \left(|r_8(n)|+|r_5(n)|+|r_6(n)| + (n-1)|r_4(n)|\right)F\Delta.\label{eqn: KAFnnmna2}
 	\end{align}
 \end{cor}
 \begin{proof}
@@ -1309,7 +1309,7 @@ At this point, we have all the results we need to prove weak convergence of the 
 	\end{align}
 \end{proof}
 
-\section{Properties of closing operators}
+\section{Properties of closing operators}\label{appendix: sec: 2}
 \begin{cor}\label{cor: cond bnd 2 V}
 	Let \(g\) be a function satisfying the Assumptions \ref{asu: g} and consider the closing operator \(V(x)=e^{\bs Sx}\bs s\). For \(u\leq \Delta-\varepsilon \), \(v\geq 0\), 
 	\[\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} V(v)g(x)\wrt x = g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon) + r_V (u,v),\]
@@ -1381,6 +1381,7 @@ Let \(U^{(p)}(x)\) be the closing operator such that, for \(\bs a^{(p)} \in\math
 Let \(\bs a   \in \mathcal A\) be arbitrary. By definition 
 	\begin{align*}
         		\bs a  e^{\bs Su}(-\bs S)^{-1} U(x) & = \bs a  e^{\bs Su}(-\bs S)^{-1}  \left(e^{\bs{S}x}\bs s + e^{\bs{S}(2\Delta-x)}\bs s\right)
+				\\& = \bs a  e^{\bs Su}  \left(e^{\bs{S}x}\bs e + e^{\bs{S}(2\Delta-x)}\bs e\right)
 	\end{align*}
 	since \((-\bs S)^{-1}\) and \(e^{\bs Sx}\) commute and \(\bs s = -\bs S e\). 
 	By Lemma~\ref{lem: akc} this is less than or equal to, 
@@ -1478,6 +1479,114 @@ Let \(\bs a   \in \mathcal A\) be arbitrary. By definition
 
 The error term \(r_V(u,v)\) depends on \(p\) so we should write \(r_V^{(p)}(u,v)\). The error term \(r_V^{(p)}(u,v)\) has similar properties to \(r_3^{(p)}(u+v)\); we can prove that it converges point-wise to \(0\) only on some areas of its domain, however when we integrate the error against bounded functions on bounded domains, then the resulting integral tends to \(0\). 
 
+% Let \(W^{(p)}(x)\) be the closing operator such that, for \(\bs a^{(p)} \in\mathcal A^{(p)}\), \(x\in[0,\Delta)\),
+% \[\bs a^{(p)} W^{(p)}(x) = \bs a^{(p)} \left(e^{\bs{S}^{(p)}x} + e^{\bs{S}^{(p)}(2\Delta-x)}\right)\left[I-e^{\bs S^{(p)} 2\Delta}\right]^{-1}\bs s^{(p)}.\]
+% \begin{lem}\label{lem: akxnj2}
+% 	For \(x\in[0,\Delta),u\geq 0\),  
+%         \begin{align*}
+%         		\bs a   e^{\bs Su}(-\bs S)^{-1} W(x) &\leq 2 \bs a e^{\bs Su} \bs e.
+% 	\end{align*}
+% \end{lem}
+% \begin{proof}
+% Let \(\bs a   \in \mathcal A\) be arbitrary. By definition 
+% 	\begin{align*}
+%         		\bs a  e^{\bs Su}(-\bs S)^{-1} W(x) & = \bs a  e^{\bs Su}(-\bs S)^{-1}  \left(e^{\bs{S} x} + e^{\bs{S} (2\Delta-x)}\right)\left[I-e^{\bs S 2\Delta}\right]^{-1}\bs s 
+% 				\\&=\bs a  e^{\bs Su}(-\bs S)^{-1}  \left(e^{\bs{S} x} + e^{\bs{S} (2\Delta-x)}\right)\sum_{m=0}^\infty e^{\bs S 2m\Delta}\bs s 
+% 				\\&=\bs a  e^{\bs Su} \left(e^{\bs{S} x} + e^{\bs{S} (2\Delta-x)}\right)\sum_{m=0}^\infty e^{\bs S 2m\Delta}\bs e 
+% 	\end{align*}
+% 	since \((-\bs S)^{-1}\) and \(e^{\bs Sx}\) commute and \(\bs s = -\bs S e\). 
+% 	By Lemma~\ref{lem: akc} this is less than or equal to, 
+% 	\begin{align}
+%         		& \bs a   e^{\bs Su} \left(\bs e + \bs e\right) = 2 \bs a   e^{\bs Su} \bs e \label{eqn:mzm2}
+% 	\end{align}
+% \end{proof}
+
+% %\begin{rem}\label{cor: lajd}
+% %	For any valid orbit, \(\bs a\in\mathcal A\), \(x\in[0,\Delta),u\geq 0\), 
+% %	\[\int_{x_n=0}^\infty \bs \alpha e^{\bs{S}u}e^{\bs{S}x_n} \wrt x_n U(x)  \leq 2\bs \alpha e^{\bs{S}u}\bs e.\]
+% %	To see this compute the integral, then
+% %	\begin{align}
+% %		\int_{x_n=0}^\infty \bs \alpha e^{\bs{S} }e^{\bs{S}x_n} \wrt x_n U(x)  &= \bs \alpha e^{\bs{S} } (-\bs S)^{-1} U(x).
+% %	\end{align}
+% %	Now apply Lemma~\ref{lem: akxnj} to the right-hand side. 
+% %\end{rem}
+
+% \begin{cor}\label{cor: cond bnd 2 U2}
+% 	Let \(g\) be a function satisfying the Assumptions \ref{asu: g}. For \(u\leq \Delta-\varepsilon \), \(v\in[ 0,\Delta)\), 
+% 	\[\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} U(v)g(x)\wrt x = g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon) + r_V (u,v),\]
+% 	where 
+% 	\[\left|r_V (u,v)\right|\leq r_3 (u+v) + r_3 (u+2\Delta - v).\]
+% 	Furthermore,  
+% 	\begin{align*}
+% 		&\int_{u=0}^{\Delta}| r_V(u,x)|\wrt u
+% 		\leq R_{V,1},
+% 	\end{align*}
+% 	and
+% 	\begin{align*}
+% 		&\int_{v=0}^{\Delta}| r_V(u,x)|\wrt u
+% 		\leq R_{V,2},
+% 	\end{align*}
+% 	where 
+% 	\[R_{V,1},\, R_{V,2} \leq 2\left(\Delta r_2 + 2\varepsilon G + \Delta\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}\right).\]
+% \end{cor}
+% \begin{proof}
+% 	By the definition of the operator \(U(x)\), 
+% 	\begin{align}
+% 		\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} U(v)g(x)\wrt x 		
+% 		%
+% 		&=
+% 			\displaystyle\int_{x=0}^\infty 
+% 				\cfrac{
+% 					\bs \alpha e^{\bs S(u+x)}
+% 					}{
+% 					\bs \alpha e^{Su}\bs e
+% 					} 
+% 				e^{\bs{S}v}\bs s g(x)
+% 				+
+% 				\cfrac{
+% 					\bs \alpha e^{\bs S(u+x)}
+% 					}{
+% 					\bs \alpha e^{Su}\bs e
+% 					} 
+% 				e^{\bs{S}(2\Delta-v)}\bs sg(x) \wrt x. \label{eqn: ghi is this a2}
+% 	\end{align}
+% 	By Corollary~\ref{cor: cond bnd 2} 
+% 	\begin{align}
+% 		\int_{x=0}^\infty 
+% 				\cfrac{
+% 					\bs \alpha e^{\bs S(u+x)}
+% 					}{
+% 					\bs \alpha e^{Su}\bs e
+% 					} 
+% 				e^{\bs{S}v}\bs s g(x)\wrt x 
+% 				&= g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon) + r_3 (u+v), \label{eqn: dkskkk22}
+% 		\\
+% 		\int_{x=0}^\infty\cfrac{
+% 					\bs \alpha e^{\bs S(u+x)}
+% 					}{
+% 					\bs \alpha e^{Su}\bs e
+% 					} 
+% 				e^{\bs{S}(2\Delta-v)}\bs sg(x) \wrt x 
+% 				&= r_3 (u+2\Delta - v).
+% 	\end{align}
+% 	Therefore, (\ref{eqn: ghi is this a}) is, 
+% 	\begin{align}
+% 		&g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon) + r_3 (u+v) + r_3 (u+2\Delta - v).
+% 	\end{align}	
+	
+% 	Now,
+% 	\begin{align*}
+% 		R_{V,1}&\leq \int_{u=0}^{\Delta}| r_V(u,v)|\wrt u
+% 		\\& \leq \int_{u=0}^{\Delta} |r_3 (u+v)| + |r_3 (u+2\Delta - v) |
+% 		\\&\leq 2\left(\Delta r_2 + 2\varepsilon G + \Delta\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}\right).
+% 	\end{align*}
+% 	Similarly 
+% 	\begin{align*}
+% 		R_{V,2}&\leq \int_{v=0}^{\Delta}| r_V(u,v)|\wrt v
+% 		\\&= \int_{v=0}^{\Delta} r_3(u+v) + r_3(u+2\Delta-v) 
+% 		\\& \leq 2\left(\Delta r_2 + 2\varepsilon G + \Delta\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}\right).
+% 	\end{align*}
+% \end{proof}
 
 \section{Kronecker properties}\label{appendix: kronecker}
 Here we detail some properties of Kronecker sum, products, and exponentials (see \citep{MEinAP}, Appendix A.4). 
@@ -1675,7 +1784,7 @@ Denote by \(\widehat{\bs H}_{11}(\lambda):=\displaystyle \int_{t=0}^\infty e^{-\
 	Also, 
 	\begin{align}
 		&\vligne{\bs I & \bs 0 }\int_{t=0}^\infty e^{-\lambda t} e^{\bs{B}_{mm}t} \wrt t \bs{B}_{m{n}} %= \vligne{\bs I & \bs 0 }\int_{t=0}^\infty e^{-\lambda t} e^{\bs{B}_{mm}t} \wrt t  \left[\begin{array}{cc} \bs{T}_{mn}\otimes \bs{D} & \bs 0 \\ \bs T_{0n}\otimes \bs D & \bs 0 \end{array}\right]
-	= \int_{x=0}^\infty \left(\bs H^{mn}(\lambda,x) \vligne{\bs I_n & \bs 0_{n\times |\calS_0|}}\right) \otimes  e^{\bs S x}\bs D\wrt x, \label{eqn: akgj987adKLDJ}
+	= \int_{x=0}^\infty \bs H^{mn}(\lambda,x)  \otimes  e^{\bs S x}\bs D\wrt x\left(\vligne{\bs I_{pn} & \bs 0_{pn\times p|\calS_0|}}\right), \label{eqn: akgj987adKLDJ}
 \end{align}
 for \(m,n\in\{+,-\}\), \(m\neq n\).
 \end{cor}
@@ -1723,7 +1832,9 @@ Now, using (\ref{eqn: skagh87}) and (\ref{eqn: skagh873}) we can write
 	%
 	\\&= \int_{x=0}^\infty e^{\bs Q_{mm}(\lambda)x}\otimes  e^{\bs S x}\wrt x \left( \left( \bs{Q}_{mn} (\lambda) \vligne{\bs I_n & \bs 0_{n\times |\calS_0|}} \right) \otimes \bs D\right)  \nonumber
 	%
-	\\&= \int_{x=0}^\infty \left(\bs H^{mn}(\lambda,x) \vligne{\bs I_n & \bs 0_{n\times |\calS_0|}}\right) \otimes  e^{\bs S x}\bs D\wrt x, \label{eqn: akgj987ad}
+	\\&= \int_{x=0}^\infty \left(\bs H^{mn}(\lambda,x) \vligne{\bs I_n & \bs 0_{n\times |\calS_0|}}\right) \otimes  e^{\bs S x}\bs D\wrt x,\nonumber
+	%
+	\\&= \int_{x=0}^\infty \bs H^{mn}(\lambda,x)  \otimes  e^{\bs S x}\bs D\wrt x,\vligne{\bs I_{pn} & \bs 0_{pn\times p|\calS_0|}} \label{eqn: akgj987ad}
 \end{align}
-for \(m,n\in\{+,-\}\), \(m\neq n\) which is (\ref{eqn: akgj987adKLDJ}). 
+for \(m,n\in\{+,-\}\), \(m\neq n\) which is (\ref{eqn: akgj987adKLDJ}), where the last line holds from the \ref{eqn:mpr}. 
 \end{proof}
