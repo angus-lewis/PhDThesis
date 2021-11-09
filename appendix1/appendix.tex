@@ -1606,15 +1606,23 @@ The error term \(r_V(u,v)\) depends on \(p\) so we should write \(r_V^{(p)}(u,v)
 % \begin{lem}\label{lem: akxnj2}
 % 	For \(x\in[0,\Delta),u\geq 0\),  
 %         \begin{align*}
-%         		\bs a   e^{\bs Su}(-\bs S)^{-1} W(x) &\leq 2 \bs a e^{\bs Su} \bs e.
+%         		\bs \alpha   e^{\bs Su}(-\bs S)^{-1} W(x) &\leq 2 \bs \alpha e^{\bs Su} \bs e.
 % 	\end{align*}
 % \end{lem}
 % \begin{proof}
-% Let \(\bs a   \in \mathcal A\) be arbitrary. By definition 
+% 	First observe that 
+% 	\begin{align}
+% 		\sum_{k=1}^\infty \bs \alpha e^{\bs S(u+x+k2\Delta)}\bs e
+% 		&= \sum_{k=1}^\infty \mathbb P(Z>u+x+k2\Delta)
+% 		\\&= \mathbb P(Z>u+x+2\Delta)\sum_{k=1}^\infty \mathbb P(Z>u+x+k2\Delta \mid Z>u+x+2\Delta)
+% 		\\&= \mathbb P(Z>u+x+2\Delta)\sum_{k=1}^\infty \cfrac{ \mathbb P(Z>u+x+k2\Delta)}{\mathbb P(Z>u+x+2\Delta)}
+% 		\\&= \mathbb P(Z>u+x+2\Delta)\sum_{k=1}^\infty \cfrac{ \var(Z)/(\Delta + (k-1)2\Delta)^2}{\var(Z)/(\Delta + (k-1)2\Delta)^2}
+% 	\end{align}
+% 	Let \(\bs \alpha \in \mathcal A\) be arbitrary. By definition 
 % 	\begin{align*}
-%         		\bs a  e^{\bs Su}(-\bs S)^{-1} W(x) & = \bs a  e^{\bs Su}(-\bs S)^{-1}  \left(e^{\bs{S} x} + e^{\bs{S} (2\Delta-x)}\right)\left[I-e^{\bs S 2\Delta}\right]^{-1}\bs s 
-% 				\\&=\bs a  e^{\bs Su}(-\bs S)^{-1}  \left(e^{\bs{S} x} + e^{\bs{S} (2\Delta-x)}\right)\sum_{m=0}^\infty e^{\bs S 2m\Delta}\bs s 
-% 				\\&=\bs a  e^{\bs Su} \left(e^{\bs{S} x} + e^{\bs{S} (2\Delta-x)}\right)\sum_{m=0}^\infty e^{\bs S 2m\Delta}\bs e 
+%         		\bs \alpha  e^{\bs Su}(-\bs S)^{-1} W(x) & = \bs \alpha e^{\bs Su}(-\bs S)^{-1}  \left(e^{\bs{S} x} + e^{\bs{S} (2\Delta-x)}\right)\left[I-e^{\bs S 2\Delta}\right]^{-1}\bs s 
+% 				\\&=\bs \alpha  e^{\bs Su}(-\bs S)^{-1}  \left(e^{\bs{S} x} + e^{\bs{S} (2\Delta-x)}\right)\sum_{m=0}^\infty e^{\bs S 2m\Delta}\bs s 
+% 				\\&=\bs \alpha  e^{\bs Su} \left(e^{\bs{S} x} + e^{\bs{S} (2\Delta-x)}\right)\sum_{m=0}^\infty e^{\bs S 2m\Delta}\bs e 
 % 	\end{align*}
 % 	since \((-\bs S)^{-1}\) and \(e^{\bs Sx}\) commute and \(\bs s = -\bs S e\). 
 % 	By Lemma~\ref{lem: akc} this is less than or equal to, 
