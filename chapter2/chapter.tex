@@ -381,6 +381,7 @@ The generator for the QBD-RAP approximation to the augmented fluid process (igno
 \end{align*}
 With this construction, jumps according to the matrix \(\bs D\) occur only on transitions from \(\calS_m\to\calS_n\), or \(\calS_m\to\calS_{0m}\to\calS_{n}\), \(m,n\in\{+.-\}\), \(m\neq n\). 
 
+
 %Hence, at time \(t_2\) the process no longer knows that it has spent exactly \(t_1-t_0\) amount of time moving at rate \(c_{j_0}\); rather, it knows some approximation of this information in the form of an expectation. 
 
 %\section{Motivation and construction of approximations}
@@ -727,9 +728,41 @@ The orbit process \(\{\bs A(t)\}\) is not required to model the behaviour at the
 %To motivate the construction, first consider the initial condition for the QBD-RAP approximation, \((L(0),\bs A(0), \varphi(0))=(\ell,\bs \alpha,i)\), corresponding to the initial condition of the fluid queue \((X(0),\varphi(0))=(y_\ell,i),\) for some \(i\in\mathcal S_+\). After time \(t\), \(c_it\in[0,\Delta)\), and assuming that no events of the QBD-RAP have occurred by this time, the position of the QBD-RAP is \((L(t),\bs A(t),\varphi(t)) = (\ell, \bs A(t), i),\) where \(\bs A(t) = \cfrac{\bs \alpha e^{c_i\bs{S}t}}{\bs \alpha e^{c_i\bs{S}t}\bs e}\). The level of the fluid at the same time is \(X(t) = y_\ell + c_i t\). 
 We argued earlier that we can think of the orbit \(\bs k(x)\) as corresponding to the fluid being a distance of \(x\) from the left boundary of an interval when \(i\in\calS_+\), or from the right boundary of an interval when \(i\in\calS_-\). With this interpretation, an approximation to the initial condition \((X(0),\varphi(0))=(x_0,i),\,x_0\in\mathcal D_{\ell,i},\,i\in\mathcal S_+\cup\calS_{+0}\) is to set the initial orbit to \(\bs k(x_0-y_{\ell})\). Similarly, an approximation to the initial condition \((X(0),\varphi(0))=(x_0,i), \,x_0\in\mathcal D_{\ell,i}, x_0\neq y_{\ell+1},\,i\in\mathcal S_-\cup\calS_{-0}\) is to set the initial orbit position to \(\bs k(y_{\ell+1}-x_0).\) 
 
-We use the notation \(\bs a_{\ell,i}(x_0) = \bs k(x_0-y_\ell)\) for the initial orbit position corresponding to \(x_0\) when the initial phase is \(i\in\calS_+\) and \(x_0\in\calD_{\ell,i}\). Similarly, for \(i\in\calS_-\) and \(x_0\in\calD_{\ell,i}\) define the notation \(\bs a_{\ell,i}(x_0) = \bs k(y_{\ell+1}-x_0)\). 
+We use the notation \(\bs a_{\ell,i}(x_0) = \bs a_{\ell,+}(x_0) = \bs k(x_0-y_\ell)\) for the initial orbit position corresponding to \(x_0\) when the initial phase is \(i\in\calS_+\) and \(x_0\in\calD_{\ell,i}\). Similarly, for \(i\in\calS_-\) and \(x_0\in\calD_{\ell,i}\) define the notation \(\bs a_{\ell,i}(x_0) = \bs a_{\ell,-}(x_0) = \bs k(y_{\ell+1}-x_0)\). 
 
 More generally, given an initial measure \(\mu_i(\cdot):= \mathbb P(X(0)\in\cdot,\varphi(0)=i)\), an approximation to this initial condition is to set the orbit to \(\displaystyle\int_{x\in\calD_{\ell,i}}\bs a_{\ell,i} (x) \wrt \mu_i\), for \(i\in\mathcal S,\, \ell\in\mathcal K\setminus\{-1,K+1\}\). 
+
+
+\paragraph{Initial conditions for phases \(i\in\calS_0\)}
+While the augmented state-space scheme described above is a convergent one, the analysis of the QBD-RAP scheme is \emph{greatly} simplified if we allow initial conditions which allocate \(0\) probability to phases in \(i\in\calS_{+0}\cup\calS_{-0}\) only. To see why initial mass in \(\mathcal S_{+0}\cup\calS_{-0}\) might introduce further complexity, consider a sample path with \(\varphi(0)=k\in\calS_{+0}\) and \(\bs A(0)=\bs a\in\mathcal A\). On \(\varphi(u)\in\calS_{+0},\) for all \(u\in[0,t)\), then \(\bs A(u) = \bs a \) is constant. Upon the phase leaving \(\calS_{+0}\), at time \(t\), say, the phase will either jump to \(\calS_+\) or \(\calS_-\). If \(\varphi(t)\) jumps to \(i\in\calS_+\), the orbit process at time \(t\) will be \(\bs A(t)=\bs a \) and the process evolve from time \(t\) as if it has started in phase \(i\in\calS_+\) with initial orbit \(\bs a \) -- there are no major issues in this case. If, however, \(\varphi(t)\) jumps to \(i\in\calS_-\), then the orbit process will jump to \(\bs A(t) = \bs a \bs D\) at time \(t\). From time \(t\) onward the QBD-RAP process will evolve as if it has started in phase \(i\in\calS_-\) with initial orbit \(\bs a \bs D\). With the way we have structured the proof of convergence, we then have to complete two analyses of the QBD-RAP process -- one for the initial condition \(\bs a\) and another for the initial condition \(\bs a\bs D\). 
+
+A solution to this problem is to augment a set of ephemeral states to the QBD-RAP which capture the initial sojourn in \(\calS_0\) only. Let us denote this set of ephemeral states \(\calS_0^*\) which has the same phase dynamics as \(\calS_0\). Suppose we wish to approximate a fluid queue with the initial condition \(\mu_k\) where \(\mu_k\) has mass 1. At time \(0\), we start the QBD-RAP in the ephemeral set of states \(\calS_0^*\) in phase \(k^*\in\calS_0^*\). While in \(\calS_0^*\), the phase process evolves according to the generator \(\bs T_{00}\). Upon exiting the ephemeral set \(\calS_0^*\) at time \(t\), say, the QBD-RAP process jumps to \(L(t)=\ell,\, \bs A(t)=\int_{\calD_{\ell,i}}\bs a_{\ell,i}(x)\wrt \mu_k,\,\varphi(t)=i\), where \(\ell\in\mathcal K\), \(i\in\calS_+\cup\calS_-\). 
+
+Notice that we have not mentioned anything about the level or orbit process during the sojourn in \(\calS_0^*\). This is because all information about the level and phase during this time is contained within the initial condition \(\mu_k\), and the only thing that changes is the phase. 
+
+To include the ephemeral states within the generator of the QBD-RAP we can do the following, 
+\begin{align*}
+	&\left[\begin{array}{c|cccc}
+		\bs T_{00} & \bs B_{-1}^* &\bs B_{0}^*&\bs B_{1}^* & \hdots \\\hline
+		&\check{\bs B}_{0} &  \check{\bs B}_{+1} &&\\
+		& \check{\bs B}_{-1}&\check{\bs B}_{0}&\bs B_{+1}& \\
+		&&\bs B_{-1} & \bs B_0&\ddots \\
+		&&&\ddots&\ddots 
+	\end{array}\right],
+\end{align*}
+where 
+\begin{align*}
+	\bs B_{-1}^* &= \vligne{\bs T_{0-}\mu_k(\{0\}) & \bs 0} & \bs B_{k}^* &= \vligne{\bs T_{0+}\otimes \bs a_k^+ & \bs 0 & \bs T_{0-}\otimes \bs a_k^- & \bs 0},
+	%
+	\\\check{\bs B}_{0} &= \left[\begin{array}{cc}\bs T_{--} & \bs T_{-0}\\\bs T_{0-} & \bs T_{00}\end{array}\right], 
+	& \check{\bs B}_{+1} &= \left[\begin{array}{cccc}\bs T_{-+}\otimes \bs \alpha & \bs 0 & \bs 0 & \bs 0 \\ \bs T_{0+}\otimes \bs \alpha & \bs 0 & \bs 0 & \bs 0 \end{array}\right],
+	%
+	\\\check{\bs B}_{-1} &= \left[\begin{array}{cc} \bs0&\bs0\\\bs0&\bs0\\(\bs C_-\bs P_{--})\otimes \bs s & (\bs C_-\bs P_{-0})\otimes \bs s \\\bs0&\bs0\end{array}\right], &&
+\end{align*}
+and 
+\begin{align*}
+	\bs a_\ell^r = \int_{\calD_{\ell,r}} \bs a_{\ell,r}(x)\wrt \mu_k,\, \ell\in\mathcal K\setminus\{-1,K+1\},\, r\in\{+,-\}. 
+\end{align*}
 
 %For technical reasons we must restrict the initial conditions so that there are no point masses at \(x_0=y_{\ell+1}\) when \(i\in\mathcal S_+\) or \(x_0=y_{\ell}\) when \(i\in\mathcal S_-\). In either of these cases, the initial orbit position would be \(\cfrac{\bs \alpha e^{\bs{S}\Delta}}{\bs \alpha e^{\bs{S}\Delta}\bs e}\) and the denominator is \(\bs \alpha e^{\bs{S}\Delta}\bs e\). To our knowledge, there are currently no results that ensure that \(\bs \alpha e^{\bs{S}\Delta}\bs e\) is not arbitrarily small for the class of matrix exponential distributions with which we work. For point masses at any other value of \(x_0\in\mathcal D_\ell, x_0\neq y_{\ell+1}\) and \(i\in\mathcal S_+\) the initial orbit position is \(\cfrac{\bs \alpha e^{\bs{S}(x_0-y_\ell)}}{\bs \alpha e^{\bs{S}(x_0-y_\ell)}\bs e}\) and the denominator is \(\bs \alpha e^{\bs{S}(x_0-y_\ell)}\bs e\geq 1-\cfrac{\var\left(Z\right)}{(\Delta-(x_0-y_\ell))}\). Therefore, by choosing a matrix exponential \(Z\) with sufficiently small variance, then the denominator is arbitrarily close to 1. Similarly for initial point masses \(x_0\in\mathcal D_\ell\neq y_{\ell}\), \(i\in\mathcal S_-\). This is, however, no real practical loss as point masses at \(x_0=y_{\ell+1}\) when \(i\in\mathcal S_+\) (\(x_0=y_{\ell}\) when \(i\in\mathcal S_-\)) can, and should, have the initial conditions \(\bs v_{\ell+1,i}=\bs \alpha\) (respectively, \(\bs v_{\ell-1,i}\)), corresponding to the fluid starting at the left (right) of the adjacent interval which shares the boundary \(y_{\ell+1}\) (\(y_\ell\)). 
 
