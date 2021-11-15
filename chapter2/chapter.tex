@@ -515,7 +515,9 @@ With this construction, jumps according to the matrix \(\bs D\) occur only on tr
 
 %Let \(Z\sim ME_p(\bs \alpha, \bs{S}, \bs s)\) of dimension \(p\) with \(\bs\alpha\bs e = 1\), \(\bs s = -\bs{S}\bs e\). For each \(i\in\mathcal S\), define \(\bs{S}_i = |c_i|\bs{S}\) and \(\bs s_i = |c_i|\bs s\). Let \(\{\bs A(t)\} = \left\{\bs A(t)\right\}_{t\geq 0}\) be a \(p\)-dimensional vector-valued stochastic process which is piecewise-deterministic and c\`adl\`ag. Additionally, let \(\left\{{\phi}(t)\right\}_{t\geq 0}\) be a real-valued stochastic process. Together, \(\left\{(\bs A(t),{\phi}(t))\right\}_{t\geq 0}\), form a Markov process, however, \(\{\bs A(t)\}\) alone is not Markovian. We will show later that \(\left\{{\phi}(t)\right\}\) is a CTMC the same as \(\left\{\varphi(t)\right\}\). The sample path behaviour of \(\{\bs A(t)\}\) and \({\phi}(t)\) is as follows. 
 \section{The dynamics of the QBD-RAP approximation}\label{sec: dynamics}
-We now have all the elements we need to describe the dynamics of the QBD-RAP approximation. Since the phase dynamics are a CTMC, we choose to use an alternate notation to the standard presented in Section \ref{sec: qbd-rap}. Let \(\{(L(t),\bs A(t),\phi(t))\}_{t\geq0}\) be the QBD-RAP approximation of a fluid queue, where \(\{L(t)\}\) is the level, \(\{\bs A(t)\}\) is the orbit process and \(\{\phi(t)\}\) is the phase process. We use this representation to make explicit how the approximation captures the phase dynamics of the fluid queue. We will show later that \(\phi(t)\) captures the phase dynamics of the fluid queue exactly, provided the phase process is independent of the fluid level \(\{X(t)\}\). The level \(L(t)=\ell\) approximates which band \(\calD_\ell\) that \(X(t)\) is in at time \(t\), and the orbit \(\bs A(t)\) can be use to obtain an approximation of where \(X(t)\) is within the interval \(\calD_\ell\). 
+We now have all the elements we need to describe the dynamics of the QBD-RAP approximation. Since the phase dynamics are a CTMC, we choose to use an alternate notation to the standard presented in Section \ref{sec: qbd-rap}. Let \(\{\bs Y(t)\}_{t\geq0} = \{(L(t),\bs A(t),\phi(t))\}_{t\geq0}\) be the QBD-RAP approximation of a fluid queue, where \(\{L(t)\}\) is the level, \(\{\bs A(t)\}\) is the orbit process and \(\{\phi(t)\}\) is the phase process. We use this representation to make explicit how the approximation captures the phase dynamics of the fluid queue. Furthermore, define the notation \(\bs Y_d(t) = (L(t),\phi(t))\) for the discrete elements of \(\bs Y(t)\).
+
+We will show later that \(\phi(t)\) captures the phase dynamics of the fluid queue exactly, provided the phase process is independent of the fluid level \(\{X(t)\}\). The level \(L(t)=\ell\) approximates which band \(\calD_\ell\) that \(X(t)\) is in at time \(t\), and the orbit \(\bs A(t)\) can be use to obtain an approximation of where \(X(t)\) is within the interval \(\calD_\ell\). 
 
 We now proceed to describe the evolution of the orbit and phase processes, before introducing the level variable later. 
 
@@ -726,24 +728,23 @@ The orbit process \(\{\bs A(t)\}\) is not required to model the behaviour at the
 %To this point, we have assumed that \((X(0),\varphi(0))=(y_\ell,i), \,i\in\mathcal S_+\) or \((X(0),\varphi(0))=(y_{\ell+1},i), \,i\in\mathcal S_-\), i.e., the initial position of the fluid is at the edge of the cell. In these cases, the appropriate initial orbit position is \(\bs \alpha\). We now generalise this so that we can approximate arbitrary initial conditions. 
 
 %To motivate the construction, first consider the initial condition for the QBD-RAP approximation, \((L(0),\bs A(0), \varphi(0))=(\ell,\bs \alpha,i)\), corresponding to the initial condition of the fluid queue \((X(0),\varphi(0))=(y_\ell,i),\) for some \(i\in\mathcal S_+\). After time \(t\), \(c_it\in[0,\Delta)\), and assuming that no events of the QBD-RAP have occurred by this time, the position of the QBD-RAP is \((L(t),\bs A(t),\varphi(t)) = (\ell, \bs A(t), i),\) where \(\bs A(t) = \cfrac{\bs \alpha e^{c_i\bs{S}t}}{\bs \alpha e^{c_i\bs{S}t}\bs e}\). The level of the fluid at the same time is \(X(t) = y_\ell + c_i t\). 
-We argued earlier that we can think of the orbit \(\bs k(x)\) as corresponding to the fluid being a distance of \(x\) from the left boundary of an interval when \(i\in\calS_+\), or from the right boundary of an interval when \(i\in\calS_-\). With this interpretation, an approximation to the initial condition \((X(0),\varphi(0))=(x_0,i),\,x_0\in\mathcal D_{\ell,i},\,i\in\mathcal S_+\cup\calS_{+0}\) is to set the initial orbit to \(\bs k(x_0-y_{\ell})\). Similarly, an approximation to the initial condition \((X(0),\varphi(0))=(x_0,i), \,x_0\in\mathcal D_{\ell,i}, x_0\neq y_{\ell+1},\,i\in\mathcal S_-\cup\calS_{-0}\) is to set the initial orbit position to \(\bs k(y_{\ell+1}-x_0).\) 
+We argued earlier that we can think of the orbit \(\bs k(x)\) as corresponding to the fluid being a distance of \(x\) from the left boundary of an interval when \(i\in\calS_+\), or from the right boundary of an interval when \(i\in\calS_-\). With this interpretation, an approximation to the initial condition \(\bs X(0) = (X(0),\varphi(0))=(x_0,i),\,x_0\in\mathcal D_{\ell,i},\,i\in\mathcal S_+\cup\calS_{+0}\) is to set the initial orbit to \(\bs k(x_0-y_{\ell})\). Similarly, an approximation to the initial condition \(\bs X(0)=(x_0,i), \,x_0\in\mathcal D_{\ell,i}, x_0\neq y_{\ell+1},\,i\in\mathcal S_-\cup\calS_{-0}\) is to set the initial orbit position to \(\bs k(y_{\ell+1}-x_0).\) 
 
 We use the notation \(\bs a_{\ell,i}(x_0) = \bs a_{\ell,+}(x_0) = \bs k(x_0-y_\ell)\) for the initial orbit position corresponding to \(x_0\) when the initial phase is \(i\in\calS_+\) and \(x_0\in\calD_{\ell,i}\). Similarly, for \(i\in\calS_-\) and \(x_0\in\calD_{\ell,i}\) define the notation \(\bs a_{\ell,i}(x_0) = \bs a_{\ell,-}(x_0) = \bs k(y_{\ell+1}-x_0)\). 
 
 More generally, given an initial measure \(\mu_i(\cdot):= \mathbb P(X(0)\in\cdot,\varphi(0)=i)\), an approximation to this initial condition is to set the orbit to \(\displaystyle\int_{x\in\calD_{\ell,i}}\bs a_{\ell,i} (x) \wrt \mu_i\), for \(i\in\mathcal S,\, \ell\in\mathcal K\setminus\{-1,K+1\}\). 
 
-
 \paragraph{Initial conditions for phases \(i\in\calS_0\)}
 While the augmented state-space scheme described above is a convergent one, the analysis of the QBD-RAP scheme is \emph{greatly} simplified if we allow initial conditions which allocate \(0\) probability to phases in \(i\in\calS_{+0}\cup\calS_{-0}\) only. To see why initial mass in \(\mathcal S_{+0}\cup\calS_{-0}\) might introduce further complexity, consider a sample path with \(\varphi(0)=k\in\calS_{+0}\) and \(\bs A(0)=\bs a\in\mathcal A\). On \(\varphi(u)\in\calS_{+0},\) for all \(u\in[0,t)\), then \(\bs A(u) = \bs a \) is constant. Upon the phase leaving \(\calS_{+0}\), at time \(t\), say, the phase will either jump to \(\calS_+\) or \(\calS_-\). If \(\varphi(t)\) jumps to \(i\in\calS_+\), the orbit process at time \(t\) will be \(\bs A(t)=\bs a \) and the process evolve from time \(t\) as if it has started in phase \(i\in\calS_+\) with initial orbit \(\bs a \) -- there are no major issues in this case. If, however, \(\varphi(t)\) jumps to \(i\in\calS_-\), then the orbit process will jump to \(\bs A(t) = \bs a \bs D\) at time \(t\). From time \(t\) onward the QBD-RAP process will evolve as if it has started in phase \(i\in\calS_-\) with initial orbit \(\bs a \bs D\). With the way we have structured the proof of convergence, we then have to complete two analyses of the QBD-RAP process -- one for the initial condition \(\bs a\) and another for the initial condition \(\bs a\bs D\). 
 
-A solution to this problem is to augment a set of ephemeral states to the QBD-RAP which capture the initial sojourn in \(\calS_0\) only. Let us denote this set of ephemeral states \(\calS_0^*\) which has the same phase dynamics as \(\calS_0\). Suppose we wish to approximate a fluid queue with the initial condition \(\mu_k\) where \(\mu_k\) has mass 1. At time \(0\), we start the QBD-RAP in the ephemeral set of states \(\calS_0^*\) in phase \(k^*\in\calS_0^*\). While in \(\calS_0^*\), the phase process evolves according to the generator \(\bs T_{00}\). Upon exiting the ephemeral set \(\calS_0^*\) at time \(t\), say, the QBD-RAP process jumps to \(L(t)=\ell,\, \bs A(t)=\int_{\calD_{\ell,i}}\bs a_{\ell,i}(x)\wrt \mu_k,\,\varphi(t)=i\), where \(\ell\in\mathcal K\), \(i\in\calS_+\cup\calS_-\). 
+A solution to this problem is to augment a set of ephemeral states to the QBD-RAP which capture the initial sojourn in \(\calS_0\) only. Suppose we wish to approximate a fluid queue with the initial condition \(\mu_k\) where \(\mu_k\) has mass 1. Let us denote the set of ephemeral states by \(\calS_0^{*,k}\) and each state in \(\calS_0^{*,k}\) by \(i^*\). Each state \(i^*\in\calS_0^{*,k}\) is a copy of \(i\in\calS_0\), and, in \(\calS_0^{*,k}\) the phase process has the same phase dynamics as it does in \(\calS_0\). At time \(0\), we start the QBD-RAP in the ephemeral set of states \(\calS_0^{*,k}\) in phase \(k^*\in\calS_0^{*,k}\). While in \(\calS_0^{*,k}\), the phase process evolves according to the generator \(\bs T_{00}\). Upon exiting the ephemeral set \(\calS_0^{*,k}\) at time \(t\), say, the QBD-RAP process jumps to \(L(t)=\ell,\, \bs A(t)=\int_{\calD_{\ell,i}}\bs a_{\ell,i}(x)\wrt \mu_k,\,\varphi(t)=i\), where \(\ell\in\mathcal K\), \(i\in\calS_+\cup\calS_-\). 
 
-Notice that we have not mentioned anything about the level or orbit process during the sojourn in \(\calS_0^*\). This is because all information about the level and phase during this time is contained within the initial condition \(\mu_k\), and the only thing that changes is the phase. 
+Notice that we have not mentioned anything about the level or orbit process during the sojourn in \(\calS_0^{*,k}\). This is because all information about the level and phase during this time is contained within the initial condition \(\mu_k\), and the only thing that changes is the phase. 
 
 To include the ephemeral states within the generator of the QBD-RAP we can do the following, 
 \begin{align*}
 	&\left[\begin{array}{c|cccc}
-		\bs T_{00} & \bs B_{-1}^* &\bs B_{0}^*&\bs B_{1}^* & \hdots \\\hline
+		\bs T_{00} & \bs B_{-1}^{*,k} &\bs B_{0}^{*,k}&\bs B_{1}^{*,k} & \hdots \\\hline
 		&\check{\bs B}_{0} &  \check{\bs B}_{+1} &&\\
 		& \check{\bs B}_{-1}&\check{\bs B}_{0}&\bs B_{+1}& \\
 		&&\bs B_{-1} & \bs B_0&\ddots \\
@@ -752,7 +753,7 @@ To include the ephemeral states within the generator of the QBD-RAP we can do th
 \end{align*}
 where 
 \begin{align*}
-	\bs B_{-1}^* &= \vligne{\bs T_{0-}\mu_k(\{0\}) & \bs 0} & \bs B_{k}^* &= \vligne{\bs T_{0+}\otimes \bs a_k^+ & \bs 0 & \bs T_{0-}\otimes \bs a_k^- & \bs 0},
+	\bs B_{-1}^{*,k} &= \vligne{\bs T_{0-}\mu_k(\{0\}) & \bs 0} & \bs B_{\ell}^{*,k} &= \vligne{\bs T_{0+}\otimes \bs a_\ell^+ & \bs 0 & \bs T_{0-}\otimes \bs a_\ell^- & \bs 0},
 	%
 	\\\check{\bs B}_{0} &= \left[\begin{array}{cc}\bs T_{--} & \bs T_{-0}\\\bs T_{0-} & \bs T_{00}\end{array}\right], 
 	& \check{\bs B}_{+1} &= \left[\begin{array}{cccc}\bs T_{-+}\otimes \bs \alpha & \bs 0 & \bs 0 & \bs 0 \\ \bs T_{0+}\otimes \bs \alpha & \bs 0 & \bs 0 & \bs 0 \end{array}\right],
@@ -763,6 +764,8 @@ and
 \begin{align*}
 	\bs a_\ell^r = \int_{\calD_{\ell,r}} \bs a_{\ell,r}(x)\wrt \mu_k,\, \ell\in\mathcal K\setminus\{-1,K+1\},\, r\in\{+,-\}. 
 \end{align*}
+
+In general, we need to augment a set of states \(\calS_0^{*,k}\) to the QBD-RAP for each initial phase, \(k\in\calS_0\) such that \(\mu_k\) has positive mass. 
 
 %For technical reasons we must restrict the initial conditions so that there are no point masses at \(x_0=y_{\ell+1}\) when \(i\in\mathcal S_+\) or \(x_0=y_{\ell}\) when \(i\in\mathcal S_-\). In either of these cases, the initial orbit position would be \(\cfrac{\bs \alpha e^{\bs{S}\Delta}}{\bs \alpha e^{\bs{S}\Delta}\bs e}\) and the denominator is \(\bs \alpha e^{\bs{S}\Delta}\bs e\). To our knowledge, there are currently no results that ensure that \(\bs \alpha e^{\bs{S}\Delta}\bs e\) is not arbitrarily small for the class of matrix exponential distributions with which we work. For point masses at any other value of \(x_0\in\mathcal D_\ell, x_0\neq y_{\ell+1}\) and \(i\in\mathcal S_+\) the initial orbit position is \(\cfrac{\bs \alpha e^{\bs{S}(x_0-y_\ell)}}{\bs \alpha e^{\bs{S}(x_0-y_\ell)}\bs e}\) and the denominator is \(\bs \alpha e^{\bs{S}(x_0-y_\ell)}\bs e\geq 1-\cfrac{\var\left(Z\right)}{(\Delta-(x_0-y_\ell))}\). Therefore, by choosing a matrix exponential \(Z\) with sufficiently small variance, then the denominator is arbitrarily close to 1. Similarly for initial point masses \(x_0\in\mathcal D_\ell\neq y_{\ell}\), \(i\in\mathcal S_-\). This is, however, no real practical loss as point masses at \(x_0=y_{\ell+1}\) when \(i\in\mathcal S_+\) (\(x_0=y_{\ell}\) when \(i\in\mathcal S_-\)) can, and should, have the initial conditions \(\bs v_{\ell+1,i}=\bs \alpha\) (respectively, \(\bs v_{\ell-1,i}\)), corresponding to the fluid starting at the left (right) of the adjacent interval which shares the boundary \(y_{\ell+1}\) (\(y_\ell\)). 
 
@@ -781,10 +784,14 @@ Similarly, for \(j\in\mathcal S_-\), if the QBD-RAP remains in phase \(j\) then 
 
 For phases \(j\in\mathcal S_0\), if phase \(j\) is associated with \(\mathcal S_+\), we use the same approximation as if \(j\in \mathcal S_+\), and if phase \(j\in\mathcal S_0\) is associated with \(\mathcal S_-\), we use the same approximation as if \(j\in \mathcal S_-\).
 
-This reasoning leads to an approximation of the distribution of the fluid at time \(t\), \(\mathbb P(X(t)\in \wrt x , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i) \), as
+This reasoning leads to an approximation of the distribution of the fluid at time \(t\), \(\mathbb P(\bs X(t)\in (\wrt x,j) \mid \bs X(0)=(x_0,i)) \), as
 \begin{align}
-		&\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs a_{\ell_0,i}(x_0), \phi(0) = i)  
-		\bs a e^{\bs{S}z} \bs s \wrt x,\label{eqn: density approx aug}
+		&\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in (\ell, \wrt \bs a, j)\mid \bs Y(0)=(\ell_0, \bs a_{\ell_0,i}(x_0), i) )
+		\bs a e^{\bs{S}z} \bs s \wrt x,
+		%
+		% \\&\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs a_{\ell_0,i}(x_0), \phi(0) = i)  
+		% \bs a e^{\bs{S}z} \bs s \wrt x,
+		\label{eqn: density approx aug}
 		% \intertext{for \(j\in\mathcal S_+\cup\calS_{+0}\) and}
 		% &\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs a_{\ell_0,i}(x_0), \phi(0) = i) \nonumber 
 		% \\&\qquad\times\bs a e^{\bs{S}(x-y_\ell)} \bs s \wrt x,\label{eqn: density approx aug2}
@@ -792,7 +799,7 @@ This reasoning leads to an approximation of the distribution of the fluid at tim
 where \(x\in\mathcal D_{\ell,j}\), \(x_0\in\mathcal D_{\ell_0,i}\) and 
 \[
 	z = \begin{cases} 
-		x - y_\ell & i\in\calS_- \\
+		x - y_\ell & i\in\calS_-, \\
 		y_{\ell+1} - x & i\in\calS_+.
 	\end{cases}
 \]
@@ -806,16 +813,21 @@ where \(x\in\mathcal D_{\ell,j}\), \(x_0\in\mathcal D_{\ell_0,i}\) and
 
 While the estimate (\ref{eqn: density approx aug}) is appealing, it is, however, defective -- it does not integrate to 1 for any finite-dimensional matrix exponential distribution. To see this, compute 
 \begin{align*}
-	&\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\int_{z\in\mathcal D_{\ell,j}}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a, \phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), 
-	\\&\qquad{}\qquad{}\phi(0) = i) \bs a e^{ \bs{S}z} \bs s \wrt z
+	&\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\int_{z\in\mathcal D_{\ell,j}}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in (\ell, \wrt \bs a, j)\mid \bs Y(0)=(\ell_0, \bs  a_{\ell,i}(x_0), i)) \bs a e^{ \bs{S}z} \bs s \wrt z
 	% \\&\qquad{}{}+\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S_-\cup \calS_{-0}}\int_{x\in\mathcal D_{\ell,j}}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a, \phi(t) = j\mid L(0)=\ell_0, 
 	% \\&\qquad{}\qquad{}\bs A(0) = \bs  a_{\ell,i}(x_0), \phi(0) = i) \bs a e^{ \bs{S}(x-y_\ell)} \bs s \wrt x
-	\\&= \sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a, \phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), 
-	\\&\qquad{}\qquad{}\phi(0) = i) (1-\bs a e^{ \bs{S}\Delta}\bs e  )
+	\\&= \sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in (\ell, \wrt \bs a, j)\mid \bs Y(\ell_0, \bs  a_{\ell,i}(x_0), i)) (1-\bs a e^{ \bs{S}\Delta}\bs e  )
 	\\&<1,
+	% &\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\int_{z\in\mathcal D_{\ell,j}}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a, \phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), 
+	% \\&\qquad{}\qquad{}\phi(0) = i) \bs a e^{ \bs{S}z} \bs s \wrt z
+	% % \\&\qquad{}{}+\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S_-\cup \calS_{-0}}\int_{x\in\mathcal D_{\ell,j}}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a, \phi(t) = j\mid L(0)=\ell_0, 
+	% % \\&\qquad{}\qquad{}\bs A(0) = \bs  a_{\ell,i}(x_0), \phi(0) = i) \bs a e^{ \bs{S}(x-y_\ell)} \bs s \wrt x
+	% \\&= \sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a, \phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), 
+	% \\&\qquad{}\qquad{}\phi(0) = i) (1-\bs a e^{ \bs{S}\Delta}\bs e  )
+	% \\&<1,
 \end{align*}
 since \(\bs a e^{\bs{S}u} \bs e>0\) for any \(u>0\). For an orbit position \(\bs A(t)=\bs a\), the amount of mass missing from each level and phase is 
-\[\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), \phi(0) = i) \bs a e^{\bs{S}\Delta} \bs e \wrt x.\]
+\[\mathbb P(\bs Y(t)\in (\ell, \wrt \bs a,j)\mid \bs Y(0)=(\ell_0,  \bs  a_{\ell,i}(x_0), i)) \bs a e^{\bs{S}\Delta} \bs e \wrt x.\]
 The problem is that the triple \((\bs a,\bs S, \bs s)\) defines a distribution on \(x\in[0,\infty)\), however, it only makes sense to take \(x\in[0,\Delta)\) in the approximation scheme.
 
 %One way to rectify this is to renormalise the estimates in the right-hand side of (\ref{eqn: density approx aug})-(\ref{eqn: density approx aug2}) with the missing mass, i.e.~the approximation to \(\mathbb P(X(t)\in \wrt x , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i) \) is
@@ -827,11 +839,12 @@ The problem is that the triple \((\bs a,\bs S, \bs s)\) defines a distribution o
 %\end{align}
 %for \(j\in\mathcal S_-\cup \calS_{-0}.\) This renormalisation distributes any missing mass over the interval \(\calD_{\ell,j}\) proportional to the estimated density in the region. 
 
-To partially rectify this we can instead approximate \(\mathbb P(X(t)\in \wrt x  , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i) \) by
+To partially rectify this we can instead approximate \(\mathbb P(\bs X(t)\in (\wrt x, j)\mid \bs X(0)=(x_0, i)) \) by
 \begin{align}
 %	&\mathbb P(X(t)\in \wrt x  , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i) \nonumber
 	\label{eqn: density approx 3+}&
-		\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), \phi(0) = i) \bs a u_i^\ell(x) \wrt x ,
+	\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in(\ell, \wrt \bs a, j)\mid \bs Y(0)=()\ell_0, \bs  a_{\ell,i}(x_0), i)) \bs a u_i^\ell(x) \wrt x ,
+	% \displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), \phi(0) = i) \bs a u_i^\ell(x) \wrt x ,
 \end{align}
 {where}
 \begin{align}
@@ -846,11 +859,11 @@ The missing mass is now proportional to
 \[\bs a e^{\bs S 2\Delta}\bs e,\]
 which is less than the quantity \(\bs a e^{\bs S \Delta}\bs e\) from the approximation scheme (\ref{eqn: density approx aug}). There is nothing special about the choice of truncating the distribution at \(2\Delta\) in this construction, and we could choose any truncation value greater than \(\Delta\).
 
-A third option is to approximate \(\mathbb P(X(t)\in \wrt x  , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i) \) by
+A third option is to approximate \(\mathbb P(\bs X(t)\in (\wrt x, j)\mid \bs X(0)=(x_0, i)) \) by
 \begin{align}
 %	&\mathbb P(X(t)\in \wrt x  , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i) \nonumber
 	\label{eqn: density approx 4+}&
-		\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), \phi(0) = i) \bs a v_i^\ell(x) \wrt x ,
+		\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in (\ell, \wrt \bs a,j)\mid \bs Y(0) = (\ell_0, \bs  a_{\ell,i}(x_0), i)) \bs a v_i^\ell(x) \wrt x ,
 \end{align}
 {where}
 \begin{align}
