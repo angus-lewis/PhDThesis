@@ -1380,9 +1380,9 @@ Equation (\ref{eqn: dskvnaSF}) appears as the first factor in the summands of (\
 \end{align}
 The set \(\mathcal P^n(\ell_0,\ell)\) contains all of the possible sequences of levels which \(\{L(t)\}\) or \(\{X(t)\}\) may visit on a sample path which starts in level \(\ell_0\), ends in level \(\ell\) and changes level \(n\) times. By partitioning on the times \(\tau_m\), \(m=2,\dots,n-1\), and the phases and the levels at these times and using the strong Markov property of the QBD-RAP, then (\ref{eqn: dskvnaSF}) is  
 	\begin{align}
-	 &\sum_{j_2,\dots,j_{n-1}\in\mathcal S}\sum_{(\ell_2,\dots,\ell_{n-1}) \in\mathcal P^{n-1}(\ell_1,\ell)}\prod_{m=2}^{n}\mathbb P(\bs Y_d^{(p)}(\tau_m^{(p)}) =(\ell_m, j_m), \tau_{m}^{(p)}\leq E^\lambda 
-            	 \mid \nonumber
-	 	 \\&\qquad \bs Y_d^{(p)}(\tau_{m-1}^{(p)}) = (\ell_{m-1}, j_{m-1}), \tau_{m-1}^{(p)}\leq E^\lambda),  \label{eqn: 161222}
+	 &\sum_{\substack{j_2,\dots,j_{n-1}\in\mathcal S \\ (\ell_2,\dots,\ell_{n-1}) \in\mathcal P^{n-1}(\ell_1,\ell)}}\prod_{m=2}^{n}\mathbb P(\bs Y_d^{(p)}(\tau_m^{(p)}) =(\ell_m, j_m), \tau_{m}^{(p)}\leq E^\lambda 
+            	 \mid \nonumber 
+	 	\bs Y_d^{(p)}(\tau_{m-1}^{(p)}) = (\ell_{m-1}, j_{m-1}), \\&\quad \tau_{m-1}^{(p)}\leq E^\lambda),  \label{eqn: 161222}
 \end{align}
 where we define \(\ell_n=\ell\). Each factor in the product is 
 \begin{align}
@@ -1493,7 +1493,7 @@ Therefore we have proved the following result
 		&\mathbb P(\bs Y_d^{(p)}(\tau_n^{(p)}) = (\ell,j_n), \tau_{n}^{(p)}\leq E^{\lambda}
 		 \mid \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0), i)),\nonumber 
 		%  &\mathbb P(L^{(p)}(\tau_n^{(p)}) = \ell, \phi^{(p)}(\tau_n^{(p)}) = j_n, \tau_{n}^{(p)}\leq E^{\lambda}
-		%  \mid L^{(p)}(0)=\ell_0, \bs A^{(p)}(0)=\bs  a_{\ell_0,i}^{(p)}(x_0), \phi^{(p)}(0)=i),\nonumber 
+		%  \mid L^{(p)}(0)=\ell_0, \bs A^{(p)}(0)=\bs  a_{\ell_0,i}^{(p)}(x_0), \phi^{(p)}(0)=i),\nonumber  
 		 %
 		 \\&\to \mathbb P(\bs X(\tau_n^X) = (y_{\ell+1(j_{n}\in\mathcal S_-)}, 
 		j_n), \tau_{n}^X\leq E^\lambda
@@ -1722,7 +1722,7 @@ Note that \(b\) and \(r_1\) depend on \(p\) which has been suppressed to simplif
 		\bs Y(0)=(\ell_0, \bs a_{\ell_0,i}(x_0), i))F\wrt t \nonumber
 		\\&=\int_{t=0}^\infty e^{-\lambda t} \mathbb P(\widetilde{\bs Y}(t) \in (\ell,\mathcal D_{\ell,j},j), t\in\mathcal T_n \mid \bs Y(0)=(\ell_0, \bs a_{\ell_0,i}(x_0), i))F\wrt t. \nonumber
 	\end{align}
-	Partitioning on the time, \(\tau_1\), of the \(1\)st change of level, and the phase and level at time \(\tau_1\), 
+	Partitioning on the time of the \(1\)st change of level, \(\tau_1\), and the phase and level at time \(\tau_1\), 
 	\begin{align}
 		&\int_{t=0}^\infty e^{-\lambda t} \int_{u_1=0}^t \sum_{j_1\in\mathcal S}\sum_{\ell_1\in\{\ell_0+1,\ell_0-1\}\cap\mathcal K}\mathbb P(\widetilde{\bs Y}(t) \in (\ell,\mathcal D_{\ell,j},j), t\in\mathcal T_n \nonumber
 		\mid \bs Y_d(\tau_1)=(\ell_1,j_1),  \tau_1=u_1)\nonumber
@@ -1797,12 +1797,12 @@ Thus, we have shown the following result
 		\mid \bs X(0)=(x_0, i))\psi(x)\wrt t. \nonumber
 	\end{align}
 \end{lem}
-
+ 
 \begin{cor}\label{cor: lk}
 	Let \(\psi(\bs y):\mathcal K \times \mathbb R\times \mathcal S \to \mathbb R\) be Lipschitz continuous and bounded functions, \(|\psi(\bs y)|\leq F\). Further, let \(\mathcal L(X(t)) = \sum_{k\in\mathcal K}k1(X(t)\in\mathcal D_k)\) and \(\widetilde{\bs X}(t) = (\mathcal L(X(t)),X(t),\varphi(t)))\). For each \(x_0\in\mathbb R\), \(i\in\mathcal S\), \(\ell_0\in\mathcal K\), 
 	\begin{align}
 		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E\left[\psi(\widetilde{\bs Y}^{(p)}(t))  \mid \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0),i) \right] \wrt t \nonumber
-		\\&\to \int_{t=0}^\infty e^{-\lambda t}  \mathbb E\left[\psi(\widetilde{\bs X}(t),\phi(t))\mid \bs X(0)=(x_0, i) \right] \wrt t.\nonumber
+		\\&\to \int_{t=0}^\infty e^{-\lambda t}  \mathbb E\left[\psi(\widetilde{\bs X}(t))\mid \bs X(0)=(x_0, i) \right] \wrt t.\nonumber
 	\end{align}
 \end{cor}
 \begin{proof}
@@ -1843,9 +1843,9 @@ Thus, we have shown the following result
 		\\&<\infty,
 	\end{align*}
 	hence the dominating terms are summable. Hence we may apply the Dominated Convergence Theorem to swap the necessary limits and sums. 
-\end{proof}
+\end{proof} 
 
-The Extended Continuity Theorem for Laplace transforms \cite[Chapter XIII, Theorem 2a]{feller1957} can now be use to claim that the QBD-RAP approximation scheme converges weakly to the fluid queue.
+The Extended Continuity Theorem for Laplace transforms \cite[Chapter XIII, Theorem 2a]{feller1957} can now be use to claim that the QBD-RAP approximation scheme converges weakly (in space and time) to the fluid queue.
 \begin{thm}[Extended Continuity Theorem]\label{thm: ext cont thm}
 	For \(p=1,2,\dots\) let \(U_p\) be a measure with Laplace transform \(\omega_p\). If \(\omega_p(\lambda)\to\omega(\lambda)\) for \(\lambda > a\geq 0\), then \(\omega\) is the Laplace transform of a measure \(U\) and \(U_p\to U\).
 	
