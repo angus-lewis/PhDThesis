@@ -13,7 +13,7 @@ In the context of approximating fluid queues, one advantage of the QBD discretis
 \section{Fluid queues}
 A fluid queue is a two-dimensional stochastic process \(\{\bs X(t)\} = \{(X(t),\varphi(t))\}_{t\geq0}\) where \(\{\varphi(t)\}_{t\geq0}\) is known as the phase or driving process, and \(\{X(t)\}_{t\geq0}\) is known as the level process or buffer. The phase process \(\{\varphi(t)\}_{t\geq0}\), is an irreducible continuous-time Markov chain (CTMC) with finite state space, which we we assume to be \(\mathcal S=\{1,2,\dots,N\}\) without loss of generality, and infinitesimal generator \(\bs T= [T_{ij}]_{i,j\in\mathcal S}\). We assume that \(\bs T\) is \emph{conservative}. Associated with states \(i\in\mathcal S\) are real-valued \emph{rates} \(c_i\in\mathbb R\). 
 
-Partition the state space \(\calS\) into \(\calS_+ = \{i\in\calS\mid c_i>0\}\), \(\calS_- = \{\i\in\calS\mid c_i<0\}\) and \(\calS_0 = \{i\in\calS\mid c_i=0\}\). We assume, without loss of generality, that the generator \(\bs T\) is partitioned into sub-matrices 
+Partition the state space \(\calS\) into \(\calS_+ = \{i\in\calS\mid c_i>0\}\), \(\calS_- = \{i\in\calS\mid c_i<0\}\) and \(\calS_0 = \{i\in\calS\mid c_i=0\}\). We assume, without loss of generality, that the generator \(\bs T\) is partitioned into sub-matrices 
 \[\bs T = \left[\begin{array}{ccc}\bs T_{++} & \bs T_{+-} & \bs T_{+0} \\ \bs T_{-+} & \bs T_{--} & \bs T_{-0} \\ \bs T_{0+} & \bs T_{0-} & \bs T_{00}  \end{array}\right],\]
 where \(\bs T_{mn} = [T_{ij}]_{i\in\mathcal S_m, j\in\mathcal S_n}\), \(m,n\in\{+,-,0\}\). Also define the diagonal matrices 
 \begin{align*}
