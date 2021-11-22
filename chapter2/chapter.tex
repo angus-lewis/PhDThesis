@@ -395,7 +395,7 @@ With this construction, jumps according to the matrix \(\bs D\) occur only on tr
 %
 %As motivation, consider again the QBD approximation, \(\bs J(t)\), to a fluid queue, \(\bs M(t)\), as described above. When the state is \((L(t),\varphi(t)) = (\ell, i)\), the process spends an exponentially distributed amount of time in this phase, with rate \(q_{i} = T_{ii}-|c_i|/\Delta\), after which there is a change of phase from phase \(i\) to phase \(j\) with probability \(T_{ij}/|q_i|\) while the level remains the same, otherwise there is a change of level: either \(L(t)\) increases from \(\ell\) to \(\ell +1\) if \(c_i>0\), or decreases from \(\ell\) to \(\ell-1\) if \(c_i<0\). 
 %
-%Rather than approximate the sojourn time of \((X(t),\varphi(t)) \in(\calD_k, i)\) by an exponential distribution, we could instead approximate this sojourn time by a phase-type distribution denoted \(\tau_i \sim PH(\bs \alpha, T_{ii}\bs{I}+\bs{S}_i)\) where \(-\bs\alpha \bs{S}^{-1}\bs 1 = \Delta\). That is, the mean of the Phase-type \(PH(\bs \alpha,\bs{S})\) is equal to the cell width, \(\Delta\). The distribution \(PH(\bs \alpha, T_{ii}\bs{I}+\bs{S}_i)\) can be viewed as \(min(U,V)\) where \(U\sim exp(T_{ii})\) and \( V\sim PH(\bs\alpha, \bs{S})\). Thus, expiry of the distribution \(\tau_i\) corresponds to either a change in phase if \(U\) is the minimum, or change in level if \(V\) is the minimum. The latter case we map to a change in level: \(L(t)\) moves from \(\ell\) to \(\ell+1\) if \(c_i>0\), and from \(\ell\) to \(\ell-1\) if \(c_i<0\).
+%Rather than approximate the sojourn time of \((X(t),\varphi(t)) \in(\calD_k, i)\) by an exponential distribution, we could instead approximate this sojourn time by a phase-type distribution denoted \(\tau_i \sim PH(\bs \alpha, T_{ii}\bs{I}+\bs{S}_i)\) where \(-\bs\alpha \bs{S}^{-1}\bs 1 = \Delta\). That is, the mean of the Phase-type \(PH(\bs \alpha,\bs{S})\) is equal to the cell width, \(\Delta\). The distribution \(PH(\bs \alpha, T_{ii}\bs{I}+\bs{S}_i)\) can be viewed as \(min(U,{\bs v})\) where \(U\sim exp(T_{ii})\) and \( {\bs v}\sim PH(\bs\alpha, \bs{S})\). Thus, expiry of the distribution \(\tau_i\) corresponds to either a change in phase if \(U\) is the minimum, or change in level if \({\bs v}\) is the minimum. The latter case we map to a change in level: \(L(t)\) moves from \(\ell\) to \(\ell+1\) if \(c_i>0\), and from \(\ell\) to \(\ell-1\) if \(c_i<0\).
 %
 %Now, we know that, given \(\varphi(t)=i\), and given that \(X(0)=y_k\), then \(X(t)\) has a degenerate distribution which is a point mass at \(t=\Delta\). Thus, we wan to choose \(PH(\bs\alpha, \bs{S})\) such that it approximates the \(\delta\) function as closely as possible. This suggests we choose \(PH(\bs\alpha, \bs{S})\) as an Erlang distribution with mean \(\Delta\) as the Erlang distribution has the lowest coefficient of variation of all PH distributions.
 %
@@ -424,9 +424,9 @@ With this construction, jumps according to the matrix \(\bs D\) occur only on tr
 %\paragraph{Time-reverse (?) ME renewal processes} 
 %Consider now a ME renewal process defined by \(ME(\bs\alpha, \bs{C})\) which we assume is minimal and of order \(p\). Can we come up with some time-reverse representation of this renewal process. To this end, we now detail some properties of ME renewal processes. 
 %
-%Let \(\bs{D} = \bs c\bs \alpha\) where \(\bs c = -\bs{C}\bs 1\). Asmussen and Bladt \citep{ab1999} gave such a process a stochastic interpretation (in fact, Asmussen and Bladt worked with rational arrival processes, but I think we need only consider ME renewal processes). Let \(V = span\left\{\alpha, \bs\alpha \bs{S},...,\bs\alpha \bs{S}^{p-1}\right\}\). There exists a vector-valued stochastic process \(\left\{\bs A(t)\right\}_{t}\) with \(\bs A(t)\in V\) for all \(t\) and \(\bs A(0)=\bs\alpha\). Suppose \(\{Y_k\}\), \(k=0,1,...\) are the renewal times, and \(Y_0=0\). Between renewal epochs \(\bs A(t)\) moves deterministically according to \(\bs A(t) = \cfrac{\bs A(Y_{N(t)}) e^{\bs{C}(t-Y_{N(t)})}}{\bs A(Y_{N(t)}) e^{\bs{C}(t-Y_{N(t)})}\bs 1}\). \(\bs A(t)\) jumps at rate \(\bs A(t)\bs{D}\bs 1\) at time \(t\), and upon a jump \(\bs A(Y_k) = \cfrac{\bs A(Y_k-) \bs{D}}{\bs A(Y_k-) \bs{D}\bs 1}=\bs \alpha\) where \(Y_k-\) is the left limit at \(Y_k\). Furthermore, \(\left\{\bs A(t)\right\}\) is a strong Markov process and \(E\left[\bs A(t+s) \mid \bs A(t)\right] = \bs A(t)e^{\bs{Q}t}\) where \(\bs{Q} = \bs{C}+\bs{D}\). We know \(\bs{Q}\bs 1=\bs 0\) and \(dev(\bs{Q})=0\), that is, the dominant eigenvalue of \(\bs{Q}\) is 0.
+%Let \(\bs{D} = \bs c\bs \alpha\) where \(\bs c = -\bs{C}\bs 1\). Asmussen and Bladt \citep{ab1999} gave such a process a stochastic interpretation (in fact, Asmussen and Bladt worked with rational arrival processes, but I think we need only consider ME renewal processes). Let \({\bs v} = span\left\{\alpha, \bs\alpha \bs{S},...,\bs\alpha \bs{S}^{p-1}\right\}\). There exists a vector-valued stochastic process \(\left\{\bs A(t)\right\}_{t}\) with \(\bs A(t)\in {\bs v}\) for all \(t\) and \(\bs A(0)=\bs\alpha\). Suppose \(\{Y_k\}\), \(k=0,1,...\) are the renewal times, and \(Y_0=0\). Between renewal epochs \(\bs A(t)\) moves deterministically according to \(\bs A(t) = \cfrac{\bs A(Y_{N(t)}) e^{\bs{C}(t-Y_{N(t)})}}{\bs A(Y_{N(t)}) e^{\bs{C}(t-Y_{N(t)})}\bs 1}\). \(\bs A(t)\) jumps at rate \(\bs A(t)\bs{D}\bs 1\) at time \(t\), and upon a jump \(\bs A(Y_k) = \cfrac{\bs A(Y_k-) \bs{D}}{\bs A(Y_k-) \bs{D}\bs 1}=\bs \alpha\) where \(Y_k-\) is the left limit at \(Y_k\). Furthermore, \(\left\{\bs A(t)\right\}\) is a strong Markov process and \(E\left[\bs A(t+s) \mid \bs A(t)\right] = \bs A(t)e^{\bs{Q}t}\) where \(\bs{Q} = \bs{C}+\bs{D}\). We know \(\bs{Q}\bs 1=\bs 0\) and \(dev(\bs{Q})=0\), that is, the dominant eigenvalue of \(\bs{Q}\) is 0.
 %
-%Let \(\bs \pi\) be the left eigenvector of \(\bs{Q}\) corresponding to eigenvalue 0. Assume that \(\pi_i\neq0\), \(i=1,...,p\). If this is not the case then construct an invertible matrix \(\bs{V}\) such that \(\bs{V}\bs 1=\bs 1\), then consider the equivalent representation of the ME renewal process with \(ME(\bs\alpha \bs{V}^{-1}, \bs{V}\bs{C}\bs{V}^{-1})\), and pray that \(\pi_i\neq0\), \(i=1,...,p\) (can we show that there is always such a \(\bs{V}\)?) By choosing \(\bs{V}\) such that \(\bs{V}\bs 1=\bs 1\), then we maintain that the right eigenvector corresponding to \(\bs{V}\bs{C}\bs{V}^{-1}\) is still \(\bs 1\). 
+%Let \(\bs \pi\) be the left eigenvector of \(\bs{Q}\) corresponding to eigenvalue 0. Assume that \(\pi_i\neq0\), \(i=1,...,p\). If this is not the case then construct an invertible matrix \(\bs{{\bs v}}\) such that \(\bs{{\bs v}}\bs 1=\bs 1\), then consider the equivalent representation of the ME renewal process with \(ME(\bs\alpha \bs{{\bs v}}^{-1}, \bs{{\bs v}}\bs{C}\bs{{\bs v}}^{-1})\), and pray that \(\pi_i\neq0\), \(i=1,...,p\) (can we show that there is always such a \(\bs{{\bs v}}\)?) By choosing \(\bs{{\bs v}}\) such that \(\bs{{\bs v}}\bs 1=\bs 1\), then we maintain that the right eigenvector corresponding to \(\bs{{\bs v}}\bs{C}\bs{{\bs v}}^{-1}\) is still \(\bs 1\). 
 %
 %Let \(\wt{\bs C}=\bs{P}^{-1}\bs{C}'\bs{P}\), \(\wt{ \bs D} = \bs{P}^{-1}\bs{D}'\bs{P}\), and \(\wt{\bs\alpha} = \bs c'\bs{P}\mu\) where \(\mu = -\bs\alpha \bs{C}^{-1}\bs 1\). Is the ME renewal process defined by \(ME(\wt{\bs\alpha},\wt{ \bs C})\) in any meaningful way, the reverse of the ME renewal process defined by \(ME(\bs\alpha, \bs{C})\)?
 %
@@ -888,26 +888,26 @@ Here, we take the density function \(\bs a e^{\bs S x}\bs s\), defined on \([0,\
 %\end{itemize}
 %Meanwhile, (\ref{eqn: density approx 3+})-(\ref{eqn: density approx 3-}) maintains positivity and smoothness. 
 
-The difference between the approximation schemes is the way in which the vector \(\bs a\) is used. We generalise this idea with the concept of \emph{closing operators} which is a linear operator \(V(x):\mathcal A \to \mathbb R,\) for each \(x\in[0,\Delta)\). For example, the closing operator in Equations (\ref{eqn: density approx aug}) is the operator \(V(x),\,x\in[0,\Delta)\) such that for any \(\bs a \in \mathcal A\), 
+The difference between the approximation schemes is the way in which the vector \(\bs a\) is used. We generalise this idea with the concept of \emph{closing operators} which is a linear operator \({\bs v}(x):\mathcal A \to \mathbb R,\) for each \(x\in[0,\Delta)\). For example, the closing operator in Equations (\ref{eqn: density approx aug}) is the operator \({\bs v}(x),\,x\in[0,\Delta)\) such that for any \(\bs a \in \mathcal A\), 
 \begin{align}
-	\bs a V(x) &= \bs a e^{\bs Sx}\bs s.\label{eqn: alal}
-	%\\\bs a V_-(x-y_\ell) &= \bs a e^{\bs S(x-y_{\ell})}\bs s,\label{eqn:ndaenf}
+	\bs a {\bs v}(x) &= \bs a e^{\bs Sx}\bs s.\label{eqn: alal}
+	%\\\bs a {\bs v}_-(x-y_\ell) &= \bs a e^{\bs S(x-y_{\ell})}\bs s,\label{eqn:ndaenf}
 \end{align}
 Similarly, in (\ref{eqn: density approx 3+})
 \begin{align}
-	\bs a V(x) &= \bs a \left(e^{ \bs{S}x} \bs s + e^{ \bs{S}(2\Delta-x)} \bs s\right),\label{eqn:546}
+	\bs a {\bs v}(x) &= \bs a \left(e^{ \bs{S}x} \bs s + e^{ \bs{S}(2\Delta-x)} \bs s\right),\label{eqn:546}
 \end{align}
 and in (\ref{eqn: density approx 4+})
 \begin{align}
-	\bs a V(x) &= \bs a \left(e^{ \bs{S}x} \bs s + e^{ \bs{S}(2\Delta-x)}\left[I-e^{S2\Delta}\right]^{-1} \bs s\right).\label{eqn:5462}
+	\bs a {\bs v}(x) &= \bs a \left(e^{ \bs{S}x} \bs s + e^{ \bs{S}(2\Delta-x)}\right)\left[I-e^{S2\Delta}\right]^{-1} \bs s.\label{eqn:5462}
 \end{align}
-The operator \(V(x)\) is a choice which forms part of the definition of the approximation scheme. As we shall see, given certain properties of \(V(x)\), we can prove that the approximation scheme converges, and ensures positivity. In the cases above, all the closing operators (\ref{eqn: alal})-(\ref{eqn:546}) lead to an approximation which converges and, due to their interpretation as probability densities, ensure positivity. 
+The operator \({\bs v}(x)\) is a choice which forms part of the definition of the approximation scheme. As we shall see, given certain properties of \({\bs v}(x)\), we can prove that the approximation scheme converges, and ensures positivity. In the cases above, all the closing operators (\ref{eqn: alal})-(\ref{eqn:546}) lead to an approximation which converges and, due to their interpretation as probability densities, ensure positivity. 
 
 % \begin{rem}
-% Since we require \(V\) to be linear, then we actually have 
+% Since we require \({\bs v}\) to be linear, then we actually have 
 % \begin{align}
-% 	&\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs a_{\ell_0,i}(x_0), \phi(0) = i) \bs a V(x) \nonumber 
-% 	\\&= \mathbb E[\bs A(t)1(L(t)=\ell, \phi(t)=j) \mid L(0)=\ell_0, \bs A(0) = \bs a_{\ell_0,i}(x_0), \phi(0) = i]V(x).
+% 	&\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs a_{\ell_0,i}(x_0), \phi(0) = i) \bs a {\bs v}(x) \nonumber 
+% 	\\&= \mathbb E[\bs A(t)1(L(t)=\ell, \phi(t)=j) \mid L(0)=\ell_0, \bs A(0) = \bs a_{\ell_0,i}(x_0), \phi(0) = i]{\bs v}(x).
 % \end{align}
 % \end{rem}
 
@@ -915,17 +915,17 @@ The operator \(V(x)\) is a choice which forms part of the definition of the appr
 	\paragraph{Comments on linearity and normalisation}
 	We considered taking the closing operators to be 
 	\begin{align}
-		\bs a V(x) &= \cfrac{\bs a \left(e^{ \bs{S}x} \bs s + e^{ \bs{S}(2\Delta-x)} \bs s\right)}{1-\bs a e^{\bs S 2\Delta}\bs e},\label{eqn: nonlin}
+		\bs a {\bs v}(x) &= \cfrac{\bs a \left(e^{ \bs{S}x} \bs s + e^{ \bs{S}(2\Delta-x)} \bs s\right)}{1-\bs a e^{\bs S 2\Delta}\bs e},\label{eqn: nonlin}
 	\end{align}
 	which also ensures that the solution always preserves mass (the result of integrating (\ref{eqn: nonlin}) over \([0,\Delta)\) is 1). However, (\ref{eqn: nonlin}) is not a linear operator. The importance of this fact is that for a linear operator, 
-	\[\mathbb E[\bs A(t) V(x)] = \mathbb E[\bs A(t)]V(x),\]
-	thus, the computation of \(\mathbb E[\bs A(t) V(x)]\) can be achieved by first computing \(\mathbb E[\bs A(t)]\) and then applying \(V(x)\) to the result. In this sense, \(\mathbb E[\bs A(t)]\) contains all of the information about the history of the process up to time \(t\) needed to compute \(\mathbb E[\bs A(t) V(x)]\). This is much the same as in RAPs and QBD-RAPs where \(\mathbb E[\bs A(t)]\) is all that is required to compute probabilities about the future of the processes from time \(t\) onwards. 
+	\[\mathbb E[\bs A(t) {\bs v}(x)] = \mathbb E[\bs A(t)]{\bs v}(x),\]
+	thus, the computation of \(\mathbb E[\bs A(t) {\bs v}(x)]\) can be achieved by first computing \(\mathbb E[\bs A(t)]\) and then applying \({\bs v}(x)\) to the result. In this sense, \(\mathbb E[\bs A(t)]\) contains all of the information about the history of the process up to time \(t\) needed to compute \(\mathbb E[\bs A(t) {\bs v}(x)]\). This is much the same as in RAPs and QBD-RAPs where \(\mathbb E[\bs A(t)]\) is all that is required to compute probabilities about the future of the processes from time \(t\) onwards. 
 
-	When \(V(x)\) is not linear then, in general, 
-	\[\mathbb E[\bs A(t) V(x)] \neq \mathbb E[\bs A(t)]V(x).\]
+	When \({\bs v}(x)\) is not linear then, in general, 
+	\[\mathbb E[\bs A(t) {\bs v}(x)] \neq \mathbb E[\bs A(t)]{\bs v}(x).\]
 	For example, with (\ref{eqn: nonlin}), 
 	\begin{align}
-		\mathbb E[\bs A(t) V(x)] = \int_{\bs a \in\mathcal A} \mathbb P(\bs A(t) \in \wrt \bs a) \cfrac{\bs a \left(e^{ \bs{S}x} \bs s + e^{ \bs{S}(2\Delta-x)} \bs s\right)}{1-\bs a e^{\bs S 2\Delta}\bs e}.\label{eqn:nonlin2}
+		\mathbb E[\bs A(t) {\bs v}(x)] = \int_{\bs a \in\mathcal A} \mathbb P(\bs A(t) \in \wrt \bs a) \cfrac{\bs a \left(e^{ \bs{S}x} \bs s + e^{ \bs{S}(2\Delta-x)} \bs s\right)}{1-\bs a e^{\bs S 2\Delta}\bs e}.\label{eqn:nonlin2}
 	\end{align}
 	While the calculation in (\ref{eqn:nonlin2}) is theoretically possible, practically it is not. The seemingly innocuous integral over \(\bs a \in\mathcal A\) actually amounts to an integral over all possible sample paths of the QBD-RAP (i.e.~all possible event times of the QBD-RAP before time \(t\)) and in general, there is no `nice' way to do this computation. 
 	
@@ -933,7 +933,7 @@ The operator \(V(x)\) is a choice which forms part of the definition of the appr
 	\[\mathbb E[\bs A(t)] = \int_{\bs a\in\mathcal A} \mathbb P(\bs A(t) \in \wrt \bs a) \bs a,\]
 	amounts to a matrix-exponential calculation. 
 
-	In practice we use 
+	In practice we may use 
 	\begin{align}
 		\cfrac{\mathbb E\left[\bs A(t)\right] \left(e^{ \bs{S}x} \bs s + e^{ \bs{S}(2\Delta-x)} \bs s\right)}{1-\mathbb E\left[\bs A(t)\right] e^{\bs S 2\Delta}\bs e}
 	\end{align}
