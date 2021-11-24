@@ -1,0 +1,251 @@
+%!TEX root = ../thesis.tex
+\chapter{Kronecker properties}\label{appendix: kronecker}
+Here we detail some properties of Kronecker sum, products, and exponentials (see \citep{MEinAP}, Appendix A.4). 
+
+Let 
+\[\bs A = \left[\begin{array}{ccc}a_{11} & \dots & a_{1m}\\\hdots & & \hdots \\ a_{n1}&\dots & a_{nm}\end{array}\right]
+\qquad
+\bs{B} = \left[\begin{array}{ccc}b_{11} & \dots & b_{1m'}\\\hdots & & \hdots \\ b_{n'1}&\dots & b_{n'm'}\end{array}\right]\]
+be matrices. The operator \(\otimes\) is the Kronecker product of two matrices; 
+\[\bs A\otimes \bs{B} = \left[\begin{array}{ccc}a_{11}\bs{B} & \dots & a_{1m}\bs{B}\\\hdots & & \hdots \\ a_{n1}\bs{B}&\dots & a_{nm}\bs{B}\end{array}\right],\]
+which is an \(nn'\times mm'\) matrix. 
+
+Let \(\bs{C},\bs{D}\)  be matrices with dimensions \(m\times k\) and \(m'\times k'\). A property of the Kronecker Product is 
+\begin{align}
+	\left(\bs A\otimes \bs{B}\right)\left(\bs{C}\otimes \bs{D}\right) &= \bs A\bs{C}\otimes \bs{B}\bs{D}.\label{eqn:mpr}\tag{Mixed Product Rule}
+\end{align}
+\begin{proof}
+	The proof follows from 
+	\begin{align*}
+		\left[\begin{array}{cccc}a_{i1}\bs{B} & a_{i2}\bs{B}&\dots&a_{in}\bs{B}\end{array}\right]\left[\begin{array}{c}c_{1j}\bs{D}\\c_{2j}\\\vdots\\c_{nj}\bs{D} \end{array}\right] 
+		%
+		&= \left(\sum_\ell a_{i\ell}c_{\ell j}\right) \bs{B}\bs{D}
+		\\&= \left(\bs A\bs{C}\right)_{ij}\bs{B}\bs{D}.
+	\end{align*}
+\end{proof}
+
+If \(\bs A\) and \(\bs{B}\) are invertible matrices, then 
+\begin{align}\label{eqn:kron inverse}
+	\left(\bs A\otimes \bs{B}\right)^{-1} = \bs A^{-1}\otimes \bs{B}^{-1}.
+\end{align}
+
+Let \(\bs A\) and \(\bs{B}\) be \(n\times n\) and \(m\times m\) matrices, respectively. The Kronecker sum of \(\bs A\) and \(\bs{B}\) is denoted by \(\oplus\) and defined as 
+\[\bs A\oplus \bs{B} := \bs A\otimes \bs{I}_{m} + \bs{I}_{n}\otimes \bs{B}.\]
+
+A property of the Kronecker sum is 
+\begin{align}\label{eqn:kron exp}
+	e^{\bs A\oplus \bs{B}}= e^{\bs A}\otimes e^{\bs{B}}.
+\end{align}
+\begin{proof}
+	First, the matrices \(\bs A\otimes \bs{I}_m\) and \(\bs{I}_n\otimes \bs{B}\) commute; from the mixed product rule their product is \(\bs A\otimes \bs{B}\). Hence 
+	\[e^{\bs A\oplus \bs{B}} = e^{\bs A\otimes \bs{I}_m}e^{\bs{I}_n\otimes \bs{B}}.\]
+	We now show that \(e^{\bs A\otimes \bs{I}_m} = e^{\bs A}\otimes \bs{I}_m\) and \(e^{\bs{I}_n\otimes \bs{B}}=\bs{I}_n\otimes e^{\bs{B}}\). The latter follows from the fact that \(\bs{I}_n\otimes \bs{B}\) is a block diagonal matrix with blocks \(\bs{B}\), hence its exponential is also block diagonal with blocks equal to the exponential of \(\bs{B}\). The former follows from 
+	\begin{align}
+	e^{\bs A\otimes \bs{I}_m} &= \sum_{n=0}^\infty \cfrac{1}{n!}\left(\bs A\otimes \bs{I}_m\right)^n \nonumber
+	\\&= \sum_{n=0}^\infty \cfrac{1}{n!}\left(\bs A^n\otimes \bs{I}_m\right) \nonumber
+	\\&=\left(\sum_{n=0}^\infty \cfrac{1}{n!}\bs A\otimes \bs{I}_m\right) \nonumber
+	\\&=e^{\bs A}\otimes \bs{I}_m.\label{eqn:09ksdjgah}
+	\end{align}
+	
+	Therefore 
+	\[e^{\bs A\oplus \bs{B}} = \left(e^{\bs A}\otimes \bs{I}_m\right)\left(\bs{I}_n\otimes e^{\bs{B}}\right),\]
+	and the result follows by the mixed product rule. 
+\end{proof}
+
+\begin{lem}\label{lem: lst mpr}
+	Let \(\bs{T}\) and \(\bs{C}\) be \(n\times n\), square matrices with \(\bs{C}\) diagonal and invertible; let \(\bs{S}\) be a \(p\times p\) matrix. Further, suppose \(\left[\bs{T}\otimes \bs{I} + \bs{C}\otimes \bs{S} - \lambda \bs{I}\right]\) is invertible for \(\lambda>0\). Then
+\begin{align}
+	&\int_{t=0}^\infty e^{-\lambda t}  e^{{\left(\bs{T}\otimes \bs{I} + \bs{C}\otimes \bs{S}\right)t}} \wrt t 
+	%
+	=   \int_{x=0}^\infty e^{{\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)x}}\otimes e^{\bs{S}x} \wrt x \left(\bs{C}\otimes \bs{I}\right)^{-1}  \label{eqn:lstsimplify}\end{align}
+\end{lem}
+\begin{proof}
+	Computing the integral on the left-hand side and then factorising the result and using the \ref{eqn:mpr} multiple times gives
+	\begin{align}
+            	\int_{t=0}^\infty e^{-\lambda t} e^{\left(\bs{T}\otimes \bs{I} + \bs{C}\otimes \bs{S}\right)t} \wrt t\nonumber 
+            	%
+            	&= - \left[\bs{T}\otimes \bs{I} + \bs{C}\otimes \bs{S} - \lambda \bs{I}\right]^{-1}
+		%
+		\\&= -  \left[\bs{T}\otimes \bs{I} + \left(\bs{C}\otimes \bs{I}\right)\left(\bs{I}\otimes \bs{S}\right) - \lambda \bs{I}\right]^{-1}\nonumber
+		%
+		\\&= -  \left[\left(\bs{C}\otimes \bs{I}\right)\left(\left(\bs{C}\otimes \bs{I}\right)^{-1}\left(\bs{T}\otimes \bs{I} \right)+ \bs{I}\otimes \bs{S} - \left(\bs{C}\otimes \bs{I}\right)^{-1}\lambda \bs{I}\right)\right]^{-1}. \label{eqn: ref this one 12}
+		%
+	\end{align}
+	By Equation~(\ref{eqn:kron inverse}) and since \(\bs{C}\) is invertible, (\ref{eqn: ref this one 12}) is equal to
+	\begin{align}
+		& - \left[\left(\bs{C}\otimes \bs{I}\right)\left(\left(\bs{C}^{-1}\otimes \bs{I}\right)\left(\bs{T}\otimes \bs{I} \right)+ \bs{I}\otimes \bs{S} - \left(\bs{C}^{-1}\otimes \bs{I}\right)\lambda \bs{I}\right)\right]^{-1}. \label{eqn: ref this one 13}
+		%
+	\end{align}
+	{Using the \ref{eqn:mpr} and algebraic manipulation, (\ref{eqn: ref this one 13}) is equal to }
+	\begin{align}
+		&- \left[\left(\bs{C}\otimes \bs{I}\right)\left(\left(\bs{C}^{-1}\bs{T}\right)\otimes \bs{I} + \bs{I}\otimes \bs{S} - \left(\bs{C}^{-1}\lambda \bs{I}\right)\otimes \bs{I}\right)\right]^{-1} \nonumber
+		%
+		\\&= - \left[\left(\bs{C}\otimes \bs{I}\right)\left(\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)\right)\otimes \bs{I} + \bs{I}\otimes \bs{S}\right)\right]^{-1} \nonumber
+		%
+		\\&= - \left[\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)\right)\otimes \bs{I} + \bs{I}\otimes \bs{S}\right]^{-1}\left(\bs{C}\otimes \bs{I}\right)^{-1} \nonumber
+		\\&= - \left[\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)\right)\oplus \bs{S}\right]^{-1}\left(\bs{C}\otimes \bs{I}\right)^{-1},\label{eqn: is an integral}
+	\end{align}
+	by definition of the Kronecker sum.
+	
+	Now, for an invertible matrix \(\bs A\) we can write \(-\bs A^{-1} = \displaystyle\int_{x=0}^\infty e^{\bs Ax}\wrt x\). Therefore (\ref{eqn: is an integral}) is 
+	\begin{align*}
+		-\left[\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)\right)\oplus \bs{S}\right]^{-1}\left(\bs{C}\otimes \bs{I}\right)^{-1}
+		&= \int_{x=0}^\infty e^{\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)x\right)\oplus \bs{S}x}\wrt x\left(\bs{C}\otimes \bs{I}\right)^{-1}.
+	\end{align*}
+	{Using the rule in Equation~(\ref{eqn:kron exp}) gives }
+	\begin{align*}
+		&\int_{x=0}^\infty e^{\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)\right)x}\otimes e^{ \bs{S}x}\wrt x\left(\bs{C}\otimes \bs{I}\right)^{-1},
+	\end{align*}
+	which is the result.
+\end{proof}
+
+%\section{Matrix exponentials}\label{appendix: matrix exponentials}
+%This appendix contains some technical results regarding the matrix exponential.
+
+The exponential of a matrix \(\bs B\) is \[e^{\bs B} := \sum_{n=0}^\infty \cfrac{1}{n!}B^n.\]
+
+\cite{ln2015} show the following.
+\begin{lem}\label{lem: sfkjgn}
+	Let \(\bs B\) be the block-partitioned matrix
+	\[\bs B = \left[\begin{array}{cc} \bs B_{11} & \bs B_{12} \\ \bs B_{21} & \bs B_{22} \end{array}\right]\]
+	where \(\bs B_{11}\) and \(\bs B_{22}\) are matrices of order \(m_1\) and \(m_2\), respectively. Denote by \(\bs H_{11}(t)\) the top-left quadrant of order \(m_1\) of \(e^{\bs Bt}\):
+	\[\bs H_{11}(t) = \vligne{\bs I_{m_1\times m_1} & \bs 0} e^{\bs Bt}\left[\begin{array}{c}\bs I_{m_1\times m_1} \\ \bs 0\end{array}\right].\]
+	
+	The matrix \(\bs H_{11}(t)\) is the solution of 
+	\begin{align}\label{eqn: akg987LKJ}
+		\bs H_{11}(t) = e^{\bs B_{11}t} + \int_{v=0}^t\int_{u=v}^t e^{\bs B_{11}(t-u)}\bs B_{12}e^{\bs B_{22}(u-v)}\bs B_{21}\bs H_{11}(v)\wrt u\wrt v.
+	\end{align}
+\end{lem}
+
+Let \(\bs H_{12}(t)\) be the top-right quadrant of \(e^{\bs Bt}\) of size \(m_1\times m_2\), i.e.
+\begin{align}
+	\bs H_{12}(t) &= \vligne{  \bs I_{m_1\times m_1} & \bs 0}e^{\bs Bt} \left[\begin{array}{c} \bs 0 \\ \bs I_{m_2\times m_2}\end{array}\right]. \label{eqn: p03j}
+\end{align}
+Denote by \(\widehat{\bs H}_{11}(\lambda):=\displaystyle \int_{t=0}^\infty e^{-\lambda t}\bs H_{11}(t)\wrt t\) and by \(\widehat{\bs H}_{12}(\lambda):=\displaystyle \int_{t=0}^\infty e^{-\lambda t}\bs H_{12}(t)\wrt t\), the Laplace transforms of \(\bs H_{11}(t)\) and \(\bs H_{12}(t)\), respectively. Using Lemma~\ref{lem: sfkjgn} we can show the following result. 
+\begin{lem}
+	\begin{align}
+		\widehat{\bs H}_{11}(\lambda) &= \int_{x=0}^\infty e^{\left(\bs B_{11} -\lambda \bs I_{m_1\times m_1} + \bs B_{12}(\lambda \bs I_{m_2\times m_2}- \bs B_{22})^{-1}\bs B_{21}\right)x} \wrt x,\label{eqn: 202}
+		%
+		\\\widehat{\bs H}_{12}(\lambda) &= \int_{x=0}^\infty e^{\left(\bs B_{11} -\lambda \bs I_{m_1\times m_1} + \bs B_{12}(\lambda \bs I_{m_2\times m_2}- \bs B_{22})^{-1}\bs B_{21}\right)x} \bs B_{12}(\lambda \bs I_{m_2\times m_2}-\bs B_{22})^{-1}\wrt x.\label{eqn: 203}
+	\end{align}
+\end{lem}
+\begin{proof}
+	First we show the result for \(\widehat{\bs H}_{11}(\lambda)\). Taking the Laplace transform of (\ref{eqn: akg987LKJ}) shows that \(\widehat{\bs H}_{11}(\lambda)\) is equal to 
+	\begin{align}
+		&\int_{t=0}^\infty \int_{v=0}^t\int_{u=v}^t e^{-\lambda (t-u)}e^{\bs B_{11}(t-u)}\bs B_{12}e^{-\lambda (u-v)}e^{\bs B_{22}(u-v)}\bs B_{21}e^{-\lambda v}\bs H_{11}(v)\wrt u\wrt v \nonumber 
+		\\&\qquad{}+ (\lambda \bs I_{m_1\times m_1} - \bs B_{11})^{-1}\nonumber 
+		%
+		\\& = (\lambda \bs I_{m_1\times m_1} - \bs B_{11})^{-1} + (\lambda \bs I_{m_1\times m_1} - \bs B_{11})^{-1}\bs B_{12}(\lambda \bs I_{m_2\times m_2}-\bs B_{22})^{-1}\bs B_{21}\widehat{\bs H}_{11}(\lambda),
+	\end{align}
+	by the convolution theorem for Laplace transforms. This implies
+	\begin{align*}
+		&\left[\bs I_{m_1\times m_1} -  (\lambda \bs I_{m_1\times m_1} - \bs B_{11})^{-1}\bs B_{12}(\lambda \bs I_{m_2\times m_2}-\bs B_{22})^{-1}\bs B_{21}\right]\widehat{\bs H}_{11}(\lambda) 
+		\\&= (\lambda \bs I_{m_1\times m_1} - \bs B_{11})^{-1},
+	\end{align*}
+	and therefore 
+	\begin{align*}
+		&\widehat{\bs H}_{11}(\lambda) 
+		\\&= \left[\bs I_{m_1\times m_1} -  (\lambda \bs I_{m_1\times m_1} - \bs B_{11})^{-1}\bs B_{12}(\lambda \bs I_{m_2\times m_2}-\bs B_{22})^{-1}\bs B_{21}\right]^{-1} (\lambda \bs I_{m_1\times m_1} - \bs B_{11})^{-1}
+		%
+		\\&= \left[(\lambda \bs I_{m_1\times m_1} - \bs B_{11})\left(\bs I_{m_1\times m_1} -  (\lambda \bs I_{m_1\times m_1} - \bs B_{11})^{-1}\bs B_{12}(\lambda \bs I_{m_2\times m_2}-\bs B_{22})^{-1}\bs B_{21}\right)\right]^{-1} 
+		%
+		\\&= \left[\lambda \bs I_{m_1\times m_1} - \bs B_{11} - \bs B_{12}(\lambda \bs I_{m_2\times m_2}-\bs B_{22})^{-1}\bs B_{21}\right]^{-1}
+		%
+		\\&= \int_{t=0}^\infty e^{\left(\bs B_{11} - \lambda \bs I_{m_1\times m_1} + \bs B_{12}(\lambda \bs I_{m_2\times m_2}-\bs B_{22})^{-1}\bs B_{21}\right)t}\wrt t,
+	\end{align*}
+	which is (\ref{eqn: 202}). 
+	
+	Now, to show (\ref{eqn: 203}), differentiate (\ref{eqn: p03j})
+	\begin{align}
+		\cfrac{\wrt}{\wrt t}\bs H_{12}(t) &= \vligne{  \bs I_{m_1\times m_1} & \bs 0}e^{\bs Bt} \left[\begin{array}{cc} \bs B_{11} & \bs B_{12} \\ \bs B_{21} & \bs B_{22} \end{array}\right] \left[\begin{array}{c} \bs 0 \\ \bs I_{m_2\times m_2}\end{array}\right] \nonumber
+		%
+		\\&= \vligne{  \bs I_{m_1\times m_1} & \bs 0}e^{\bs Bt} \left[\begin{array}{c} \bs B_{12} \\ \bs B_{22} \end{array}\right] \nonumber
+		%
+		\\&= \bs H_{11}(t) \bs B_{12} + \bs H_{12}(t)\bs B_{22}.
+	\end{align}
+	Now take the Laplace transform 
+	\begin{align}
+		\lambda \widehat{\bs H}_{12}(\lambda) - \bs H_{12}(0) = \widehat{\bs H}_{11}(\lambda) \bs B_{12} + \widehat{\bs H}_{12}(\lambda)\bs B_{22}.
+	\end{align}
+	Since \(\bs H_{12}(0)=\bs 0\) and after rearranging we get 
+	\begin{align}
+		\widehat{\bs H}_{12}(\lambda) = \widehat{\bs H}_{11}(\lambda) \bs B_{12} (\lambda \bs I_{m_2\times m_2} -\bs B_{22})^{-1},
+	\end{align}
+	which gives (\ref{eqn: 203}) upon substituting (\ref{eqn: 202}).
+\end{proof}
+
+
+\begin{cor}\label{cor: mpr B}
+	For \(m\in\{+,-\}\) the top-left quadrant of size \(m_1\times m_1=|\calS_m|\cdot p \times |\calS_m|\cdot p\) of \(e^{\bs B_{mm}t}\), 
+	\begin{align}
+		&\vligne{\bs I & \bs 0}\int_{t=0}^\infty e^{-\lambda t} \exp\left\{\left[\begin{array}{cc} \bs T_{mm}\otimes \bs I + \bs C_m\otimes \bs S & \bs T_{m0}\otimes \bs I \\ \bs T_{0m} \otimes \bs I & \bs T_{00}\otimes \bs I \end{array}\right]t\right\} \wrt t\left[\begin{array}{c} \bs I \\ \bs 0 \end{array}\right], \nonumber
+	\end{align}
+	is given by 
+	\begin{align}
+		\int_{x=0}^\infty e^{\bs Q_{mm} (\lambda)x}\otimes  e^{\bs S x}\wrt x(\bs C_m^{-1}\otimes \bs I).\label{eqn: skagh87} 
+	\end{align}
+	For \(m\in\{+,-\}\) the top-right quadrant of size \(m_1\times m_2=|\calS_m|\cdot p\times |\calS_0|\cdot p\) of  \(e^{\bs B_{mm}t}\), 
+	\begin{align}
+		&\vligne{\bs I & \bs 0}\int_{t=0}^\infty e^{-\lambda t} \exp\left\{\left[\begin{array}{cc} \bs T_{mm}\otimes \bs I + \bs C_m\otimes \bs S & \bs T_{m0}\otimes \bs I \\ \bs T_{0m} \otimes \bs I & \bs T_{00}\otimes \bs I \end{array}\right]t\right\} \wrt t \left[\begin{array}{c}\bs 0 \\ \bs I\end{array}\right] ,\nonumber
+	\end{align}
+	is given by
+	\begin{align}
+		\int_{x=0}^\infty e^{\bs Q_{mm}(\lambda)x}\otimes  e^{\bs S x}\wrt x((\bs C_m^{-1}\bs T_{m0}(\lambda \bs I - \bs T_{00})^{-1})\otimes \bs I).\label{eqn: skagh873} 
+	\end{align}
+	Also, 
+	\begin{align}
+		&\vligne{\bs I & \bs 0 }\int_{t=0}^\infty e^{-\lambda t} e^{\bs{B}_{mm}t} \wrt t \bs{B}_{m{n}} %= \vligne{\bs I & \bs 0 }\int_{t=0}^\infty e^{-\lambda t} e^{\bs{B}_{mm}t} \wrt t  \left[\begin{array}{cc} \bs{T}_{mn}\otimes \bs{D} & \bs 0 \\ \bs T_{0n}\otimes \bs D & \bs 0 \end{array}\right]
+	= \int_{x=0}^\infty \bs H^{mn}(\lambda,x)  \otimes  e^{\bs S x}\bs D\wrt x\left(\vligne{\bs I_{pn} & \bs 0_{pn\times p|\calS_0|}}\right), \label{eqn: akgj987adKLDJ}
+\end{align}
+for \(m,n\in\{+,-\}\), \(m\neq n\).
+\end{cor}
+\begin{proof}
+	From Lemma~\ref{lem: sfkjgn} the top-left quadrant of size \(m_1\times m_1=|\calS_m|\cdot p \times |\calS_m|\cdot p\) of the integral with respect to \(t\) on the left-hand side of (\ref{eqn: skagh87}) is 
+	\begin{align}
+		\int_{t=0}^\infty e^{\left(\bs T_{mm}\otimes \bs I + \bs C_m\otimes \bs S - \lambda \bs I+ (\bs T_{m0}\otimes \bs I)(\lambda \bs I-\bs T_{00}\otimes \bs I)^{-1}(\bs T_{0m}\otimes \bs I)\right)t}\wrt t. \label{eqn: akjf768}
+	\end{align}
+	By Lemma~\ref{lem: lst mpr}, (\ref{eqn: akjf768}) is equal to 
+	\begin{align}
+		&\int_{x=0}^\infty e^{\bs C_m^{-1}\left(\bs T_{mm} - \lambda \bs I+ \bs T_{m0} (\lambda \bs I-\bs T_{00})^{-1}\bs T_{0m} \right)x}\otimes e^{\bs Sx}\wrt x(\bs C_m\otimes \bs I)^{-1}\nonumber
+		%
+		\\&=\int_{x=0}^\infty e^{\bs Q_{mm} ( \lambda )x}\otimes e^{\bs Sx}\wrt x(\bs C_m\otimes \bs I)^{-1} , \label{eqn: akjf7623988}
+	\end{align}
+	from the definition of \(\bs Q_{mm}(\lambda)\). This proves (\ref{eqn: skagh87}). 
+	
+	Now, from Lemma~\ref{lem: sfkjgn} the top-right quadrant of size \(m_1\times m_2=|\calS_m|\cdot p\times |\calS_0|\cdot p\) of the integral with respect to \(t\) on the left-hand side of (\ref{eqn: skagh873}) is 
+	\begin{align}
+		&\int_{t=0}^\infty e^{\left(\bs T_{mm}\otimes \bs I + \bs C_m\otimes \bs S - \lambda \bs I+ (\bs T_{m0}\otimes \bs I)(\lambda \bs I-\bs T_{00}\otimes \bs I)^{-1}(\bs T_{0m}\otimes \bs I)\right)t}(\bs T_{m0}\otimes \bs I)(\lambda \bs I - \bs T_{00}\otimes \bs I)^{-1} \nonumber 
+		\\&\qquad\times (\bs T_{0m}\otimes \bs I)\wrt t. \label{eqn: akjf768f}
+	\end{align}
+	By Lemma~\ref{lem: lst mpr}, (\ref{eqn: akjf768f}) is equal to 
+	\begin{align}
+		\int_{x=0}^\infty e^{\bs Q_{mm}(\lambda)x}\otimes e^{\bs Sx}\wrt x(\bs C_m\otimes \bs I)^{-1}(\bs T_{m0}\otimes \bs I)(\lambda \bs I - \bs T_{00}\otimes \bs I)^{-1}(\bs T_{0m}\otimes \bs I) . \label{eqn: akjf7623988g}
+	\end{align}
+	Now, 
+	\begin{align*}
+		\displaystyle (\lambda \bs I - \bs T_{00}\otimes \bs I)^{-1} &= \int_{u=0}^\infty e^{-(\lambda \bs I - \bs T_{00}\otimes \bs I)u}\wrt u \\&= \int_{u=0}^\infty e^{-\lambda u} e^{(\bs T_{00}\otimes \bs I)u}\wrt u \\&= \int_{u=0}^\infty e^{-\lambda u} e^{\bs T_{00}u}\otimes \bs I \wrt u,
+	\end{align*} by (\ref{eqn:09ksdjgah}). Using this and the \ref{eqn:mpr} we can write  
+	\begin{align}
+		&(\bs C_m\otimes \bs I)^{-1}(\bs T_{m0}\otimes \bs I)(\lambda \bs I - \bs T_{00}\otimes \bs I)^{-1}(\bs T_{0m}\otimes \bs I) \nonumber
+		\\&= (\bs C_m^{-1}\otimes \bs I)(\bs T_{m0}\otimes \bs I)\int_{u=0}^\infty e^{-\lambda u} e^{\bs T_{00}u}\otimes \bs I \wrt u(\bs T_{0m}\otimes \bs I) \nonumber
+		\\&= \left(\bs C_m^{-1}\bs T_{m0}(\lambda \bs I-\bs T_{00}u)^{-1}\bs T_{0m}\right)\otimes \bs I).\label{eqn: q092}
+	\end{align}
+	Substituting (\ref{eqn: q092}) into (\ref{eqn: akjf7623988g}) completes the proof of (\ref{eqn: skagh873}). 
+
+Now, using (\ref{eqn: skagh87}) and (\ref{eqn: skagh873}) we can write 
+\begin{align}
+	\nonumber&\vligne{\bs I & \bs 0 }\int_{t=0}^\infty e^{-\lambda t} e^{\bs{B}_{mm}t} \wrt t \bs{B}_{m{n}} = \vligne{\bs I & \bs 0 }\int_{t=0}^\infty e^{-\lambda t} e^{\bs{B}_{mm}t} \wrt t  \left[\begin{array}{cc} \bs{T}_{mn}\otimes \bs{D} & \bs 0 \\ \bs T_{0n}\otimes \bs D & \bs 0 \end{array}\right]
+	%
+%	\\\nonumber& =\left[ \begin{array}{cc} \displaystyle \int_{x=0}^\infty e^{\bs Q_{mm}(\lambda)x}\otimes  e^{\bs S x}\wrt x(\bs C_m^{-1} \otimes \bs I) & \displaystyle \int_{x=0}^\infty e^{\bs Q_{mm}(\lambda)x}\otimes  e^{\bs S x}\wrt x((\bs C_m^{-1}\bs T_{m0}(\lambda \bs I - \bs T_{00})^{-1})\otimes \bs I)  \end{array}\right]
+%	\\\nonumber&\quad\times\left[\begin{array}{cc} \bs{T}_{mn}\otimes \bs{D} & \bs 0 \\ \bs T_{0n}\otimes \bs D & \bs 0 \end{array}\right]
+	%
+	\\&= \int_{x=0}^\infty e^{\bs Q_{mm}(\lambda)x}\otimes  e^{\bs S x}\wrt x (\bs C_m^{-1}(\bs{T}_{mn} + \bs T_{m0}(\lambda \bs I - \bs T_{00})^{-1}\bs T_{0n}) \vligne{\bs I_n & \bs 0_{n\times |\calS_0|}} \otimes \bs D) \nonumber
+	%
+	\\&= \int_{x=0}^\infty e^{\bs Q_{mm}(\lambda)x}\otimes  e^{\bs S x}\wrt x \left( \left( \bs{Q}_{mn} (\lambda) \vligne{\bs I_n & \bs 0_{n\times |\calS_0|}} \right) \otimes \bs D\right)  \nonumber
+	%
+	\\&= \int_{x=0}^\infty \left(\bs H^{mn}(\lambda,x) \vligne{\bs I_n & \bs 0_{n\times |\calS_0|}}\right) \otimes  e^{\bs S x}\bs D\wrt x,\nonumber
+	%
+	\\&= \int_{x=0}^\infty \bs H^{mn}(\lambda,x)  \otimes  e^{\bs S x}\bs D\wrt x,\vligne{\bs I_{pn} & \bs 0_{pn\times p|\calS_0|}} \label{eqn: akgj987ad}
+\end{align}
+for \(m,n\in\{+,-\}\), \(m\neq n\) which is (\ref{eqn: akgj987adKLDJ}), where the last line holds from the \ref{eqn:mpr}. 
+\end{proof}
