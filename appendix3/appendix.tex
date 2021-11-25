@@ -1,6 +1,6 @@
 %!TEX root = ../thesis.tex
 \chapter{Convergence without ephemeral phases\label{app:extend conv}}
-For completeness, we include here, the results needed to prove the convergence of the QBD-RAP scheme without the need for the ephemeral initial states.
+For completeness, we include here proof of the convergence of the QBD-RAP scheme to the fluid queue without the need for the ephemeral initial states.
 
 For \(\varphi(0)=k\in\mathcal S_{-0}\) (or \(\varphi(0)=k\in\mathcal S_{+0}\)) the added complexity comes from the fact that it is possible that, upon the phase process first leaving \(\mathcal S_{-0}\) (\(\mathcal S_{+0}\)) the phase transitions to a state in \(\mathcal S_+\) (\(\mathcal S_-\)). Since the orbit of the QBD-RAP is constant on \(\varphi(t)\in\mathcal S_{-0}\) (\(\varphi(t)\in\mathcal S_{+0}\)), then upon a first transition out of \(\mathcal S_{-0}\) (\(\mathcal S_{+0}\)) and into \(\mathcal S_+\) (\(\mathcal S_-\)) the orbit jumps to \(\bs   a_{\ell_0,i}^{(p)}(x_0)\bs D^{(p)}\). For \(k\in\mathcal S_{-0}\), \(m\geq 0\), the corresponding Laplace transform of the QBD-RAP is
 \begin{align}
@@ -61,11 +61,12 @@ In practice, it may be possible to avoid this issue by choosing the intervals \(
 % Suppose we wish to have a point mass at \(x_0=y_{\ell}\), \(i\in\calS_{+0}\), and without loss of generality, assume the point mass has total mass 1. Let \(\mathcal S_{+0}^*\) with rates \(c_j=0\), \(j\in\mathcal S_{+0}^*\). These states represent a duplicated copy of \(\mathcal S_{+0}\). The initial orbit representing the point mass is \(\bs \alpha^{(p)}\), \(i\in\mathcal S_{+0}^*\). The dynamics of the QBD-RAP process regarding the ephemeral class \(\calS_{0+}^*\) is as follows. The phase process evolves according to the sub-generator matrix \(\bs T_{00}\) whilst it remains in \(\calS_{0+}^*\). Meanwhile, the orbit and level remain constant. When in phase \(k\in\calS_{0+}^*\), at rate \([\bs T_{0+}]_{kj}\) the process transitions out of \(\calS_{0+}^*\) and into phase \(j\in\mathcal S_+\). Similarly, when in phase \(k\in\calS_{0+}^*\), at rate \([\bs T_{0-}]_{kj}\) the process transitions out of \(\calS_{0+}^*\) and into phase \(j\in\mathcal S_-\). Upon a transition from \(\mathcal S_{0+}^*\) to \(j\in\mathcal S_{+}\) the orbit and level remain unchanged, and the process evolves as usual. Upon a transition from \(\mathcal S_{0+}^*\) to \(j\in\mathcal S_{-}\) the orbit remains unchanged, but the level jumps to \(\ell - 1\). Thus, the process evolves as if it has just entered level \(\ell-1\) in phase \(j\in\mathcal S_-\). 
 \end{rem}
 
+Theorem~\ref{thm: a thm2!} below is analogous to Theorem~\ref{thm: a thm!} and proves a certain convergence of the QBD-RAP scheme to the fluid queue in the case that \(\phi(0)\in\mathcal S_{+0}\cup\calS_{-0}\). Like the proof of Theorem~\ref{thm: a thm!}, the proof of Theorem~\ref{thm: a thm2!} relies on technical bounds which we establish with the remainder of this Appendix. 
+
 \begin{thm}\label{thm: a thm2!}
-	As \(p\to \infty\) the following convergence statements hold.
-	For \(r\in\{+,-\},\, q\in\{+0,-0\}\) and \(m=0\),  
+	As \(p\to \infty\), for \(q\in\{+0,-0\},\, r\in\{+,-\}\) and \(m=0\),  
 	\begin{align}\int_{x\in\calD_{\ell_0}}\widehat f_{0,q,r}^{\ell_0,(p)}(\lambda)(x,j;x_0,k)\psi(x)\wrt x \to \int_{x\in\calD_{\ell_0}}\widehat \mu_{0,q,r}^{\ell_0}(\lambda)(x,j;x_0,k)\psi(x)\wrt x.\end{align}
-	For \(r\in\{+,-\},\, q\in\{+0,-0\}\) and \(m\geq 1\), 
+	For \(q\in\{+0,-0\}, r\in\{+,-\}\) and \(m\geq 1\), 
 	\begin{align}\int_{x\in\calD_{\ell_0}}\widehat f_{m,q,r}^{\ell_0,(p)}(\lambda)(x,j;x_0,k)\psi(x)\wrt x \to \int_{x\in\calD_{\ell_0}}\widehat \mu_{m,q,r}^{\ell_0}(\lambda)(x,j;x_0,k)\psi(x)\wrt x.\label{eqn: thm 22}\end{align}
 \end{thm}
 \begin{proof}
@@ -113,7 +114,7 @@ In practice, it may be possible to avoid this issue by choosing the intervals \(
 \end{proof}
 
 \section{Technical results}
-
+As in Appendix~\ref{app:tand}, we treat the cases of \(m=0\) and \(m\geq 1\) seperately. We start with the case \(m=0\). The following result is analgous to Lemma~\ref{lem: Dcoajc}, though the proof is somewhat more tedious. 
 
 \begin{lem}\label{lem: ppp}
 	Let \(\psi:\calD_{\ell_0}\to \mathbb R\) be bounded \(|\psi(x)|\leq F\) and Lipschitz continuous function and let \(\lambda >0\). For \(i\in\mathcal S_-,j\in\mathcal S_-\cup\calS_{-0}\), \(x_0\in(0,\Delta)\), 
@@ -128,19 +129,114 @@ In practice, it may be possible to avoid this issue by choosing the intervals \(
 	\end{align}
 \end{lem}
 \begin{proof}
-	Assume, without loss of generality \(\ell_0=0\) so \(\calD_{\ell_0}=[0,\Delta]\). Substituting the definition of \(\bs D\), then the left-hand side of (\ref{eqn: LLLlllL}) is
+	Assume, for simplicity and without loss of generality, that \(\ell_0=0\) so \(\calD_{\ell_0}=[0,\Delta]\). Substituting the definition of \(\bs D\) and exchanging the order of integration, then the left-hand side of (\ref{eqn: LLLlllL}) is
 	\begin{align}
-%		&\Bigg|\int_{x_1=0}^\infty \int_{x=0}^{\Delta}\bs k^{(p)}(x_0) \bs D^{(p)} e^{\bs S x_1} {\bs v}(x) h_{ij}^{--}(\lambda, x_1) \psi(x) \wrt x \wrt x_1\nonumber
-%		 - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg| \nonumber
-		%
-		&\Bigg|\int_{x_1=0}^\infty \int_{x=0}^{\Delta}\int_{u=0}^\infty \bs k(x_0)e^{\bs Su}\bs s \bs k(u) \wrt u e^{\bs S x_1} {\bs v}(x) h_{ij}^{--}(\lambda, x_1) \psi(x) \wrt x \wrt x_1\nonumber
-		\\&{}\qquad {} - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x\Bigg| \nonumber
-		%
-		\\&\leq \Bigg|\int_{x_1=0}^\infty \int_{x=0}^{\Delta}\int_{u=0}^{\Delta-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \bs k(u) \wrt u e^{\bs S x_1} {\bs v}(x) h_{ij}^{--}(\lambda, x_1) \psi(x) \wrt x \wrt x_1\nonumber
-		\\&{}\qquad {} - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x\Bigg| \nonumber
-		%
-		\\&\qquad {}+\Bigg|\int_{x_1=0}^\infty \int_{x=0}^{\Delta}\int_{u= \Delta-\varepsilon}^\infty  \bs k(x_0)e^{\bs Su}\bs s \bs k(u) \wrt u e^{\bs S x_1} {\bs v}(x) h_{ij}^{--}(\lambda, x_1) \psi(x) \wrt x \wrt x_1\Bigg| \label{eqn: llllL}
+		&\Bigg|\int_{u=0}^\infty \bs k(x_0)e^{\bs Su}\bs s \int_{x=0}^{\Delta}  \int_{x_1=0}^\infty \bs k(u)  e^{\bs S x_1} {\bs v}(x) h_{ij}^{--}(\lambda, x_1) \psi(x) \wrt x_1 \wrt x \wrt u\nonumber
+		\\&{}\qquad {} - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x\Bigg|.\label{eqn: aksfKJJJJJ}
 	\end{align}
+	We wish to apply Property~\ref{properties: 2} to the integral over \(x_1\), however, to do so requires that \(u\leq \Delta-\varepsilon\). Breaking up the integral with respect to \(u\), then (\ref{eqn: aksfKJJJJJ}) is equal to 
+	\begin{align}
+		&\Bigg|\int_{u=0}^{\Delta-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \int_{x=0}^{\Delta}  \int_{x_1=0}^\infty \bs k(u)  e^{\bs S x_1} {\bs v}(x) h_{ij}^{--}(\lambda, x_1) \psi(x) \wrt x_1 \wrt x \wrt u + d_1 \nonumber
+		\\&{}  - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x\Bigg|
+		\\&\leq \Bigg|\int_{u=0}^{\Delta-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \int_{x=0}^{\Delta}  \int_{x_1=0}^\infty \bs k(u)  e^{\bs S x_1} {\bs v}(x) h_{ij}^{--}(\lambda, x_1) \psi(x) \wrt x_1 \wrt x \wrt u\nonumber
+		\\&{} - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x\Bigg| +|d_1| \label{eqnL MMMM}
+	\end{align}
+	where 
+	\[|d_1|=\left|\int_{u=\Delta-\varepsilon}^\infty \bs k(x_0)e^{\bs Su}\bs s \int_{x=0}^{\Delta}  \int_{x_1=0}^\infty \bs k(u)  e^{\bs S x_1} {\bs v}(x) h_{ij}^{--}(\lambda, x_1) \psi(x) \wrt x_1 \wrt x \wrt u\right|.\]
+	We show later that \(|d_1|\) can be made arbitrarily small by choosing \(Z\) with sufficiently small variance.  For now, let us focus on the first absolute value in (\ref{eqnL MMMM}). By Property~\ref{properties: 2} the first absolute value in (\ref{eqnL MMMM}) is 
+	\begin{align}
+		&\Bigg|\int_{x=0}^{\Delta}\int_{u=0}^{\Delta-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \left[ h_{ij}^{--}(\lambda, \Delta - u - x)1(u+x\leq \Delta-\varepsilon) + r_{\bs v}(u,x) \right] \psi(x) \wrt u \wrt x \nonumber
+		\\&{}\qquad {} - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg|\nonumber
+		\\&\leq \Bigg|\int_{x=0}^{\Delta}\int_{u=0}^{\Delta-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x)1(u+x\leq \Delta-\varepsilon) \psi(x) \wrt u \wrt x \nonumber 
+		\\&\qquad{} - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg| + |d_2|,
+		\label{eqn: aKK}
+	\end{align}
+	where 
+	\[|d_2| = \left| \int_{x=0}^{\Delta}\int_{u=0}^{\Delta-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s r_{\bs v}(u,x) \psi(x) \wrt u \wrt x \right|.\]
+	We show later that \(|d_2|\) can be made arbitrarily small by choosing \(Z\) with sufficiently small variance. The remaining term in (\ref{eqn: aKK}) can be written as 
+	\begin{align}
+		&\Bigg|\int_{x=0}^{\Delta-\varepsilon}\int_{u=0}^{\Delta-x-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u \wrt x 
+		- \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg|.\label{eqn: FGHJKL}
+	\end{align}
+	
+
+	Intuitively, when the variance of \(Z\) is low, we expect a significant constribution to the integral with respect to \(u\) in (\ref{eqn: FGHJKL}) to come from the portion of the integral over the interval \((\Delta-x_0-\varepsilon,\Delta-x_0+\varepsilon)\). Although, the integral with respect to \(u\) only contain this interval when \(x\) is sufficiently small. Breaking up the integral with respect to \(u\) in (\ref{eqn: FGHJKL}) into an integral over the interval \((\Delta-x_0-\varepsilon,\Delta-x_0+\varepsilon)\) and integrals over the rest, then applying the triangle inequality, (\ref{eqn: FGHJKL}) is less than or equal to 
+	\begin{align}
+		&\Bigg| \int_{x=0}^{\Delta-\varepsilon}\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u 1(x\leq x_0-2\varepsilon) \wrt x\nonumber
+		\\&\qquad{} - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg| + |d_3|+|d_4|+|d_5|,\label{eqn: LLkkK} 
+	\intertext{where}
+		&|d_3|=\Bigg|\int_{x=0}^{\Delta-\varepsilon}\int_{u=0}^{\min(\Delta-x_0-\varepsilon,\Delta-x-\varepsilon)} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u \wrt x\Bigg|,\nonumber
+		\\&|d_4|=\Bigg|\int_{x=0}^{\Delta-\varepsilon}\int_{u=\Delta-x_0+\varepsilon}^{\Delta-x-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u \nonumber 
+		 1(x\leq x_0-2\varepsilon)\wrt x\Bigg|,\nonumber
+		\\&|d_5|=\Bigg|\int_{x=0}^{\Delta-\varepsilon}\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u \times 1(x\in[x_0,x_0-2\varepsilon))\wrt x\Bigg|.  \nonumber 
+	\end{align}
+	We show later that \(|d_3|,\, |d_4|\) and \(|d_5|\) can be made arbitrarily small by choosing \(Z\) with sufficiently small variance.
+
+	In the first integral with respect to \(x\) in (\ref{eqn: LLkkK}), since \(x_0\in(2\varepsilon,\Delta-\varepsilon)\), then we can absorb the indicator function into the limits of the integral which results in
+	\begin{align}
+		\int_{x=0}^{x_0-2\varepsilon}\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u 1(x\leq x_0-2\varepsilon) \wrt x.
+	\end{align}
+	With this, and breaking up the integral over \(h_{ij}^{--}\), we can write the first absolute value in (\ref{eqn: LLkkK}) as 
+	\begin{align}
+		\nonumber &\Bigg| \int_{x=0}^{x_0-2\varepsilon}\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u  \wrt x 
+		\\\nonumber &\qquad{} - \int_{x=0}^{x_0-2\varepsilon} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x  - \int_{x=x_0-2\varepsilon}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg| 
+		\\\nonumber &\leq \Bigg| \int_{x=0}^{x_0-2\varepsilon}\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u   \wrt x 
+		\\&\qquad{} - \int_{x=0}^{x_0-2\varepsilon} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg| + |d_6|,\label{eqn:PPPPPP}
+	\end{align}
+		where
+	\begin{align}
+		&|d_6|=\left|\int_{x=x_0-2\varepsilon}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \right|.\nonumber 
+	\end{align}
+	We show later that \(|d_6|\) can be made arbitrarily small by choosing \(Z\) with sufficiently small variance.
+
+	Now, since probability densities integrate to 1, then we can write 
+	\begin{align*}
+		\int_{x=0}^{x_0-2\varepsilon} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x
+		&=\int_{x=0}^{x_0-2\varepsilon} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x\mathbb P(|Z-\Delta|\leq \varepsilon\mid Z>x_0) 
+		\\&{}+ \int_{x=0}^{x_0-2\varepsilon} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x\mathbb P(|Z-\Delta|> \varepsilon\mid Z>x_0)
+		\\&=\int_{x=0}^{x_0-2\varepsilon} \int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt u\wrt x
+		\\&{}+ \int_{x=0}^{x_0-2\varepsilon} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x\mathbb P(|Z-\Delta|> \varepsilon\mid Z>x_0).
+	\end{align*}
+	Therefore, the first absolute value in (\ref{eqn:PPPPPP}) can be written as 
+	\begin{align}
+		\nonumber &\Bigg| \int_{x=0}^{x_0-2\varepsilon}\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u   \wrt x 
+		\\\nonumber &\qquad{} - \int_{x=0}^{x_0-2\varepsilon} \int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt u\wrt x
+		\\\nonumber &\qquad{}- \int_{x=0}^{x_0-2\varepsilon} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x\mathbb P(|Z-\Delta|> \varepsilon\mid Z>x_0)\Bigg|
+		\\\nonumber &=\Bigg| \int_{x=0}^{x_0-2\varepsilon}\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \left[h_{ij}^{--}(\lambda, \Delta - u - x) -  h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\right]\wrt u\wrt x
+		\\\nonumber &\qquad{}- \int_{x=0}^{x_0-2\varepsilon} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x\mathbb P(|Z-\Delta|> \varepsilon\mid Z>x_0)\Bigg|
+		\\&\leq \Bigg| \int_{x=0}^{x_0-2\varepsilon}\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \left[h_{ij}^{--}(\lambda, \Delta - u - x) -  h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\right]\wrt u\wrt x\Bigg| + |d_7| \nonumber 
+		\\&\leq  \int_{x=0}^{x_0-2\varepsilon}\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \left|h_{ij}^{--}(\lambda, \Delta - u - x) -  h_{ij}^{--}(\lambda, x_0 - x)\left|\right|\psi(x)\right|\wrt u\wrt x + |d_7|, \label{eqn: ajkhvakjhdannvnnvnvn}
+	\end{align}
+	where 
+	\[|d_7|=\left| \int_{x=0}^{x_0-2\varepsilon} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x\mathbb P(|Z-\Delta|> \varepsilon\mid Z>x_0)\right|.\]
+	We show later that \(|d_7|\) can be made arbitrarily small by choosing \(Z\) with sufficiently small variance.
+
+	What remains is to bound the terms \(|d_\ell|,\, \ell=1,\dots,7\). 
+	
+	Since \(|\psi|\leq F\) then 
+	\begin{align}
+		|d_1|&\leq \left|\int_{u=\Delta-\varepsilon}^\infty \bs k(x_0)e^{\bs Su}\bs s \int_{x=0}^{\Delta}  \int_{x_1=0}^\infty \bs k(u)  e^{\bs S x_1} {\bs v}(x) h_{ij}^{--}(\lambda, x_1)  \wrt x_1 \wrt x \wrt u\right|F.\label{eqn:  CVBNM}
+	\end{align}
+	From Property~\ref{properties: -2}, (\ref{eqn:  CVBNM}) is less than or equal to 
+	\begin{align}
+		\nonumber &\left|\int_{u=\Delta-\varepsilon}^\infty \bs k(x_0)e^{\bs Su}\bs s  \int_{x_1=0}^\infty \bs k(u)  e^{\bs S x_1} {\bs e} h_{ij}^{--}(\lambda, x_1) \wrt x_1 \wrt u\right|F
+		\\\nonumber &\leq\left|\int_{u=\Delta-\varepsilon}^\infty \bs k(x_0)e^{\bs Su}\bs s  \int_{x_1=0}^\infty \bs k(u) {\bs e} h_{ij}^{--}(\lambda, x_1) \wrt x_1 \wrt u\right|F
+		\\&=\left|\int_{u=\Delta-\varepsilon}^\infty \bs k(x_0)e^{\bs Su}\bs s  \int_{x_1=0}^\infty h_{ij}^{--}(\lambda, x_1) \wrt x_1 \wrt u\right|F\label{eqb:afsgh}
+	\end{align}
+	since \(\bs k(u)e^{\bs Sx_1}\bs e\) is decreasing in \(x_1\) and \(\bs k(u)\bs e=1\). Now, as \(h_{ij}^{--}(\lambda,x_1)\) is integrable with \(\int_{x_1=0}^\infty h_{ij}^{--}(\lambda, x_1)\wrt x_1\leq \widehat{ G}\), then (\ref{eqb:afsgh}) is less than or equal to
+	\begin{align}
+		\nonumber \left|\int_{u=\Delta-\varepsilon}^\infty \bs k(x_0)e^{\bs Su}\bs s \wrt u\right|\widehat GF
+		&=\mathbb P(Z>x_0+\Delta-\varepsilon\mid Z>x_0)\widehat G F
+		\\&\leq\cfrac{\var{(Z)}/\varepsilon^2}{1-\var{(Z)}/\varepsilon^2} \widehat G F,\nonumber 
+	\end{align}
+	by Chebyshev's inequality, since \(x_0\in(2\varepsilon,\Delta-\varepsilon)\). 
+
+	Since \(h_{ij}^{--}\) is Lipschitz and \(|(\Delta-u-x)-(x_0-x)|\leq 2\varepsilon\) for all \(u\in(\Delta-x_0-\varepsilon,\Delta-x_0+\varepsilon)\), then the first absolute value of (\ref{eqn: ajkhvakjhdannvnnvnvn}) is less than or equal to 
+	\begin{align}
+		&\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \wrt u 2L\varepsilon \int_{x=0}^{x_0-2\varepsilon} \left|\psi(x)\right|\wrt x. \label{eqn: the last one?}
+	\end{align}
+	Now, \(\displaystyle \int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \wrt u\leq 1\) as it is a probability, and \(\displaystyle \int_{x=0}^{x_0-2\varepsilon} \left|\psi(x)\right|\wrt x \leq F\Delta\) as \(|\psi|\leq F\) and \(x_0\in(2\varepsilon,\Delta-\varepsilon)\). Therefore, (\ref{eqn: the last one?}) is less than or equal to \(2\varepsilon LF\Delta.\)
+
 	Since \(|\psi(x)|\leq F\) and \(|h_{ij}^{--}(\lambda,x)|\leq G\), the third term in (\ref{eqn: llllL}) is less than or equal to 
 	\begin{align}
 		&\int_{x_1=0}^\infty \int_{x=0}^{\Delta}\int_{u= \Delta-\varepsilon}^\infty  \bs k(x_0)e^{\bs Su}\bs s \bs k(u) \wrt u e^{\bs S x_1} {\bs v}(x) \wrt x \wrt x_1G F.\label{eqn: a big lola}
@@ -161,16 +257,7 @@ In practice, it may be possible to avoid this issue by choosing the intervals \(
 	by Chebyshev's inequality. 
 	
 	The first and second terms in (\ref{eqn: llllL}) are
-	\begin{align}
-		&\Bigg|\int_{x=0}^{\Delta}\int_{u=0}^{\Delta-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \int_{x_1=0}^\infty \bs k(u)  e^{\bs S x_1} {\bs v}(x) h_{ij}^{--}(\lambda, x_1) \wrt x_1 \wrt u \psi(x) \wrt x \nonumber
-		\\&{}\qquad {} - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x\Bigg| \nonumber
-		%
-		\\&=\Bigg|\int_{x=0}^{\Delta}\int_{u=0}^{\Delta-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \left[ h_{ij}^{--}(\lambda, \Delta - u - x)1(u+x\leq \Delta-\varepsilon) + r_{\bs v}(u,x) \right] \psi(x) \wrt u \wrt x \nonumber
-		\\&{}\qquad {} - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg|\nonumber
-		\\&\leq \Bigg|\int_{x=0}^{\Delta}\int_{u=0}^{\Delta-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x)1(u+x\leq \Delta-\varepsilon) \psi(x) \wrt u \wrt x \nonumber 
-		\\&\qquad{} - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg| + \Bigg| \int_{x=0}^{\Delta}\int_{u=0}^{\Delta-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s r_{\bs v}(u,x) \psi(x) \wrt u \wrt x \Bigg|
-		\label{eqn: aKK}
-	\end{align}
+	
 	where the first equality holds from Property \ref{properties: 2}. The last term in (\ref{eqn: aKK}) is less than or equal to 
 	\begin{align}
 		\int_{u=0}^{\Delta-\varepsilon} \bs k(x_0)e^{\bs Su} \int_{x=0}^{\Delta} \bs s \left|r_{\bs v}(u,x)\right|\wrt x \wrt u F 
@@ -180,19 +267,7 @@ In practice, it may be possible to avoid this issue by choosing the intervals \(
 		\\&\leq R_{{\bs v},2} F, \label{eqn: HhHj}
 	\end{align}
 	by Property \ref{properties: 2}. The first two terms in (\ref{eqn: aKK}) are 
-	\begin{align}
-		& \Bigg|\int_{x=0}^{\Delta}\int_{u=0}^{\Delta-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x)1(u+x\leq \Delta-\varepsilon) \psi(x) \wrt u \wrt x \nonumber
-		\\&\qquad{} - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg| \nonumber 
-		\\&= \Bigg|\int_{x=0}^{\Delta-\varepsilon}\int_{u=0}^{\Delta-x-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u \wrt x \nonumber
-		  \\&\qquad{}- \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg| \nonumber 
-		\\&\leq \Bigg| \int_{x=0}^{\Delta-\varepsilon}\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u 1(\Delta-x_0+\varepsilon\leq \Delta-x-\varepsilon) \wrt x\nonumber
-		\\&\qquad{} - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg| \nonumber 
-		\\&\qquad {}+\Bigg|\int_{x=0}^{\Delta-\varepsilon}\int_{u=0}^{\min(\Delta-x_0-\varepsilon,\Delta-x-\varepsilon)} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u \wrt x\Bigg|\nonumber
-		\\&\qquad {}+\Bigg|\int_{x=0}^{\Delta-\varepsilon}\int_{u=\Delta-x_0+\varepsilon}^{\Delta-x-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u \nonumber 
-		\\&\qquad\qquad \times1(\Delta-x_0+\varepsilon\leq \Delta - x -\varepsilon)\wrt x\Bigg|\nonumber
-		\\&\qquad {}+\Bigg|\int_{x=0}^{\Delta-\varepsilon}\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u \nonumber
-		\\&\qquad\qquad \times 1(\Delta-x_0-\varepsilon\leq \Delta - x -\varepsilon < \Delta-x_0+\varepsilon)\wrt x\Bigg|   \label{eqn: LLkkK}
-	\end{align}
+	
 	Since \(|\psi|\leq F\), the second and third terms in (\ref{eqn: LLkkK}) are less than or equal to 
 	\begin{align}
 		&\int_{x=0}^{\Delta-\varepsilon}\int_{u=0}^{\min(\Delta-x_0-\varepsilon,\Delta-x-\varepsilon)} \bs k(x_0)e^{\bs Su}\bs s  \wrt u \wrt xGF \nonumber
@@ -239,75 +314,75 @@ In practice, it may be possible to avoid this issue by choosing the intervals \(
 \end{proof}  
 
 \subsection{One integral}
-\begin{lem} \label{lem:tttttt}
-	Let \(g\) satisfy the Assumptions \ref{asu: g} and \(x_0\in(2\varepsilon,\Delta-\varepsilon)\). Then
-	\begin{align}
-		\left|\int_{x=0}^\infty \bs k(x_0)\bs De^{\bs Sx}g(x)\bs s\wrt x - g(x_0)\right| \leq \cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}4G + 3L\varepsilon+6G\cfrac{\var(Z)}{\varepsilon^2}.
-	\end{align}
-\end{lem}
-\begin{proof}
-	First rewrite the left-hand side as 
-	\begin{align}
-%		\left|\int_{x=0}^\infty \bs k(x_0)\bs De^{\bs Sx}g(x)\bs s\wrt x - g(x_0)\right| 
-		\left|\int_{x=0}^\infty \bs k(x_0)\bs De^{\bs Sx}(g(x)-g(x_0))\bs s\wrt x \right|
-		%
-		&\leq \int_{x=0}^\infty \bs k(x_0)\bs De^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x.
-	\end{align}
-	Substituting in the expression for \(\bs D\) gives,
-	\begin{align}
-		&\int_{x=0}^\infty \bs k(x_0)\int_{u=0}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x  \nonumber 
-%		\\&= \int_{x=0}^\infty \bs k(x_0)\int_{u=0}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x 
-		%
-		\\&= \int_{x=0}^\infty \bs k(x_0)\int_{u=0}^{\Delta-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x \nonumber
-		\\&\quad {} + \int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-\varepsilon}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x \label{eqn: 2nd here}
-	\end{align}
-	Since \(g\) is bounded, the second term is less than or equal to 
-	\begin{align}
-		\int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-\varepsilon}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}\bs s\wrt x 2G \nonumber
-		&= \bs k(x_0)\int_{u=\Delta-\varepsilon}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u \bs e 2G \nonumber
-		\\&= \bs k(x_0)\int_{u=\Delta-\varepsilon}^\infty e^{\bs Su}\bs s \wrt u2G \nonumber
-		\\&= \cfrac{\mathbb P(Z\geq x_0+\Delta-\varepsilon)}{\mathbb P(Z>x_0)}2G \label{eqn" dgkjlwerhv}
-	\end{align}
-	For \(x_0\in(2\varepsilon,\Delta-\varepsilon),\) then (\ref{eqn" dgkjlwerhv}) is less than or equal to 
-	\[\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}2G.\]
+% \begin{lem} \label{lem:tttttt}
+% 	Let \(g\) satisfy the Assumptions \ref{asu: g} and \(x_0\in(2\varepsilon,\Delta-\varepsilon)\). Then
+% 	\begin{align}
+% 		\left|\int_{x=0}^\infty \bs k(x_0)\bs De^{\bs Sx}g(x)\bs s\wrt x - g(x_0)\right| \leq \cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}4G + 3L\varepsilon+6G\cfrac{\var(Z)}{\varepsilon^2}.
+% 	\end{align}
+% \end{lem}
+% \begin{proof}
+% 	First rewrite the left-hand side as 
+% 	\begin{align}
+% %		\left|\int_{x=0}^\infty \bs k(x_0)\bs De^{\bs Sx}g(x)\bs s\wrt x - g(x_0)\right| 
+% 		\left|\int_{x=0}^\infty \bs k(x_0)\bs De^{\bs Sx}(g(x)-g(x_0))\bs s\wrt x \right|
+% 		%
+% 		&\leq \int_{x=0}^\infty \bs k(x_0)\bs De^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x.
+% 	\end{align}
+% 	Substituting in the expression for \(\bs D\) gives,
+% 	\begin{align}
+% 		&\int_{x=0}^\infty \bs k(x_0)\int_{u=0}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x  \nonumber 
+% %		\\&= \int_{x=0}^\infty \bs k(x_0)\int_{u=0}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x 
+% 		%
+% 		\\&= \int_{x=0}^\infty \bs k(x_0)\int_{u=0}^{\Delta-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x \nonumber
+% 		\\&\quad {} + \int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-\varepsilon}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x \label{eqn: 2nd here}
+% 	\end{align}
+% 	Since \(g\) is bounded, the second term is less than or equal to 
+% 	\begin{align}
+% 		\int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-\varepsilon}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}\bs s\wrt x 2G \nonumber
+% 		&= \bs k(x_0)\int_{u=\Delta-\varepsilon}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u \bs e 2G \nonumber
+% 		\\&= \bs k(x_0)\int_{u=\Delta-\varepsilon}^\infty e^{\bs Su}\bs s \wrt u2G \nonumber
+% 		\\&= \cfrac{\mathbb P(Z\geq x_0+\Delta-\varepsilon)}{\mathbb P(Z>x_0)}2G \label{eqn" dgkjlwerhv}
+% 	\end{align}
+% 	For \(x_0\in(2\varepsilon,\Delta-\varepsilon),\) then (\ref{eqn" dgkjlwerhv}) is less than or equal to 
+% 	\[\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}2G.\]
 	
-	As for the first term in (\ref{eqn: 2nd here}), it can be written as 
-	\begin{align}
-		&\int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-x_0-\varepsilon}^{u=\Delta-x_0+\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x) - g(x_0)|\bs s\wrt x \nonumber
-		%
-		\\&\qquad{}+\int_{x=0}^\infty \bs k(x_0)\int_{u=0}^{\Delta-x_0-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x) - g(x_0)|\bs s\wrt x \nonumber
-		%
-		\\&\qquad{}+\int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-x_0+\varepsilon}^{\Delta-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x) - g(x_0)|\bs s\wrt x. \label{eqn: 201}
-	\end{align}
-	Since \(g\) is bounded, then the last two terms in (\ref{eqn: 201}) are 
-	\begin{align}
-		&2G\Bigg(\int_{x=0}^\infty \bs k(x_0)\int_{u=0}^{\Delta-x_0-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}\bs s\wrt x \nonumber
-		%
-		\\&\qquad{}+\int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-x_0+\varepsilon}^{\Delta-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}\bs s\wrt x\Bigg) \nonumber 
-		%
-		\\&=2G\Bigg(\bs k(x_0)\int_{u=0}^{\Delta-x_0-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e}  \bs e  \wrt u\nonumber
-		%
-		+ \bs k(x_0)\int_{u=\Delta-x_0+\varepsilon}^{\Delta-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \bs e\wrt u \Bigg) \nonumber
-		%
-		\\&=2G \cfrac{\mathbb P(Z>x_0, Z\notin(\Delta-\varepsilon, \Delta+\varepsilon))}{\mathbb P(Z>x_0)}  \nonumber 
-		%
-		\\&\leq 2G\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2},
-	\end{align}
-	provided that \(x_0\in[0,\Delta-\varepsilon)\). 
-	Exchanging the order of integration for the first term in (\ref{eqn: 201})
-	\begin{align}
-		\int_{u=\Delta-x_0-\varepsilon}^{u=\Delta-x_0+\varepsilon} \bs k(x_0) e^{\bs Su}\bs s\int_{x=0}^\infty \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x \wrt u \label{eqn: fdk13897}
-	\end{align}
-	from which we see that we can apply Corollary~\ref{cor: cond bnd} to the integral over \(x\), implying that (\ref{eqn: fdk13897}) is less than or equal to
-	\begin{align}
-		\int_{u=\Delta-x_0-\varepsilon}^{u=\Delta-x_0+\varepsilon} \bs k(x_0) e^{\bs Su}\bs s\left(|g(\Delta-u)-g(x_0)|+6G\cfrac{\var(Z)}{\varepsilon^2} + 2 L \varepsilon\right)\wrt u. \label{eqn: sdkagh lkhvasfv}
-	\end{align}
-	Since \(g\) is Lipschitz, then (\ref{eqn: sdkagh lkhvasfv}) is less than or equal to 
-	\begin{align}
-		\int_{u=\Delta-x_0-\varepsilon}^{u=\Delta-x_0+\varepsilon} \bs k(x_0) e^{\bs Su}\bs s\left(L\varepsilon+6G\cfrac{\var(Z)}{\varepsilon^2} + 2 L \varepsilon\right)\wrt u \leq L\varepsilon+6G\cfrac{\var(Z)}{\varepsilon^2} + 2 L \varepsilon. \label{eqn: sdkagh lsfv}
-	\end{align}
-	Putting all the bounds together proves the result. 
-\end{proof}
+% 	As for the first term in (\ref{eqn: 2nd here}), it can be written as 
+% 	\begin{align}
+% 		&\int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-x_0-\varepsilon}^{u=\Delta-x_0+\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x) - g(x_0)|\bs s\wrt x \nonumber
+% 		%
+% 		\\&\qquad{}+\int_{x=0}^\infty \bs k(x_0)\int_{u=0}^{\Delta-x_0-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x) - g(x_0)|\bs s\wrt x \nonumber
+% 		%
+% 		\\&\qquad{}+\int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-x_0+\varepsilon}^{\Delta-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x) - g(x_0)|\bs s\wrt x. \label{eqn: 201}
+% 	\end{align}
+% 	Since \(g\) is bounded, then the last two terms in (\ref{eqn: 201}) are 
+% 	\begin{align}
+% 		&2G\Bigg(\int_{x=0}^\infty \bs k(x_0)\int_{u=0}^{\Delta-x_0-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}\bs s\wrt x \nonumber
+% 		%
+% 		\\&\qquad{}+\int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-x_0+\varepsilon}^{\Delta-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}\bs s\wrt x\Bigg) \nonumber 
+% 		%
+% 		\\&=2G\Bigg(\bs k(x_0)\int_{u=0}^{\Delta-x_0-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e}  \bs e  \wrt u\nonumber
+% 		%
+% 		+ \bs k(x_0)\int_{u=\Delta-x_0+\varepsilon}^{\Delta-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \bs e\wrt u \Bigg) \nonumber
+% 		%
+% 		\\&=2G \cfrac{\mathbb P(Z>x_0, Z\notin(\Delta-\varepsilon, \Delta+\varepsilon))}{\mathbb P(Z>x_0)}  \nonumber 
+% 		%
+% 		\\&\leq 2G\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2},
+% 	\end{align}
+% 	provided that \(x_0\in[0,\Delta-\varepsilon)\). 
+% 	Exchanging the order of integration for the first term in (\ref{eqn: 201})
+% 	\begin{align}
+% 		\int_{u=\Delta-x_0-\varepsilon}^{u=\Delta-x_0+\varepsilon} \bs k(x_0) e^{\bs Su}\bs s\int_{x=0}^\infty \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x \wrt u \label{eqn: fdk13897}
+% 	\end{align}
+% 	from which we see that we can apply Corollary~\ref{cor: cond bnd} to the integral over \(x\), implying that (\ref{eqn: fdk13897}) is less than or equal to
+% 	\begin{align}
+% 		\int_{u=\Delta-x_0-\varepsilon}^{u=\Delta-x_0+\varepsilon} \bs k(x_0) e^{\bs Su}\bs s\left(|g(\Delta-u)-g(x_0)|+6G\cfrac{\var(Z)}{\varepsilon^2} + 2 L \varepsilon\right)\wrt u. \label{eqn: sdkagh lkhvasfv}
+% 	\end{align}
+% 	Since \(g\) is Lipschitz, then (\ref{eqn: sdkagh lkhvasfv}) is less than or equal to 
+% 	\begin{align}
+% 		\int_{u=\Delta-x_0-\varepsilon}^{u=\Delta-x_0+\varepsilon} \bs k(x_0) e^{\bs Su}\bs s\left(L\varepsilon+6G\cfrac{\var(Z)}{\varepsilon^2} + 2 L \varepsilon\right)\wrt u \leq L\varepsilon+6G\cfrac{\var(Z)}{\varepsilon^2} + 2 L \varepsilon. \label{eqn: sdkagh lsfv}
+% 	\end{align}
+% 	Putting all the bounds together proves the result. 
+% \end{proof}
 
 %\begin{lem}
 %	Let \(f:[0,\Delta)\to \mathbb R\) be any bounded, Lipschitz continuous function with \(|\psi(x)|\leq F\). Then for \(u\leq \Delta-\varepsilon\), \(v\in[0,\Delta)\)
