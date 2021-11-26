@@ -1,6 +1,6 @@
 %!TEX root = ../thesis.tex
 \chapter{Convergence without ephemeral phases\label{app:extend conv}}
-For completeness, we include here proof of the convergence of the QBD-RAP scheme to the fluid queue without the need for the ephemeral initial states.
+For completeness, we include here results needed to prove the convergence of the convergence of the QBD-RAP scheme to the fluid queue without the need for the ephemeral initial states. Note that we only need to prove that the convergence up to, and at, the time of the first change of level of the QBD-RAP. 
 
 For \(\varphi(0)=k\in\mathcal S_{-0}\) (or \(\varphi(0)=k\in\mathcal S_{+0}\)) the added complexity comes from the fact that it is possible that, upon the phase process first leaving \(\mathcal S_{-0}\) (\(\mathcal S_{+0}\)) the phase transitions to a state in \(\mathcal S_+\) (\(\mathcal S_-\)). Since the orbit of the QBD-RAP is constant on \(\varphi(t)\in\mathcal S_{-0}\) (\(\varphi(t)\in\mathcal S_{+0}\)), then upon a first transition out of \(\mathcal S_{-0}\) (\(\mathcal S_{+0}\)) and into \(\mathcal S_+\) (\(\mathcal S_-\)) the orbit jumps to \(\bs   a_{\ell_0,i}^{(p)}(x_0)\bs D^{(p)}\). For \(k\in\mathcal S_{-0}\), \(m\geq 0\), the corresponding Laplace transform of the QBD-RAP is
 \begin{align}
@@ -114,7 +114,7 @@ Theorem~\ref{thm: a thm2!} below is analogous to Theorem~\ref{thm: a thm!} and p
 \end{proof}
 
 \section{Technical results}
-As in Appendix~\ref{app:tand}, we treat the cases of \(m=0\) and \(m\geq 1\) seperately. We start with the case \(m=0\). The following result is analgous to Lemma~\ref{lem: Dcoajc}, though the proof is somewhat more tedious. 
+As we did in Appendix~\ref{app:tand}, we treat the cases of no changes, and \(m\geq 1\) changes, of phase from \(\calS_+\) to \(\calS_-\) and \(\calS_-\) to \(\calS_+\) seperately. We start with the \emph{no changes} case. The following result is analgous to Lemma~\ref{lem: Dcoajc}, though the proof is somewhat more tedious. 
 
 \begin{lem}\label{lem: ppp}
 	Let \(\psi:\calD_{\ell_0}\to \mathbb R\) be bounded \(|\psi(x)|\leq F\) and Lipschitz continuous function and let \(\lambda >0\). For \(i\in\mathcal S_-,j\in\mathcal S_-\cup\calS_{-0}\), \(x_0\in(0,\Delta)\), 
@@ -211,8 +211,15 @@ As in Appendix~\ref{app:tand}, we treat the cases of \(m=0\) and \(m\geq 1\) sep
 	\[|d_7|=\left| \int_{x=0}^{x_0-2\varepsilon} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x\mathbb P(|Z-\Delta|> \varepsilon\mid Z>x_0)\right|.\]
 	We show later that \(|d_7|\) can be made arbitrarily small by choosing \(Z\) with sufficiently small variance.
 
+	Since \(h_{ij}^{--}\) is Lipschitz and \(|(\Delta-u-x)-(x_0-x)|\leq 2\varepsilon\) for all \(u\in(\Delta-x_0-\varepsilon,\Delta-x_0+\varepsilon)\), then the first absolute value of (\ref{eqn: ajkhvakjhdannvnnvnvn}) is less than or equal to 
+	\begin{align}
+		&\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \wrt u 2L\varepsilon \int_{x=0}^{x_0-2\varepsilon} \left|\psi(x)\right|\wrt x. \label{eqn: the last one?}
+	\end{align}
+	Now, \(\displaystyle \int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \wrt u\leq 1\) as it is a probability, and \(\displaystyle \int_{x=0}^{x_0-2\varepsilon} \left|\psi(x)\right|\wrt x \leq F\Delta\) as \(|\psi|\leq F\) and \(x_0\in(2\varepsilon,\Delta-\varepsilon)\). Therefore, (\ref{eqn: the last one?}) is less than or equal to \(2\varepsilon LF\Delta.\)
+
 	What remains is to bound the terms \(|d_\ell|,\, \ell=1,\dots,7\). 
 	
+	%% d1 %%
 	Since \(|\psi|\leq F\) then 
 	\begin{align}
 		|d_1|&\leq \left|\int_{u=\Delta-\varepsilon}^\infty \bs k(x_0)e^{\bs Su}\bs s \int_{x=0}^{\Delta}  \int_{x_1=0}^\infty \bs k(u)  e^{\bs S x_1} {\bs v}(x) h_{ij}^{--}(\lambda, x_1)  \wrt x_1 \wrt x \wrt u\right|F.\label{eqn:  CVBNM}
@@ -231,267 +238,102 @@ As in Appendix~\ref{app:tand}, we treat the cases of \(m=0\) and \(m\geq 1\) sep
 	\end{align}
 	by Chebyshev's inequality, since \(x_0\in(2\varepsilon,\Delta-\varepsilon)\). 
 
-	Since \(h_{ij}^{--}\) is Lipschitz and \(|(\Delta-u-x)-(x_0-x)|\leq 2\varepsilon\) for all \(u\in(\Delta-x_0-\varepsilon,\Delta-x_0+\varepsilon)\), then the first absolute value of (\ref{eqn: ajkhvakjhdannvnnvnvn}) is less than or equal to 
+	%% d2 %% 
+	Since \(|\psi(x)|\leq F\), then
 	\begin{align}
-		&\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \wrt u 2L\varepsilon \int_{x=0}^{x_0-2\varepsilon} \left|\psi(x)\right|\wrt x. \label{eqn: the last one?}
+		|d_2| &\leq \left| \int_{x=0}^{\Delta}\int_{u=0}^{\Delta-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s r_{\bs v}(u,x) \wrt u \wrt x \right|F
+		%
+		\\&\leq \left| \int_{u=0}^{\Delta-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s  \wrt u \right|R_{\bs v,2}F
+		%
+		\\&\leq R_{\bs v,2}F,
 	\end{align}
-	Now, \(\displaystyle \int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \wrt u\leq 1\) as it is a probability, and \(\displaystyle \int_{x=0}^{x_0-2\varepsilon} \left|\psi(x)\right|\wrt x \leq F\Delta\) as \(|\psi|\leq F\) and \(x_0\in(2\varepsilon,\Delta-\varepsilon)\). Therefore, (\ref{eqn: the last one?}) is less than or equal to \(2\varepsilon LF\Delta.\)
+	where the first inequality holds from Property~\ref{properties: 2}, and the last inequality holds since \(\int_{u=0}^{\Delta-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s  \wrt u=\mathbb P(Z\in (x_0,x_0+\Delta-\varepsilon)\mid Z>x_0)\leq 1\). 
+	
+	%% d3 %%
+	Since \(|\psi(x)|\leq F\) and \(h_{ij}^{--}(\lambda,\Delta-u-x)\leq G\), then
+	\begin{align}
+		|d_3|&\leq \int_{u=0}^{\min(\Delta-x_0-\varepsilon,\Delta-x-\varepsilon)} \bs k(x_0)e^{\bs Su}\bs s \wrt u \Delta GF
+		\\ &\leq \mathbb P(Z\leq\Delta-\varepsilon \mid Z>x_0) \wrt u \Delta GF\nonumber
+		\\ &\leq \cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2} \Delta GF,\nonumber
+	\end{align}
+	where the last inequality holds from Chebyshev's inequality. 
+	
+	%% d4 %%
+	Similarly, since \(|\psi(x)|\leq F\) and \(h_{ij}^{--}(\lambda,\Delta-u-x)\leq G\), then
+	\begin{align} 
+		|d_4|&\leq \int_{x=0}^{x_0-2\varepsilon}\int_{u=\Delta-x_0+\varepsilon}^{\Delta-x-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \wrt u \wrt x GF \nonumber
+			\\& = \int_{x=0}^{x_0-2\varepsilon}\mathbb P(Z\in[\Delta+\varepsilon, \Delta-x-\varepsilon + x_0]\mid Z>x_0) \wrt x GF \nonumber
+			\\& \leq \int_{x=0}^{x_0-2\varepsilon}\mathbb P(Z\in[\Delta+\varepsilon, \Delta-\varepsilon + x_0]\mid Z>x_0) \wrt x GF \nonumber
+			\\& \leq \mathbb P(Z\in[\Delta+\varepsilon, \Delta-\varepsilon + x_0]\mid Z>x_0)  \Delta GF \nonumber
+			\\& \leq \cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2} \Delta GF \nonumber
+	\end{align}
 
-	Since \(|\psi(x)|\leq F\) and \(|h_{ij}^{--}(\lambda,x)|\leq G\), the third term in (\ref{eqn: llllL}) is less than or equal to 
-	\begin{align}
-		&\int_{x_1=0}^\infty \int_{x=0}^{\Delta}\int_{u= \Delta-\varepsilon}^\infty  \bs k(x_0)e^{\bs Su}\bs s \bs k(u) \wrt u e^{\bs S x_1} {\bs v}(x) \wrt x \wrt x_1G F.\label{eqn: a big lola}
-	\end{align} 
-	Computing the integral over \(x_1\) in (\ref{eqn: a big lola}) gives
-	\begin{align}
-		& \int_{x=0}^{\Delta}\int_{u= \Delta-\varepsilon}^\infty  \bs k(x_0)e^{\bs Su}\bs s \bs k(u) \wrt u (-\bs S)^{-1}{\bs v}(x) \wrt x G F\nonumber
-		%
-		\\&\leq  \int_{x=0}^{\Delta}\int_{u= \Delta-\varepsilon}^\infty  \bs k(x_0)e^{\bs Su}\bs s \wrt u \wrt x G_{\bs v} G F \nonumber
-		%
-		\\&= \int_{u= \Delta-\varepsilon}^\infty  \bs k(x_0)e^{\bs Su}\bs s  \wrt u\Delta G_{\bs v} G F.\label{eqn: google the yes}
+	%% d5 %%
+	Since \(|\psi(x)|\leq F\) and \(h_{ij}^{--}(\lambda,\Delta-u-x)\leq G\), then
+	\begin{align} 
+		|d_5|&\leq \int_{x=0}^{\Delta-\varepsilon}\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \wrt u 1(x\in[x_0,x_0-2\varepsilon))\wrt xGF
+		\\&\leq \int_{x=0}^{\Delta-\varepsilon} 1(x\in[x_0,x_0-2\varepsilon))\wrt xGF  \nonumber 
+		\\&= 2\varepsilon GF,  \nonumber 
 	\end{align}
-	since, by property \ref{properties: 1}, \(\bs k(u)(-\bs S)^{-1}{\bs v}(x)\leq \bs k(u)\bs e G_{\bs v}=G_{\bs v}\). The bound (\ref{eqn: google the yes}) is equal to 
-	\begin{align}
-		\Delta \mathbb P(Z>x_0 + \Delta-\varepsilon) \wrt x G_{\bs v} G F
-		\leq  \Delta \cfrac{\var(Z)}{(x_0-\varepsilon)^2} G_{\bs v} G F, \label{eqn: JjJ}
-	\end{align}
-	by Chebyshev's inequality. 
+	where the second inequality holds since \(\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \wrt u\leq 1\).
 	
-	The first and second terms in (\ref{eqn: llllL}) are
+	%% d6 %% 
+	Since \(|\psi(x)|\leq F\) and \(h_{ij}^{--}(\lambda,\Delta-u-x)\leq G\), then
+	\begin{align}
+		&|d_6| \leq \int_{x=x_0-2\varepsilon}^{x_0} \wrt x GF\nonumber 
+		\\&= 2\varepsilon GF.
+	\end{align}
 	
-	where the first equality holds from Property \ref{properties: 2}. The last term in (\ref{eqn: aKK}) is less than or equal to 
+	%% d7 %% 
+	Since \(|\psi(x)|\leq F\) and \(h_{ij}^{--}(\lambda,\Delta-u-x)\leq G\) then
 	\begin{align}
-		\int_{u=0}^{\Delta-\varepsilon} \bs k(x_0)e^{\bs Su} \int_{x=0}^{\Delta} \bs s \left|r_{\bs v}(u,x)\right|\wrt x \wrt u F 
-		%
-		&\leq \int_{u=0}^{\Delta-\varepsilon} \bs k(x_0)e^{\bs Su} \bs sR_{{\bs v},2} \wrt u F \nonumber 
-		%
-		\\&\leq R_{{\bs v},2} F, \label{eqn: HhHj}
+		|d_7|&\leq \mathbb P(|Z-\Delta|> \varepsilon\mid Z>x_0)\Delta GF
+		\\&\leq \cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}\Delta GF
 	\end{align}
-	by Property \ref{properties: 2}. The first two terms in (\ref{eqn: aKK}) are 
 	
-	Since \(|\psi|\leq F\), the second and third terms in (\ref{eqn: LLkkK}) are less than or equal to 
-	\begin{align}
-		&\int_{x=0}^{\Delta-\varepsilon}\int_{u=0}^{\min(\Delta-x_0-\varepsilon,\Delta-x-\varepsilon)} \bs k(x_0)e^{\bs Su}\bs s  \wrt u \wrt xGF \nonumber
-		\\&\qquad {}+\int_{x=0}^{\Delta-\varepsilon}\int_{u=\Delta-x_0+\varepsilon}^{\Delta-x-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s  \wrt u 1(\Delta-x_0+\varepsilon\leq \Delta - x -\varepsilon)\wrt x GF \nonumber
-		\\&\leq \int_{x=0}^{\Delta-\varepsilon}\int_{u=0}^{\Delta-x_0-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s  \wrt u \wrt xGF \nonumber
-		\\&\qquad {}+\int_{x=0}^{\Delta-\varepsilon}\int_{u=\Delta-x_0+\varepsilon}^{\infty} \bs k(x_0)e^{\bs Su}\bs s  \wrt u 1(\Delta-x_0+\varepsilon\leq \Delta - x -\varepsilon)\wrt x GF \nonumber
-		\\&\leq\Delta\int_{u=0}^{\Delta-x_0-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s  \wrt u \wrt xGF 
-		+ \Delta \int_{u=\Delta-x_0+\varepsilon}^{\infty} \bs k(x_0)e^{\bs Su}\bs s  \wrt u GF \nonumber
-		\\&\leq \Delta \cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}GF. \label{eqn:aaAAAAd}
-	\end{align}
-	Since \(\displaystyle \int_{u=\Delta-x_0-\varepsilon}^{\Delta-x-\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \leq 1\), the last term in (\ref{eqn: LLkkK}) is less than or equal to 
-	\begin{align}
-		&\int_{x=0}^{\Delta-\varepsilon}GF \wrt u 
-		 1(\Delta-x_0-\varepsilon\leq \Delta - x -\varepsilon < \Delta-x_0+\varepsilon)\wrt x =2\varepsilon GF. \label{eqn:Qwe}
-	\end{align}
-	Now consider the difference in the first absolute value in (\ref{eqn: LLkkK}),
-	\begin{align}
-		&\Bigg|\int_{x=0}^{\Delta-\varepsilon}\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u 1(x\leq x_0-2\varepsilon) \wrt x \nonumber
-		\\&{}\qquad {} - \int_{x=0}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg|\nonumber
-		%
-		\\&\leq \Bigg|\int_{x=0}^{ x_0-2\varepsilon }\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s h_{ij}^{--}(\lambda, \Delta - u - x) \psi(x) \wrt u  \wrt x \nonumber
-		\\&{}\qquad {} - \int_{x=0}^{x_0-2\varepsilon} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x\Bigg| + \Bigg| \int_{x=x_0-2\varepsilon}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x\Bigg| \nonumber
-		%
-		\\&\leq  \int_{x=0}^{ x_0-2\varepsilon }\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s \Bigg| h_{ij}^{--}(\lambda, \Delta - u - x) - h_{ij}^{--}(\lambda, x_0 - x) \Bigg| \wrt u \left|\psi(x)\right| \wrt x  \nonumber
-		\\&{}\qquad {} + \Bigg| \int_{x=0}^{x_0-2\varepsilon} h_{ij}^{--}(\lambda, x_0 - x)\psi(x) \wrt x \mathbb P(|Z-\Delta|>\varepsilon)\Bigg| \nonumber 
-		\\&\qquad{} + \Bigg|\int_{x=x_0-2\varepsilon}^{x_0} h_{ij}^{--}(\lambda, x_0 - x)\psi(x)\wrt x \Bigg| \nonumber
-		%
-		\\&\leq \int_{x=0}^{ x_0-2\varepsilon }\int_{u=\Delta-x_0-\varepsilon}^{\Delta-x_0+\varepsilon} \bs k(x_0)e^{\bs Su}\bs s L\varepsilon  \wrt u \left|\psi(x)\right| \wrt x \nonumber
-		+\Delta GF \cfrac{\var(Z)}{\varepsilon^2} + 2\varepsilon GF
-		%
-		\\&\leq \Delta L\varepsilon   F 
-		+\Delta GF \cfrac{\var(Z)}{\varepsilon^2} + 2\varepsilon GF.\label{eqn: LLLaase}
-	\end{align}
-	In summary, we have shown 
-	\begin{align}
-		&\Bigg|\int_{x_1=0}^\infty \int_{x=0}^{\Delta}\bs k^{(p)}(x_0) \bs D^{(p)} e^{\bs S^{(p)} x_1} {\bs v}^{(p)}(x) h_{ij}^{--}(\lambda, x_1) \psi(x) \wrt x \wrt x_1 \nonumber
-		\\&\qquad{}- \int_{x=0}^{x_0} h_{ij}^{--}(\lambda,x_0-x)\psi(x)\wrt x \Bigg| \nonumber 
-		%
-		\\& \leq  \Delta L\varepsilon^{(p)}   F 
-		+\Delta GF \cfrac{\var(Z^{(p)})}{\left(\varepsilon^{(p)}\right)^2} + 4\varepsilon^{(p)} GF + \Delta \cfrac{\var(Z^{(p)})/\left(\varepsilon^{(p)}\right)^2}{1-\var(Z^{(p)})/\left(\varepsilon^{(p)}\right)^2}GF + R_{{\bs v},2}^{(p)} F \nonumber
-		\\&\qquad{} +  \Delta \cfrac{\var(Z^{(p)})}{(x_0-\varepsilon^{(p)})^2} G_{\bs v} G F.
-	\end{align}
-	The result follows upon choosing \(\varepsilon^{(p)}=\var(Z^{(p)})^{1/3}\) and letting \(p\to\infty\). 
+	Convergence follows after setting \(\varepsilon^{(p)}=\var(Z^{(p)})^{1/3}\) and observing that all the bounds \(|d_1|,\dots,|d_7|\) tend to 0, as does the bound on (\ref{eqn: the last one?}), given by \(2\varepsilon^{(p)}LF\Delta\), as \(p\to\infty\). 
 \end{proof}  
 
-\subsection{One integral}
-% \begin{lem} \label{lem:tttttt}
-% 	Let \(g\) satisfy the Assumptions \ref{asu: g} and \(x_0\in(2\varepsilon,\Delta-\varepsilon)\). Then
-% 	\begin{align}
-% 		\left|\int_{x=0}^\infty \bs k(x_0)\bs De^{\bs Sx}g(x)\bs s\wrt x - g(x_0)\right| \leq \cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}4G + 3L\varepsilon+6G\cfrac{\var(Z)}{\varepsilon^2}.
-% 	\end{align}
-% \end{lem}
-% \begin{proof}
-% 	First rewrite the left-hand side as 
-% 	\begin{align}
-% %		\left|\int_{x=0}^\infty \bs k(x_0)\bs De^{\bs Sx}g(x)\bs s\wrt x - g(x_0)\right| 
-% 		\left|\int_{x=0}^\infty \bs k(x_0)\bs De^{\bs Sx}(g(x)-g(x_0))\bs s\wrt x \right|
-% 		%
-% 		&\leq \int_{x=0}^\infty \bs k(x_0)\bs De^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x.
-% 	\end{align}
-% 	Substituting in the expression for \(\bs D\) gives,
-% 	\begin{align}
-% 		&\int_{x=0}^\infty \bs k(x_0)\int_{u=0}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x  \nonumber 
-% %		\\&= \int_{x=0}^\infty \bs k(x_0)\int_{u=0}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x 
-% 		%
-% 		\\&= \int_{x=0}^\infty \bs k(x_0)\int_{u=0}^{\Delta-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x \nonumber
-% 		\\&\quad {} + \int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-\varepsilon}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x \label{eqn: 2nd here}
-% 	\end{align}
-% 	Since \(g\) is bounded, the second term is less than or equal to 
-% 	\begin{align}
-% 		\int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-\varepsilon}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}\bs s\wrt x 2G \nonumber
-% 		&= \bs k(x_0)\int_{u=\Delta-\varepsilon}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u \bs e 2G \nonumber
-% 		\\&= \bs k(x_0)\int_{u=\Delta-\varepsilon}^\infty e^{\bs Su}\bs s \wrt u2G \nonumber
-% 		\\&= \cfrac{\mathbb P(Z\geq x_0+\Delta-\varepsilon)}{\mathbb P(Z>x_0)}2G \label{eqn" dgkjlwerhv}
-% 	\end{align}
-% 	For \(x_0\in(2\varepsilon,\Delta-\varepsilon),\) then (\ref{eqn" dgkjlwerhv}) is less than or equal to 
-% 	\[\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}2G.\]
+	Now we show bounds for certain Laplace transform expressions which arise when the QBD-RAP starts in phases in \(\calS_{+0}\cup\calS_{-0}\) and there is more than one change from \(\calS_+\) to \(\calS_-\) or \(\calS_-\) to \(\calS_+\) before the first change of level. These expressions have the form
+	\begin{align}
+		\int_{x_1=0}^\infty g_1(x_1) \bs k(x_0) \bs D e^{\bs{S}x_1}\wrt x_1\bs D 
+            	\left[\prod_{n=2}^{k-1}\int_{x_n=0}^\infty g_n(x_n) e^{\bs{S}x_n} \wrt x_n
+		\bs D\right]
+            	\int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n {\bs v}(x). \label{eqn: c30}
+	\end{align}
+	Here, we ultimately wish to show that (\ref{eqn: c30}) converges to \(g_{1,n}^*(\Delta-x_0,x)\). We do not do this directly, instead, we show that (\ref{eqn: c30}) is `close' to \(w_n(\Delta-x_0,x)\), then rely on the results from Appendix~\ref{app:tand} to get the desired convergence. 
 	
-% 	As for the first term in (\ref{eqn: 2nd here}), it can be written as 
-% 	\begin{align}
-% 		&\int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-x_0-\varepsilon}^{u=\Delta-x_0+\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x) - g(x_0)|\bs s\wrt x \nonumber
-% 		%
-% 		\\&\qquad{}+\int_{x=0}^\infty \bs k(x_0)\int_{u=0}^{\Delta-x_0-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x) - g(x_0)|\bs s\wrt x \nonumber
-% 		%
-% 		\\&\qquad{}+\int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-x_0+\varepsilon}^{\Delta-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x) - g(x_0)|\bs s\wrt x. \label{eqn: 201}
-% 	\end{align}
-% 	Since \(g\) is bounded, then the last two terms in (\ref{eqn: 201}) are 
-% 	\begin{align}
-% 		&2G\Bigg(\int_{x=0}^\infty \bs k(x_0)\int_{u=0}^{\Delta-x_0-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}\bs s\wrt x \nonumber
-% 		%
-% 		\\&\qquad{}+\int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-x_0+\varepsilon}^{\Delta-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}\bs s\wrt x\Bigg) \nonumber 
-% 		%
-% 		\\&=2G\Bigg(\bs k(x_0)\int_{u=0}^{\Delta-x_0-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e}  \bs e  \wrt u\nonumber
-% 		%
-% 		+ \bs k(x_0)\int_{u=\Delta-x_0+\varepsilon}^{\Delta-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \bs e\wrt u \Bigg) \nonumber
-% 		%
-% 		\\&=2G \cfrac{\mathbb P(Z>x_0, Z\notin(\Delta-\varepsilon, \Delta+\varepsilon))}{\mathbb P(Z>x_0)}  \nonumber 
-% 		%
-% 		\\&\leq 2G\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2},
-% 	\end{align}
-% 	provided that \(x_0\in[0,\Delta-\varepsilon)\). 
-% 	Exchanging the order of integration for the first term in (\ref{eqn: 201})
-% 	\begin{align}
-% 		\int_{u=\Delta-x_0-\varepsilon}^{u=\Delta-x_0+\varepsilon} \bs k(x_0) e^{\bs Su}\bs s\int_{x=0}^\infty \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x \wrt u \label{eqn: fdk13897}
-% 	\end{align}
-% 	from which we see that we can apply Corollary~\ref{cor: cond bnd} to the integral over \(x\), implying that (\ref{eqn: fdk13897}) is less than or equal to
-% 	\begin{align}
-% 		\int_{u=\Delta-x_0-\varepsilon}^{u=\Delta-x_0+\varepsilon} \bs k(x_0) e^{\bs Su}\bs s\left(|g(\Delta-u)-g(x_0)|+6G\cfrac{\var(Z)}{\varepsilon^2} + 2 L \varepsilon\right)\wrt u. \label{eqn: sdkagh lkhvasfv}
-% 	\end{align}
-% 	Since \(g\) is Lipschitz, then (\ref{eqn: sdkagh lkhvasfv}) is less than or equal to 
-% 	\begin{align}
-% 		\int_{u=\Delta-x_0-\varepsilon}^{u=\Delta-x_0+\varepsilon} \bs k(x_0) e^{\bs Su}\bs s\left(L\varepsilon+6G\cfrac{\var(Z)}{\varepsilon^2} + 2 L \varepsilon\right)\wrt u \leq L\varepsilon+6G\cfrac{\var(Z)}{\varepsilon^2} + 2 L \varepsilon. \label{eqn: sdkagh lsfv}
-% 	\end{align}
-% 	Putting all the bounds together proves the result. 
-% \end{proof}
-
-%\begin{lem}
-%	Let \(f:[0,\Delta)\to \mathbb R\) be any bounded, Lipschitz continuous function with \(|\psi(x)|\leq F\). Then for \(u\leq \Delta-\varepsilon\), \(v\in[0,\Delta)\)
-%	\begin{align}
-%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E[f(\bar X(t))1(\varphi(t)=j, L(t)=\ell_0, L(s)=\ell_0, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid L(0)=\ell_0, \nonumber
-%		\\&\qquad{} \bs A(0)=\bs a_{\ell_0,i}(x_0), \varphi(0)=i]\wrt t \nonumber
-%		\\&= \int_{t=0}^\infty e^{-\lambda t}\mathbb E[\psi(X(t))1(\varphi(t)=j,X(s)\in\calD_{\ell_0}, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid X(0)=x_0, \varphi(0)=i]\wrt t \nonumber
-%		\\&\qquad {} + r_{11}^{(p)}
-%	\end{align}
-%	where 
-%	\[|r_{11}^{(p)}| \leq F R_{{\bs v},2}+ GF\varepsilon.\]
-%\end{lem}
-%\begin{proof}
-%	Assume, without loss of generality \(\ell_0=0\) so \(\calD_{\ell_0}=[0,\Delta]\). First observe that 
-%	\begin{align}
-%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E[f(\bar X(t))1(\varphi(t)=j, L(t)=\ell_0, L(s)=\ell_0, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid L(0)=\ell_0, \nonumber
-%		\\&\qquad{} \bs A(0)=\bs a_{\ell_0,i}(x_0), \varphi(0)=i]\wrt t \nonumber 
-%		\\&= \int_{x_1=0}^\infty \int_{x=[0,\Delta)} \cfrac{\bs \alpha e^{\bs S(x_1+x_0+x)}\bs s}{\bs \alpha e^{\bs S x_0} \bs e}h_{ij}^{++}(\lambda, x_1)f(\Delta-x)\wrt x\wrt x_1
-%	\end{align}
-%	and 
-%	\begin{align}
-%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E[\psi(X(t))1(\varphi(t)=j,X(s)\in\calD_{\ell_0}, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid X(0)=x_0, \varphi(0)=i]\wrt t \nonumber
-%		\\&=  \int_{x=0}^{\Delta-x_0} h_{ij}^{++}(\lambda, x)\psi(X_0 + x)\wrt x
-%	\end{align}
-%	In Property \ref{properties: 2} take \(g(x) = h_{ij}^{--}(\lambda, x)\), which states 
-%	\begin{align}
-%		&\int_{x_1=0}^\infty \int_{x=0}^\Delta\cfrac{\bs \alpha e^{\bs S(x_1+x_0+x)}\bs s}{\bs \alpha e^{\bs S x_0} \bs e}h_{ij}^{++}(\lambda, x_1)f(\Delta-x)\wrt x\wrt x_1 \nonumber
-%		\\& = \int_{x=0}^{\Delta}h_{ij}^{++}(\lambda,\Delta - x_0 - x)1(x+x_0\leq \Delta-\varepsilon)f(\Delta - x)\wrt x + \int_{x=0}^\Delta r_{\bs v}(x_0,x)\psi(x)\wrt x. 
-%	\end{align}
-%	The second term is less than or equal to 
-%	\[F\int_{x=0}^\Delta r_{\bs v}(x_0,x)\wrt x = FR_{{\bs v},1}.\]
-%	The first term is 
-%	\[\int_{x=0}^{\Delta-x_0}h_{ij}^{++}(\lambda,\Delta - x_0 - x)f(\Delta - x)\wrt x - \int_{x=\Delta-x_0-\varepsilon}^{\Delta-x_0}h_{ij}^{++}(\lambda,\Delta - x_0 - x)f(\Delta - x)\wrt x.\]
-%	Now 
-%	\[\int_{x=\Delta-x_0-\varepsilon}^{\Delta-x_0}h_{ij}^{++}(\lambda,\Delta - x_0 - x)f(\Delta - x)\wrt x\leq GF\varepsilon\]
-%	and 
-%	\[\int_{x=0}^{\Delta-x_0}h_{ij}^{++}(\lambda,\Delta - x_0 - x)f(\Delta - x)\wrt x=\int_{x=0}^{\Delta-x_0}h_{ij}^{++}(\lambda,x)\psi(x_0+x)\wrt x.\]
-%\end{proof}
-
-
-%\begin{cor}\label{cor: Dcoajc2222}
-%	Let \(\psi:\calD_{\ell_0}\to \mathbb R\) be bounded, \(|\psi(x)|\leq F\), and Lipschitz continuous. Then, for \(x_0\in(y_{\ell_0}, y_{\ell+1}),\) \(k\in\calS_{0+}\), \(i\in\calS_-\), \(j\in\calS_-\cup\calS_{-0}\), there exists \(r_{10}^{(p)}\to 0\) as \(p \to \infty\), 
-%	\begin{align}
-%		\left|\int_{x\in\calD_{\ell_0}} \widehat f_{0,-0,-}^{\ell_0}(x,i,j;j,x_0)\psi(x)\wrt x  \to \int_{x\in\calD_{\ell_0}} \widehat \mu_{0,-0,-}^{\ell_0}(x,i,j;k,x_0)\psi(x)\wrt x\right|\leq r_{10}^{(p)}.\label{eqn:xvasfv}
-%	\end{align}
-%	Similarly, for \(k\in\calS_{0-}\), \(i\in\calS_+\), \(j\in\calS_+\cup\calS_{+0}\)
-%	\begin{align}
-%		\left|\int_{x\in\calD_{\ell_0}} \widehat f_{0,+0,+}^{\ell_0}(x,i,j;j,x_0)\psi(x)\wrt x  - \int_{x\in\calD_{\ell_0}} \widehat \mu_{0,+0,+}^{\ell_0}(x,i,j;k,x_0)\psi(x)\wrt x\right|\leq r_{10}^{(p)}.\label{eqn:!124msfvcds}
-%	\end{align}
-%\end{cor}
-%\begin{proof}[Proof of Corollary \ref{cor: Dcoajc}]
-%	We show the result for (\ref{eqn:xs}) only, with the result for (\ref{eqn:!124mcds}) following analogously. 
-%	
-%	Observe that, for \(k\in\calS_{0+}\), \(i\in\calS_-\), \(j\in\calS_-\cup\calS_{-0}\), 
-%	\begin{align}
-%		&\int_{x\in\calD_{\ell_0}} \widehat f_{0,-0,-}^{\ell_0,(p)}(x,i,j;j,x_0)\psi(x)\wrt x \nonumber 
-%		%
-%		\\&{}= \vligne{\lambda \bs I - \bs T_{00}}^{-1}_{ki}\int_{x\in\calD_{\ell_0}}\int_{x_1=0}^\infty \bs k(x_0) \bs D e^{\bs S x_1} {\bs v}(x)h_{ij}^{--}(\lambda,x_1)\wrt x_1\psi(x)\wrt x,
-%	\end{align}
-%	and 
-%	\begin{align}
-%		\int_{x\in\calD_{\ell_0}} \widehat \mu_{0,-0,-}^{\ell_0}(x,i,j;k,x_0)\psi(x)\wrt x \nonumber  = \vligne{\lambda \bs I - \bs T_{00}}^{-1}_{ki}\int_{x=0}^{x_0} h_{ij}^{--}(\lambda,x_0-x)\psi(x)\wrt x 
-%	\end{align}
-%	These terms appear in the proof of Corollary~\ref{lem: ppp} and using arguments applied there we can show
-%	\begin{align}
-%		\int_{x\in\calD_{\ell_0}} \widehat f_{0,-0,-}^{\ell_0,(p)}(x,i,j;j,x_0)\psi(x)\wrt x  \to \int_{x\in\calD_{\ell_0}} \widehat \mu_{0,-0,-}^{\ell_0}(x,i,j;k,x_0)\psi(x)\wrt x ,\label{eqn:xssgwg}
-%	\end{align}
-%	and therefore there exists a bound \(r_{10}^{(p)}\) such that 
-%	\[\left|\int_{x\in\calD_{\ell_0}} \widehat f_{0,-0,-}^{\ell_0,(p)}(x,i,j;j,x_0)\psi(x)\wrt x  \to \int_{x\in\calD_{\ell_0}} \widehat \mu_{0,-0,-}^{\ell_0}(x,i,j;k,x_0)\psi(x)\wrt x\right|\leq r_{10}^{(p)} ,\]
-%	and \(r_{10}^{(p)}\to 0\) as \(p\to\infty\). 
-%\end{proof}
-
-%\begin{cor}\label{corL Tta} For \(i\in\mathcal S_-,j\in\mathcal S_-\cup\calS_{-0}\), \(x_0\in[0,\Delta)\), 
-%	\begin{align}
-%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb P(\bar X^{(p)}(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \varphi(0)=i) \wrt t \nonumber 
-%		%
-%		\\& \to \int_{t=0}^\infty e^{-\lambda t}\mathbb P( X(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid X(0)= x_0, \varphi(0)=i) \wrt t \label{eqn: ffaA}
-%	\end{align}
-%	as \(p\to\infty\).
-%\end{cor}
-%\begin{proof}
-%	From the convergence of Laplace transforms in Lemma~\ref{lem: ppp} and the Continuity Theorem \ref{thm: ext cont thm} then 
-%	\begin{align}
-%		&  \mathbb E[f(\bar X^{(p)}(t))1(\varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j) \mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \varphi(0)=i]  \nonumber 
-%		\\& \to \mathbb E[\psi(X(t)) 1(\varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j) \mid X(0)=x_0, \varphi(0)=i],
-%	\end{align}
-%	as \(p\to\infty\), for every bounded, Lipschitz function \(f\). By the Portmanteau Theorem, then 
-%	\begin{align}
-%		& \mathbb P(\bar X^{(p)}(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \varphi(0)=i)   \nonumber 
-%		%
-%		\\& \to \mathbb P( X(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid X(0)= x_0, \varphi(0)=i) 
-%	\end{align}
-%	weakly as \(p\to\infty\). In addition 
-%	\begin{align}
-%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb P(\bar X^{(p)}(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \varphi(0)=i) \wrt t\nonumber 
-%		\\& \leq \int_{x=0}^\infty  h_{ij}^{--}(\lambda, x)\wrt x ,
-%	\end{align}
-%	which is bounded as a function of \(p\). Hence we can apply the Continuity Theorem \ref{thm: ext cont thm} again and claim that 
-%	\begin{align}
-%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb P(\bar X^{(p)}(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \varphi(0)=i) \wrt t \nonumber 
-%		%
-%		\\& \to \int_{t=0}^\infty e^{-\lambda t}\mathbb P( X(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid X(0)= x_0, \varphi(0)=i) \wrt t
-%	\end{align}
-%	as \(p\to\infty,\) as required. 
-%\end{proof}
-%
-
-\subsection{Many integrals}
-The orbit process at the time at which \(\{\phi(t)\}\) first exits \(\calS_{+0}\) (\(\calS_{-0}\)) is \(\bs k(x_0) \bs D\), thus we can treat this case simply as a change in the initial condition of the QBD-RAP. We do so by showing that asymptotically, the  initial conditions \(\bs k(\Delta-x_0)\) and \(\bs k(x_0)\bs D\) produce results that are arbitrarily close to each other. We first show a Lipschitz-like condition in \(x_0\) for \(w_n(x_0,x)\).
+	Observe that by substituting the first matrix \(\bs D\) in the expression above for its integral expression, then (\ref{eqn: c30}) is equal to 
+	\begin{align}
+		&\int_{x_1=0}^\infty g_1(x_1) \bs k(x_0) \int_{z_0=0}^\infty e^{\bs Sz_0}\bs s\cfrac{\bs\alpha e^{\bs Sz_0}}{\bs\alpha e^{\bs Sz_0}\bs e} \wrt z_0 e^{\bs{S}x_1}\wrt x_1\bs D 
+            	\left[\prod_{n=2}^{k-1}\int_{x_n=0}^\infty g_n(x_n) e^{\bs{S}x_n} \wrt x_n
+		\bs D\right]
+            	\\\nonumber&\quad\times\int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n {\bs v}(x) 
+	%
+		\\&=\bs k(x_0) \int_{z_0=0}^\infty e^{\bs Sz_0}\bs sw_n(z_0,x)\wrt z_0.\label{eqn: kd djv}
+	\end{align}
+	Intuitively, when the variance of \(Z\) is low, we expect that the integral in (\ref{eqn: kd djv}) above will be approximately equal to \(w_n(\Delta-x_0,x)\). Indeed, we proved in Lemma~\ref{lemma:bound} that this is the case for functions \(g\) satisfying the Assumptions~\ref{asu: g}. However, here we do not immediately have that \(w_n(x_0,x)\) is Lipschitz as we would need for it to satisfy Assumptions~\ref{asu: g}. Instead, we can show a Lipschitz-like condition in \(x_0\) for \(w_n(x_0,x)\), which suffices. 
+	
+For later, observe that 
+\begin{align}
+	g^*_{2,n}(u_1,x) &= \int_{u_2=0}^{\Delta-u_1}g_2(\Delta - u_2 - u_1)\wrt u_1 \dots \nonumber 
+         	\int_{u_{n-1}=0}^{\Delta-u_{n-2}} g_{n-1}(\Delta - u_{n-1} - u_{n-2}) \wrt u_{n-2}
+       	\\&\qquad{}g_{n}(\Delta - x-u_{n-1})1(\Delta-x-u_{n-1}\geq0)\wrt u_{n-1} \nonumber
+ %
+ 	\\&\leq G^{n-1}\int_{u_2=0}^{\Delta-u_1}\wrt u_1 \dots\nonumber
+            	\int_{u_{n-1}=0}^{\Delta-u_{n-2}}  \wrt u_{n-1}
+		\\&\leq G^{n-1}\Delta^{n-2}:=G^*_n.
+\end{align}
+Also, 
+\begin{align}
+	g^*_{2,n}(u_1,x) &= \int_{u_2=0}^{\Delta-u_1}g_2(\Delta - u_2 - u_1)\wrt u_1 \dots \nonumber 
+         	\int_{u_{n-1}=0}^{\Delta-u_{n-2}} g_{n-1}(\Delta - u_{n-1} - u_{n-2}) \wrt u_{n-2}
+       	\\&\qquad{}g_{n}(\Delta - x-u_{n-1})1(\Delta-x-u_{n-1}\geq0)\wrt u_{n-1} \nonumber
+ %
+ 	\\&\leq G^{n-1}\int_{u_2=0}^{\Delta-u_1}\wrt u_1 \dots\nonumber
+            	\int_{u_{n-1}=0}^{\Delta-u_{n-2}}  \wrt u_{n-1}
+		\\&\leq G^{n-1}\Delta^{n-2}:=G^*_n.
+\end{align}
 
 \begin{cor}\label{cor: awrg}
 	For \(x_0,x\in[0,\Delta)\), \(n\geq 2\), 
@@ -544,37 +386,83 @@ The orbit process at the time at which \(\{\phi(t)\}\) first exits \(\calS_{+0}\
 	\end{align}
 \end{proof}
 
+% \begin{cor}\label{cor: ksjkd}
+% 	Let \(g_1, g_2, \dots,\) be functions satisfying the Assumptions \ref{asu: g} and let \(\bs v(x)\) be a closing operator with the Properties \ref{properties: some props}, then,
+% 	\begin{align}
+% 		&\int_{x_1=0}^\infty g_1(x_1) \bs k(x_0) e^{\bs{S}x_1}\wrt x_1\bs D 
+%             	\left[\prod_{k=2}^{n-1}\int_{x_k=0}^\infty g_k(x_k) e^{\bs{S}x_k} \wrt x_k \bs D\right] \int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n \bs v(x) \nonumber 
+% 		\\&\leq \cfrac{1}{\bs \alpha e^{\bs{S}x_0}\bs e} \widehat{G}^{n-1}G(G_{\bs v}+\widehat G O(\var(Z)) \label{eqn :mmmm}
+% 	\end{align}
+% \end{cor}
+% \begin{proof}
+% 	By Corollary \ref{cor: amammme} 
+% 	\begin{align}
+% 		&\int_{x_1=0}^\infty g_1(x_1) \bs k(x_0) e^{\bs{S}x_1}\wrt x_1\bs D 
+%             	\left[\prod_{k=2}^{n-1}\int_{x_k=0}^\infty g_k(x_k) e^{\bs{S}x_k} \wrt x_k \bs D\right] \int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n \bs v(x)\nonumber
+% 		\\&\leq \int_{x_1=0}^\infty g_1(x_1) \bs k(x_0) e^{\bs{S}x_1}\wrt x_1\bs D 
+% 		\left[\prod_{k=2}^{n-1}\int_{x_k=0}^\infty g_k(x_k) e^{\bs{S}x_k} \wrt x_k \bs D\right] \int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n\bs w(x) \nonumber
+% 		\\&\quad{} + O(\var(Z)). \label{eqn: LLaaNNab}
+% 	\end{align}
+% 	The first term of (\ref{eqn: LLaaNNab}) can be seen to be equivalent to \(\mathcal J_{1,n+1}(x_0,x_1),\) with \(g_1(x_1)=1\), and the integrability condition on \(g_1\) is not required to prove the bound. 
+% \end{proof}
+
+
+% \begin{cor}\label{cor: amammme}
+% 	Let \(g_1, g_2, \dots,\) be functions satisfying the Assumptions \ref{asu: g} and let \({\bs v}(x)\) be a closing operator with the Properties \ref{properties: some props}, then,
+% 	\begin{align}
+% 		&\int_{x_1=0}^\infty g_1(x_1) \bs k(x_0) e^{\bs{S}x_1}\wrt x_1\bs D 
+%             	\left[\prod_{k=2}^{n-1}\int_{x_k=0}^\infty g_k(x_k) e^{\bs{S}x_k} \wrt x_k \bs D\right] \int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n \widetilde{\bs w}(x) \nonumber 
+% 		% \\&= \int_{x_1=0}^\infty g_1(x_1) \bs k(x_0) e^{\bs{S}x_1}\wrt x_1\bs D 
+% 		% \left[\prod_{k=2}^{n-1}\int_{x_k=0}^\infty g_k(x_k) e^{\bs{S}x_k} \wrt x_k \bs D\right] \int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n {\bs w}(x) \nonumber
+% 		\\&= O(\var(Z)) \label{eqn :mmmm2}
+% 	\end{align}
+% \end{cor}
+% \begin{proof}
+% 	% First observe that 
+% 	% \begin{align*} 
+% 	% 	\int_{x_n=0}^\infty \bs\alpha e^{\bs S(u+x_n)}{\bs v}(x)\wrt x_n 
+% 	% 	&=\int_{x_n=0}^\infty \bs\alpha e^{\bs S(u+x_n)} (\bs w(x)+\widetilde{\bs w}(x))\wrt x_n
+% 	% 	\\&=\int_{x_n=0}^\infty \bs\alpha e^{\bs S(u+x_n)} \bs w(x)\wrt x_n + \bs\alpha e^{\bs S(u+x_n)} \widetilde{\bs w}(x))\wrt x_n
+% 	% \end{align*}
+% 	% and recall that Property \ref{properties: 0} states 
+% 	% \begin{align}
+% 	% 	\int_{x_n=0}^\infty \bs\alpha e^{\bs S(u+x_n)} \widetilde{\bs w}(x)\wrt x_n = \bs\alpha e^{\bs Su}(-\bs S)^{-1} \widetilde{\bs w}(x) = O(\var(Z)).
+% 	% \end{align}
+
+% 	Consider the left-hand side of (\ref{eqn :mmmm2}). Replacing the last \(\bs D\) matrix in (\ref{eqn :mmmm2}) by its integral definition, gives 
+% 	\begin{align*}
+% 		&\int_{x_1=0}^\infty g_1(x_1) \bs k(x_0) e^{\bs{S}x_1}\wrt x_1
+%             \left[\prod_{k=2}^{n-1}\bs D \int_{x_k=0}^\infty g_k(x_k) e^{\bs{S}x_k} \wrt x_k \right] \int_{u=0}^\infty e^{\bs S u}\bs s \cfrac{\bs \alpha e^{\bs S u}}{\bs \alpha e^{\bs S u} \bs e}\wrt u 
+% 			\\&\qquad{}\int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n \widetilde{\bs w}(x) 
+% 		\\&=\bs k(x_0) \int_{u=0}^\infty \mathcal I_{1,n}(u) \cfrac{\bs \alpha e^{\bs S u}}{\bs \alpha e^{\bs S u} \bs e}\wrt u \int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n \widetilde{\bs w}(x) 
+% 		\\&\leq \cfrac{1}{\bs \alpha e^{\bs{S}x_0}\bs e}G\widehat G^{n-1} \int_{u=0}^\infty \bs \alpha e^{\bs{S}u}\bs e \cfrac{\bs \alpha e^{\bs S u}}{\bs \alpha e^{\bs S u} \bs e}\wrt u \int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n \widetilde{\bs w}(x) 
+% 	\end{align*}
+% 	by Lemma \ref{lem: lh bnd}. Integrating over \(u\) gives 
+% 	\begin{align*}
+% 		&\cfrac{1}{\bs \alpha e^{\bs{S}x_0}\bs e}G\widehat G^{n-1} \bs \alpha (-\bs S)^{-1} \int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n \widetilde{\bs w}(x) 
+% 		\\&\leq \cfrac{1}{\bs \alpha e^{\bs{S}x_0}\bs e}G\widehat G^{n-1} \bs \alpha (-\bs S)^{-1} \int_{x_n=0}^\infty g_{n}(x_n) \wrt x_n \widetilde{\bs w}(x),
+% 	\end{align*}
+% 	by Property \ref{properties: -1}. Integrating over \(x_n\), gives
+% 	\begin{align*}
+% 		\cfrac{1}{\bs \alpha e^{\bs{S}x_0}\bs e}G\widehat G^{n} \bs \alpha (-\bs S)^{-1} \widetilde{\bs w}(x) 
+% 		&=\cfrac{1}{\bs \alpha e^{\bs{S}x_0}\bs e}G\widehat G^{n}O(\var(Z)),
+% 	\end{align*}
+% 	by Property \ref{properties: 0}.
+% \end{proof}
+
+
 \begin{cor}\label{cor: ahjg}
 	Let \(g_1,g_2,\dots,\) be functions satisfying Assumptions \ref{asu: g} and let \({\bs v}(x)\), \(x\in[0,\Delta)\), be a closing operator with Properties \ref{properties: some props}. For \(x_0,x\in\mathcal [0,\Delta)\), \(n\geq 2\), 
 	\begin{align}
-		&\Bigg| \int_{x_1=0}^\infty g_1(x_1) \bs k(x_0) \bs D e^{\bs{S}x_1}\wrt x_1\bs D 
-            	\left[\prod_{n=2}^{k-1}\int_{x_n=0}^\infty g_n(x_n) e^{\bs{S}x_n} \wrt x_n
-		\bs D\right]
-            	\int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n {\bs v}(x) \nonumber 
-	%
-		\\&\quad{}- w_n(\Delta - x_0,x) \Bigg| \nonumber
-		\\&= r_8(n),
+		&\left|\int_{x=0}\bs k(x_0) \int_{z_0=0}^\infty e^{\bs Sz_0}\bs sw_n(z_0,x)\wrt z_0 - w_n(\Delta - x_0,x) \right| \nonumber
+		= r_8(n),
 	\end{align}
 	where 
 	\begin{align*}
-	|r_8(n)|&\leq  \left( 2|r_5(n)| + 2|r_6(n)| + 2(n-1)|r_4(n)| + \varepsilon G_n^{*}(G+L\Delta) \right) \\&\qquad{}+ 2\widehat G^{n-2}GG_{\bs v}\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}.\end{align*}
+		|r_8(n)|&\leq  \left( 2|r_5(n)| + 2|r_6(n)| + 2(n-1)|r_4(n)| + \varepsilon G_n^{*}(G+L\Delta) \right) \\&\qquad{}+ 2\widehat G^{n-2}GG_{\bs v}\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}.
+	\end{align*}
 \end{cor}
 \begin{proof}
-	Observe that 
-	\begin{align}
-		\nonumber&\int_{x_1=0}^\infty g_1(x_1) \bs k(x_0) \bs D e^{\bs{S}x_1}\wrt x_1\bs D 
-            	\left[\prod_{n=2}^{k-1}\int_{x_n=0}^\infty g_n(x_n) e^{\bs{S}x_n} \wrt x_n
-		\bs D\right]
-            	\int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n {\bs v}(x) 
-	%
-		\\\nonumber&=\int_{x_1=0}^\infty g_1(x_1) \bs k(x_0) \int_{z_0=0}^\infty e^{\bs Sz_0}\bs s\cfrac{\bs\alpha e^{\bs Sz_0}}{\bs\alpha e^{\bs Sz_0}\bs e} \wrt z_0 e^{\bs{S}x_1}\wrt x_1\bs D 
-            	\left[\prod_{n=2}^{k-1}\int_{x_n=0}^\infty g_n(x_n) e^{\bs{S}x_n} \wrt x_n
-		\bs D\right]
-            	\\\nonumber&\quad\times\int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n {\bs v}(x) 
-	%
-		\\&=\bs k(x_0) \int_{z_0=0}^\infty e^{\bs Sz_0}\bs sw_n(z_0,x)\wrt z_0
-	\end{align}
-	
 	Now
 	\begin{align}
 		\nonumber&\left|\bs k(x_0) \int_{z_0=0}^\infty e^{\bs Sz_0}\bs sw_n(z_0,x)\wrt z_0 - w_n(\Delta - x_0,x) \right|
@@ -586,19 +474,29 @@ The orbit process at the time at which \(\{\phi(t)\}\) first exits \(\calS_{+0}\
 		\\\nonumber&\qquad{}+\bs k(x_0) \int_{z_0=\Delta+\varepsilon-x_0}^\infty e^{\bs Sz_0}\bs s  \left|w_n(z_0,x) - w_n(\Delta - x_0,x)\right| \wrt z_0
 		\\\label{eqn: KASJF}&\qquad{}+\bs k(x_0) \int_{z_0=\Delta-\varepsilon-x_0}^{\Delta+\varepsilon-x_0} e^{\bs Sz_0}\bs s  \left|w_n(z_0,x) - w_n(\Delta - x_0,x)\right| \wrt z_0.
 		%
-		\end{align}
-		By Corollary~\ref{cor: ksjkd}, for any \(x,y\in [0,\Delta)\), \(0\leq w_n(x,y)\leq \widehat G^{n-2}GG_{\bs v}\), so the sum of the first two terms is less than or equal to 
+	\end{align}
+		
+		Using Equations~(\ref{eqn: in here}), (\ref{eqn: J bound}) and (\ref{eqn:FGHJSjjs sj}) we can claim
 		\begin{align}
-		&2\widehat G^{n-1}GG_{\bs v}\left(\int_{z_0=0}^{\Delta-\varepsilon-x_0}\bs k(x_0)e^{\bs S z_0} \bs s \wrt z_0+\int_{z_0=\Delta+\varepsilon-x_0}^\infty \bs k(x_0)e^{\bs S z_0} \bs s \wrt z_0\right)
-		\\\nonumber &= 2\widehat G^{n-1}GG_{\bs v} \cfrac{\mathbb P(|Z-\Delta|> \varepsilon)}{\mathbb P(Z> x_0)}
-		\\&\leq 2G^n\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}
+			|w_n(x_0,x)| &\leq \cfrac{1}{\bs \alpha e^{\bs{S} x_0}\bs e}G^2 \widehat G^{n-2}  
+			\int_{u_k=0}^\infty \bs \alpha e^{\bs{S}u_k}\bs e \wrt u_k G_{\bs v} + \cfrac{1}{\bs \alpha e^{\bs{S}x_0}\bs e}G\widehat G^{n}\widetilde G_{\bs v} \nonumber 
+			\\& = \cfrac{1}{\bs \alpha e^{\bs{S} x_0}\bs e}G^2
+			 \widehat G^{n-2} G_{\bs v} + \cfrac{1}{\bs \alpha e^{\bs{S}x_0}\bs e}G\widehat G^{n}\widetilde G_{\bs v} \nonumber 
+			 \\&=:W_n
+		\end{align}
+		
+		Therefore, the sum of the first two terms in (\ref{eqn: KASJF}) is less than or equal to 
+		\begin{align}
+		&2W_n\left(\int_{z_0=0}^{\Delta-\varepsilon-x_0}\bs k(x_0)e^{\bs S z_0} \bs s \wrt z_0+\int_{z_0=\Delta+\varepsilon-x_0}^\infty \bs k(x_0)e^{\bs S z_0} \bs s \wrt z_0\right)\nonumber 
+		\\\nonumber &= 2W \cfrac{\mathbb P(|Z-\Delta|> \varepsilon)}{\mathbb P(Z> x_0)}
+		\\&\leq 2W_n\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}
 		\end{align}
 		by Chebyshev's inequality. As for the last term in (\ref{eqn: KASJF}), we can use Corollary~\ref{cor: awrg} to bound the integrand so that the last term is less than or equal to 
 		\begin{align}
 		\nonumber&\bs k(x_0) \int_{z_0=\Delta-\varepsilon-x_0}^{\Delta+\varepsilon-x_0} e^{\bs Sz_0}\bs s \left( 2|r_5(n)| + 2|r_6(n)| + 2(n-1)|r_4(n)| + \varepsilon G^{n-1}\Delta^{n-2}(G+L\Delta) \right) \wrt z_0
 		%
 		\\\nonumber&\leq  \left( 2|r_5(n)| + 2|r_6(n)| + 2(n-1)|r_4(n)| + \varepsilon G^{n-1}\Delta^{n-2}(G+L\Delta) \right)
-		\\&\quad{}+2\widehat G^{n-2}GG_{\bs v}\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2} ,
+		\\&\quad{}+2W_n\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2} ,
 	\end{align}
 	since \(\displaystyle \bs k(x_0) \int_{z_0=\Delta-\varepsilon-x_0}^{\Delta+\varepsilon-x_0} e^{\bs Sz_0}\bs s\wrt z_0\leq 1\). 
 \end{proof}
@@ -606,18 +504,7 @@ The orbit process at the time at which \(\{\phi(t)\}\) first exits \(\calS_{+0}\
 \begin{cor} \label{cor: aaaaa}
 	Let \(g_1,g_2,\dots,\) be functions satisfying Assumptions \ref{asu: g} and let \({\bs v}(x)\), \(x\in(0,\Delta)\), be a closing operator with Properties \ref{properties: some props}. For \(x_0,x\in(0,\Delta)\), \(n\geq 2\)
 	\begin{align}
-		&\Bigg| \int_{x_1=0}^\infty g_1(x_1) \bs k(x_0) \bs D e^{\bs{S}x_1}\wrt x_1\bs D 
-            	\left[\prod_{n=2}^{k-1}\int_{x_n=0}^\infty g_n(x_n) e^{\bs{S}x_n} \wrt x_n
-		\bs D\right]
-            	\int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n {\bs v}(x) \nonumber 
-	%
-		\\&\qquad {}- \int_{u_1=0}^{x_0}g_1(x_0 - u_1)
-%		\int_{u_2=0}^{\Delta-u_1}g_2(\Delta - u_2 - u_1)\wrt u_1  \nonumber 
-		\left[\prod_{k=2}^{n-1} \int_{u_k=0}^{\Delta-u_{k-1}} g_k(\Delta-u_k-u_{k-1})\wrt u_{k-1}\right] \nonumber 
-		%\\&{}\nonumber
-            	%\int_{u_{n-1}=0}^{\Delta-u_{n-2}} g_{n-1}(\Delta - u_{n-1} - u_{n-2}) \wrt u_{n-2}
-            	g_{n}(\Delta - x-u_{n-1})
-	\\&\qquad{} 1(\Delta-x-u_{n-1}\geq0)\wrt u_{n-1} \Bigg| \nonumber
+		&\left|\bs k(x_0) \int_{z_0=0}^\infty e^{\bs Sz_0}\bs sw_n(z_0,x)\wrt z_0- g_{1,n}^*(\Delta-x_0,x) \right| \nonumber
 		\\&\leq |r_8(n)|+|r_5(n)|+|r_6(n)| + (n-1)|r_4(n)|,\label{eqn: KAFnn}
 	\end{align}
 	where 
@@ -635,17 +522,10 @@ The orbit process at the time at which \(\{\phi(t)\}\) first exits \(\calS_{+0}\
 %            	\int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n {\bs v}(x) \nonumber 
 	%
 %		\\&{}- g_{1,n}^*(\Delta - x_0,x) \Bigg| 
-		&\Bigg| \int_{x_1=0}^\infty g_1(x_1) \bs k(x_0) \bs D e^{\bs{S}x_1}\wrt x_1\bs D 
-            	\left[\prod_{n=2}^{k-1}\int_{x_n=0}^\infty g_n(x_n) e^{\bs{S}x_n} \wrt x_n
-		\bs D\right]
-            	\int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n {\bs v}(x) \nonumber 
+		&\left| \bs k(x_0) \int_{z_0=0}^\infty e^{\bs Sz_0}\bs sw_n(z_0,x)\wrt z_0 \nonumber 
 	%
-		\\\nonumber &{}\qquad - w_n(\Delta - x_0,x) + w_n(\Delta - x_0,x) - g_{1,n}^*(\Delta - x_0,x) \Bigg| 
-		\\&\leq \Bigg| \int_{x_1=0}^\infty g_1(x_1) \bs k(x_0) \bs D e^{\bs{S}x_1}\wrt x_1\bs D 
-            	\left[\prod_{n=2}^{k-1}\int_{x_n=0}^\infty g_n(x_n) e^{\bs{S}x_n} \wrt x_n
-		\bs D\right]
-            	\int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n {\bs v}(x) ,\nonumber 
-	\\&\qquad - w_n(\Delta - x_0,x)\Bigg| + \Bigg| w_n(\Delta - x_0,x) - g_{1,n}^*(\Delta - x_0,x) \Bigg| 
+		 - w_n(\Delta - x_0,x) + w_n(\Delta - x_0,x) - g_{1,n}^*(\Delta - x_0,x) \right| 
+		\\&\leq \left| \bs k(x_0) \int_{z_0=0}^\infty e^{\bs Sz_0}\bs sw_n(z_0,x)\wrt z_0 - w_n(\Delta - x_0,x)\right| + \left| w_n(\Delta - x_0,x) - g_{1,n}^*(\Delta - x_0,x) \right| 
 	\end{align*}
 	where the first absolute value is less than or equal to \(|r_8(n)|\) by Corollary~\ref{cor: ahjg} and the second absolute value is less than or equal to \(|r_5(n)|+|r_6(n)| + (n-1)|r_4(n)|\) by Corollary~\ref{cor: a cor}.
 \end{proof}
@@ -653,72 +533,53 @@ The orbit process at the time at which \(\{\phi(t)\}\) first exits \(\calS_{+0}\
 \begin{cor}
 	Let \(\psi\) be bounded and Lipschitz, let \(g_1,g_2,\dots,\) be functions satisfying Assumptions \ref{asu: g} and let \({\bs v}(x)\), \(x\in(0,\Delta)\), be a closing operator with Properties \ref{properties: some props}. For \(x_0,x\in(0,\Delta)\), \(n\geq 2\)
 	\begin{align}
-		&\Bigg| \int_{x\in[0,\Delta)} \int_{x_1=0}^\infty g_1(x_1) \bs k(x_0) \bs D e^{\bs{S}x_1}\wrt x_1\bs D 
-            	\left[\prod_{n=2}^{k-1}\int_{x_n=0}^\infty g_n(x_n) e^{\bs{S}x_n} \wrt x_n
-		\bs D\right] \nonumber 
-            	\\&\qquad{}\times\int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n {\bs v}(x) \psi(x)\wrt x \nonumber 
+		&\left| \int_{x\in[0,\Delta)}\bs k(x_0) \int_{z_0=0}^\infty e^{\bs Sz_0}\bs sw_n(z_0,x)\wrt z_0 \psi(x)\wrt x  
 	% 
-		\\&\qquad {}- \int_{x\in[0,\Delta)} \int_{u_1=0}^{x_0}g_1(x_0 - u_1)
-%		\int_{u_2=0}^{\Delta-u_1}g_2(\Delta - u_2 - u_1)\wrt u_1  \nonumber 
-		\left[\prod_{k=2}^{n-1} \int_{u_k=0}^{\Delta-u_{k-1}} g_k(\Delta-u_k-u_{k-1})\wrt u_{k-1}\right] \nonumber 
-		%\\&{}\nonumber
-            	%\int_{u_{n-1}=0}^{\Delta-u_{n-2}} g_{n-1}(\Delta - u_{n-1} - u_{n-2}) \wrt u_{n-2}
-            	g_{n}(\Delta - x-u_{n-1})
-	\\&\qquad{} \times1(\Delta-x-u_{n-1}\geq0)\wrt u_{n-1}\psi(x)\wrt x \Bigg| \nonumber
+		- \int_{x\in[0,\Delta)} g_{1,n}^*(\Delta-x_0,x)\psi(x)\wrt x \right|\nonumber 
 		\\&\leq \left(|r_8(n)|+|r_5(n)|+|r_6(n)| + (n-1)|r_4(n)|\right)F\Delta.\label{eqn: KAFnnmna2}
 	\end{align}
 \end{cor}
 \begin{proof}
 	The left-hand side of (\ref{eqn: KAFnnmna2}) is less than or equal to 
 	\begin{align}
-		& \int_{x\in[0,\Delta)} \Bigg| \int_{x_1=0}^\infty g_1(x_1) \bs k(x_0) \bs D e^{\bs{S}x_1}\wrt x_1\bs D 
-            	\left[\prod_{n=2}^{k-1}\int_{x_n=0}^\infty g_n(x_n) e^{\bs{S}x_n} \wrt x_n
-		\bs D\right] \nonumber 
-            	\\&\qquad {}\times\int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n {\bs v}(x)  \nonumber 
+		& \int_{x\in[0,\Delta)} \left| \int_{x_1=0}^\infty \bs k(x_0) \int_{z_0=0}^\infty e^{\bs Sz_0}\bs sw_n(z_0,x)\wrt z_0 
 	%
-		- \int_{u_1=0}^{x_0}g_1(x_0 - u_1)
-		\\&\qquad {}\times \left[\prod_{k=2}^{n-1} \int_{u_k=0}^{\Delta-u_{k-1}} g_k(\Delta-u_k-u_{k-1})\wrt u_{k-1}\right] \nonumber 
-            	g_{n}(\Delta - x-u_{n-1})
-	\\&\qquad{} 1(\Delta-x-u_{n-1}\geq0)\wrt u_{n-1}\Bigg| \left|\psi(x)\right|\wrt x . \label{eqn: lfj}
+		- g_{1,n}^*(\Delta-x_0,x)\right| \left|\psi(x)\right|\wrt x . \label{eqn: lfj}
 	\end{align}
-	Now, apply Corollary~\ref{cor: aaaaa} to the first absolute value then (\ref{eqn: lfj}) is less than or equal to 
-	\begin{align}
-		&\int_{x\in[0,\Delta)} \left(|r_8(n)|+|r_5(n)|+|r_6(n)| + (n-1)|r_4(n)|\right) \left|\psi(x)\right|\wrt x  \nonumber 
-		\\&\leq \int_{x\in[0,\Delta)} \left(|r_8(n)|+|r_5(n)|+|r_6(n)| + (n-1)|r_4(n)|\right) F\wrt x  \nonumber 
-		\\&=  \left(|r_8(n)|+|r_5(n)|+|r_6(n)| + (n-1)|r_4(n)|\right) \Delta F
-	\end{align}
+	Now, using \(|\psi(x)|\leq F\) and Corollary~\ref{cor: aaaaa} then (\ref{eqn: lfj}) is less than or equal to 
+		\[\left(|r_8(n)|+|r_5(n)|+|r_6(n)| + (n-1)|r_4(n)|\right) \Delta F\]
 \end{proof}
-
-To summarise, the main results we need are 
-\begin{align}
-	&\Bigg| \int_{x=0}^\Delta w_n(x_0,x) \psi(x) \wrt x \nonumber 
 %
-	\\&{}- \int_{x=0}^\Delta \int_{u_1=0}^{\Delta-x_0}g_1(\Delta - u_1 - x_0)
-%		\int_{u_2=0}^{\Delta-u_1}g_2(\Delta - u_2 - u_1)\wrt u_1  \nonumber 
-	\left[\prod_{k=2}^{n-1} \int_{u_k=0}^{\Delta-u_{k-1}} g_k(\Delta-u_k-u_{k-1})\wrt u_{k-1}\right] \nonumber 
-	%\\&{}\nonumber
-			%\int_{u_{n-1}=0}^{\Delta-u_{n-2}} g_{n-1}(\Delta - u_{n-1} - u_{n-2}) \wrt u_{n-2}
-			g_{n}(\Delta - x-u_{n-1})
-\\&\qquad{} 1(\Delta-x-u_{n-1}\geq0) \wrt u_{n-1}\psi(x) \wrt x \Bigg| \nonumber
-	\\&\leq (|r_5(n)| + |r_6(n)| + (n-1)|r_4(n)|)\Delta F. \label{eqn: rhs g 4dvfklsmv2}
-\end{align}
-and 
-\begin{align}
-	&\Bigg| \int_{x\in[0,\Delta)} \int_{x_1=0}^\infty g_1(x_1) \bs k(x_0) \bs D e^{\bs{S}x_1}\wrt x_1\bs D 
-			\left[\prod_{n=2}^{k-1}\int_{x_n=0}^\infty g_n(x_n) e^{\bs{S}x_n} \wrt x_n
-	\bs D\right] \nonumber 
-			\\&\qquad{}\times\int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n {\bs v}(x) \psi(x)\wrt x \nonumber 
+%To summarise, the main results we need are 
+%\begin{align}
+%	&\Bigg| \int_{x=0}^\Delta w_n(x_0,x) \psi(x) \wrt x \nonumber 
 %
-	\\&\qquad {}- \int_{x\in[0,\Delta)} \int_{u_1=0}^{x_0}g_1(x_0 - u_1)
+%	\\&{}- \int_{x=0}^\Delta \int_{u_1=0}^{\Delta-x_0}g_1(\Delta - u_1 - x_0)
 %		\int_{u_2=0}^{\Delta-u_1}g_2(\Delta - u_2 - u_1)\wrt u_1  \nonumber 
-	\left[\prod_{k=2}^{n-1} \int_{u_k=0}^{\Delta-u_{k-1}} g_k(\Delta-u_k-u_{k-1})\wrt u_{k-1}\right] \nonumber 
-	%\\&{}\nonumber
-			%\int_{u_{n-1}=0}^{\Delta-u_{n-2}} g_{n-1}(\Delta - u_{n-1} - u_{n-2}) \wrt u_{n-2}
-			g_{n}(\Delta - x-u_{n-1})
-\\&\qquad{} \times1(\Delta-x-u_{n-1}\geq0)\wrt u_{n-1}\psi(x)\wrt x \Bigg| \nonumber
-	\\&\leq \left(|r_8(n)|+|r_5(n)|+|r_6(n)| + (n-1)|r_4(n)|\right)F\Delta.\label{eqn: KAFnnmna22}
-\end{align}
-
+%	\left[\prod_{k=2}^{n-1} \int_{u_k=0}^{\Delta-u_{k-1}} g_k(\Delta-u_k-u_{k-1})\wrt u_{k-1}\right] \nonumber 
+%	%\\&{}\nonumber
+%			%\int_{u_{n-1}=0}^{\Delta-u_{n-2}} g_{n-1}(\Delta - u_{n-1} - u_{n-2}) \wrt u_{n-2}
+%			g_{n}(\Delta - x-u_{n-1})
+%\\&\qquad{} 1(\Delta-x-u_{n-1}\geq0) \wrt u_{n-1}\psi(x) \wrt x \Bigg| \nonumber
+%	\\&\leq (|r_5(n)| + |r_6(n)| + (n-1)|r_4(n)|)\Delta F. \label{eqn: rhs g 4dvfklsmv2}
+%\end{align}
+%and 
+%\begin{align}
+%	&\Bigg| \int_{x\in[0,\Delta)} \int_{x_1=0}^\infty g_1(x_1) \bs k(x_0) \bs D e^{\bs{S}x_1}\wrt x_1\bs D 
+%			\left[\prod_{n=2}^{k-1}\int_{x_n=0}^\infty g_n(x_n) e^{\bs{S}x_n} \wrt x_n
+%	\bs D\right] \nonumber 
+%			\\&\qquad{}\times\int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n {\bs v}(x) \psi(x)\wrt x \nonumber 
+%
+%	\\&\qquad {}- \int_{x\in[0,\Delta)} \int_{u_1=0}^{x_0}g_1(x_0 - u_1)
+%		\int_{u_2=0}^{\Delta-u_1}g_2(\Delta - u_2 - u_1)\wrt u_1  \nonumber 
+%	\left[\prod_{k=2}^{n-1} \int_{u_k=0}^{\Delta-u_{k-1}} g_k(\Delta-u_k-u_{k-1})\wrt u_{k-1}\right] \nonumber 
+%	%\\&{}\nonumber
+%			%\int_{u_{n-1}=0}^{\Delta-u_{n-2}} g_{n-1}(\Delta - u_{n-1} - u_{n-2}) \wrt u_{n-2}
+%			g_{n}(\Delta - x-u_{n-1})
+%\\&\qquad{} \times1(\Delta-x-u_{n-1}\geq0)\wrt u_{n-1}\psi(x)\wrt x \Bigg| \nonumber
+%	\\&\leq \left(|r_8(n)|+|r_5(n)|+|r_6(n)| + (n-1)|r_4(n)|\right)F\Delta.\label{eqn: KAFnnmna22}
+%\end{align}
+%
 We have assumed throughout the appendix that the functions \(g\) are scalar functions, however, we are ulitmately interested in expressions which contain matrix functions. We now extend the previous results to the matrix case.
 \begin{lem}\label{lem: boobies2}
 	Let \(\bs G_k(x)\), \(k\in\{1,2,...\}\), be matrix functions with dimensions \(N_k \times N_{k+1}\). Further, suppose \([\bs G_k(x)]_{ij}\), \(k\in\{1,2,...\}\) satisfy Assumptions \ref{asu: g}. Then, 
@@ -757,3 +618,187 @@ Lemma \ref{lem: boobies} effectively shows that, as \(p \to \infty\), then
 			\\&\qquad{} \bs G_{n}(\Delta - x-u_{n-1})
 		 \times1(\Delta-x-u_{n-1}\geq0)\wrt u_{n-1}\psi(x)\wrt x.  \nonumber
 \end{align}
+
+Thus, we have estableshed a type of convergence of the QBD-RAP scheme to the fluid queue on the event that the phase is initially in \(\calS_{+0}\cup\calS_{-0}\), and before the first change of level. However, we're not quite done yet. The last thing we need to prove is convergence at the first change of level. Since the result in Corollary~\ref{cor: aaaaa} is pointwise in \(x\), then choosing the closing operator as \(e^{\bs Sx}\bs s\) and setting \(x=0\), then we get covergence at the first change of level, on the event that there is one or more phase transition from \(\calS_+\) to \(\calS_-\) or \(\calS_-\) to \(\calS_+\). The only thing that remains is to show convergence at the first change of level on the event that there is no phase transition from \(\calS_+\) to \(\calS_-\) or \(\calS_-\) to \(\calS_+\). 
+
+ \begin{lem} \label{lem:tttttt}
+ 	Let \(g\) satisfy the Assumptions \ref{asu: g} and \(x_0\in(2\varepsilon,\Delta-\varepsilon)\). Then
+ 	\begin{align}
+ 		\left|\int_{x=0}^\infty \bs k(x_0)\bs De^{\bs Sx}g(x)\bs s\wrt x - g(x_0)\right| \leq \cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}4G + 3L\varepsilon+6G\cfrac{\var(Z)}{\varepsilon^2}.
+ 	\end{align}
+ \end{lem}
+ \begin{proof}
+ 	First rewrite the left-hand side as 
+ 	\begin{align}
+ %		\left|\int_{x=0}^\infty \bs k(x_0)\bs De^{\bs Sx}g(x)\bs s\wrt x - g(x_0)\right| 
+ 		\left|\int_{x=0}^\infty \bs k(x_0)\bs De^{\bs Sx}(g(x)-g(x_0))\bs s\wrt x \right|
+ 		%
+ 		&\leq \int_{x=0}^\infty \bs k(x_0)\bs De^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x.
+ 	\end{align}
+ 	Substituting in the expression for \(\bs D\) gives,
+ 	\begin{align}
+ 		&\int_{x=0}^\infty \bs k(x_0)\int_{u=0}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x  \nonumber 
+ %		\\&= \int_{x=0}^\infty \bs k(x_0)\int_{u=0}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x 
+ 		%
+ 		\\&= \int_{x=0}^\infty \bs k(x_0)\int_{u=0}^{\Delta-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x \nonumber
+ 		\\&\quad {} + \int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-\varepsilon}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x \label{eqn: 2nd here}
+ 	\end{align}
+ 	Since \(g\) is bounded, the second term is less than or equal to 
+ 	\begin{align}
+ 		\int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-\varepsilon}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}\bs s\wrt x 2G \nonumber
+ 		&= \bs k(x_0)\int_{u=\Delta-\varepsilon}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u \bs e 2G \nonumber
+ 		\\&= \bs k(x_0)\int_{u=\Delta-\varepsilon}^\infty e^{\bs Su}\bs s \wrt u2G \nonumber
+ 		\\&= \cfrac{\mathbb P(Z\geq x_0+\Delta-\varepsilon)}{\mathbb P(Z>x_0)}2G \label{eqn" dgkjlwerhv}
+ 	\end{align}
+ 	For \(x_0\in(2\varepsilon,\Delta-\varepsilon),\) then (\ref{eqn" dgkjlwerhv}) is less than or equal to 
+ 	\[\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}2G.\]
+	
+ 	As for the first term in (\ref{eqn: 2nd here}), it can be written as 
+ 	\begin{align}
+ 		&\int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-x_0-\varepsilon}^{u=\Delta-x_0+\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x) - g(x_0)|\bs s\wrt x \nonumber
+ 		%
+ 		\\&\qquad{}+\int_{x=0}^\infty \bs k(x_0)\int_{u=0}^{\Delta-x_0-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x) - g(x_0)|\bs s\wrt x \nonumber
+ 		%
+ 		\\&\qquad{}+\int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-x_0+\varepsilon}^{\Delta-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}|g(x) - g(x_0)|\bs s\wrt x. \label{eqn: 201}
+ 	\end{align}
+ 	Since \(g\) is bounded, then the last two terms in (\ref{eqn: 201}) are 
+ 	\begin{align}
+ 		&2G\Bigg(\int_{x=0}^\infty \bs k(x_0)\int_{u=0}^{\Delta-x_0-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}\bs s\wrt x \nonumber
+ 		%
+ 		\\&\qquad{}+\int_{x=0}^\infty \bs k(x_0)\int_{u=\Delta-x_0+\varepsilon}^{\Delta-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \wrt u e^{\bs Sx}\bs s\wrt x\Bigg) \nonumber 
+ 		%
+ 		\\&=2G\Bigg(\bs k(x_0)\int_{u=0}^{\Delta-x_0-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e}  \bs e  \wrt u\nonumber
+ 		%
+ 		+ \bs k(x_0)\int_{u=\Delta-x_0+\varepsilon}^{\Delta-\varepsilon} e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} \bs e\wrt u \Bigg) \nonumber
+ 		%
+ 		\\&=2G \cfrac{\mathbb P(Z>x_0, Z\notin(\Delta-\varepsilon, \Delta+\varepsilon))}{\mathbb P(Z>x_0)}  \nonumber 
+ 		%
+ 		\\&\leq 2G\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2},
+ 	\end{align}
+ 	provided that \(x_0\in[0,\Delta-\varepsilon)\). 
+ 	Exchanging the order of integration for the first term in (\ref{eqn: 201})
+ 	\begin{align}
+ 		\int_{u=\Delta-x_0-\varepsilon}^{u=\Delta-x_0+\varepsilon} \bs k(x_0) e^{\bs Su}\bs s\int_{x=0}^\infty \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e} e^{\bs Sx}|g(x)-g(x_0)|\bs s\wrt x \wrt u \label{eqn: fdk13897}
+ 	\end{align}
+ 	from which we see that we can apply Corollary~\ref{cor: cond bnd 2} with \(v=0\) to the integral over \(x\), implying that (\ref{eqn: fdk13897}) is less than or equal to
+ 	\begin{align}
+ 		\int_{u=\Delta-x_0-\varepsilon}^{u=\Delta-x_0+\varepsilon} \bs k(x_0) e^{\bs Su}\bs s\left(|g(\Delta-u)-g(x_0)|+r_3(u)\right)\wrt u. \label{eqn: sdkagh lkhvasfv}
+ 	\end{align}
+ 	Noting that \(\sup |r_3(u)|\leq|r_2|\) for \(u\leq \Delta-\varepsilon\), and since \(g\) is Lipschitz, then (\ref{eqn: sdkagh lkhvasfv}) is less than or equal to 
+ 	\begin{align}
+ 		\int_{u=\Delta-x_0-\varepsilon}^{u=\Delta-x_0+\varepsilon} \bs k(x_0) e^{\bs Su}\bs s\left(L\varepsilon+|r_2|\right)\wrt u \leq L\varepsilon+|r_2|. \label{eqn: sdkagh lsfv}
+ 	\end{align}
+ 	Putting all the bounds together proves the result. 
+ \end{proof}
+%
+%\begin{lem}
+%	Let \(f:[0,\Delta)\to \mathbb R\) be any bounded, Lipschitz continuous function with \(|\psi(x)|\leq F\). Then for \(u\leq \Delta-\varepsilon\), \(v\in[0,\Delta)\)
+%	\begin{align}
+%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E[f(\bar X(t))1(\varphi(t)=j, L(t)=\ell_0, L(s)=\ell_0, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid L(0)=\ell_0, \nonumber
+%		\\&\qquad{} \bs A(0)=\bs a_{\ell_0,i}(x_0), \varphi(0)=i]\wrt t \nonumber
+%		\\&= \int_{t=0}^\infty e^{-\lambda t}\mathbb E[\psi(X(t))1(\varphi(t)=j,X(s)\in\calD_{\ell_0}, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid X(0)=x_0, \varphi(0)=i]\wrt t \nonumber
+%		\\&\qquad {} + r_{11}^{(p)}
+%	\end{align}
+%	where 
+%	\[|r_{11}^{(p)}| \leq F R_{{\bs v},2}+ GF\varepsilon.\]
+%\end{lem}
+%\begin{proof}
+%	Assume, without loss of generality \(\ell_0=0\) so \(\calD_{\ell_0}=[0,\Delta]\). First observe that 
+%	\begin{align}
+%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E[f(\bar X(t))1(\varphi(t)=j, L(t)=\ell_0, L(s)=\ell_0, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid L(0)=\ell_0, \nonumber
+%		\\&\qquad{} \bs A(0)=\bs a_{\ell_0,i}(x_0), \varphi(0)=i]\wrt t \nonumber 
+%		\\&= \int_{x_1=0}^\infty \int_{x=[0,\Delta)} \cfrac{\bs \alpha e^{\bs S(x_1+x_0+x)}\bs s}{\bs \alpha e^{\bs S x_0} \bs e}h_{ij}^{++}(\lambda, x_1)f(\Delta-x)\wrt x\wrt x_1
+%	\end{align}
+%	and 
+%	\begin{align}
+%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E[\psi(X(t))1(\varphi(t)=j,X(s)\in\calD_{\ell_0}, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid X(0)=x_0, \varphi(0)=i]\wrt t \nonumber
+%		\\&=  \int_{x=0}^{\Delta-x_0} h_{ij}^{++}(\lambda, x)\psi(X_0 + x)\wrt x
+%	\end{align}
+%	In Property \ref{properties: 2} take \(g(x) = h_{ij}^{--}(\lambda, x)\), which states 
+%	\begin{align}
+%		&\int_{x_1=0}^\infty \int_{x=0}^\Delta\cfrac{\bs \alpha e^{\bs S(x_1+x_0+x)}\bs s}{\bs \alpha e^{\bs S x_0} \bs e}h_{ij}^{++}(\lambda, x_1)f(\Delta-x)\wrt x\wrt x_1 \nonumber
+%		\\& = \int_{x=0}^{\Delta}h_{ij}^{++}(\lambda,\Delta - x_0 - x)1(x+x_0\leq \Delta-\varepsilon)f(\Delta - x)\wrt x + \int_{x=0}^\Delta r_{\bs v}(x_0,x)\psi(x)\wrt x. 
+%	\end{align}
+%	The second term is less than or equal to 
+%	\[F\int_{x=0}^\Delta r_{\bs v}(x_0,x)\wrt x = FR_{{\bs v},1}.\]
+%	The first term is 
+%	\[\int_{x=0}^{\Delta-x_0}h_{ij}^{++}(\lambda,\Delta - x_0 - x)f(\Delta - x)\wrt x - \int_{x=\Delta-x_0-\varepsilon}^{\Delta-x_0}h_{ij}^{++}(\lambda,\Delta - x_0 - x)f(\Delta - x)\wrt x.\]
+%	Now 
+%	\[\int_{x=\Delta-x_0-\varepsilon}^{\Delta-x_0}h_{ij}^{++}(\lambda,\Delta - x_0 - x)f(\Delta - x)\wrt x\leq GF\varepsilon\]
+%	and 
+%	\[\int_{x=0}^{\Delta-x_0}h_{ij}^{++}(\lambda,\Delta - x_0 - x)f(\Delta - x)\wrt x=\int_{x=0}^{\Delta-x_0}h_{ij}^{++}(\lambda,x)\psi(x_0+x)\wrt x.\]
+%\end{proof}
+%
+%
+%\begin{cor}\label{cor: Dcoajc2222}
+%	Let \(\psi:\calD_{\ell_0}\to \mathbb R\) be bounded, \(|\psi(x)|\leq F\), and Lipschitz continuous. Then, for \(x_0\in(y_{\ell_0}, y_{\ell+1}),\) \(k\in\calS_{0+}\), \(i\in\calS_-\), \(j\in\calS_-\cup\calS_{-0}\), there exists \(r_{10}^{(p)}\to 0\) as \(p \to \infty\), 
+%	\begin{align}
+%		\left|\int_{x\in\calD_{\ell_0}} \widehat f_{0,-0,-}^{\ell_0}(x,i,j;j,x_0)\psi(x)\wrt x  \to \int_{x\in\calD_{\ell_0}} \widehat \mu_{0,-0,-}^{\ell_0}(x,i,j;k,x_0)\psi(x)\wrt x\right|\leq r_{10}^{(p)}.\label{eqn:xvasfv}
+%	\end{align}
+%	Similarly, for \(k\in\calS_{0-}\), \(i\in\calS_+\), \(j\in\calS_+\cup\calS_{+0}\)
+%	\begin{align}
+%		\left|\int_{x\in\calD_{\ell_0}} \widehat f_{0,+0,+}^{\ell_0}(x,i,j;j,x_0)\psi(x)\wrt x  - \int_{x\in\calD_{\ell_0}} \widehat \mu_{0,+0,+}^{\ell_0}(x,i,j;k,x_0)\psi(x)\wrt x\right|\leq r_{10}^{(p)}.\label{eqn:!124msfvcds}
+%	\end{align}
+%\end{cor}
+%\begin{proof}[Proof of Corollary \ref{cor: Dcoajc}]
+%	We show the result for (\ref{eqn:xs}) only, with the result for (\ref{eqn:!124mcds}) following analogously. 
+%	
+%	Observe that, for \(k\in\calS_{0+}\), \(i\in\calS_-\), \(j\in\calS_-\cup\calS_{-0}\), 
+%	\begin{align}
+%		&\int_{x\in\calD_{\ell_0}} \widehat f_{0,-0,-}^{\ell_0,(p)}(x,i,j;j,x_0)\psi(x)\wrt x \nonumber 
+%		%
+%		\\&{}= \vligne{\lambda \bs I - \bs T_{00}}^{-1}_{ki}\int_{x\in\calD_{\ell_0}}\int_{x_1=0}^\infty \bs k(x_0) \bs D e^{\bs S x_1} {\bs v}(x)h_{ij}^{--}(\lambda,x_1)\wrt x_1\psi(x)\wrt x,
+%	\end{align}
+%	and 
+%	\begin{align}
+%		\int_{x\in\calD_{\ell_0}} \widehat \mu_{0,-0,-}^{\ell_0}(x,i,j;k,x_0)\psi(x)\wrt x \nonumber  = \vligne{\lambda \bs I - \bs T_{00}}^{-1}_{ki}\int_{x=0}^{x_0} h_{ij}^{--}(\lambda,x_0-x)\psi(x)\wrt x 
+%	\end{align}
+%	These terms appear in the proof of Corollary~\ref{lem: ppp} and using arguments applied there we can show
+%	\begin{align}
+%		\int_{x\in\calD_{\ell_0}} \widehat f_{0,-0,-}^{\ell_0,(p)}(x,i,j;j,x_0)\psi(x)\wrt x  \to \int_{x\in\calD_{\ell_0}} \widehat \mu_{0,-0,-}^{\ell_0}(x,i,j;k,x_0)\psi(x)\wrt x ,\label{eqn:xssgwg}
+%	\end{align}
+%	and therefore there exists a bound \(r_{10}^{(p)}\) such that 
+%	\[\left|\int_{x\in\calD_{\ell_0}} \widehat f_{0,-0,-}^{\ell_0,(p)}(x,i,j;j,x_0)\psi(x)\wrt x  \to \int_{x\in\calD_{\ell_0}} \widehat \mu_{0,-0,-}^{\ell_0}(x,i,j;k,x_0)\psi(x)\wrt x\right|\leq r_{10}^{(p)} ,\]
+%	and \(r_{10}^{(p)}\to 0\) as \(p\to\infty\). 
+%\end{proof}
+%
+%\begin{cor}\label{corL Tta} For \(i\in\mathcal S_-,j\in\mathcal S_-\cup\calS_{-0}\), \(x_0\in[0,\Delta)\), 
+%	\begin{align}
+%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb P(\bar X^{(p)}(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \varphi(0)=i) \wrt t \nonumber 
+%		%
+%		\\& \to \int_{t=0}^\infty e^{-\lambda t}\mathbb P( X(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid X(0)= x_0, \varphi(0)=i) \wrt t \label{eqn: ffaA}
+%	\end{align}
+%	as \(p\to\infty\).
+%\end{cor}
+%\begin{proof}
+%	From the convergence of Laplace transforms in Lemma~\ref{lem: ppp} and the Continuity Theorem \ref{thm: ext cont thm} then 
+%	\begin{align}
+%		&  \mathbb E[f(\bar X^{(p)}(t))1(\varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j) \mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \varphi(0)=i]  \nonumber 
+%		\\& \to \mathbb E[\psi(X(t)) 1(\varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j) \mid X(0)=x_0, \varphi(0)=i],
+%	\end{align}
+%	as \(p\to\infty\), for every bounded, Lipschitz function \(f\). By the Portmanteau Theorem, then 
+%	\begin{align}
+%		& \mathbb P(\bar X^{(p)}(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \varphi(0)=i)   \nonumber 
+%		%
+%		\\& \to \mathbb P( X(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid X(0)= x_0, \varphi(0)=i) 
+%	\end{align}
+%	weakly as \(p\to\infty\). In addition 
+%	\begin{align}
+%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb P(\bar X^{(p)}(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \varphi(0)=i) \wrt t\nonumber 
+%		\\& \leq \int_{x=0}^\infty  h_{ij}^{--}(\lambda, x)\wrt x ,
+%	\end{align}
+%	which is bounded as a function of \(p\). Hence we can apply the Continuity Theorem \ref{thm: ext cont thm} again and claim that 
+%	\begin{align}
+%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb P(\bar X^{(p)}(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \varphi(0)=i) \wrt t \nonumber 
+%		%
+%		\\& \to \int_{t=0}^\infty e^{-\lambda t}\mathbb P( X(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid X(0)= x_0, \varphi(0)=i) \wrt t
+%	\end{align}
+%	as \(p\to\infty,\) as required. 
+%\end{proof}
+%
+%
+%
+%
+%
+%
+%

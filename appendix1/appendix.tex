@@ -1,15 +1,15 @@
 %!TEX root = ../thesis.tex
 \chapter{Technical results for covergence}\label{app:tand}
-In this Appendix we show various bounds which are required to prove the convergence of the QBD-RAP to the fluid queue on no change of level, asstated in Theorem~\ref{thm: a thm!}. First, in Appendix~\ref{appendix: int one}, we prove results which are ultimately used to show convergence of the QBD-RAP to the fluid queue on the event that there is no change of phase before first change of level. Then, in Appendix~\ref{appendix: many}, we prove results which are ultimately used show the convergence of the QBD-RAP to the fluid queue on the event that there is are \(m>0\) changes of phase before first change of level.
+In this Appendix we show various bounds which are required to prove the convergence of the QBD-RAP to the fluid queue on no change of level as stated in Theorem~\ref{thm: a thm!}. %First, in Appendix~\ref{appendix: int one}, we prove results which are ultimately used to show convergence of the QBD-RAP to the fluid queue on the event that there is no change of phase before first change of level. Then, in Appendix~\ref{appendix: many}, we prove results which are ultimately used show the convergence of the QBD-RAP to the fluid queue on the event that there is are \(m>0\) changes of phase before first change of level.
 
-As with Section~\ref{sec: conv}, we use the superscript \((p)\) to denote dependence on the underlying choice of matrix exponential random variable \(Z^{(p)}\). However, to simplify notation, we may omit the super script \((p)\) where it is not explicitly needed. Other notations, previously defined and which depend on \(p\) are \(\bs\alpha^{(p)},\) \(\bs \alpha_0^{i,\ell_0,(p)}(x_0),\) \(\bs S^{(p)},\) \(\bs s^{(p)},\) \(\varepsilon^{(p)},\) \({\bs v}^{(p)}(x),\) \(R_{{\bs v},1}^{(p)},\) \(R_{{\bs v},2}^{(p)},\) \(\bs D^{(p)},\) \( \mathcal A^{(p)}\).
+As with Chapter~\ref{sec: conv}, we use the superscript \((p)\) to denote dependence on the underlying choice of matrix exponential random variable \(Z^{(p)}\). However, to simplify notation, we may omit the super script \((p)\) where it is not explicitly needed. Other notations, previously defined and which depend on \(p\) are \(\bs\alpha^{(p)},\) \(\bs \alpha_0^{i,\ell_0,(p)}(x_0),\) \(\bs S^{(p)},\) \(\bs s^{(p)},\) \(\varepsilon^{(p)},\) \({\bs v}^{(p)}(x),\) \(R_{{\bs v},1}^{(p)},\) \(R_{{\bs v},2}^{(p)},\) \(\bs D^{(p)},\) \( \mathcal A^{(p)}\).
 
 Throughout this Appendix, we show results for an arbitrary parameter \(\varepsilon>0\). Keep in mind the ultimate intention is to show convergence, for which we choose this parameter to be \(\varepsilon^{(p)}=\var\left(Z^{(p)}\right)^{1/3}\). 
 
-\section{One integral}\label{appendix: int one}
- Here we show a collection of results that show that integrating functions against a ME density function, or against the density function of a ME conditional on the ME-life-time surviving until some time \(u<\Delta-\varepsilon\) where \(\Delta = \mathbb E[Z]\) is the mean of the matrix exponential distribution, approximates integrating said function against a Kronecker delta situated at \(\Delta\), provided the variance of the ME is sufficiently low. 
+%\section{One integral}\label{appendix: int one}
+First we show a collection of results that prove that integrating functions against a ME density function, or against the density function of a ME conditional on the ME-life-time surviving until some time \(u<\Delta-\varepsilon\) where \(\Delta = \mathbb E[Z]\) is the mean of the matrix exponential distribution, approximates integrating said function against a Kronecker delta situated at \(\Delta\), provided the variance of the ME is sufficiently low. 
 
- The next result is used in the proof of Theorem~\ref{thm: a thm!} to prove convergence on the event that there is no change of phase before the first change of level. 
+ The next result is used in the proof of Theorem~\ref{thm: a thm!} to prove convergence on the event that there is no change of phase from \(\calS_+\) to \(\calS_-\) or \(\calS_-\) to \(\calS_+\) before the first change of level. 
  \begin{lem}\label{lem: Dcoajc}
 	Let \(\psi:[0,\Delta)\to \mathbb R\) be bounded, \(\psi(x)\leq F\). Then, for \(x\in\calD_{\ell_0,j}\), \(\ell_0\in\mathcal K\setminus\{-1,K+1\}\), \(\lambda > 0\), \(q\in\{+,-\}\), 
 	\begin{align}
@@ -50,7 +50,7 @@ Throughout this Appendix, we show results for an arbitrary parameter \(\varepsil
                 Using analogous arguments we can show  (\ref{eqn: anue}) for \(q=-\).
 \end{proof}
 
-Next, we proceed to show results needed to prove convergence on the event that there are one or more changes of phase before the first change of level. The expressions arising from the QBD-RAP which we wish to show converge have the form 
+Next, we proceed to show results needed to prove convergence on the event that there are one or more changes of phase from \(\calS_+\) to \(\calS_-\) or \(\calS_-\) to \(\calS_+\) before the first change of level. The expressions arising from the QBD-RAP which we wish to show converge have the form 
 \begin{align}
 	\Bigg| \int_{x_1=0}^\infty g_1(x_1) \bs k(x_0) e^{\bs{S}x_1}\wrt x_1\bs D 
 			\left[\prod_{k=2}^{n-1}\int_{x_k=0}^\infty g_k(x_k) e^{\bs{S}x_k} \wrt x_k \bs D\right] \int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n {\bs v}(x), \label{eqn: salkdjgaf} 
@@ -103,7 +103,7 @@ Recall the row vector function \(\bs k(x): [0,\infty)\to \mathcal A \subset \mat
 	\begin{align}
 		&\int_{x_{k+1}=0}^\infty \int_{u_k=\Delta-\varepsilon}^\infty \bs k(x_0)\mathcal I_{1,k}(u_k) \mathcal J_{k+1,n}(u_k,x_{k+1})\bs v(x) \nonumber
 		%
-            	\\&\leq \cfrac{1}{\bs \alpha e^{\bs{S}x_0}\bs e}\left(\left(2\varepsilon + \cfrac{\var(Z)}{\varepsilon}\right) G^2 \widehat G^{n-2} G_{\bs v} + G\widehat G^{n}O(\var(Z))\right)  =: |r_4(n)|. \label{eqn: the result tail}
+            	\\&\leq \cfrac{1}{\bs \alpha e^{\bs{S}x_0}\bs e}\left(\left(2\varepsilon + \cfrac{\var(Z)}{\varepsilon}\right) G^2 \widehat G^{n-2} G_{\bs v} + G\widehat G^{n}\widetilde G_{\bs v}\right)  =: |r_4(n)|. \label{eqn: the result tail}
 	\end{align}
 \end{cor}
 The structure of the proof is as follows. First, we bound \(\bs k(x_0)\mathcal I_{1,k}(u_k) \). Next, we decompose (\ref{eqn: the result tail}) into 
@@ -209,7 +209,7 @@ Referring to the Properties~\ref{properties: some props}, we can decompose the c
 			&\cfrac{1}{\bs \alpha e^{\bs{S} x_0 }\bs e}G \widehat G^{k-1}
 			\int_{x_{k+1}=0}^\infty \int_{u_k=\Delta-\varepsilon}^\infty \bs \alpha e^{\bs{S}u_k}\bs e g_{k+1}(x_{k+1}) \wrt u_k \wrt x_{k+1}\widehat G^{n-k-2} G G_{\bs v}\nonumber 
 			%
-			\\&=\cfrac{1}{\bs \alpha e^{\bs{S} x_0}\bs e}G \widehat G^{k-1}  
+			\\&\leq \cfrac{1}{\bs \alpha e^{\bs{S} x_0}\bs e}G \widehat G^{k-1}  
 			\int_{u_k=\Delta-\varepsilon}^\infty \bs \alpha e^{\bs{S}u_k}\bs e \wrt u_k \widehat G \widehat G^{n-k-2} G G_{\bs v}. \label{eqnL afejhm789}
 		\end{align}
 		Now, observe that 
@@ -275,10 +275,10 @@ To bound the second term in (\ref{eqn: JABHwj2}) we instead bound
 		\\&\leq \cfrac{1}{\bs \alpha e^{\bs{S}x_0}\bs e}G\widehat G^{n-1} \bs \alpha (-\bs S)^{-1} \int_{x_n=0}^\infty g_{n}(x_n) \wrt x_n \widetilde{\bs w}(x),
 	\end{align*}
 	by Property \ref{properties: -1}. Integrating over \(x_n\), gives
-	\begin{align*}
+	\begin{align}
 		\cfrac{1}{\bs \alpha e^{\bs{S}x_0}\bs e}G\widehat G^{n} \bs \alpha (-\bs S)^{-1} \widetilde{\bs w}(x) 
-		&=\cfrac{1}{\bs \alpha e^{\bs{S}x_0}\bs e}G\widehat G^{n}O(\var(Z)),
-	\end{align*}
+		&=\cfrac{1}{\bs \alpha e^{\bs{S}x_0}\bs e}G\widehat G^{n}\widetilde G_{\bs v},\label{eqn:FGHJSjjs sj}
+	\end{align}
 	by Property \ref{properties: 0}.
 
 	Combining all the bounds proves the result. 

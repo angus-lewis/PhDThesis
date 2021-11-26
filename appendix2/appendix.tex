@@ -1,7 +1,32 @@
+%!TEX root = ../thesis.tex
 \chapter{Properties of closing operators}\label{appendix: sec: 2}
-This appendix is dedicated to proving that the closing operators in (\ref{eqn: density approx 4+}), (\ref{eqn: density approx 3+}) and (\ref{eqn: density approx aug}) have the Properties \ref{properties: some props}. 
+This appendix is dedicated to proving that the closing operators in (\ref{eqn: density approx aug}), (\ref{eqn: density approx 3+}), and (\ref{eqn: density approx 4+}) have the Properties \ref{properties: some props}. 
 
 \section{The closing operator \(e^{\bs S x}\bs s\)}
+\begin{cor}
+	The closing operator \(e^{\bs S x}\bs s\) has Property~\ref{properties: -2}.
+	
+	For \(\bs a\in\mathcal A,\, u\geq 0, \)
+	\[\int_{x=0}^\Delta \bs a e^{\bs Su}e^{\bs Sx}\bs s\wrt x \leq \bs a e^{\bs Su}\bs e.\]	
+\end{cor}
+\begin{proof}
+	\[\int_{x=0}^\Delta \bs a e^{\bs Su}e^{\bs Sx}\bs s\wrt x = \bs a e^{\bs Su}\bs e-\bs a e^{\bs S(u+\Delta)}\bs e\]
+\end{proof}
+For the closing operator \(e^{\bs Sx}\bs s\) we may set \(\widetilde w(x) = \bs 0\), so Properties~\ref{properties: -1} and \ref{properties: 0} hold trivially.
+\begin{lem}\label{lem: akc}
+The closing operator \(e^{\bs Sx}\bs s\) has Property~\ref{properties: 1}.
+
+For any valid orbit, \(\bs a\in\mathcal A\), \(x,u\geq 0\), 
+        \begin{align*}
+        		\int_{x_n=0}^\infty \bs a e^{\bs{S}(x+x_n+u)}\bs s = \bs a e^{\bs{S}(x+u)}\bs e &\leq \bs a e^{\bs{S}u}\bs e. 
+	\end{align*}
+\end{lem}
+\begin{proof}
+	For any valid orbit, \(\bs a\in\mathcal A\), 
+        \begin{align*}
+        		\bs a e^{\bs{S}(x+u)}\bs e &= \mathbb P(Z>x+u) \leq\mathbb P(X>u) = \bs a e^{\bs Su} \bs e. 
+	\end{align*}
+\end{proof}
 \begin{cor}\label{cor: cond bnd 2 V}
 	The closing operator \(e^{\bs S x}\bs s\) has Property~\ref{properties: 2}.
 
@@ -32,18 +57,6 @@ This appendix is dedicated to proving that the closing operators in (\ref{eqn: d
 	\end{align*}
 \end{proof}
 
-\begin{lem}\label{lem: akc}
-For any valid orbit, \(\bs a\in\mathcal A\), \(x,u\geq 0\), 
-        \begin{align*}
-        		\int_{x_n=0}^\infty \bs a e^{\bs{S}(x+x_n+u)}\bs s = \bs a e^{\bs{S}(x+u)}\bs e &\leq \bs a e^{\bs{S}u}\bs e. 
-	\end{align*}
-\end{lem}
-\begin{proof}
-	For any valid orbit, \(\bs a\in\mathcal A\), 
-        \begin{align*}
-        		\bs a e^{\bs{S}(x+u)}\bs e &= \mathbb P(Z>x+u) \leq\mathbb P(X>u) = \bs a e^{\bs Su} \bs e. 
-	\end{align*}
-\end{proof}
 \begin{lem}\label{lem:macmnm}
 	For any valid orbit, \(\bs a\in\mathcal A\), \(x\geq 0\), 
         \begin{align*}
@@ -67,7 +80,20 @@ By the definition of \(\bs D\) and Lemma~\ref{lem: akc},
 
 Let \(\bs u^{(p)}(x)\) be the closing operator such that, for \(\bs a^{(p)} \in\mathcal A^{(p)}\), \(x\in[0,\Delta)\),
 \[\bs a^{(p)} {\bs u}^{(p)}(x) = \bs a^{(p)} \left(e^{\bs{S}^{(p)}x}\bs s^{(p)} + e^{\bs{S}^{(p)}(2\Delta-x)}\bs s^{(p)}\right).\]
+\begin{lem}
+	The closing operator \(\bs u(x)\) has the property \ref{properties: -2}. 
+	
+	For \(\bs a\in\mathcal A\), \(u\geq 0\), 
+	\[\int_{x=0}^\Delta \bs a e^{\bs Su}\bs u(x)\wrt x\leq\bs ae^{\bs Su}\bs e\]
+\end{lem}
+\begin{proof}
+	\[\int_{x=0}^\Delta \bs a e^{\bs Su}\bs u(x)\wrt x=\bs ae^{\bs Su}\bs e-\bs ae^{\bs S(u+2\Delta)}\bs e\leq \bs ae^{\bs Su}\bs e.\]
+\end{proof}
+For the closing operator \(\bs u(x)\) we may set \(\widetilde w(x) = \bs 0\), so Properties~\ref{properties: -1} and \ref{properties: 0} hold trivially.
+
 \begin{lem}\label{lem: akxnj}
+	The closing operator \(\bs u(x)\) has the Property~\ref{properties: 1}.
+
 	For \(x\in[0,\Delta),u\geq 0\),  
         \begin{align*}
         		\bs a   e^{\bs Su}(-\bs S)^{-1} {\bs u}(x) &\leq 2 \bs a e^{\bs Su} \bs e.
@@ -97,6 +123,8 @@ Let \(\bs a   \in \mathcal A\) be arbitrary. By definition
 %\end{rem}
 
 \begin{cor}\label{cor: cond bnd 2 U}
+	The closing operator \(\bs u(x)\) has the Property~\ref{properties: 1}.
+
 	Let \(g\) be a function satisfying the Assumptions \ref{asu: g}. For \(u\leq \Delta-\varepsilon \), \(v\in[ 0,\Delta)\), 
 	\[\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} {\bs u}(v)g(x)\wrt x = g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon) + r_{{\bs u}} (u,v),\]
 	where 
@@ -179,22 +207,48 @@ The error term \(r_{{\bs u}}(u,v)\) depends on \(p\) so we should write \(r_{{\b
 
 Let \(\widetilde{\bs u}^{(p)}(x)\) be the closing operator such that, for \(\bs a^{(p)} \in\mathcal A^{(p)}\), \(x\in[0,\Delta)\),
 \[\bs a^{(p)} \widetilde{\bs u}^{(p)}(x) = \bs a^{(p)} \left(e^{\bs{S}^{(p)}x} + e^{\bs{S}^{(p)}(2\Delta-x)}\right)\left[I-e^{\bs S^{(p)} 2\Delta}\right]^{-1}\bs s^{(p)}.\]
-\begin{lem}\label{lem: akxnj2}
-	For \(x\in[0,\Delta),u\geq 0\),  
-        \begin{align*}
-        		\bs \alpha   e^{\bs Su}(-\bs S)^{-1} \widetilde{\bs u}(x) &\leq 2 \bs \alpha e^{\bs Su} \bs e + \cfrac{\var(Z)}{\Delta^2}\cfrac{\pi^2}{4}.
-	\end{align*}
+Notice that 
+\[\bs a^{(p)} \widetilde{\bs u}^{(p)}(x) = \bs a^{(p)} \left(e^{\bs{S}^{(p)}x} + e^{\bs{S}^{(p)}(2\Delta-x)}\right)\sum_{n=0}^\infty e^{\bs S2n\Delta}\bs s^{(p)}.\]
+We decompose the closing operator \(\displaystyle \widetilde{\bs u}^{(p)}(x)=\bs w^{(p)}(x)+\widetilde{\bs w}^{(p)}(x),\) where \(\bs w^{(p)}(x) = \bs u^{(p)}(x)\) and \(\widetilde{\bs w}^{(p)}(x) = \bs a^{(p)} \left(e^{\bs{S}^{(p)}x} + e^{\bs{S}^{(p)}(2\Delta-x)}\right)\sum_{n=1}^\infty e^{\bs S2n\Delta}\bs s^{(p)}\)
+
+\begin{lem}
+	The closing operator \(\widetilde{\bs u}(x)\) has Property~\ref{properties: -2}.
+	
+	For \(\bs a \in\mathcal A\), \(u\geq 0\), 
+	\[\int_{x=0}^\Delta \bs a e^{\bs Su}\widetilde{\bs u}(x)\wrt x =\bs a e^{\bs Su}\bs e. \]
 \end{lem}
 \begin{proof}
-	First observe that 
 	\begin{align*}
-		&\bs \alpha e^{\bs Su}(-\bs S)^{-1} \left(e^{\bs{S} x} + e^{\bs{S} (2\Delta-x)}\right)\left[I-e^{\bs S  2\Delta}\right]^{-1}\bs s 
-		\\ &=\bs \alpha \left(e^{\bs{S} x} + e^{\bs{S} (2\Delta-x)}\right)\sum_{n=0}^\infty e^{\bs S  2n\Delta} \bs s 
-		\\ &=\bs \alpha e^{\bs Su}(-\bs S)^{-1} \bs u(x) + \bs \alpha e^{\bs Su}(-\bs S)^{-1} \left(e^{\bs{S} x} + e^{\bs{S} (2\Delta-x)}\right)\sum_{n=1}^\infty e^{\bs S  2n\Delta} \bs s.
+		\int_{x=0}^\Delta \bs a e^{\bs Su}\widetilde{\bs u}(x)\wrt x &= \bs a  e^{\bs Su} (\bs S)^{-1} \left( e^{\bs S\Delta} - I + e^{\bs S2\Delta} - e^{\bs S\Delta}\right)\left[I-e^{\bs S  2\Delta}\right]^{-1}\bs s
+		\\ &= \bs a  e^{\bs Su}(-\bs S)^{-1}\bs s
+		\\ &= \bs a  e^{\bs Su}\bs e.
 	\end{align*}
-	By Lemma \ref{lem: akxnj}, the first term is bounded by \(2\bs \alpha e^{\bs S u}\bs e\). 
+\end{proof}
+
+\begin{lem}
+	The closing operator \(\widetilde{\bs u}(x)\) has Property~\ref{properties: -1}.
 	
-	The second term is 
+	For \(\bs a \in\mathcal A\), \(u\geq 0\), 
+	\[\bs a e^{\bs S(u+v)}(-\bs S)^{-1}\widetilde{\bs u}(x) \leq \bs a e^{\bs Su}(-\bs S)^{-1}\widetilde{\bs u}(x) . \]
+\end{lem}
+\begin{proof}
+	\begin{align*}
+		 \bs a e^{\bs S(u+v)}(-\bs S)\widetilde{\bs u}(x)\wrt x &= \bs a e^{\bs S(x+u+v+2n\Delta)}\bs e + \bs a  e^{\bs S(2\Delta-x + u + v + 2n\Delta)} \bs e
+		\\ &\leq \bs a e^{\bs S(x+u+2n\Delta)}\bs e + \bs a  e^{\bs S(2\Delta-x + u + 2n\Delta)} \bs e
+		\\ &= \bs a e^{\bs Su}(-\bs S)\widetilde{\bs u}(x)\wrt x.
+	\end{align*}
+\end{proof}
+
+\begin{lem}\label{lem: akxnj2}
+	The closing operator \(\widetilde{\bs u}(x)\) has Property~\ref{properties: 0}.
+
+	For \(x\in[0,\Delta),u\geq 0\),  
+        \begin{align}
+        		\bs \alpha   e^{\bs Su}(-\bs S)^{-1} \widetilde{\bs w}(x) &\leq \cfrac{\var(Z)}{\Delta^2}\cfrac{\pi^2}{4}.\label{eqn: weha cjcweyugeiow}
+	\end{align}
+\end{lem}
+\begin{proof}
+	The espression on the left-hand side of (\ref{eqn: weha cjcweyugeiow}) is 
 	\begin{align*}
 		&\bs \alpha e^{\bs Su}(-\bs S)^{-1} \left(e^{\bs{S} x} + e^{\bs{S} (2\Delta-x)}\right)\sum_{n=1}^\infty e^{\bs S  2n\Delta} \bs s
 		\\&= \bs \alpha e^{\bs Su} \left(e^{\bs{S} x} + e^{\bs{S} (2\Delta-x)}\right)\sum_{n=1}^\infty e^{\bs S  2n\Delta} \bs e
@@ -214,7 +268,7 @@ Let \(\widetilde{\bs u}^{(p)}(x)\) be the closing operator such that, for \(\bs 
 	\[\cfrac{\pi^2}{6} = \cfrac{1}{4}\cfrac{\pi^2}{6} + \sum_{n=0}^\infty \cfrac{1}{(1+2n)^2}\]
 	and therefore 
 	\[\sum_{n=0}^\infty \cfrac{1}{(1+2n)^2} = \cfrac{\pi^2}{8}.\]
-	Thus, the second term less than or equal to 
+	Thus, (\ref{eqn: weha cjcweyugeiow}) is less than or equal to 
 	\[\cfrac{\var(Z)}{\Delta^2}\cfrac{\pi^2}{4}.\]
 \end{proof}
 
@@ -228,7 +282,11 @@ Let \(\widetilde{\bs u}^{(p)}(x)\) be the closing operator such that, for \(\bs 
 %	Now apply Lemma~\ref{lem: akxnj} to the right-hand side. 
 %\end{rem}
 
+Since \(\bs w(x)=\bs u(x)\), then from the results of the previous section then \(\widetilde{\bs u}(x)\) has Property~\ref{properties: 1}.
+
 \begin{cor}\label{cor: cond bnd 2 U2}
+	The closing operator \(\widetilde{\bs u}(x)\) has Property~\ref{properties: 2}.
+
 	Let \(g\) be a function satisfying the Assumptions \ref{asu: g}. For \(u\leq \Delta-\varepsilon \), \(v\in[ 0,\Delta)\), 
 	\[\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} \widetilde{\bs u}(v)g(x)\wrt x = g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon) + r_{\widetilde{\bs u}} (u,v),\]
 	where 
