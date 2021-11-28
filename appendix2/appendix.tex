@@ -1,6 +1,6 @@
 %!TEX root = ../thesis.tex
 \chapter{Properties of closing operators}\label{appendix: sec: 2}
-This appendix is dedicated to proving that the closing operators in (\ref{eqn: density approx aug}), (\ref{eqn: density approx 3+}), and (\ref{eqn: density approx 4+}) have the Properties \ref{properties: some props}. 
+This appendix is dedicated to proving that the closing operators in (\ref{eqn: density approx aug}), (\ref{eqn: density approx 3+}), and (\ref{eqn: density approx 4+}) have the Properties \ref{properties: some props}.  
 
 \section{The closing operator \(e^{\bs S x}\bs s\)}
 \begin{cor}
@@ -12,13 +12,13 @@ This appendix is dedicated to proving that the closing operators in (\ref{eqn: d
 \begin{proof}
 	\[\int_{x=0}^\Delta \bs a e^{\bs Su}e^{\bs Sx}\bs s\wrt x = \bs a e^{\bs Su}\bs e-\bs a e^{\bs S(u+\Delta)}\bs e\]
 \end{proof}
-For the closing operator \(e^{\bs Sx}\bs s\) we may set \(\widetilde w(x) = \bs 0\), so Properties~\ref{properties: -1} and \ref{properties: 0} hold trivially.
+For the closing operator \(e^{\bs Sx}\bs s\) we may set \(\widetilde{\bs w}(x) = \bs 0\), so Properties~\ref{properties: -1} and \ref{properties: 0} hold trivially.
 \begin{lem}\label{lem: akc}
-The closing operator \(e^{\bs Sx}\bs s\) has Property~\ref{properties: 1}.
+The closing operator \(\bs v(x) = e^{\bs Sx}\bs s\) has Property~\ref{properties: 1}.
 
 For any valid orbit, \(\bs a\in\mathcal A\), \(x,u\geq 0\), 
-        \begin{align*}
-        		\int_{x_n=0}^\infty \bs a e^{\bs{S}(x+x_n+u)}\bs s = \bs a e^{\bs{S}(x+u)}\bs e &\leq \bs a e^{\bs{S}u}\bs e. 
+    \begin{align*}
+		\int_{x_n=0}^\infty \bs a e^{\bs{S}(x+x_n+u)}\bs s = \bs a e^{\bs{S}(x+u)}\bs e &\leq \bs a e^{\bs{S}u}\bs e. 
 	\end{align*}
 \end{lem}
 \begin{proof}
@@ -57,24 +57,24 @@ For any valid orbit, \(\bs a\in\mathcal A\), \(x,u\geq 0\),
 	\end{align*}
 \end{proof}
 
-\begin{lem}\label{lem:macmnm}
-	For any valid orbit, \(\bs a\in\mathcal A\), \(x\geq 0\), 
-        \begin{align*}
-        		\bs a\bs D e^{\bs{S}x}\bs e &\leq 1. 
-	\end{align*}
-\end{lem}
-\begin{proof}
-By the definition of \(\bs D\) and Lemma~\ref{lem: akc},
-	\begin{align*}
-        		\bs a\bs D e^{\bs{S}x}\bs e &= \bs a \int_{u=0}^\infty e^{\bs Su}\bs s\cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e}\wrt ue^{\bs{S}x}\bs e
-		%
-		\\& \leq \bs a \int_{u=0}^\infty e^{\bs Su}\bs s\cfrac{\bs \alpha e^{\bs Su}\bs e}{\bs \alpha e^{\bs Su}\bs e}\wrt u
-		%
-		\\& = \bs a \int_{u=0}^\infty e^{\bs Su}\bs s\wrt u
-		%
-		\\& = \bs a \bs e = 1.
-	\end{align*}
-\end{proof}
+% \begin{lem}\label{lem:macmnm}
+% 	For any valid orbit, \(\bs a\in\mathcal A\), \(x\geq 0\), 
+%         \begin{align*}
+%         		\bs a\bs D e^{\bs{S}x}\bs e &\leq 1. 
+% 	\end{align*}
+% \end{lem}
+% \begin{proof}
+% By the definition of \(\bs D\) and Lemma~\ref{lem: akc},
+% 	\begin{align*}
+%         		\bs a\bs D e^{\bs{S}x}\bs e &= \bs a \int_{u=0}^\infty e^{\bs Su}\bs s\cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e}\wrt ue^{\bs{S}x}\bs e
+% 		%
+% 		\\& \leq \bs a \int_{u=0}^\infty e^{\bs Su}\bs s\cfrac{\bs \alpha e^{\bs Su}\bs e}{\bs \alpha e^{\bs Su}\bs e}\wrt u
+% 		%
+% 		\\& = \bs a \int_{u=0}^\infty e^{\bs Su}\bs s\wrt u
+% 		%
+% 		\\& = \bs a \bs e = 1.
+% 	\end{align*}
+% \end{proof}
 
 \section{The closing operator \(\bs a  \left(e^{\bs{S} x}  + e^{\bs{S} (2\Delta-x)}  \right)\bs s\)}
 
@@ -201,46 +201,47 @@ Let \(\bs a   \in \mathcal A\) be arbitrary. By definition
 	\end{align*}
 \end{proof}
 
-The error term \(r_{{\bs u}}(u,v)\) depends on \(p\) so we should write \(r_{{\bs u}}^{(p)}(u,v)\). The error term \(r_{{\bs u}}^{(p)}(u,v)\) has similar properties to \(r_3^{(p)}(u+v)\); we can prove that it converges point-wise to \(0\) only on some areas of its domain, however when we integrate the error against bounded functions on bounded domains, then the resulting integral tends to \(0\). 
+% The error term \(r_{{\bs u}}(u,v)\) depends on \(p\) so we should write \(r_{{\bs u}}^{(p)}(u,v)\). The error term \(r_{{\bs u}}^{(p)}(u,v)\) has similar properties to \(r_3^{(p)}(u+v)\); we can prove that it converges point-wise to \(0\) only on some areas of its domain, however when we integrate the error against bounded functions on bounded domains, then the resulting integral tends to \(0\). 
 
 \section{The closing operator \(\bs a  \left(e^{\bs{S} x} + e^{\bs{S} (2\Delta-x)}\right)\left[I-e^{\bs S  2\Delta}\right]^{-1}\bs s \)}
 
-Let \(\widetilde{\bs u}^{(p)}(x)\) be the closing operator such that, for \(\bs a^{(p)} \in\mathcal A^{(p)}\), \(x\in[0,\Delta)\),
-\[\bs a^{(p)} \widetilde{\bs u}^{(p)}(x) = \bs a^{(p)} \left(e^{\bs{S}^{(p)}x} + e^{\bs{S}^{(p)}(2\Delta-x)}\right)\left[I-e^{\bs S^{(p)} 2\Delta}\right]^{-1}\bs s^{(p)}.\]
+Let \(\widehat{\bs u}^{(p)}(x)\) be the closing operator such that, for \(\bs a^{(p)} \in\mathcal A^{(p)}\), \(x\in[0,\Delta)\),
+\[\bs a^{(p)} \widehat{\bs u}^{(p)}(x) = \bs a^{(p)} \left(e^{\bs{S}^{(p)}x} + e^{\bs{S}^{(p)}(2\Delta-x)}\right)\left[I-e^{\bs S^{(p)} 2\Delta}\right]^{-1}\bs s^{(p)}.\]
 Notice that 
-\[\bs a^{(p)} \widetilde{\bs u}^{(p)}(x) = \bs a^{(p)} \left(e^{\bs{S}^{(p)}x} + e^{\bs{S}^{(p)}(2\Delta-x)}\right)\sum_{n=0}^\infty e^{\bs S2n\Delta}\bs s^{(p)}.\]
-We decompose the closing operator \(\displaystyle \widetilde{\bs u}^{(p)}(x)=\bs w^{(p)}(x)+\widetilde{\bs w}^{(p)}(x),\) where \(\bs w^{(p)}(x) = \bs u^{(p)}(x)\) and \(\widetilde{\bs w}^{(p)}(x) = \bs a^{(p)} \left(e^{\bs{S}^{(p)}x} + e^{\bs{S}^{(p)}(2\Delta-x)}\right)\sum_{n=1}^\infty e^{\bs S2n\Delta}\bs s^{(p)}\)
+\[\bs a^{(p)} \widehat{\bs u}^{(p)}(x) = \bs a^{(p)} \left(e^{\bs{S}^{(p)}x} + e^{\bs{S}^{(p)}(2\Delta-x)}\right)\sum_{n=0}^\infty e^{\bs S2n\Delta}\bs s^{(p)}.\]
+We decompose the closing operator \(\displaystyle \widehat{\bs u}^{(p)}(x)=\bs w^{(p)}(x)+\widetilde{\bs w}^{(p)}(x),\) where \(\bs w^{(p)}(x) = \bs u^{(p)}(x)\) and 
+\[\widetilde{\bs w}^{(p)}(x) = \bs a^{(p)} \left(e^{\bs{S}^{(p)}x} + e^{\bs{S}^{(p)}(2\Delta-x)}\right)\sum_{n=1}^\infty e^{\bs S2n\Delta}\bs s^{(p)}.\]
 
 \begin{lem}
-	The closing operator \(\widetilde{\bs u}(x)\) has Property~\ref{properties: -2}.
+	The closing operator \(\widehat{\bs u}(x)\) has Property~\ref{properties: -2}.
 	
 	For \(\bs a \in\mathcal A\), \(u\geq 0\), 
-	\[\int_{x=0}^\Delta \bs a e^{\bs Su}\widetilde{\bs u}(x)\wrt x =\bs a e^{\bs Su}\bs e. \]
+	\[\int_{x=0}^\Delta \bs a e^{\bs Su}\widehat{\bs u}(x)\wrt x =\bs a e^{\bs Su}\bs e. \]
 \end{lem}
 \begin{proof}
 	\begin{align*}
-		\int_{x=0}^\Delta \bs a e^{\bs Su}\widetilde{\bs u}(x)\wrt x &= \bs a  e^{\bs Su} (\bs S)^{-1} \left( e^{\bs S\Delta} - I + e^{\bs S2\Delta} - e^{\bs S\Delta}\right)\left[I-e^{\bs S  2\Delta}\right]^{-1}\bs s
+		\int_{x=0}^\Delta \bs a e^{\bs Su}\widehat{\bs u}(x)\wrt x &= \bs a  e^{\bs Su} (\bs S)^{-1} \left( e^{\bs S\Delta} - I + e^{\bs S2\Delta} - e^{\bs S\Delta}\right)\left[I-e^{\bs S  2\Delta}\right]^{-1}\bs s
 		\\ &= \bs a  e^{\bs Su}(-\bs S)^{-1}\bs s
 		\\ &= \bs a  e^{\bs Su}\bs e.
 	\end{align*}
 \end{proof}
 
 \begin{lem}
-	The closing operator \(\widetilde{\bs u}(x)\) has Property~\ref{properties: -1}.
+	The closing operator \(\widehat{\bs u}(x)\) has Property~\ref{properties: -1}.
 	
 	For \(\bs a \in\mathcal A\), \(u\geq 0\), 
-	\[\bs a e^{\bs S(u+v)}(-\bs S)^{-1}\widetilde{\bs u}(x) \leq \bs a e^{\bs Su}(-\bs S)^{-1}\widetilde{\bs u}(x) . \]
+	\[\bs a e^{\bs S(u+v)}(-\bs S)^{-1}\widehat{\bs u}(x) \leq \bs a e^{\bs Su}(-\bs S)^{-1}\widehat{\bs u}(x) . \]
 \end{lem}
 \begin{proof}
 	\begin{align*}
-		 \bs a e^{\bs S(u+v)}(-\bs S)\widetilde{\bs u}(x)\wrt x &= \bs a e^{\bs S(x+u+v+2n\Delta)}\bs e + \bs a  e^{\bs S(2\Delta-x + u + v + 2n\Delta)} \bs e
+		 \bs a e^{\bs S(u+v)}(-\bs S)\widehat{\bs u}(x)\wrt x &= \bs a e^{\bs S(x+u+v+2n\Delta)}\bs e + \bs a  e^{\bs S(2\Delta-x + u + v + 2n\Delta)} \bs e
 		\\ &\leq \bs a e^{\bs S(x+u+2n\Delta)}\bs e + \bs a  e^{\bs S(2\Delta-x + u + 2n\Delta)} \bs e
-		\\ &= \bs a e^{\bs Su}(-\bs S)\widetilde{\bs u}(x)\wrt x.
+		\\ &= \bs a e^{\bs Su}(-\bs S)\widehat{\bs u}(x)\wrt x.
 	\end{align*}
 \end{proof}
 
 \begin{lem}\label{lem: akxnj2}
-	The closing operator \(\widetilde{\bs u}(x)\) has Property~\ref{properties: 0}.
+	The closing operator \(\widehat{\bs u}(x)\) has Property~\ref{properties: 0}.
 
 	For \(x\in[0,\Delta),u\geq 0\),  
         \begin{align}
@@ -282,34 +283,34 @@ We decompose the closing operator \(\displaystyle \widetilde{\bs u}^{(p)}(x)=\bs
 %	Now apply Lemma~\ref{lem: akxnj} to the right-hand side. 
 %\end{rem}
 
-Since \(\bs w(x)=\bs u(x)\), then from the results of the previous section then \(\widetilde{\bs u}(x)\) has Property~\ref{properties: 1}.
+Since \(\bs w(x)=\bs u(x)\), then from the results of the previous section then \(\widehat{\bs u}(x)\) has Property~\ref{properties: 1}.
 
 \begin{cor}\label{cor: cond bnd 2 U2}
-	The closing operator \(\widetilde{\bs u}(x)\) has Property~\ref{properties: 2}.
+	The closing operator \(\widehat{\bs u}(x)\) has Property~\ref{properties: 2}.
 
 	Let \(g\) be a function satisfying the Assumptions \ref{asu: g}. For \(u\leq \Delta-\varepsilon \), \(v\in[ 0,\Delta)\), 
-	\[\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} \widetilde{\bs u}(v)g(x)\wrt x = g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon) + r_{\widetilde{\bs u}} (u,v),\]
+	\[\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} \widehat{\bs u}(v)g(x)\wrt x = g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon) + r_{\widehat{\bs u}} (u,v),\]
 	where 
-	\[\left|r_{\widetilde{\bs u}} (u,v)\right|\leq r_{\bs u} (u,v) + \cfrac{G \varepsilon^2 \pi^2}{4\Delta^2}.\]
+	\[\left|r_{\widehat{\bs u}} (u,v)\right|\leq r_{\bs u} (u,v) + \cfrac{G \varepsilon^2 \pi^2}{4\Delta^2}.\]
 	Furthermore,  
 	\begin{align*}
-		&\int_{u=0}^{\Delta}| r_{\widetilde{\bs u}}(u,v)|\wrt u
-		\leq R_{{\widetilde{\bs u}},1},
+		&\int_{u=0}^{\Delta}| r_{\widehat{\bs u}}(u,v)|\wrt u
+		\leq R_{{\widehat{\bs u}},1},
 	\end{align*}
 	and
 	\begin{align*}
-		&\int_{v=0}^{\Delta}| r_{\widetilde{\bs u}}(u,v)|\wrt u
-		\leq R_{{\widetilde{\bs u}},2},
+		&\int_{v=0}^{\Delta}| r_{\widehat{\bs u}}(u,v)|\wrt u
+		\leq R_{{\widehat{\bs u}},2},
 	\end{align*}
 	where 
-	\[R_{{\widetilde{\bs u}},1} \leq R_{{{\bs u}},1} + \cfrac{G \varepsilon^2 \pi^2}{4\Delta},\]
+	\[R_{{\widehat{\bs u}},1} \leq R_{{{\bs u}},1} + \cfrac{G \varepsilon^2 \pi^2}{4\Delta},\]
 	and
-	\[R_{{\widetilde{\bs u}},2} \leq R_{{{\bs u}},2} + \cfrac{G \varepsilon^2 \pi^2}{4\Delta}.\]
+	\[R_{{\widehat{\bs u}},2} \leq R_{{{\bs u}},2} + \cfrac{G \varepsilon^2 \pi^2}{4\Delta}.\]
 \end{cor}
 \begin{proof}
-	By the definition of the operator \(\widetilde{\bs u}(v)\), 
+	By the definition of the operator \(\widehat{\bs u}(v)\), 
 	\begin{align}
-		&\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} \widetilde{\bs u}(v)g(x)\wrt x \nonumber		
+		&\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} \widehat{\bs u}(v)g(x)\wrt x \nonumber		
 		%
 		\\&= \int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} \bs u(v)g(x)\wrt x + \int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} \left(e^{\bs{S} v} + e^{\bs{S} (2\Delta-v)}\right)\sum_{n=1}^\infty e^{\bs S2n\Delta}\bs s g(x)\wrt x. \label{eqn: ghi is this a2}
 	\end{align}
@@ -335,18 +336,18 @@ Since \(\bs w(x)=\bs u(x)\), then from the results of the previous section then 
 
 	Putting it all together, we have shown 
 	\begin{align}
-		\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} \widetilde{\bs u}(v)g(x)\wrt x = g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon) + r_{\widetilde{\bs u}} (u,v)
+		\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} \widehat{\bs u}(v)g(x)\wrt x = g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon) + r_{\widehat{\bs u}} (u,v)
 	\end{align}
 	where 
-	\[|r_{\widetilde{\bs u}} (u,v)| \leq \left|r_{\bs u} (u,v) + \cfrac{G \varepsilon^2 \pi^2}{4\Delta^2}\right|.\]
+	\[|r_{\widehat{\bs u}} (u,v)| \leq \left|r_{\bs u} (u,v) + \cfrac{G \varepsilon^2 \pi^2}{4\Delta^2}\right|.\]
 	
 	Lastly, observe 
 	\begin{align*}
-		R_{\widetilde{\bs u},1} = \int_{u=0}^\Delta |r_{\widetilde{\bs u}} (u,v) |\wrt u 
+		R_{\widehat{\bs u},1} = \int_{u=0}^\Delta |r_{\widehat{\bs u}} (u,v) |\wrt u 
 		&\leq \int_{u=0}^\Delta \left|r_{\bs u} (u,v) \right| + \left|\cfrac{G \varepsilon^2 \pi^2}{4\Delta^2}\right| \wrt u
 		\\& = R_{{{\bs u}},1} + \cfrac{G \varepsilon^2 \pi^2}{4\Delta}
 	\end{align*}
 	and similarly, 
-	\[R_{\widetilde{\bs u},2} = \int_{v=0}^\Delta |r_{\widetilde{\bs u}} (u,v) |\wrt v \leq R_{{\bs u},2} + \cfrac{G \varepsilon^2 \pi^2}{4\Delta}\]
+	\[R_{\widehat{\bs u},2} = \int_{v=0}^\Delta |r_{\widehat{\bs u}} (u,v) |\wrt v \leq R_{{\bs u},2} + \cfrac{G \varepsilon^2 \pi^2}{4\Delta}\]
 	where we have used Lemma \ref{cor: cond bnd 2 U}. 
 \end{proof}

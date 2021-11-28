@@ -1136,7 +1136,7 @@ We obtain an upper bound by removing the requirement that the fluid level \(X(t)
 		\int_{x_{m+1}=0}^\infty \bs H^{++}(\lambda,x_{m+1}) 
 		\\&\quad\wrt x_1  \wrt x_2 \dots \wrt x_{m+1}  F \label{eqn :NNeeaefjn}
 	\end{align}
-	where the inequality follow by applying Lemma~\ref{lem:macmnm} repeatedly (or by noting that \(\bs a_{\ell_0,i}(x_0)e^{\bs{S}x_1} \bs{D}e^{\bs{S}x_2} \bs{D}\dots e^{\bs{S}x_m} \bs{D}e^{\bs{S}x_{m+1}}{\bs e}\leq 1\) as it is a probability).
+	where the inequality follow by noting that \(\bs a_{\ell_0,i}(x_0)e^{\bs{S}x_1} \bs{D}e^{\bs{S}x_2} \bs{D}\dots e^{\bs{S}x_m} \bs{D}e^{\bs{S}x_{m+1}}{\bs e}\leq 1\) as it is a probability.
 	        
 	Since all of the elements of \(\bs H^{++}(\lambda,x_{m+1}) \bs e\) are non-negative, then, for any length \(|\calS_+|+|\calS_{+0}|\) row-vector \(\bs b\), 
 	\[\bs b\int_{x_{m+1}} \bs H^{++}(\lambda,x_{m+1}) \bs e \wrt x_{m+1} \leq \bs b \bs e \widehat{\bs G}.\]
@@ -1346,7 +1346,7 @@ Regarding Remark~\ref{rem: point wies}, we do require convergence at certain bou
 		 \bs e G
 		\\&\quad \wrt x_1 \wrt x_2\dots \wrt x_m \label{eqn :ejrvn}
 	\end{align}
-	where the last inequality is a result of a repeated application of Lemma~\ref{lem:macmnm}. Equation~(\ref{eqn :ejrvn}) is of a similar to (\ref{eqn: bound ggggaaaa}) (they differ by a constant only), hence the same arguments used to bound (\ref{eqn: bound ggggaaaa}) can be applied to get the desired domination result. 
+	where the last inequality holds since \(\bs a_{\ell_0,i}(x_0)e^{\bs{S}x_1}\wrt x_1 \bs{D}e^{\bs{S}x_2} \wrt x_2 \bs{D}\dots e^{\bs{S}x_m} \wrt x_m \bs{D}{\bs e}\) is a probability. Equation~(\ref{eqn :ejrvn}) is of a similar to (\ref{eqn: bound ggggaaaa}) (they differ by a constant only), hence the same arguments used to bound (\ref{eqn: bound ggggaaaa}) can be applied to get the desired domination result. 
 	
 	Unltimately, we can apply the Dominated Convergence Theorem to prove that the sum of the partitioned probabilities (\ref{eqn: prob ofjaiv}) converges as \(p\to\infty\). The sum of the limits is 
 	\[\mathbb P(\bs X(\tau_1^X) = (y_{\ell_0+1}, j), \tau_{1}\leq E^\lambda 
