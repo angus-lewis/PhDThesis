@@ -1,0 +1,2006 @@
+%!TEX root = ../thesis.tex
+\chapter{Weak convergence of the QBD-RAP scheme\label{sec: conv}}
+This chapter details convergence of the approximation scheme constructed in Chapter~\ref{sec: construction and modelling}. The QBD-RAP is constructed using \emph{matrix-exponential distributions}. The main result shows the convergence of the approximation scheme under the assumption that the variance of the matrix-exponential distribution(s) used in the construction tends to 0. Given that there is no known simple closed form for the transient distributions of a fluid queue, and that we make minimal assumptions about the matrix-exponential distributions used in the construction of the approximation, it is somewhat remarkable that we are able to establish a convergence result. The generality of the result with respect to the assumptions on the matrix-exponential distributions used in the construction of the approximation is necessitated by the fact that we use a class of \emph{concentrated matrix-exponential distributions} found numerically in \citep{hht2020}, and for which there is relatively little known about their properties.
+
+We suppose that we have a sequence \(\{Z^{(p)}\}_{p\geq 1}\) of matrix exponential distributions, \(Z^{(p)}\sim ME(\bs\alpha^{(p)},\bs S^{(p)}, \bs s^{(p)})\), such that \(\var\left(Z^{(p)}\right)\to 0 \) as \(p\to \infty\). Ultimately, we show weak convergence (in both space and time) of the QBD-RAP approximation scheme via convergence of various Laplace transforms with respect to time of the QBD-RAP to the corresponding Laplace transforms of the fluid queue. We use the superscript \((p)\) to denote dependence on the underlying choice of matrix exponential distribution that is used in the construction of the QBD-RAP scheme. To simplify notation, we omit the super script \((p)\) where possible. In the following we show error bounds for an arbitrary parameter \(\varepsilon>0\). However, keep in mind the ultimate intention is to show convergence, for which we choose this parameter to be \(\varepsilon^{(p)}=\var\left(Z^{(p)}\right)^{1/3}\). Other notations which have been defined so far which are defined by \(Z^{(p)}\) and therefore also implicitly depend on \(p\) are \(\bs\alpha^{(p)},\,\bs S^{(p)},\,\bs s^{(p)},\, \bs S_i^{(p)},\, \bs s_i^{(p)},\, \bs D^{(p)},\,\mathcal A^{(p)},\, \bs Y^{(p)}(t) = (L^{(p)}(t),\bs A^{(p)}(t), \phi^{(p)}(t)),\, \bs Y_d(t).\)
+
+In the following we show various results which involve integrating a function \(g\), or a sequence of functions \(g_1,g_2,\dots\). We make the following assumptions about such functions, 
+\begin{asu}\label{asu: g}
+	Let \(g\) be a function \(g:[0,\infty)\to [0,\infty)\) which is \\
+	\subasu \label{asu: g non-neg} non-negative, 
+	\[g(x) \geq 0 \mbox{ for all } x \geq 0,\]
+	\subasu bounded, 
+	\[g(x) \leq G < \infty \mbox{ for all } x \geq 0,\]
+	\subasu integrable, 
+	\[\int_{x=0}^\infty g(x)\wrt x \leq \widehat G < \infty,\]
+	\subasu \label{asu: lipschitz} and Lipschitz continuous 
+	\begin{align}
+		|g(x) - g(u)|&\leq L|x - u| \mbox{ for all } x,\, u \geq 0,\, 0<L<\infty.
+	\end{align}
+\end{asu}
+
+We also need a corresponding sequence of closing operators which we denote by \({\bs v}^{(p)}\). For the convergence results, we require the following properties of the closing operators \({\bs v}^{(p)}(x),\, x \in[0.\Delta)\).
+\begin{property}\label{properties: some props}
+	Let \(\{\bs v^{(p)}(x)\}_{p\geq 1}\) be a sequence of closing operators such that they may be decomposed as \(\bs v^{(p)}(x)=\bs w^{(p)}(x) + \widetilde{\bs w}^{(p)}(x)\), where; \\
+	\subproperty \label{properties: -2} For \(\bs a \in\mathcal A,\,u\geq 0\),  
+        \begin{align*}
+        		\int_{x\in[0,\Delta)}\bs a^{(p)} e^{\bs S^{(p)}u} {\bs v}^{(p)}(x) \wrt x&\leq \bs a^{(p)} e^{\bs S^{(p)}u} \bs e.
+		\end{align*}
+	\subproperty \label{properties: -1} For \(x\in[0,\Delta),u,v\geq 0\),  
+        \begin{align*}
+        		\bs \alpha^{(p)} e^{\bs S^{(p)}(u+v)}(-\bs S^{(p)})^{-1} \widetilde{\bs w}^{(p)}(x) &\leq \bs \alpha^{(p)} e^{\bs S^{(p)}u}(-\bs S^{(p)})^{-1} \widetilde{\bs w}^{(p)}(x).
+		\end{align*}
+	\subproperty \label{properties: 0} For \(x\in[0,\Delta),u\geq 0\),
+		\begin{align*}
+			\bs \alpha^{(p)} e^{\bs S^{(p)}u}(-\bs S^{(p)})^{-1} \widetilde{\bs w}^{(p)}(x) &=\widetilde G_{\bs v}^{(p)} \to 0,\, \mbox{ as }p \to \infty.  
+		\end{align*}
+	\subproperty \label{properties: 1} For \(x\in[0,\Delta),u\geq 0\),  
+        \begin{align*}
+        		\bs \alpha^{(p)} e^{\bs S^{(p)}u}(-\bs S^{(p)})^{-1} \bs w^{(p)}(x) &\leq \bs \alpha^{(p)} e^{\bs S^{(p)}u} \bs e G_{\bs v},
+	\end{align*}
+	for some \(0\leq G_{\bs v}<\infty\) independent of \(p\) for \(p>p_0\) and some \(p_0<\infty\). \\
+	\subproperty \label{properties: 2} Let \(g\) be a function satisfying the Assumptions~\ref{asu: g}. For \(u\leq \Delta-\varepsilon^{(p)}\), \(v\in[0,\Delta)\), then
+	\[\left|\int_{x=0}^\infty \cfrac{\bs \alpha^{(p)} e^{\bs{S}^{(p)}(u+x)} }{\bs \alpha^{(p)} e^{\bs{S}^{(p)}u} \bs e} {\bs v}^{(p)}(v)g(x)\wrt x -g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon^{(p)})\right| =  |r_{\bs v}^{(p)}(u,v)|,\]
+	where 
+	\[ \int_{u=0}^{\Delta}\left| r_{\bs v}^{(p)}(u,v)\right| \wrt u  \leq R_{{\bs v},1}^{(p)} \to 0\]
+	and 
+	\[ \int_{v=0}^{\Delta}\left| r_{\bs v}^{(p)}(u,v)\right| \wrt v  \leq R_{{\bs v},2}^{(p)} \to 0\]
+	as \(\var(Z^{(p)})\to 0\). 
+\end{property}
+
+For convenience, in the sequel, let us adopt the notation 
+\begin{align}
+	\mathbb P(\widetilde{\bs Y}^{(p)}(t) \in (\ell,\wrt x, j)\mid \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0),  i) )
+\end{align}
+for an approximation to 
+\begin{align}
+	\mathbb P(\bs X(t)\in(\wrt x, j)\mid \bs X(0)=(x_0, i)),
+\end{align}
+\(x\in \calD_{\ell,j}\), \(x_0\in\calD_{\ell_0,i}\).
+
+In Appendix~\ref{appendix: sec: 2} we provide results which show that the closing operators (\ref{eqn: alal}) - (\ref{eqn:546}) satisfy Properties~\ref{properties: some props}. 
+
+Ultimately, we will apply the Extended Continuity Theorem for Laplace transforms \cite[Chapter XIII, Theorem 2a]{feller1957} to claim convergence. The Extended Continuity Theorem for Laplace transforms requires us to show convergence of the Laplace transform pointwise with respect to the transform parameter, \(\lambda\). Therefore, we can fix \(\lambda>0\) in the following sections. 
+
+The structure of this chapter is as follows. First, in Sections~\ref{sec: no change} we analyse the behaviour of the fluid queue and QBD-RAP on the event that they stay in the same level. Then, in Section~\ref{sec: lst on no change}, we derive expressions for certain Laplace transforms with respect to time of the QBD-RAP and fluid queue on the event that there is no change of level. Section~\ref{sec: no change convergence} provides error bounds between the Laplace transforms of the QBD-RAP and the fluid queue that were derived in Section~\ref{sec: lst on no change} and also a domination condition used so that we may apply the Dominated Convergence Theorem. At this stage we have shown weak convergence of the approximation up to the first change of level. The subsequent sections generalise this to global convergence. We start by showing weak convergence of the approximation at the \(n\)th change of level, \(n\geq 1\) in Section~\ref{sec: nth change}. Section~\ref{sec: between n and np1} generalises this to show weak convergence between the \(n\)th and \(n+1\)th change of level. Via the Dominated Convergence Theorem (again), Section~\ref{sec: local to global} proves the weak convergence of the QBD-RAP approximation to the fluid queue. So as to not obscure the logical flow of the presentation, technical results are reserved for the Appendices.
+
+%\section{What we are approximating}
+%We now make clear exactly what we are approximating. First, partition the state space of \(\left\{X(t)\right\}\), \((-\infty,\infty)\), into intervals \(\mathcal D_k\) of width \(\Delta\). Let \(y_k = k\Delta\), \(k\in\mathbb Z\), and define intervals \(\mathcal D_k = \left[y_k,y_{k+1}\right]\). The process \(\left\{\left(\displaystyle \sum_{k\in\mathbb Z}k 1(X(t)\in\mathcal D_k),\varphi(t)\right)\right\}_{t\geq0}\) is approximated by \(\left\{(L(t),\varphi(t))\right\}_{t\geq0}\). From the discretised fluid process we can obtain quantities of interest of the original SFM, such as
+%\begin{align*}
+%	&\mathbb P(L(t) = \ell, \varphi(t) = j) 
+%	= \mathbb P(X(t)\in \mathcal D_\ell, \varphi(t) = j).
+%\end{align*} 
+%
+%We approximate \(\left\{\left(\displaystyle \sum_{k\in\mathbb Z}k 1(X(t)\in\mathcal D_k),\varphi(t)\right)\right\}_{t\geq0}\) by the joint process \(\left\{(L(t),{\varphi}(t))\right\}_{t\geq0}\). Note that the process \(\left\{(L(t),{\varphi}(t))\right\}_{t\geq0}\) in not Markovian (in fact, neither is the process \(\left\{\left(\displaystyle \sum_{k\in\mathbb Z}k 1(X(t)\in\mathcal D_k),\varphi(t)\right)\right\}_{t\geq0}\)). However, the process \(\left\{(L(t),\bs A(t),{\varphi}(t))\right\}_{t\geq0}\) is Markovian. 
+
+%Recall that our goal is to approximate quantities relating to the SFM \(\left\{(X(t),\varphi(t))\right\}\). By utilising the orbit, \(\bs A(t)\), as well as \(\left\{(L(t),{\varphi}(t))\right\}_{t\geq0}\), an approximation to the level and phase of the fluid can be obtained. 
+
+
+\section{Characterisations on no change of level}\label{sec: no change}
+\subsection{Characterising the fluid queue}
+Let \(\tau_1^X\) be the minimum of the time at which \(\{X(t)\}\) hits a boundary or exits \(\mathcal D_{\ell_0}\), where \(X(0)=x_0\in\mathcal D_{\ell_0}\), or \(\{X(t)\}\) exits a boundary. More precisely, 
+\[\tau_1^X = \min\left\{\begin{array}{c}\inf\left\{t>0\mid X(t)=y_{\ell}, \ell\in\mathcal K\right\}, \\ \inf\left\{t>0 \mid X(t) \neq 0, X(0)=0\right\}, \\ \inf\left\{t>0 \mid X(t) \neq y_{K+1}, X(0)=y_{K+1}\right\} \end{array} \right\}.\]
+Consider the measures 
+\begin{align}\label{eqn: sojourn}
+	\mu^{\ell_0}(t)(\wrt x,j; x_0,i) := \mathbb P(\bs X(t)\in (\wrt x,j), t<\tau_1^X \mid \bs X(0) = (x_0, i)),
+\end{align}
+\(\ell_0\in\{0,\dots,K\}\), \(x,x_0 \in\mathcal D_{\ell_0,i}, i,j\in\mathcal S, t \geq 0. \)
+In words, this is the distribution of the fluid queue at time \(t\) on the event that the fluid level remains within \(\mathcal D_{\ell_0}\) up to and including time \(t\) and is in phase \(j\) at time \(t\), given that is started at \(X(0)=x_0\in\mathcal D_{\ell_0,i}\) in phase \(i\). The QBD-RAP approximation to (\ref{eqn: sojourn}) is 
+\begin{align}
+	(\bs e_i\otimes \bs  a_{\ell_0,i}^{(p)}(x_0)) \exp\left(\bs{B}^{(p)}t\right)(\bs e_j \otimes {\bs v}^{(p)}(y_{\ell_0+1}-x))\wrt x,\,j\in\calS_+\cup\calS_{+0}. \label{eqn: ldll}
+\end{align}
+% where 
+% \[\bs{B}^{(p)} = \left[\begin{array}{cccc}
+% 	\bs{C}_+\otimes \bs{S}^{(p)} + \bs{T}_{++}\otimes \bs{I} & \bs{T}_{+-}\otimes \bs{D}^{(p)} & \bs{T}_{+0}\otimes \bs{I} & \bs 0 \\
+% 	\bs{T}_{-+}\otimes \bs{D}^{(p)} & \bs{C}_-\otimes \bs{S}^{(p)} + \bs{T}_{--}\otimes \bs{I} &\bs 0 & \bs{T}_{-0}\otimes \bs{I} \\
+% 	\bs{T}_{0+}\otimes \bs{I} & \bs{T}_{0-}\otimes \bs{D}^{(p)} & \bs{T}_{00}\otimes \bs{I} & \bs 0 \\
+% 	\bs{T}_{0+}\otimes \bs{D}^{(p)} & \bs{T}_{0-}\otimes \bs{I} &\bs 0 & \bs{T}_{00}\otimes \bs{I} 
+% 	\end{array}\right].
+% \] 
+%\begin{align}
+%	(\bs e_i\otimes \bs  a_{\ell_0,i}(x_0)) \exp\left(\bs{B}t\right)(\bs e_j \otimes e^{|c_j|\bs{S}(y_{{\ell_0}+1}-x)/|c_j|}|c_j|\bs s)\wrt x/|c_j|,
+%\end{align}
+%where 
+%\[\bs{B} = \left[\begin{array}{cc}
+%	\bs{C}_+\otimes \bs{S} + \bs{T}_{++}\otimes \bs{I} & \bs{T}_{+-}\otimes \bs{D} \\
+%	\bs{T}_{-+}\otimes \bs{D} & \bs{C}_-\otimes \bs{S} + \bs{T}_{--}\otimes \bs{I} 
+%	\end{array}\right],\] 
+%and \(\bs   a_{\ell_0,i}(x_0) = \bs \alpha e^{\bs S(x_0-y_{\ell_0})}/\bs \alpha e^{\bs S(x_0-y_{\ell_0})}\bs e\). 
+% For convenience, and without loss of generality, we reorder the rows and columns of \(\bs B^{(p)}\) and partition \(\bs{B}^{(p)}\) into 
+% \begin{align}
+% 	\bs B^{(p)} = \left[\begin{array}{ccc} \bs B_{++}^{(p)} & \bs B_{+-}^{(p)} \\ \bs B_{-+}^{(p)} & \bs B_{--}^{(p)}\end{array}\right]
+% \end{align}
+% where 
+% \begin{align*}
+% \bs{B}_{++}^{(p)} &= \left[\begin{array}{cc} \bs{C}_+\otimes \bs{S}^{(p)} + \bs{T}_{++}\otimes \bs{I} & \bs T_{+0}\otimes \bs I \\ \bs T_{0+}\otimes \bs I & \bs T_{00}\otimes \bs I\end{array}\right] ,
+% %
+% \bs{B}_{+-}^{(p)} = \left[\begin{array}{cc} \bs{T}_{+-}\otimes \bs{D}^{(p)} & \bs 0 \\ \bs T_{0-}\otimes \bs D^{(p)} & \bs 0 \end{array}\right],
+% %
+% \\ \bs{B}_{-+}^{(p)} &=  \left[\begin{array}{cc} \bs{T}_{-+}\otimes \bs{D}^{(p)} & \bs 0 \\ \bs T_{0+}\otimes \bs D^{(p)} & \bs 0 \end{array}\right] ,
+% % 
+% \bs{B}_{--}^{(p)} = \left[\begin{array}{cc} \bs{C}_-\otimes \bs{S}^{(p)} - \bs{T}_{--}\otimes \bs{I} & \bs T_{-0}\otimes \bs I \\ \bs T_{0-}\otimes \bs I & \bs T_{00}\otimes \bs I\end{array}\right].
+% \end{align*}
+% For \(m\in\{+,-,0\},\,n\in\{+,-\},\,m\neq n\), \(j\in\mathcal S_n\), denote \(\bs T_{mj} = \bs T_{mn} (\bs e_j\bs e_j')\) and for \(m,n\in\{+,-\},\,m\neq n\), \(j\in\calS_n\), denote
+% \begin{align}
+% \bs{B}_{mj}^{(p)} &= \bs B_{mn}^{(p)} \bs e_j\bs e_j'= \left[\begin{array}{cc} \bs{T}_{mj}\otimes \bs{D}^{(p)} & \bs 0 \\ \bs T_{0j}\otimes \bs D^{(p)} & \bs 0 \end{array}\right].
+% \end{align}
+
+There is no simple expression for (\ref{eqn: sojourn}). There are expressions for the Laplace transform of (\ref{eqn: sojourn}) with respect to time. One is in terms of the of first return matrices \(\Psi(\lambda)\) and \(\Xi(\lambda)\) \citep{bean2009}. Here we opt for another expression for the Laplace transform which is obtained by partitioning as follows.
+
+Suppose \(i\in\calS_+,j\in\mathcal S_+\cup\mathcal S_{+0}\). The arguments for all other combinations of \(i,j\in\mathcal S\) are analogous and notable differences will be pointed out where necessary. For this analysis we suppose the QBD-RAP approximation uses ephemeral states \(\calS_0^*\) to model the fluid queue whenever the phase starts in \(k\in\calS_0\). As a result, certain expressions for the QBD-RAP which start in phase \(k\in\calS_0^*\) can be written as linear combinations of expressions for the QBD-RAP which start in phases \(i\in\calS_+\cup\calS_-\). Thus, once we show convergence for starting phases \(i\in\calS_+\cup\calS_-\) we get convergence for starting in \(\calS_0\) too. 
+
+Denote by \(\Sigma_m,\, m\geq 1\) the sequence of (stopping) times at which \(\{\varphi(t)\}\) jumps from \(\mathcal S_+\cup\calS_{+0}\) to \(\mathcal S_- \) for the \(m\)th time. Denote by \(\Gamma_m, m\geq 1\) the sequence of (stopping) times at which \(\{\varphi(t)\}\) jumps from \(\mathcal S_-\cup\calS_{-0}\) to \(\mathcal S_+\) for the \(m\)th time. See Figure~\ref{fig: sample paths}. More precisely, for sample paths with \(\varphi(0)\in\mathcal S_+\), let \(\Gamma_0=0\), then for \(m\geq 1\), 
+\begin{align}
+	\Sigma_m &:=\inf\{t > \Gamma_{m-1} \mid \varphi(t)\in\mathcal S_-\}, 
+	\\ \Gamma_m &:=\inf\{t > \Sigma_{m} \mid \varphi(t)\in\mathcal S_+\}.
+\end{align}
+For times \(t\) such that \(\Gamma_m\leq t<\Sigma_{m+1}\), then \(\varphi(t)\in\mathcal S_+\cup\calS_{+0}\). For times \(t\) such that \(\Sigma_{m+1}\leq t< \Gamma_{m+1}\), then \(\varphi(t)\in\mathcal S_-\cup\calS_{-0}\). The events \(\{\Gamma_m\leq t< \Sigma_{m+1}\} , \mbox{ and } \{\Sigma_{m+1}\leq t< \Gamma_{m+1}\}, \) \(m\geq 0\), partition the sample paths of (\ref{eqn: sojourn}) into periods where the fluid is either non-decreasing or non-increasing, respectively; see Figure~\ref{fig: sample paths}.
+\begin{figure}
+    \centering\begin{tikzpicture}
+    	\draw[->,thick] (0,0) -- (14,0);
+    %	\draw[-,dashed] (0,4) -- (14.5,4);
+    	\draw (14,-0.75) node {$x$};
+    	\draw[-,thick] (0,0) -- (0,4.5);
+    	\draw[-,thick] (-0.1,4) -- (0.1,4);
+    	\draw (-0.75,4) node {$y_{\ell_0}+\Delta$};
+    	\draw (-0.75,0) node {$y_{\ell_0}$};
+	
+    	\draw (0,-0.75) node {$\Gamma_0$};
+    %	\foreach \i in {1,2} {
+    %        		\draw[-,thick] (\i*4,-0.1) -- (\i*4,0.1);
+    %%		\draw (\i*4,-0.75) node {$\i \Delta$};
+    %        }
+    %	\edef\mya{0}
+    %	\foreach \x/\y [count=\c] in {0/2.6,2.6/2,2/2,2/2} {
+    %		\draw[-,thick] (\mya,\x) -- (\mya+\y,{(-(-1)^\c)*\y+\x});
+    %                	\pgfmathparse{\mya+\y}
+    %                	\xdef\mya{\pgfmathresult}
+    %	}
+            \draw[-,thick] (0,0) -- (2.6,2.6);
+
+			% \draw (3.2,3.0) node {$\varphi(t)\in\calS_{+0}$};
+			\draw[-,thick] (2.6,2.6) -- (3.6,2.6); 
+
+            \draw[-,thick] (3.6,-0.1) -- (3.6,0.1);
+    %        \draw[-,dashed] (2.6,0) -- (2.6,5);
+    	\draw (3.6,-0.75) node {$\Sigma_1$};
+
+    	
+%    	\draw[<->,thick] (3.6-1,1) -- (3.6+1,1);
+%    	\draw (3.6,1) node[fill=white] {$ R_1$};
+    	
+%    	\draw[<->,thick] (5.6-1,1) -- (5.6+1,1);
+%    	\draw (5.6,1) node[fill=white] {$ R_1$};
+    	
+%            \draw[-,dashed] (2.6,2.6) -- (2.6+2,2.6+2);
+%            \draw[-,thick] (4.6,-0.1) -- (4.6,0.1);
+    %        \draw[-,dashed] (4.6,0) -- (4.6,5);
+%    	\draw (4.6,-0.75) node {$Y_1$};
+    	
+%            \draw[-,dashed] (4.6,4.6) -- (4.6+2,4.6-2);
+%            \draw[-,thick] (6.6,-0.1) -- (6.6,0.1);
+    %        \draw[-,dashed] (6.6,0) -- (6.6,5);
+    %	\draw (6.6,-0.75) node {$Y_1+R_1$};
+    	
+    	\draw[-,thick] (3.6,2.6) -- (5.6,2.6-2);
+
+		\draw[-,thick] (5.6,0.6) -- (7,0.6);
+
+    %        \draw[-,dashed] (6.6+2,0) -- (6.6+2,5);
+		\draw[-,thick] (7,-0.1) -- (7,0.1);
+    	\draw (7,-0.75) node {$\Gamma_1$};
+    	
+%    	\draw[<->,thick] (9.1-0.5,1) -- (9.1+0.5,1);
+%    	\draw (9.1,1) node[fill=white] {$R_2$};
+%    	\draw[<->,thick] (10.1-0.5,1) -- (10.1+0.5,1);
+%    	\draw (10.1,1) node[fill=white] {$R_2$};
+            
+%            	\draw[-,dashed] (6.6+2,0.6) -- (6.6+3,0.6-1);
+%            \draw[-,thick] (6.6+3,-0.1) -- (6.6+3,0.1);
+%    %        \draw[-,dashed] (6.6+3,0) -- (6.6+3,5);
+%            	\draw (9.6,-0.75) node {$Y_2$};
+    	
+%            	\draw[-,dashed] (6.6+3,-0.4) -- (6.6+4,0.6);
+%    	\draw[-,thick] (6.6+4,-0.1) -- (6.6+4,0.1);
+    %        \draw[-,dashed] (6.6+4,0) -- (6.6+4,5);
+            
+		\draw[-,thick] (7,0.6) -- (7+0.8,1.4);
+
+		\draw[-,thick] (7.8,1.4) -- (8.8,1.4);
+		\draw[-,thick] (8.8,1.4) -- (8+3,3.6);
+%    	\draw[-,thick] (4.6+3,-0.1) -- (4.6+3,0.1);
+    %        \draw[-,dashed] (6.6+7,0) -- (6.6+7,5);
+%            	\draw (6.6+7,-0.75) node {$Y_3$};
+    
+            	\draw[-,thick] (7+3+1,3.6) -- (7+4+1,2.6);
+            \draw[-,thick] (7+3+1,-0.1) -- (7+3+1,0.1);
+	    	\draw (7+3+1,-0.75) node {$\Sigma_2$};
+    \end{tikzpicture}
+	\begin{tikzpicture}
+    	\draw[->,thick] (0,0) -- (14,0);
+    %	\draw[-,dashed] (0,4) -- (14.5,4);
+    	\draw (14,-0.75) node {$x$};
+    	\draw[-,thick] (0,0) -- (0,4.5);
+    	\draw[-,thick] (-0.1,4) -- (0.1,4);
+    	\draw (-0.75,4) node {$y_{\ell_0}+\Delta$};
+    	\draw (-0.75,0) node {$y_{\ell_0}$};
+	
+    	\draw (0,-0.75) node {$\Sigma_0$};
+    %	\foreach \i in {1,2} {
+    %        		\draw[-,thick] (\i*4,-0.1) -- (\i*4,0.1);
+    %%		\draw (\i*4,-0.75) node {$\i \Delta$};
+    %        }
+    %	\edef\mya{0}
+    %	\foreach \x/\y [count=\c] in {0/2.6,2.6/2,2/2,2/2} {
+    %		\draw[-,thick] (\mya,\x) -- (\mya+\y,{(-(-1)^\c)*\y+\x});
+    %                	\pgfmathparse{\mya+\y}
+    %                	\xdef\mya{\pgfmathresult}
+    %	}
+            \draw[-,thick] (0,4) -- (2.6,4-2.6);
+
+			% \draw (3.2,3.0) node {$\varphi(t)\in\calS_{+0}$};
+			\draw[-,thick] (2.6,4-2.6) -- (3.6,4-2.6); 
+
+            \draw[-,thick] (3.6,-0.1) -- (3.6,0.1);
+    %        \draw[-,dashed] (2.6,0) -- (2.6,5);
+    	\draw (3.6,-0.75) node {$\Gamma_1$};
+
+    	
+%    	\draw[<->,thick] (3.6-1,1) -- (3.6+1,1);
+%    	\draw (3.6,1) node[fill=white] {$ R_1$};
+    	
+%    	\draw[<->,thick] (5.6-1,1) -- (5.6+1,1);
+%    	\draw (5.6,1) node[fill=white] {$ R_1$};
+    	
+%            \draw[-,dashed] (2.6,2.6) -- (2.6+2,2.6+2);
+%            \draw[-,thick] (4.6,-0.1) -- (4.6,0.1);
+    %        \draw[-,dashed] (4.6,0) -- (4.6,5);
+%    	\draw (4.6,-0.75) node {$Y_1$};
+    	
+%            \draw[-,dashed] (4.6,4.6) -- (4.6+2,4.6-2);
+%            \draw[-,thick] (6.6,-0.1) -- (6.6,0.1);
+    %        \draw[-,dashed] (6.6,0) -- (6.6,5);
+    %	\draw (6.6,-0.75) node {$Y_1+R_1$};
+    	
+    	\draw[-,thick] (3.6,4-2.6) -- (5.6,4-2.6+2);
+
+		\draw[-,thick] (5.6,4-0.6) -- (7,4-0.6);
+
+    %        \draw[-,dashed] (6.6+2,0) -- (6.6+2,5);
+		\draw[-,thick] (7,-0.1) -- (7,0.1);
+    	\draw (7,-0.75) node {$\Sigma_1$};
+    	
+%    	\draw[<->,thick] (9.1-0.5,1) -- (9.1+0.5,1);
+%    	\draw (9.1,1) node[fill=white] {$R_2$};
+%    	\draw[<->,thick] (10.1-0.5,1) -- (10.1+0.5,1);
+%    	\draw (10.1,1) node[fill=white] {$R_2$};
+            
+%            	\draw[-,dashed] (6.6+2,0.6) -- (6.6+3,0.6-1);
+%            \draw[-,thick] (6.6+3,-0.1) -- (6.6+3,0.1);
+%    %        \draw[-,dashed] (6.6+3,0) -- (6.6+3,5);
+%            	\draw (9.6,-0.75) node {$Y_2$};
+    	
+%            	\draw[-,dashed] (6.6+3,-0.4) -- (6.6+4,0.6);
+%    	\draw[-,thick] (6.6+4,-0.1) -- (6.6+4,0.1);
+    %        \draw[-,dashed] (6.6+4,0) -- (6.6+4,5);
+            
+		\draw[-,thick] (7,4-0.6) -- (7+0.8,4-1.4);
+
+		\draw[-,thick] (7.8,4-1.4) -- (8.8,4-1.4);
+		\draw[-,thick] (8.8,4-1.4) -- (8+3,4-3.6);
+%    	\draw[-,thick] (4.6+3,-0.1) -- (4.6+3,0.1);
+    %        \draw[-,dashed] (6.6+7,0) -- (6.6+7,5);
+%            	\draw (6.6+7,-0.75) node {$Y_3$};
+    
+            	\draw[-,thick] (7+3+1,4-3.6) -- (7+4+1,4-2.6);
+            \draw[-,thick] (7+3+1,-0.1) -- (7+3+1,0.1);
+	    	\draw (7+3+1,-0.75) node {$\Gamma_2$};
+    \end{tikzpicture}
+    \caption{\label{fig: sample paths} Sample paths corresponding to the summands in (\ref{eqn: sojourn partition}) for \(\varphi(0)\in\calS_+\) (top) and \(\varphi(0)\in\calS_-\) (bottom).}
+\end{figure}
+Similarly, for sample paths with \(\varphi(0)\in\mathcal S_-\), let \(\Sigma_0=0\), then for \(m\geq 1\), 
+\begin{align}
+	\Gamma_m &:=\inf\{t > \Sigma_{m-1} \mid \varphi(t)\in\mathcal S_+\}.
+	\\\Sigma_m &:=\inf\{t > \Gamma_{m} \mid \varphi(t)\in\mathcal S_-\}, 
+\end{align}
+
+Using the law of total probability, we may write (\ref{eqn: sojourn}) with \(i\in\calS_+,\,j\in\calS_+\cup\calS_{+0}\), as 
+\begin{align}
+	\label{eqn: sojourn partition}&\sum_{m=0}^\infty \mu_{m,+,+}^{\ell_0}(t)(\wrt x,j;x_0,i),
+	%\\&{}+ \sum_{m=1}^\infty \mathbb P(X(t)\in \wrt x, X(s)\in \mathcal D_{\ell_0}, s\in[0,t], \varphi(t) = j, \Sigma_m\leq t< \Gamma_{m}\mid X(0) = x_0, \varphi(0) = i).
+\end{align}
+% We can further partition by including the phases at times \(\Sigma_1,\Gamma_1, \Sigma_2,\Gamma_2,\dots\), i.e. 
+% \begin{align}
+% 	&\sum_{m=0}^\infty \sum_{j_1\in\mathcal S_-} \sum_{k_1\in\mathcal S_+}\dots \sum_{j_m\in\mathcal S_-}\sum_{k_m\in\mathcal S_+}  \mathbb P\Big(X(t)\in\wrt x,  \tau_1^X>t, \varphi(t) = j, \Gamma_m\leq t<\Sigma_{m+1}, \nonumber
+% 	\varphi(\Sigma_\ell) = j_\ell ,\\&\quad{}\varphi(\Gamma_\ell) = k_\ell, \ell = 1,\dots,m\mid X(0) = x_0, \varphi(0) = i\Big).\label{eqn: sojourn partition again}
+% 	%\\&{}+\sum_{m=1}^\infty \sum_{j_1\in\mathcal S_-} \sum_{k_2\in\mathcal S_+}\dots \sum_{k_{m-1}\in\mathcal S_+}\sum_{j_m\in\mathcal S_-}  \mathbb P\Big(X(t)\in \wrt x, X(s)\in \mathcal D_{\ell_0}, s\in[0,t], \varphi(t) = j, \Sigma_m\leq t<\Gamma_{m}, \nonumber
+% 	%\\&\quad{} \bigcap\limits_{\ell=1}^m\varphi(\Sigma_\ell) = j_\ell , \bigcap\limits_{\ell=1}^{m-1}\varphi(\Gamma_\ell) = k_\ell \mid X(0) = x_0, \varphi(0) = i\Big).
+% \end{align}
+% Define \(\mu^{\ell_0}_{m,+,+}(t)(\wrt x, j_1,k_1,\dots,j_m,k_m, j; x_0,i) \) by
+% \begin{align}
+% 	&\mathbb P\Big(X(t)\in\wrt x, \tau_1^X>t, \varphi(t) = j, \Gamma_m\leq t<\Sigma_{m+1}, \nonumber
+% 	\varphi(\Sigma_\ell) = j_\ell , \varphi(\Gamma_\ell) = k_\ell, \ell = 1,\dots,m \\&\qquad{}\mid X(0) = x_0, \varphi(0) = i\Big),\label{eqn: density part +}
+% \end{align}
+% \(i\in\calS_+,\) \(j\in\calS_+\cup\calS_{+0},\) \( j_1,j_2,\dots\in\calS_-,\) \(k_1,k_2,\dots\in\calS_+,\) \(x_0\in\calD_{\ell_0,i},\) \(x\in\calD_{\ell_0,i},\) \(t\geq0,\) \(\ell_0\in\{0,\dots,K\},\) \(m\geq 0\), which are the summands in the sums (\ref{eqn: sojourn partition again}). Analogously, define measures 
+% \begin{align}
+% 	&\mu^{\ell_0}_{m,+,-}(t)(\wrt x, j_1,k_1,\dots,j_m,k_m,j_{m+1}, j; x_0,i)  \nonumber
+% 	\\&= 
+% 	\mathbb P\Big(X(t)\in\wrt x, \tau_1^X>t, \varphi(t) = j, \Sigma_{m+1}\leq t<\Gamma_{m+1},\varphi(\Sigma_{m+1})=j_{m+1}, \nonumber
+% 	 \varphi(\Sigma_\ell) = j_\ell , 
+% 	 \\&\qquad{} \varphi(\Gamma_\ell) = k_\ell, 
+% 	\ell = 1,\dots,m
+% 	 \mid X(0) = x_0, \varphi(0) = i\Big),\label{eqn: gq er h}
+% 	\intertext{for \(i\in\mathcal S_+ ,\,j\in\mathcal S_{-}\cup\mathcal S_{-0},\, m\geq 0\);}
+% 	&\mu^{\ell_0}_{m,-,+}(t)(\wrt x, k_1,j_1,\dots,j_m,k_{m+1}, j; x_0,i)  \nonumber
+% 	\\&= 
+% 	\mathbb P\Big(X(t)\in\wrt x,  \tau_1^X>t, \varphi(t) = j, \Gamma_{m+1}\leq t<\Sigma_{m+1},\varphi(\Gamma_{m+1})=k_{m+1}, \nonumber
+% 	\varphi(\Sigma_\ell) = j_\ell , 
+% 	\\&\qquad{}\varphi(\Gamma_\ell) = k_\ell, 
+% 	\ell = 1,\dots,m\mid X(0) = x_0, \varphi(0) = i\Big),
+% 	\intertext{for \(i\in\mathcal S_-  ,\, j\in\calS_+\cup\mathcal S_{+0};\)}
+% 	&\mu^{\ell_0}_{m,-,-}(t)(\wrt x, k_1, j_1,\dots,k_m,j_m, j; x_0,i)  \nonumber
+% 	\\&= 
+% 	\mathbb P\Big(X(t)\in\wrt x,  \tau_1^X>t, \varphi(t) = j, \Sigma_{m}\leq t<\Gamma_{m+1}, \nonumber
+% 	 \varphi(\Sigma_\ell) = j_\ell , \varphi(\Gamma_\ell) = k_\ell, \ell = 1,\dots,m \\&\qquad{} \mid X(0) = x_0, \varphi(0) = i\Big),
+% \label{eqn: 63}
+% \end{align}
+% for \(i\in\mathcal S_- ,\,j\in\calS_-\cup\mathcal S_{-0},\) where in each case \(j_1,j_2,\dots\in\calS_-,\,k_1,k_2,\dots\in\calS_+,\,x_0\in\calD_{\ell_0,i},\,x\in\calD_{\ell_0,j},\,t\geq0,\,\ell_0\in\{0,\dots,K\},\,m\geq 0\). 
+where we define \(\mu_{m,+,+}^{\ell_0}(t)(\cdot,j;x_0,i) \), \(m\geq 0\), to be the measures on \(\calD_{\ell_0}\)
+\begin{align}
+	&\mathbb P(\bs X(t)\in(\cdot,j), t<\tau_1^X,  \Gamma_m\leq t<\Sigma_{m+1}\mid \bs X(0) = (x_0,  i)), \label{eqn: loop mu}
+\end{align}
+\(x_0\in\calD_{\ell_0}\). 
+For \(m\geq 0\), define analogously
+\begin{align}
+	%
+	&\mu^{\ell_0}_{m,+,-}(t)(\cdot, j; x_0,i) 
+	= \mathbb P(X(t)\in(\cdot,j), t<\tau_1^X,  \Sigma_{m+1}\leq t<\Gamma_{m+1}\mid \bs X(0) = (x_0, i))\label{eqn: fkl}%\sum_{j_1\in\mathcal S_-} \sum_{k_1\in\mathcal S_+}\dots \sum_{k_m\in\mathcal S_+}\sum_{j_{m+1}\in\mathcal S_-}\mu^{\ell_0}_{m,+,-}(t)(\wrt x, j_1,k_1,\dots,k_m,j_{m+1}, j; x_0,i)
+	\intertext{for \(i\in\calS_+,\,j\in\calS_-\cup\calS_{-0}\),}
+	&\mu^{\ell_0}_{m,-,+}(t)(\cdot, j; x_0,i)  
+	= \mathbb P(\bs X(t)\in(\cdot,j), t<\tau_1^X, \Gamma_{m+1}\leq t<\Sigma_{m+1}\mid X(0) = (x_0, i))%\sum_{k_1\in\mathcal S_+} \sum_{j_1\in\mathcal S_-}\dots \sum_{j_m\in\mathcal S_-}\sum_{k_{m+1}\in\mathcal S_+}\mu^{\ell_0}_{m,-,+}(t)(\wrt x, k_1,j_1,\dots,j_m,k_{m+1}, j; x_0,i) 
+	\intertext{for \(i\in\calS_-,\,j\in\calS_+\cup\calS_{+0}\), and}
+	&\mu^{\ell_0}_{m,-,-}(t)(\cdot, j; x_0,i) = \mathbb P(\bs X(t)\in(\cdot,j), t<\tau_1^X, \Sigma_m\leq t<\Gamma_{m+1}\mid \bs X(0) = (x_0, i)) \label{eqn: many eqns mu}% \sum_{k_1\in\mathcal S_+} \sum_{j_1\in\mathcal S_-}\dots \sum_{k_m\in\mathcal S_+}\sum_{j_m\in\mathcal S_-}\mu^{\ell_0}_{m,-,-}(t)(\wrt x, k_1, j_1,\dots,k_m,j_m, j; x_0,i)  
+\end{align}
+for \(i\in\calS_-,\,j\in\calS_-\cup\calS_{-0}\).
+%For \(i\notin \mathcal S_{+0}\cup\calS_{-0}\), the quantity (\ref{eqn: sojourn}) is 
+%\begin{align}\label{eqn: trie thingy}
+%	\mu^{\ell_0}(t)(\wrt x,j;x_0,i)
+%	&=\begin{cases}
+%		\mu^{\ell_0}_{+,+}(t)(\wrt x,j;x_0,i)  & i\in\calS_+,\,j\in\mathcal S_+\cup\calS_{+0},
+%		\\ \mu^{\ell_0}_{+,-}(t)(\wrt x,j;x_0,i)  & i\in\mathcal S_+,\,j\in\mathcal S_-\cup\calS_{-0},
+%		\\ \mu^{\ell_0}_{-,+}(t)(\wrt x,j;x_0,i)  & i\in\mathcal S_-,\,j\in\mathcal S_+\cup\calS_{+0},
+%		\\ \mu^{\ell_0}_{-,-}(t)(\wrt x,j;x_0,i)  & i\in\mathcal S_-,\,j\in\mathcal S_-\cup\calS_{-0},
+%	\end{cases}
+%\end{align}
+Furthermore, let 
+\begin{align}
+		\mu^{\ell_0}_{+,+}(t)(\wrt x,j;x_0,i)  &:= \sum_{m=0}^\infty \mu^{\ell_0}_{m,+,+}(t)(\wrt x,j;x_0,i)  && i\in\calS_+,\,j\in\mathcal S_+\cup\calS_{+0}, \label{eqn: ljg97skg}
+		\\ \mu^{\ell_0}_{+,-}(t)(\wrt x,j;x_0,i)  &:= \sum_{m=1}^\infty \mu^{\ell_0}_{m,+,-}(t)(\wrt x,j;x_0,i)  && i\in\mathcal S_+,\,j\in\mathcal S_-\cup\calS_{-0},
+		\\ \mu^{\ell_0}_{-,+}(t)(\wrt x,j;x_0,i) &:= \sum_{m=1}^\infty \mu^{\ell_0}_{m,-,+}(t)(\wrt x,j;x_0,i)  && i\in\mathcal S_-,\,j\in\mathcal S_+\cup\calS_{+0},
+		\\ \mu^{\ell_0}_{-,-}(t)(\wrt x,j;x_0,i)  &:= \sum_{m=0}^\infty \mu^{\ell_0}_{m,-,-}(t)(\wrt x,j;x_0,i)  && i\in\calS_-,\,j\in\mathcal S_-\cup\calS_{-0}. \label{eqn: ljg97skg2}
+\end{align}
+
+\subsection{Characterising the QBD-RAP} 
+Let \(\tau_1^{(p)}\) be the random (stopping) time at which the QBD-RAP changes level, or hits the boundary, or exits a boundary, for the first time;
+\[\tau_1^{(p)} = \inf\left\{t>0\mid L^{(p)}(t)\neq L^{(p)}(0)\right\}.\]
+According to the approximation described in Chapter~\ref{sec: inspiration}, the summands in (\ref{eqn: sojourn partition}) are approximated by \[f^{\ell_0,(p)}_{m,+,+}(t)( x,j; x_0,i)\wrt x,\] 
+for \(i\in\calS_+,\) \(j\in\calS_+\cup\calS_{+0},\) \(x_0\in\calD_{\ell_0,i},\) \(x\in\calD_{\ell_0,j},\) \(t\geq0,\) \(\ell_0\in\{0,\dots,K\},\) \(m\geq 0\), which are given by
+\begin{align}
+	&\int_{\bs a \in\mathcal A^{(p)}}\mathbb P\Big(\bs A^{(p)}(t)\in \wrt \bs a, t<\tau_1^{(p)}, \varphi(t) = j, \Gamma_m\leq t<\Sigma_{m+1} \nonumber
+	\mid \bs A^{(p)}(0) = \bs   a_{\ell_0,i}^{(p)}(x_0), \varphi(0) = i\Big)
+	\\&\quad \times \bs a{\bs v}^{(p)}(y_{\ell_0+1}-x)\wrt x\nonumber
+	%
+	\\
+	&=\int_{\sigma_1=0}^t (\bs e_i\otimes \bs  a_{\ell_0,i}^{(p)}(x_0)) e^{\bs{B}^{(p)}_{++}\sigma_1}\bs{B}^{(p)}_{+-}	\nonumber
+	\int_{\gamma_1=\sigma_1}^{t} e^{\bs{B}^{(p)}_{--}(\gamma_1-\sigma_1)}\bs{B}^{(p)}_{-+}
+	\hdots 
+	 \int_{\gamma_m=\sigma_{m}}^{t} e^{\bs{B}^{(p)}_{--}(\gamma_m-\sigma_{m})}\bs{B}^{(p)}_{-+}\\&\quad\times
+	e^{\bs{B}^{(p)}_{++}(t-\gamma_m)}\left(\bs e_j  \otimes {\bs v}^{(p)}(y_{\ell_0+1}-x)\right)\wrt x
+	\wrt \sigma_1\wrt \gamma_1\dots \wrt \sigma_m\wrt \gamma_m. \label{eqn: approx end conv}
+\end{align}
+Analogously, approximations to (\ref{eqn: fkl})-(\ref{eqn: many eqns mu}) are 
+\begin{align}
+	&f^{\ell_0,(p)}_{m,+,-}(t)(  x, j; x_0,i) \nonumber
+	% \\&= \int_{\bs a \in\mathcal A^{(p)}}\mathbb P\Big(\bs A^{(p)}(t)\in \wrt \bs a, t<\tau_1^{(p)}, \varphi(t) = j, \Sigma_{m+1}\leq t<\Gamma_{m+1}\mid 
+	% %
+	% \bs A^{(p)}(0) = \bs   a_{\ell_0,i}^{(p)}(x_0), \nonumber
+	% \\&\qquad \times \varphi(0) = i\Big)
+	% \bs a{\bs v}^{(p)}(y_{\ell_0+1}-x)\wrt x \nonumber 
+	%
+	\\&:=\int_{\sigma_1=0}^t (\bs e_i\otimes \bs  a_{\ell_0,i}^{(p)}(x_0)) e^{\bs{B}^{(p)}_{++}\sigma_1}\bs{B}^{(p)}_{+-}	\nonumber
+	\int_{\gamma_1=\sigma_1}^{t} e^{\bs{B}^{(p)}_{--}(\gamma_1-\sigma_1)}\bs{B}^{(p)}_{-+}
+	\hdots 
+	%\int_{\gamma_m=\sigma_{m}}^{t} e^{\bs{B}^{(p)}_{--}(\gamma_m-\sigma_{m})}\bs{B}^{(p)}_{-+}%
+	\int_{\sigma_{m+1}=\gamma_m}^t e^{\bs{B}^{(p)}_{++}(\sigma_{m+1}-\gamma_m)}\bs B^{(p)}_{+-}
+	\\&\quad\times e^{\bs{B}^{(p)}_{--}(t-\sigma_{m+1})}\left(\bs e_j  \otimes {\bs v}^{(p)}(x-y_{\ell_0})\right)\wrt x
+	\wrt \sigma_1\wrt \gamma_1\dots \wrt \sigma_m\wrt \gamma_m\wrt \sigma_{m+1}\label{eqn:gljagj}
+	 %
+	\intertext{for \(i\in\mathcal S_+ ,\,j\in\calS_{-}\cup\mathcal S_{-0}\);}
+	%
+	&f^{\ell_0,(p)}_{m,-,+}(t)( x, j; x_0,i) \nonumber
+	% \\&= \int_{\bs a \in\mathcal A^{(p)}}\mathbb P\Big(\bs A^{(p)}(t)\in \wrt \bs a, t<\tau_1^{(p)}, \varphi(t) = j,  \Gamma_{m+1}\leq t<\Sigma_{m+1},\varphi(\Gamma_{m+1})=k_{m+1}, \nonumber
+	% \nonumber
+	%  \\&\qquad\varphi(\Sigma_\ell) = j_\ell , \varphi(\Gamma_\ell) = k_\ell, \ell = 1,\dots,m \mid 
+	% %
+	% \bs A^{(p)}(0) = \bs   a_{\ell_0,i}^{(p)}(x_0), \varphi(0) = i\Big)\nonumber
+	%  \\&\qquad\times \bs a{\bs v}^{(p)}(y_{\ell_0+1}-x)\wrt x
+	%
+	\\&:=\int_{\gamma_1=0}^t (\bs e_i\otimes \bs  a_{\ell_0,i}^{(p)}(x_0)) e^{\bs{B}^{(p)}_{--}\gamma_1}\bs{B}^{(p)}_{-+}	\nonumber
+	\int_{\sigma_1=\gamma_1}^{t} e^{\bs{B}^{(p)}_{++}(\sigma_1-\gamma_1)}\bs{B}^{(p)}_{+-}
+	\hdots 
+	%\int_{\gamma_m=\sigma_{m}}^{t} e^{\bs{B}^{(p)}_{--}(\gamma_m-\sigma_{m})}\bs{B}^{(p)}_{-+}%
+	\int_{\gamma_{m+1}=\sigma_m}^t e^{\bs{B}^{(p)}_{--}(\gamma_{m+1}-\sigma_m)}\bs B^{(p)}_{-+}
+	\\&\quad\times e^{\bs{B}^{(p)}_{++}(t-\gamma_{m+1})}\left(\bs e_j  \otimes {\bs v}^{(p)}(y_{\ell_0+1}-x)\right)\wrt x
+	\wrt \gamma_1\wrt \sigma_1\dots \wrt \gamma_m\wrt \sigma_m\wrt \gamma_{m+1}
+	 %
+	\intertext{for \( i\in\mathcal S_-  ,\, j\in\mathcal S_{+}\cup\calS_{+0};\)}
+	%
+	&f^{\ell_0,(p)}_{m,-,-}(t)( x, j; x_0, i) \nonumber
+	% \\&= \int_{\bs a \in\mathcal A^{(p)}}\mathbb P\Big(\bs A^{(p)}(t)\in \wrt \bs a, t<\tau_1^{(p)}, \varphi(t) = j, \Sigma_{m}\leq t<\Gamma_{m+1}, \nonumber
+	% \varphi(\Sigma_\ell) = j_\ell , \varphi(\Gamma_\ell) = k_\ell, 
+	% \\&\qquad\ell = 1,\dots,m \mid \bs A^{(p)}(0) = \bs   a_{\ell_0,i}^{(p)}(x_0), \varphi(0) = i\Big)\bs a{\bs v}^{(p)}(y_{\ell_0+1}-x)\wrt x
+	%
+	\\&:=\int_{\gamma_1=0}^t (\bs e_i\otimes \bs  a_{\ell_0,i}^{(p)}(x_0)) e^{\bs{B}^{(p)}_{--}\gamma_1}\bs{B}^{(p)}_{-+}	\nonumber
+	\int_{\sigma_1=\gamma_1}^{t} e^{\bs{B}^{(p)}_{++}(\sigma_1-\gamma_1)}\bs{B}^{(p)}_{+-}
+	\hdots 
+	 \int_{\sigma_m=\gamma_{m}}^{t} e^{\bs{B}^{(p)}_{++}(\sigma_m-\gamma_{m})}\bs{B}^{(p)}_{+-}\\&\quad\times
+	e^{\bs{B}^{(p)}_{--}(t-\sigma_m)}\left(\bs e_j  \otimes {\bs v}^{(p)}(x-y_{\ell_0})\right)\wrt x
+	\wrt \gamma_1\wrt \sigma_1\dots \wrt \gamma_m\wrt \sigma_m\label{eqn: 67}
+\end{align}
+for \( i\in\calS_-,j\in\mathcal S_-\cup\calS_{-0}\), respectively. %Expressions analgous to that on the right-hand side of (\ref{eqn: approx end conv}) can be written down for (\ref{eqn:gljagj})-(\ref{eqn: 67}). 
+
+%To justify the last exponential in the expressions above. The whole expression is in terms of \emph{time}. Consider \(f^{\ell_0}_{m,+}(t)( x, j_1,k_1,\dots,j_m,k_m, j; x_0,i)\). Assume that \(X(t)\in \mathcal D_{\ell_0}\), if the process were to continue in phase \(j\) for another \((y_{\ell_0}+\Delta-x)/c_j = (y_{\ell_0+1}-x)/c_j\) units of time, at which time the ME life time expired, then, since the expiry of the ME is most likely to occur when \(X=y_{\ell_0}+\Delta\), we would approximate the position of \(X(t)\) as \(y_{\ell_0+1} - c_j(y_{\ell_0+1}-x)/c_j  = x\); the probability density associated with the description above is to take the position of the orbit at time \(t\), \(\bs \alpha(t)\) and post-multiply by \(e^{c_j\bs{S}(y_{\ell_0+1}-x)/c_j}c_j\bs s\), i.e. the probability density associated with \(X(t)\) being at \(x\) is \(\bs \alpha(t)e^{c_j\bs{S}(y_{\ell_0+1}-x)/c_j}c_j\bs s\).
+
+For sample paths with \(\varphi(0)\in\mathcal S_+\), (\(\varphi(0)\in\mathcal S_-\)) the events \(\{\Gamma_m\leq t< \Sigma_{m+1}\} , \mbox{ and } \{\Sigma_{m+1}\leq t< \Gamma_{m+1}\}, \) (respectively, \(\{\Sigma_m\leq t< \Gamma_{m+1}\} , \mbox{ and } \{\Gamma_{m+1}\leq t< \Sigma_{m+1}\}\)) \(m\geq 0\), form a partition of the sample paths of the QBD-RAP. With this partition the phase of the QBD-RAP changes from \(\mathcal S_+\) to \(j_m\in\mathcal S_-\) at times \(\Sigma_{m}\) and from \(\mathcal S_-\) to \(k_m\in\mathcal S_+\) at times \(\Gamma_m\). %Hence for \(i\notin\calS_{+0}\cup\calS_{-0}\), the probability (\ref{eqn: ldll}) is approximated by 
+%\begin{align}\label{eqn: approx to sojourn}
+%	f^{\ell_0}(t)(x,j;x_0,i)\wrt x &:=\begin{cases}
+%		 f^{\ell_0}_{+,+}(t)(x,j;x_0,i)\wrt x & i\in\calS_+,\,j\in\mathcal S_+\cup\calS_{+0},
+%		\\ f^{\ell_0}_{+,-}(t)(x,j;x_0,i)\wrt x & i\in\mathcal S_+,\,j\in\mathcal S_{-}\cup\calS_{-0},
+%		\\ f^{\ell_0}_{-,+}(t)(x,j;x_0,i)\wrt x & i\in\mathcal S_-,\,j\in\mathcal S_{+}\cup\calS_{+0},
+%		\\ f^{\ell_0}_{-,-}(t)(x,j;x_0,i)\wrt x & i\in\calS_-,\,j\in\mathcal S_{-}\cup\calS_{-0},
+%	\end{cases}
+%\end{align}
+%where 
+
+Define
+% \begin{align}
+% 	&f_{m,+,+}^{\ell_0,(p)}(t)(x,j;x_0,i) \wrt x \nonumber 
+% 	\\&\qquad= \sum_{j_1\in\mathcal S_-} \sum_{k_1\in\mathcal S_+}\dots \sum_{j_m\in\mathcal S_-}\sum_{k_m\in\mathcal S_+} f_{m,+,+}^{\ell_0,(p)}(t)(x, j_1,k_1,\dots,j_m,k_m, j; x_0,i) \wrt x,\label{eqn: oihg87576}
+% 	%
+% 	\\&f^{\ell_0,(p)}_{m,+,-}(t)(x, j; x_0,i) \wrt x \nonumber
+% 	\\&= \sum_{j_1\in\mathcal S_-} \sum_{k_1\in\mathcal S_+}\dots \sum_{k_m\in\mathcal S_+}\sum_{j_{m+1}\in\mathcal S_-}f^{\ell_0,(p)}_{m+1,+,-}(t)(x, j_1,k_1,\dots,k_m,j_{m+1}, j; x_0,i) \wrt x,
+% 	\\&f^{\ell_0,(p)}_{m,-,+}(t)(x, j; x_0,i) \wrt x \nonumber
+% 	\\&= \sum_{k_1\in\mathcal S_+} \sum_{j_1\in\mathcal S_-}\dots \sum_{j_m\in\mathcal S_-}\sum_{k_{m+1}\in\mathcal S_+}f^{\ell_0,(p)}_{m,-,+}(t)(x, k_1,j_1,\dots,j_m,k_{m+1}, j; x_0,i)  \wrt x,
+% 	\\&f^{\ell_0,(p)}_{m,-,-}(t)(x, j; x_0,i) \wrt x \nonumber 
+% 	\\&\qquad = \sum_{k_1\in\mathcal S_+} \sum_{j_1\in\mathcal S_-}\dots \sum_{k_m\in\mathcal S_+}\sum_{j_m\in\mathcal S_-}f^{\ell_0,(p)}_{m,-,-}(t)(x, k_1, j_1,\dots,k_m,j_m, j; x_0,i) \wrt x.  \label{eqn: many eqns}
+% \end{align}
+% and
+\begin{align*}
+		f^{\ell_0,(p)}_{+,+}(t)(x,j;x_0,i)\wrt x &:= \sum_{m=0}^\infty f^{\ell_0,(p)}_{m,+,+}(t)(x,j;x_0,i)\wrt x & i\in\calS_+,\,j\in\calS_+\cup\calS_{+0},
+		\\ f^{\ell_0,(p)}_{+,-}(t)(x,j;x_0,i)\wrt x &:= \sum_{m=1}^\infty f^{\ell_0,(p)}_{m,+,-}(t)(x,j;x_0,i)\wrt x & i\in\mathcal S_+,\,\,j\in\mathcal S_{0}\cup\calS_{-0},
+		\\ f^{\ell_0,(p)}_{-,+}(t)(x,j;x_0,i) &:= \sum_{m=1}^\infty f^{\ell_0,(p)}_{m,-,+}(t)(x,j;x_0,i)\wrt x & i\in\mathcal S_-,\,\,j\in\mathcal S_{+}\cup\calS_{+0},
+		\\ f^{\ell_0,(p)}_{-,-}(t)(x,j;x_0,i)\wrt x &:= \sum_{m=0}^\infty f^{\ell_0,(p)}_{m,-,-}(t)(x,j;x_0,i)\wrt x & i\in\calS_-,\,j\in\mathcal S_-\cup\calS_{-0}.
+\end{align*}
+which are the corresponding approximations of (\ref{eqn: loop mu})-(\ref{eqn: ljg97skg2}).
+% The sum (\ref{eqn: oihg87576}) is 
+% \begin{align}
+% 	&\int_{\sigma_1=0}^t (\bs e_i\otimes \bs  a_{\ell_0,i}^{(p)}(x_0)) e^{\bs{B}^{(p)}_{++}\sigma_1}\bs{B}^{(p)}_{+-}	\nonumber
+% 	\int_{\gamma_1=\sigma_1}^{t} e^{\bs{B}^{(p)}_{--}(\gamma_1-\sigma_1)}\bs{B}^{(p)}_{-+}
+% 	\hdots 
+% 	 \int_{\gamma_m=\sigma_{m}}^{t} e^{\bs{B}^{(p)}_{--}(\gamma_m-\sigma_{m})}\\&\quad\times\bs{B}^{(p)}_{-+}
+% 	e^{\bs{B}^{(p)}_{++}(t-\gamma_m)}\left(\bs e_j \otimes {\bs v}^{(p)}(y_{\ell_0+1}-x)\right)\wrt x
+% 	\wrt \sigma_1\wrt \gamma_1\dots \wrt \sigma_m\wrt \gamma_m. \label{eqn: looper}
+% \end{align}
+% Analogous expressions can be written down for (\ref{eqn: oihg87576})-(\ref{eqn: many eqns}). For simplicity, we may drop the superscript \((p)\). 
+%
+%Let \(\psi:[0,\Delta)\to \mathbb R\) be bounded and Lipschitz continuous. To prove weak convergence we consider the expectations 
+%\begin{align}
+%	&\mathbb E[\psi(\widetilde X(t))1( t<\tau_1, \varphi(t) = j, \Sigma_{m}\leq t<\Gamma_{m+1}, \nonumber
+%	\varphi(\Sigma_\ell) = j_\ell , \varphi(\Gamma_\ell) = k_\ell, \ell = 1,\dots,m )\mid 
+%	%
+%	\\&\qquad \bs A(0) = \bs   a_{\ell_0,i}(x_0), \varphi(0) = i)]. \label{eqn: skdjfq}
+%\end{align}
+%For example, when \(i\in\calS_+\), \(j\in\calS_+\cup\calS_{0+}\), the expectation (\ref{eqn: skdjfq}) is given by 
+%\begin{align}
+%	& \int_{x=0}^\Delta \int_{\sigma_1=0}^t (\bs e_i\otimes \bs  a_{\ell_0,i}(x_0)) e^{\bs{B}_{++}\sigma_1}\bs{B}_{+-}	\nonumber
+%	\int_{\gamma_1=\sigma_1}^{t} e^{\bs{B}_{--}(\gamma_1-\sigma_1)}\bs{B}_{-+}
+%	\hdots 
+%	 \int_{\gamma_m=\sigma_{m}}^{t} e^{\bs{B}_{--}(\gamma_m-\sigma_{m})}\\&\quad\times\bs{B}_{-+}
+%	e^{\bs{B}_{++}(t-\gamma_m)}\left(\bs e_j \otimes {\bs v}(y_{\ell_0+1}-x)\right)\wrt x
+%	\wrt \sigma_1\wrt \gamma_1\dots \wrt \sigma_m\wrt \gamma_m f(x-y_{\ell_0})\wrt x.
+%\end{align}
+
+%The goal in this section is to show that (\ref{eqn: sojourn}) can be approximated arbitrarily closely by (\ref{eqn: approx to sojourn}) by choosing \(Z^{(p)}\sim ME(\bs \alpha^{(p)},\bs S^{(p)},\bs s^{(p)})\) with sufficiently small variance in the construction of the approximation scheme. 
+%Specifically we show weak convergence of the measures defined by the density function (\ref{eqn: approx to sojourn}) to the measure (\ref{eqn: sojourn}). We do this by showing that for an arbitrary bounded and Lipschitz continuous function \(f:[0,\Delta)\to\mathbb R\), the expected value of \(\psi(X^{(p)}(t))\) converges to the expected value of \(\psi(X(t)\). To do so, we show that the Laplace transforms with respect to time of expectations with respect to (\ref{eqn: approx end conv})-(\ref{eqn: 67}) converge to the Laplace transforms with respect to time of expectations with respect to (\ref{eqn: density part +})-(\ref{eqn: 63}), respectively. This implies that the Laplace transforms with respect to time of expectations with respect to (\ref{eqn: oihg87576})-(\ref{eqn: many eqns}) converge to the Laplace transforms of expectations with respect to (\ref{eqn: loop mu})-(\ref{eqn: many eqns mu}), since the sums are finite and the Laplace transform is a linear operator. Using the Dominated Convergence Theorem, we then show that the Laplace transform with respect to time of expectations with respect to (\ref{eqn: approx to sojourn}) converge to the Laplace transform with respect to time of expectations with respect to (\ref{eqn: sojourn}).
+
+\section{Laplace transforms with respect to time on no change of level}\label{sec: lst on no change}
+Here, we only need to consider Laplace transforms with real transform parameter, \(\lambda \in \mathbb R\), as this is what the convergence results we use require. Therefore, take \(\lambda \in\mathbb R\) throughout. Moreover, take \(\lambda \geq 0\). 
+
+Define the matrices
+\begin{align*}
+	\bs Q_{+0}(\lambda) &= \bs C_+^{-1}\bs T_{+0}\left[\lambda \bs I - \bs T_{00}\right]^{-1},
+	%
+	\\\bs Q_{-0}(\lambda) &= \bs C_-^{-1}\bs T_{-0}\left[\lambda \bs I - \bs T_{00}\right]^{-1},
+	%
+	\\\bs Q_{++}(\lambda) &= \bs C_+^{-1} \left(\bs T_{++} - \lambda \bs I + \bs T_{+0}\left[\lambda \bs I - \bs T_{00}\right]^{-1}\bs T_{0+}\right),
+	%
+	\\\bs Q_{+-}(\lambda) &= \bs C_+^{-1} \left(\bs T_{+-} + \bs T_{+0}\left[\lambda \bs I - \bs T_{00}\right]^{-1}\bs T_{0-} \right) ,
+	%
+	\\\bs Q_{--}(\lambda) &= \bs C_-^{-1} \left(\bs T_{--}  - \lambda \bs I + \bs T_{-0}\left[\lambda \bs I - \bs T_{00}\right]^{-1}\bs T_{0-}\right),
+	%
+	\\\bs Q_{-+}(\lambda) &=\bs C_-^{-1} \left(\bs T_{-+}+ \bs T_{-0}\left[\lambda \bs I - \bs T_{00}\right]^{-1}\bs T_{0+}\right) ,
+\end{align*}
+and the functions,
+\begin{align}
+	\bs H^{++}(\lambda,x) &:= e^{\bs{Q}_{++}(\lambda)x}\vligne{\bs C_+^{-1} & \bs Q_{+0}(\lambda)} = \left[h_{ij}^{++}(\lambda,x)\right]_{i\in \mathcal S_+,j\in\mathcal S_{+}\cup\calS_{+0}}, \label{eqn: lst 1}
+	\\\bs H^{--}(\lambda,x) &:= e^{\bs{Q}_{--}(\lambda)x}\vligne{\bs C_-^{-1} & \bs Q_{-0}(\lambda)} = \left[h_{ij}^{--}(\lambda,x)\right]_{i\in\mathcal S_-,j\in\mathcal S_{-}\cup\calS_{-0}},
+	\\\bs H^{+-}(\lambda,x) &:= e^{\bs{Q}_{++}(\lambda)x}\bs{Q}_{+-}(\lambda) = \left[h_{ij}^{+-}(\lambda,x)\right]_{i\in\mathcal S_+,\,j\in\mathcal S_-}, 
+	\\\bs H^{-+}(\lambda,x) &:= e^{\bs{Q}_{--}(\lambda)x}\bs{Q}_{-+}(\lambda) = \left[h_{ij}^{-+}(\lambda,x)\right]_{i\in\mathcal S_-,\, j\in\mathcal S_+}, \label{eqn: lst 4}
+\end{align}
+for \(x,\lambda\geq 0\). The function \(h_{ij}^{++}(\lambda,x)\) (\(h_{ij}^{--}(\lambda,x)\)) is the Laplace transform with respect to time of the time taken for the fluid level to shift by an amount \(x\) whilst remaining in phases in \(\mathcal S_+\cup\calS_{+0}\) (\(\mathcal S_-\cup\calS_{-0}\)), given the phase was initially \(i\in\mathcal S_+\) (\(i\in\mathcal S_-\)) \citep{bean2005}. The function \(h_{ij}^{+-}(\lambda,x)\) (\(h_{ij}^{-+}(\lambda,x)\)) is the Laplace transform with respect to time of the time taken for the fluid level, \(\{X(t)\}\) to shift by an amount \(x\) whilst remaining in phases in \(\mathcal S_+\cup\calS_{+0}\) (\(\mathcal S_-\cup\calS_{-0}\)), after which time the phase instantaneously changes to \(j\in\mathcal S_-\) (\(\mathcal S_+\)), given the phase was initially \(i\in\mathcal S_+\) (\(\mathcal S_-\)) \citep{bean2005}.
+
+Let \(\psi:[0,\Delta)\to\mathbb R\) be bounded and Lipschitz continuous and consider expectations with respect to measures (\ref{eqn: loop mu})-(\ref{eqn: many eqns mu}). For example, 
+\begin{align}
+	\int_{x=0}^\Delta \mu^{\ell_0}_{m,+,+}(t)( y_{\ell_0} + \wrt x, j; x_0,i) \psi(x)\wrt x. \label{eqn: papPP}
+\end{align}
+Consider taking the Laplace transform with respect to time of (\ref{eqn: papPP});
+\begin{align}
+	&\int_{t=0}^\infty e^{-\lambda t}\int_{x=0}^\Delta \mu^{\ell_0}_{m,+,+}(t)( y_{\ell_0} + \wrt x, j; x_0,i) \psi(x) \wrt t \nonumber 
+	\\&= \int_{x=0}^\Delta \int_{t=0}^\infty e^{-\lambda t} \mu^{\ell_0}_{m,+,+}(t)( y_{\ell_0} + \wrt x, j; x_0,i)  \wrt t \psi(x) \nonumber 
+	\\&= \int_{x=0}^\Delta \widehat \mu^{\ell_0}_{m,+,+}(\lambda)( y_{\ell_0} + x, j; x_0,i) \psi(x) \wrt x \label{eqn: papPP2}
+\end{align}
+where we use \(\widehat \mu^{\ell_0}_{m,+,+}(\lambda)( y_{\ell_0} + \wrt x, j; x_0,i) \) to denote the Laplace transform with respect to time of (\ref{eqn: loop mu}). We now proceed to derive an expression for the Laplace transform with respect to time, \(\widehat \mu^{\ell_0}_{m,+,+}(\lambda)( \wrt x, j; x_0,i) \), from which an expression for (\ref{eqn: papPP2}) follows. We use the hat \(\,\widehat{}\,\)  notation to denote Laplace transforms with respect to time. 
+
+From the stochastic interpretations of the Laplace transforms (\ref{eqn: lst 1})-(\ref{eqn: lst 4}) given in \citep{bean2005} and summarised above, the Laplace transforms with respect to time, \(\widehat \mu^{\ell_0}_{m,+,+}(\lambda)( x, j; x_0,i)\), of (\ref{eqn: loop mu}) are given by 
+\begin{align*}
+	\widehat \mu^{\ell_0}_{0,+,+}(\lambda)( x,j;x_0,i) \wrt x&= h_{ij}^{++}(\lambda,x-x_0)1(x\geq x_0)\wrt x,
+\end{align*}
+for \(m=0\),  and 
+\begin{align}
+	\nonumber&\int_{x_1 = 0}^{\Delta-(x_0-y_{\ell_0})} \bs e_i \bs H^{+-}(\lambda,\Delta-(x_0-y_{\ell_0})-x_1)  %\int_{x_2 = 0}^{\Delta-x_1} h_{j_1k_1}^{-+}(\lambda,\Delta - x_2-x_1) \wrt x_1 
+	\\& \quad \nonumber\times\left[\prod_{r=1}^{m-1} \int_{x_{2r}=0}^{\Delta-x_{2r-1}} \bs H^{-+}(\lambda,\Delta-x_{2r}-x_{2r-1})\wrt x_{2r-1}\int_{x_{2r+1}=0}^{\Delta-x_{2r}}\bs H^{+-}(\lambda,\Delta-x_{2r+1}-x_{2r})\wrt x_{2r}\right]
+	\\&\quad\times \int_{x_{2m}=0}^{\Delta-x_{2m-1}} \bs H^{-+}(\lambda,\Delta -x_{2m-1} - x_{2m}) \wrt x_{2m-1}\bs H^{++}(\lambda,\Delta -x_{2m}- (y_{\ell_0+1}- x))\bs e_j \nonumber	
+	\\&\quad\times 1(\Delta-x_{2m}-(y_{\ell_0+1}-x)\geq 0)\wrt x_{2m} \wrt x \label{eqn: lst herwe}
+\end{align} 
+for \(m\geq 1\). Figure~\ref{fig: sample paths lst} shows an example of the sample paths to which these Laplace transforms correspond.  Analogously, we can write down similar expressions for the Laplace transform with respect to time of (\ref{eqn: loop mu})-(\ref{eqn: many eqns mu}). 
+
+Observe that \(\widehat \mu^{\ell_0}_{0,+,+}(\lambda)(x,j;x_0,i)\) is a smooth function in the variable \(x> x_0\) (and \(\lambda>0\) too), even though the measure \(\mu^{\ell_0}_{0,+,+}(t)(\wrt x,j;x_0,i)\) may have point masses. For example, given \(X(0)=x_0\) and \(\varphi(0)=i\), then \(\mu^{\ell_0}_{0,+,+}(t)(\wrt x,j;x_0,i)\) has a point mass of size (at least) \(e^{T_{ii}t}\delta(x-(x_0+c_it))1(j=i)1(x\in\mathcal D_{\ell_0,i})\) which arises from the event that the phase remains in \(i\) until time \(t\). Meanwhile, the Laplace transform \(\widehat \mu^{\ell_0}_{0,+,+}(\lambda)(\wrt x,j;x_0,i)\) is given by \(\displaystyle \left[e^{\bs Q_{++}(\lambda)(x-x_0)}1(x\geq x_0)\right]_{ij}\), which is a smooth function for all \(x\) except at \(x=x_0\). 
+
+% The Laplace transform with respect to time of (\ref{eqn: loop mu}), \(\widehat \mu^{\ell_0}_{m,+,+}(t)(\wrt x,j;x_0,i)\), is the \((i,j)\)th entry of 
+% \begin{align}
+% 	\nonumber&\int_{x_1 = 0}^{\Delta-(x_0-y_{\ell_0})} \bs H^{+-}(\lambda,\Delta-(x_0-y_{\ell_0})-x_1) \int_{x_2 = 0}^{\Delta-x_1} \bs H^{-+}(\lambda,\Delta - x_2-x_1) \wrt x_1 \dots  
+% 	\\&\quad\times \int_{x_{2m}=0}^{\Delta-x_{2m-1}} \bs H^{-+}(\lambda,\Delta -x_{2m-1} - x_{2m}) \wrt x_{2m-1}\bs H^{++}(\lambda,\Delta -x_{2m}- (y_{\ell_0+1}- x)) \nonumber
+% 	\\&\quad\times 1(\Delta-x_{2m}-(y_{\ell_0+1}-x)\geq 0)\wrt x_{2m}\wrt x. \label{eqn: lst herwe2}
+% \end{align} 
+% Analogous expressions can be written down for the Laplace transforms of (\ref{eqn: fkl})-(\ref{eqn: many eqns mu}).
+
+\begin{figure}
+    \centering\begin{tikzpicture}
+    	\draw[->,thick] (0,-1) -- (7.5,-1);
+   	\draw[-,dashed] (0,4) -- (7.5,4);
+    	\draw (7.5,-1.75) node {$t$};
+    	\draw[-,thick] (0,-1) -- (0,4.5);
+    	\draw[-,thick] (-0.1,4) -- (0.1,4);
+    	\draw[-,thick] (-0.1,0) -- (0.1,0);
+	\draw (-0.75,0) node {$x_0$};
+    	\draw (-0.75,4) node {$y_{\ell_0+1}$};
+    	\draw (-0.75,-1) node {$y_{\ell_0}$};
+    	\draw[|-|,thick] (0,-1) -- (0,0);
+    	\draw (0,-0.5) node[fill=white] {$x_0-y_{\ell_0}$};
+	
+    	\draw (0,-1.75) node {$\sigma_0$};
+    %	\foreach \i in {1,2} {
+    %        		\draw[-,thick] (\i*4,-0.1) -- (\i*4,0.1);
+    %%		\draw (\i*4,-0.75) node {$\i \Delta$};
+    %        }
+    %	\edef\mya{0}
+    %	\foreach \x/\y [count=\c] in {0/2.6,2.6/2,2/2,2/2} {
+    %		\draw[-,thick] (\mya,\x) -- (\mya+\y,{(-(-1)^\c)*\y+\x});
+    %                	\pgfmathparse{\mya+\y}
+    %                	\xdef\mya{\pgfmathresult}
+    %	}
+    
+	
+            \draw[-,thick] (0,0) -- (2.6,2.6);
+            \draw[-,thick] (2.6,-1.1) -- (2.6,-0.9);
+    %        \draw[-,dashed] (2.6,0) -- (2.6,5);
+       	\draw[|-|] (2.6,2.6) -- (2.6,4);
+	\draw (2.6,2.6+0.7) node[fill=white] {$x_1$};
+    	\draw (2.6,-1.75) node {$\sigma_1$};
+    	
+       	\draw[|-|] (1.3,0) -- (1.3,2.6);
+	\draw (1.3,1.3) node[fill=white] {$z_1$};
+	
+%    	\draw[|-|,thick] (3.6-1,1) -- (3.6+1,1);
+%    	\draw (3.6,1) node[fill=white] {$ R_1$};
+    	
+%    	\draw[|-|,thick] (5.6-1,1) -- (5.6+1,1);
+%    	\draw (5.6,1) node[fill=white] {$ R_1$};
+    	
+%            \draw[-,dashed] (2.6,2.6) -- (2.6+2,2.6+2);
+%            \draw[-,thick] (4.6,-0.1) -- (4.6,0.1);
+    %        \draw[-,dashed] (4.6,0) -- (4.6,5);
+%    	\draw (4.6,-0.75) node {$Y_1$};
+    	
+%            \draw[-,dashed] (4.6,4.6) -- (4.6+2,4.6-2);
+%            \draw[-,thick] (6.6,-0.1) -- (6.6,0.1);
+    %        \draw[-,dashed] (6.6,0) -- (6.6,5);
+    %	\draw (6.6,-0.75) node {$Y_1+R_1$};
+    
+    	
+    	\draw[-,thick] (2.6,2.6) -- (4.6,2.6-2);
+            \draw[-,thick] (4.6,-1.1) -- (4.6,-0.9);
+    %        \draw[-,dashed] (6.6+2,0) -- (6.6+2,5);
+        \draw[|-|] (4.6,-1) -- (4.6,0.6);
+	\draw (4.6,-0.2) node[fill=white] {$x_2$};
+    	\draw (4.6,-1.75) node {$\sigma_2$};
+	
+       	\draw[|-|] (3.6,2.6) -- (3.6,0.6);
+	\draw (3.6,1.6) node[fill=white] {$z_2$};
+    	
+%    	\draw[<->,thick] (9.1-0.5,1) -- (9.1+0.5,1);
+%    	\draw (9.1,1) node[fill=white] {$R_2$};
+%    	\draw[<->,thick] (10.1-0.5,1) -- (10.1+0.5,1);
+%    	\draw (10.1,1) node[fill=white] {$R_2$};
+            
+%            	\draw[-,dashed] (6.6+2,0.6) -- (6.6+3,0.6-1);
+%            \draw[-,thick] (6.6+3,-0.1) -- (6.6+3,0.1);
+%    %        \draw[-,dashed] (6.6+3,0) -- (6.6+3,5);
+%            	\draw (9.6,-0.75) node {$Y_2$};
+    	
+%            	\draw[-,dashed] (6.6+3,-0.4) -- (6.6+4,0.6);
+%    	\draw[-,thick] (6.6+4,-0.1) -- (6.6+4,0.1);
+    %        \draw[-,dashed] (6.6+4,0) -- (6.6+4,5);
+            
+            	\draw[-,thick] (4.6,0.6) -- (4.6+3,3.6);
+%    	\draw[-,thick] (4.6+3,-0.1) -- (4.6+3,0.1);
+    %        \draw[-,dashed] (6.6+7,0) -- (6.6+7,5);
+%            	\draw (6.6+7,-0.75) node {$Y_3$};
+    
+            	\draw[-,dotted] (4.6+3,3.6) -- (4.6+3.2,3.8);
+    \end{tikzpicture}
+    \caption{\label{fig: sample paths lst} Sample paths corresponding to the Laplace transforms (\ref{eqn: lst herwe}). \(z_1 = \Delta - x_1-(x-y_{\ell_0}),\, z_2= \Delta - x_2-x_1\).}
+\end{figure}
+
+Now consider expectations with respect to measures (\ref{eqn: approx end conv})-(\ref{eqn: 67}). For example,
+\begin{align}
+	\int_{x=0}^\Delta f^{\ell_0,(p)}_{m,+,+}(t)( y_{\ell_0} + \wrt x,j; x_0,i) \psi(x). \label{eqn: fpapPP}
+\end{align}
+Taking the Laplace transform with respect to time of (\ref{eqn: fpapPP});
+\begin{align}
+	&\int_{t=0}^\infty e^{-\lambda t}\int_{x=0}^\Delta f^{\ell_0,(p)}_{m,+,+}(t)( y_{\ell_0} + x, j; x_0,i) \psi(x)\wrt x \wrt t \nonumber 
+	\\&= \int_{x=0}^\Delta \int_{t=0}^\infty e^{-\lambda t} f^{\ell_0,(p)}_{m,+,+}(t)( y_{\ell_0} + x, j; x_0,i)  \wrt t \psi(x) \wrt x \nonumber 
+	\\&= \int_{x=0}^\Delta \widehat f^{\ell_0,(p)}_{m,+,+}(\lambda)( y_{\ell_0} + x, j; x_0,i) \psi(x) \wrt x \label{eqn: fpapPP2}
+\end{align}
+where we use \(\widehat f^{\ell_0,(p)}_{m,+,+}(\lambda)( y_{\ell_0} + x, j; x_0,i) \) to denote the Laplace transform with respect to time of (\ref{eqn: approx end conv}). We now proceed to derive an expression for the Laplace transform with respect to time, \(\widehat f^{\ell_0,(p)}_{m,+,+}(\lambda)( \wrt x, j; x_0,i) \), from which an expression for (\ref{eqn: fpapPP2}) follows. 
+
+Notice that (\ref{eqn: approx end conv}) is a convolution. The Laplace transform with respect to time of (\ref{eqn: approx end conv}) is
+\begin{align}
+	&\widehat f^{\ell_0,(p)}_{m,+,+}(\lambda)(x, j; x_0,i) \nonumber 
+	% \\&=\int_{t=0}^\infty e^{-\lambda t}\int_{\bs a \in\mathcal A^{(p)}}\mathbb P\Big(\bs A^{(p)}(t)\in \wrt \bs a, t<\tau_1^{(p)}, \varphi(t) = j, \Gamma_m\leq t<\Sigma_{m+1}, \nonumber
+	% \varphi(\Sigma_\ell) = j_\ell , 
+	% \\&\qquad\varphi(\Gamma_\ell) = k_\ell, \ell = 1,\dots,m \mid \bs A^{(p)}(0) = \bs   a_{\ell_0,i}^{(p)}(x_0), \varphi(0) = i\Big)\bs a {\bs v}^{(p)}(y_{\ell_0+1}-x)\wrt t\nonumber
+	%
+	\\&=(\bs e_i\otimes \bs  a_{\ell_0,i}^{(p)}(x_0))  \int_{t_1=0}^\infty e^{-\lambda t_1} e^{\bs{B}^{(p)}_{++}t_1} \wrt t_1 \bs{B}^{(p)}_{+{-}} \nonumber
+	\int_{t_2=0}^\infty e^{-\lambda t_2} e^{\bs{B}^{(p)}_{--}t_2} \wrt t_2\bs{B}^{(p)}_{-{+}} 
+	\\&\hdots 
+	\int_{t_{2m}=0}^\infty e^{-\lambda t_{2m}}e^{\bs{B}^{(p)}_{--}t_{2m}} \wrt t_{2m}\bs{B}^{(p)}_{-{+}} 
+	\int_{t=0}^\infty e^{-\lambda t}e^{\bs{B}^{(p)}_{++}t} \wrt t 
+	%
+	\left(\bs e_j \otimes {\bs v}^{(p)}(y_{\ell_0+1}-x)\right). \label{eqn: approx end conv lst}
+\end{align}
+Analogous expressions can be computed for the Laplace transforms with respect to time of (\ref{eqn:gljagj})-(\ref{eqn: 67}). 
+
+%The Laplace transforms are convenient formulations with which to work as the integrands in (\ref{eqn: approx end conv lst}) simplify to a product of one of the functions in (\ref{eqn: lst 1})-(\ref{eqn: lst 4}) and a matrix exponential effectively separating the behaviour. 
+
+In Corollary~\ref{cor: mpr B} in Appendix~\ref{appendix: kronecker}, we show the following relation
+\begin{align}
+	&\vligne{\bs I_{p|\calS_m|} & \bs 0_{p|\calS_m|\times p|\calS_0|} }\int_{t=0}^\infty e^{-\lambda t} e^{\bs{B}^{(p)}_{mm}t} \wrt t \bs{B}^{(p)}_{m{n}} \nonumber %= \vligne{\bs I & \bs 0 }\int_{t=0}^\infty e^{-\lambda t} e^{\bs{B}_{mm}t} \wrt t  \left[\begin{array}{cc} \bs{T}_{mn}\otimes \bs{D} & \bs 0 \\ \bs T_{0n}\otimes \bs D & \bs 0 \end{array}\right]
+	\\&= \int_{x=0}^\infty \bs H^{mn}(\lambda,x)  \otimes  e^{\bs S^{(p)} x}\bs D^{(p)}\wrt x \vligne{\bs I_{p|\calS_n|} & \bs 0_{p|\calS_n|\times p|\calS_0|}}, \label{eqn: akgj987adKLDJaf}
+\end{align}
+for \(m,n\in\{+,-\}\), \(m\neq n\). Before we can apply this result, observe that we can write the inital vector in (\ref{eqn: approx end conv lst}) as 
+\[((\bs e_i)_{1\times |\calS_+\cup\calS_{+0}|}\otimes \bs  a_{\ell_0,i}^{(p)}(x_0)) = ((\bs e_i)_{1\times |\calS_+|}\otimes \bs  a_{\ell_0,i}^{(p)}(x_0))\vligne{\bs I_{p|\calS_+|} & \bs 0_{p|\calS_+|\times p|\calS_0|}}\]
+by the~\ref{eqn:mpr}. 
+Now, applying (\ref{eqn: akgj987adKLDJaf}) to the first integral in (\ref{eqn: approx end conv lst}) transforms the expression to 
+\begin{align}
+	&(\bs e_i\otimes \bs  a_{\ell_0,i}^{(p)}(x_0)) \int_{x_1=0}^\infty \left(\bs H^{+{-}}(\lambda,x_1) \otimes e^{\bs S^{(p)} x}\bs D^{(p)}\right) \wrt x_1 \vligne{\bs I_{p|\calS_-|} & \bs 0_{p|\calS_-|\times p|\calS_0|}} \nonumber
+	\\&\int_{t_2=0}^\infty e^{-\lambda t_2} e^{\bs{B}^{(p)}_{--}t_2} \wrt t_2\bs{B}^{(p)}_{-{+}} 
+	\hdots 
+	\int_{t_{2m}=0}^\infty e^{-\lambda t_{2m}}e^{\bs{B}^{(p)}_{--}t_{2m}} \wrt t_{2m}\bs{B}^{(p)}_{-{+}} 
+	\int_{t=0}^\infty e^{-\lambda t}e^{\bs{B}^{(p)}_{++}t} \wrt t \nonumber
+	%
+	\\&\left(\bs e_j \otimes {\bs v}^{(p)}(y_{\ell_0+1}-x)\right). \label{eqn: approx end conv lst2}
+\end{align}
+We may now apply (\ref{eqn: akgj987adKLDJaf}) to the second integral, after which we can apply (\ref{eqn: akgj987adKLDJaf}) to the third integral and so on. Ultimately, after applying (\ref{eqn: akgj987adKLDJaf}) to all of the integrals in (\ref{eqn: approx end conv lst}), we get 
+%\begin{align}
+%	&(\bs e_i\otimes \bs  a_{\ell_0,i}(x_0))  \int_{x_1=0}^\infty e^{\bs{Q}_{++}(\lambda)} \otimes e^{\bs{S}x_1}\wrt x_1 (\bs{Q}_{+-}(\lambda)\otimes \bs{D})\bs e_{j_1}\bs e_{j_1}'
+%	\int_{x_2=0}^\infty e^{\bs{Q}_{--}(\lambda)x_2}\otimes e^{\bs{S}x_2} \wrt x_2 \nonumber
+%	\\&(\bs{Q}_{-{+}}(\lambda)\otimes \bs{D})\bs e_{k_1}\bs e_{k_1}'
+%	\hdots \int_{x_{2m}=0}^\infty e^{\bs{Q}_{--}(\lambda)x_{2m}}\otimes e^{\bs{S}x_{2m}} \wrt x_{2m}(\bs{Q}_{-+}(\lambda)\otimes  \bs{D}) \bs e_{k_m}\bs e_{k_m}'\nonumber
+%	\\&\times\int_{x_{2m+1}=0}^\infty e^{\bs{Q}_{++} ( \lambda )x_{2m+1}}\otimes e^{\bs{S}x_{2m+1}} \wrt x_{2m+1}\left(\vligne{\bs C_+^{-1} & \bs Q_{+0}(\lambda)}\otimes  \bs I\right)(\bs e_j\bs e_j') (\bs I \otimes U_+(y_{\ell_0}-x) ) . \label{eqn: approx end conv lst 4}
+%\end{align}
+%By the~\ref{eqn:mpr}, we can rewrite (\ref{eqn: approx end conv lst 4}) as 
+\begin{align}
+	&(\bs e_i \otimes \bs   a_{\ell_0,i}^{(p)}(x_0)) \left( \int_{x_1=0}^\infty \bs H^{+-}(\lambda,x_1)\otimes e^{\bs{S}^{(p)}x_1}\bs{D}^{(p)}\wrt x_1 \right)\nonumber%
+	% \int_{x_2=0}^\infty \left[\bs H^{-+}(\lambda,x_2)\right]_{j_1,k_1} e^{\bs{S}x_2} \wrt x_2 \bs{D} 	\nonumber
+	\\&\Bigg[\prod_{r=1}^{m-1} \left(\int_{x_{2r}=0}^\infty \bs H^{-+}(\lambda,x_{2r}) \otimes e^{\bs{S}^{(p)}x_{2r}}\bs{D}^{(p)}\wrt x_{2r}\right) \nonumber 
+	\\&\nonumber \left(\int_{x_{2r+1}=0}^\infty \bs H^{+-}(\lambda,x_{2r+1})
+	\otimes e^{\bs{S}^{(p)}x_{2r+1}}\bs{D}^{(p)} \wrt x_{2r+1} \right)\Bigg] 
+	\\&\left(\int_{x_{2m}=0}^\infty \bs H^{-+}(\lambda,x_{2m})
+	  \otimes e^{\bs{S}^{(p)}x_{2m}}\bs{D}^{(p)} \wrt x_{2m} \right) \nonumber 
+	\\&\left(\int_{x_{2m+1}=0}^\infty \bs H^{++}(\lambda,x_{2m+1})\otimes 
+	e^{\bs{S}^{(p)}x_{2m+1}} \wrt x_{2m+1}\right) \left(\bs e_j \otimes {\bs v}^{(p)}(y_{\ell_0+1}-x)\right) \nonumber
+	%
+	\\&=\int_{x_1=0}^\infty \dots \int_{x_{2m+1}=0}^\infty \bs e_i\bs M^{m}_{++}(\lambda,x_1,\dots,x_{2m+1})\bs e_j \nonumber 
+	\\&\times \bs a_{\ell_0,i}^{(p)}(x_0) \bs N^{2m+1,(p)}(\lambda,x_1,\dots,x_{2m+1}) {\bs v}^{(p)}(y_{\ell_0+1}-x)\wrt x_{2m+1}\dots\wrt x_1 ,
+	%
+	% \\
+	% &=\int_{x_1=0}^\infty h^{+-}_{i,j_{1}}(\lambda,x_1)\bs   a_{\ell_0,i}^{(p)}(x_0)e^{\bs{S^{(p)}}x_1}\wrt x_1 \bs{D}^{(p)}\nonumber
+	% %\int_{x_2=0}^\infty h^{-+}_{j_1,k_1}(\lambda,x_2) e^{\bs{S}x_2} \wrt x_2 \bs{D} 
+	% %\hdots
+	% \Bigg[\prod_{r=1}^{m-1} \int_{x_{2r}=0}^\infty h^{-+}_{j_r,k_r}(\lambda,x_{2r}) e^{\bs{S}^{(p)}x_{2r}}\wrt x_{2r}\bs D^{(p)}
+	% \\&\nonumber \quad \int_{x_{2r+1}=0}^\infty h^{+-}_{k_rj_{r+1}}(\lambda,x_{2r+1}) e^{\bs{S}^{(p)}x_{2r+1}} \wrt x_{2r+1}\bs D^{(p)}\Bigg]
+	% \int_{x_{2m}=0}^\infty h^{-+}_{j_{m},k_m}(\lambda, x_{2m}) e^{\bs{S}^{(p)}x_{2m}} \wrt x_{2m} \bs{D}^{(p)}
+	% \\&\nonumber \quad \int_{x_{2m+1}=0}^\infty h^{++}_{k_m,j}(\lambda,x_{2m+1}) e^{\bs{S}^{(p)}x_{2m+1}}\wrt x_{2m+1}{\bs v}^{(p)}(y_{\ell_0+1}-x) \nonumber
+	% %
+	% \\&=\int_{x_1=0}^\infty h^{+-}_{i,j_{1}}(\lambda,x_1)
+	% \int_{x_2=0}^\infty h^{-+}_{j_1,k_1}(\lambda,x_2)
+	% \hdots \int_{x_{2m}=0}^\infty h^{-+}_{j_{m},k_m}(\lambda, x_{2m})  \int_{x_{2m+1}=0}^\infty h^{++}_{k_m,j}(\lambda,x_{2m+1})\nonumber
+	% \\&
+	%  \quad \bs   a_{\ell_0,i}^{(p)}(x_0)e^{\bs{S}^{(p)}x_1} \bs{D}^{(p)} e^{\bs{S}^{(p)}x_2} \bs{D}^{(p)}\dots e^{\bs{S}^{(p)}x_{2m}}  \bs{D}^{(p)}e^{\bs{S}^{(p)}x_{2m+1}} {\bs v}^{(p)}(y_{\ell_0+1}-x)  \nonumber 
+	%  \\&\quad{}\wrt x_{2m+1} \wrt x_{2m}\dots\wrt x_2 \wrt x_1.
+	 \label{eqn: approx final end 2}
+\end{align}
+where we define matrices 
+\begin{align}
+	&\bs M^{m}_{++}(\lambda,x_1,\dots,x_{2m+1}) \nonumber 
+	\\&= \bs H^{+-}(\lambda,x_1)\prod_{r=1}^{m-1}\bs H^{-+}(\lambda,x_{2r}) \bs H^{+-}(\lambda,x_{2r+1}) \bs H^{-+}(\lambda,x_{2m}) 
+	\bs H^{++}(\lambda,x_{2m+1})\nonumber 
+\end{align}
+and
+\begin{align}
+	%
+	\bs N^{n,(p)}(\lambda,x_1,\dots,x_{n}) &= \prod_{r=1}^{n-1} e^{\bs{S}^{(p)}x_{r}}\bs{D}^{(p)} e^{\bs{S}^{(p)}x_{n}}. \nonumber 
+\end{align}
+The relation (\ref{eqn: akgj987adKLDJaf}) is key to our analysis. It allows us to factorise the integrand of the Laplace transform (\ref{eqn: approx final end 2}) into one factor solely related to the orbit process \(\{\bs A^{(p)}(t)\}\) and another factor solely related to the fluid queue. 
+
+Further, if we define matrices
+\begin{align*}
+	\bs M^{m}_{-+}(\lambda,x_1,\dots,x_{2m}) &= \bs H^{-+}(\lambda,x_1)\prod_{r=1}^{m-1}\bs H^{+-}(\lambda,x_{2r}) \bs H^{-+}(\lambda,x_{2r+1}) \bs H^{++}(\lambda,x_{2m}),
+	%
+	\\\bs M^{m}_{+-}(\lambda,x_1,\dots,x_{2m}) &= \bs H^{+-}(\lambda,x_1)\prod_{r=1}^{m-1}\bs H^{-+}(\lambda,x_{2r}) \bs H^{+-}(\lambda,x_{2r+1}) \bs H^{--}(\lambda,x_{2m}),
+\end{align*}
+and
+\begin{align*}
+	&\bs M^{m}_{--}(\lambda,x_1,\dots,x_{2m+1}) \nonumber 
+	\\&= \bs H^{-+}(\lambda,x_1)\prod_{r=1}^{m-1}\bs H^{+-}(\lambda,x_{2r}) \bs H^{-+}(\lambda,x_{2r+1}) \bs H^{+-}(\lambda,x_{2m}) 
+	\bs H^{--}(\lambda,x_{2m+1}),\nonumber 
+\end{align*}
+then analogous expressions can be shown for (\ref{eqn:gljagj})-(\ref{eqn: 67}) in terms of these matrices; for \(m\geq 0\), 
+\begin{align*}
+	\widehat f^{\ell_0,(p)}_{m+1,-,+}(\lambda)(x, j; x_0,i) &= 
+		\int_{x_1=0}^\infty \dots \int_{x_{2m+2}=0}^\infty \bs e_i\bs M^{m+1}_{-+}(\lambda,x_1,\dots,x_{2m+2})\bs e_j \nonumber 
+		\\&\times \bs a_{\ell_0,i}^{(p)}(x_0) \bs N^{2m+2,(p)}(\lambda,x_1,\dots,x_{2m+2}) {\bs v}^{(p)}(y_{\ell_0+1}-x)\wrt x_{2m+2}\dots\wrt x_1,
+	%
+	\\ \widehat f^{\ell_0,(p)}_{m+1,+,-}(\lambda)(x, j; x_0,i) &= 
+		\int_{x_1=0}^\infty \dots \int_{x_{2m+2}=0}^\infty \bs e_i\bs M^{m+1}_{+-}(\lambda,x_1,\dots,x_{2m+2})\bs e_j \nonumber 
+		\\&\times \bs a_{\ell_0,i}^{(p)}(x_0) \bs N^{2m+1,(p)}(\lambda,x_1,\dots,x_{2m+1}) {\bs v}^{(p)}(y_{\ell_0+1}-x)\wrt x_{2m+2}\dots\wrt x_1,
+	\\ \widehat f^{\ell_0,(p)}_{m,-,-}(\lambda)(x, j; x_0,i) &= 
+		\int_{x_1=0}^\infty \dots \int_{x_{2m+1}=0}^\infty \bs e_i\bs M^m_{--}(\lambda,x_1,\dots,x_{2m+1})\bs e_j \nonumber 
+		\\&\times \bs a_{\ell_0,i}^{(p)}(x_0) \bs N^{2m+1,(p)}(\lambda,x_1,\dots,x_{2m+1}) {\bs v}^{(p)}(y_{\ell_0+1}-x)\wrt x_{2m+1}\dots\wrt x_1.
+\end{align*}
+
+In general, for \(k\in\calS_0^*\), \(p\in \{+,-\}, \, q\in\{+,-\}\), \(m\geq 0\),
+\begin{align}
+	\widehat f_{m,0,q}^{\ell_0}(\lambda)(x,j;x_0,k)  
+	&:= \sum_{r\in\{+,-\}}\sum_{i\in\calS_r}\bs e_k\vligne{\lambda \bs I - \bs T_{00}}^{-1}\bs T_{0i}\widehat f_{m+1(r\neq q),r,q}^{\ell_0}(\lambda)(x,j;x_0,i), \label{eqn: vma}
+\end{align}
+and
+\begin{align}
+	\widehat \mu_{m,0,q}^{\ell_0}(\lambda)(x,j;x_0,k) \label{eqn:kdneee}
+	&:= \sum_{r\in\{+,-\}}\sum_{i\in\calS_r}\bs e_k\vligne{\lambda \bs I - \bs T_{00}}^{-1}\bs T_{0i}\widehat \mu_{m+1(r\neq q),r,q}^{\ell_0}(\lambda)(x,j;x_0,i).
+\end{align}
+
+\section{Convergence on no change of level}\label{sec: no change convergence}
+%We now wish to show that expectations of \(\psi(x)\) with respect to the Laplace transforms of (\ref{eqn: approx end conv})-(\ref{eqn: 67}) converge to (\ref{eqn: density part +})-(\ref{eqn: 63}), respectively. 
+
+We need the following properties of \(h_{ij}^{++}(\lambda,x),\,h_{ij}^{--}(\lambda,x),\) \(h_{ij}^{+-}(\lambda,x) ,\) \( h_{ij}^{-+}(\lambda,x) \) which follow from their interpretation as a Laplace transform of a probability distribution. Let \(c_{min}=\min_{i\in\mathcal S_-\cup\calS_+} |c_i|\). For all \(\lambda \geq 0\), there is some \(0\leq G<\infty\) such that 
+\begin{align*}
+	0\leq h_{ij}^{++}(\lambda,x) &\leq  h_{ij}^{++}(0,x)  \leq \max\left\{1/c_{min},1\right\}\leq G,\, i\in\mathcal S_+,j\in\calS_+\cup\mathcal S_{+0},
+	%
+	\\0\leq  h_{ij}^{--}(\lambda,x)  &\leq  h_{ij}^{--}(0,x)  \leq \max\left\{1/c_{min},1\right\}\leq G,\, i\in\mathcal S_-,j\calS_-\in\mathcal S_{-0},
+	%
+	\\0\leq  h_{ij}^{+-}(\lambda,x)  &\leq  h_{ij}^{+-}(0,x)  \leq \max_{k,\ell}\left[\bs{Q}_{+-}(0)\right]_{k,\ell}\leq G, \, i\in\mathcal S_+,\, j\in\mathcal S_-,
+	%
+	\\0\leq  h_{ij}^{-+}(\lambda,x)  &\leq  h_{ij}^{-+}(0,x)  \leq \max_{k,\ell}\left[\bs{Q}_{-+}(0)\right]_{k,\ell}\leq G, \, i\in\mathcal S_-,\, j \in\mathcal S_+,
+\end{align*}
+Furthermore, there exists some \(0\leq \widehat G<\infty\) such that, for \( i\in\mathcal S_+,\,j\in\mathcal S_{+0},\)
+\begin{align*}
+	\int_{x=0}^\infty  h_{ij}^{++}(\lambda,x) \wrt x &\leq \int_{x=0}^\infty  h_{ij}^{++}(0,x) \wrt x = \vligne{-\bs{Q}_{++}(0)^{-1}\bs{C}_+ & -\bs Q_{++}(0)^{-1}\bs Q_{+0}(0)}_{ij}\leq \widehat G, 
+	\intertext{for \(i\in\mathcal S_-,\,j\in\mathcal S_{-0},\)}
+	\int_{x=0}^\infty  h_{ij}^{--}(\lambda,x) \wrt x &\leq \int_{x=0}^\infty  h_{ij}^{--}(0,x) \wrt x = \vligne{-\bs{Q}_{--}(0)^{-1}\bs{C}_- & -\bs Q_{--}(0)^{-1}\bs Q_{-0}(0)}_{ij}\leq \widehat G,
+	\intertext{for \( i\in\mathcal S_+,\, j\in\mathcal S_-,\) }
+	\int_{x=0}^\infty  h_{ij}^{+-}(\lambda,x) \wrt x &\leq \int_{x=0}^\infty  h_{ij}^{+-}(0,x) \wrt x = \left[-\bs{Q}_{++}(0)^{-1}\bs{Q}_{+-}(0)\right]_{ij}\leq \widehat G,
+	\intertext{for \(i\in\mathcal S_-,\, j \in\mathcal S_+\),}
+	\int_{x=0}^\infty  h_{ij}^{-+}(\lambda,x) \wrt x &\leq \int_{x=0}^\infty  h_{ij}^{-+}(0,x) \wrt x = \left[-\bs{Q}_{--}(0)^{-1}\bs{Q}_{-+}(0)\right]_{ij}\leq \widehat G. 
+\end{align*}
+Moreover, since \(h_{ij}^{qr}(\lambda,x)\), \(q,r\in \{+,-\}\), \(i\in\mathcal S_q,\,j\in\mathcal S_r\), are matrix exponential functions with exponent matrix which is a sub-generator matrix, then for every \(\lambda >0\), \(h_{ij}^{qr}(\lambda,x)\) is Lipschitz continuous with respect to \(x\) on \(x\in[0,\infty)\). Therefore there exists some \(0<L<\infty\) such that \(\left|h_{ij}^{qr}(\lambda,x)-h_{ij}^{qr}(\lambda,y)\right|\leq L|x-y|,\) \(q,r\in \{+,-\}\), \(i\in\mathcal S_q,\,j\in\mathcal S_r\cup\calS_{r0}\).
+
+\begin{thm}\label{thm: a thm!}
+	As \(p\to \infty\), for \(m\geq 1\), \(q\in\{+,-,0\},\, r\in\{+,-\}\), or \(m=0\), \(q=0\), \(r\in\{+,-\}\), or \(m=0\), \(q=r\), \(q,r\in\{+,-\},\) then
+	\begin{align}\int_{x\in\calD_{\ell_0}}\widehat f_{m,q,r}^{\ell_0,(p)}(\lambda)(x,j;x_0,k)\psi(x)\wrt x \to \int_{x\in\calD_{\ell_0}}\widehat \mu_{m,q,r}^{\ell_0}(\lambda)(x,j;x_0,k)\psi(x)\wrt x.\label{eqn: thm 2}\end{align}
+\end{thm}
+\begin{proof}
+	\textit{Cases \(q=r \in \{+,-\}\) and \(m=0\).} Lemma~\ref{lem: Dcoajc} bounds the absolute difference 
+	\[\left|\int_{x\in\calD_{\ell_0}}\widehat f_{0,r,r}^{\ell_0,(p)}(\lambda)(x,j;x_0,k)\psi(x)\wrt x-\int_{x\in\calD_{\ell_0}}\widehat \mu_{0,r,r}^{\ell_0}(\lambda)(x,j;x_0,k)\psi(x)\wrt x\right|.\]
+	Since the bounds from Lemma~\ref{lem: Dcoajc} are \(\mathcal O(\var(Z^{(p)})^{1/3})\) then, as we take \(p \to \infty\), the bounds becomes arbitrarily small which gives us the required convergence. 
+
+	\textit{Cases \(q,r\in \{+,-\},\) and \(m\geq 1\).} Given the properties of the functions \(\bs h_{ij}^{u,v}\), \(u,v\in\{+,-\}\), then \(\int_{x\in\calD_{\ell_0}}\widehat f_{0,q,r}^{\ell_0,(p)}(\lambda)(x,j;x_0,k)\psi(x)\wrt x\) satisfies the assumptions of Lemma~\ref{lem: boobies}. To see this, let \(q'\) be the opposite sign to \(q\), i.e.~\(q'\in\{+,-\},\, q\neq q'\). Then, in Equation (\ref{eqn: rhs g 4dvfklsmv2G}), take \(n=2m+1(q=r)\), \(\bs G_1(x_1) = \bs e_i\bs H^{qq'}(\lambda, x_1)\), \(\bs G_{2k}(x_{2k}) = \bs H^{q'q}(\lambda, x_{2k})\), \(\bs G_{2k+1}(x_{2k}) = \bs H^{qq'}(\lambda, x_{2k+1})\), \(k=1,\dots,m-1\); if \(q\neq r\) then take \(\bs G_{2m}(x_{2m}) = \bs H^{rr}(x_{2m})\bs e_j\), otherwise, take \(\bs G_{2m}(x_{2m}) = \bs H^{q'r}(x_{2m})\) and \(\bs G_{2m+1} = \bs H^{rr}(\lambda,x_{2m+1})\bs e_j\). By the remarks following Lemma~\ref{lem: boobies}, this gives the required convergence for this case. 
+
+	\textit{Cases \(q=0,\, r\in\{+,-\}\) and \(m\geq 0\).} 
+	Since
+	\begin{align}
+		\widehat f_{m,0,r}^{\ell_0}(\lambda)(x,j;x_0,k)  
+		&= \sum_{q\in\{+,-\}}\sum_{i\in\calS_q}\bs e_k\vligne{\lambda \bs I - \bs T_{00}}^{-1}\bs T_{0i}\widehat f_{m+1(r\neq q),q,r}^{\ell_0}(\lambda)(x,j;x_0,i), \label{eqkadv}
+	\end{align}
+	is a linear combination of terms which are treated in the two cases above, then (\ref{eqkadv}) converges to 
+	\begin{align}
+		\widehat \mu_{m,0,r}^{\ell_0}(\lambda)(x,j;x_0,k) 
+		&= \sum_{q\in\{+,-\}}\sum_{i\in\calS_q}\bs e_k\vligne{\lambda \bs I - \bs T_{00}}^{-1}\bs T_{0i}\widehat \mu_{m+1(r\neq q),q,r}^{\ell_0}(\lambda)(x,j;x_0,i),
+	\end{align}
+	as required. 
+\end{proof}
+
+% We now present a series of results which provide provide error bounds and/or show convergence of the Laplace transforms presented in the previous section. 
+% \begin{lem}\label{lem: Dcoajc}
+% 	Let \(\psi:[0,\Delta)\to \mathbb R\) be bounded, \(\psi(x)\leq F\), and Lipschitz. Then, for \(x\in\calD_{\ell_0,j}\), \(\ell_0\in\mathcal K\setminus\{-1,K+1\}\), \(\lambda > 0\),
+% 	\begin{align}
+%             	\left|\int_{x=0}^\Delta \widehat f^{\ell_0,(p)}_{0,+,+}(\lambda)(x,j; x_0,i)\psi(x)\wrt x - \int_{x=0}^\Delta\widehat \mu^{\ell_0}_{0,+,+}(\lambda)(x,j; x_0,i)\psi(x)\wrt x\right| \leq R_{{\bs v},2}^{(p)} GF + \varepsilon^{(p)} GF, \label{eqn: anue}
+%             \end{align}
+%             and 
+%             \begin{align}
+%             	\left|\int_{x=0}^\Delta \widehat f^{\ell_0,(p)}_{0,-,-}(\lambda)(x,j; x_0,i)\psi(x)\wrt x - \int_{x=0}^\Delta\widehat \mu^{\ell_0}_{0,-,-}(\lambda)(x,j; x_0,i)\psi(x)\wrt x\right| \leq R_{{\bs v},2}^{(p)} GF + \varepsilon^{(p)} GF. \label{eqn: anue2}
+%             \end{align} 
+% \end{lem}
+
+% \begin{cor}\label{cor: Dcoajc}
+% 	Let \(\psi:\calD_{\ell_0}\to \mathbb R\) be bounded, \(|\psi(x)|\leq F\), and Lipschitz continuous. Then, for \(x_0\in(y_{\ell_0},y_{\ell_0+1}\), \(k\in\calS_{0+}\), \(i\in\calS_-\), \(j\in\calS_-\cup\calS_{-0}\), there exists \(r_{10}^{(p)}\to 0\) as \(p \to \infty\), 
+% 	\begin{align}
+% 		\left|\int_{x\in\calD_{\ell_0}} \widehat f_{0,-0,-}^{\ell_0,(p)}(x,i,j;j,x_0)\psi(x)\wrt x  \to \int_{x\in\calD_{\ell_0}} \widehat \mu_{0,-0,-}^{\ell_0}(x,i,j;k,x_0)\psi(x)\wrt x\right|\leq r_{10}^{(p)}.\label{eqn:xs}
+% 	\end{align}
+% 	Similarly, for \(k\in\calS_{0-}\), \(i\in\calS_+\), \(j\in\calS_+\cup\calS_{+0}\)
+% 	\begin{align}
+% 		\left|\int_{x\in\calD_{\ell_0}} \widehat f_{0,+0,+}^{\ell_0,(p)}(x,i,j;j,x_0)\psi(x)\wrt x  - \int_{x\in\calD_{\ell_0}} \widehat \mu_{0,+0,+}^{\ell_0}(x,i,j;k,x_0)\psi(x)\wrt x\right|\leq r_{10}^{(p)},\label{eqn:!124mcds}
+% 	\end{align}
+% 	where \(r_{10}^{(p)}\to 0\) as \(p\to \infty\). 
+% \end{cor}
+% \begin{proof}
+% 	The result follows from (\ref{lem: ppp}) in Appendix~\ref{app:tand}.
+% \end{proof}
+
+% Define 
+% \begin{align}
+% 		w_n^{(p)}(x_0,x) &= \int_{x_1=0}^\infty g_1(x_1) \bs a ^{(p)}(x_0) e^{\bs{S}^{(p)}x_1}\wrt x_1\bs D^{(p)} 
+%             	\left[\prod_{k=2}^{n-1}\int_{x_k=0}^\infty g_k(x_k) e^{\bs{S}^{(p)}x_k} \wrt x_k \bs D^{(p)}\right] \nonumber 
+% 		\\&\qquad{} \int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}^{(p)}x_n} \wrt x_n {\bs v}^{(p)}(x), \label{eqn: kagorevAJ}
+% \end{align}
+% where \(g_1,g_2,\dots,\) are functions satisfying the Assumptions~\ref{asu: g} and \({\bs v}^{(p)}(x)\) is a closing operator with the Properties~\ref{properties: some props}. Expressions such as (\ref{eqn: approx end conv lst}) are specific forms of (\ref{eqn: kagorevAJ}). In Appendix~\ref{appendix: bounds}, we prove the following results. %By Lemma~\ref{cor: ksjkd}, for any \(x_0,x\in [0,\Delta)\) 
+% %\begin{align}
+% %		w_n(x_0,x) &\leq \widehat G^{n-2}GG_{\bs v}.
+% %\end{align}
+
+% \begin{cor}\label{eqn: lafkjebjcbbalbvvbrb}
+% 	 Let \(g_1,g_2,\dots,\) be functions satisfying Assumptions~\ref{asu: g} and let \({\bs v}(x)\), \(x\in[0,\Delta)\), be a closing operator with Properties~\ref{properties: some props}. Then, for \(n\geq 2\), \(x_0\in[0,\Delta)\), 
+% 	\begin{align}
+% 		&\Bigg| \int_{x=0}^\Delta w_n^{(p)}(x_0,x) \psi(x) \wrt x \nonumber 
+% 	%
+% 		- \int_{x=0}^\Delta \int_{u_1=0}^{\Delta-x_0}g_1(\Delta - u_1 - x_0)
+% 		\\&\qquad{} \left[\prod_{k=2}^{n-1} \int_{u_k=0}^{\Delta-u_{k-1}} g_k(\Delta-u_k-u_{k-1})\wrt u_{k-1}\right] \nonumber 
+% 	g_{n}(\Delta - x-u_{n-1}) 
+% 		\\&\qquad{} 1(\Delta-x-u_{n-1}\geq0) \wrt u_{n-1}\psi(x) \wrt x \Bigg| \nonumber
+% 		\\&\leq (|r_5^{(p)}(n)| + |r_6^{(p)}(n)| + (n-1)|r_4^{(p)}(n)|)\Delta F, \label{eqn: rhs gs 4dvfklsmv}
+% 	\end{align}
+% 	where 
+% 	\begin{align*}
+% 		|r_4^{(p)}(n)| &= \left(2\varepsilon^{(p)} + \cfrac{\var(Z^{(p)})}{\varepsilon^{(p)}}\right) \cfrac{1}{1-\var(Z^{(p)})/(\Delta-x_0)} G \widehat G^{n-2} G ,
+% 		\\|r_5(n)|&= O\Bigg(\max\Bigg\{G^{n-1}\Delta^{n-2}\left(\frac{1}{2}\Delta|r_2 |+ 2\varepsilon^{(p)} G 
+% 		%
+% 		+ \cfrac{1}{2}\Delta G\cfrac{\var(Z^{(p)})/\left(\varepsilon^{(p)}\right)^2}{1-\var(Z^{(p)})/\left(\varepsilon^{(p)}\right)^2}\right),
+% 		\\&\qquad{} G^{n-1}\Delta^{n-2}R_{{\bs v},1}^{(p)}\Bigg\}\Bigg)
+% 		\\|r_6^{(p)}(n)| &\leq\left(\varepsilon^{(p)}\right)^{n-1}G^n.
+% 	\end{align*}
+% \end{cor}
+% \begin{cor}\label{cor: fljm7778}
+% 	Let \(g_1,g_2,\dots,\) be functions satisfying Assumptions~\ref{asu: g} and let \({\bs v}^{(p)}(x)\), \(x\in(0,\Delta)\), be a closing operator with Properties~\ref{properties: some props}. For \(x_0,x\in(0,\Delta)\), \(n\geq 2\)
+% 	\begin{align}
+% 		&\Bigg| \int_{x\in[0,\Delta)} \int_{x_1=0}^\infty g_1(x_1) \bs k^{(p)} (x_0) \bs D^{(p)} e^{\bs{S}^{(p)}x_1}\wrt x_1\bs D^{(p)} 
+%             	\left[\prod_{n=2}^{k-1}\int_{x_n=0}^\infty g_n(x_n) e^{\bs{S}^{(p)}x_n} \wrt x_n
+% 		\bs D^{(p)}\right]\nonumber 
+%             	\\&\qquad{}\int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}^{(p)}x_n} \wrt x_n {\bs v}^{(p)}(x) \psi(x)\wrt x - \int_{x\in[0,\Delta)} \int_{u_1=0}^{x_0}g_1(x_0 - u_1)
+% 		\nonumber 
+%             	\\&\qquad{} \left[\prod_{k=2}^{n-1} \int_{u_k=0}^{\Delta-u_{k-1}} g_k(\Delta-u_k-u_{k-1})\wrt u_{k-1}\right]g_{n}(\Delta - x-u_{n-1}) 
+% 		\\&\qquad{} \times 1(\Delta-x-u_{n-1}\geq0)\wrt u_{n-1}\psi(x)\wrt x \Bigg| \nonumber
+% 		\\&\leq \left(|r_8^{(p)}(n)|+|r_5^{(p)}(n)|+|r_6^{(p)}(n)| + (n-1)|r_4^{(p)}(n)|\right)F\Delta.\label{eqn: KAFnnmna}
+% 	\end{align}
+% 	where 
+% 	\begin{align*}
+% 		|r_8^{(p)}(n)|&\leq  \left( 2|r_5^{(p)}(n)| + 2|r_6^{(p)}(n)| + 2(n-1)|r_4^{(p)}(n)| + \varepsilon^{(p)} G^{n-1}\Delta^{n-2}(G+L\Delta) \right) \\&\qquad{}+ 2\widehat G^{n-2}GG_{\bs v}\cfrac{\var(Z^{(p)})/\left(\varepsilon^{(p)}\right)^2}{1-\var(Z^{(p)})/\left(\varepsilon^{(p)}\right)^2}.
+% 	\end{align*}
+% \end{cor}
+% Upon choosing \(\varepsilon^{(p)}=\var(Z^{(p)})^{1/3}\), for fixed \(n\geq 2\), \( |r_5^{(p)}(n)| + |r_6^{(p)}(n)| + (n-1)|r_4^{(p)}(n)|\to 0\) and \( |r_8^{(p)}|+|r_5^{(p)}(n)| + |r_6^{(p)}(n)| + (n-1)|r_4^{(p)}(n)|\to 0\) as \(p\to \infty\). 
+
+% Our first main result towards proving the convergence of the QBD-RAP scheme to the fluid queue is the following bound. 
+% %Using Corollary~\ref{cor: fljm7778}, we can have the following result. 
+% \begin{cor}\label{cor: lst diff}Let \(\psi:\calD_{\ell_0}\to\mathbb R\) be bounded, \(|\psi(x)|\leq F\), and Lipschitz continuous. For \(x\in\calD_{\ell_0,j}\), \(x_0\in\calD_{\ell_0,i}\), \(j_1,j_2\dots\in\calS_-\), \(k_1,k_2,\dots\in\calS_+\), \(\ell_0\in\mathcal K\setminus\{-1,K+1\}\), \(m\geq 0\), \(\lambda > 0\), then 
+% \begin{enumerate}
+% 	\item if \(i\in\calS_{+}\), \(j\in\calS_+\cup\calS_{+0}\),
+% 	\begin{align}
+%                 	&\Bigg|\int_{x\in\calD_{\ell_0}}\widehat f^{\ell_0,(p)}_{m,+,+}(\lambda)(x,j_1,k_1,\dots,j_m,k_m,j; x_0,i)\psi(x) \wrt x \nonumber 
+% 	\\&\qquad{} - \int_{x\in\calD_{\ell_0}}\widehat \mu^{\ell_0}_{m,+,+}(\lambda)(x,j_1,k_1,\dots,j_m,k_m,j; x_0,i)\psi(x)\wrt x\Bigg| \nonumber
+%                 	%
+%                 	\\&\leq \begin{cases}
+% 			R_{{\bs v},2}^{(p)} GF + \varepsilon^{(p)} GF, & m = 0, \\
+% 			(|r_5^{(p)}(2m)| + |r_6^{(p)}(2m)| + (2m-1)|r_4^{(p)}(2m)|)\Delta F,  &  m\geq 1,
+% 			\end{cases}\label{eqn: ++}
+% 	\end{align}
+% 	\item if \(i\in\calS_{-}\), \(j\in\calS_-\cup\calS_{-0}\),
+% 	\begin{align}
+%                 	&\Bigg|\int_{x\in\calD_{\ell_0}}\widehat f^{\ell_0,(p)}_{m,-,-}(\lambda)(x,k_1,j_1,\dots,k_m,j_m,j; x_0,i)\psi(x)\wrt x \nonumber
+% 	\\&\qquad{} - \int_{x\in\calD_{\ell_0}} \widehat \mu^{\ell_0}_{m,-,-}(\lambda)(x,k_1,j_1,\dots,k_m,j_m,j; x_0,i)\psi(x)\wrt x\Bigg| \nonumber
+%                 	%
+%                 	\\&\leq \begin{cases}
+% 			R_{{\bs v},2}^{(p)} GF + \varepsilon^{(p)} GF, & m = 0, \\
+% 			(|r_5^{(p)}(2m)| + |r_6^{(p)}(2m)| + (2m-1)|r_4^{(p)}(2m)|)\Delta F,  &  m\geq 1,
+% 			\end{cases}\label{eqn: --}
+% 	\end{align}
+% 	\item if \(i\in\calS_{+}\), \(j\in\calS_-\cup\calS_{-0}\),
+% 	\begin{align}
+%                 	&\Bigg|\int_{x\in\calD_{\ell_0}}\widehat f^{\ell_0,(p)}_{m,+,-}(\lambda)(x,j_1,k_1,\dots,j_m,k_m,j_{m+1},j; x_0,i)\psi(x)\wrt x \nonumber
+% 	\\&\qquad{}- \int_{x\in\calD_{\ell_0}}\widehat \mu^{\ell_0}_{m,+,-}(\lambda)(x,j_1,k_1,\dots,j_m,k_m,j_{m+1},j; x_0,i)\psi(x)\wrt x\Bigg| \nonumber
+%                 	%
+%                 	\\&\leq 
+% 			(|r_5^{(p)}(2m+1)| + |r_6^{(p)}(2m+1)| + 2m|r_4^{(p)}(2m+1)|)\Delta F ,\,   m\geq 0,\label{eqn: +-}
+% 	\end{align}
+% 	\item and if \(i\in\calS_{-}\), \(j\in\calS_+\cup\calS_{+0}\),
+% 	\begin{align}
+%                 	&\Bigg|\int_{x\in\calD_{\ell_0}}\widehat f^{\ell_0,(p)}_{m,-,+}(\lambda)(x,k_1,j_1,\dots,k_m,j_m,k_{m+1},j; x_0,i)\psi(x)\wrt x \nonumber
+% 	\\&\qquad{} - \int_{x\in\calD_{\ell_0}}\widehat \mu^{\ell_0}_{m,-,+}(\lambda)(x,k_1,j_1,\dots,k_m,j_m,k_{m+1},j; x_0,i)\psi(x)\wrt x\Bigg| \nonumber
+%                 	%
+%                 	\\&\leq 
+% 			(|r_5^{(p)}(2m+1)| + |r_6^{(p)}(2m+1)| + 2m|r_4^{(p)}(2m+1)|)\Delta F,\,    m\geq 0.\label{eqn: -+}
+% 	\end{align}
+% %\end{enumerate}
+% %
+% %	Furthermore, for \(x\in\calD_{\ell_0,j}\), \(x_0\in\calD_{\ell_0,i}\), \(j_1,j_2,\dots\in\calS_-\), \(k_1,k_2,\dots\in\calS_+\), \(\ell_0\in\mathcal K, \ell_0\notin\{-1,K+1\}\), \(m\geq 0\), \(\lambda > 0\), then 
+% %	\begin{enumerate}
+% 	\item  if \(k\in\calS_{-0}\), \(i\in\mathcal S_+\), \(j\in\calS_+\cup\calS_{+0}\), 
+% 	\begin{align}
+%                 	\Big|&\int_{x=0}^\Delta \widehat{f}_{m,-0,+}^{\ell_0}(\lambda)(x,i,j_1,k_1,\dots,j_m,k_m,j;x_0,k)\psi(x) \wrt x\nonumber 
+% 		\\&\qquad{} -\int_{x=0}^\Delta \widehat \mu_{m,-0,+}^{\ell_0}(\lambda)(x,i,j_1,k_1,\dots,j_m,k_m,j;x_0,k)\psi(x)\wrt x \Big| \nonumber
+% 	\\&\leq \begin{cases} |r_{10}^{(p)}|, & m=0 \\ (|r_8^{(p)}(2m)|+|r_5^{(p)}(2m)|+|r_6^{(p)}(2m)| + (2m-1)|r_4^{(p)}(2m)|)\Delta F & m \geq 1 \end{cases}  \label{eqn: MMv}
+% 	\end{align}
+% 	\item {if \(k\in\calS_{-0}\), \(i\in\mathcal S_+\), \(j\in\calS_-\cup\calS_{-0}\), }
+% 	\begin{align}
+%                 	&\Big|\int_{x=0}^\Delta \widehat{f}_{m,-0,-}^{\ell_0,(p)}(\lambda)(x,i,j_1,k_1,\dots,k_m,j_{m+1},j;x_0,k)\psi(x)\wrt x\nonumber 
+%                 	\\&\qquad{} -\int_{x=0}^\Delta \widehat \mu_{m,-0,-}^{\ell_0}(\lambda)(x,i,j_1,k_1,\dots,k_m,j_{m+1},j;x_0,k)\psi(x)\wrt x\Big|\nonumber 
+% 	\\&\leq   (|r_8^{(p)}(2m+1)|+|r_5^{(p)}(2m+1)|+|r_6^{(p)}(2m+1)| + 2m|r_4^{(p)}(2m+1)|)\Delta F,\,  m \geq 0   \label{eqn: MMv22}
+% 	\end{align}
+% 	\item {if \(k\in\calS_{+0}\), \(i\in\mathcal S_-\), \(j\in\calS_+\cup\calS_{+0}\),}
+% 	\begin{align}
+%                 	&\Big|\int_{x=0}^\Delta \widehat{f}_{m,+0,+}^{\ell_0,(p)}(\lambda)(x,i,k_1,j_1,\dots,j_m,k_{m+1},j;x_0,k)\psi(x) \wrt x \nonumber 
+%                 	\\&\qquad{} - \int_{x=0}^\Delta \widehat \mu_{m,+0,+}^{\ell_0}(\lambda)(x,i,k_1,j_1,\dots,j_m,k_{m+1},j;x_0,k)\psi(x) \wrt x\Big| \nonumber 
+% 	\\&\leq   (|r_8^{(p)}(2m+1)|+|r_5^{(p)}(2m+1)|+|r_6^{(p)}(2m+1)| + 2m|r_4^{(p)}(2m+1)|)\Delta F,\,  m \geq 0   \label{eqn: MMv222}
+% 	\end{align}
+% 	\item {and if \(k\in\calS_{+0}\), \(i\in\mathcal S_-\), \(j\in\calS_-\cup\calS_{-0}\),}
+% 	\begin{align}
+%                 	&\Big|\int_{x=0}^\Delta \widehat{f}_{m,+0,-}^{\ell_0,(p)}(\lambda)(x,i,k_1,j_1,\dots,k_{m},j_{m},j;x_0,k)\psi(x) \wrt x\nonumber 
+%                 	\\&\qquad{}-\int_{x=0}^\Delta \widehat{\mu}_{m,+0,-}^{\ell_0}(\lambda)(x,i,k_1,j_1,\dots,k_{m},j_{m},j;x_0,k)\psi(x)\wrt x\Big| \nonumber 
+% 	\\&\leq \begin{cases}  |r_{10}^{(p)}|, & m=0 \\( |r_8^{(p)}(2m)|+|r_5^{(p)}(2m)|+|r_6^{(p)}(2m)| + (2m-1)|r_4^{(p)}(2m)|)\Delta F & m \geq 1. \end{cases}\label{eqn: MMv2}
+% 	\end{align}
+% 	\end{enumerate}
+% \end{cor}
+% %For \(r_2\) we have suppressed the dependence of \(r_2\) on \(p\) for simplicity here. When this dependence needs to be made explicit we write \(r_2^{(p)}\). 
+% \begin{proof} 
+% 	For (\ref{eqn: ++}) and (\ref{eqn: --}) and \(m= 0\) apply Lemma~\ref{lem: Dcoajc} to the differences on the left-hand sides.
+	
+% 	For (\ref{eqn: ++}) and (\ref{eqn: --}) and \(m\geq 1\) apply Corollary~\ref{eqn: lafkjebjcbbalbvvbrb} to the differences on the left-hand sides.
+	
+% 	For (\ref{eqn: +-}) and (\ref{eqn: -+}) apply Corollary~\ref{eqn: lafkjebjcbbalbvvbrb} to the differences on the left-hand sides.
+	
+% 	For (\ref{eqn: MMv}) and (\ref{eqn: MMv2}) and \(m= 0\) apply Corollary~\ref{cor: Dcoajc} to the differences on the left-hand sides.
+	
+% 	For (\ref{eqn: MMv}) and (\ref{eqn: MMv2}) and \(m\geq 1\) apply Corollary~\ref{cor: fljm7778} to the differences on the left-hand sides.
+	
+% 	For (\ref{eqn: MMv22}) and (\ref{eqn: MMv222}) apply Corollary~\ref{cor: fljm7778} to the differences on the left-hand sides.
+% \end{proof}
+% These bounds are enough to show the weak convergence (in space and time) of the QBD-RAP scheme to the fluid queue on the event on the event that there is no change of level, and on a given partition as described in (\ref{eqn: 63})-(\ref{eqn: density part +}). Since the state space of the phases, \(\mathcal S\), is finite, then the same bounds show convergence when we sum over all possible phases at times \(\{\Sigma_m\}\) and \(\{\Gamma_m\}\). We formalise this with Corollary~\ref{cor: k}, below.
+
+% \begin{cor}\label{cor: k}
+% 	For \(q \in \{+,-,+0,-0\}\), \(r\in\{+,-\}\), \(i\in\calS_q\), \(j\in\calS_r\), \(x\in\calD_{\ell_0,j}\), \(x_0\in\calD_{\ell_0,i}\), \(\ell_0\in\mathcal K, \ell_0\notin\{-1,K+1\}\), \(m\geq 0\), \(\lambda > 0\), then 
+% 	\begin{align}
+% 		\left| \int_{x\in\calD_{\ell_0}}\widehat f^{\ell_0,(p)}_{m,q,r}(\lambda)(x,j;x_0,i)\psi(x) \wrt x - \int_{x\in\calD_{\ell_0}}\widehat \mu_{m,q,r}^{\ell_0}(\lambda)( x,j;x_0,i)\psi(x)\wrt x \right| \to 0 \label{eqnALKJ{\bs v}}
+% 	\end{align}
+% 	as \(p\to\infty\). 
+% \end{cor}
+% \begin{proof}
+% 	We prove the result for \(q=r=+\) only, with the proofs for the other cases being analogous. 
+	
+% 	By (\ref{eqn: mu advh}) and (\ref{eqn: f advh}) and the triangle inequality, 
+%             \begin{align*}
+%             	&\left| \int_{x\in\calD_{\ell_0}} \widehat f^{\ell_0,(p)}_{m,+,+}(\lambda)(x,j;x_0,i)\psi(x)\wrt x -  \int_{x\in\calD_{\ell_0}} \widehat \mu^{\ell_0}_{m,+,+}(\lambda)(x,j;x_0,i)\psi(x)\wrt x\right|
+% 		\\&\leq \sum_{j_1\in\mathcal S_-} \sum_{k_1\in\mathcal S_+}\dots \sum_{j_m\in\mathcal S_-}\sum_{k_m\in\mathcal S_+} \Big|  \int_{x\in\calD_{\ell_0}} \widehat f^{\ell_0,(p)}_{m,+,+}(\lambda)( x, j_1,k_1,\dots,j_m,k_m, j; x_0,i) \psi(x)\wrt x
+% 		\\&\quad{}- \int_{x\in\calD_{\ell_0}} \widehat \mu^{\ell_0}_{m,+,+}(\lambda)( x, j_1,k_1,\dots,j_m,k_m, j; x_0,i)\psi(x)\wrt x \Big|
+%            %
+% 		\\&\leq  \begin{cases}
+% 			R_{{\bs v},2}^{(p)} GF + \varepsilon^{(p)} GF & m = 0 \\
+% 			(|r_5^{(p)}(2m)| + |r_6^{(p)}(2m)| + 2m|r_4^{(p)}(2m)|)\Delta F |\calS_+|^m|\calS_-|^m  &  m\geq 1.
+% 			\end{cases}
+%         \end{align*}
+%          since, by Corollary~\ref{cor: lst diff}, each term in the sum is bounded by either \(R_{{\bs v},2}^{(p)} GF + \varepsilon^{(p)} GF\) for \(m=0\) or by \((|r_5^{(p)}(2m)| + |r_6^{(p)}(2m)| + 2m|r_4^{(p)}(2m)|)|\Delta F \) for \(m\geq 0\). 
+% \end{proof}
+
+For \(q\in\{+,-,0\}\), \(r\in\{+.-\}\), \(i\in\calS_q,\,j\in\calS_r\cup\calS_{r0}\), consider the Laplace transforms 
+\[\int_{x\in\calD_{\ell_0}} \widehat f^{\ell_0,(p)}_{q,r}(\lambda)(x,j;x_0,i)\psi(x)\wrt x := \int_{x\in\calD_{\ell_0}} \sum_{m=0}^\infty \widehat f^{\ell_0,(p)}_{m,q,r}(\lambda)(x,j;x_0,i)\psi(x) \wrt x,\]
+and
+\[\int_{x\in\calD_{\ell_0}} \widehat \mu^{\ell_0}_{q,r}(\lambda)( x,j;x_0,i)\psi(x) \wrt x := \int_{x\in\calD_{\ell_0}} \sum_{m=0}^\infty \widehat \mu^{\ell_0}_{m,q,r}(\lambda)( x,j;x_0,i)\psi(x) \wrt x.\]
+The difference, 
+\begin{align}\left|\int_{x\in\calD_{\ell_0}} \widehat \mu^{\ell_0}_{q,r}(\lambda)( x,j;x_0,i)\psi(x)\wrt x  - \int_{x\in\calD_{\ell_0}} \widehat f^{\ell_0,(p)}_{q,r}(\lambda)(x,j;x_0,i)\psi(x) \wrt x \right|\label{eqn: hidden sum}\end{align}
+is less than or equal to 
+\begin{align}\sum_{m=0}^\infty \left| \int_{x\in\calD_{\ell_0}} \widehat f^{\ell_0,(p)}_{m,q,r}(\lambda)(x,j;x_0,i)\psi(x)\wrt x - \int_{x\in\calD_{\ell_0}}  \widehat \mu^{\ell_0}_{m,q,r}(\lambda)(x,j;x_0,i)\psi(x) \wrt x\right|,\label{eqn: sum big}\end{align}
+which is an infinite sum of terms which we have shown converge (Theorem~\ref{thm: a thm!}). The issue that remains is to show that we may take the limit as \(p\to\infty\) inside of the sum in (\ref{eqn: sum big}), which will allow us to claim that the difference (\ref{eqn: hidden sum}) converges to 0. In a step to resolving this we show a geometric domination condition in Lemma \ref{lem: gkjljklgagjklagsjlk}.  
+
+Let \(c_{min} = \min\limits_{i\in\mathcal S_{+}\cup\calS_-} |c_i|\) and let \(E^\lambda\) be an independent exponential random variable with rate \(\lambda\). In the following we use the stochastic interpretation of the Laplace transform of a probability distribution with non-negative support: for a random variable \(W\) with distribution function \(F_W(w)= \mathbb P(W<w)\), then \(\displaystyle\int_{w=0}^\infty e^{-\lambda w} \wrt F_W(w) = \mathbb P(W < E^{\lambda})\). That is, the Laplace transform with parameter \(\lambda >0\) is the probability that \(W\) occurs before an exponential time with rate \(\lambda\) occurs. 
+\begin{lem}\label{lem: gkjljklgagjklagsjlk}For all \(M\geq 0\), \(x\in\calD_{\ell_0,j}\), \(x_0\in\calD_{\ell_0,i}\), \(\ell_0\in\mathcal K\), \(\lambda > 0\), \(q\in\{+,-,0\}\), \(r\in\{+,-\}\), \(i\in\calS_q\), \(j\in\calS_r\cup\calS_{r0}\),
+	\begin{align}
+		\sum_{m=M+1}^\infty \left| \int_{x\in\calD_{\ell_0}} \widehat f^{\ell_0,(p)}_{m,q,r}(\lambda)(x,j;x_0,i)\psi(x)\wrt x
+		-
+		\int_{x\in\calD_{\ell_0}} \widehat \mu^{\ell_0}_{m,q,r}(\lambda)(x,j;x_0,i)\psi(x) \wrt x\right| \leq r_7^M
+	\end{align}
+	where 
+	\[r_7^M =  F(\Delta G + \widehat G)\left(\frac{q}{q+\lambda}\right)^{2M+2} \left(1-\left(\frac{q}{q+\lambda}\right)^2\right)^{-1} .\]
+\end{lem}
+Note that the bound \(r_7^M\) is independent of \(p\). 
+
+We prove the result for \(q=r=+\) only, with the proof for the other cases following analogously. Essentially, this result follows from noting the probabilistic interpretation of the Laplace transforms \(\widehat f^{\ell_0}_{m,+,+}(t)(x,j;x_0,i)\), as the probability that, 
+\begin{itemize}
+	\item there are \(m\) changes from \(\mathcal S_+\) to \(\mathcal S_-\) and \(\calS_-\) to \(\calS_+\), 
+	\item the orbit process \(\{\bs A(t)\}\) evolves accordingly, 
+	\item and an independent exponential random variable with rate \(\lambda\), \(E^\lambda\), has not yet occurred.
+\end{itemize}
+We obtain an upper bound by ignoring the behaviour of the orbit process \(\{\bs A(t)\}\), then, by a uniformisation argument, we bound the probability that there are \(m\) changes from \(\mathcal S_+\) to \(\mathcal S_-\) and \(\calS_-\) to \(\calS_+\) before an independent exponential random variable with rate \(\lambda\) occurs, by the event that there are \(m\) independent exponential events before an exponential random variable with rate \(\lambda\) occurs.
+
+Similarly, the probabilistic interpretation of the Laplace transforms \(\widehat \mu^{\ell_0}_{m,+,+}(\lambda)(x,j;x_0,i)\), is the probability that, 
+\begin{itemize}
+	\item there are \(m\) changes from \(\mathcal S_+\) to \(\mathcal S_-\) and \(\calS_-\) to \(\calS_+\), 
+	\item the fluid level \(X(t)\) remains in \(\mathcal D_{\ell_0}\), 
+	\item and an independent exponential random variable with rate \(\lambda\), \(E^\lambda\), has not yet occurred.
+\end{itemize}
+We obtain an upper bound by removing the requirement that the fluid level \(X(t)\) remain in \(\mathcal D_{\ell_0}\), then applying the same uniformisation argument as we do for \(\widehat f^{\ell_0}_{m,+,+}(t)(x,j;x_0,i)\).
+
+\begin{proof}
+	The same arguments and results apply for all \(p\), so let us drop the dependence on \(p\). 
+	
+	Consider \(i\in\calS_+,j\in\mathcal S_+\cup\calS_{+0}\). By the triangle inequality, 
+	\begin{align*}
+		&\sum_{m=M+1}^\infty \left| \int_{x\in\calD_{\ell_0}} \widehat f^{\ell_0}_{m,+,+}(\lambda)(x,j;x_0,i)\psi(x) \wrt x
+		-
+		 \int_{x\in\calD_{\ell_0}} \widehat \mu^{\ell_0}_{m,+,+}(\lambda)(x,j;x_0,i) \psi(x) \wrt x \right|
+		\\&\leq\sum_{m=M+1}^\infty \int_{x\in\calD_{\ell_0}} \widehat f^{\ell_0}_{m,+,+}(\lambda)(x,j;x_0,i) |\psi(x)| \wrt x
+		\\&\qquad{} +\sum_{m=M+1}^\infty \int_{x\in\calD_{\ell_0}} \widehat  \mu^{\ell_0}_{m,+,+}(\lambda)(x,j;x_0,i) |\psi(x)| \wrt x,
+	\end{align*}
+	since all terms are non-negative. 
+	
+	Consider \(\int_{x\in\calD_{\ell_0}}\widehat f^{\ell_0}_{m,+,+}(\lambda)(x,j;x_0,i)|\psi(x)|\wrt x\), which is given by the \((i,j)\)th entry of
+        \begin{align}
+        	&\int_{x\in\calD_{\ell_0}}\int_{x_1=0}^\infty \bs H^{+-}(\lambda,x_1)\nonumber
+	\int_{x_2=0}^\infty \bs H^{-+}(\lambda,x_2) 
+	\hdots \int_{x_m=0}^\infty \bs H^{-+}(\lambda, x_m) 
+	\int_{x_{m+1}=0}^\infty \bs H^{++}(\lambda,x_{m+1}) 
+	\\&\quad\bs   a_{\ell_0,i}(x_0)e^{\bs{S}x_1}\wrt x_1 \bs{D}e^{\bs{S}x_2} \wrt x_2 \bs{D}\dots e^{\bs{S}x_m} \wrt x_m \bs{D}e^{\bs{S}x_{m+1}}{\bs v}(y_{\ell_0+1}-x) \wrt x_{m+1}\psi(x)\wrt x\nonumber
+			\\&\leq \int_{x\in\calD_{\ell_0}}\int_{x_1=0}^\infty \bs H^{+-}(\lambda,x_1)\nonumber
+			\int_{x_2=0}^\infty \bs H^{-+}(\lambda,x_2) 
+			\hdots \int_{x_m=0}^\infty \bs H^{-+}(\lambda, x_m) 
+			\int_{x_{m+1}=0}^\infty \bs H^{++}(\lambda,x_{m+1}) 
+			\\&\quad\bs   a_{\ell_0,i}(x_0)e^{\bs{S}x_1}\wrt x_1 \bs{D}e^{\bs{S}x_2} \wrt x_2 \bs{D}\dots e^{\bs{S}x_m} \wrt x_m \bs{D}e^{\bs{S}x_{m+1}}{\bs v}(y_{\ell_0+1}-x) \wrt x_{m+1}\wrt x F 
+			% \\&=\int_{x\in\calD_{\ell_0}}\int_{x_1=0}^\infty \bs H^{+-}(\lambda,x_1)\nonumber
+			% \int_{x_2=0}^\infty \bs H^{-+}(\lambda,x_2) 
+			% \hdots \int_{x_m=0}^\infty \bs H^{-+}(\lambda, x_m) 
+			% \int_{x_{m+1}=0}^\infty \bs H^{++}(\lambda,x_{m+1}) 
+			% \\&\quad\bs   a_{\ell_0,i}(x_0)e^{\bs{S}x_1}\wrt x_1 \bs{D}e^{\bs{S}x_2} \wrt x_2 \bs{D}\dots e^{\bs{S}x_m} \wrt x_m \bs{D}e^{\bs{S}x_{m+1}}{\bs w}(y_{\ell_0+1}-x) \wrt x_{m+1} \psi(x)\wrt x \nonumber
+			% \\&{}+\int_{x\in\calD_{\ell_0}}\int_{x_1=0}^\infty \bs H^{+-}(\lambda,x_1)\nonumber
+			% \int_{x_2=0}^\infty \bs H^{-+}(\lambda,x_2) 
+			% \hdots \int_{x_m=0}^\infty \bs H^{-+}(\lambda, x_m) 
+			% \int_{x_{m+1}=0}^\infty \bs H^{++}(\lambda,x_{m+1}) 
+			% \\&\quad\bs   a_{\ell_0,i}(x_0)e^{\bs{S}x_1}\wrt x_1 \bs{D}e^{\bs{S}x_2} \wrt x_2 \bs{D}\dots e^{\bs{S}x_m} \wrt x_m \bs{D}e^{\bs{S}x_{m+1}}\widetilde{\bs w}(y_{\ell_0+1}-x) \wrt x_{m+1} \psi(x)\wrt x. 
+			\label{eqn:llkjhslkj}
+	\end{align}
+	By Property~\ref{properties: -2}, for \(\bs a \in \mathcal A\), 
+	\begin{align*}
+		\bs a\int_{x\in\calD_{\ell_0}}\bs De^{\bs Sx_{m+1}}{\bs v}(x) 
+		&= \bs a\int_{x\in\calD_{\ell_0}}\int_{u=0}^\infty e^{\bs Su}\bs s\cfrac{\bs \alpha e^{\bs S u}}{\bs \alpha e^{\bs S u}\bs e}e^{\bs Sx_{m+1}}{\bs v}(x)\wrt u\wrt x
+		\\&\leq \bs a\int_{u=0}^\infty e^{\bs Su}\bs s\cfrac{\bs \alpha e^{\bs S u}}{\bs \alpha e^{\bs S u}\bs e}e^{\bs Sx_{m+1}}{\bs e}\wrt u
+		\\&= \bs a\bs D e^{\bs Sx_{m+1}}{\bs e}\wrt u.
+	\end{align*}
+	
+    Therefore (\ref{eqn:llkjhslkj}) is less than or equal to 
+	\begin{align}
+		&\int_{x_1=0}^\infty \bs H^{+-}(\lambda,x_1)\nonumber
+		\int_{x_2=0}^\infty \bs H^{-+}(\lambda,x_2) 
+		\hdots \int_{x_m=0}^\infty \bs H^{-+}(\lambda, x_m) 
+		\int_{x_{m+1}=0}^\infty \bs H^{++}(\lambda,x_{m+1}) 
+		\\&\quad\bs   a_{\ell_0,i}(x_0)e^{\bs{S}x_1}\wrt x_1 \bs{D}e^{\bs{S}x_2} \wrt x_2 \bs{D}\dots e^{\bs{S}x_m} \wrt x_m \bs{D}e^{\bs{S}x_{m+1}}{\bs e} \wrt x_{m+1} F\nonumber 
+		%
+		\\&\leq\int_{x_1=0}^\infty \bs H^{+-}(\lambda,x_1)\nonumber
+		\int_{x_2=0}^\infty \bs H^{-+}(\lambda,x_2) 
+		\hdots \int_{x_m=0}^\infty \bs H^{-+}(\lambda, x_m) 
+		\int_{x_{m+1}=0}^\infty \bs H^{++}(\lambda,x_{m+1}) 
+		\\&\quad\wrt x_1  \wrt x_2 \dots \wrt x_{m+1}  F \label{eqn :NNeeaefjn}
+	\end{align}
+	where the inequality follow by noting that \(\bs a_{\ell_0,i}(x_0)e^{\bs{S}x_1} \bs{D}e^{\bs{S}x_2} \bs{D}\dots e^{\bs{S}x_m} \bs{D}e^{\bs{S}x_{m+1}}{\bs e}\leq 1\) as it is a probability.
+	        
+	Since all of the elements of \(\bs H^{++}(\lambda,x_{m+1}) \bs e\) are non-negative, then, for any length \(|\calS_+|+|\calS_{+0}|\) row-vector \(\bs b\), 
+	\[\bs b\int_{x_{m+1}} \bs H^{++}(\lambda,x_{m+1}) \bs e \wrt x_{m+1} \leq \bs b \bs e \widehat{\bs G}.\]
+
+	Therefore (\ref{eqn :NNeeaefjn}) is less than or equal to 
+	\begin{align}
+		&\int_{x_1=0}^\infty \bs H^{+-}(\lambda,x_1)
+		\int_{x_2=0}^\infty \bs H^{-+}(\lambda,x_2) 
+		\hdots \int_{x_m=0}^\infty \bs H^{-+}(\lambda, x_m) 
+		\wrt x_1  \wrt x_2 \dots \wrt x_{m} \widehat{G} F \label{eqn :NNeeaefjn12}
+	\end{align}
+
+	The stochastic interpretation of the \(i\)th element of the vector \(\bs H^{+-}(\lambda,x)\bs e\) is that it is the probability density that the phase of the fluid queue changes from a positive to a negative phase at the time when the in-out fluid has increased by \(\wrt x\) and before an exponential random variable with rate \(\lambda\) occurs, given the phase is initially \(i\). There may be multiple changes of phase within \(\mathcal S_+\cup\calS_{+0}\) before the first change from \(\mathcal \mathcal S_+\cup\calS_{+0}\) to \(\mathcal S_-\). The first change of phase occurs at rate (with respect to the in-out level) \(-T_{ii}/|c_i|\) and this is the lowest in-out fluid level at which it may be possible for us to see a transition from \(\mathcal S_+\) to \(\mathcal S_-\). Consider a uniformised version of the in-out fluid process with uniformisation parameter \(q = \max\limits_{i\in\mathcal S\setminus \calS_0}-T_{ii}/|c_i|\). Then the first event of the phase process of the uniformised version of the in-out fluid process occurs at rate \(q\) and occurs at, or before, the first change of phase of the uniformised process. Therefore, the first uniformisation event occurs at, or before, the first change from \(\mathcal S_+\cup\calS_{+0}\) to \(\mathcal S_-\) of the uniformised version of the in-out process. Hence, the first uniformisation event occurs at, or before, the first change of phase from \(\mathcal S_+\cup\calS_{+0}\) to \(\mathcal S_-\) of the original process (since they are versions of each other). This gives the bound \(\bs b\bs H^{+-}(\lambda,x)\bs e\leq qe^{-(\lambda + q)x}\bs e\), for any length \(|\calS_+|+|\calS_{+0}|\) row-vector of non-negative number \(\bs b\).
+	
+	Similarly for \(\bs b\bs H^{-+}(\lambda,x)\bs e\leq qe^{-(\lambda + q)x}\bs e\), for any length \(|\calS_-|+|\calS_{-0}|\) row-vector of non-negative number \(\bs b\)
+	
+	From this stochastic interpretation above, (\ref{eqn :NNeeaefjn12}) is less than or equal to 
+	\begin{align}
+	%
+	&\bs H^{+-}(\lambda,x_1) \wrt x_1 \int_{x_2=0}^\infty \bs H^{-+}(\lambda,x_2)  \wrt x_2  
+				\hdots \int_{x_m=0}^\infty qe^{(-q-\lambda)x_m}\wrt x_{2m}\widehat GF\nonumber
+	%
+	\\&\leq \bs e\int_{x_1=0}^\infty qe^{(-q-\lambda)x_1}  \wrt x_1 \int_{x_2=0}^\infty qe^{(-q-\lambda)x_2}  \wrt x_2  
+				\hdots \int_{x_{2m}=0}^\infty qe^{(-q-\lambda)x_{2m}}\wrt x_{2m}\widehat GF \nonumber
+	%
+	\\&= \bs e\left(\cfrac{q}{q+\lambda}\right)^{2m}\widehat GF.\label{eqn: bound ggggaaaa}
+	\end{align}
+	Hence,  
+	\begin{align}
+			&\sum_{m=M+1}^\infty \int_{x\in\calD_{\ell_0}} \widehat f^{\ell_0}_{m,+,+}(\lambda)(x,j;x_0,i)|\psi(x)|\wrt x \nonumber
+		\\&\leq  \widehat GF  \sum_{m=M+1}^\infty \left(\cfrac{q}{q+\lambda}\right)^{2m}\int_{x\in\calD_{\ell_0}} |\psi(x)|\wrt x \nonumber
+		\\&\leq \widehat GF \left(\cfrac{q}{q+\lambda}\right)^{2M+2} \left(1-\left(\cfrac{q}{q+\lambda}\right)^2\right)^{-1} \Delta F.
+	\end{align}
+	
+	Now consider \(\widehat\mu_{m,+,+}^{\ell_0}(\lambda)( x,j;x_0,i) \) which is given by the \((i,j)\)th entry of 
+	\begin{align}
+	\nonumber& \int_{x_1 = 0}^{\Delta-(x_0-y_{\ell_0})} \bs H^{+-}(\lambda,\Delta-(x_0-y_{\ell_0})-x_1) \int_{x_2 = 0}^{\Delta-x_1} \bs H^{-+}(\lambda,\Delta - x_2-x_1) \wrt x_1 
+	\\\nonumber &\quad\dots  
+	\int_{x_{2m}=0}^{\Delta-x_{m-1}} \bs H^{-+}(\lambda,\Delta -x_{2m-1} - x_{2m}) \wrt x_{2m-1}
+		\bs H^{++}(\lambda,\Delta -x_{2m}- (y_{\ell_0+1}- x))\wrt x_{2m}
+	\\\nonumber&= \int_{x_1 = (x_0-y_{\ell_0})}^{\Delta} \bs H^{+-}(\lambda,\Delta-x_1) \int_{x_2 = x_1}^{\Delta} \bs H^{-+}(\lambda,\Delta -x_2) \wrt x_1 
+	\dots  
+	\\&\int_{x_{2m}=x_{2m-1}}^{\Delta} \bs H^{-+}(\lambda,\Delta - x_{2m}) 
+	\bs H^{++}(\lambda,\Delta -x_{2m}-x_{2m-1}- (y_{\ell_0+1}- x)) 
+	\wrt x_{2m-1}\wrt x_{2m}.\label{eqn:m789J}
+	\end{align}
+	Using the bound \(h^{++}_{j_m,j}(\lambda,x_{m+1})\leq G\), then (\ref{eqn:m789J}) is less than or equal to 
+	\begin{align}
+			&\int_{x_1 = (x_0-y_{\ell_0})}^{\Delta} \bs H^{+-}(\lambda,\Delta-x_1) \int_{x_2 = x_1}^{\Delta} \bs H^{-+}(\lambda,\Delta -x_2) \wrt x_1 \nonumber
+	\\&\quad\dots  
+	\int_{x_{2m}=x_{2m-1}}^{\Delta} \bs H^{-+}(\lambda,\Delta - x_{2m})  
+	\wrt x_{2m-1}\wrt x_{2m}G.\label{eqn:m789J2}
+	\end{align}
+	The expression (\ref{eqn:m789J2}) differs from (\ref{eqn :NNeeaefjn12}) only by a constant factor and that the integrals in the former are not finite, hence we may bound it in the same way. Therefore, 
+	\begin{align}
+			& \sum_{m=M+1}^\infty \int_{x\in\calD_{\ell_0}} |\psi(x)|\wrt x \widehat \mu^{\ell_0}_{m,+,+}(\lambda)(x,j;x_0,i) |\psi(x)|\wrt x \nonumber
+		\\&\leq G\left(\cfrac{q}{q+\lambda}\right)^{2M+2} \left(1-\left(\cfrac{q}{q+\lambda}\right)^2\right)^{-1}\Delta F.
+	\end{align}
+        
+	Analogous arguments show the same bounds for any \(i,j\in\mathcal S\). 
+\end{proof}
+
+\begin{lem} \label{lem:vn4}
+	For all \(x\in\calD_{\ell_0,j}\), \(x_0\in\calD_{\ell_0,i}\), \(i,j\in\calS\), \(\ell_0\in\mathcal K\), \(\lambda > 0\),  
+	\begin{align}
+		&\left|\int_{x\in\calD_{\ell_0}}\widehat f^{\ell_0,(p)}(\lambda)(x,j;x_0,i)\psi(x) \wrt x - \int_{x\in\calD_{\ell_0}}\widehat \mu^{\ell_0}(\lambda)( x,j; x_0,i)\psi(x) \wrt x\right|\to 0  \label{eqn: akhv}
+%		\leq R(i,j,M).
+	\end{align}
+	as \(p\to\infty\). 
+\end{lem}
+\begin{proof}
+	 
+	
+	Consider \(i\in\calS_+\) and \(j\in\calS_+\cup\calS_{+0}\). By partitioning on the number of changes from \(\calS_-\to\calS_+\), (\ref{eqn: akhv}) can be written as
+	\begin{align}
+		&\left|\sum_{m=0}^\infty \int_{x\in\calD_{\ell_0}}\widehat f^{\ell_0,(p)}_{m,+,+}(\lambda)(x,j;x_0,i)\psi(x)\wrt x
+		-
+		\sum_{m=0}^\infty \int_{x\in\calD_{\ell_0}} \widehat \mu^{\ell_0}_{m,+,+}(\lambda)(x,j;x_0,i)\psi(x)\wrt x\right| \nonumber
+		\\&\leq \sum_{m=0}^\infty \left| \int_{x\in\calD_{\ell_0}}\widehat f^{\ell_0,(p)}_{m,+,+}(\lambda)(x,j;x_0,i)\psi(x)\wrt x
+		-
+		\int_{x\in\calD_{\ell_0}} \widehat \mu^{\ell_0}_{m,+,+}(\lambda)(x,j;x_0,i)\psi(x)\wrt x\right|. \label{eqn:ASLKF}
+        \end{align}
+        By Theorem~\ref{thm: a thm!} each term in the sum (\ref{eqn:ASLKF}) converges to \(0\) as \(p\to\infty\). Lemma~\ref{lem: gkjljklgagjklagsjlk} gives a domination condition, so we can apply the Dominated Convergence Theorem which proves the stated convergence in (\ref{eqn: akhv}).
+        
+        Analogous arguments can be applied for any \(i,j\in\mathcal S\). 
+\end{proof}
+
+
+\begin{rem}\label{rem: point wies}
+	For a fixed \(\lambda > 0\), convergence of 
+	\begin{align}
+		\left|\widehat f^{\ell_0,(p)}(\lambda)(x,j;x_0,i) - \widehat \mu^{\ell_0}(\lambda)( x,j; x_0,i) \right|
+	\end{align}
+	actually holds point-wise for each \(\ell_0\in\mathcal K\setminus\{-1,K+1\}\), and each \(i,j\in\mathcal S,\) \(x_0\in\mathcal D_{\ell_0,i}\), \(x\in\calD_{\ell_0,j}\) except at the set of points where \(x=x_0\). Specifically, the lack of point-wise convergence at this point occurs due to terms with the index \(m=0\), that is, terms where there are no changes of phase from \(\calS_+\to\calS_-\) or \(\calS_-\to \calS_+\). On these sample paths the relevant Laplace transforms of the fluid queue are discontinuous at this point. For example, 
+	\begin{align*}
+		\widehat \mu^{\ell_0}_{0,+,+}(\lambda)( x,j;x_0,i) \wrt x&= h_{ij}^{++}(\lambda,x-x_0)1(x\geq x_0)\wrt x,
+	\end{align*}
+	is discontinuous at \(x=x_0\). %If we were to insist on point-wise convergence, then we would need to enforce the error term \(r_{\bs v}(u,v)^{(p)}\to 0\) point-wise for each \(u,v\). In the cases presented here \(r_{\bs v}^{(p)}(u,v)\) converges point-wise to 0 everywhere except \(u+v=\Delta\). 
+\end{rem}
+
+\subsection{Convergence at the first change of level} Before moving on to global convergence we need another result about convergence of the QBD-RAP scheme and the fluid queue at changes of level. 
+
+Regarding Remark~\ref{rem: point wies}, we do require convergence at certain boundary points which correspond to changes of level of the QBD-RAP. To this end, we have the following result. 
+\begin{cor}\label{cor: aln222} For \(\ell,\ell_0\in \mathcal K \setminus \{-1,K+1\},\) \(x_0\in\mathcal D_{\ell_0,i}\), \(i\in\mathcal S\)
+	then, for \(j\in\calS_+\),
+	\begin{align}
+		&\mathbb P(L^{(p)}(\tau_1^{(p)}) = \ell_0+1, \varphi(\tau_1^{(p)}) = j, \tau_{1}^{(p)}\leq E^\lambda 
+            	 \mid \bs Y^{(p)}(0) = (\ell_{0},\bs  a_{\ell_0,i}^{(p)}(x_0), i)) \nonumber
+	 	%
+		\\&\to \mathbb P(\bs X(\tau_1^X) = (y_{\ell_0+1}, j), \tau_{1}^X\leq E^\lambda 
+            	 \mid \bs X(0) = (x_0,i))\label{eqn: 1421}
+		 %
+		 %
+		 \intertext{and for \(j\in\calS_-\)}
+		 &\mathbb P(L^{(p)}(\tau_1^{(p)}) = \ell_0-1, \varphi(\tau_1^{(p)}) = j, \tau_{1}^{(p)}\leq E^\lambda 
+            	 \mid \bs Y^{(p)}(0) = (\ell_{0},\bs  a_{\ell_0,i}^{(p)}(x_0), i)) \nonumber
+	 	%
+		\\&\to \mathbb P(\bs X(\tau_1^X) = (y_{\ell_0}, j), \tau_{1}^X\leq E^\lambda 
+            	 \mid \bs X(0) = (x_0, i)). \nonumber
+		%
+	\end{align}
+	% \begin{align}
+	% 	&\mathbb P(L^{(p)}(\tau_1^{(p)}) = \ell_0+1, \varphi(\tau_1^{(p)}) = j, \tau_{1}^{(p)}\leq E^\lambda 
+    %         	 \mid L^{(p)}(0) = \ell_{0},\bs A^{(p)}(0)=\bs  a_{\ell_0,i}^{(p)}(x_0), \varphi(0) = i) \nonumber
+	%  	%
+	% 	\\&\to \mathbb P(X(\tau_1^X) = y_{\ell_0+1}, \varphi(\tau_1^X) = j, \tau_{1}^X\leq E^\lambda 
+    %         	 \mid X(0) = x_0, \varphi(0) = i)\label{eqn: 1421}
+	% 	 %
+	% 	 %
+	% 	 \intertext{and for \(j\in\calS_-\)}
+	% 	 &\mathbb P(L^{(p)}(\tau_1^{(p)}) = \ell_0-1, \varphi(\tau_1^{(p)}) = j, \tau_{1}^{(p)}\leq E^\lambda 
+    %         	 \mid L^{(p)}(0) = \ell_{0},\bs A^{(p)}(0)=\bs  a_{\ell_0,i}^{(p)}(x_0), \nonumber 
+	% 	\varphi(0) = i) \nonumber
+	%  	%
+	% 	\\&\to \mathbb P(X(\tau_1^X) = y_{\ell_0}, \varphi(\tau_1^X) = j, \tau_{1}^X\leq E^\lambda 
+    %         	 \mid X(0) = x_0, \varphi(0) = i). \nonumber
+	% 	%
+	% \end{align}
+	At a boundary, for \(\ell_0\in\{-1,K+1\}\), 
+	\begin{align}
+		&\mathbb P(L^{(p)}(\tau_1^{(p)}) = \ell, \varphi(\tau_1^{(p)}) = j, \tau_{1}^{(p)}\leq E^\lambda 
+            	 \mid L^{(p)}(0) = \ell_{0},\bs A^{(p)}(0)=1, \varphi(0) = i) \nonumber
+	 	%
+		\\&= \mathbb P(\bs X(\tau_1^X) = (y_\ell, j), \tau_{1}\leq E^\lambda 
+            	 \mid \bs X(0) = (0,i)), \label{eqn: lk78GHJK}
+	\end{align}
+	where \(\ell = 0\), \(i\in\calS_-\cup\calS_{-0}\) and \(j\in\mathcal S_+\) if \(\ell_0=-1\), and \(\ell = K\), \(i\in\calS_+\cup\calS_{+0}\) and \(j\in\calS_-\) if \(\ell_0=K+1\).  
+\end{cor}
+\begin{proof}
+	The proof follows the same structure as the proof of Theorem~\ref{thm: a thm!} however changes are required in all the results used in the proof, as here we do not need to integrate a function \(\psi\). Here we only give an outline of the proof. 
+
+	At a boundary we can model the fluid queue exactly, hence (\ref{eqn: lk78GHJK}) holds.
+
+	Consider first \(i\in \calS_+,j\in\calS_+\). Partition the probability (\ref{eqn: 1421}) on the times \(\{\Sigma_n\}_{n\geq 1}\) and \(\{\Gamma_n\}_{n\geq 1}\), and specifically, partition on the event that there are exactly \(m\) events \(\{\Sigma_n\}_{n=1}^m\) and exactly \(m\) events \(\{\Gamma_n\}_{n=1}^m\). %Partition further by the phases at these times \(\varphi(\Sigma_n)=j_n\in\calS_-\), \(n=1,\dots,m\) and \(\varphi(\Gamma_n)=k_n\in\calS_+\), \(n=1,...,m\). 
+	The resulting partitioned probabilities are
+	\begin{align}
+                 &\int_{x_1=0}^\infty \left(\bs e_i\bs H^{+-}(\lambda,x_1)\otimes \bs a_{\ell_0,i}^{(p)}(x_0)e^{\bs{S}^{(p)}x_1}\bs{D}^{(p)}\right)\wrt x_1 \nonumber
+            	\\&\nonumber \quad \Bigg[\prod_{r=1}^{m-1} \int_{x_{2r}=0}^\infty \left(\bs H^{-+}(\lambda,x_{2r}) \otimes e^{\bs{S}^{(p)}x_{2r}}\bs D^{(p)}\right)\wrt x_{2r} \\&\quad \int_{x_{2r+1}=0}^\infty \left(\bs H^{+-}(\lambda,x_{2r+1}) \otimes e^{\bs{S}^{(p)}x_{2r+1}}\bs D^{(p)}\right) \wrt x_{2r+1}\Bigg] \nonumber
+            	\\&
+            	\quad \int_{x_{2m}=0}^\infty \left(\bs H^{-+}(\lambda, x_{2m}) \otimes e^{\bs{S}^{(p)}x_{2m}}\bs{D}^{(p)}\right) \wrt x_{2m} \nonumber
+				\\&\quad \int_{x_{2m+1}=0}^\infty \left( \bs H^{++}\bs e_j \otimes (\lambda,x_{2m+1}) e^{\bs{S}^{(p)}x_{2m+1}}\bs s^{(p)} \right) \wrt x_{2m+1}.  \label{eqn: prob ofjaiv}
+	\end{align}
+
+	To show that the terms (\ref{eqn: prob ofjaiv}) converge to 
+	\begin{align}
+		&\mathbb P(\bs X(\tau_1^X)=(y_{\ell_0+1},j),\tau_1^X\leq E^\lambda, \Sigma_{m}\leq \tau_1^X<\Gamma_{m+1}, \mid \bs X(0)=(x_0, i))
+	\end{align}
+	we use a combination of Corollary~\ref{cor: cond bnd}, Lemma~\ref{lem:tttttt}, Corollry~\ref{cor: a cor}, and Corollary~\ref{cor: aaaaa}.
+
+	% Corollary~\ref{cor: cond bnd} and Lemma~\ref{lem:tttttt} are analogous to Lemma~\ref{lem: Dcoajc} and Corollary~\ref{lem: Dcoajc} used in the proof of Lemma~\ref{lem:vn4}. They provide relevant bounds for the difference between terms like (\ref{eqn: prob ofjaiv}) for \(m=0\) and 
+	% \begin{align*}
+	% 	&\mathbb P(X(\tau_1^X)=y_{\ell_0+1},\varphi(\tau_1^X)=j,\tau_1^X\leq E^\lambda, \tau_1^X<\Sigma_1 \mid X(0)=x_0, \varphi(0)=i) 
+	% 	\\&= h_{ij}^{++}(\lambda,y_{\ell_0+1}-x_0),
+	% \end{align*}
+	% for example.
+	
+	% Corollaries~\ref{cor: a cor} and~\ref{cor: aaaaa} are analogous to Corollaries~\ref{eqn: lafkjebjcbbalbvvbrb} and~\ref{cor: fljm7778} used in the proof of Lemma~\ref{lem:vn4}. Corollaries~\ref{cor: a cor} and~\ref{cor: aaaaa} give error bounds for the difference between terms such as (\ref{eqn: prob ofjaiv}) for \(m\geq 1\) and the corresponding probability for the fluid queue, 
+	% \begin{align}
+	% 	&\mathbb P(X(\tau_1^X)=y_{\ell_0+1},\varphi(\tau_1^X)=j,\tau_1^X\leq E^\lambda, \Sigma_{m}\leq \tau_1^X<\Gamma_{m+1}, \varphi(\Sigma_\ell) = j_\ell, \varphi(\Gamma_\ell)=k_\ell, \nonumber
+	% 	\\&\qquad{} \ell = 1,\dots, m  \mid X(0)=x_0, \varphi(0)=i)
+	% \end{align}
+	% which is given by (\ref{eqn: lst herwe}). 
+	
+	For a domination condition, since \(\left[\bs H^{++}(\lambda,x_{m+1})\right]_{ij}\leq G\), then 
+	\begin{align}
+			&\int_{x_1=0}^\infty \bs H^{+-}(\lambda,x_1)\nonumber
+		\int_{x_2=0}^\infty \bs H^{-+}(\lambda,x_2) 
+		\hdots \int_{x_m=0}^\infty \bs H^{-+}(\lambda, x_m) 
+		\int_{x_{m+1}=0}^\infty \bs H^{++}(\lambda,x_{m+1}) \bs e 
+		\\&\quad\bs   a_{\ell_0,i}(x_0)e^{\bs{S}x_1}\wrt x_1 \bs{D}e^{\bs{S}x_2} \wrt x_2 \bs{D}\dots e^{\bs{S}x_m} \wrt x_m \bs{D}e^{\bs{S}x_{m+1}}{\bs s} \wrt x_{m+1}\nonumber 
+		%
+			\\&\leq \int_{x_1=0}^\infty \bs H^{+-}(\lambda,x_1)\nonumber
+		\int_{x_2=0}^\infty \bs H^{-+}(\lambda,x_2) 
+		\hdots \int_{x_m=0}^\infty \bs H^{-+}(\lambda, x_m) 
+		\int_{x_{m+1}=0}^\infty \bs e G
+		\\&\quad\bs   a_{\ell_0,i}(x_0)e^{\bs{S}x_1}\wrt x_1 \bs{D}e^{\bs{S}x_2} \wrt x_2 \bs{D}\dots e^{\bs{S}x_m} \wrt x_m \bs{D}e^{\bs{S}x_{m+1}}{\bs s} \wrt x_{m+1}\nonumber
+		%
+		\\&=\int_{x_1=0}^\infty \bs H^{+-}(\lambda,x_1)\nonumber
+		\int_{x_2=0}^\infty \bs H^{-+}(\lambda,x_2) 
+		\hdots \int_{x_m=0}^\infty \bs H^{-+}(\lambda, x_m) 
+		 \bs e G
+		\\&\quad\bs   a_{\ell_0,i}(x_0)e^{\bs{S}x_1}\wrt x_1 \bs{D}e^{\bs{S}x_2} \wrt x_2 \bs{D}\dots e^{\bs{S}x_m} \wrt x_m \bs{D}{\bs e}\nonumber
+		%
+			\\&\leq\int_{x_1=0}^\infty \bs H^{+-}(\lambda,x_1)\nonumber
+		\int_{x_2=0}^\infty \bs H^{-+}(\lambda,x_2) 
+		\hdots \int_{x_m=0}^\infty \bs H^{-+}(\lambda, x_m) 
+		 \bs e G
+		\\&\quad \wrt x_1 \wrt x_2\dots \wrt x_m \label{eqn :ejrvn}
+	\end{align}
+	where the last inequality holds since \(\bs a_{\ell_0,i}(x_0)e^{\bs{S}x_1}\wrt x_1 \bs{D}e^{\bs{S}x_2} \wrt x_2 \bs{D}\dots e^{\bs{S}x_m} \wrt x_m \bs{D}{\bs e}\) is a probability. Equation~(\ref{eqn :ejrvn}) is of a similar to (\ref{eqn: bound ggggaaaa}) (they differ by a constant only), hence the same arguments used to bound (\ref{eqn: bound ggggaaaa}) can be applied to get the desired domination result. 
+	
+	Unltimately, we can apply the Dominated Convergence Theorem to prove that the sum of the partitioned probabilities (\ref{eqn: prob ofjaiv}) converges as \(p\to\infty\). The sum of the limits is 
+	\[\mathbb P(\bs X(\tau_1^X) = (y_{\ell_0+1}, j), \tau_{1}\leq E^\lambda 
+            	 \mid \bs X(0) = (x_0,i)).\]
+	 
+	 The results for all other cases of \(i,j\in\calS\) follow analogously.
+\end{proof}
+
+
+\section{At the \(n\)th change of level}\label{sec: nth change}
+
+So far we have shown error bounds for the QBD-RAP approximation on the event that the fluid queue and QBD-RAP remain in the same band/level (%Corollary~\ref{cor: lst diff} and 
+Theorem~\ref{thm: a thm!}) and also immediately upon exiting the band (Corollary~\ref{cor: aln222}). In the next three subsections we extend this to global convergence of the approximation. To do so, we partition the approximation and the fluid queue by the number of level changes. The local convergence on a given level, which we just proved, is then used to claim that each term in the partition converges. What remains is to argue that we can swap a limit and countable sum which we do by the Dominated Convergence Theorem. 
+
+Let \(\{\tau_n^{(p)}\}_{n\geq 0}\), \(\tau_0^{(p)}=0\), and
+\[\tau_{n}^{(p)} = \inf\left\{t\geq \tau_{n-1}^{(p)} \mid L^{(p)}(t)\neq L^{(p)}(\tau_{n-1}^{(p)})\right\},\]
+be the (stopping) times at which \(\{L^{(p)}(t)\}\), the level process of the QBD-RAP, changes, or the boundary is hit, or, if the process is at the boundary, the process leaves the boundary. To simplify notation, we may drop the superscript \(p\) where it is not explicitly needed. 
+
+The process \(\{L^{(p)}(\tau_n^{(p)})\}_{n\geq 0}\) is the level process of the (continuous-time) QBD-RAP process observed at changes of level. When \(\tau_n^{(p)}\) is a change of level, or the time when the process leaves a boundary, the value of orbit process at these times is \(\bs A^{(p)}(\tau_n^{(p)}) = \bs \alpha^{(p)}\). At time \(\tau_0^{(p)} =0\), \(\bs A^{(p)}(\tau_0^{(p)})=\bs A^{(p)}(0) = \bs   a_{\ell_0,i}^{(p)}(x_0)\). The process \(\{\bs Y_d^{(p)}(t)\} = \{(L^{(p)}(\tau_n^{(p)}),\phi^{(p)}(\tau_n^{(p)}))\}_{n\geq 0}\) is a time-inhomogeneous discrete-time QBD. Further, the process \(\{\phi^{(p)}(\tau_n^{(p)})\}_{n\geq 0}\) is a time-inhomogeneous discrete-time Markov chain on the state space \(\mathcal S\). For \(\bs   a_{\ell_0,i}^{(p)}(x_0) = \bs \alpha^{(p)}\), or for index \(n\geq 1\), then \(\{L^{(p)}(\tau_n^{(p)}),\phi^{(p)}(\tau_n^{(p)})\}_{n\geq 1}\), and \(\{\phi^{(p)}(\tau_n^{(p)})\}_{n\geq 1}\) are time-homogenous.
+
+Let \(\{\tau_n^X\}_{n\geq 0}\), be the sequence of (stopping) times with \(\tau_0^X=0\), and 
+\[\tau_{n+1}^X = \min\left\{\begin{array}{c}\inf\left\{t>\tau_n^X\mid X(t)=y_{\ell}, \ell\in\mathcal K\right\}, \\ \inf\left\{t>\tau_n^X \mid X(t) \neq 0, X(0)=0\right\}, \\ \inf\left\{t>\tau_n^X \mid X(t) \neq y_{K+1}, X(0)=y_{K+1}\right\} \end{array} \right\}.\]
+For \(n\geq 1\), \(\tau_n^X\) is the time at which \(X(t)\) either changes band, or hits a boundary, or the process leaves a boundary, for the \(n\)th time. 
+
+For \(n\geq 1\), consider the Laplace transform 
+\begin{align}
+	&\int_{t=0}^\infty e^{-\lambda t} \mathbb P(\bs Y_d^{(p)}(\tau_n^{(p)}) = (\ell, j_n), \tau_{n}^{(p)}\in \wrt t
+	 \mid \bs Y^{(p)}(0)=(\ell_0,\bs  a_{\ell_0,i}^{(p)}(x_0),i)) \wrt t \nonumber 
+	 %
+	 \\&=\mathbb P(\bs Y_d^{(p)}(\tau_n^{(p)}) = (\ell, j_n), \tau_{n}^{(p)}\leq E^{\lambda}
+	 \mid \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0), i)),\nonumber 
+	%
+\end{align}
+% \begin{align}
+% 	&\int_{t=0}^\infty e^{-\lambda t} \mathbb P(L^{(p)}(\tau_n^{(p)}) = \ell, \phi^{(p)}(\tau_n^{(p)}) = j_n, \tau_{n}^{(p)}\in \wrt t
+% 	 \mid L^{(p)}(0)=\ell_0, \bs A^{(p)}(0)=\bs  a_{\ell_0,i}^{(p)}(x_0), \nonumber 
+% 	 \\&\qquad{} \phi^{(p)}(0)=i) \wrt t \nonumber 
+% 	 %
+% 	 \\&=\mathbb P(L^{(p)}(\tau_n^{(p)}) = \ell, \phi^{(p)}(\tau_n^{(p)}) = j_n, \tau_{n}^{(p)}\leq E^{\lambda}
+% 	 \mid L^{(p)}(0)=\ell_0, \bs A^{(p)}(0)=\bs  a_{\ell_0,i}^{(p)}(x_0), \nonumber 
+% 	 \\&\qquad{} \phi^{(p)}(0)=i),\nonumber 
+% 	%
+% \end{align}
+which is the Laplace transform of the time until the \(n\)th change of level of the QBD-RAP on the event that the level and phase at the \(n\)th change of level are \(\ell\) and \(j_n\), respectively, given that the initial level and phases are \(\ell_0\) and \(i\), respectively and the initial orbit is \(\bs a_{\ell_0,i}^{(p)}(x_0)\). Partitioning on the time of the first change of level, \(\tau_1\), and the level and phase at this time gives
+\begin{align}
+	&\sum_{j_1\in\mathcal S}\sum_{\ell_1\in\{\ell_0+1,\ell_0-1\}\cap \mathcal K}\mathbb P(\bs Y_d^{(p)}(\tau_n^{(p)}) = (\ell, j_n), \tau_{n}^{(p)}\leq E^\lambda 
+	 \mid \bs Y_d^{(p)}(\tau_1^{(p)})=(\ell_1, j_1), \tau_1^{(p)}\leq E^\lambda ) \nonumber
+	 %
+	 \\&\times \mathbb P(\bs Y_d^{(p)}(\tau_1^{(p)})=(\ell_1, j_1), \tau_{1}^{(p)}\leq E^\lambda
+	 \mid \bs Y(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0), i)).
+	%  \\&\times \mathbb P(L^{(p)}(\tau_1^{(p)})=\ell_1, \phi^{(p)}(\tau_1^{(p)}) = j_1, \tau_{1}^{(p)}\leq E^\lambda
+	%  \mid L^{(p)}(0)=\ell_0, \bs A^{(p)}(0)=\bs  a_{\ell_0,i}^{(p)}(x_0), \nonumber 
+	%  \\&\qquad{} \phi^{(p)}(0)=i).
+	 \label{eqn: mnebrb2}
+\end{align}
+An application of Corollary \ref{cor: aln222} to the expression on the second line of (\ref{eqn: mnebrb2}) states, for \(i\in\calS\), \(j\in\calS\), \(\ell_0\in\mathcal K\), 
+\begin{align}
+	&\lim_{p\to\infty}\mathbb P(\bs Y_d^{(p)}(\tau_1^{(p)})=(\ell_1, j_1), \tau_{1}^{(p)}\leq E^\lambda
+	 \mid \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0), i)) \nonumber
+	%  &\lim_{p\to\infty}\mathbb P(L^{(p)}(\tau_1^{(p)})=\ell_1, \phi^{(p)}(\tau_1^{(p)}) = j_1, \tau_{1}^{(p)}\leq E^\lambda
+	%  \mid L^{(p)}(0)=\ell_0, \bs A^{(p)}(0)=\bs  a_{\ell_0,i}^{(p)}(x_0), \nonumber 
+	%  \\&\qquad{} \phi^{(p)}(0)=i) \nonumber
+	 %
+	 	\\&\to \mathbb P(\bs X(\tau_1^X) = (y_{\ell_0+1}, j_1), \tau_{1}^X\leq E^\lambda 
+            	 \mid \bs X(0) = (x_0, i)) 
+	 %
+	 \intertext{ for \(j_1\in\calS_+,\, \ell_1=\ell_0+1\) and } 
+	 &\lim_{p\to\infty}\mathbb P(\bs Y_d^{(p)}(\tau_1^{(p)})=(\ell_1, j_1), \tau_{1}^{(p)}\leq E^\lambda
+	 \mid \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0), i)) \nonumber
+	%  &\lim_{p\to\infty}\mathbb P(L^{(p)}(\tau_1^{(p)})=\ell_1, \phi^{(p)}(\tau_1^{(p)}) = j_1, \tau_{1}^{(p)}\leq E^\lambda
+	%  \mid L^{(p)}(0)=\ell_0, \bs A^{(p)}(0)=\bs  a_{\ell_0,i}^{(p)}(x_0), \nonumber 
+	%  \\&\qquad{} \phi^{(p)}(0)=i) \nonumber
+	 %
+	 \\&\to
+	 	\mathbb P(\bs X(\tau_1^X) = (y_{\ell_0}, j_1), \tau_{1}^X\leq E^\lambda 
+            	 \mid \bs X(0) = (x_0, i)) 
+\end{align}
+for \( j_1\in\calS_-,\, \ell_1=\ell_0-1.\)
+
+Now, for a given \(j_1\) and \(\ell_1\) consider 
+\begin{align}
+	&\mathbb P(\bs Y_d^{(p)}(\tau_n^{(p)}) = (\ell, j_n), \tau_{n}^{(p)}\leq E^\lambda 
+	 \mid \bs Y_d^{(p)}(\tau_1^{(p)})=(\ell_1, j_1), \tau_1^{(p)}\leq E^\lambda) \nonumber 
+	 % 
+	\\&=\mathbb P(\bs Y_d^{(p)}(\tau_n^{(p)}) = (\ell, j_n), \tau_{n}^{(p)}\leq E^\lambda 
+	 \mid \bs Y_d^{(p)}(0)=(\ell_1, j_1), \tau_1^{(p)}=0)\label{eqn: dskvnaSF}
+\end{align}
+by the time-homogeneous property of the QBD-RAP and the the memoryless property of the exponential distribution.
+Equation (\ref{eqn: dskvnaSF}) appears as the first factor in the summands of (\ref{eqn: mnebrb2}). Let 
+\begin{align}\label{eqn: paths set1}
+	\mathcal P^n(\ell_0,\ell_n)&=\{(\ell_1,\dots,\ell_{n-1}) \in \mathcal K^{n-1}\mid |\ell_{r-1}-\ell_r|=1,r = 1,\dots,n\}.
+\end{align}
+The set \(\mathcal P^n(\ell_0,\ell)\) contains all of the possible sequences of levels which \(\{L(t)\}\) or \(\{X(t)\}\) may visit on a sample path which starts in level \(\ell_0\), ends in level \(\ell\) and changes level \(n\) times. By partitioning on the times \(\tau_m\), \(m=2,\dots,n-1\), and the phases and the levels at these times and using the strong Markov property of the QBD-RAP, then (\ref{eqn: dskvnaSF}) is  
+	\begin{align}
+	 &\sum_{\substack{j_2,\dots,j_{n-1}\in\mathcal S \\ (\ell_2,\dots,\ell_{n-1}) \in\mathcal P^{n-1}(\ell_1,\ell)}}\prod_{m=2}^{n}\mathbb P(\bs Y_d^{(p)}(\tau_m^{(p)}) =(\ell_m, j_m), \tau_{m}^{(p)}\leq E^\lambda 
+            	 \mid \nonumber 
+	 	\bs Y_d^{(p)}(\tau_{m-1}^{(p)}) = (\ell_{m-1}, j_{m-1}), \\&\quad \tau_{m-1}^{(p)}\leq E^\lambda),  \label{eqn: 161222}
+\end{align}
+where we define \(\ell_n=\ell\). Each factor in the product is 
+\begin{align}
+	&\mathbb P(\bs Y_d^{(p)}(\tau_m^{(p)}) = (\ell_m, j_m), \tau_{m}^{(p)}\leq E^\lambda 
+            	 \mid \bs Y_d^{(p)}(\tau_{m-1}^{(p)}) = (\ell_{m-1}, \nonumber
+	 	 j_{m-1}), \tau_{m-1}^{(p)}\leq E^\lambda) 
+	\\&=\mathbb P(\bs Y_d^{(p)}(\tau_m^{(p)}) = (\ell_m, j_m), \tau_{m}^{(p)}\leq E^\lambda 
+            	 \mid \bs Y_d^{(p)}(0) = (\ell_{m-1}, j_{m-1}), \tau_{m-1^{(p)}}=0)\nonumber
+	\\&=\mathbb P(\bs Y_d^{(p)}(\tau_1^{(p)}) = (\ell_m, j_m), \tau_{1}^{(p)}\leq E^\lambda 
+            	 \mid \bs Y_d^{(p)}(0) = (\ell_{m-1}, j_{m-1}))\label{eqn: kk}
+\end{align}
+by the time-homogeneous property of the QBD-RAP and the memoryless property of the exponential distribution. We can also apply Corollary (\ref{cor: aln222}) to the terms (\ref{eqn: kk}) and conclude 
+\begin{align}
+	& \mathbb P(\bs Y_d^{(p)}(\tau_1^{(p)}) = (\ell_m, j_m), \tau_{1}^{(p)}\leq E^\lambda 
+            	 \mid \bs Y_d^{(p)}(0) = (\ell_{m-1}, j_{m-1}))\nonumber
+	%
+	\\&\to
+	 	\mathbb P(\bs X(\tau_1^X) =( y_{\ell_{m-1}+1},j_m), \tau_{1}^X\leq E^\lambda 
+            	 \mid \bs X(0) = (x_0, j_{m-1}))  \label{eqn:kknvf fawoprgj v}
+	 \intertext{for \( j_m\in\calS_+,\, \ell_m=\ell_{m-1}+1\) and }
+	 %
+	 %
+	 & \mathbb P(\bs Y_d^{(p)}(\tau_1^{(p)}) = (\ell_m, j_m), \tau_{1}^{(p)}\leq E^\lambda 
+            	 \mid \bs Y_d^{(p)}(0) = (\ell_{m-1}, j_{m-1}))\nonumber
+	%
+	\\&\to
+	 	\mathbb P(\bs X(\tau_1^X) = (y_{\ell_{m-1}}, j_m), \tau_{1}^X\leq E^\lambda 
+            	 \mid \bs X(0) = (x_0, j_{m-1})) 
+	 \label{eqn:kknvf fawoprgj v2}
+\end{align}
+for \(j_m\in\calS_-,\, \ell_m=\ell_{m-1}-1.\)
+
+By the time-homogeneous property of the fluid queue and the memoryless property of the exponential distribution, 
+\begin{align}
+	&\mathbb P(\bs X(\tau_1^X) = (y_{\ell_{m-1}+1}, j_m), \tau_{1}^X\leq E^\lambda 
+            	 \mid \bs X(0) = (x_0, j_{m-1})) \nonumber
+	 \\&=\mathbb P(\bs X(\tau_m^X) = (y_{\ell_{m-1}+1}, j_m), \tau_{m}^X\leq E^\lambda 
+            	 \mid \bs X(0) = (x_0, j_{m-1}), \tau_{m-1}^X=0)\nonumber 
+	 \\&=\mathbb P(\bs X(\tau_m^X) = (y_{\ell_{m-1}+1}, j_m), \tau_{m}^X\leq E^\lambda 
+            	 \mid \bs X(\tau_{m-1}^X) = (x_0, j_{m-1}), \nonumber 
+	 \\&\ \tau_{m-1}^X\leq E^{\lambda}).
+\end{align}
+Similarly, 
+\begin{align}
+	&\mathbb P(\bs X(\tau_1^X) = (y_{\ell_{m-1}}, j_m), \tau_{1}^X\leq E^\lambda 
+            	 \mid \bs X(0) = (x_0, j_{m-1})) \nonumber
+	 \\&=\mathbb P(\bs X(\tau_m^X) = (y_{\ell_{m-1}}, j_m), \tau_{m}^X\leq E^\lambda 
+            	 \mid \bs X(\tau_{m-1}^X) = (x_0, j_{m-1}), \tau_{m-1}^X\leq E^\lambda).
+\end{align}
+
+Now, taking the limit of (\ref{eqn: 161222}) gives 
+\begin{align}
+	&\lim_{p\to\infty}\sum_{j_2,\dots,j_{n-1}\in\mathcal S}\sum_{(\ell_2,\dots,\ell_{n-1}) \in\mathcal P^{n-1}(\ell_1,\ell)}\prod_{m=2}^{n}\mathbb P(\bs Y_d^{(p)}(\tau_m^{(p)}) = (\ell_m, j_m), \tau_{m}^{(p)}\leq E^\lambda \nonumber
+            	 \\&\qquad\mid \bs Y_d^{(p)}(\tau_{m-1}^{(p)}) = (\ell_{m-1}, j_{m-1}), \tau_{m-1}^{(p)}\leq E^\lambda) \nonumber 
+	%
+	\\ &=\sum_{j_2,\dots,j_{n-1}\in\mathcal S}\sum_{(\ell_2,\dots,\ell_{n-1}) \in\mathcal P^{n-1}(\ell_1,\ell)}\prod_{m=2}^{n}\lim_{p\to\infty} \mathbb P(\bs Y_d^{(p)}(\tau_m^{(p)}) = (\ell_m, j_m), \tau_{m}^{(p)}\leq E^\lambda \nonumber
+            	 \\&\qquad \mid \bs Y_d^{(p)}(\tau_{m-1}^{(p)}) = (\ell_{m-1}, 
+	 	 j_{m-1}), \tau_{m-1}^{(p)}\leq E^\lambda),
+	 \label{eqn: 161222b}
+\end{align}
+where we may swap the limit and the sums as they are finite, and we can swap the limit and the product since all the limits exist and the product is finite. Substituting the limits into (\ref{eqn: 161222b}) gives 
+\begin{align}
+	&\sum_{j_2,\dots,j_{n-1}\in\mathcal S}\sum_{(\ell_2,\dots,\ell_{n-1})  \in\mathcal P^{n-1}(\ell_1,\ell)} \prod_{m=2}^{n}\mathbb P(\bs X(\tau_m^X) = (y_{\ell_{m-1}+1(j_{m}\in\mathcal S_+)}, j_m), \tau_{m}^X\leq E^\lambda \nonumber
+            	\\&\qquad \mid \bs X(\tau_{m-1}^X)=(y_{\ell_{m-2}+1(j_{m-1}\in\mathcal S_+)},j_{m-1}),\tau_{m-1}^X\leq E^\lambda),\nonumber
+		%
+		\\&= \mathbb P(\bs X(\tau_n^X) = (y_{\ell+1(j_{n}\in\mathcal S_-)}, 
+		j_n), \tau_{n}^X\leq E^\lambda \mid \bs X(0)=(y_{\ell_{0}+1(j_{1}\in\mathcal S_+)},
+		j_{1}), 
+		\tau_1^X\leq E^\lambda).
+\end{align}
+
+Therefore, taking the limit as \(p\to \infty \) of (\ref{eqn: mnebrb2}) 
+\begin{align}
+	&\lim_{p\to\infty}\sum_{j_1\in\mathcal S}\sum_{\ell_1\in\{\ell_0+1,\ell_0-1\}\cap \mathcal K}\mathbb P(\bs Y_d^{(p)}(\tau_n^{(p)}) = (\ell, j_n), \tau_{n}^{(p)}\leq E^\lambda 
+	 \mid \bs Y_d^{(p)}(0)=(\ell_1,j_1), 
+	 \tau_1^{(p)}=0) \nonumber 
+	 %
+	 \\& \mathbb P(\bs Y_d^{(p)}(\tau_1^{(p)})=(\ell_1, j_1), \tau_{1}^{(p)}\leq E^\lambda
+	 \mid \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0), i)) \nonumber
+	 %
+	 \\&= \sum_{j_1\in\mathcal S}\sum_{\ell_1\in\{\ell_0+1,\ell_0-1\}\cap \mathcal K} \lim_{p\to\infty} \mathbb P(\bs Y_d^{(p)}(\tau_n^{(p)}) = (\ell, j_n), \tau_{n}^{(p)}\leq E^\lambda 
+	 \mid \bs Y_d^{(p)}(0)=(\ell_1, j_1), \tau_1^{(p)}=0) \nonumber
+	 %
+	 \\& \lim_{p\to\infty}\mathbb P(\bs Y_d^{(p)}(\tau_1^{(p)})=(\ell_1, j_1), \tau_{1}^{(p)}\leq E^\lambda
+	 \mid \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0), =i))\nonumber
+	 %%
+	 %%
+	 \\&= \sum_{j_1\in\mathcal S}\sum_{\ell_1\in\{\ell_0+1,\ell_0-1\}\cap \mathcal K} \mathbb P(\bs X(\tau_n^X) = (y_{\ell+1(j_{n}\in\mathcal S_-)}, 
+		j_n), \tau_{n}^X\leq E^\lambda \mid \nonumber
+		\\&\qquad{} \bs X(\tau_1^X)=(y_{\ell_{0}+1(j_{1}\in\mathcal S_+)},
+		j_{1}),\tau_1^X\leq E^\lambda) \nonumber
+	 %
+	 \\& \mathbb P(\bs X(\tau_1^X)=(y_{\ell_{0}+1(j_{1}\in\mathcal S_+)},
+		j_{1}),\tau_1^X\leq E^\lambda
+		\mid \bs X(0)=(x_0, i)) \nonumber
+	%
+	\\&=\mathbb P(\bs X(\tau_n^X) = (y_{\ell+1(j_{n}\in\mathcal S_-)}, 
+		j_n), \tau_{n}^X\leq E^\lambda
+		\mid \bs X(0)=(x_0, i))
+	 \label{eqn: mnebrb22}
+\end{align}
+where the swapping of limits and sums is justified as the sums are finite, and swapping limits and products is justified as the product is finite and all limits exist. 
+
+Therefore we have proved the following result 
+\begin{lem}\label{lem: kKKJJJF}
+	For all \(\ell,\ell_0\in\mathcal K,\) \(i,j_n\in\mathcal S\), \(x_0\in\mathcal D_{\ell_0,i}\), \(n\geq 1\), then, as \(p\to\infty\),
+	\begin{align}
+		&\mathbb P(\bs Y_d^{(p)}(\tau_n^{(p)}) = (\ell,j_n), \tau_{n}^{(p)}\leq E^{\lambda}
+		 \mid \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0), i)),\nonumber 
+		%  &\mathbb P(L^{(p)}(\tau_n^{(p)}) = \ell, \phi^{(p)}(\tau_n^{(p)}) = j_n, \tau_{n}^{(p)}\leq E^{\lambda}
+		%  \mid L^{(p)}(0)=\ell_0, \bs A^{(p)}(0)=\bs  a_{\ell_0,i}^{(p)}(x_0), \phi^{(p)}(0)=i),\nonumber  
+		 %
+		 \\&\to \mathbb P(\bs X(\tau_n^X) = (y_{\ell+1(j_{n}\in\mathcal S_-)}, 
+		j_n), \tau_{n}^X\leq E^\lambda
+		\mid \bs X(0)=(x_0, i)).
+	\end{align}
+\end{lem} 
+
+\section{Between the \(n\)th and \(n+1\)th change of level}\label{sec: between n and np1}
+Let \(\mathcal T_n^{(p)} = (\tau_{n}^{(p)},\tau_{n+1}^{(p)}]\) and \(\mathcal T_n^X=(\tau_n^X,\tau_{n+1}^X]\) be the interval of time between the \(n\)th and \(n+1\)th change of level of the QBD-RAP and fluid queue, respectively. Consider the Laplace transform 
+\begin{align}
+	\nonumber&\int_{t=0}^\infty e^{-\lambda t}\int_{x\in\calD_\ell}\mathbb P(\widetilde{\bs Y}^{(p)}(t) = (\ell, \wrt x, j), t\in\mathcal T_n^{(p)} \mid 
+	\bs Y^{(p)}(0)=(\ell_0, \bs a_{\ell_0,i}^{(p)}(x_0), i))\psi(x)\wrt t.
+	% \nonumber&\int_{t=0}^\infty e^{-\lambda t}\int_{x\in\calD_\ell}\mathbb P(L^{(p)}(t) = \ell, \widetilde X^{(p)}(t)\in\wrt x, \phi^{(p)}(t) = j, \tau_{n}^{(p)}\leq t<\tau_{n+1}^{(p)} \mid L^{(p)}(0)=\ell_0, 
+	% 	\\&\qquad \bs A^{(p)}(0)=\bs a_{\ell_0,i}^{(p)}(x_0), \phi^{(p)}(0)=i)\psi(x)\wrt t.
+\end{align}
+Partitioning on the time of the \(n\)th change of level and the phase and level at this time gives
+\begin{align}
+	&\int_{t=0}^\infty e^{-\lambda t} \int_{u_n=0}^t\sum_{j_n\in\mathcal S}
+	\int_{x\in\calD_\ell}\mathbb P(\widetilde{\bs Y}^{(p)}(t) = (\ell,\wrt x,j), 
+	t \in(u_n, \tau_{n+1}^{(p)}] \mid\bs Y_d^{(p)}(u_n) = (\ell,j_n), \nonumber
+	\\&\quad \tau_{n}^{(p)}= u_n)\psi(x) \mathbb P(\bs Y_d^{(p)}(u_n) = (\ell, j_n), \tau_{n}^{(p)}\in \wrt u_n 
+	 \mid \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0), i)) 
+	 \wrt u_n\wrt t \nonumber 
+	 %
+	 \\&= \sum_{j_n\in\mathcal S}
+	\int_{x\in\calD_\ell} \int_{t=0}^\infty e^{-\lambda t} \mathbb P(\widetilde{\bs Y}_d^{(p)}(t) = (\ell,\wrt x, j), 
+	t\in\mathcal T_n^{(p)} \mid\nonumber 
+	  \bs Y_d^{(p)}(\tau_n^{(p)}) = (\ell,j_n), 
+	  \tau_{n}^{(p)}= 0)\wrt t \psi(x)  
+	  \\&\quad{} \mathbb P(\bs Y_d^{(p)}(\tau_n^{(p)}) = (\ell,j_n), \tau_{n}^{(p)}\leq E^\lambda 
+	 \mid \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0), i)) \label{eqn: l whkrqvlkjbrd}
+\end{align}
+by the time homogenous property of the QBD-RAP, the memoryless property of the exponential distribution, and the convolution theorem of Laplace transforms. We recognise the probability 
+\begin{align}
+	\mathbb P(\bs Y_d^{(p)}(\tau_n^{(p)}) = (\ell, j_n), \tau_{n}^{(p)}\leq E^\lambda 
+	 \mid \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0), i)) \label{eqn: Kkk nj aa w}
+\end{align}
+as that appearing in Lemma \ref{lem: kKKJJJF}. Hence (\ref{eqn: Kkk nj aa w}) converges to 
+\begin{align}
+	\mathbb P(\bs X(\tau_n^X) = (y_{\ell+1(j_{n}\in\mathcal S_-)}, 
+		j_n), \tau_{n}^X\leq E^\lambda
+		\mid \bs X(0)=(x_0, i)) \label{eqn: ashverkjbvjhkhdsknacva}
+\end{align}
+as \(p\to\infty\). 
+
+Now consider the expression 
+\begin{align}
+	&\int_{x\in\calD_\ell} \int_{t=0}^\infty e^{-\lambda t} \mathbb P(\widetilde{\bs Y}_d^{(p)}(t) = (\ell,\wrt x, j),  
+	t\in\mathcal T_n^{(p)} \mid \bs Y_d^{(p)}(\tau_n^{(p)}) = (\ell, j_n),
+	 	\tau_{n}^{(p)}= 0)\wrt t  \psi(x)  \label{eqn: vajkl;vJK:GSKJ}
+\end{align}
+which appears as part of (\ref{eqn: l whkrqvlkjbrd}). We can rewrite (\ref{eqn: vajkl;vJK:GSKJ}) as  
+\begin{align}
+	 &\int_{x\in\calD_\ell} \int_{t=0}^\infty e^{-\lambda t} \mathbb P(\widetilde{\bs Y}_d^{(p)}(t) = (\ell,\wrt x,j), 
+	t\in\mathcal T_0^{(p)}\mid \bs Y_d^{(p)}(0) = (\ell,j_n))\wrt t \psi(x) \nonumber 
+	 \\&= \int_{x\in\calD_\ell} \widehat f^{\ell,(p)} (\lambda)(x,j;x_0,j_n) \psi(x)\wrt x \label{eqn: Jk jJ KK}
+\end{align}
+Applying Theorem~\ref{thm: a thm!}, then (\ref{eqn: Jk jJ KK}) converges to 
+\begin{align}
+	&\int_{x\in\calD_\ell} \widehat \mu^{\ell} (\lambda)(x,j;y_{\ell+1(j_n\in\mathcal S_-)},j_n) \psi(x)\wrt x \nonumber 
+	\\&= \int_{x\in\calD_\ell} \int_{t=0}^\infty e^{-\lambda t}\mathbb P(\bs X(t)\in(\wrt x, j), t\in\mathcal T_0^X \mid \bs X(0) = (y_{\ell+1(j_n\in\mathcal S_-)}, j_n) ) \psi(x). \label{eqn: lkHAHJFHKJ J J H}
+\end{align}
+Since the fluid queue is time homogeneous then we can write (\ref{eqn: lkHAHJFHKJ J J H}) as 
+\begin{align}
+	&\int_{x\in\calD_\ell} \int_{t=0}^\infty e^{-\lambda t} \mathbb P(\bs X(t)\in(\wrt x,j), t\in\mathcal T_n^{X} \mid  
+	\bs X(\tau_n^X) = (y_{\ell+1(j_n\in\mathcal S_-)},j_n), \tau_n^X\leq E^\lambda ) \psi(x)  \label{eqn: lkHAHJFHKJ J J 22}
+\end{align}
+Therefore, we have shown (\ref{eqn: vajkl;vJK:GSKJ}) converges to (\ref{eqn: lkHAHJFHKJ J J 22}) as \(p\to\infty\). 
+
+Returning to the right-hand side of (\ref{eqn: l whkrqvlkjbrd}) and taking the limit as \(p\to\infty\), 
+\begin{align}
+	&\lim_{p\to\infty} \sum_{j_n\in\mathcal S}
+	\int_{x\in\calD_\ell} \int_{t=0}^\infty e^{-\lambda t} \mathbb P(\widetilde{\bs Y}^{(p)}(t) = (\ell,\wrt x, j), 
+	t\in\mathcal T_n^{(p)} \mid \nonumber 
+	 \bs Y_d^{(p)}(\tau_n^{(p)}) = (\ell,j_n), \tau_{n}^{(p)}= 0)\wrt t 
+	 \\&\qquad{}\psi(x)  \mathbb P(\bs Y_d^{(p)}(\tau_n) = (\ell, j_n), \tau_{n}^{(p)}\leq E^\lambda 
+	 \mid \bs Y^{(p)}(0)=(\ell_0,\bs  a_{\ell_0,i}^{(p)}(x_0),i))\nonumber
+	 %
+	 \\&= \sum_{j_n\in\mathcal S}
+	\lim_{p\to\infty} \int_{x\in\calD_\ell} \int_{t=0}^\infty e^{-\lambda t}  \mathbb P(\widetilde{\bs Y}^{(p)}(t) = (\ell,\wrt x,j), 
+	t\in\mathcal T_n^{(p)} \mid \nonumber 
+	 \bs Y_d^{(p)}(\tau_n^{(p)}) = (\ell,j_n), 
+	  \tau_{n}^{(p)}= 0)\wrt t \\&\qquad{} \psi(x) 
+	 \lim_{p\to\infty} \mathbb P(\bs Y_d^{(p)}(\tau_n^{(p)}) = (\ell, j_n), \tau_{n}^{(p)}\leq E^\lambda 
+	 \mid \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0),i))\nonumber
+\end{align}
+since the sum is finite and the limits exist. Replacing the limits with their limiting values, (\ref{eqn: lkHAHJFHKJ J J 22}), and (\ref{eqn: ashverkjbvjhkhdsknacva}) respectively, gives 
+\begin{align}
+	 &\sum_{j_n\in\mathcal S}\int_{x\in\calD_\ell} \int_{t=0}^\infty e^{-\lambda t} \mathbb P(\bs X(t)\in(\wrt x, j_n), t\in\mathcal T_n^{X} \mid \bs X(\tau_n^X) = (y_{\ell+1(j_n\in\mathcal S_-)}, j_n),\nonumber 
+	 \tau_n^X\leq E^\lambda ) \psi(x)
+	 \\&\quad{} \mathbb P(\bs X(\tau_n^X) = (y_{\ell+1(j_{n}\in\mathcal S_-)}, 
+		j_n), \tau_{n}^X\leq E^\lambda
+		\mid \bs X(0)=(x_0,i))\nonumber
+	%
+	\\&= \int_{t=0}^\infty e^{-\lambda t}  \int_{x\in\calD_\ell}\mathbb P(\bs X(t)\in(\wrt x, j_n), t\in\mathcal T_n^{X} 
+	\mid X(0)=x_0, \varphi(0)=i)\psi(x)\wrt t
+\end{align}
+
+Hence we have shown the following result 
+\begin{lem}\label{lem: LAkAKFnvnb mav h}
+	For \(\ell,\ell_0\in\mathcal K\), \(i,j\in\calS\), \(n\geq 0\), then, as \(p\to\infty\), 
+	\begin{align}
+		&\int_{t=0}^\infty e^{-\lambda t}\int_{x\in\calD_\ell}\mathbb P(\widetilde{\bs Y}^{(p)}(t) = (\ell,\wrt x, j), t\in\mathcal T_n^{(p)} \mid  \nonumber 
+		\bs Y(0) = (\ell_0, \bs a_{\ell_0,i}^{(p)}(x_0), i))\psi(x)\wrt t \nonumber
+		%
+		\\&\to\int_{t=0}^\infty e^{-\lambda t}  \int_{x\in\calD_\ell}\mathbb P(\bs X(t)\in(\wrt x, j_n), t\in\mathcal T_n^{X} 
+		\mid \bs X(0)=(x_0,i))\psi(x)\wrt x\wrt t.
+	\end{align}
+\end{lem}
+
+\section{To global convergence}\label{sec: local to global}
+\subsection{First, another domination condition}
+To extend Lemma~\ref{lem: LAkAKFnvnb mav h} to show a global convergence result we use the Dominated Convergence Theorem. Here we show some geometric bounds on the probability of \(n\) level changes of the QBD-RAP and fluid queue, which ultimately serve as a dominating function in the Dominated Convergence Theorem. 
+
+%Let \(c_{min} = \min\limits_{i\in\mathcal S_+\cup \mathcal S_-}|c_i|\).
+
+\begin{lem}\label{lem: another bound}
+	For all \(i\in\mathcal S_+\cup \calS_-\), and \(n\geq 2\),
+	\begin{align}
+		&\mathbb P(\tau_n\leq E^\lambda \mid \phi(\tau_{n-1})=i, \tau_{n-1}\leq  E^\lambda ) \leq b,
+	\end{align}
+	where 
+	\[b = \min\left\{1-e^{-q(\Delta+\varepsilon)}\left[1-e^{q\varepsilon-\lambda \Delta/|c_{min}|}\right] + \cfrac{\var(Z)}{\varepsilon^2} + |r_1|,\cfrac{q}{q+\lambda}\right\}\]
+	and  
+	\[|r_1|\leq 2G\cfrac{\var \left(Z\right)}{\varepsilon^2} + 2L\varepsilon.\]
+\end{lem}
+Note that \(b\) and \(r_1\) depend on \(p\) which has been suppressed to simplify notation. When explicitly needed, we use a superscript \(p\) to denote this dependence.  
+\begin{proof}
+	For the QBD-RAP, changes of level can only occur when \(i\in\mathcal S_+\cup\calS_-\). 
+	
+	Suppose that the phase at time \(\tau_{n-1}\) is \(i\in\mathcal S_+\) and that at time \(\tau_{n-1}\) the QBD-RAP is not at a boundary. The arguments for an initial phase \(i\in\mathcal S_-\) are analogous. For the QBD-RAP to change level or hit a boundary one of two things must happen, either; 
+	\begin{enumerate}
+		\item the fluid remains in phase \(i\) until there is a change of level or boundary hit, or
+		\item the fluid changes phase before there is a change of level or a boundary is hit. 
+	\end{enumerate}
+	
+	Hence, for sample paths which contribute to the Laplace transform, one of two things must happen, either; 
+	\begin{enumerate}
+		\item the fluid remains in phase \(i\) until there is a change of level or a boundary is hit and \(E^\lambda\) does not occur before the change of level, or, \label{item: 1}
+		\item the fluid changes phase before there is a change of level or a boundary is hit and \(E^\lambda\) does not occur before the change of phase. \label{item: 2}
+	\end{enumerate}
+	
+	The probability of~\ref{item: 1}~is 
+	\begin{align}
+		\int_{x=0}^\infty \bs \alpha e^{\bs{S}x}\bs s e^{(T_{ii}-\lambda)x/|c_i|}\wrt x 
+		&= e^{(T_{ii}-\lambda)\Delta/|c_i|} + r_1,\label{eqn: bnd this 12345}
+	\end{align}
+	by Lemma~\ref{lemma:bound}.
+	
+	The probability of~\ref{item: 2}~is 
+	\begin{align}
+		\nonumber\int_{x=0}^\infty \bs \alpha e^{\bs{S}x}\bs e e^{(T_{ii}-\lambda)x/|c_i|}(-T_{ii}/|c_i|)\wrt x 
+		&= \int_{x=0}^{\Delta+\varepsilon} \bs \alpha e^{\bs{S}x}\bs ee^{(T_{ii}-\lambda)x/|c_i|}(-T_{ii}/|c_i|)\wrt x 
+%		\\\nonumber&{}+\int_{x=\Delta}^{\Delta+\varepsilon}\bs \alpha e^{\bs{S}x}\bs ee^{(T_{ii}-\lambda)x/|c_i|}(-T_{ii}/|c_i|)\wrt x 
+		\\&{}+\int_{x=\Delta+\varepsilon}^\infty \bs \alpha e^{\bs{S}x}\bs e e^{(T_{ii}-\lambda)x/|c_i|}(-T_{ii}/|c_i|)\wrt x.\label{eqn: bnd this 1234}
+	\end{align}
+	Now, since \(\bs \alpha e^{\bs{S}x}\bs e\leq 1\) for \(x\leq \Delta+\varepsilon\) then the first term on the right-hand side of (\ref{eqn: bnd this 1234}) is less than or equal to 
+	\[\displaystyle \int_{x=0}^{\Delta+\varepsilon} e^{(T_{ii}-\lambda)/|c_i|x}(-T_{ii}/|c_i|)\wrt x \leq \int_{x=0}^{\Delta+\varepsilon} e^{T_{ii}/|c_i|x}(-T_{ii}/|c_i|)\wrt x = 1-e^{T_{ii}/|c_i|(\Delta+\varepsilon)}.\]
+	By Chebyshev's inequality, \(\bs \alpha e^{\bs{S}x}\bs e\leq \cfrac{\var(Z)}{\varepsilon^2}\) for \(x> \Delta+\varepsilon\), hence the second term on the right-hand side of (\ref{eqn: bnd this 1234}) is less than or equal to 
+	\[\displaystyle \int_{x=\Delta+\varepsilon}^\infty \cfrac{\var(Z)}{\varepsilon^2} e^{(T_{ii}-\lambda)x/|c_i|}(-T_{ii}/|c_i|)\wrt x \leq  \cfrac{\var(Z)}{\varepsilon^2}.\]
+	Putting these together, then the right-hand side of (\ref{eqn: bnd this 1234}) is less than or equal to
+	\begin{align}
+		1-e^{T_{ii}(\Delta+\varepsilon)/|c_i|} + \cfrac{\var(Z)}{\varepsilon^2}.\label{eqn: the big dog}
+	\end{align}	
+	Combining (\ref{eqn: bnd this 12345}) and (\ref{eqn: the big dog}), then \(\mathbb P(\tau_n\leq E^\lambda  \mid \phi(\tau_{n-1})=i , \tau_{n-1}\leq  E^\lambda)\) is less than or equal to 
+	\begin{align}
+		&e^{(T_{ii}-\lambda)\Delta/|c_i|} + |r_1| + 1-e^{T_{ii}(\Delta+\varepsilon)/|c_i|} + \cfrac{\var(Z)}{\varepsilon^2}\nonumber
+		\\&= 1-e^{T_{ii}(\Delta+\varepsilon)/|c_i|}\left[1-e^{(-T_{ii}\varepsilon-\lambda \Delta)/|c_i|}\right] + \cfrac{\var(Z)}{\varepsilon^2} + |r_1| \nonumber 
+		\\&= 1-e^{-q(\Delta+\varepsilon)}\left[1-e^{q\varepsilon-\lambda \Delta/|c_{min}|}\right] + \cfrac{\var(Z)}{\varepsilon^2} + |r_1|,
+	\end{align}
+	since \(-T_{ii}/|c_i|\leq q\) and \(\lambda \Delta/|c_i| \leq \lambda \Delta/c_{min}\) for all \(i\in\mathcal S_+\cup \calS_-\). 
+	
+	Now consider the QBD-RAP at a boundary. To leave the boundary there must be at-least one change of phase before \(E^\lambda\). By a uniformisation argument, the probability of at-least one change of phase before \(E^\lambda\) is less than or equal to \(q/(q+\lambda)\). 
+\end{proof}
+
+\begin{lem}\label{lem: another bound 2}
+	For \(n\geq 2\), \(i\in\mathcal S_+\cup \calS_-\), 
+	\begin{align}
+		\mathbb P(\tau_n \leq E^\lambda \mid \phi(\tau_1) = i, \tau_1\leq E^\lambda) \leq b^{n-1}.
+	\end{align}
+\end{lem}
+\begin{proof}
+	The proof is by induction. 
+	
+	For the base case, set \(n=2\) and apply Lemma~\ref{lem: another bound}.
+
+	Now, assume the induction hypothesis \(\mathbb P(\tau_{n-1} \leq E^\lambda \mid \phi(\tau_1) = i, \tau_1\leq E^\lambda) \leq b^{n-2}\) for arbitrary \(n\geq 3\). 
+	
+	Since \(\{\tau_{n-1}\leq E^\lambda\}\) is a subset of \(\{\tau_{n}\leq E^\lambda\}\), then 
+	\begin{align}
+		 \mathbb P(   \tau_n \leq E^\lambda \mid \phi(\tau_1) = i, \tau_1\leq E^\lambda)
+		&= \mathbb P(   \tau_n \leq E^\lambda,  \tau_{n-1} \leq E^\lambda  \mid \phi(\tau_1) = i, \tau_1\leq E^\lambda). \label{eqn: eheh}
+	\end{align}
+	Now partition (\ref{eqn: eheh}) on the phase at time \(\tau_{n-1}\),
+	\begin{align}
+		\nonumber&\sum_{j_{n-1}\in\mathcal S}\mathbb P(  \tau_n \leq E^\lambda,  \tau_{n-1} \leq E^\lambda,\phi(\tau_{n-1}) = j_{n-1} \mid \phi(\tau_1) = i, \tau_1\leq E^\lambda)
+		\\&\nonumber=  \sum_{j_{n-1}\in\mathcal S}\mathbb P(  \tau_{n}\leq E^\lambda\mid   \phi(\tau_{n-1}) = j_{n-1}, \tau_{n-1} \leq E^\lambda)
+		\\&\qquad\times\mathbb P( \phi(\tau_{n-1}) = j_{n-1}, \tau_{n-1}\leq E^\lambda \mid \phi(\tau_1) = i, \tau_1\leq E^\lambda), \label{eqn: kekew}
+	\end{align}
+	by the strong Markov property of the QBD-RAP and the fact that \(\bs A(\tau_{n-1})=\bs \alpha\). 
+	 
+	By Lemma~\ref{lem: another bound} (\ref{eqn: kekew}) is less than or equal to 
+	\begin{align}
+		&\sum_{j_{n-1}\in\mathcal S} b
+		\mathbb P(  \phi(\tau_{n-1}) = j_{n-1}, \tau_{n-1}\leq E^\lambda\mid \phi(\tau_1) = i, \tau_1\leq E^\lambda) \nonumber
+		\\&= b
+		\mathbb P( \tau_{n-1}\leq E^\lambda\mid \phi(\tau_1) = i, \tau_1\leq E^\lambda)\nonumber
+		\\&\leq b\cdot b^{n-2},
+	\end{align}
+	by the induction hypothesis, and this completes the proof. 
+\end{proof}
+%
+
+\begin{cor}\label{vcor: cdks d}
+	\begin{align}
+		\Bigg|&\int_{t=0}^\infty e^{-\lambda t}\int_{x\in\calD_\ell}\mathbb P(\widetilde{\bs Y}(t) \in (\ell,\wrt x, j), t\in\mathcal T_n \mid 
+		\bs Y(0)=(\ell_0, \bs a_{\ell_0,i}(x_0), i))
+		\psi(x) \wrt t \Bigg|\nonumber
+		\\&\leq \cfrac{F b^{n-1}}{\lambda}\label{eq: JjbCS  B k }
+	\end{align}
+\end{cor}
+\begin{proof}
+	First, since \(|\psi(x)|\leq F\), then the left-hand side of (\ref{eq: JjbCS  B k }) is less than or equal to 
+	\begin{align}
+		&\int_{t=0}^\infty e^{-\lambda t}\int_{x\in\calD_\ell}\mathbb P(\widetilde{\bs Y}(t) \in (\ell,\wrt x,j), t\in\mathcal T_n \mid  \nonumber 
+		\bs Y(0)=(\ell_0, \bs a_{\ell_0,i}(x_0), i))F\wrt t \nonumber
+		\\&=\int_{t=0}^\infty e^{-\lambda t} \mathbb P(\widetilde{\bs Y}(t) \in (\ell,\mathcal D_{\ell,j},j), t\in\mathcal T_n \mid \bs Y(0)=(\ell_0, \bs a_{\ell_0,i}(x_0), i))F\wrt t. \nonumber
+	\end{align}
+	Partitioning on the time of the \(1\)st change of level, \(\tau_1\), and the phase and level at time \(\tau_1\), 
+	\begin{align}
+		&\int_{t=0}^\infty e^{-\lambda t} \int_{u_1=0}^t \sum_{j_1\in\mathcal S}\sum_{\ell_1\in\{\ell_0+1,\ell_0-1\}\cap\mathcal K}\mathbb P(\widetilde{\bs Y}(t) \in (\ell,\mathcal D_{\ell,j},j), t\in\mathcal T_n \nonumber
+		\mid \bs Y_d(\tau_1)=(\ell_1,j_1),  \tau_1=u_1)\nonumber
+		\\&\quad\mathbb P(\bs Y_d(\tau_1)=(\ell_1,j_1), \tau_1\in \wrt u_1
+		\mid \bs Y(0)=(\ell_0, \bs a_{\ell_0,i}(x_0), i))F  \wrt t\nonumber
+		%
+		\\&= \sum_{j_1\in\mathcal S}\sum_{\ell_1\in\{\ell_0+1,\ell_0-1\}\cap\mathcal K} \int_{t=0}^\infty e^{-\lambda t} \mathbb P(\widetilde{\bs Y}(t) \in (\ell,\mathcal D_{\ell,j},j), t\in\mathcal T_n \nonumber
+		\mid \bs Y_d(0)=(\ell_1,j_1), \tau_1=0) \wrt t 
+		\\&\quad{}\mathbb P(\bs Y_d(\tau_1)=(\ell_1,j_1), \tau_1\leq E^\lambda
+		\mid \bs Y(0)=(\ell_0, \bs a_{\ell_0,i}(x_0), i))F, \label{eqn fLks}
+	\end{align}
+	by the time-homogeneous property of the QBD-RAP and the convolution theorem for Laplace transforms. 
+	
+	The expression 
+	\begin{align}
+		&\int_{t=0}^\infty e^{-\lambda t} \mathbb P(\widetilde{\bs Y}(t) \in (\ell,\mathcal D_{\ell,j},j), t\in\mathcal T_n\nonumber
+		\mid \bs Y_d(0)=(\ell_1,j_1), \tau_1=0) \wrt t
+		%
+		\\&\leq \int_{t=0}^\infty e^{-\lambda t} \mathbb P(\tau_{n}\leq t \nonumber
+		\mid \bs Y_d(0)=(\ell_1,j_1), \tau_1=0) \wrt t
+		%
+		%
+		\\&\leq b^{n-1}\int_{t=0}^\infty e^{-\lambda t} \wrt t \nonumber 
+		\\&=b^{n-1}\cfrac{1}{\lambda}, \label{eq: bndhs vja sdh}
+	\end{align}
+	by Lemma~\ref{lem: another bound 2}.
+	
+	Using the bound(\ref{eq: bndhs vja sdh}) in (\ref{eqn fLks}), gives the result.  
+\end{proof}
+
+\subsection{Global convergence}
+Consider the Laplace transform of the QBD-RAP 
+\begin{align}
+	&\int_{t=0}^\infty e^{-\lambda t}\int_{x\in\mathcal D_{\ell,j}}\mathbb P(\widetilde{\bs Y}^{(p)}(t) = (\ell,\wrt x,j)\mid \bs Y^{(p)}(0)=(\ell_0, \bs a_{\ell_0,i}^{(p)}(x_0), i))  \psi(x)\wrt t.
+\end{align}
+Partition on the number of level changes by time \(t\), 
+\begin{align}
+	&\int_{x\in\mathcal D_{\ell,j}} \int_{t=0}^\infty e^{-\lambda t}\sum_{n=0}^\infty \mathbb P( \widetilde{\bs Y}^{(p)}(t) \in (\ell, \wrt x, j), t\in\mathcal T_n^{(p)} \mid\nonumber 
+	\bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0), i))\wrt t \psi(x) \nonumber
+	\\&=\sum_{n=0}^\infty\int_{x\in\mathcal D_{\ell,j}}\int_{t=0}^\infty e^{-\lambda t} \mathbb P(\widetilde{\bs Y}^{(p)}(t) \in (\ell, \wrt x, j), t\in\mathcal T_n^{(p)} \mid  
+	\bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0),i))\wrt t \psi(x) . \label{eqn: KLDNVnav}
+\end{align}
+By Lemma (\ref{lem: LAkAKFnvnb mav h}), each term in the sum (\ref{eqn: KLDNVnav}) converges. Furthermore, for \(n\geq 1\), each term is dominated by \(\left(b^{(p)}\right)^{n-1}F/\lambda\), from Corollary~\ref{vcor: cdks d}. The dominating terms \(\left(b^{(p)}\right)^{n-1}F/\lambda\) depend on \(p\) and may not be summable. However, for \(p\) sufficiently large, there exists a \(p_0<\infty\) and a \(B\) with \(B<1\) such that \(b^{(p)}<B\) for all \(p>p_0\).
+
+Therefore we can apply the Dominated Convergence Theorem, 
+\begin{align}
+	&\lim_{p\to\infty} \sum_{n=0}^\infty\int_{x\in\mathcal D_{\ell,j}}\int_{t=0}^\infty e^{-\lambda t} \mathbb P(\widetilde{\bs Y}^{(p)}(t) \in (\ell, \wrt x, j), t\in\mathcal T_n^{(p)} \mid \nonumber 
+	\bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0),i))\wrt t \psi(x)  \nonumber
+	%
+	% \\&= \sum_{n=0}^\infty\int_{x\in\mathcal D_{\ell,j}}\lim_{p\to\infty} \int_{t=0}^\infty e^{-\lambda t} \mathbb P(\widetilde{\bs Y}^{(p)}(t) \in (\ell, \wrt x, j), t\in\mathcal T_n^{(p)} \mid \nonumber 
+	% \bs Y^{(p)}(0)=(\ell_0,  \bs  a_{\ell_0,i}^{(p)}(x_0), i))\wrt t \psi(x) \nonumber
+	%
+	\\&= \sum_{n=0}^\infty\int_{t=0}^\infty e^{-\lambda t}  \int_{x\in\calD_\ell}\mathbb P(\bs X(t)\in(\wrt x, j), t\in\mathcal T_n^X 
+	\mid \bs X(0)=(x_0,i)) \nonumber 
+	\psi(x)\wrt t. \nonumber
+\end{align}
+where the limit is given by Lemma~\ref{lem: LAkAKFnvnb mav h}. Swapping the sum and integrals and by the law of total probability, 
+\begin{align}
+	& \int_{t=0}^\infty e^{-\lambda t}  \int_{x\in\calD_\ell}\sum_{n=0}^\infty\mathbb P(\bs X(t)\in(\wrt x, j), t\in\mathcal T_n^X 
+	\mid \bs X(0)=(x_0, i))\psi(x)\wrt t \nonumber
+	%
+	\\&= \int_{t=0}^\infty e^{-\lambda t}  \int_{x\in\calD_\ell} \mathbb P(\bs X(t)\in(\wrt x, j)  
+	\mid \bs X(0)=(x_0, i))\psi(x)\wrt t. \nonumber
+\end{align}
+
+Thus, we have shown the following result
+\begin{lem}\label{lem: KajPOw}
+	For all \(\ell_0,\ell\in\mathcal K\), \(i,j\in\mathcal S\), \(x_0\in\mathcal D_{\ell_0,i}\), as \(p\to\infty\), 
+	\begin{align}
+		&\int_{t=0}^\infty e^{-\lambda t}\int_{x\in\mathcal D_{\ell,j}}\mathbb P(\widetilde{\bs Y}^{(p)}(t) = (\ell,\wrt x,j) \mid \bs Y^{(p)}(0)=(\ell_0, \bs a_{\ell_0,i}^{(p)}(x_0), i))  \psi(x)\wrt t \nonumber
+		\\&\to \int_{t=0}^\infty e^{-\lambda t}  \int_{x\in\calD_{\ell,j}} \mathbb P(\bs X(t)\in(\wrt x, j)  
+		\mid \bs X(0)=(x_0, i))\psi(x)\wrt t. \nonumber
+	\end{align}
+\end{lem}
+ 
+\begin{cor}\label{cor: lk}
+	Let \(\psi(\bs y):\mathcal K \times \mathbb R\times \mathcal S \to \mathbb R\) be Lipschitz continuous and bounded functions, \(|\psi(\bs y)|\leq F\). Further, let \(\mathcal L(X(t)) = \sum_{k\in\mathcal K}k1(X(t)\in\mathcal D_k)\) and \(\widetilde{\bs X}(t) = (\mathcal L(X(t)),X(t),\varphi(t)))\). For each \(x_0\in\mathbb R\), \(i\in\mathcal S\), \(\ell_0\in\mathcal K\), 
+	\begin{align}
+		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E\left[\psi(\widetilde{\bs Y}^{(p)}(t))  \mid \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0),i) \right] \wrt t \nonumber
+		\\&\to \int_{t=0}^\infty e^{-\lambda t}  \mathbb E\left[\psi(\widetilde{\bs X}(t))\mid \bs X(0)=(x_0, i) \right] \wrt t.\nonumber
+	\end{align}
+\end{cor}
+\begin{proof}
+	Consider the left-hand side 
+	\begin{align}
+		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E\left[\psi(\widetilde{\bs Y}^{(p)}(t))  \mid \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}(x_0)^{(p)},i) \right] \wrt t \nonumber 
+		\\&= \int_{t=0}^\infty e^{-\lambda t}\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\mathbb E\Big[\psi(\widetilde{\bs Y}^{(p)}(t)) 1(\widetilde{\bs Y}^{(p)}(t)\in(\ell,\mathcal D_{\ell,j},j))  \mid\bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0), i) \Big] \wrt t \nonumber 
+		\\&= \sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Big[\psi(\widetilde{\bs Y}^{(p)}(t)) 1(\widetilde{\bs Y}^{(p)}(t)\in(\ell,\mathcal D_{\ell,j},j))\mid  \bs Y^{(p)}(0)=(\ell_0,  \bs  a_{\ell_0,i}^{(p)}(x_0),  i) \Big] \wrt t. \label{eqnL AKJF cjk ajhJK}
+	\end{align}
+	By Lemma~\ref{lem: KajPOw}, for each \(\ell\in\mathcal K\), \(j\in\calS\), the terms 
+	 \begin{align}
+	 	&\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Big[\psi(\widetilde{\bs Y}^{(p)}(t)) 1(\widetilde{\bs Y}^{(p)}(t)\in (\ell, \mathcal D_{\ell,j},j))  \mid \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0),i) \Big] \wrt t
+	\end{align}
+		converge to 
+	\[\int_{t=0}^\infty e^{-\lambda t}  \mathbb E\left[\psi(\widetilde{\bs X}(t),\phi(t))1(\bs X(t)\in(\mathcal D_{\ell_j},j))\mid \bs X(0)=(x_0,i) \right] \wrt t.\]
+	
+	If \(\mathcal K\) is finite, we are done upon taking the limit of (\ref{eqnL AKJF cjk ajhJK}) as \(p\to\infty\) and swapping the limit and the sums. 
+	
+	If \(\mathcal K\) is countably infinite, then for a given \(k\in\mathcal K\), since \(\psi\) is bounded
+	\begin{align}
+		&\Bigg|\sum_{j\in\mathcal S}\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Big[\psi(\widetilde{\bs Y}^{(p)}(t)) 1(\widetilde{\bs Y}^{(p)}(t)\in(\ell,\mathcal D_{\ell,j},j))  \mid 
+		\bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0), i) \Big] \wrt t\Bigg| \nonumber 
+		%
+		\\&\leq F \sum_{j\in\mathcal S}\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Big[ 1(\widetilde{\bs Y}^{(p)}(t)\in(\ell,\mathcal D_{\ell,j},j))  \mid \nonumber 
+		 \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0), i) \Big] \wrt t \nonumber 
+		%
+		\\&\leq F  \int_{t=0}^\infty e^{-\lambda t}\mathbb P( L^{(p)}(t)=\ell, \widetilde X^{(p)}(t) \in \mathcal D_{\ell} \mid   
+		\bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0), i) )\wrt t \nonumber 
+		%
+		\\&\leq F \mathbb P(\tau_{|\ell-\ell_0|}^{(p)}\leq E^\lambda \mid
+			\bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0), i)), \label{eqn:SKAM. fqj}
+	\end{align}
+	since, to be in level \(\ell\) after starting in level \(\ell_0\), there must be at least \(|\ell_0-\ell|\) changes of level. By Lemma~\ref{lem: another bound 2} then (\ref{eqn:SKAM. fqj}) is bounded by \(\left(b^{(p)}\right)^{|\ell-\ell_0|-1}\) for \(|\ell-\ell_0|\geq 2\) and by \(1\) otherwise. Now, choose \(p_0\) sufficiently large so that \(b^{(p)}<B<1\) for all \(p>p_0\). Therefore, for all \(p>p_0\), the terms in (\ref{eqnL AKJF cjk ajhJK}) are dominated by \(F\min\{B^{|\ell-\ell_0|-1},1\}\). Moreover 
+	\begin{align*}
+		F\sum_{\ell\in\mathcal K} \min\{B^{|\ell-\ell_0|-1},1\} 
+		&\leq2\sum_{n=1}^\infty B^{n-1}+1
+		\\&=\cfrac{2}{1-B}+1
+		\\&<\infty,
+	\end{align*}
+	hence the dominating terms are summable. Hence we may apply the Dominated Convergence Theorem to swap the necessary limits and sums. 
+\end{proof} 
+
+The Extended Continuity Theorem for Laplace transforms \cite[Chapter XIII, Theorem 2a]{feller1957} can now be use to claim that the QBD-RAP approximation scheme converges weakly (in space and time) to the fluid queue.
+\begin{thm}[Extended Continuity Theorem]\label{thm: ext cont thm}
+	For \(p=1,2,\dots\) let \(U_p\) be a measure with Laplace transform \(\omega_p\). If \(\omega_p(\lambda)\to\omega(\lambda)\) for \(\lambda > a\geq 0\), then \(\omega\) is the Laplace transform of a measure \(U\) and \(U_p\to U\).
+	
+	Conversely, if \(U_p\to U\) and the sequence \(\{\omega_p(a)\}\) is bounded, then \(\omega_p(\lambda)\to\omega(\lambda)\) for \(\lambda >a\). 
+\end{thm}
+Thus, by the the Extended Continuity Theorem~\ref{thm: ext cont thm}
+\begin{align}
+		&\mathbb E\left[\psi(\widetilde{\bs Y}^{(p)}(t))  \mid \widetilde{\bs Y}^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0),i) \right] 
+		\to \mathbb E\left[\psi(\widetilde{\bs X}(t))\mid \bs X(0)=(x_0, i) \right] \nonumber
+\end{align}
+weakly in \(t\) as \(p\to \infty\). Now, \[\mathbb E\left[\psi(\widetilde{\bs X}(t))\mid \bs X(0)=(x_0,i) \right]\] is a continuous function of \(t\) (it is a Feller semi-group), moreover, for \(p<\infty\), \[\mathbb E\left[\psi(\widetilde{\bs Y}^{(p)}(t))  \mid \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0), i) \right] \] is also continuous in \(t\). However, the limit \[\lim\limits_{p\to\infty}\mathbb E\left[\psi(\widetilde{\bs Y}^{(p)}(t))  \mid \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0),i) \right] \] need not be continuous in \(t\). We can claim that 
+\begin{align}
+		&\mathbb E\left[\psi(\widetilde{\bs Y}^{(p)}(t))  \mid \bs Y^{(p)}(0)=(\ell_0, \bs  a_{\ell_0,i}^{(p)}(x_0), i) \right] \nonumber
+		\to \mathbb E\left[\psi(\widetilde{\bs X}(t),\phi(t))\mid \bs X(0)=(x_0, i) \right] \nonumber
+\end{align}
+for almost all \(t\geq 0\). At such values of \(t\), since \(\psi\) is an arbitrary bounded, Lipschitz continuous function, then the Portmanteau Theorem states that the QBD-RAP approximation scheme converges in distribution to the fluid queue.
+
+A sufficient condition to upgrade the convergence from weak to point-wise (in the variable \(t\)) is to show that for \(t\geq 0\) 
+\[\sup_{p}\mathbb E\left[\psi(\widetilde{\bs Y}^{(p)}(t))  \mid \bs Y^{(p)}(0)=(\ell_0,\bs  a^{(p)}_{\ell_0,i}(x_0), i )\right]  \leq M(t)<\infty\]
+and the sequence \(\mathbb E\left[\psi(\widetilde{\bs Y}^{(p)}(t))  \mid \bs Y^{(p)}(0)=(\ell_0, \bs a^{(p)}_{\ell_0,i}(x_0), i) \right] \) is eventually equicontinuous in \(t\). That is, for every \(\varepsilon>0\) there exists a \(\delta(t,\varepsilon)>0\) and an \(p_0(t,\varepsilon)\) such that \(|t-u|<\delta(t,\varepsilon)\) implies that 
+\begin{align}
+	&\nonumber \Big|\mathbb E\left[\psi(\widetilde{\bs Y}^{(p)}(t))  \mid \bs Y^{(p)}(0)=(\ell_0, \bs a^{(p)}_{\ell_0,i}(x_0), i) \right]
+	-\mathbb E\left[\psi(\widetilde{\bs Y}^{(p)}(u))  \mid \bs Y^{(p)}(0)=(\ell_0, \bs a^{(p)}_{\ell_0,i}(x_0), i) \right]\Big|
+	\\&<\varepsilon
+\end{align}
+for all \(p\geq p_0(t,\varepsilon)\). This is an area for future work. 
+
+\begin{rem}
+	While the convergence result implies a loose bound on the rate of convergence, it applies to a wide class of QBD-RAP constructions. The main cause of the loose bound on the convergence rate is due to our reliance on Chebyshev's inequality. This is necessary as we try to make minimal assumptions about the matrix-exponential distributions used in the construction. In practice, we use a class of \emph{concentrated matrix-exponential distributions} found numerically in \citep{hht2020}, and for which there is relatively little known about their properties. This necessitates the generality of the convergence result. 
+\end{rem}
+
+\section{Extension to arbitrary (but fixed) discretisation structures}
+Throughout, we have assumed that all intervals are of width \(\Delta\), i.e.~\(|y_{\ell+1}-y_\ell|=\Delta\), and that on every interval the dynamics of the fluid queue are modelled based on the same matrix exponential representation \((\bs \alpha, \bs S, \bs s)\). These assumptions are, in fact, not necessary, but they do serve to simplify the presentation. The convergence results can be extended to use different sequences of matrix exponential representations on each interval, provided that for each sequence of matrix exponential distributions, the variance tends to \(0\). Moreover, we can extend the results to intervals of arbitrary width, provided that the width of the intervals is not arbitrarily small. Here we describe how one would prove such results.
+
+The arguments which prove Theorem~\ref{thm: a thm!} are independent of all other levels/intervals, i.e.~the hypotheses of the Lemma depend only on the interval \(\calD_{\ell_0}\), and the sequence of matrix exponential distributions used to model the behaviour of the fluid queue on this interval and not on any other interval. Thus Lemma~\ref{thm: a thm!} holds independently on each interval, as does Corollary~\ref{cor: aln222}.
+
+Let the width of an interval \(\mathcal D_{\ell_0}\) be \(\Delta_{\ell_0}=y_{\ell_0+1}-y_{\ell_0}\) and suppose that sequence of matrix exponential random variable used to model the dynamics of the fluid queue on the interval \(\calD_{\ell_0}\) is \(Z_{\ell_0}^{(p)}\). Regarding Lemma~\ref{lem: another bound}, we can extend it the following version, 
+\begin{lem}\label{lem: another bound sdfg}
+	Assume \(\inf_{\ell_0}\Delta_{\ell_0}>0\) and \(\sup_{\ell_0}\var(Z_{\ell_0})<\infty\) exist. Then, for all \(i\in\mathcal S_+\cup \calS_-\), \(\ell_0\in\mathcal K\setminus\{-1,K+1\},\) and \(n\geq 2\), 
+	\begin{align}
+		&\mathbb P(\tau_n^{(p)}\leq E^\lambda \mid \bs Y_d^{(p)}(\tau_{n-1}^{(p)}) = (\ell_0,i), \tau_{n-1}^{(p)}\leq  E^\lambda ) \leq b_{\ell_0}^{(p)},\label{eqn: ell0 version}
+	\end{align}
+	where 
+	\[b_{\ell_0}^{(p)} = 1-e^{-q(\Delta_{\ell_0}+\varepsilon_{\ell_0}^{(p)})}\left[1-e^{q\varepsilon_{\ell_0}^{(p)}-\lambda \Delta_{\ell_0}/|c_{min}|}\right] + \cfrac{\var(Z_{\ell_0}^{(p)})}{\left(\varepsilon^{(p)}\right)^2} + |r_{1,\ell_0}^{(p)}| \]
+	and  
+	\[|r_{1,\ell_0}^{(p)}|\leq 2G\cfrac{\var \left(Z_{\ell_0}^{(p)}\right)}{\left(\varepsilon_{\ell_0}^{(p)}\right)^2} + 2L\varepsilon_{\ell_0}^{(p)}.\]
+	Hence, for all \(i\in\mathcal S_+\cup \calS_-\), and \(n\geq 2\), 
+	\begin{align}
+		&\mathbb P(\tau_n^{(p)}\leq E^\lambda \mid \phi^{(p)}(\tau_{n-1}^{(p)})=i, \tau_{n-1}^{(p)}\leq  E^\lambda ) \leq b^{(p)}, \label{eqn: skjhg}
+	\end{align}
+	where 
+	\[b^{(p)} = \max\left\{\sup_{\ell_0}b_{\ell_0}^{(p)}, \cfrac{q}{\lambda + q}\right\}.\]
+\end{lem}
+\begin{proof}
+	For the proof of (\ref{eqn: ell0 version}) follow the same arguments as in the proof of Lemma~\ref{lem: another bound}. The bound in equation follows by the assumptions that \(\inf_{\ell_0}\Delta_{\ell_0}\) and \(\sup_{\ell_0}\var(Z_{\ell_0}^{(p)})\) exist, then 
+	\begin{align*}
+		&\mathbb P(\tau_n^{(p)}\leq E^\lambda \mid \phi^{(p)}(\tau_{n-1}^{(p)})=i, \tau_{n-1}^{(p)}\leq  E^\lambda ) 
+		\\&\leq \sup_{\ell_0} \mathbb P(\tau_n^{(p)}\leq E^\lambda \mid \bs Y_d^{(p)}(\tau_{n-1}^{(p)}) = (\ell_0, i), \tau_{n-1}^{(p)}\leq  E^\lambda ) 
+		\\&\leq \max\left\{\sup_{\ell_0}b_{\ell_0}^{(p)}, \cfrac{q}{\lambda + q}\right\}.
+	\end{align*}
+\end{proof}
+Given Lemma~\ref{lem: another bound sdfg}, then an equivalent of Lemma~\ref{lem: another bound 2} remains true, the proof of which follows verbatim except with the use of Lemma~\ref{lem: another bound} replaced by Lemma~\ref{lem: another bound sdfg}. Corollary~\ref{vcor: cdks d} remains true without modification. Lemma~\ref{lem: KajPOw} and Corollary~\ref{cor: lk} remain true without modification provided that \(\lim\limits_{p\to\infty}\var(Z_\ell^{(p)})\to 0\) for all \(\ell\). 
+
+\begin{rem}
+	I suspect that the approximation results can also be extended to approximating so-called \emph{multi-layer fluid queues}, as described in \cite{bo2008}. 
+\end{rem}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
