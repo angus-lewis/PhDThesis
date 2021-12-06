@@ -591,7 +591,7 @@ The following result states that \(\left\{{\phi}(t)\right\}\) has the same distr
 	 \end{align*}
 	 Therefore the process \(\left\{{\phi}(t)\right\}\) is has the same probability law as \(\left\{\varphi(t)\right\}\).
 \end{proof}
-\begin{rem}
+\begin{rem}\label{rem: afllflflflf}
 The same result can be shown for a regulated boundary. For boundary conditions which interact with the phase dynamics, such as a reflecting boundary, the result does not hold. The cause is the fact that the phase dynamics are level dependent -- we may see a forced change of phase upon a boundary being hit -- and the QBD-RAP can only approximate the level process of the fluid queue. However, until a boundary is hit (by either the fluid queue or QBD-RAP) then the phase processes match. We show later that, in the limit as the variance of the the matrix exponential distribution used in the construction of the QBD-RAP goes to zero, then the dynamics of the level process of the fluid queue, \(X(t)\), are captured by the QBD-RAP, and boundary behaviour which interacts with the phase dynamics can be captured too.
 \end{rem}
 
@@ -786,7 +786,7 @@ For phases \(j\in\mathcal S_0\), if phase \(j\) is associated with \(\mathcal S_
 
 This reasoning leads to an approximation of the distribution of the fluid at time \(t\), \(\mathbb P(\bs X(t)\in (\wrt x,j) \mid \bs X(0)=(x_0,i)) \), as
 \begin{align}
-		&\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in (\ell, \wrt \bs a, j)\mid \bs Y(0)=(\ell_0, \bs a_{\ell_0,i}(x_0), i) )
+		&\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in (\ell, \wrt \bs a, j)\mid \bs Y(0)=\bs y_0)
 		\bs a e^{\bs{S}z} \bs s \wrt x,
 		%
 		% \\&\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs a_{\ell_0,i}(x_0), \phi(0) = i)  
@@ -796,7 +796,7 @@ This reasoning leads to an approximation of the distribution of the fluid at tim
 		% &\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs a_{\ell_0,i}(x_0), \phi(0) = i) \nonumber 
 		% \\&\qquad\times\bs a e^{\bs{S}(x-y_\ell)} \bs s \wrt x,\label{eqn: density approx aug2}
 \end{align}
-where \(x\in\mathcal D_{\ell,j}\), \(x_0\in\mathcal D_{\ell_0,i}\) and 
+where \(x\in\mathcal D_{\ell,j}\), \(x_0\in\mathcal D_{\ell_0,i}\), \(\bs y_0 = (\ell_0,\bs a_{\ell_0,i}(x_0),i)\), and 
 \[
 	z = \begin{cases} 
 		x - y_\ell & i\in\calS_-, \\
@@ -813,10 +813,10 @@ where \(x\in\mathcal D_{\ell,j}\), \(x_0\in\mathcal D_{\ell_0,i}\) and
 
 While the estimate (\ref{eqn: density approx aug}) is appealing, it is, however, defective -- it does not integrate to 1 for any finite-dimensional matrix exponential distribution. To see this, compute 
 \begin{align*}
-	&\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\int_{z\in\mathcal D_{\ell,j}}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in (\ell, \wrt \bs a, j)\mid \bs Y(0)=(\ell_0, \bs  a_{\ell,i}(x_0), i)) \bs a e^{ \bs{S}z} \bs s \wrt z
+	&\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\int_{z\in\mathcal D_{\ell,j}}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in (\ell, \wrt \bs a, j)\mid \bs Y(0)=\bs y_0) \bs a e^{ \bs{S}z} \bs s \wrt z
 	% \\&\qquad{}{}+\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S_-\cup \calS_{-0}}\int_{x\in\mathcal D_{\ell,j}}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a, \phi(t) = j\mid L(0)=\ell_0, 
 	% \\&\qquad{}\qquad{}\bs A(0) = \bs  a_{\ell,i}(x_0), \phi(0) = i) \bs a e^{ \bs{S}(x-y_\ell)} \bs s \wrt x
-	\\&= \sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in (\ell, \wrt \bs a, j)\mid \bs Y(\ell_0, \bs  a_{\ell,i}(x_0), i)) (1-\bs a e^{ \bs{S}\Delta}\bs e  )
+	\\&= \sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in (\ell, \wrt \bs a, j)\mid \bs Y(0)=\bs y_0) (1-\bs a e^{ \bs{S}\Delta}\bs e  )
 	\\&<1,
 	% &\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\int_{z\in\mathcal D_{\ell,j}}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a, \phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), 
 	% \\&\qquad{}\qquad{}\phi(0) = i) \bs a e^{ \bs{S}z} \bs s \wrt z
@@ -827,7 +827,7 @@ While the estimate (\ref{eqn: density approx aug}) is appealing, it is, however,
 	% \\&<1,
 \end{align*}
 since \(\bs a e^{\bs{S}u} \bs e>0\) for any \(u>0\). For an orbit position \(\bs A(t)=\bs a\), the amount of mass missing from each level and phase is 
-\[\mathbb P(\bs Y(t)\in (\ell, \wrt \bs a,j)\mid \bs Y(0)=(\ell_0,  \bs  a_{\ell,i}(x_0), i)) \bs a e^{\bs{S}\Delta} \bs e \wrt x.\]
+\[\mathbb P(\bs Y(t)\in (\ell, \wrt \bs a,j)\mid \bs Y(0)=\bs y_0) \bs a e^{\bs{S}\Delta} \bs e \wrt x.\]
 The problem is that the triple \((\bs a,\bs S, \bs s)\) defines a distribution on \(x\in[0,\infty)\), however, it only makes sense to take \(x\in[0,\Delta)\) in the approximation scheme.
 
 %One way to rectify this is to renormalise the estimates in the right-hand side of (\ref{eqn: density approx aug})-(\ref{eqn: density approx aug2}) with the missing mass, i.e.~the approximation to \(\mathbb P(X(t)\in \wrt x , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i) \) is
@@ -843,7 +843,7 @@ To partially rectify this we can instead approximate \(\mathbb P(\bs X(t)\in (\w
 \begin{align}
 %	&\mathbb P(X(t)\in \wrt x  , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i) \nonumber
 	\label{eqn: density approx 3+}&
-	\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in(\ell, \wrt \bs a, j)\mid \bs Y(0)=()\ell_0, \bs  a_{\ell,i}(x_0), i)) \bs a u_i^\ell(x) \wrt x ,
+	\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in(\ell, \wrt \bs a, j)\mid \bs Y(0)=\bs y_0) \bs a u_i^\ell(x) \wrt x ,
 	% \displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), \phi(0) = i) \bs a u_i^\ell(x) \wrt x ,
 \end{align}
 {where}

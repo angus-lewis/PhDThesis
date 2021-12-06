@@ -29,7 +29,6 @@
 \newtheorem{cor}[defn]{Corollary}
 \newtheorem{rem}[defn]{Remark}
 % \newtheorem{ass}[defn]{Assumption}
-\newtheorem{example}[defn]{Example}
 \newcounter{asu}[defn]
 \newtheorem{asu}[defn]{Assumptions}
 \newcounter{subassumption}[asu]
@@ -50,6 +49,8 @@
 \newcommand{\subproperty}{% Just like \item in a list, but for a property
   \refstepcounter{subproperty}%
   \thesubproperty~\ignorespaces}
+\theoremstyle{definition}
+\newtheorem{example}[defn]{Example}
 
 \newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
 \newcommand{\wrt}{\, \mathrm{d}} 
@@ -64,6 +65,7 @@
 \newcommand{\vligne}[1]{\begin{bmatrix} #1 \end{bmatrix}}
 \newcommand{\Ydp}{\bm{Y}_{\bm{\alpha}}^{(p)}}
 \newcommand{\Yd}{\bm{Y}_{\bm{\alpha}}}
+
 
 \begin{document}
 \frontmatter
@@ -89,6 +91,7 @@
 \include{chapter3/chapter}
 \include{chapter4/chapter}
 \include{chapter5/chapter}
+\include{chapter6/chapter}
 % add as many as you like
 
 \appendix
