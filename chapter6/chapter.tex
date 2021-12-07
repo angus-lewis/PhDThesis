@@ -203,10 +203,10 @@ for \(\ell=1,\dots,K\), and also the boundary mass
 \end{align}
 by computing 
 \begin{align}
-	&\sum_{\ell=1}^{10} \left|\mathbb P(X(4)\in\calD_{\ell,1}, \varphi(4)=1\mid X(0)=0.5,\varphi(0)=1)-p(4,\ell,1)\right|
-	\\&+\left|\mathbb P(X(4)\in\{10\}, \varphi(4)=1\mid X(0)=0.5,\varphi(0)=1)-p(4,10,1)\right| \label{eqn: cell errors}
+	&\sum_{\ell=1}^{10} \left|\mathbb P(X(4)\in\calD_{\ell,1}, \varphi(4)=1\mid X(0)=0.5,\varphi(0)=1)-p(4,\ell,1)\right|\nonumber 
+	\\&+\left|\mathbb P(X(4)\in\{10\}, \varphi(4)=1\mid X(0)=0.5,\varphi(0)=1)-p(4,11,1)\right| \label{eqn: cell errors}
 \end{align}
-where \(p(4,\ell,1)\) is an approximation to \(\mathbb P(X(4)\in\calD_{\ell,1}, \varphi(4)=1\mid X(0)=0.5,\varphi(0)=1)\), and \(p(4,10,1)\) is an approximation to \(\mathbb P(X(4)\in\{10\}, \varphi(4)=1\mid X(0)=0.5,\varphi(0)=1)\).
+where \(p(4,\ell,1)\) is an approximation to \(\mathbb P(X(4)\in\calD_{\ell,1}, \varphi(4)=1\mid X(0)=0.5,\varphi(0)=1)\), and \(p(4,11,1)\) is an approximation to \(\mathbb P(X(4)\in\{10\}, \varphi(4)=1\mid X(0)=0.5,\varphi(0)=1)\).
 
 Figure~\ref{fig: fun 2 wave} (left) plots the \(L^1\) error between the true and approximated CDFs (left). The \(L^1\) metric tells a similar story to the previous analysis: the DG method with the limiter does not converge as order increases, the other two positivity preserving methods, the uniformisation and QBD-RAP methods, appear to converge, with the QBD-RAP method converging faster, while the DG method appears to converge the fastest. However, if we plot the approximations to the CDFs from the DG method (not shown) we would once again see an oscilating non-monotonic approximation. Another interesting observation is to compare the performance of the uniformisation and QBD-RAP methods with respect to the \(L^1\) metric on the CDFs in Figure~\ref{fig: fun 2 wave} (left) to that in Figure~\ref{fig: fun 1 comp} (right). Recall that with Figure~\ref{fig: fun 1 comp} we investigate the ability of the different approximation methods to represent the initial distribution with CDF \(1(x\geq 1)\), which is the initial condition of the problem we are consdiering here. In Figure~\ref{fig: fun 1 comp} (right) the uniformisation method out-performed the QBD-RAP method at reconstructing the inital condition. However, in Figure~\ref{fig: fun 2 wave} (left) we see that the QBD-RAP method out-performs the uniformisation method. This suggest that the QBD-RAP method is better able to resolve movement of mass across the domain when integrating over time, compared to the uniformisation method.  
 
@@ -220,20 +220,158 @@ Figure~\ref{fig: fun 2 wave} (right) plots the cell-based error metric in (\ref{
 \end{figure}
 \end{example}
 
+\begin{example}
+	Now consider an initial distribution which is truncated Gaussian with mean parameter 2.5 and standard deviation parameter 0.5, and trucated at the boundaries, 0 and 10;
+	\begin{align}
+		\mu([0,x)) := \mathbb P(X(0)\leq x, \varphi(0)=1)=\cfrac{\Phi((x-2.5)/0.5)1(0 \leq x < 10.0)}{\Phi(7.5/0.5)-\Phi(-2.5/0.5)} + 1(10\leq x), \label{eqn: kdjfksdf}
+	\end{align}
+	where \(\Phi(x)\) is the CDF of the standard normal distribution.
 
+	Hence, at time \(t=4\) the distribution is truncated Gaussian with mean parameter 6.5, standard deviation parameter 0.5, and is truncated below at 4.0 and above at 10, and there is also a small mass at the upper boundary; 
+	\begin{align}
+		&\mathbb P(X(4)\leq x, \varphi(4)=1\mid X(0)\sim\mu, \varphi(0)=1) \nonumber 
+		\\&=\cfrac{\Phi((x-6.5)/0.5)1(4.0\leq x)}{\Phi(7.5/0.5)-\Phi(-2.5/0.5)} + 1(10 \leq x)\label{eqn: bbbbbaabbaa}%\cfrac{\Phi(7.5/0.5)-\Phi(3.5/0.5)}{\Phi(7.5/0.5)-\Phi(-2.5/0.5)}.
+	\end{align}
+	The mass at the boundary is approximately \(1.28\times 10^{-12}\). There is a small discontinuity at \(x=4\) where the CDF jumps from \(0\) to \(\approx 2.87\times 10^{-7}\), due to the truncation of the initial distribution at \(0\). 
 
+	Since the discontinuity at \(x=4\) is small (much smaller than numerical integration errors in the evaluation of the error metrics), and the distribution is otherwise smooth, we expect that the DG method will perform well for this example. Figure~\ref{fig: fun 6 wave} confirms that this is indeed the case. For both metrics the error obtained by the DG method rapidly decreases to a point where it is swamped by other numerical errors. This is charaterisitc of the DG method for smooth problems. For low order DG schemes there are regions where the approximated PDF is negative, however, as the order of the DG scheme increases, these regions dissipate. Interestingly, even though this is a relatively smooth problem, the DG method with MUSCL limiter does not perform well. It must be that the initial and transient distributions are sufficiently `pointy' that small oscillations in the numerical solutions occur, and the limiter reduces the order of the scheme to linear. Both the uniformisation and QBD-RAP schemes perform similarly to previous examples. 
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.5\textwidth,trim={0.75cm 0.8cm 0.25cm 1.25cm},clip]{chapter6/figs/wave/fun6/meshs_ks_error_formatted.pdf}%
+		\includegraphics[width=0.5\textwidth,trim={0.75cm 0.8cm 0.25cm 1.25cm},clip]{chapter6/figs/wave/fun6/meshs_l2_pdf_error_formatted.pdf}
+		\caption{KS error between the true CDF (Equation (\ref{eqn: bbbbbaabbaa})) and the approximations (left) and \(L^2\) error between the true PDF and the approximations for the DG method (blue solid line with crosses), DG method with the MUSCL limiter (green dash-dotted line with crosses), uniformisation method (orange dashed line with diamonds) and QBD-RAP method (green dash-dotted line with circles).} 
+		\label{fig: fun 6 wave} 
+	\end{figure}
+\end{example}
 
+\begin{example}
+	We now want to look at how the methods might handle a point mass. We introduce an ephemeral second phase into the model with phase transition rate \(T_{22}=-1\), and fluid rate \(c_2=0\). The generator is therefore 
+	\[T=\left[\begin{array}{cc} 0 & 0 \\ 1 & -1 \end{array}\right].\]
 
+	We suppose that the initial condition is a point mass at the boundary in phase \(2\), i.e.~
+	\[\mathbb P(X(0)\leq x, \varphi(0)=2)=1(0\leq x).\] 
+	With this inital condition, the transient distribution at time \(t=4\) is 
+	\begin{align}
+		&\mathbb P(X(4)\leq x,\varphi(4)=1 \mid X(0)=0,\varphi(0)=2) \nonumber 
+		\\&= e^{T_{22}4}\left(e^{-T_{22}x}-1\right)1(4< x) + (1-e^{T_{22}4})1(4\leq x) \nonumber
+		\\&= e^{-4}\left(e^{4x}-1\right)1(4< x) + (1-e^{-4})1(4\leq x) \label{eqn: asjda}
+	\end{align}
+	and 
+	\begin{align}
+		\mathbb P(X(4)\leq x,\varphi(4)=2 \mid X(0)=0,\varphi(0)=2) = e^{-4}1(0\leq x).
+	\end{align}
+	The PDF at \(t=4\) is discontinuous at \(x=4\). For this problem, all methods can represent the initial condition exactly. 
 
+	Figure~\ref{fig: fun 1 wave} plots the KS error metric between the true and approximated CDFs (right) and the \(L^2\) error metrics between the true and approximated PDFs. Observing Figure~\ref{fig: fun 1 wave}, as expected, since the solution is discontinuous, the DG method with MUSCL limiter does perform well. The uniformisation and QBD-RAP methods appear to converge, with the QBD-RAP method converging faster. DG method converges fastest, however, produces approximations with negative and oscillatory solutions as we might expect given the discontinuity. A selection of approximations to the transient PDF are shown in Figure~\ref{fig: pdf wave fun 1}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.5\textwidth,trim={0.75cm 0.8cm 0.25cm 1.25cm},clip]{chapter6/figs/wave/fun1/meshs_ks_error_formatted.pdf}%
+		\includegraphics[width=0.5\textwidth,trim={0.75cm 0.8cm 0.25cm 1.25cm},clip]{chapter6/figs/wave/fun1/meshs_l2_pdf_error_formatted.pdf}
+		\caption{KS error between the true CDF (Equation (\ref{eqn: asjda})) and the approximations (left) and \(L^2\) error between the true PDF and the approximations for the DG method (blue solid line with crosses), DG method with the MUSCL limiter (green dash-dotted line with crosses), uniformisation method (orange dashed line with diamonds) and QBD-RAP method (green dash-dotted line with circles).} 
+		\label{fig: fun 1 wave} 
+	\end{figure}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\textwidth]{chapter6/figs/wave/fun1/pdf_formatted.pdf}
+		\caption{Reconstructed PDFs using the DG (top row), uniformisation (second row), DG with MUSCL limiter (third row) and QBD-RAP (bottom row) methods, for order 1, 3, 5, and 7 (columns). The true density function is \(e^{-4}e^{x}1(x<4)\).} 
+		\label{fig: pdf wave fun 1}
+	\end{figure} 
+\end{example} 
 
+\FloatBarrier
 
+\section{Stationary distributions} \label{sec:stat}
+We briefly turn our attention to stationary distributions of fluid queue. Since the stationary distribution is smooth, apart from at the boundaries, we expect that the DG method will work well here. The stationary distributions are conveninent as they can be evaluated analytically (CITE) and do not require us to approximate initial conditions or integrate over time.
 
+Here we analyse two simple models which are versions of \cite[Example 2]{bean2009}. They are versions of \cite[Example 2]{bean2009} since there no lower boundary behaviour was specified (as it is inconsequential to their analysis), whereas here, we introduce behaviour at the lower boundary. The two models differ only by their behaviour at the boundaries.
 
+\begin{model}\label{model: simple}
+	Consider a fluid queue where the driving process is a CTMC with state space \(\calS=\{1,2,3,4\}\), generator 
+	\[\bs T = \left[\begin{array}{cccc}
+		-1.1 & 1.1 & 0 & 0 \\
+		1.1 & -1.1 & 0 & 0 \\ 
+		0.01 & 0 & -0.01 & 0 \\
+		0 & 0.01 & 0 & -0.01 
+	\end{array}\right],\]
+	and there are associated rates \(c_1=1, c_2 = -1, c_3=0, c_4=0\) and boundaries at \(x=0\) and \(x=10\). We specify two types of behaviour at the boundary.
+	\begin{enumerate}[a)]
+		\item (Absorbing model) Upon hitting the lower boundary, the process transitions from phase \(2\) to phase \(j\) with probability \(p_{2j}\) where 
+		\[\vligne{p_{21} & p_{22} & p_{23} & p_{24}} = \vligne{0 & 0 & 1 & 0}.\]
+		Upon hitting the upper boundary, the process transitions from phase \(1\) to phase \(j\) with probability \(p_{1j}\) where 
+		\[\vligne{p_{11} & p_{12} & p_{13} & p_{14}} = \vligne{0 & 0 & 0 & 1}.\]
+		\item (Reflecting model) Upon hitting the lower boundary, the process transitions from phase \(2\) to phase \(j\) with probability \(p_{2j}\) where 
+		\[\vligne{p_{21} & p_{22} & p_{23} & p_{24}} = \vligne{1 & 0 & 0 & 0}.\]
+		Upon hitting the upper boundary, the process transitions from phase \(1\) to phase \(j\) with probability \(p_{1j}\) where 
+		\[\vligne{p_{11} & p_{12} & p_{13} & p_{14}} = \vligne{0 & 1 & 0 & 0}.\]
+	\end{enumerate}
+\end{model}
+For Model~\ref{model: simple}~a), upon hitting the boundary, the process stays at the boundary for an exponentially distributed amount of time with mean 100. For Model~\ref{model: simple}~b), upon hitting the boundary, the process is immediately reflected. In Model~\ref{model: simple}~b) phases 3 and 4 are ephemeral. 
 
+The models were dicretised using the DG, uniformisation and QBD-RAP methods using ten cells of width \(1\). We compute the coefficients for the stationary distribution in the following way. Suppose that a given discretisation method results in an approximation to the generator of the fluid queue as a matrix \(\bs B\). Then the stationary coefficients are found by solving 
+\begin{align}
+	\bs b \bs B = 0,\\
+	\mbox{such that } \bs b\bs 1=1,
+\end{align}
+for the coefficients \(\bs b\). 
 
+\paragraph{Model~\ref{model: simple}~a) Absorbing model}
+Figure~\ref{fig: absorbing stationary} plots KS errors between the true stationary CDF and the approximations (left) and the \(L^2\) error between the true stationary PDF and the approximations. Clearly the DG method is superior here as its error rapidly decrease to a point where is become insignificant compared to other numerical errors. The QBD-RAP method and uniformisation method both appear to be converging, with the errors for the QBD-RAP method decreasing faster.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth,trim={0.75cm 0.8cm 0.25cm 1.25cm},clip]{chapter6/figs/hitting_times_model/absorbing_model/stationary_distribution/ks_error_formatted.pdf}%
+	\includegraphics[width=0.5\textwidth,trim={0.75cm 0.8cm 0.25cm 1.25cm},clip]{chapter6/figs/hitting_times_model/absorbing_model/stationary_distribution/l2_pdf_error_formatted.pdf}
+	\caption{KS error between the true stationary CDF  and the approximations (left) and \(L^2\) error between the true stationary PDF and the approximations for Model~\ref{model: simple}~a) using the DG method (blue solid line with crosses), uniformisation method (orange dashed line with diamonds) and QBD-RAP method (green dash-dotted line with circles).} 
+	\label{fig: absorbing stationary} 
+\end{figure}
 
+\paragraph{Model~\ref{model: simple}~b) Reflecting model}
+Figure~\ref{fig: reflecting stationary} plots KS errors between the true stationary CDF and the approximations (left) and the \(L^2\) error between the true stationary PDF and the approximations. Once again, the DG method is superior, the QBD-RAP method and uniformisation method both appear to be converging, with the errors for the QBD-RAP method decreasing faster.
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth,trim={0.75cm 0.8cm 0.25cm 1.25cm},clip]{chapter6/figs/hitting_times_model/reflecting_model/stationary_distribution/ks_error_formatted.pdf}%
+	\includegraphics[width=0.5\textwidth,trim={0.75cm 0.8cm 0.25cm 1.25cm},clip]{chapter6/figs/hitting_times_model/reflecting_model/stationary_distribution/l2_pdf_error_formatted.pdf}
+	\caption{KS error between the true stationary CDF and the approximations (left) and \(L^2\) error between the true stationary PDF and the approximations for Model~\ref{model: simple}~b) using the DG method (blue solid line with crosses), uniformisation method (orange dashed line with diamonds) and QBD-RAP method (green dash-dotted line with circles).} 
+	\label{fig: reflecting stationary} 
+\end{figure}
 
+\section{Transient distributions}
+Once again we consider Model~\ref{model: simple} and use the same spatial discretisation as described in Section~\ref{sec:stat} (ten cells of width 1). We consider two initial conditions, a point mass at 0.0 in phase 1, and the initial distribution with PDF 
+\begin{align}
+	\cfrac{1}{2}e^{-x}/(1-e^{-10})\label{eqn: exp init cond}
+\end{align}
+in phases 1 and 2, with no mass at the boundaries. We integrate the approximations numerically over time until time \(t=2.0\) using the SSPRK4 method with t-step size 0.005. We apply the DG method with, and without, the Generalised MUSCL slope limiter. 
 
+To obtain a \emph{ground truth} we simulated 5,000,000 realisations of the fluid queue and computed the empirical CDF, and also the mass within each cell and at the boundaries. We do not attempt to numerically approximate the true PDF via simulation. We then compute the KS and \(L^1\) error metrics between the approximated CDF and simulated CDF, as well as the cell-wise error metric, given as follows. 
+\begin{align}
+	&\sum_{j\in\{1,2\}}\sum_{\ell=1}^{10} \left|\mathbb P(X(2)\in\calD_{\ell,j}, \varphi(2)=j\mid X(0)=0.5,\varphi(0)=1)-p(2,\ell,j)\right|\nonumber 
+	\\&+\left|\mathbb P(X(2)\in\{10\}, \varphi(2)=4\mid X(0),\varphi(0))-p(2,11,4)\right|\nonumber 
+	\\&+\left|\mathbb P(X(2)\in\{0\}, \varphi(2)=3\mid X(0),\varphi(0))-p(2,0,3)\right| \label{eqn: cell errors 2}
+\end{align}
+where \(p(2,\ell,j)\) is an approximation to \(\mathbb P(X(2)\in\calD_{\ell,j}, \varphi(2)=j\mid X(0),\varphi(0))\), \(p(2,11,4)\) is an approximation to \(\mathbb P(X(2)\in\{10\}, \varphi(2)=4\mid X(0),\varphi(0))\), and \(p(2,0,3)\) is an approximation to \(\mathbb P(X(2)\in\{10\}, \varphi(2)=3\mid X(0),\varphi(0))\). 
+
+To examine possible Monte-Carlo error, we used a bootstrap with 1,000 bootstrap samples. That is, we sample, with replacement, 5,000,000 realisations of the fluid queue from the original 5,000,000 samples, then compute error metrics for each of the 1,000 bootstrap samples. Via the bootstrap, we report the \(5\)th and \(95\)th percentile of the sampling distribribution of the errors. 
+
+To evaluate error metrics, we use a grid of 10,001 evenly spaced points for each phase. 
+
+To approximate the point mass inital condition we compute the inital coefficients for each scheme exactly. For the exponential initial condition (\ref{eqn: exp init cond}) we compute the initial coefficients via Gauss-Lobatto quadrature for the DG method, by using the mid-point rule for the uniformisation method, and by using a trapezoidal rule with 2,001 points on each cell for the QBD-RAP method. 
+
+\paragraph{Model~\ref{model: simple}~b) Reflecting model}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth,trim={0.75cm 0.8cm 0.25cm 1.25cm},clip]{chapter6/figs/hitting_times_model/reflecting_model/transient_distribution/point_mass/ks_error_formatted.pdf}%
+	\includegraphics[width=0.5\textwidth,trim={0.75cm 0.8cm 0.25cm 1.25cm},clip]{chapter6/figs/hitting_times_model/reflecting_model/transient_distribution/point_mass/l1_cdf_error_formatted.pdf}
+	\caption{KS (left) and \(L^1\) (right) errors between the true transient CDF at time \(t=2\) for Model~\ref{model: simple}~b) with the point-mass initial condition, and the corresponding approximations obtained via the DG method (blue solid line with crosses), DG method with Generalised MUSCL limiter (green dashed line with circles), uniformisation method (orange dashed line with diamonds) and QBD-RAP method (green dash-dotted line with circles).} 
+	\label{fig: reflecting transient pm} 
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=0.5\textwidth,trim={0.75cm 0.8cm 0.25cm 1.25cm},clip]{chapter6/figs/hitting_times_model/reflecting_model/transient_distribution/exp/ks_error_formatted.pdf}%
+	\includegraphics[width=0.5\textwidth,trim={0.75cm 0.8cm 0.25cm 1.25cm},clip]{chapter6/figs/hitting_times_model/reflecting_model/transient_distribution/exp/l1_cdf_error_formatted.pdf}
+	\caption{KS (left) and \(L^1\) (right) errors between the true transient CDF at time \(t=2\) for Model~\ref{model: simple}~b) with the expponential initial condition, and the corresponding approximations obtained via the DG method (blue solid line with crosses), DG method with Generalised MUSCL limiter (green dashed line with circles), uniformisation method (orange dashed line with diamonds) and QBD-RAP method (green dash-dotted line with circles).} 
+	\label{fig: reflecting transient exp} 
+\end{figure}
 
 
 
