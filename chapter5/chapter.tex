@@ -13,129 +13,12 @@ In this chapter we prove a number of results stemming from Theorem~\ref{thm: a t
  
 % The structure of this chapter is as follows. We start by showing weak convergence of the approximation at the \(1\)st and then \(n\)th change of level, \(n> 1\) in Sections~\ref{sec: 1st change} and \ref{sec: nth change}. Section~\ref{sec: between n and np1} generalises this to show weak convergence between the \(n\)th and \(n+1\)th change of level. Via the Dominated Convergence Theorem (again), Section~\ref{sec: local to global} proves the weak convergence of the QBD-RAP approximation to the fluid queue. So as to not obscure the logical flow of the presentation, technical results are reserved for the Appendices.
 
-\section{Convergence of an embedded process}\label{sec: 1st change}
+\section{Convergence of an embedded process}\label{sec: embedded}
 % Before we move on to global convergence we need another result about convergence of the QBD-RAP scheme and the fluid queue at changes of level. 
 
 % Regarding Remark~\ref{rem: point wies}, we do require convergence at certain boundary points which correspond to changes of level of the QBD-RAP. To this end, we have the following result. 
 
-In this section we consider the embedded process formed by observing the QBD-RAP at changes of level. We start by analysing the QBD-RAP at the time of the first change of level, \(\tau_1^{(p)}\). Following a similar method to Chapter~\ref{sec: conv} we can prove the following result. 
-
-\begin{cor}\label{cor: aln222} For \(\ell,\ell_0\in \mathcal K \setminus \{-1,K+1\},\) \(x_0\in\mathcal D_{\ell_0,i}\), \(i\in\mathcal S\)
-	then, for \(j\in\calS_+\),
-	\begin{align}
-		&\mathbb P(L^{(p)}(\tau_1^{(p)}) = \ell_0+1, \varphi(\tau_1^{(p)}) = j, \tau_{1}^{(p)}\leq E^\lambda 
-            	 \mid \bs Y^{(p)}(0) = \bs y_0^{(p)}) \nonumber
-	 	%
-		\\&\to \mathbb P(\bs X(\tau_1^X) = (y_{\ell_0+1}, j), \tau_{1}^X\leq E^\lambda 
-            	 \mid \bs X(0) = (x_0,i))\label{eqn: 1421}
-		 %
-		 %
-		 \intertext{and for \(j\in\calS_-\)}
-		 &\mathbb P(L^{(p)}(\tau_1^{(p)}) = \ell_0-1, \varphi(\tau_1^{(p)}) = j, \tau_{1}^{(p)}\leq E^\lambda 
-            	 \mid \bs Y^{(p)}(0) = \bs y_0^{(p)}) \nonumber
-	 	%
-		\\&\to \mathbb P(\bs X(\tau_1^X) = (y_{\ell_0}, j), \tau_{1}^X\leq E^\lambda 
-            	 \mid \bs X(0) = (x_0, i)). \nonumber
-		%
-	\end{align}
-	% \begin{align}
-	% 	&\mathbb P(L^{(p)}(\tau_1^{(p)}) = \ell_0+1, \varphi(\tau_1^{(p)}) = j, \tau_{1}^{(p)}\leq E^\lambda 
-    %         	 \mid L^{(p)}(0) = \ell_{0},\bs A^{(p)}(0)=\bs  a_{\ell_0,i}^{(p)}(x_0), \varphi(0) = i) \nonumber
-	%  	%
-	% 	\\&\to \mathbb P(X(\tau_1^X) = y_{\ell_0+1}, \varphi(\tau_1^X) = j, \tau_{1}^X\leq E^\lambda 
-    %         	 \mid X(0) = x_0, \varphi(0) = i)\label{eqn: 1421}
-	% 	 %
-	% 	 %
-	% 	 \intertext{and for \(j\in\calS_-\)}
-	% 	 &\mathbb P(L^{(p)}(\tau_1^{(p)}) = \ell_0-1, \varphi(\tau_1^{(p)}) = j, \tau_{1}^{(p)}\leq E^\lambda 
-    %         	 \mid L^{(p)}(0) = \ell_{0},\bs A^{(p)}(0)=\bs  a_{\ell_0,i}^{(p)}(x_0), \nonumber 
-	% 	\varphi(0) = i) \nonumber
-	%  	%
-	% 	\\&\to \mathbb P(X(\tau_1^X) = y_{\ell_0}, \varphi(\tau_1^X) = j, \tau_{1}^X\leq E^\lambda 
-    %         	 \mid X(0) = x_0, \varphi(0) = i). \nonumber
-	% 	%
-	% \end{align}
-	At a boundary, for \(\ell_0\in\{-1,K+1\}\), 
-	\begin{align}
-		&\mathbb P(L^{(p)}(\tau_1^{(p)}) = \ell, \varphi(\tau_1^{(p)}) = j, \tau_{1}^{(p)}\leq E^\lambda 
-            	 \mid L^{(p)}(0) = \ell_{0},\bs A^{(p)}(0)=1, \varphi(0) = i) \nonumber
-	 	%
-		\\&= \mathbb P(\bs X(\tau_1^X) = (y_\ell, j), \tau_{1}\leq E^\lambda 
-            	 \mid \bs X(0) = (0,i)), \label{eqn: lk78GHJK}
-	\end{align}
-	where \(\ell = 0\), \(i\in\calS_-\cup\calS_{-0}\) and \(j\in\mathcal S_+\) if \(\ell_0=-1\), and \(\ell = K\), \(i\in\calS_+\cup\calS_{+0}\) and \(j\in\calS_-\) if \(\ell_0=K+1\).  
-\end{cor}
-\begin{proof}
-	The proof follows the same structure as the proof of Theorem~\ref{thm: a thm!} however changes are required in all the results used in the proof, as here we do not need to integrate a function \(\psi\). Here we only give an outline of the proof. 
-
-	At a boundary we can model the fluid queue exactly, hence (\ref{eqn: lk78GHJK}) holds.
-
-	Consider first \(i\in \calS_+,j\in\calS_+\). Partition the probability (\ref{eqn: 1421}) on the times \(\{\Sigma_n\}_{n\geq 1}\) and \(\{\Gamma_n\}_{n\geq 1}\), and specifically, partition on the event that there are exactly \(m\) events \(\{\Sigma_n\}_{n=1}^m\) and exactly \(m\) events \(\{\Gamma_n\}_{n=1}^m\). %Partition further by the phases at these times \(\varphi(\Sigma_n)=j_n\in\calS_-\), \(n=1,\dots,m\) and \(\varphi(\Gamma_n)=k_n\in\calS_+\), \(n=1,...,m\). 
-	The resulting partitioned probabilities are
-	\begin{align}
-                 &\int_{x_1=0}^\infty \left(\bs e_i\bs H^{+-}(\lambda,x_1)\otimes \bs a_{\ell_0,i}^{(p)}(x_0)e^{\bs{S}^{(p)}x_1}\bs{D}^{(p)}\right)\wrt x_1 \nonumber
-            	\\&\nonumber \quad \Bigg[\prod_{r=1}^{m-1} \int_{x_{2r}=0}^\infty \left(\bs H^{-+}(\lambda,x_{2r}) \otimes e^{\bs{S}^{(p)}x_{2r}}\bs D^{(p)}\right)\wrt x_{2r} \\&\quad \int_{x_{2r+1}=0}^\infty \left(\bs H^{+-}(\lambda,x_{2r+1}) \otimes e^{\bs{S}^{(p)}x_{2r+1}}\bs D^{(p)}\right) \wrt x_{2r+1}\Bigg] \nonumber
-            	\\&
-            	\quad \int_{x_{2m}=0}^\infty \left(\bs H^{-+}(\lambda, x_{2m}) \otimes e^{\bs{S}^{(p)}x_{2m}}\bs{D}^{(p)}\right) \wrt x_{2m} \nonumber
-				\\&\quad \int_{x_{2m+1}=0}^\infty \left( \bs H^{++}\bs e_j \otimes (\lambda,x_{2m+1}) e^{\bs{S}^{(p)}x_{2m+1}}\bs s^{(p)} \right) \wrt x_{2m+1}.  \label{eqn: prob ofjaiv}
-	\end{align}
-
-	To show that the terms (\ref{eqn: prob ofjaiv}) converge to 
-	\begin{align}
-		&\mathbb P(\bs X(\tau_1^X)=(y_{\ell_0+1},j),\tau_1^X\leq E^\lambda, \Sigma_{m}\leq \tau_1^X<\Gamma_{m+1}, \mid \bs X(0)=(x_0, i))
-	\end{align}
-	we can use the bounds from Corollary~\ref{cor: cond bnd 2} and Corollry~\ref{cor: a cor}. For \(m=0\) we recognise (\ref{eqn: prob ofjaiv}) as the same form as that appearing in Corollary~\ref{cor: cond bnd 2} upon choosing \(v=0\). For \(m\geq 1\), choose the closing operator to be \(\bs v(x)=e^{\bs S x}\bs s\) and set \(x=0\) in Corollary~\ref{cor: a cor}. Now take the bound from Corollary~\ref{cor: a cor} and extend it to the case of matrix functions in the same way we extended Corollary~\ref{cor: asjdajaaaaa} to the matrix case in Lemma~\ref{lem: boobies}. In this way, we have a bound for (\ref{eqn: prob ofjaiv}) which tends to \(0\) as \(p\to\infty\).
-
-	% Corollary~\ref{cor: cond bnd} and Lemma~\ref{lem:tttttt} are analogous to Lemma~\ref{lem: Dcoajc} and Corollary~\ref{lem: Dcoajc} used in the proof of Lemma~\ref{lem:vn4}. They provide relevant bounds for the difference between terms like (\ref{eqn: prob ofjaiv}) for \(m=0\) and 
-	% \begin{align*}
-	% 	&\mathbb P(X(\tau_1^X)=y_{\ell_0+1},\varphi(\tau_1^X)=j,\tau_1^X\leq E^\lambda, \tau_1^X<\Sigma_1 \mid X(0)=x_0, \varphi(0)=i)  
-	% 	\\&= h_{ij}^{++}(\lambda,y_{\ell_0+1}-x_0),
-	% \end{align*}
-	% for example.
-	
-	% Corollaries~\ref{cor: a cor} and~\ref{cor: aaaaa} are analogous to Corollaries~\ref{eqn: lafkjebjcbbalbvvbrb} and~\ref{cor: fljm7778} used in the proof of Lemma~\ref{lem:vn4}. Corollaries~\ref{cor: a cor} and~\ref{cor: aaaaa} give error bounds for the difference between terms such as (\ref{eqn: prob ofjaiv}) for \(m\geq 1\) and the corresponding probability for the fluid queue, 
-	% \begin{align}
-	% 	&\mathbb P(X(\tau_1^X)=y_{\ell_0+1},\varphi(\tau_1^X)=j,\tau_1^X\leq E^\lambda, \Sigma_{m}\leq \tau_1^X<\Gamma_{m+1}, \varphi(\Sigma_\ell) = j_\ell, \varphi(\Gamma_\ell)=k_\ell, \nonumber
-	% 	\\&\qquad{} \ell = 1,\dots, m  \mid X(0)=x_0, \varphi(0)=i)
-	% \end{align}
-	% which is given by (\ref{eqn: lst herwe}). 
-	
-	What reamins is a domination condition so that we may apply the Dominated Convergence Theorem to claim that the sum over the number of up-down and down-up transition converges (i.e.~the sum over \(m\) in (\ref{eqn: prob ofjaiv}) converges). To this end, since \(\left[\bs H^{++}(\lambda,x_{m+1})\right]_{ij}\leq G\), then 
-	\begin{align}
-			&\int_{x_1=0}^\infty \bs H^{+-}(\lambda,x_1)\nonumber
-		\int_{x_2=0}^\infty \bs H^{-+}(\lambda,x_2) 
-		\hdots \int_{x_m=0}^\infty \bs H^{-+}(\lambda, x_m) 
-		\int_{x_{m+1}=0}^\infty \bs H^{++}(\lambda,x_{m+1}) \bs e 
-		\\&\quad\bs   a_{\ell_0,i}(x_0)e^{\bs{S}x_1}\wrt x_1 \bs{D}e^{\bs{S}x_2} \wrt x_2 \bs{D}\dots e^{\bs{S}x_m} \wrt x_m \bs{D}e^{\bs{S}x_{m+1}}{\bs s} \wrt x_{m+1}\nonumber 
-		%
-			\\&\leq \int_{x_1=0}^\infty \bs H^{+-}(\lambda,x_1)\nonumber
-		\int_{x_2=0}^\infty \bs H^{-+}(\lambda,x_2) 
-		\hdots \int_{x_m=0}^\infty \bs H^{-+}(\lambda, x_m) 
-		\int_{x_{m+1}=0}^\infty \bs e G
-		\\&\quad\bs   a_{\ell_0,i}(x_0)e^{\bs{S}x_1}\wrt x_1 \bs{D}e^{\bs{S}x_2} \wrt x_2 \bs{D}\dots e^{\bs{S}x_m} \wrt x_m \bs{D}e^{\bs{S}x_{m+1}}{\bs s} \wrt x_{m+1}\nonumber
-		%
-		\\&=\int_{x_1=0}^\infty \bs H^{+-}(\lambda,x_1)\nonumber
-		\int_{x_2=0}^\infty \bs H^{-+}(\lambda,x_2) 
-		\hdots \int_{x_m=0}^\infty \bs H^{-+}(\lambda, x_m) 
-		 \bs e G
-		\\&\quad\bs   a_{\ell_0,i}(x_0)e^{\bs{S}x_1}\wrt x_1 \bs{D}e^{\bs{S}x_2} \wrt x_2 \bs{D}\dots e^{\bs{S}x_m} \wrt x_m \bs{D}{\bs e}\nonumber
-		%
-			\\&\leq\int_{x_1=0}^\infty \bs H^{+-}(\lambda,x_1)\nonumber
-		\int_{x_2=0}^\infty \bs H^{-+}(\lambda,x_2) 
-		\hdots \int_{x_m=0}^\infty \bs H^{-+}(\lambda, x_m) 
-		 \bs e G
-		\\&\quad \wrt x_1 \wrt x_2\dots \wrt x_m \label{eqn :ejrvn}
-	\end{align}
-	where the last inequality holds as we claimed in the discussion after (\ref{eqn :NNeeaefjn}) in the proof of Lemma~\ref{lem: gkjljklgagjklagsjlk}. Equation~(\ref{eqn :ejrvn}) is of a similar form to (\ref{eqn: bound ggggaaaa}) (they differ by a constant only), hence the same arguments used to bound (\ref{eqn: bound ggggaaaa}) can be applied to get the desired domination result. 
-	
-	Ultimately, we can apply the Dominated Convergence Theorem to prove that the sum of the partitioned probabilities (\ref{eqn: prob ofjaiv}) converges as \(p\to\infty\). The sum of the limits is 
-	\[\mathbb P(\bs X(\tau_1^X) = (y_{\ell_0+1}, j), \tau_{1}\leq E^\lambda 
-            	 \mid \bs X(0) = (x_0,i)).\]
-	 
-	 The results for all other cases of \(i,j\in\calS\) follow analogously.
-\end{proof}
-
-Now, let \(\{\tau_n^{(p)}\}_{n\geq 0, n \in \mathbb Z}\), \(\tau_0^{(p)}=0\), and
+In this section we consider the embedded process formed by observing the QBD-RAP at changes of level. Now, let \(\{\tau_n^{(p)}\}_{n\geq 0, n \in \mathbb Z}\), \(\tau_0^{(p)}=0\), and
 \[\tau_{n}^{(p)} = \inf\left\{t\geq \tau_{n-1}^{(p)} \mid L^{(p)}(t)\neq L^{(p)}(\tau_{n-1}^{(p)})\right\},\]
 be the (stopping) times at which \(\{L^{(p)}(t)\}\), the level process of the QBD-RAP, changes, or the boundary is hit, or, if the process is at the boundary, the process leaves the boundary. To simplify notation, we may drop the superscript \(p\) where it is not explicitly needed. Further, let \(\{\Ydp(n)\}_{n\geq 0, n \in \mathbb Z} = \{(L^{(p)}(\tau_n^{(p)}),\varphi(\tau_n^{(p)}))\}_{n\geq 0, n \in \mathbb Z}\) be the level and phase of the discrete-time process embedded at the change-of-level epochs, \(\{\tau_n^{(p)}\}_{n\geq 0}\). The subscript \(\bs \alpha^{(p)}\) refers to the fact that \(\bs A^{(p)}(\tau_n^{(p)})=\bs \alpha^{(p)}\) for \(n\geq 1\). The process \(\{\Ydp(n)\}_{n\geq 0}\) is a discrete-time Markov chain, which is time-homogeneous for \(n\geq 1\). 
 
@@ -216,7 +99,7 @@ A direct corollary of Corollary~\ref{cor: aln222222} is the convergence of the t
 \begin{proof}
 	Since \(\tau_1^{(p)}<\infty\) almost surely, as is \(\tau_1^X\), then taking \(\lambda \to 0\) in Corollary~\ref{cor: aln222222} yields the result. 
 \end{proof}
-Corollary~\ref{cor: aln22222212} states that the transition probabilities of the embedded processes converge. Thus the finite-dimensional distributions of \(\{\Ydp(n)\}\) converge, and if the space \(\mathcal K\times \calS\) is finite, then the distribution of \(\{\Ydp(n)\}\) is tight. Thus we can establish a convergence in distribution of \(\{\Ydp(n)\}\) and \(\{\bs X(\tau_n^X)\}\). 
+Corollary~\ref{cor: aln22222212} states that the transition probabilities of the embedded processes converge. Thus the finite-dimensional distributions of \(\{\Ydp(n)\}\) converge, and if the space \(\mathcal K\times \calS\) is finite, then the sequence of distributions of \(\{\Ydp(n)\}\) is tight. Thus we can establish a convergence in distribution of \(\{\Ydp(n)\}\) and \(\{\bs X(\tau_n^X)\}\). 
 
 Another direct corollary of Corollary~\ref{cor: aln222} is the convergence in distribution of the random variables \(\{\tau_1^{(p)}\}_{p\geq 1}\) to \(\tau_1^X\). 
 \begin{cor}

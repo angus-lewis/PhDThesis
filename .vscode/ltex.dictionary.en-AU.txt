@@ -1,0 +1,8 @@
+QBD-RAP
+pointwise
+integrand
+Chebyshev
+piecewise
+uniformisation
+uniformised
+elementwise

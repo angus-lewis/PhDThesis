@@ -40,7 +40,7 @@ Consider the partition of the state space of the level of a fluid queue, \([0,M]
 is right-continuous with left limits (c\'adl\'ag). The expression (\ref{eqn: kfj}) is the discrete process of the fluid-queue which the level process of the QBD-RAP will approximate. Let \(y_k = k\Delta\), \(k=0,\dots,K+1\) and \(\calD_k = [y_k,y_{k+1}]\). We now look to model the behaviour of \(\{X(t)\}\) on an interval \(\calD_k\) over the time \([t,t+u]\) given information about the phase process over this time. 
 
 \subsection{Modelling the residual time to exit on no change of phase} 
-We first consider no change of phase in \([t,t+u]\). Suppose that \(\varphi(t)=i\in\mathcal S_+\) and \(X(t) = x\in\mathcal D_{k,i}\). Observe that on no change of phase, \(\varphi(t+s) = i\), \(s\in[0,u]\), and at time \(t+s\) the level of the fluid queue is given by \(X(t+s) = x+c_i s\), \(s\in[0,u]\). Further, for \(u>(y_{k+1}-x)/c_i\) the level process \(\{X(t)\}\) leaves the interval \(\mathcal D_{k,i}\) at exactly time \(t+(y_{k+1} - x)/c_i\). Similarly, for \(i\in\mathcal S_-\), \(\{X(t)\}\) leaves the interval \(\mathcal D_{k,i}\) at exactly time \(t+(x-y_k)/|c_i|\) on the event that there is no change of phase on \([t,t+u]\) for \(u>(x-y_k)/|c_i|\). 
+We first consider no change of phase in \([t,t+u]\). Suppose that \(\varphi(t)=i\in\mathcal S_+\) and \(X(t) = x\in\mathcal D_{k,i}\). Observe that on the event that there is no change of phase, \(\varphi(t+s) = i\), \(s\in[0,u]\), and at time \(t+s\) the level of the fluid queue is given by \(X(t+s) = x+c_i s\), \(s\in[0,u]\). Further, for \(u>(y_{k+1}-x)/c_i\) the level process \(\{X(t)\}\) leaves the interval \(\mathcal D_{k,i}\) at exactly time \(t+(y_{k+1} - x)/c_i\). Similarly, for \(i\in\mathcal S_-\), \(\{X(t)\}\) leaves the interval \(\mathcal D_{k,i}\) at exactly time \(t+(x-y_k)/|c_i|\) on the event that there is no change of phase on \([t,t+u]\) for \(u>(x-y_k)/|c_i|\). 
 
 To approximate the deterministic behaviour observed above, consider a matrix-exponential distribution \(Z\sim ME(\bs \alpha, \bs S, \bs s)\) with mean \(\Delta\) and low variance. As we shall see later, the assumption that \(Z\) has low variance will allow us to claim that \(Z\) can be used to approximate deterministic behaviour. Let \(Z_i\sim ME(\bs \alpha, \bs S_i, \bs s_i)\) where \(\bs S_i = |c_i|\bs S\), \(\bs s_i=-\bs S_i\bs e\), \(i\in\calS\). The random variable \(Z_i\) has mean \(\Delta/|c_i|\). 
 
@@ -770,13 +770,13 @@ In general, we need to augment a set of states \(\calS_0^{*,k}\) to the QBD-RAP 
 %For technical reasons we must restrict the initial conditions so that there are no point masses at \(x_0=y_{\ell+1}\) when \(i\in\mathcal S_+\) or \(x_0=y_{\ell}\) when \(i\in\mathcal S_-\). In either of these cases, the initial orbit position would be \(\cfrac{\bs \alpha e^{\bs{S}\Delta}}{\bs \alpha e^{\bs{S}\Delta}\bs e}\) and the denominator is \(\bs \alpha e^{\bs{S}\Delta}\bs e\). To our knowledge, there are currently no results that ensure that \(\bs \alpha e^{\bs{S}\Delta}\bs e\) is not arbitrarily small for the class of matrix exponential distributions with which we work. For point masses at any other value of \(x_0\in\mathcal D_\ell, x_0\neq y_{\ell+1}\) and \(i\in\mathcal S_+\) the initial orbit position is \(\cfrac{\bs \alpha e^{\bs{S}(x_0-y_\ell)}}{\bs \alpha e^{\bs{S}(x_0-y_\ell)}\bs e}\) and the denominator is \(\bs \alpha e^{\bs{S}(x_0-y_\ell)}\bs e\geq 1-\cfrac{\var\left(Z\right)}{(\Delta-(x_0-y_\ell))}\). Therefore, by choosing a matrix exponential \(Z\) with sufficiently small variance, then the denominator is arbitrarily close to 1. Similarly for initial point masses \(x_0\in\mathcal D_\ell\neq y_{\ell}\), \(i\in\mathcal S_-\). This is, however, no real practical loss as point masses at \(x_0=y_{\ell+1}\) when \(i\in\mathcal S_+\) (\(x_0=y_{\ell}\) when \(i\in\mathcal S_-\)) can, and should, have the initial conditions \(\bs v_{\ell+1,i}=\bs \alpha\) (respectively, \(\bs v_{\ell-1,i}\)), corresponding to the fluid starting at the left (right) of the adjacent interval which shares the boundary \(y_{\ell+1}\) (\(y_\ell\)). 
 
 \section{At time \(t\) -- closing operators}\label{sec: closing}
-So far we have described how we can use a QBD-RAP to approximate a fluid queue. The level process \(\{L(t)\}\) of the QBD-RAP approximates the process 
+The level process \(\{L(t)\}\) of the QBD-RAP approximates the process 
 \begin{align}
 	\displaystyle \left\{\sum_{k\in\mathcal K}\sum_{i\in\calS} k1(X(t)\in\calD_{k,i})\right\}_{t\geq 0}. \label{eqn: kfafj}
 \end{align}
 This may be of interest in its own right. However, for some applications, this approximation may be too coarse -- the level process tells us nothing about where in the intervals \(\calD_{k,i}\) the fluid queue might be. 
 
-We now describe how the orbit position \(\bs A(t)\) can be used to approximate the density of the level of the fluid queue \(X(t)\). This reconstruction is entirely post-hoc in the sense that it does not affect the dymaics of the QBD-RAP itself. For any time \(t\) we only take the information contained in \(\mathbb E[A(t)1(L(t)=\ell,\varphi(t)=i)]\) and rewrite it in a descriptive way. 
+We now describe how the orbit position \(\bs A(t)\) can be used to approximate the density of the level of the fluid queue \(X(t)\). This reconstruction is entirely post-hoc in the sense that it does not affect the dymaics of the QBD-RAP itself. For any time \(t\) we only take the information contained in \(\mathbb E[\bs A(t)1(L(t)=\ell,\varphi(t)=i)]\) and rewrite it in a descriptive way. 
 
 Suppose that the QBD-RAP is in level \(L(t)=\ell\), phase \(\phi(t)=j\in\calS_+\), and the orbit is \(\bs A(t)=\bs a\). If the QBD-RAP remains in phase \(j\), the QBD-RAP approximation will transition out of level \(\ell\) in the infinitesimal time interval \(t+\wrt u\) with density \(\bs a e^{|c_j|\bs{S}u}|c_j|\bs s\wrt u\). At the time of the change of level we estimate the position of \(X(t+u)\) by \(X(t+u)\approx y_{\ell+1}\). Tracing this back to time \(t\), we estimate the position of \(X(t)\) as \(X(t)\approx y_{\ell+1} - |c_j|u\). Reverse engineering this logic, the approximation to the density of \(X(t) \in\wrt x\) is \(\bs a e^{|c_j|\bs S(y_{\ell+1}-x)/|c_j|}|c_j|\bs s \wrt x/|c_j|\), since \(\wrt x = |c_j|\wrt u\) where \(\wrt x\) is an infinitesimal interval in space and \(\wrt u\) is an infinitesimal interval with respect to time.
 
@@ -843,14 +843,14 @@ To partially rectify this we can instead approximate \(\mathbb P(\bs X(t)\in (\w
 \begin{align}
 %	&\mathbb P(X(t)\in \wrt x  , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i) \nonumber
 	\label{eqn: density approx 3+}&
-	\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in(\ell, \wrt \bs a, j)\mid \bs Y(0)=\bs y_0) \bs a u_i^\ell(x) \wrt x ,
+	\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in(\ell, \wrt \bs a, j)\mid \bs Y(0)=\bs y_0) \bs a \bs u_{\ell,j}(x) \wrt x ,
 	% \displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), \phi(0) = i) \bs a u_i^\ell(x) \wrt x ,
 \end{align}
 {where}
 \begin{align}
-		\bs a u_i^\ell(x) = \begin{cases}
-			\bs a \left(e^{ \bs{S}(y_{\ell+1}-x)} \bs s + e^{ \bs{S}(2\Delta-(y_{\ell+1}-x))} \bs s\right), & i\in\calS_+, \\ 
-			\bs a \left(e^{ \bs{S}(x-y_\ell)} \bs s+e^{ \bs{S}(2\Delta-(x-y_\ell))} \bs s\right), & i\in\calS_-. \\ 
+		\bs a \bs u_{\ell,j}(x) = \begin{cases}
+			\bs a \left(e^{ \bs{S}(y_{\ell+1}-x)} \bs s + e^{ \bs{S}(2\Delta-(y_{\ell+1}-x))} \bs s\right), & j\in\calS_+, \\ 
+			\bs a \left(e^{ \bs{S}(x-y_\ell)} \bs s+e^{ \bs{S}(2\Delta-(x-y_\ell))} \bs s\right), & j\in\calS_-. \\ 
 		\end{cases}\label{eqn: density approx 3+a}
 \end{align}
 Intuitively, we take the density function \(\bs ae^{\bs{S}x}\bs s\) on \(x \in [0,2\Delta)\), and `fold' it back on itself around \(\Delta\), to create a density function on \([0,\Delta)\), 
@@ -863,13 +863,13 @@ A third option is to approximate \(\mathbb P(\bs X(t)\in (\wrt x, j)\mid \bs X(0
 \begin{align}
 %	&\mathbb P(X(t)\in \wrt x  , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i) \nonumber
 	\label{eqn: density approx 4+}&
-		\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in (\ell, \wrt \bs a,j)\mid \bs Y(0) = (\ell_0, \bs  a_{\ell,i}(x_0), i)) \bs a v_i^\ell(x) \wrt x ,
+		\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in (\ell, \wrt \bs a,j)\mid \bs Y(0) = (\ell_0, \bs  a_{\ell,i}(x_0), i)) \bs a \bs v_{\ell,j}(x) \wrt x ,
 \end{align}
 {where}
 \begin{align}
-		\bs a v_i^\ell(x) = \begin{cases}
-			\bs a \left(e^{ \bs{S}(y_{\ell+1}-x)} + e^{ \bs{S}(2\Delta-(y_{\ell+1}-x))} \right)\left[I-e^{\bs S 2\Delta}\right]^{-1}\bs s, & i\in\calS_+, \\ 
-			\bs a \left(e^{ \bs{S}(x-y_\ell)}+e^{ \bs{S}(2\Delta-(x-y_\ell))}\right) \left[I-e^{\bs S 2\Delta}\right]^{-1}\bs s, & i\in\calS_-. \\ 
+		\bs a \bs v_{\ell,j}(x) = \begin{cases}
+			\bs a \left(e^{ \bs{S}(y_{\ell+1}-x)} + e^{ \bs{S}(2\Delta-(y_{\ell+1}-x))} \right)\left[I-e^{\bs S 2\Delta}\right]^{-1}\bs s, & j\in\calS_+, \\ 
+			\bs a \left(e^{ \bs{S}(x-y_\ell)}+e^{ \bs{S}(2\Delta-(x-y_\ell))}\right) \left[I-e^{\bs S 2\Delta}\right]^{-1}\bs s, & j\in\calS_-. \\ 
 		\end{cases}
 \end{align}
 Here, we take the density function \(\bs a e^{\bs S x}\bs s\), defined on \([0,\infty)\), and map it to a density function on \([0,\Delta)\) by \(\Delta - |(x \mod 2\Delta )-\Delta|\). The resulting density function is 
@@ -901,6 +901,11 @@ and in (\ref{eqn: density approx 4+})
 \begin{align}
 	\bs a {\bs v}(x) &= \bs a \left(e^{ \bs{S}x} \bs s + e^{ \bs{S}(2\Delta-x)}\right)\left[I-e^{S2\Delta}\right]^{-1} \bs s.\label{eqn:5462}
 \end{align}
+We will use the notation 
+\begin{align}
+	\bs v_{\ell,j}(x) = \begin{cases} \bs v(y_{\ell+1}-x) & j\in\calS_+\cup\calS_{0+}, \\ \bs v(x-y_\ell) & j\in\calS_-\cup\calS_{0-}. \end{cases}
+\end{align}
+
 The operator \({\bs v}(x)\) is a choice which forms part of the definition of the approximation scheme. As we shall see, given certain properties of \({\bs v}(x)\), we can prove that the approximation scheme converges, and ensures positivity. In the cases above, all the closing operators (\ref{eqn: alal})-(\ref{eqn:546}) lead to an approximation which converges and, due to their interpretation as probability densities, ensure positivity. 
 
 % \begin{rem}
