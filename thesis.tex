@@ -31,6 +31,7 @@
 \newtheorem{rem}[defn]{Remark}
 \newtheorem{model}[defn]{Model}
 % \newtheorem{ass}[defn]{Assumption}
+
 \newcounter{asu}[defn]
 \newtheorem{asu}[defn]{Assumptions}
 \newcounter{subassumption}[asu]
@@ -41,6 +42,7 @@
 \newcommand{\subasu}{% Just like \item in a list, but for an asu
   \refstepcounter{subassumption}%
   \thesubassumption~\ignorespaces}
+
 \newcounter{property}[defn]
 \newtheorem{property}[defn]{Properties}
 \newcounter{subproperty}[property]
@@ -51,6 +53,9 @@
 \newcommand{\subproperty}{% Just like \item in a list, but for a property
   \refstepcounter{subproperty}%
   \thesubproperty~\ignorespaces}
+
+\usepackage{thmtools,thm-restate}
+
 \theoremstyle{definition}
 \newtheorem{example}[defn]{Example}
 

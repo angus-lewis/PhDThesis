@@ -10,3 +10,4 @@ memoryless
 summands
 intergals
 discretisation
+non-differetiable

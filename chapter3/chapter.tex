@@ -257,10 +257,10 @@ since at time \(t+u^-\), the orbit position is \(\bs A(t+u^-) = {\bs\alpha e^{\b
 
 Observe that \(\bs D\bs e = \displaystyle \int_{x=0}^\infty e^{\bs S x }\bs s \bs k(x)\wrt x\bs e =\displaystyle \int_{x=0}^\infty e^{\bs S x }\bs s \wrt x=\bs e\), since \(\bs k(x)\bs e = 1\) for all \(x\geq 0\). Further, since \(\mathcal A\) is closed and convex \citep{MEinAP}, then \((\bs a \bs D,\bs S,\bs s)\) is a representation of a matrix exponential distribution for any \(\bs a\in\mathcal A\). 
 
-We pose the choice of the matrix \(\bs D\) as a modelling choice. Other choices are possible, for example, \(\displaystyle \bs D = \int_{x=0}^{\Delta}e^{\bs S x }\bs s \bs k(x)\wrt x\) is another sensible choice. It may also be possible to construct other matrices \(\bs D\), perhaps via geometric arguments. 
+We pose the choice of the matrix \(\bs D\) as a modelling choice. Other choices are possible, for example, \(\displaystyle \bs D = \int_{x=0}^{\Delta}e^{\bs S x }\bs s \bs k(x)\wrt x + \int_{x=\Delta}^\infty e^{\bs S x }\bs s\bs \alpha \wrt x\), or \(\displaystyle \bs D = \int_{x=0}^{\Delta}\bs v(x) \bs k(x)\wrt x\), where \(\bs v(x)\) is a \emph{closing operator} as introduced later in Section~\ref{sec: closing}, are other possible choices. It may also be possible to construct other matrices \(\bs D\), perhaps via geometric arguments. 
 
 \paragraph{Computing \(\bs D\)}
-In practice we use the class of concentrated matrix exponential distributions (CMEs) found numerically in \citep{hht2020}. For this class of CMEs, we take the index \(p\) to be the order of the representation. Moreover, we take \(p\) to be odd. The justification for considering representations of odd orders only is that the variance of CME representations of orders \(2p\) and \(2p-1\) are relatively similar and therefore have similar abilities to represent the delta function \citep{hht2020}. Hence, if we construct a QBD-RAP approximation with a representation of order \(2p\) we expect it to perform only marginally better than an approximation constructed with representations of order \(2p-1\). However, the computational cost of the latter is lower, so we opt for the order \(2p-1\) representation. 
+In practice, we use the class of concentrated matrix exponential distributions (CMEs) found numerically in \citep{hht2020}. For this class of CMEs, we take the index \(p\) to be the order of the representation. Moreover, we take \(p\) to be odd. The justification for considering representations of odd orders only is that the variance of CME representations of orders \(2p\) and \(2p-1\) are relatively similar and therefore have similar abilities to represent the delta function \citep{hht2020}. Hence, if we construct a QBD-RAP approximation with a representation of order \(2p\) we expect it to perform only marginally better than an approximation constructed with representations of order \(2p-1\). However, the computational cost of the latter is lower, so we opt for the order \(2p-1\) representation. 
 
 For a given CME with odd order, \(p\), and representation \((\bs\alpha,\bs S)\), the matrix \(\bs S\) has one real eigenvalue, and \(p-1\) complex eigenvalues and all eigenvalues have the same real part. 
 
@@ -547,7 +547,7 @@ The two scenarios, \(sign(c_i)\neq sign(c_j)\) and \(sign(c_i)= sign(c_j)\), can
 
 The following result states that \(\left\{{\phi}(t)\right\}\) has the same distribution as \(\left\{{\varphi}(t)\right\}\) when the fluid queue is unbounded, the latter being the phase process of the fluid queue. 
 \begin{thm}\label{thm: 1}
-	Let \(\Theta_i\) be the time at which the first jump of the phase process of the unbounded QBD-RAP, \(\left\{{\phi}(t)\right\}\), occurs given \(\phi(0)=i\). For any initial orbit \(\bs a\in\mathcal A\), then \(\Theta_i\) has an exponential distribution with rate parameter \(|T_{ii}|\). Furthermore, given \({\phi}(t)\) leaves state \(i\), it jumps to state \(j\) with probability \(T_{ij}/|T_{ii}|\). Hence \({\phi}(t)\) and \(\varphi(t)\) have the same probability law. 
+	Let \(\Theta_i\) be the time at which the first jump of the phase process of the unbounded QBD-RAP, \(\left\{{\phi}(t)\right\}\), occurs, given \(\phi(0)=i\). For any initial orbit \(\bs a\in\mathcal A\), then \(\Theta_i\) has an exponential distribution with rate parameter \(|T_{ii}|\). Furthermore, given \({\phi}(t)\) leaves state \(i\), it jumps to state \(j\) with probability \(T_{ij}/|T_{ii}|\). Hence \({\phi}(t)\) and \(\varphi(t)\) have the same probability law. 
 \end{thm}
 \begin{proof}
 	Let \(\{\tau_n\}_{n\geq 0}\) with \(\tau_0=0\) and \(\tau_n\) the time of the \(n\)-th change of level of the QBD-RAP. Consider partitioning \(\left\{\Theta_i> t \right\}\) with respect to \(\left\{\tau_{n-1}< t \leq\tau_n\right\},\,n=1,2,\dots\). For \(n=1\) we can write
@@ -718,7 +718,7 @@ Upper boundaries can be included in an analogous manner.
 
 The orbit process \(\{\bs A(t)\}\) is not required to model the behaviour at the sticky boundary. However, we suppose that \(\bs A(t)=1\) at the boundaries. This choice is arbitrary but allows us to generalise some notation later when we are describing the evolution of the QBD-RAP. Further, for boundaries at \(y_0=0\) and \(y_{K+1} = (K+1)\Delta\), we let the level process take the value \(L(t)=-1\) at the lower boundary, and \(L(t)=K+1\) at the upper boundary. Denote the set of levels (including boundary levels) by \(\mathcal K = \{-1,0,\dots,K,K+1\}\). 
 
-\begin{rem}
+\begin{rem}\label{rem: 111}
 	It may be possible to extend the QBD-RAP approximation to model jumps into and out of the boundary, provided that the jumps into/out of the boundary happen at an intensity which can be described by a matrix exponential distribution. 
 	
 	Furthermore, it may be possible to model more general boundary behaviours which can be approximated by a limit of matrix exponentials. For example, a boundary condition where the fluid queue spends a deterministic time at the boundary. 

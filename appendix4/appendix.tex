@@ -1,12 +1,12 @@
 %!TEX root = ../thesis.tex
 \chapter{Kronecker properties}\label{appendix: kronecker}
-Here we detail some properties of Kronecker sum, products, and exponentials (see \citep{MEinAP}, Appendix A.4). 
+Here we detail some properties of Kronecker sums, products, and exponential (see \citep{MEinAP}, Appendix A.4). 
 
 Let 
 \[\bs A = \left[\begin{array}{ccc}a_{11} & \dots & a_{1m}\\\hdots & & \hdots \\ a_{n1}&\dots & a_{nm}\end{array}\right]
 \qquad
 \bs{B} = \left[\begin{array}{ccc}b_{11} & \dots & b_{1m'}\\\hdots & & \hdots \\ b_{n'1}&\dots & b_{n'm'}\end{array}\right]\]
-be matrices. The operator \(\otimes\) is the Kronecker product of two matrices; 
+be matrices with dimensions \(n\times m\) and \(n'\times m'\), respectively. The operator \(\otimes\) is the Kronecker product of two matrices; 
 \[\bs A\otimes \bs{B} = \left[\begin{array}{ccc}a_{11}\bs{B} & \dots & a_{1m}\bs{B}\\\hdots & & \hdots \\ a_{n1}\bs{B}&\dots & a_{nm}\bs{B}\end{array}\right],\]
 which is an \(nn'\times mm'\) matrix. 
 
@@ -31,6 +31,8 @@ If \(\bs A\) and \(\bs{B}\) are invertible matrices, then
 
 Let \(\bs A\) and \(\bs{B}\) be \(n\times n\) and \(m\times m\) matrices, respectively. The Kronecker sum of \(\bs A\) and \(\bs{B}\) is denoted by \(\oplus\) and defined as 
 \[\bs A\oplus \bs{B} := \bs A\otimes \bs{I}_{m} + \bs{I}_{n}\otimes \bs{B}.\]
+
+The exponential of a square matrix \(\bs B\) is \[e^{\bs B} := \sum_{n=0}^\infty \cfrac{1}{n!}\bs B^n.\]
 
 A property of the Kronecker sum is 
 \begin{align}\label{eqn:kron exp}
@@ -57,7 +59,7 @@ A property of the Kronecker sum is
 \begin{align}
 	&\int_{t=0}^\infty e^{-\lambda t}  e^{{\left(\bs{T}\otimes \bs{I} + \bs{C}\otimes \bs{S}\right)t}} \wrt t 
 	%
-	=   \int_{x=0}^\infty e^{{\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)x}}\otimes e^{\bs{S}x} \wrt x \left(\bs{C}\otimes \bs{I}\right)^{-1}  \label{eqn:lstsimplify}\end{align}
+	=   \int_{x=0}^\infty e^{{\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)x}}\otimes e^{\bs{S}x} \wrt x \left(\bs{C}\otimes \bs{I}\right)^{-1}.  \label{eqn:lstsimplify}\end{align}
 \end{lem}
 \begin{proof}
 	Computing the integral on the left-hand side and then factorising the result and using the \ref{eqn:mpr} multiple times gives
@@ -102,10 +104,7 @@ A property of the Kronecker sum is
 %\section{Matrix exponentials}\label{appendix: matrix exponentials}
 %This appendix contains some technical results regarding the matrix exponential.
 
-The exponential of a matrix \(\bs B\) is \[e^{\bs B} := \sum_{n=0}^\infty \cfrac{1}{n!}B^n.\]
-
-\cite{ln2015} show the following.
-\begin{lem}\label{lem: sfkjgn}
+\begin{lem}[\cite{ln2015}]\label{lem: sfkjgn}
 	Let \(\bs B\) be the block-partitioned matrix
 	\[\bs B = \left[\begin{array}{cc} \bs B_{11} & \bs B_{12} \\ \bs B_{21} & \bs B_{22} \end{array}\right]\]
 	where \(\bs B_{11}\) and \(\bs B_{22}\) are matrices of order \(m_1\) and \(m_2\), respectively. Denote by \(\bs H_{11}(t)\) the top-left quadrant of order \(m_1\) of \(e^{\bs Bt}\):
@@ -116,6 +115,9 @@ The exponential of a matrix \(\bs B\) is \[e^{\bs B} := \sum_{n=0}^\infty \cfrac
 		\bs H_{11}(t) = e^{\bs B_{11}t} + \int_{v=0}^t\int_{u=v}^t e^{\bs B_{11}(t-u)}\bs B_{12}e^{\bs B_{22}(u-v)}\bs B_{21}\bs H_{11}(v)\wrt u\wrt v.
 	\end{align}
 \end{lem}
+\begin{proof}
+	See \cite{ln2015}.
+\end{proof}
 
 Let \(\bs H_{12}(t)\) be the top-right quadrant of \(e^{\bs Bt}\) of size \(m_1\times m_2\), i.e.
 \begin{align}
@@ -174,7 +176,21 @@ Denote by \(\widehat{\bs H}_{11}(\lambda):=\displaystyle \int_{t=0}^\infty e^{-\
 	which gives (\ref{eqn: 203}) upon substituting (\ref{eqn: 202}).
 \end{proof}
 
-
+Now, recall the matrix-functions
+\begin{align*}
+	% \bs Q_{+0}(\lambda) &= \bs C_+^{-1}\bs T_{+0}\left[\lambda \bs I - \bs T_{00}\right]^{-1},
+	% %
+	% \\\bs Q_{-0}(\lambda) &= \bs C_-^{-1}\bs T_{-0}\left[\lambda \bs I - \bs T_{00}\right]^{-1},
+	%
+	\bs Q_{++}(\lambda) &= \bs C_+^{-1} \left(\bs T_{++} - \lambda \bs I + \bs T_{+0}\left[\lambda \bs I - \bs T_{00}\right]^{-1}\bs T_{0+}\right),
+	%
+	\\\bs Q_{+-}(\lambda) &= \bs C_+^{-1} \left(\bs T_{+-} + \bs T_{+0}\left[\lambda \bs I - \bs T_{00}\right]^{-1}\bs T_{0-} \right) ,
+	%
+	\\\bs Q_{--}(\lambda) &= \bs C_-^{-1} \left(\bs T_{--}  - \lambda \bs I + \bs T_{-0}\left[\lambda \bs I - \bs T_{00}\right]^{-1}\bs T_{0-}\right),
+	%
+	\\\bs Q_{-+}(\lambda) &=\bs C_-^{-1} \left(\bs T_{-+}+ \bs T_{-0}\left[\lambda \bs I - \bs T_{00}\right]^{-1}\bs T_{0+}\right) ,
+\end{align*}
+from Chapter~\ref{sec: conv}.
 \begin{cor}\label{cor: mpr B}
 	For \(m\in\{+,-\}\) the top-left quadrant of size \(m_1\times m_1=|\calS_m|\cdot p \times |\calS_m|\cdot p\) of \(e^{\bs B_{mm}t}\), 
 	\begin{align}
@@ -245,7 +261,7 @@ Now, using (\ref{eqn: skagh87}) and (\ref{eqn: skagh873}) we can write
 	%
 	\\&= \int_{x=0}^\infty \left(\bs H^{mn}(\lambda,x) \vligne{\bs I_n & \bs 0_{n\times |\calS_0|}}\right) \otimes  e^{\bs S x}\bs D\wrt x,\nonumber
 	%
-	\\&= \int_{x=0}^\infty \bs H^{mn}(\lambda,x)  \otimes  e^{\bs S x}\bs D\wrt x,\vligne{\bs I_{pn} & \bs 0_{pn\times p|\calS_0|}} \label{eqn: akgj987ad}
+	\\&= \int_{x=0}^\infty \bs H^{mn}(\lambda,x)  \otimes  e^{\bs S x}\bs D\wrt x,\vligne{\bs I_{pn} & \bs 0_{pn\times p|\calS_0|}}, \label{eqn: akgj987ad}
 \end{align}
 for \(m,n\in\{+,-\}\), \(m\neq n\) which is (\ref{eqn: akgj987adKLDJ}), where the last line holds from the \ref{eqn:mpr}. 
 \end{proof}
