@@ -1,5 +1,52 @@
 %!TEX root = ../thesis.tex
 \chapter{Introduction \& Preliminaries \label{ch:intro}} 
+% intro to intro
+% contextual background
+	% Fluid queues 
+		% definition
+		% applications 
+		% existing results 
+	% Fluid-fluid queues
+		% definition 
+		% basic analysis in terms of generators
+		% the need for approximation and how the old work doesn't fit here
+	% The DG method
+		% pertition into cells
+		% project on to a basis
+		% problems: oscillations
+		% soutions and why they dont fit
+		% observation about constant-basis methods
+		% this thesis asks the question: motivated by the constant basis being a probability model, can we dream up a more accurate probability model to approximate a fluid queue?
+	% On the structure of the constant basis/uniformisation method (QBD)
+	% least variable is PH, so what about MEs?
+% structure of the thesis
+	% rest of chapter 1 gives mathematical preliminaries
+	% chapter 2 explains the DG method, problems/oscillations, slope limiting, and appllication to SFFMs
+	% inspired by the structure of the order-1 scheme, and to solve the negativity problem, chapter 3 introduces a new approximation method; The QBD-RAP. In this chapter we derive the intuitively of the model and explain it's dynamics.
+	% we then move to convergence, with chapter 4 proving a convergence of the QBD-RAP up to the first hitting time of the fluid queue on the edges of an interval. technical results and extensions are left to the appendix: certain properties of closing vectors, convergence without ephemeral phases, and certain matrix algebraic manipulations. 
+	% chapter 5 stitches together the results of chapter 4 to prove a global result about convergence
+	% chapter 6 investigate, numerically, the performance of the DG, DG with limiter, uniformisation and QBD-RAP schemes. 
+	% chapter 7  makes concluding remarks.
+% mathematical preliminaries 
+	% CTMCs
+	% fluid queues
+	% fluid-fluid queues and operator-analytic expressions (all of them)
+		% the equations of bo2014
+		% meets the partition of the DG/QBD-RAP, and reconstructing the Fil sets 
+    % why we cant solve the equations, what we need to approximate to solve it, i.e. B, R, then D, Psi
+	% projections
+	% phase-type distributions 
+		% definition
+		% least variable property
+	% matrix exponentials
+		% definition 
+		% properties 
+		% verification that parameters give an ME
+		% CMEs
+	% QBD-RAPs, then QBDs as a special case
+		% orbit processes, their interpretation for PH and how they differ for MEs
+
+		
 % THE ROUGH IDEA & CONTEXT
 % 	THE CONTEXT: FLUID-FLUID QUEUES
 %	PDEs 
