@@ -11,3 +11,12 @@ summands
 intergals
 discretisation
 non-differetiable
+discretised
+Galerkin
+Runge-Kutta
+MUSCL
+discretise
+unnormalised
+Kolmogorov-Smirnov
+CDFs
+PDE

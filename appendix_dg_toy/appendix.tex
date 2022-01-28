@@ -1,0 +1,313 @@
+%!TEX root = ../thesis.tex
+\chapter{DG applied to a toy example}\label{appendix:example}
+\begin{center}
+    \begin{minipage}{0.8\textwidth}
+        \textit{This appendix has been taken from Appendix~2 of \cite{blnos2022} with only minor changes, such as notations, so that this chapter is consistent with the rest of the thesis. I am a co-author of the paper \cite{blnos2022}. The conceptualisation of \cite{blnos2022} was originally by Vikram Sunkara, Nigel Bean and Giang Nguyen, and the original coding was done by Vikram Sunkara. I made significant contributions to Section~3 of the paper, expressing the operator-theoretic expressions to use the same partition as the approximation scheme. I contributed Sections~4.4 and 5.1. I extended the numerical experiments in Section~6 to higher orders and made all the plots in Section~6. Appendix~A is also my original work. I did a significant proportion of the writing of the manuscript and addressed the reviewers comments and also developed code for the numerical experiments.
+        }
+    \end{minipage}
+    \end{center}
+\renewcommand\thefigure{\arabic{figure}}
+Here we include a small toy example to show how we construct a DG approximation and to help clarify the notation. 
+
+Consider a process \(\{(\overline X_t,Y_t,\varphi_t)\}_{t\geq 0}\) with two phases, \(\varphi_t\in\calS=\{1,2\}\) and generator matrix \(\bs T\). Let \(\mathcal I = 1.8\), and partition into two intervals \(\calD_1=[0,1]\) and \(\calD_2=[1,1.8]\), hence \(x_1=0,\,x_2=1,\,x_3=1.8\). We choose a basis of Lagrange polynomials of order 1 to define our approximation space. That is, 
+\begin{align*}
+	\phi_{1}^1(x) &= 1-x,& \phi_2^1(x) &= x, & &x \in\calD_1,\\
+	\phi_{1}^2(x) &= \cfrac{1.8-x}{0.8},& \phi_2^2(x) &= \cfrac{x-1}{0.8}, & & x \in\calD_2.
+\end{align*}
+The mesh and basis functions are shown in Figure~\ref{fig: mesh}. 
+\begin{figure}
+\centering
+\begin{tikzpicture}[scale=4]
+    % Draw axes
+    \draw [<->,thick] (0,1.1) node (yaxis) [above] {}
+        |- (2,0) node (xaxis) [right] {$x$};
+    % Draw two intersecting lines
+    \draw[red] (0,0) coordinate (a_1) -- (1,1) coordinate (a_2);
+    \draw[blue] (0,1) coordinate (b_1) -- (1,0) coordinate (b_2);
+    \draw[red] (1,0) coordinate (a_3) -- (1.8,1) coordinate (a_4);
+    \draw[blue] (1,1) coordinate (b_3) -- (1.8,0) coordinate (b_4);
+    \draw[dashed] (1,0) coordinate (c_1) -- (1,1.1) coordinate (c_2);
+    \draw[dashed] (1.8,0) coordinate (d_1) -- (1.8,1.1) coordinate (d_2);
+    \filldraw (0.5,0) circle (0pt) node[align=center, below] {\(\calD_1\)};
+    \filldraw (1.4,0) circle (0pt) node[align=center, below] {\(\calD_2\)};
+    \filldraw (0,0) circle (0pt) node[align=center, below] {\(x_1=0\)};
+    \filldraw (1,0) circle (0pt) node[align=center, below] {\(x_2=1\)};
+    \filldraw (1.8,0) circle (0pt) node[align=center, below] {\(x_3=1.8\)};  
+    \filldraw (0,1) circle (0pt) node[align=center, left] {\(1\)};    
+    \filldraw (0,1) circle (0pt) node[align=center, right] {\color{blue}\(\phi_1^1(x)\)};    
+    \filldraw (1,1) circle (0pt) node[align=center, left] {\color{red}\(\phi_2^1(x)\)};    
+    \filldraw (1,1) circle (0pt) node[align=center, right] {\color{blue}\(\phi_1^2(x)\)};    
+    \filldraw (1.8,1) circle (0pt) node[align=center, left] {\color{red}\(\phi_2^2(x)\)};    
+\end{tikzpicture}
+\caption{A mesh with nodes \(x_1=0\), \(x_2=1\) and \(x_3=1.8\) and cells \(\calD_1=[0,1]\), \(\calD_2=[1,1.8]\). There are two basis functions on each cell. Point masses are located at \(x_1=0\) and \(x_3=1.8\).\label{fig: mesh}}
+\end{figure}
+We can verify that the matrices \(\bs M\) and \(\bs G\) are given by 
+\[\bs M = \left[\begin{array}{cc|cc} 1/3 & 1/6 & 0 & 0 \\ 1/6 & 1/3 & 0 & 0 \\\hline 0 & 0 & 4/15 & 4/30 \\ 0 & 0 & 4/30 & 4/15 \end{array}\right],\, \bs G = \left[\begin{array}{cc|cc} -1/2 & 1/2 & 0 & 0 \\ -1/2 & 1/2 & 0 & 0 \\\hline 0 & 0 & -1/2 & 1/2 \\ 0 & 0 & -1/2 & 1/2 \end{array}\right].\] 
+The matrix \(\bs P\) is given by 
+\[\bs P = \left[\begin{array}{cc|cc} 1/2 & 0 & 0 & 0 \\ 0 & 1/2 & 0 & 0 \\\hline 0 & 0 & 2/5 & 0 \\ 0 & 0 & 0 & 2/5 \end{array}\right].\]
+
+Let \(c_1=1\) and \(c_2=-2\). Then the flux matrices are given by 
+\[\bs F_1 = \left[\begin{array}{cc|cc} 0 & 0 & 0 & 0 \\ 0 & -1 & 1 & 0 \\\hline 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & -1 \end{array}\right],\quad \bs F_2 = \left[\begin{array}{cc|cc} -1 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\\hline 0 & 1 & -1 & 0 \\ 0 & 0 & 0 & 0 \end{array}\right].\]
+
+Suppose that \(r_1(x)>0\) on \(\calD_1=\mathcal F_1^+\) and \(r_1(x)<0\) on \(\calD_2\cup\{1\}=\mathcal F_1^-\), and further, that \(r_2(x)<0\) on \(\{0\}\cup\calD_1=\mathcal F_2^-\) and \(r_2(x)>0\) on \(\calD_2=\mathcal F_2^+\). Specifically, let 
+\[r_1(x) = \begin{cases} 1 & x \in [0,1], \\ -1 & x \in [1,1.8],\end{cases}\quad r_2(x) = \begin{cases} -1 & x = 0, \\ -2 & x \in (0,1], \\ 1 & x \in [1,1.8]. \end{cases}\]
+
+%Therefore, on the interior of the space we have 
+%\begin{align*}
+%  B &= \left[\begin{array}{cc|cc|cc|cc} 
+%T_{11}/3 & T_{11}/6 & 0 & 0 & T_{12}/3 & T_{12}/6 & 0 & 0 \\
+%T_{11}/6 & T_{11}/3 & 0 & 0 & T_{12}/6 & T_{12}/3 & 0 & 0 \\\hline 
+%0 & 0 & T_{11}/15 & T_{11}/30 & 0 & 0 & T_{12}/15 & T_{12}/30 \\ 
+%0 & 0 & T_{11}/30 & T_{11}/15 & 0 & 0 & T_{12}/30 & T_{12}/15 \\\hline
+%T_{21}/3 & T_{21}/6 & 0 & 0 & T_{22}/3 & T_{22}/6 & 0 & 0 \\
+%T_{21}/6 & T_{21}/3 & 0 & 0 & T_{22}/6 & T_{22}/3 & 0 & 0 \\\hline
+%0 & 0 & T_{21}/15 & T_{21}/30 & 0 & 0 & T_{22}/15 & T_{22}/30 \\
+%0 & 0 & T_{21}/30 & T_{21}/15 & 0 & 0 & T_{22}/30 & T_{22}/15 
+%\end{array}\right] 
+%\\&{}+\left[\begin{array}{cc|cc|cc|cc} 
+%-1/2 & 1/2 & 0 & 0 & 0 & 0 & 0 & 0 \\
+%-1/2 & -1/2 & 1 & 0 & 0 & 0 & 0 & 0 \\\hline 
+%0 & 0 & -1/2 & 1/2 & 0 & 0 & 0 & 0 \\ 
+%0 & 0 & -1/2 & -1/2 & 0 & 0 & 0 & 0 \\\hline
+%0 & 0 & 0 & 0 & -1 & -1 & 0 & 0 \\
+%0 & 0 & 0 & 0 & 1 & -1 & 0 & 0 \\\hline
+%0 & 0 & 0 & 0 & 0 & 2 & -1 & -1 \\
+%0 & 0 & 0 & 0 & 0 & 0 & 1 & -1 
+%\end{array}\right].
+%\end{align*}
+%Reordering and adding the boundary conditions gives 
+%\begin{align*}
+%\widehat{\mathfrak B} &= \left[\begin{array}{c|cc|cc|cc|cc|c} 
+%T_{22} & T_{21} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\\hline 
+%0 & T_{11}/3 & T_{11}/6 & T_{12}/3 & T_{12}/6 & 0 & 0 & 0 & 0 & 0 \\
+%0 & T_{11}/6 & T_{11}/3 & T_{12}/6 & T_{12}/3 & 0 & 0 & 0 & 0 & 0 \\\hline 
+%0 & T_{21}/3 & T_{21}/6 & T_{22}/3 & T_{22}/6 & 0 & 0 & 0 & 0 & 0 \\ 
+%0 & T_{21}/6 & T_{21}/3 & T_{22}/6 & T_{22}/3 & 0 & 0 & 0 & 0 & 0\\\hline
+%0 & 0 & 0 & 0 & 0 & T_{11}/15 & T_{11}/30 & T_{12}/15 & T_{12}/30 & 0 \\ 
+%0 & 0 & 0 & 0 & 0 & T_{11}/30 & T_{11}/15 & T_{12}/30 & T_{12}/15 & 0\\\hline
+%0 & 0 & 0 & 0 & 0 & T_{21}/15 & T_{21}/30 & T_{22}/15 & T_{22}/30 & 0 \\
+%0 & 0 & 0 & 0 & 0 & T_{21}/30 & T_{21}/15 & T_{22}/30 & T_{22}/15 & 0 \\\hline
+%0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & T_{12} & T_{11}
+%\end{array}\right] 
+%\\&{}+\left[\begin{array}{c|cc|cc|cc|cc|c} 
+%0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\\hline 
+%0 & -1/2 & 1/2 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+%0 & -1/2 & -1/2 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\\hline 
+%2 & 0 & 0 & -1 & -1 & 0 & 0 & 0 & 0 & 0 \\ 
+%0 & 0 & 0 & 1 & -1 & 0 & 0 & 0 & 0 & 0 \\\hline
+%0 & 0 & 0 & 0 & 0 & -1/2 & 1/2 & 0 & 0 & 0 \\
+%0 & 0 & 0 & 0 & 0 & -1/2 & -1/2 & 0 & 0 & 1 \\\hline
+%0 & 0 & 0 & 0 & 2 & 0 & 0 & -1 & -1 & 0 \\
+%0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & -1 & 0 \\
+%0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 
+%\end{array}\right].
+%\end{align*}
+
+Then, constructing \({  \bs B}\) we get 
+\[
+\begin{blockarray}{c|cc|cc|cc|cc|c}
+\nabla & \BAmulticolumn{4}{c|}{\calD_1} & \BAmulticolumn{4}{c|}{\calD_2} & \Delta\\
+\calF_2^- & \BAmulticolumn{2}{c|}{\calF_1^+} & \BAmulticolumn{2}{c|}{\calF_2^-} & \BAmulticolumn{2}{c|}{\calF_1^-} & \BAmulticolumn{2}{c|}{\calF_2^+} & \calF_1^-\\
+q_{\nabla,1} & a_{1,1}^1 & a_{1,2}^1 & a_{2,1}^1 & a_{2,2}^1 & a_{1,1}^2 & a_{1,2}^2 & a_{2,1}^2 & a_{2,2}^2 & q_{\Delta,1}\\\BAhline
+\begin{block}{[c|cc|cc|cc|cc|c]} 
+T_{22} & 4T_{21} & -2T_{21} & 0 & 0 & 0 & 0 & 0 & 0 & 0\\\BAhline
+0 & T_{11}-3 & 3 & T_{12} & 0 & 0 & 0 & 0 & 0 & 0 \\
+0 & -1 & T_{11}-1 & 0 & T_{12} & 5 & -2.5 & 0 & 0 & 0 \\\BAhline 
+2 & T_{21} & 0 & T_{22}-2 & -2 & 0 & 0 & 0 & 0 & 0 \\ 
+0 & 0 & T_{21} & 6 & T_{22}-6 & 0 & 0 & 0 & 0 & 0\\\BAhline
+0 & 0 & 0 & 0 & 0 & T_{11}-\frac{15}{4} & \frac{15}{4} & T_{12} & 0 & 0 \\ 
+0 & 0 & 0 & 0 & 0 & -\frac{5}{4} & T_{11}-\frac{5}{4} & 0 & T_{12} &1\\\BAhline
+0 & 0 & 0 & -4 & 8 & T_{21} & 0 & T_{22}-\frac{5}{2} & -\frac{5}{2} & 0 \\
+0 & 0 & 0 & 0 & 0 & 0 & T_{21} & \frac{15}{2} & T_{22}-\frac{15}{2} & 0 \\\BAhline
+0 & 0 & 0 & 0 & 0 & 0 & 0 & -2T_{12} & 4T_{12} & T_{11} \\
+\end{block}
+\end{blockarray}.
+%\\&{}+\left[\begin{array}{c|cc|cc|cc|cc|c} 
+%0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\\hline 
+%0 & -3 & 3 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+%0 & -1 & -1 & 0 & 0 & 4 & -2 & 0 & 0 & 0 \\\hline 
+%4 & 0 & 0 & -2 & -2 & 0 & 0 & 0 & 0 & 0 \\ 
+%0 & 0 & 0 & 6 & -6 & 0 & 0 & 0 & 0 & 0 \\\hline
+%0 & 0 & 0 & 0 & 0 & -3.75 & 3.75 & 0 & 0 & 0 \\
+%0 & 0 & 0 & 0 & 0 & -1.25 & -1.25 & 0 & 0 & 2.5 \\\hline
+%0 & 0 & 0 & -5 & 10 & 0 & 0 & -2.5 & -2.5 & 0 \\
+%0 & 0 & 0 & 0 & 0 & 0 & 0 & 7.5 & -7.5 & 0 \\\hline
+%0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 
+%\end{array}\right].
+\]
+
+We also have sub-matrices
+\begin{align*}
+	&{  \bs B}_{11}^{++} = \left[\begin{array}{cc}
+		T_{11}-3 & 3 \\
+		-1 & T_{11}-1
+	\end{array}\right],
+	\,
+	{  \bs B}_{11}^{+-} = \left[\begin{array}{cc|c}
+		0 & 0 & 0\\
+		5 & -2.5 & 0
+	\end{array}\right], 
+	%
+%	\\&{  B}_{11}^{-+} = \left[\begin{array}{cc}
+%		0 & 0 \\
+%		0 & 0 \\ \hline
+%		0 & 0 
+%	\end{array}\right], 
+	\,
+	{  \bs B}_{11}^{--} = \left[\begin{array}{cc|c}
+		T_{11}-\frac{15}{2} & \frac{15}{2} & 0\\
+		-\frac{5}{2} & T_{11}-\frac{5}{2} & 1\\\hline
+		0 & 0 & T_{11}
+	\end{array}\right],
+	%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%
+%	\\&{  B}_{12}^{++} = \left[\begin{array}{cc}
+%		0 & 0 \\
+%		0 & 0 
+%	\end{array}\right],
+%	\,
+	\\&{  \bs B}_{12}^{+-} = \left[\begin{array}{c|cc}
+		0 & T_{12} & 0 \\
+		0 & 0 & T_{12}
+	\end{array}\right], \,
+	%
+	{  \bs B}_{12}^{-+} = \left[\begin{array}{cc}
+		T_{12} & 0 \\
+		0 & T_{12} \\\hline
+		-2T_{12} & 4T_{12}
+	\end{array}\right],
+	\, 
+%	{  B}_{12}^{--} = \left[\begin{array}{c|cc}
+%		0 & 0 & 0 \\
+%		0 & 0 & 0
+%	\end{array}\right],
+	%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%
+%	\\&{  B}_{21}^{++} = \left[\begin{array}{cc}
+%		0 & 0 \\
+%		0 & 0
+%	\end{array}\right],
+%	\,
+	\\&{  \bs B}_{21}^{+-} = \left[\begin{array}{cc|c}
+		T_{21} & 0 & 0 \\
+		0 & T_{21} & 0 
+	\end{array}\right], \,
+	%
+	{  \bs B}_{21}^{-+} = \left[\begin{array}{cc}
+		4T_{21} & -2T_{21} \\ \hline
+		T_{21} & 0 \\
+		0 & T_{21} 
+	\end{array}\right],
+	\, 
+%	{  B}_{21}^{--} = \left[\begin{array}{cc|c}
+%		0 & 0 & 0 \\\hline
+%		0 & 0 & 0 \\ 
+%		0 & 0 & 0 
+%	\end{array}\right],
+	%%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%%
+	\\&{  \bs B}_{22}^{++} = \left[\begin{array}{cc}
+		T_{22}-\frac{5}{2} & -\frac{5}{2} \\
+		\frac{15}{2} & T_{22} -\frac{15}{2}
+	\end{array}\right],
+	\,
+	{  \bs B}_{22}^{+-} = \left[\begin{array}{c|cc}
+		0 & -4 & 8 \\
+		0 & 0 & 0 
+	\end{array}\right], \,
+	%
+%	\\&{  B}_{22}^{-+} = \left[\begin{array}{cc}
+%		0 & 0 \\\hline
+%		0 & 0 \\
+%		0 & 0 
+%	\end{array}\right], 
+%	\,
+	{  \bs B}_{22}^{--} = \left[\begin{array}{c|cc}
+		T_{22} & 0 & 0\\\hline
+		2 & T_{22}-2 & -2\\
+		0 & 6 & T_{22}-6
+	\end{array}\right],
+	%%%%%%%%%%%%%%%%%%%
+	%%%%%%%%%%%%%%%%%%%
+\end{align*}
+and \({  \bs B}_{11}^{-+} = \bs 0_{3\times2},\, {  \bs B}_{12}^{++} = \bs 0_{2\times2},\, {  \bs B}_{12}^{--} = \bs 0_{2\times3},\, {  \bs B}_{21}^{++} = \bs 0_{2\times 2},\, {  \bs B}_{21}^{--} = \bs 0_{3\times3},\, {  \bs B}_{22}^{-+} = \bs 0_{3\times2},\) where \(\bs 0_{n\times m}\) denotes an \(n\times m\) matrix of zeros. Furthermore, 
+\begin{align*}
+	{  \bs B}^{++} &= \left[\begin{array}{cc|cc}
+		T_{11}-3 & 3 & 0 & 0 \\
+		-1 & T_{11}-1 & 0 & 0 \\\hline
+		0 & 0 & T_{22}-\frac{5}{2} & -\frac{5}{2}\\
+		0 & 0 & \frac{15}{2} & -\frac{15}{2}
+	\end{array}\right],
+	\\
+	{  \bs B}^{+-} &= \left[\begin{array}{c|cc|cc|c}
+		0 & T_{12} & 0 & 0 & 0 & 0\\
+		0 & 0 & T_{12} & 5 & -2.5 & 0\\\hline 
+		0 & -4 & 8 & T_{21} & 0 & 0 \\
+		0 & 0 & 0 & 0 & T_{21} & 0 
+	\end{array}\right], 
+	\\
+	{  \bs B}^{-+} &= \left[\begin{array}{cc|cc}
+		4T_{21} & -2T_{21} & 0 & 0 \\\hline
+		T_{21} & 0 & 0 & 0\\
+		0 & T_{21} & 0 & 0 \\\hline
+		0 & 0 & T_{12} & 0 \\ 
+		0 & 0 & 0 & T_{12} \\\hline
+		0 & 0 & -2T_{12} & 4T_{12}
+	\end{array}\right],
+	\intertext{}
+	{  \bs B}^{--} &= \left[\begin{array}{c|cc|cc|c}
+		T_{22} & 0 & 0 & 0 & 0 & 0 \\\hline 
+		2 & T_{22}-2 & -2 & 0 & 0 & 0 \\
+		0 & 6 & T_{22}-6 & 0 & 0 & 0 \\\hline 
+		0 & 0 & 0 & T_{11}-\frac{15}{4} & -\frac{15}{4} & 0 \\
+		0 & 0 & 0 & -\frac{5}{4} & T_{11}-\frac{5}{4} & 1 \\\hline 
+		0 & 0 & 0 & 0 & 0 & T_{11}
+	\end{array}\right].
+\end{align*}
+
+Since \(r_1(x)\) and \(r_2(x)\) are constant on each cell then \(  \bs R^+\) and \(  \bs R^-\) take a particularly simple form. We have 
+\[  \bs R^+ = \left[\begin{array}{cc|cc}1&0&0&0\\0&1&0&0\\\hline0&0&1&0\\0&0&0&1\end{array}\right], \quad   \bs R^- = \left[\begin{array}{c|cc|cc|c}1&0&0&0&0&0\\\hline0&1/2&0&0&0&0\\0&0&1/2&0&0&0\\\hline0&0&0&1&0&0\\0&0&0&0&1&0\\\hline0&0&0&0&0&1\end{array}\right].\]
+
+The DG approximations \(  \bs D^{m n}(s),\, m,n\in\{+,-\}\) can now be constructed as 
+\[  \bs D^{m n}(s) = \begin{cases}   \bs R^m\left({  \bs B}^{mm} - s \bs I\right) & n=m,
+	\\   \bs R^m {  \bs B}^{mn} & n \neq m. \end{cases}\]
+
+For a given value of \(s\), we construct and solve the matrix Riccati equation,
+\begin{align*}
+	\bs D^{+-}(s)
++ \bs \Psi(s)   \bs D^{-+}(s)\Psi(s)
++   \bs D^{++}(s)\bs \Psi(s)
++ \bs \Psi(s)  \bs D^{--}(s)
+= \bs 0,
+\end{align*}
+for the matrix \(\bs \Psi(s)\) using, for example, Newtons method \citep{bot08}. To obtain the stationary distribution we require \(\bs \Psi(0)\). 
+
+Now, to find \( {\bs\xi}\), we solve the linear system in Equations \eqref{eqn:xi1}-\eqref{eqn:xi2}. The result is a vector which we denote, 
+\[ {\bs\xi} = \left[\begin{array}{c|cc|cc|c} {\xi}^\nabla_{2} &  {\xi}_{2,1}^1 &  {\xi}_{2,2}^1 &  {\xi}_{1,1}^2 &  {\xi}_{1,2}^2 &  {\xi}_{1}^\Delta \end{array}\right],\]
+where \( {\xi}^\nabla_{2}\) is an approximation to \( \lim\limits_{n\to\infty}\mathbb{P}\left(\overline X_{\theta_n} =0, \varphi_{\theta_n} = 2\right)\) and \( {\xi}^\Delta_{1}\) is an approximation to the artificial point mass \( \lim\limits_{n\to\infty}\mathbb{P}\left(\overline X_{\theta_n} =1.8, \varphi_{\theta_n} = 1\right)\). For \(x\in\calD_1\) an approximation to the density of \( \lim\limits_{n\to\infty}\mathbb{P}\left(\overline X_{\theta_n} \in \wrt x, \varphi_{\theta_n} = 2\right)\), is constructed as \( {\xi}_{2,1}^1\phi_1^1(x) +  {\xi}_{2,2}^1\phi_2^1(x)\). For \(x\in\calD_2\) an approximation to the density of \( \lim\limits_{n\to\infty}\mathbb{P}\left(\overline X_{\theta_n} \in \wrt x, \varphi_{\theta_n} = 1\right)\), is constructed as \( {\xi}_{1,1}^2\phi_1^2(x) +  {\xi}_{1,2}^2\phi_2^2(x).\)
+
+Next, given a value of \(y\), we solve the system \eqref{eqn:pisystem1}-\eqref{eqn:pisystem2} to find \( {\bs p}= {\bs p}^-\) and \( {\bs \pi}(y)\). 
+
+For the point masses we have 
+\[ {\bs p}^- = \left[\begin{array}{c|cc|cc|c} {p}_{2}^\nabla &  {p}_{2,1}^1 &  {p}_{2,2}^1 &  {p}_{1,1}^2 &  {p}_{1,2}^2 &  {p}_{1}^\Delta \end{array}\right],\]
+where \( {p}_{2}^\nabla\) is an approximation to \( \lim\limits_{t\to\infty}\mathbb{P}\left(\overline X_{t} =0, Y_t=0, \varphi_{t} = 2\right)\) and \( {p}_{1}^\Delta\) is an approximation to the artificial point mass \( \lim\limits_{t\to\infty}\mathbb{P}\left(\overline X_t =1.8, Y_t=0, \varphi_{t} = 1\right)\). For \(x\in\calD_1\), an approximation to the density of \( \lim\limits_{t\to\infty}\mathbb{P}\left(\overline X_t \in \wrt x, Y_t = 0, \varphi_{t} = 2\right)\), is constructed as \( {p}_{2,1}^1\phi_1^1(x) +  {p}_{2,2}^1\phi_2^1(x)\). For \(x\in\calD_2\), an approximation to the density of \( \lim\limits_{t\to\infty}\mathbb{P}\left(\overline X_t \in \wrt x, Y_t = 0, \varphi_{t} = 1\right)\), is constructed as \( {p}_{1,1}^2\phi_1^2(x) +  {p}_{1,2}^2\phi_2^2(x).\)
+
+Similarly, for \( {\bs\pi}^-(y)\), we have 
+\[ {\bs \pi}^-(y) = \left[\begin{array}{c|cc|cc|c} {\pi}_{2}^\nabla(y) &  {\pi}_{2,1}^1(y) &  {\pi}_{2,2}^1(y) &  {\pi}_{1,1}^2(y) &  {\pi}_{1,2}^2(y) &  {\pi}_{1}^\Delta(y) \end{array}\right],\]
+where \( {\pi}_{2}^\nabla(y)\) is an approximation to \( \lim\limits_{t\to\infty}\mathbb{P}\left(\overline X_t =0, Y_t\in\wrt y, \varphi_{t} = 2\right)\) and \( {\pi}_{1}^\Delta(y)\) is an approximation to the artificial point mass \( \lim\limits_{t\to\infty}\mathbb{P}\left(\overline X_t =1.8, Y_t\in \wrt y, \varphi_{t} = 1\right)\). For \(x\in\calD_1\) an approximation to the density of \( \lim\limits_{t\to\infty}\mathbb{P}\left(\overline X_t \in \wrt x, Y_t \in \wrt y, \varphi_{t} = 2\right)\), is constructed as \( {\pi}_{2,1}^1(y)\phi_1^1(x) +  {\pi}_{2,2}^1(y)\phi_2^1(x)\). For \(x\in\calD_2\) an approximation to the density of \( \lim\limits_{t\to\infty}\mathbb{P}\left(\overline X_t \in \wrt x, Y_t \in \wrt y, \varphi_{t} = 1\right)\), is constructed as \( {\pi}_{1,1}^2(y)\phi_1^2(x) +  {\pi}_{1,2}^2(y)\phi_2^2(x).\)
+
+For \( {\bs\pi}^+(y)\), we have 
+\[ {\bs \pi}^+(y) = \left[\begin{array}{cc|cc}  {\pi}_{1,1}^1(y) &  {\pi}_{1,2}^1(y) &  {\pi}_{2,1}^2(y) &  {\pi}_{2,2}^2(y) \end{array}\right].\]
+For \(x\in\calD_1\) an approximation to the joint density of \( \lim\limits_{t\to\infty}\mathbb{P}\left(\overline X_t \in \wrt x, Y_t \in \wrt y, \varphi_{t} = 1\right)\) is constructed as \( {\pi}_{1,1}^1(y)\phi_1^1(x) +  {\pi}_{1,2}^1(y)\phi_2^1(x)\). For \(x\in\calD_2\) an approximation to the density of \( \lim\limits_{t\to\infty}\mathbb{P}\left(\overline X_t \in \wrt x, Y_t \in \wrt y, \varphi_{t} = 2\right)\) is constructed as \( {\pi}_{2,1}^2(y)\phi_1^2(x) +  {\pi}_{2,2}^2(y)\phi_2^2(x).\)
+
+In summary, for \(i\in\calS\), a global approximation of the joint stationary distribution is
+\begin{align*}
+	\lim\limits_{t\to\infty}\mathbb{P}\left(\overline X_t \in \wrt x, Y_t \in \wrt y, \varphi_{t} = i\right) &\approx \displaystyle \sum_{r\in\{1,2\},k\in\{1,2\}}  {\pi}_{i,r}^k(y)\phi_r^k(x)\wrt x \wrt y ,\quad x\in(0,1.8),\, y>0, \\
+	\lim\limits_{t\to\infty}\mathbb{P}\left(\overline X_t \in \wrt x, Y_t=0, \varphi_{t} = i\right) & \approx \displaystyle \sum_{r\in\{1,2\},k\in\{1,2\}}  {p}_{i,r}^k\phi_r^k(x)\wrt x ,\quad x\in(0,1.8),\\
+	 \lim\limits_{t\to\infty}\mathbb{P}\left(\overline X_t =0, Y_t \in \wrt y, \varphi_{t} = i\right) & \approx{\pi}_{i}^\nabla(y)\wrt y,\quad y>0, \\
+	 \lim\limits_{t\to\infty}\mathbb{P}\left(\overline X_t = 0, Y_t =0, \varphi_{t} = i\right) & \approx {p}_{i}^\nabla,\quad \\ 
+	 \lim\limits_{t\to\infty}\mathbb{P}\left(\overline X_t = 1.8, Y_t \in \wrt y, \varphi_{t} = i\right) & \approx {\pi}_{i}^\Delta(y)\wrt y,\quad y>0, \\
+	 \lim\limits_{t\to\infty}\mathbb{P}\left(\overline X_t = 1.8, Y_t = 0, \varphi_{t} = i\right) & \approx {p}_{i}^\Delta.\quad
+\end{align*}
+%\[\left[\begin{array}{c|cc|cc|cc|cc|c} {\pi}_{2,\nabla}(y) &  {\pi}_{1,1}^1(y) &  {\pi}_{1,2}^1(y) &  {\pi}_{2,1}^1(y) &  {\pi}_{2,2}^1(y) &  {\pi}_{1,1}^2(y) &  {\pi}_{1,2}^2(y) &  {\pi}_{2,1}^2(y) &  {\pi}_{2,2}^2(y) &  {\pi}_{1,\Delta}(y) \end{array}\right]\]

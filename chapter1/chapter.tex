@@ -45,6 +45,9 @@
 		% CMEs
 	% QBD-RAPs, then QBDs as a special case
 		% orbit processes, their interpretation for PH and how they differ for MEs
+	% convergence theorems 
+		% DCT 
+		% Continuity of Laplace transforms
 
 		
 % THE ROUGH IDEA & CONTEXT
@@ -60,9 +63,10 @@ More recently, \cite{bo2014} extended fluid queues to \emph{so-called} stochasti
 
 %A QBD can be viewed as a two-dimensional CTMC, \(\{(L(t),\varphi(t))\}_{t\geq0}\), where \(\{L(t)\}\) is the discrete level process, and \(\{\varphi(t)\}_{t\geq0}\) is the phase process. The level process \(\{L(t)\}\) is skip free, meaning that, given the process is at level \(L(t)=\ell\), is may only jump to \(\ell+1\) or \(\ell-1\) at jump epochs. The sojourn time of \(\{L(t)\}\) in a given level follows a phase-type distribution 
 
-In the context of approximating fluid queues, one advantage of the QBD discretisation and, equivalently, DG schemes with constant basis functions, is that they guarantee probabilities computed from the approximation are positive \citep[Section 3.3]{koltai2011}, see also \citep{nodalDGBook} and references therein. One justification for the positivity preserving property is from the interpretation of the discretisation as a stochastic process thereby ensuring positivity. For higher order DG schemes there is no such interpretation. Moreover, higher-order DG approximation schemes may produce negative, or highly oscillatory solutions, particularly when discontinuities or steep gradients are present. Methods to navigate the problem of negative or highly oscillatory solutions have been developed, such as slope limiters, and filtering (see \citep[Section 6.5]{nodalDGBook} and references therein). Slope limiting effectively alters the discretised operator in regions where oscillations are detected and lowers the order of the approximation in theses regions. Filtering is a post-hoc method which looks to recover an accurate solution, given an oscillatory approximation. 
+In the context of approximating fluid queues, one advantage of the QBD discretisation and, equivalently, DG schemes with constant basis functions, is that they guarantee probabilities computed from the approximation are positive \citep[Section 3.3]{koltai2011}, see also \citep{nodalDGBook} and references therein. One justification for the positivity preserving property is from the interpretation of the discretisation as a stochastic process thereby ensuring positivity. For higher order DG schemes there is no such interpretation. Moreover, higher-order DG approximation schemes may produce negative, or highly oscillatory solutions, particularly when discontinuities or steep gradients are present. Methods to navigate the problem of negative or highly oscillatory solutions have been developed, such as slope limiters, and filtering (see \citep[Section 6.5]{nodalDGBook} and references therein). Slope limiting effectively alters the discretised operator in regions where oscillations are detected and lowers the order of the approximation in these regions. Filtering is a post-hoc method which looks to recover an accurate solution, given an oscillatory approximation. 
 
-\section{Fluid queues}
+\section{Mathematical Preliminaries}
+\subsection{Fluid queues}
 A fluid queue is a two-dimensional stochastic process \(\{\bs X(t)\} = \{(X(t),\varphi(t))\}_{t\geq0}\) where \(\{\varphi(t)\}_{t\geq0}\) is known as the phase or driving process, and \(\{X(t)\}_{t\geq0}\) is known as the level process or buffer. The phase process \(\{\varphi(t)\}_{t\geq0}\), is an irreducible continuous-time Markov chain (CTMC) with finite state space, which we we assume to be \(\mathcal S=\{1,2,\dots,N\}\) without loss of generality, and infinitesimal generator \(\bs T= [T_{ij}]_{i,j\in\mathcal S}\). We assume that \(\bs T\) is \emph{conservative}. Associated with states \(i\in\mathcal S\) are real-valued \emph{rates} \(c_i\in\mathbb R\). 
 
 Partition the state space \(\calS\) into \(\calS_+ = \{i\in\calS\mid c_i>0\}\), \(\calS_- = \{i\in\calS\mid c_i<0\}\) and \(\calS_0 = \{i\in\calS\mid c_i=0\}\). We assume, without loss of generality, that the generator \(\bs T\) is partitioned into sub-matrices 
@@ -92,7 +96,7 @@ Let \(\bs f(x,t) = \vligne{f_i(x,t)}_{i\in\calS}\) be a row-vector function wher
 \end{equation}
 The initial condition is the initial distribution of the fluid queue, \(f_i(x,0)\). Often a differentiable density function does not exist and therefore the partial differential equation (\ref{eqn: pde}) is not well-defined. For example, for a fluid queue with a regulated boundary, if the initial distribution of the fluid queue is a point mass at any point \(x_0\geq 0\) and in phase \(i\in\calS_+\cup\calS_0\), then a density function \(f_i(x,t)\) will not exist for any finite \(t\). Specifically, a point mass will persist along the ray \(x_0+c_it\), \(t\geq 0\). In such situations, it is the \emph{weak solution} to (\ref{eqn: pde}) that we seek. A weak solution satisfies
 \begin{equation}
-	-\int_x\int_t \bs f(x,t)\cfrac{\partial}{\partial t} \bs \psi(x,t)\wrt t \wrt x= \int_{x}\int_t\bs f(x,t)\bs T\bs \psi(x,t)\wrt t \wrt x + \int_x\int_t\bs f(x,t)\bs C \cfrac{\partial}{\partial x} \bs psi(x,t)\wrt t \wrt x,\label{eqn: weak pde}
+	-\int_x\int_t \bs f(x,t)\cfrac{\partial}{\partial t} \bs \psi(x,t)\wrt t \wrt x= \int_{x}\int_t\bs f(x,t)\bs T\bs \psi(x,t)\wrt t \wrt x + \int_x\int_t\bs f(x,t)\bs C \cfrac{\partial}{\partial x} \bs \psi(x,t)\wrt t \wrt x,\label{eqn: weak pde}
 \end{equation}
 for every vector of test functions, \(\bs \psi(x,t)\), wich are smooth and have compact support.
 
@@ -100,7 +104,345 @@ Boundary conditions may also be imposed on (\ref{eqn: pde}).
 
 Discretisation methods approximate the operator on the right-hand side of (\ref{eqn: pde}) by a matrix, in our case, by the generator of a QBD-RAP. 
 
-\section{Matrix-exponential distributions}
+\subsection{Fluid-fluid Queues}
+	\label{sec:prelim}
+	\begin{center}
+		\begin{minipage}{0.8\textwidth}
+			\textit{This subsection has been taken from Sections~2 and 3 of \cite{blnos2022} with only minor changes, such as notations, so that this chapter is consistent with the rest of the thesis. I am a co-author of the paper \cite{blnos2022}. The conceptualisation of \cite{blnos2022} was originally by Vikram Sunkara, Nigel Bean and Giang Nguyen, and the original coding was done by Vikram Sunkara. I made significant contributions to Section~3 of the paper, expressing the operator-theoretic expressions to use the same partition as the approximation scheme. I contributed Sections~4.4 and 5.1. I extended the numerical experiments in Section~6 to higher orders and made all the plots in Section~6. Appendix~A is also my original work. I did a significant proportion of the writing of the manuscript and addressed the reviewers comments and also developed code for the numerical experiments.
+			}
+		\end{minipage}
+		\end{center}
+
+An unbounded stochastic fluid-fluid model (SFFM) is a Markov process $\{(\widehat{X}_t, \widehat{Y}_t, \varphi(t)),t \geq 0\},$ where the phase $\{\varphi(t)\}$ is a continuous-time Markov chain on a finite state space $\mathcal{S}$;  $\{\widehat{X}_t\}$ is the first fluid, which varies linearly at rate~$c_{\varphi(t)}$
+% 
+\begin{align*} 
+	\widehat X(t) := \widehat X(0) + \int_0^t c_{\varphi(s)} \wrt s;
+\end{align*} 
+% 
+and $\widehat{Y}_t$ is the second fluid, which varies at rate $r_{\varphi(t)}(\widehat{X}_t)$:
+% 
+\begin{align*} 
+	\widehat{Y}_t := \widehat Y(0)) + \int_0^t r_{\varphi(s)}(\widehat{X}_s) \wrt s.
+\end{align*} 
+% 
+Regulated boundaries may also be included for both fluids. To distinguish between unbounded and bounded processes, we use the notations \(\widehat X(t)\) and \(\widehat Y(t)\) to denote unbounded processes, and \(X(t)\) and \(Y(t)\) to denote fluid levels with a regulated lower boundary at 0.
+
+As classic fluid processes, $\{(\widehat X(t), \varphi(t)),t \geq 0\}$, or unbounded analogues, are used extensively in many areas, such as insurance and environmental modelling, it is clear that stochastic fluid-fluid models have an even wider range of applicability. 
+
+We assume that $X(t), Y(t) \in [0,\infty)$ and that there is a regulated boundary at level $0$ for both buffers: 
+% 
+	\begin{align*} 
+		\frac{\wrt}{\wrt t} X(t) & := \max\{0, c_i\} \quad \mbox{if } X(t) = 0 \mbox{ and } \varphi(t) = i, \\
+          	\frac{\wrt}{\wrt t} Y(t) & := \max\{0, r_i(x)\} \quad \mbox{if } Y(t) = 0,\,X(t) = x \mbox{ and } \varphi(t) = i, 	
+	\end{align*} 
+	% 
+for $i \in \mathcal{S} = \{1,...,N_\calS\}$. Let $T$ be the irreducible generator for the finite-state Markov chain $\{\varphi(t)\}$. 
+%  on $\mathcal{S} = \{1, \ldots, L\}$. 
+We denote by $\bs R(x) := \diag(r_i(x))_{i \in \mathcal{S}}$ the diagonal fluid-rate matrix of functions for $\{Y(t)\}$. 
+
+\begin{rem}[Notation]\label{remark: notation 1}For future reference we require some notation regarding the elements of the model introduced above. We use the notation \(\bs u = (u_h)_{h\in \mathcal H}\) to denote a row-vector, \(\bs u\), defined by its elements, \(u_h\), indexed by \(h\in\mathcal H\), where \(\mathcal H\) is some countable index set. Similarly, \(\bs u = (\bs u_h)_{h\in\mathcal H}\), is a row-vector defined by a collection of row-vectors \(\bs u_h\). The notation \(\bs u_m=(u_h)_{h\in\mathcal H_m}\) refers to the vector containing the subset of elements corresponding to \(\mathcal H_m\subseteq \mathcal H\). When the index set is empty, the resulting vector \(\bs u_m\) is a vector of dimension 0. In cases when there are two indices, we order the elements of the vector according to the first index, then the second; i.e.~\(\bs u = (u_{g}^h)_{g\in\mathcal G,h\in\mathcal H} = ((u_g^h)_{g\in\mathcal G})_{h\in\mathcal H}\). Here we use the convention that for a vector \(\bs u=(u)_{h\in \mathcal H}\) where the elements \(u\) do not depend on the index \(h\) and \(H\) is some index set, then we repeat \(u\) \(h\)-times; i.e.~\(\bs u = (u)_{h\in \mathcal H} =\underbrace{(u,\dots,u)}_{h-\mbox{times}}\). The notation \(\bs U = [u_{gh}]_{g\in\mathcal G, h\in\mathcal H}\) is used to denote a matrix defined by its elements, or sub-blocks, \(u_{gh}\). 
+\end{rem}
+
+Let \(\mathcal S_-=\{i\in\calS\mid c_i<0\},\, \mathcal S_+=\{i\in\calS\mid c_i>0\},\, \mathcal S_0=\{i\in\calS\mid c_i=0\},\, \mathcal S_\nabla=\{i\in\calS\mid c_i\leq0\},\, \mathcal S_\Delta=\{i\in\calS\mid c_i\geq0\}\). 
+
+For the remainder of this section, we summarise the findings of~\citep{bo2014} on the joint stationary distribution of $\{(X(t), Y(t), \varphi(t)),t \geq 0\}$. For each Markovian state $i \in \mathcal{S}$, we partition the state space of \(X(t)\), \([0,\infty)\), according to the rates of change $r_i(\cdot)$ for the second fluid $\{Y(t)\}$: $[0,\infty) := \mathcal{F}^{+}_i \cup \mathcal{F}^{-}_i \cup \mathcal{F}^{0}_i,$  
+where 
+% 
+		\begin{align} 
+%				\label{eqn:Fi1}
+			\mathcal{F}^{+}_i & := \{u \in \mathcal{F} : r_i(u) > 0\},  \;
+%				\label{eqn:Fi2}
+			\mathcal{F}^{-}_i :=  \{u \in \mathcal{F}:  r_i(u) < 0\}, \;
+%				\label{eqn:Fi3}
+			\mathcal{F}^{0}_i := \{u \in \mathcal{F}: r_i(u) = 0\}.\label{eqn:fil}
+		\end{align} 
+% 
+For all $i \in \mathcal{S}$, the functions $r_i(\cdot)$ are assumed to be sufficiently well-behaved that $\mathcal{F}^{m}_i$, $m \in \{+, -, 0\}$, is a finite union of intervals and isolated points. 
+
+We assume that the process $\{(X(t), Y(t), \varphi(t)),t\geq 0\}$ is positive recurrent, in order to guarantee the existence of the joint stationary density. Define stationary operators 
+\begin{align} 
+		\label{eqn:jointpi} 
+	\overline \bbpi_i(y)(\mathcal{A}) & := \lim_{t \rightarrow \infty} \frac{\partial}{\partial y} \mathbb{P}\left(X(t) \in \mathcal{A}, Y(t) \leq y, \varphi(t) = i\right), \quad y>0,\\
+% 
+		\label{eqn:jointmass}
+		\overline{\mathbb p}_i(\mathcal{A}) & := \lim_{t \rightarrow \infty}  \mathbb{P}(X(t) \in \mathcal{A}, Y(t) = 0, \varphi(t) = i]),
+	\end{align} 
+	where $\mathcal{A} \subset [0,\infty)$.
+Then let $\overline{{\bbpi}}(y) = (\overline \bbpi_i(y))_{i \in \mathcal{S}}$ be a vector containing the joint stationary density operators and $\overline{\mathbb{p}} = (\overline{\mathbb p}_i)_{i \in \mathcal{S}}$ a vector containing the joint stationary mass operators.
+
+	
+The determination of $\overline{{\bbpi}}(y)$ involves two important matrices of operators, $\overline{\mathbb B}$ and $\overline{\mathbb \Psi}$. The operator \(\overline{\mathbb B}\) is the \textit{infinitesimal generator} of the process \(\{(X(t),\varphi(t))\}\). %Intuitively, for a set $\mathcal{A} \subset \mathcal{F}$ and a measure vector $\boldsymbol{\mu} = (\mu_i)_{i \in \mathcal{S}}$, $\bs{\mu}V(t)(\mathcal{A})$, where \(V(t)\) is a semigroup with infinitesimal generator \(B\), gives the conditional probability of $X(t) \in \mathcal{A}$, 
+The operator \(\overline{\mathbb \Psi}\) is such that $\boldsymbol{\mu} \overline{\mathbb \Psi} (\mathcal{A})$ is the conditional probability of $\{Y(t)\}$ returning to level zero and doing so when $X(t) \in \mathcal{A}$, given that the initial distribution is $\boldsymbol{\mu}$.
+
+
+\subsubsection{Matrix $\overline{\mathbb B}$ of Operators}
+\label{subsec:B_operators}
+Since \(\{(X(t),\varphi(t)),t\geq 0\}\) is a Markov process, the evolution of probability can be described by a semigroup. Let $\mathcal{M}(\mathcal{S} \times \mathbb{R}_{+})$ be the set of integrable complex-valued Borel measures on the Borel $\sigma$-algebra $\mathcal{B}_{\mathcal{S} \times \mathbb{R}_{+}}$. For $\bs{\mu} \in \mathcal{M}(\mathcal{S} \times \mathbb{R}_{+})$, we can write \(\bs{\mu} = (\mu_i)_{i \in \mathcal{S}}\). The measures \(\mu_i(\cdot)\) represent an initial distribution, \(\mu_i(\cdot) = \mathbb P(X(0))\in\cdot, \varphi(0) = i)\). 
+Let \(\{\overline{\mathbb V}(t)\}_{t\geq 0},\, \overline{\mathbb V}(t):\mathcal{M}(\mathcal{S} \times \mathbb{R}_{+})\mapsto \mathcal{M}(\mathcal{S} \times \mathbb{R}_{+})\) be the semigroup describing the evolution of probability for \(\{(X(t),\varphi(t)),t\geq 0\}\) structured as a matrix of operators, \(\left[ \overline{\mathbb V}(t)\right]_{ij}= \overline{\mathbb V}_{ij}(t)\) where, 
+\[\mu_i \overline{ \mathbb V}_{ij}(t)(\mathcal A) = \int_{x\in[0,\infty)} \wrt \mu_i(x)\mathbb P (X(t) \in\mathcal A,\varphi(t) = j \mid X(0)) = x, \varphi(0) = i).\]
+Intuitively, the operator \( \overline{\mathbb V}(t)\) maps an initial measure \(\boldsymbol \mu\) on \((X(0),\varphi(0))\) to the measure \(\mathbb P(X(t)\in \mathcal A, \varphi(t)=j)=:\mu_j(t)(\mathcal A)\). 
+The matrix of operators \( \overline{\mathbb B}:=[\overline{\mathbb B}_{ij}]_{i,j\in\mathcal S}\) is the \textit{infinitesimal generator} of the semigroup \(\{ \overline{\mathbb V}(t)\}\) defined by 
+\[ \overline{\mathbb B} =\left.\cfrac{\wrt}{\wrt t} \overline{\mathbb V}(t)\right|_{t=0},\]
+with domain the set of measures for which this limit exists. Specifically, the domain of \(\overline{\mathbb B}\) is the set of measures, \(\bs \mu = (\mu_i)_{i\in\calS}\), for which each \(\mu_i\) admits an absolutely continuous density on \((0,\infty)\), and can have a point mass at \(0\) if \(i\in\mathcal S_\nabla\); call this set of measures \(\mathcal M_0\). That is, the measures \(\mu_i,\, i\in\calS,\) such that \((\mu_i)_{i\in\calS}\in \mathcal M_0\) are absolutely continuous on \((0,\infty)\) and may have point masses at \(0\) if \(i\in\calS_\nabla\). The measure \(\mu_i\) cannot have a point mass at 0 if \(i\notin \mathcal S_\nabla\). In the sequel we write \(v_i(x),\, x>0\), as the density of \(\mu_i\) and \(q_i\) as the point mass of \(\mu_i\) at \(x=0\) (if such a point mass exists). 
+
+To use the operators \(\{ \overline{\mathbb  V}(t)\}\) and \( \overline{\mathbb  B}\) to analyse the fluid-fluid model, \cite{bo2014} explicitly track when \((X(t),\varphi(t))\in(\mathcal F_i^m,i)\) for \(i\in\mathcal S,\, m \in \{+,-,0\}\) by partitioning the operators \( \overline{\mathbb  V}(t)\) and \( \overline{\mathbb  B}\) into \( \overline{\mathbb  V}_{ij}^{m n}\) and \( \overline{\mathbb  B}_{ij}^{m n}\), for \(i,j\in\mathcal S,\, m,n\in \{+,-,0\}\), where
+\[\left.\mu_i\right|_{\calF_i^m}  \overline{\mathbb  V}_{ij}^{m n}(t)(\mathcal A) := \int_{x\in[0,\infty)} \left. \wrt \mu_i\right|_{\calF_i^m}(x)\mathbb P (X(t) \in\mathcal A\cap \calF_j^n,\varphi(t) = j \mid X(0) = x, \varphi(0) = i),\]
+and \(\left.\mu_i\right|_{E}\) is the restriction of \(\mu_i\) to \(E\). Similarly, for \( \overline{\mathbb  B}_{ij}^{m n},\) \(i,j\in\mathcal S,\, m,n\in \{+,-,0\}\).
+
+We claim that numerical schemes are needed to approximate the analytic operator equations introduced in \cite{bo2014}. The DG scheme we choose to use here works by first partitioning the state space of the fluid level, \(\{X(t)\}\), into a collection of intervals, \(\calD_k=[x_k,x_{k+1}]\) then, on each interval, the operator \(\overline{\mathbb B}\) is projected onto a basis of polynomials. So, to help elucidate the connection between the operators \(\{ \overline{\mathbb  V}(t)\}\), \( \overline{\mathbb  B}\) and their DG approximation counterparts, we take a slightly different approach to partitioning these operators than that taken in \cite{bo2014}. Rather than partition according to the sets \(\calF_i^m,\,i\in\calS,\,m\in\{+,-,0\}\), we use the same partition as that in the construction of the DG scheme. By doing so, we can directly correspond elements of the partitioned operators to their approximation counterparts. Since the partition used to construct the DG scheme is finer, then we can always reconstruct the partition in terms of the sets \(\calF_i^m,\,i\in\calS,\,m\in\{+,-,0\}\). 
+
+Let us first partition the space \([0,\infty)\) into \(\calD_\nabla = \{0\}\), and non-trivial intervals \(\calD_k=[x_k,x_{k+1}]\setminus \{0\},\) with \(x_1=0,\, x_k<x_{k+1},\,k=1,2,...\). The symbol \(\nabla\) is used to refer to sets and quantities which are relevant to boundary at \(x=0\). For $\bs{\mu} \in \mathcal{M}_0(\mathcal{S} \times \mathbb{R}_{+})$ we write \(\bs{\mu} = (\mu^{k}_i)_{i \in \mathcal{S},k\in\{\nabla,1,2,...\}},\) where $\mu^{k}_i(\cdot) = \mu_i(\cdot \cap \calD_k),\,k=\nabla,1,2,\dots.$ We also have densities, \(v_i^k(x),\,x>0\), associated with each measure, \(\mu_i^k\). For \( i,j\in\calS,\,k,\ell\in\{\nabla,1,2,\dots\}\) define the operators 
+\[\mu_i^k \mathbb V_{ij}^{k \ell}(t)(\mathcal A) := \int_{x\in\calD_k} \wrt \mu_i^k(x)\mathbb P (X(t) \in\mathcal A\cap \calD_\ell,\varphi(t) = j \mid X(0) = x, \varphi(0) = i),\]
+and the matrices of operators \(\mathbb V^{k\ell}(t) := \vligne{\mathbb V_{ij}^{k\ell}(t)}_{i,j\in\mathcal S},\,k,\ell\in\{\nabla,1,2,\dots\}\) and write 
+\[\mathbb V(t) = \left[
+	\begin{array}{llll}
+		\mathbb V^{\nabla,\nabla}(t)&\mathbb V^{\nabla,1}(t)& \mathbb V^{\nabla,2}(t) &\hdots \\
+		\mathbb V^{1,\nabla}(t)&\mathbb V^{1,1}(t)&\mathbb V^{1,2}(t)&\hdots\\
+		\mathbb V^{2,\nabla}(t)&\mathbb V^{2,1}(t)&\mathbb V^{2,2}(t)&\hdots\\
+		\vdots & \vdots & \vdots & \ddots 
+%		&\ddots &&&&\reflectbox{\(\ddots\)}\\
+%		&&\mathbb V^{k-1,k-1}(t) & \mathbb V^{k-1,k}(t) & \mathbb V^{k-1,k+1}(t)& \\
+%		&&\mathbb V^{k,k-1}(t) & \mathbb V^{k,k}(t) & \mathbb V^{k,k+1}(t)& \\
+%		&&\mathbb V^{k+1,k-1}(t) & \mathbb V^{k+1,k}(t) & \mathbb V^{k+1,k+1}(t)& \\
+%		&\reflectbox{\(\ddots\)}&&&&\ddots
+	\end{array}\right].\]
+Now define \(\mathbb B=\left.\cfrac{\wrt}{\wrt t}\mathbb V(t)\right|_{t=0}\) as the infinitesimal generator of \(\{\mathbb V(t)\}\), resulting in the tridiagonal matrix of operators 
+\[\mathbb B(t) = \left[
+	\begin{array}{llll}
+		\mathbb B^{\nabla,\nabla}(t)&\mathbb B^{\nabla,1}(t)& & \\
+		\mathbb B^{1,\nabla}(t)&\mathbb B^{1,1}(t)&\mathbb B^{1,2}(t)&\\
+		&\mathbb B^{2,1}(t)&\mathbb B^{2,2}(t)&\ddots\\
+		& & \ddots & \ddots 
+	\end{array}\right],\]
+%\begin{align*}
+%\mathbb B &= \left[\begin{array}{lllll}
+%		\ddots &&&&\\
+%		\mathbb B^{k-2,k-1} &\mathbb B^{k-1,k-1} & \mathbb B^{k-1,k} & & \\
+%		&\mathbb B^{k,k-1} & \mathbb B^{k,k} & \mathbb B^{k,k+1}& \\
+%		& & \mathbb B^{k+1,k} & \mathbb B^{k+1,k+1}&\mathbb B^{k+1,k+2} \\
+%		&&&&\ddots
+%	\end{array}\right],
+%\end{align*}
+where the blocks \(\mathbb B^{k\ell}:= \vligne{\mathbb B_{ij}^{k\ell}(t)}_{i,j\in\mathcal S},\,k,\ell\in\{\nabla,1,2,\dots\}\). 
+The tridiagonal structure arises since, for \(|k-\ell|\geq2\) (where we take \(\nabla = 0\) if it appears in the differences) it is impossible for \(\{X(t)\}\) to move from \(\mathcal D_k\) to \(\mathcal D_\ell\) in an infinitesimal amount of time. 
+
+\begin{rem}[More notation]\label{remark: notation 2} We use a blackboard bold font with an overline above the character (e.g.~\(\overline{\mathbb B}\) and \(\overline{\mathbb V}(t)\)) to represent theoretical operators derived in \citep{bo2014} which are constructed using the partition in (\ref{eqn:fil}). The operators denoted with an overline play a minor role in the introductory sections of this paper, but do not appear again. We use a blackboard font sans overline (e.g.~\(\mathbb V(t)\) and \(\mathbb B\)) to represent the same operators but which are constructed with the finer partition defined by \(\mathcal D_k,\,k=\nabla,1,2,\dots\). We use the letters \(i,j\in\mathcal S\) to represent states of the phase process, letters \(m,n,\in\mathcal \{+,-,0\}\) to refer to the partition in terms of the sets in Equations (\ref{eqn:fil}), and the letters \(k,\ell\in\{\nabla,1,2,...\}\) to refer to the finer partition into sets \(\{\calD_k\}_k\). With a slight abuse of notation, whenever we use the dummy variables \(k,\ell\) we imply \(k,\ell\in\{\nabla,1,2,\dots\}\), the dummy variables \(m,n\) imply \(m,n\in\{+,-,0\}\) and the dummy variables \(i,j\) imply \(i,j\in\calS\). E.g.~\(\mathbb B_{ij}^{k\ell}\) means \(\mathbb B_{ij}^{k\ell},\, i,j\in\calS, k,\ell\in\{\nabla,1,2,\dots\}\) and \(\mathbb B_{ij}^{mn}\) means \(\mathbb B_{ij}^{mn},\, i,j\in\calS, m,n\in\{+,-,0\}\).
+\end{rem}
+
+By an appropriate choice of the intervals \(\{\mathcal D_k\},\, k\in\{\nabla,1,2,\dots,\}\), the partition used in \citep{bo2014} can be recovered. Intuitively, we must ensure that each of the boundaries of \(\calF_i^m,\, i\in\calS,\,m\in\{+,-,0\}\), align with a boundary of a cell \(\mathcal D_k=[x_k,x_{k+1}]\setminus\{0\}\). Then, each set \(\calF_i^m,\, i\in\calS,\,m\in\{+,-,0\}\), can be written as a union of cells, \(\mathcal D_k,\,k=\nabla,1,2,\dots\), sans a collection of points which have measure zero for all measures in \(\mathcal M_0\), and this collection of points is inconsequential for the purposes of the approximations presented here. 
+
+Formally, to recover the partition used in \citep{bo2014} we choose the intervals \(\calD_k\) such that \(   l (\calD_k\cap\calF_i^m) \in \{   l (\calD_k), 0\}\) for all \(i\in\calS,\,m\in\{+,-,0\},\,k\in\{\nabla,1,2,\dots\}\), for all \( l \in\mathcal M_0\). That is, we choose \(\calD_k\) such that it is contained (up to sets of measure 0 with respect to measures in \(\mathcal M_0\)) within \(\calF_i^m\) for some \(m\in\{+,-,0\}\) and all \(i\in\calS\). We assume such a partition for the rest of the paper. For \(i\in\calS,\,m\in\{+,-,0\}\), let \(\mathcal K^m_i = \{k\in\{\nabla,1,2,\dots\}\mid  l (\calD_k\cap\calF_i^m) =   l (\calD_k),\,l\in\mathcal M_0 \}\), so that \(\bigcup\limits_{k\in\mathcal K_i^m} \calD_k\) and \(\mathcal F_i^m\) are equal up to a set of \(l\)-measure 0. Define \(\mathcal K^m = \bigcup\limits_{i\in\calS}\mathcal K_i^m\), \(m\in\{+,-,0\}\). 
+%Then for \(m\in\{+,-,0\}\), \(\mu_i^m(\cdot) = \sum\limits_{k\in\mathcal K_i^m} \mu_i^k(\cdot)\). 
+
+To recover the partition defined by (\ref{eqn:fil}) we bundle together the elements of \(\mathbb V(t)\) which correspond to \(\calF_i^m\) and \(\calF_j^n\). That is, for \(m,n\in\{+,-,0\}\), define \(\mathbb V_{ij}^{m n}(t)\) as the matrix of operators 
+\[\mathbb V_{ij}^{m n}(t) = \left[\mathbb V_{ij}^{k \ell}(t)\right]_{k\in\mathcal K_i^m,\ell\in\mathcal K_j^n}.\] 
+Then, for \(i,j\in\calS,\,m,n\in\{+,-,0\}\), we can write \(\overline{\mathbb  V}_{ij}^{mn}(t) = \boldsymbol 1_{|\mathcal K_i^m|} \mathbb V_{ij}^{m n}(t) \boldsymbol 1_{|\mathcal K_j^n|}\tr{}\) where \(\boldsymbol 1_{|\mathcal K_i^m|}\) and \(\bs 1_{|\mathcal K_j^n|}\) are row-vectors of 1's of length \(|\mathcal K_i^m|\) and \(|\mathcal K_j^n|\), respectively, and \({}\tr{}\) denotes the transpose. The same construction can be achieved with \(\mathbb B\). 
+
+Let \(\calS_k^+=\{i\in\calS\mid r_i(x)>0,\,\forall x \in\calD_k\}\), \(\calS_k^0=\{i\in\calS\mid r_i(x)=0,\,\forall x \in\calD_k\}\), \(\calS_k^-=\{i\in\calS\mid r_i(x)<0,\,\forall x \in\calD_k\}\) and \(\calS_k^\bullet=\{i\in\calS\mid r_i(x)\neq0,\,\forall x \in\calD_k\}\) for \(k\in\{\nabla,1,\dots,K,\Delta\}\). For later reference, we need the following constructions. For \(k,\ell\in\{\nabla,1,2,...\}\)
+\begin{align}
+	\mathbb B^{k\ell} & = \left[\mathbb B_{ij}^{k\ell}\right]_{i,j\in\mathcal S},\label{eqn:ref1here}
+\end{align}
+for \(i,j\in\calS\) 
+\begin{align}
+	\mathbb B_{ij} & = \left[\mathbb B_{ij}^{k\ell}\right]_{k,\ell \in \{\nabla,1,2,\dots\}},
+\end{align}
+%for \(i,j\in\calS, \, m,n\in\{+,-,0\}\) 
+%\begin{align}
+%	\mathbb B_{ij}^{m n} &= \left[\mathbb B_{ij}^{k \ell}\right]_{k\in\mathcal K_i^m,\ell\in\mathcal K_j^n},\label{eqn: Bmn etc}
+%	\\ \mathbb B_{ij}^{k n} &= \left[\mathbb B_{ij}^{k \ell}\right]_{\ell\in\mathcal K_j^n} \mbox{ for }k\in\{\nabla,1,2,...\},
+%	\\ \mathbb B_{ij}^{m \ell} &= \left[\mathbb B_{ij}^{k \ell}\right]_{k\in\mathcal K_i^m} \mbox{ for } \ell\in\{\nabla,1,2,...\},
+%	\label{eqn: Bl0 etc}
+%\end{align}
+and for \(m,n\in\{+,-,0\}\) 
+\begin{align}
+	\mathbb B^{m n} &= \left[\left[\mathbb B_{ij}^{k\ell}\right]_{i\in\calS_k^m,j\in\calS_\ell^n}\right]_{k\in\mathcal K^m,\ell\in\mathcal K^n},\label{eqn: Bmn2 etc}
+	\\ \mathbb B^{k n} &= \left[\left[\mathbb B_{ij}^{k\ell}\right]_{i\in\calS_k^m,j\in\calS_\ell^n}\right]_{\ell\in\mathcal K^n} \mbox{ for }k\in\{\nabla,1,2,...\},
+	\\ \mathbb B^{m \ell} &= \left[\left[\mathbb B_{ij}^{k\ell}\right]_{i\in\calS_k^m,j\in\calS_\ell^n}\right]_{k\in\mathcal K^m} \mbox{ for } \ell\in\{\nabla,1,2,...\}.
+	\label{eqn:ref2here}
+\end{align}
+We persist with the partition \(\calD_k,\,k\in\nabla,1,2,\dots\) throughout this paper, as this is consistent with the partition used in the DG method, and note that for all the operators defined with this partition, the partitioning used in \citep{bo2014} can always be recovered by the above construction. 
+
+We can write \(\mu_i^k\mathbb B_{ij}^{k\ell}(\mathcal A)\) in kernel form as \(\displaystyle\int_{x\in\calD_k,y\in\mathcal A}\wrt \mu_i^k(x)\mathbb B_{ij}^{k\ell}(x,dy)\). It is known that
+\[\mu_i^k\mathbb B_{ij}^{kk}(\wrt y):=\int_{x\in\calD_k}\wrt\mu_i^k(x)\mathbb B_{ij}^{kk}(x,\wrt y)=\begin{cases}
+v_i^k(y)T_{ij}\wrt y, & i\neq j,\\
+v_i^k(y)T_{ii}\wrt y - c_i\cfrac{\wrt}{\wrt y}v_i^k(y)\wrt y, & i=j, 
+\end{cases}\]
+on the interior of \(\calD_k\) \citep{kk1995}. Intuitively, \(v_i^k(y)T_{ij}\wrt y\) represents the instantaneous rate of transition from phase \(i\) to \(j\) in the infinitesimal interval \(\wrt y\), \(v_i^k(y)T_{ii}\wrt y\) represents no such transition occurring, and \(- c_i\cfrac{\wrt}{\wrt y}v_i^k(y)\wrt y\) represents the drift across the interval \(\wrt y\) when the phase is \(i\). 
+
+Translating the results of \cite{bo2014} to use the partition \(\{\calD_k\}\) we may state that, for all \(i,j\in\calS\), \(k\in\{1,2,\dots\}\),
+\begin{align*}
+\mu_i^{k}\mathbb B_{ij}^{kk}(\calD_k)&=\int_{x\in\calD_k}v_i^k(x)T_{ij}\wrt x - c_iv_i^{k}(x_{k+1})\mathbb 1_{(c_i>0)} + c_iv_i^{k}(x_{k})\mathbb 1_{(c_i<0)},
+\end{align*}
+where \(\mathbb 1_{}\) is the indicator function. 
+Intuitively, the first term represents the instantaneous rate of the stochastic transitions of the phase process \(\{\varphi(t)\}\), the second term represents the flux out of the right-hand edge of \(\calD_k\) which occurs when \(c_i>0\) only, and the last term represents the flux out of the left-hand edge of \(\calD_k\) which occurs when \(c_i<0\) only. 
+
+The results of \cite{bo2014} also imply that, 
+\begin{align*}
+\mu_i^{k}\mathbb B_{ii}^{k,k+1}(\calD_{k+1})&= c_iv_i^{k}(x_{k+1})\mathbb 1_{(c_i>0)},\mbox{ for all \(i\in\calS\), \(k\in\{1,2,...\}\),}
+\\\mu_i^{k}\mathbb B_{ii}^{k,k-1}(\calD_{k-1})&= -c_iv_i^{k}(x_{k})\mathbb 1_{(c_i<0)}, \mbox{  for all \(i\in\calS\), \(k\in\{2,3,...\}\)}.
+\end{align*}
+Intuitively, the first equation represents the flux from \(\calD_k\) to \(\calD_{k+1}\) across the shared boundary at \(x_{k+1}\) which occurs when \(c_i>0\) only. The second expression represents the flux from \(\calD_k\) to \(\calD_{k-1}\) across the shared boundary at \(x_{k}\) which occurs when \(c_i<0\) only. 
+
+\cite{bo2014} also state that, at the boundary \(x=0\), for states \(i\in\calS\) with \(c_i\leq0\) such that a point mass at \(0\) is possible, we have 
+\begin{align*}
+	\mu_i^\nabla\mathbb B_{ii}^{\nabla,\nabla} &= \mu_i^\nabla(\{0\})T_{ii},\\
+	\mu_i^\nabla\mathbb B_{ij}^{\nabla,\nabla} &= \mu_i^\nabla(\{0\})T_{ij},\,j\in\calS,\,c_j\leq 0,\\
+	\mu_i^\nabla\mathbb B_{ij}^{\nabla,1} &= \mu_i^\nabla(\{0\})T_{ij},\,j\in\calS,\,c_j> 0,\\
+	\mu_i^1\mathbb B_{ii}^{1,\nabla} &= -c_iv_i^1(0^+),\,j\in\calS,\,c_j< 0,
+\end{align*}
+where \(0^+\) is the right limit at \(0\). Otherwise, \(\mu_i^{k}\mathbb B_{ij}^{k\ell}=0,\,\mbox{ for } |k-\ell|\geq 2,\,i,j\in\mathcal S \mbox{ or }|k-\ell|=1,\,i,j\in\mathcal S,i\neq j\), where we take \(\nabla = 0\) if it appears in the differences, capturing the facts that the process \(\{X(t)\}\) is continuous and that drift across boundaries occurs only when \(\{\varphi(t)\}\) remains in the same phase. 
+
+Note that we have not presented \(\mathbb B\) in its full detail here and refer the reader to \citep{bo2014} for the details. The main goal here is to show how \(\mathbb B\) is used to construct the stationary distribution of the SFFM and to illustrate the link between the operator \(\mathbb B\) and the DG approximation of the same object. As we shall see later, these expressions closely resemble the DG approximations to the same quantities. 
+
+\subsubsection{Matrix $\mathbb D(s)$ of Operators}
+Let $b(t) := \int_0^t \left| r_{\varphi(z)}(X(z)) \right|  \wrt z$ be the total unregulated amount of fluid that has flowed into or out of the second buffer $\{Y(t)\}$ during $[0,t]$, and let $\eta(y) := \inf \{t > 0: b(t) = y\}$ be the first time this accumulated in-out amount hits level $y$. Note that at the stopping time \(\eta(y)\) it must be that \((X({\eta(y)}),\varphi({\eta(y)}))\in(\calF_i^m,i)\) for some \(i\in\calS\) and \(m\in\{+,-\}\), i.e.~\(m\neq0\). We define the operators $\mathbb{U}_{ij}^{k\ell}(y,s): \mathcal{M}_0(\mathcal{D}_{k}\cap\calF_i^m) \mapsto \mathcal{M}_0 (\calD_\ell\cap\mathcal{F}_j^n)$, for $k\in\mathcal K_i^+\cup\mathcal K_i^-$,  $\ell\in\mathcal K_j^+\cup\mathcal K_j^-$, and $i \in \mathcal{S}_k^\bullet,\,j \in \mathcal{S}_k^\bullet$, by 
+% 
+	\begin{align*} 
+		&\mu_i^{k}\mathbb{U}_{ij}^{k\ell} (y,s) (\mathcal{A}) 
+		\\&:= \int_{x \in \calD_k} \wrt  \mu_i^{k}(x) \mathbb{E}\left[e^{-s\eta(y)}{1}\left\{\varphi({\eta(y)}) = j, \; X({\eta(y)}) \in \mathcal{A}\cap\calD_\ell\right\} \mid \varphi(0) = i, X(0) = x\right].
+	\end{align*} 
+Then, construct the matrix of operators 
+\begin{align*}
+%\mathbb{U}^{k \ell}(y,s)&:=[\mathbb U_{ij}^{k\ell}(y,s)]_{i\in\calS_k^\bullet,j\in\calS_\ell^\bullet}, \, k,\ell\in \mathcal K^+\cup\mathcal K^-,
+\mathbb U(y,s) &:= \left[[\mathbb U_{ij}^{k\ell}(y,s)]_{i\in\calS_k^\bullet,j\in\calS_\ell^\bullet}\right]_{k,\ell\in\mathcal K^+\cup\mathcal K^-}.\end{align*}
+%\[\mathbb U(t) = \left[
+%	\begin{array}{llll}
+%		\mathbb U^{\nabla,\nabla}(t)&\mathbb U^{\nabla,1}(t)& \mathbb U^{\nabla,2}(t) &\hdots \\
+%		\mathbb U^{1,\nabla}(t)&\mathbb U^{1,1}(t)&\mathbb U^{1,2}(t)&\hdots\\
+%		\mathbb U^{2,\nabla}(t)&\mathbb U^{2,1}(t)&\mathbb U^{2,2}(t)&\hdots\\
+%		\vdots & \vdots & \vdots & \ddots 
+%	\end{array}\right].\]
+%	\begin{align*} 
+%		\mathbb{U}(y,s) = \left[\begin{array}{llllll} 
+%		\ddots & & & &~\reflectbox{$\ddots$}\\
+%            		& \mathbb{U}^{k-1,k-1}(y,s) & \mathbb{U}^{k-1,k}(y,s) & \mathbb{U}^{k-1,k+1}(y,s) \\
+%			& \mathbb{U}^{k,k-1}(y,s) & \mathbb{U}^{k,k}(y,s) & \mathbb{U}^{k,k+1}(y,s) \\
+%			& \mathbb{U}^{k+1,k-1}(y,s) & \mathbb{U}^{k+1,k}(y,s) & \mathbb{U}^{k+1,k+1}(y,s) \\	
+%			\reflectbox{$\ddots$}& & & & \ddots		
+%		\end{array}\right], 
+%	\end{align*} 
+	% 
+%	where $\mathbb{U}^{k \ell}:=\mathbb U_{ij}^{k\ell}$ is an $|\mathcal{S}| \times |\mathcal{S}|$ matrix of operators for $y > 0$, $s \in \mathbb{C}$, and Re$(s) \geq 0$. 
+The matrix of operators \(\mathbb D(s)\) is the infinitesimal generator of the semigroup \(\{\mathbb U(y,s)\}_{y\geq 0}\) defined by 
+\[\mathbb D(s) = \cfrac{\wrt}{\wrt y}\mathbb U(y,s)|_{y=0},\]
+whenever this limit exists.
+			
+	Recalling the constructions in Equations (\ref{eqn:ref1here})-(\ref{eqn:ref2here}) and using Lemma~$4$ of \citep{bo2014} gives the following expression for $\mathbb{D}(s)$. 
+\begin{lem}\label{lemma: D(s)}
+	For $y \geq 0$, $s \in \mathbb{C}$ with \textit{Re}$(s) \geq 0$, $i,j \in \mathcal{S}$, $k\in \mathcal K_i^+\cup\mathcal K_i^-$, $\ell\in \mathcal K_j^+\cup\mathcal K_j^-$,
+	% 
+	\begin{align*}
+		\mathbb{D}_{ij}^{k\ell}(s) = [\mathbb{R}^{k}(
+		\mathbb{B}^{k\ell } - s\mathbb{I} + \mathbb{B}^{k0 }(s \mathbb{I} - \mathbb{B}^{00})^{-1}\mathbb{B}^{0\ell})]_{ij}, 
+	\end{align*} 
+	% 
+	where $\mathbb I$ is the identity operator, and $\mathbb{R}^{k} := \diag(\mathbb{R}_i^{k})_{i \in \mathcal{S}}$ is a diagonal matrix of operators $\mathbb{R}_i^{k}$ given by 
+	\begin{align*} 
+		{\mu}_i^{k}\mathbb{R}_i^{k}(\mathcal{A}) := \int_{x \in \mathcal{A} \cap \mathcal{D}_k} \frac{1}{r_i(x)}\wrt  \mu_i^{k}(x),\quad k\in \mathcal K_i^+\cup\mathcal K_i^-.
+	\end{align*} 
+\end{lem}
+
+	Also, construct the matrices of operators 
+	\begin{align*}
+            	%\mathbb D^{k \ell} &:= \left[\mathbb D_{ij}^{k \ell}\right]_{i,j\in\mathcal S},\quad k,\ell\in\{\nabla,1,2,...\},
+		\mathbb D^{m n} &:= \left[\left[\mathbb D_{ij}^{k \ell}\right]_{i\in\calS_k^m,j\in\calS_k^n}\right]_{k\in\mathcal K^m,\ell\in\mathcal K^n}.
+		%\\ \mathbb D_{ij}^{m n} &:= \left[\mathbb D_{ij}^{k \ell}\right]_{k\in\mathcal K_i^m,\ell\in\mathcal K_j^n},\quad i,j\in\calS,\,m,n\in\{+,-,0\}.
+        \end{align*}
+
+\subsubsection{Matrix $\mathbb\Psi(s)$ of Operators}\label{sec: intro Psi}
+We denote by $\mathbb \Psi(s)$ the matrix of operators with the same dimensions as \(\mathbb D^{+-}\), recording the Laplace-Stieltjes transforms of the time for $\{Y(t)\}$ to return, for the first time, to the initial level of zero as introduced in \citep{bo2014} but constructed with respect to the finer partition \(\{\calD_k\}\). Define the stopping time $\zeta_Y(\{E\}):= \inf \{t > 0: Y(t) \in E\}$ to be the first time $\{Y(t)\}$ hits the set $E$, then each component $\mathbb \Psi_{ij}^{k\ell}(s): \mathcal{M}_0(\mathcal D_k) \mapsto \mathcal{M}_0(\mathcal D_\ell), i,j \in \mathcal{S},\,k\in\mathcal K_i^+$ and $\ell \in \mathcal K_j^-$, is given by  
+% 
+\begin{align*} 
+    % 
+	 \mu_i^{k}\mathbb\Psi_{ij}^{k\ell}(s) (\mathcal{A}) 
+	& := \int_{x \in \calD_k} \wrt \mu_i^k(x)
+	% 
+	 \mathbb{E}\left[e^{-s\zeta_Y(\{0\})}1\left\{\varphi({\zeta_Y(\{0\})}) = j, \; X({\zeta_Y(\{0\})}) \in \mathcal{A}\cap\calD_\ell\right\} \mid X(0) = x, Y(0) = 0, \varphi(0) = i\right].
+	 % 
+\end{align*} 
+
+Bean and O'Reilly \cite[Theorem~1]{bo2014} give the following result which characterises \(\mathbb\Psi(s)\).
+\begin{theo} 
+	\label{theo:Psi} 
+	For \textit{Re}$(s) \geq 0$, $\mathbb\Psi(s)$ satisfies the  equation: 
+	% 
+	\begin{align*} 
+		\mathbb{D}^{+-}(s) + \mathbb\Psi(s)\mathbb{D}^{-+}(s)\mathbb\Psi(s) + \mathbb{D}^{++}(s)\mathbb\Psi(s) + \mathbb\Psi(s)\mathbb{D}^{--}(s) = 0. 
+	\end{align*} 
+	% 
+	Furthermore, if $s$ is real then $\mathbb\Psi(s)$ is the minimal nonnegative solution. 
+\end{theo} 
+
+\subsubsection{Stationary Distribution} 
+
+Let $\mathbb\Psi := \mathbb\Psi(0)$. We define $\zeta_Y^n(\{0\}) := \inf\{t \geq \zeta_Y^{n - 1}(\{0\}): Y(t) = 0\}$, for $n \geq  2$, to be the sequence of hitting times to level $0$ of $Y(t)$, with $\zeta_Y^1(\{0\}): = \zeta_Y(\{0\})$. Consider a discrete-time Markov process $\{X({\zeta_Y^n(\{0\})}), \varphi(\zeta_Y^n(\{0\})),n \geq 1\}$, and for $i \in \mathcal{S},\,k\in\mathcal K_i^-$ define the measures $\bbxi_i^k$ as follows 
+	%
+	\begin{align*}
+		\bbxi_i^k(\mathcal{A}) := \lim_{n \rightarrow \infty} \mathbb{P}\left(X(\zeta_Y^n(\{0\})) \in \mathcal{A}\cap\calD_k, \varphi(\zeta_Y^n(\{0\})) = i\right).
+	\end{align*} 
+	By \citep{bo2014}, the vector of measures $\boldsymbol{\bbxi} := (\bbxi_i^k)_{i \in \mathcal{S}_k^-,k\in\mathcal K^-}$ satisfies the following set of equations 
+ % 
+ 	\begin{align}
+		\vligne{\boldsymbol{\bbxi}  & \boldsymbol{0}}\left(-\left[\begin{array}{ll} 
+			\mathbb{B}^{--} & \mathbb{B}^{-0} \\
+			\mathbb{B}^{0-} & \mathbb{B}^{00} 
+		\end{array} \right]\right)^{-1}\left[\begin{array}{l} 
+			\mathbb{B}^{-+} \\ 
+			\mathbb{B}^{0+}
+		\end{array} \right]\mathbb\Psi & = \boldsymbol{\bbxi}, \label{eqn:xi1}\\ 
+		\sum_{k\in\mathcal K^-}\sum_{i \in \mathcal{S}_k^-}\bbxi_i^k(\mathcal{F}^-_i) & = 1. \label{eqn:xi2}
+	\end{align} 
+
+We reproduce Theorem 2 of \citep{bo2014} below, which gives the joint stationary distribution of $\{X(t), Y(t), \varphi(t)\}$. Recall that the joint stationary density operator ${\bbpi}(y) = (\bbpi_i(y))_{i \in \mathcal{S}}$ for $\{X(t), Y(t), \varphi(t)\}$ and the joint stationary mass operator ${\mathbb p} = (\mathbb p_i)_{i \in \mathcal{S}}$ are defined by~\eqref{eqn:jointpi} and \eqref{eqn:jointmass}, respectively. %Following out notational convention, define an equivalent joint stationary density operator $\boldsymbol{\bbpi}(y) = (\bbpi_i(y))_{i \in \mathcal{S}}$ for $\{X(t), Y(t), \varphi(t)\}$ and an equivalent joint stationary mass operator $\boldsymbol{\mathbb p} = (\mathbb p_i)_{i \in \mathcal{S}}$, but partitioned accprsing . 
+We can partition \(\bbpi\) as follows 
+% 
+	\begin{align*} 
+		\bbpi(y) &= \vligne{\bbpi^{+}(y) & \bbpi^{-}(y) & \bbpi^{0}(y)} 
+		\\&= \vligne{\left(\bbpi^{k}_i(y)\right)_{i \in \mathcal{S}_k^+,k\in\mathcal K^+} & \left(\bbpi^{k}_i(y)\right)_{i \in \mathcal{S}_k^-,k\in\mathcal K^-} & \left(\bbpi^{k}_i(y)\right)_{i \in \mathcal{S}_k^0,k\in\mathcal K^0}},
+	\end{align*} 
+	%
+	where  
+% 
+	\begin{align*} 
+		\bbpi_i^{k}(y)(\mathcal{A}) = \bbpi_i(y)(\mathcal{A}\cap \mathcal D_k).
+	\end{align*} 
+%
+Similarly we can write 
+	\begin{align*} 
+		\mathbb{p} &= \vligne{\mathbb{p}^{-} & \mathbb{p}^{0}} 
+		= \vligne{\left(\mathbb p^{k}_i\right)_{i \in \mathcal{S}_k^-,k\in\mathcal K^-}  & \left(\mathbb p^{k}_i\right)_{i \in \mathcal{S}_k^0,k\in\mathcal K^0} },
+	\end{align*} 
+	%
+	where  
+% 
+	\( 
+		\mathbb p_i^{k}(\mathcal{A}) = \mathbb p_i(\mathcal{A}\cap \mathcal D_k).
+	\) 
+%
+\begin{theo} 
+	\label{theo:density} 
+The density ${\bbpi}^{m}(y)$, for $m \in \{+,-,0\}$ and $y > 0$, and the probability mass $\mathbb{p}^{m}$, for $m \in \{-,0\}$, satisfy the following set of equations:
+% 	 
+	\begin{align} 
+	&\label{11} \; \bbpi^{0}(y) = \vligne{\bbpi^{+}(y) & \bbpi^{-}(y)}\left[\begin{array}{l} \mathbb{B}^{+0} \\ \mathbb{B}^{-0} \end{array} \right]\left(-\mathbb{B}^{00}\right)^{-1}, \\
+	% 
+	&  \vligne{\bbpi^{+}(y) & \bbpi^{-}(y)} = \vligne{\mathbb{p}^{-} & \mathbb{p}^{0}}\left[\begin{array}{l} \mathbb{B}^{-+} \\ \mathbb{B}^{0+} \end{array} \right]\vligne{e^{\mathbb{K}y} & e^{\mathbb{K}y}\mathbb\Psi}\left[\begin{array}{cc} \mathbb{R}^{+} & 0 \\ 0 & \mathbb{R}^{-}\end{array}\right], \\
+	% 
+	&  \vligne{\mathbb{p}^{-}  & \mathbb{p}^{0}} = z \vligne{{\bbxi} & \bs{0}} 
+	\left(-\left[\begin{array}{ll} 
+		\mathbb{B}^{--} & \mathbb{B}^{-0} \\
+		\mathbb{B}^{0-} & \mathbb{B}^{00} 
+		\end{array} \right] \right)^{-1},  \label{eqn:mass}\\
+	%  
+	& \sum_{m \in \{+,-,0\}}\sum_{i \in \mathcal{S}} \int_{y = 0}^{\infty} \bbpi_i^{m}(y)(\mathcal{F}^{m}_i)\wrt y + \sum_{m \in \{-,0\}} \sum_{i \in \mathcal{S}}\mathbb p^{m}_i(\mathcal{F}^{m}_i) = 1, \label{14}
+	\end{align}
+	% 
+	where $\mathbb{K} := \mathbb{D}^{++}(0) + \mathbb\Psi\mathbb{D}^{(-+)}(0)$ and $z$ is a normalising constant. 
+\end{theo} 
+
+At this point we reiterate that Equations~(\ref{11})-(\ref{14}) are operator equations and are only amenable to numerical evaluation in the simplest of cases. Sources of this intractability come from, for example, the need to find the inverse operator \(( - \mathbb B^{00})^{-1}\), and the need to find the solution, \(\mathbb \Psi(s)\), of the operator equation in Theorem~\ref{theo:Psi}. There is also the complexity of the partition of the operators defined by the sets \(\mathcal F_{i}^m,\, i\in\calS,\,m\in\{+,-,0\}\). Therefore, there is the need for approximation schemes such as the DG scheme we introduce next.
+
+\subsection{Matrix-exponential distributions}
 Here we recount some facts about matrix exponential distributions. See \citep{MEinAP} for a more detailed exposition. A random variable, \(Z\), is said to have a matrix-exponential distribution if it has a distribution function of the form \(1-\bs \alpha e^{\bs Sx}(-\bs S)^{-1}\bs s\), where \(\bs \alpha\) is a \(1\times p\) \emph{initial vector}, \(\bs S\) a \(p\times p\) matrix, and \(\bs s\) a \(p\times 1\) \emph{closing vector}, and \(\displaystyle e^{\bs S x} := \sum_{n=0}^\infty \cfrac{\left(\bs Sx\right)^n}{n!}\) is the matrix exponential. The density function of \(Z\) is given by \(f_Z(x) = \bs\alpha e^{\bs S x}\bs s\). The only restrictions on the parameters \((\bs \alpha, \bs S, \bs s)\) are that \(\bs \alpha e^{\bs S x} \bs s\) be a valid density function, i.e.~\(\bs \alpha e^{\bs S x} \bs s\geq 0,\) for all \(x\geq 0\) and \(\lim_{x\to\infty} 1-\bs \alpha e^{\bs Sx}(-\bs S)^{-1}\bs s = 1.\) There is the possibility of an \emph{atom} (a point mass) at 0, but here we do not consider this possibility. These condition that \(\bs \alpha e^{\bs Sx}\bs s\) be a valid density imposes some properties on representations \((\bs \alpha, \bs S, \bs s)\). However, in general there is no way to determine whether, given a triplet \((\bs \alpha, \bs S, \bs s)\) whether it is a representation of a matrix-exponential distribution, or not. Nonetheless, some properties of a triplet \((\bs \alpha, \bs S, \bs s)\) are known, such as the following, which is used in the characterisation of QBD-RAPs. 
 \begin{thm}[Theorem 4.1.3, \cite{MEinAP}]
 	The density function of a matrix-exponential distribution with representation \((\bs\alpha, \bs S, \bs s)\) can be expressed in terms of real-valued constants as 
@@ -129,7 +471,7 @@ For a given \(p\times p\) matrix \(\bs S\), denote by \(\mathcal A\subset \mathb
 
 
 
-%\section{Rational arrival processes}
+%\subsection{Rational arrival processes}
 %Let \(N\) be a simple point process, with event time \(Y_0=0<Y_1<Y_2<\cdot\). Let \(\{N(t)\}_{t\geq0}\) be the right-continuous counting process associated with \(N\); \(N(t)\) returns the number of events by time \(t\). Denote by \(f_{N,n}(y_1,\dots,y_n)\) the joint density of \(Y_1, Y_2-Y_1, \dots,Y_n-Y_{n-1}\), the first \(n\) inter-arrival times. For a matrix \(\bs B\) let \(dev(\bs B)\) denote the dominant eigenvalue of \(\bs B\) (the one with maximal real part). Theorem 1.1 of Asmussen and Bladt CITE states that the point process \(N\) is a RAP if there exists matrices \(\bs S\), \(\bs D\), a row vector \(\bs\alpha\), and a column vector \(\bs s\) such that \(dev(\bs S)<1\), \(dev(\bs S+\bs D)=0\), \((\bs S+\bs D)\bs e=0,\) and 
 %\[f_{N,n}(y_1,\dots,y_n) = \bs \alpha e^{\bs Sy_1} \bs D e^{\bs Sy_1} \bs D \dots e^{\bs Sy_n} \bs s.\]
 %Here \(\bs s\) can be taken to be \(\bs D e\). The \(n\)th inter-arrival, \(T_n-T_{n-1}\), has a matrix exponential distribution with density \(\bs \alpha(-\bs S\bs D )^{n-1}e^{\bs S x_n}\bs s\). Denote such a process \(N \sim RAP(\bs \alpha, \bs S, \bs D)\). 
@@ -144,7 +486,7 @@ For a given \(p\times p\) matrix \(\bs S\), denote by \(\mathcal A\subset \mathb
 %
 %Intuitively, \(\bs A(t)\) encodes all of the information about the jump times of the RAP up to time \(t\). Let \(\mathcal F_{t}\) be the \(\sigma\)-algebra generated by \(N(u), u\in[0,t]\). Then \(N\mid \mathcal F_t \equiv N\mid \bs A(t) \sim ME(\bs A(t), \bs S, \bs S)\). In words, the future of the point process after time \(t\) given all of the information about the process up to and including time \(t\), is distributed as a RAP with initial vector \(\bs A(t)\). 
 
-\section{QBD-RAPs}\label{sec: qbd-rap}
+\subsection{QBD-RAPs}\label{sec: qbd-rap}
 As RAPs are an extension of Markovian arrival processes to include matrix-exponential inter-arrival times, QBD-RAPs are extensions of QBDs to include matrix-exponential times between level changes. To define a QBD-RAP we first need a Batch (Marked) RAP. 
 
 Let \(\mathscr K\subset \mathbb Z\) be a set of \emph{marks}. Let \(N\) be a point process, and \(Y_0=0<Y_1<Y_2\cdots\) be event times of \(N\). Let \(\{N(t)\}\) be the counting process associated with \(N\) such that \(N(t)\) returns the number of events by time \(t\). Associated with the \(n\)th event is a mark \(M_n\). For \(i\in\mathscr K\), let \(N_i\) be simple point processes associated with events with marks of type \(i\) only, and let \(\{N_i(t)\}_{t\geq 0}\) be the associated counting processes of events of mark \(i\). For a matrix \(\bs B\) let \(dev(\bs B)\) denote the real part of the dominant eigenvalue of \(\bs B\) (the one with maximal real part). Denote by \(f_{N,n}(y_1,m_1,y_2,m_2,\dots,y_n,m_n)\) the joint density, probability mass function of the first \(n\) inter-arrival times, \(Y_1,Y_2-Y_1,\dots,Y_n-Y_{n-1}\), and the associated marks \(M_n\). From Bean and Nielsen \cite[Theorem 1]{bn2010} we have the following. 
@@ -168,4 +510,9 @@ Intuitively, \(\bs A(t)\) encodes all of the information about the event times o
 
 Now consider a Marked RAP, \(N\sim BRAP(\bs \alpha, \bs S, \bs D_i,\,i\in\{-1,0,+1\}).\) The process \(\{(L(t),\bs A(t))\}_{t\geq0}\) formed by letting \(L(t) = N_{+1}(t) - N_{-1}(t)\) is a QBD-RAP. 
 
-
+\subsection{Convergence theorems}
+\begin{thm}[Extended Continuity Theorem \citep{feller1957}]\label{thm: ext cont thm}
+	For \(p=1,2,\dots\) let \(U_p\) be a measure with Laplace transform \(\zeta_p\). If \(\zeta_p(\lambda)\to\zeta(\lambda)\) for \(\lambda > a\geq 0\), then \(\zeta\) is the Laplace transform of a measure \(U\) and \(U_p\to U\).
+	
+	Conversely, if \(U_p\to U\) and the sequence \(\{\zeta_p(a)\}\) is bounded, then \(\zeta_p(\lambda)\to\zeta(\lambda)\) for \(\lambda >a\). 
+\end{thm}

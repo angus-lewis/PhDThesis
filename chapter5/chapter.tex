@@ -1,6 +1,8 @@
 %!TEX root = ../thesis.tex
 \chapter{Global convergence results}\label{ch: global results}
-In this chapter we prove a number of results which stem from the main results of Chapter~\ref{sec: conv}. We consider the discrete-time embedded processes formed by observing the QBD-RAP at the orbit restart epochs and by observing the fluid queue at the hitting times of the level process at the of points \(\{y_\ell\}\), which are the boundaries of the intervals \(\{\calD_\ell\}\). In Corollary~\ref{cor: aln22222212} we prove that the transition probability of the embedded process of the QBD-RAP converge those of the embedded process of the fluid queue. In Corollary~\ref{cor: short cor} we prove that distribution of the sojourn time of the QBD-RAP in a given level converges to distribution of the sojourn time of the fluid queue in the corresponding interval. In Section~\ref{sec: sub global}, we state global results on the weak convergence (in space and time) of the QBD-RAP approximation scheme to the fluid queue. 
+In this chapter we prove some results which stem from the main results of Chapter~\ref{sec: conv}. We consider the discrete-time embedded processes formed by observing the QBD-RAP at the orbit restart epochs and by observing the fluid queue at the hitting times of the level process at the of points \(\{y_\ell\}\), which are the boundaries of the intervals \(\{\calD_\ell\}\). In Corollary~\ref{cor: aln22222212} we prove that the transition probability of the embedded process of the QBD-RAP converge those of the embedded process of the fluid queue. In Corollary~\ref{cor: short cor} we prove that distribution of the sojourn time of the QBD-RAP in a given level converges to distribution of the sojourn time of the fluid queue in the corresponding interval. In Section~\ref{sec: sub global}, we state global results on the weak convergence (in space and time) of the QBD-RAP approximation scheme to the fluid queue. 
+
+In this chapter we work with the augmented state space scheme to model phases with rates \(c_i=0\) as described in Section~\ref{sec: zero states}. The results of this chapter rely on results of Chapter~\ref{sec: conv} and therefore apply to the QBD-RAP scheme which uses ephemeral states to model a fluid queue which starts in a phase with rate \(0\), as described in Section~\ref{sec: initial conditions}. However, supplementing the results of Chapter~\ref{sec: conv} with the results from Appendix~\ref{app:extend conv} and using the same arguments from this chapter with only slight modifications, then the results of this chapter can be extended to the augmented state-space QBD-RAP scheme without the initial ephemeral phases. 
 
 % In this chapter we prove a global convergence result. We partition the Laplace tarnsforms with respect to time of the QBD-RAP on the number of level changes. Then, by considering the process at changes of level, we are able to work with the discrete-time Markov chain embedded at changes of level. First, we show that the transition probabilities of the embedded chain of the QBD-RAP convergence to the transition probabilities of the chain embedded in the fluid queue. We show that for a fixed number of level changes, \(n\), say, the embedded process of the QBD-RAP converges to an embedded discrete time process of the fluid queue, embedded at the times when the fluid queue leaves the bands \(\mathcal D_{\ell}\). Now, from Chapter~\ref{sec: conv} we have a result on the convergence of the QBD-RAP up to the first change of level (THM) and at the first change of level (COR). By time-homogeneity and the strong Markov property of the QBD-RAP then a Corollary to (COR) is the convergence of the transition probabilities of the embedded process of the QBD-RAP to the transition probabilities of the embedded process of the fluid queue. Similarly, a Corollary to (THM) is the convegence of the QBD-RAP to the fluid queue between the \(n\)th and \(n+1\)th change of level. Putting these Corollaries together, we can than claim a convergence of the distribution of QBD-RAP to the distribution of the fluid queue between the \(n\)th and \(n+1\)th change of level. Next, by summing over the partition on the number of level changes, \(n\), and applying the Dominated Convergence Theorem, we can then claim that Laplace transform with respect to time of the fluid queue converges to the Laplace transform with respect to time of the fluid queue. Finally, by the Extended Continuity Theorem, we can then claim that the distributions of the QBD-RAP and fluid queue converge for almost all \(t\geq 0\). 
 
@@ -148,7 +150,7 @@ Another direct corollary of Corollary~\ref{cor: aln222} is the convergence in di
 \end{proof}
 
 \section{Convergence of the QBD-RAP scheme}\label{sec: local to global}
-The rest of this chapter is dedicated to proving a global convergence results of the QBD-RAP approximation scheme to the fluid queue. Ultimately, we prove the weak convergence (in space and time) of the QBD-RAP approximation scheme to the distribution of the fluid queue. The structure of the argument is to first show a convergence result for the Laplace transform with respect to time of the distributions of the QBD-RAP and fluid queue at the \(n\)th orbit restart epoch. We then prove a convergence result of the QBD-RAP and fluid queue between the \(n\)th and \(n+1\)th orbit restart epoch. Summing over the number of orbit restart epochs, \(n\), and via the Dominated Convergence Theorem, we claim a convergence of the Laplace transforms with respect to time of the QBD-RAP approximation and fluid queue. Lastly, we apply the Extended Continuity Theorem for Laplace transforms \cite[Chapter XIII, Theorem 2a]{feller1957} to claim a weak convergence (in space and time) of the QBD-RAP approximation scheme to the fluid queue.
+This section is dedicated to proving a global convergence results of the QBD-RAP approximation scheme to the fluid queue. Ultimately, we prove the weak convergence (in space and time) of the QBD-RAP approximation scheme to the distribution of the fluid queue. The structure of the argument is to first show a convergence result for the Laplace transform with respect to time of the distributions of the QBD-RAP and fluid queue at the \(n\)th orbit restart epoch. We then prove a convergence result of the QBD-RAP and fluid queue between the \(n\)th and \(n+1\)th orbit restart epoch. Summing over the number of orbit restart epochs, \(n\), and via the Dominated Convergence Theorem, we claim a convergence of the Laplace transforms with respect to time of the QBD-RAP approximation and fluid queue. Lastly, we apply the Extended Continuity Theorem for Laplace transforms \cite[Chapter XIII, Theorem 2a]{feller1957} to claim a weak convergence (in space and time) of the QBD-RAP approximation scheme to the fluid queue.
 
 \subsection{At the \(n\)th orbit restart epoch}\label{sec: nth change}
 % So far we have shown error bounds for the QBD-RAP approximation on the event that the fluid queue and QBD-RAP remain in the same band/level (%Corollary~\ref{cor: lst diff} and 
@@ -237,9 +239,9 @@ Let
 	\mathcal P^n_{\ell_0,\ell_n}&=\left\{(\ell_1,\dots,\ell_{n-1}) \in \mathcal K^{n-1}\Bigg| \begin{array}{c}  \ell_{r-1}=\ell_r=0 \mbox{ or } \ell_{r-1}=\ell_r=K
 		\\ \mbox{ or }|\ell_{r-1}-\ell_r|=1,r = 1,\dots,n\end{array}\right\}.
 \end{align}
-The set \(\mathcal P^n_{\ell_0,\ell}\) contains all the possible values which \(\{L(\tau_m)\}_{m=2}^{n-1}\) may take on a sample path which starts in level \(\ell_0\), ends in level \(\ell\) and has \(n\) orbit restart epochs. Similarly, \(\mathcal P^n_{\ell_0,\ell}\) contains all the possible values which \(\{X(\tau_m^X)\}_{m=2}^{n-1}\) may take on a sample path which starts in band \(\ell_0\), ends in band \(\ell\) at time \(\tau_n^X\). 
+The set \(\mathcal P^n_{\ell_0,\ell}\) contains all the possible values which \(\{L(\tau_m)\}_{m=2}^{n-1}\) may take on a sample path which starts in level \(\ell_0\), ends in level \(\ell\) and has \(n\) orbit restart epochs. %Similarly, \(\mathcal P^n_{\ell_0,\ell}\) contains all the possible values which \(\{X(\tau_m^X)\}_{m=2}^{n-1}\) may take on a sample path which starts in band \(\ell_0\), ends in band \(\ell\) at time \(\tau_n^X\). 
 
-Thus, by partitioning on the times \(\tau_m\), \(m=2,\dots,n-1\), and the phases and the levels at these times and using the strong Markov property of the QBD-RAP, then (\ref{eqn: dskvnaSF}) is  
+Thus, by partitioning on the phases and the levels at the times \(\tau_m\), \(m=2,\dots,n-1\),and using the strong Markov property of the QBD-RAP, then (\ref{eqn: dskvnaSF}) is  
 	\begin{align}
 		\sum_{\substack{j_2,\dots,j_{n-1}\in\mathcal S \\ (\ell_2,\dots,\ell_{n-1}) \in\mathcal P^{n-1}_{\ell_1,\ell}}}\prod_{m=2}^{n}&\mathbb P(\Ydp(m) =(\ell_m, j_m), 
 		\tau_{m}^{(p)}\leq E^\lambda 
@@ -261,19 +263,20 @@ by the time-homogeneity property of the QBD-RAP and the memoryless property of \
 %             	 \mid \Ydp(0) = (\ell_{m-1}, j_{m-1}))\label{eqn: kk}
 % \end{align}
 % by the time-homogeneous property of the QBD-RAP and the memoryless property of the exponential distribution. 
-We can apply Corollary (\ref{cor: aln222}) to the factors of the summands in (\ref{eqn: 161222}) and conclude 
+We can apply Corollary \ref{cor: aln222} to the factors of the summands in (\ref{eqn: 161222}) and conclude 
 \begin{align}
 	& \mathbb P(\Ydp(1) = (\ell_m, j_m), \tau_{1}^{(p)}\leq E^\lambda 
             	 \mid \bs Y^{(p)}(0) = (\ell_{m-1},\bs \alpha, j_{m-1}))\nonumber
 	%
 	\\&\to \mathbb P(\bs X(\tau_1^X) =( y_{\ell_{m}+1(j_m\in\calS_-)},j_m), \tau_{1}^X\leq E^\lambda 
-	\mid \bs X(0) = (y_{\ell_{m-1}+1(j_{m-1}\in\calS_-)}, j_{m-1}))  \label{eqn:kknvf fawoprgj v2}
+	\mid \bs X(0) = (y_{\ell_{m-1}+1(j_{m-1}\in\calS_-)}, j_{m-1})).  \label{eqn:kknvf fawoprgj v2}
 \end{align}
 
 By the time-homogeneous property of the fluid queue and the memoryless property of the exponential distribution, (\ref{eqn:kknvf fawoprgj v2}) is equal to 
 \begin{align}
-	\mathbb P(\bs X(\tau_m^X) =( y_{\ell_{m}+1(j_m\in\calS_-)},j_m), \tau_{m}^X\leq E^\lambda 
-		\mid \bs X(\tau_{m-1}) = (y_{\ell_{m-1}+1(j_{m-1}\in\calS_-)}, j_{m-1})).\label{eqn: lim 12}
+	&\mathbb P(\bs X(\tau_m^X) =( y_{\ell_{m}+1(j_m\in\calS_-)},j_m), \tau_{m}^X\leq E^\lambda 
+		\mid \bs X(\tau_{m-1}) = (y_{\ell_{m-1}+1(j_{m-1}\in\calS_-)}, j_{m-1}), \nonumber
+	\\&\tau_{m-1}^X\leq E^\lambda ).\label{eqn: lim 12}
 \end{align}
 % \begin{align}
 % 	&\mathbb P(\bs X(\tau_1^X) = (y_{\ell_{m-1}+1}, j_m), \tau_{1}^X\leq E^\lambda 
@@ -297,7 +300,7 @@ Thus, returning to (\ref{eqn: 161222}) and taking the limit as \(p\to\infty\),
 	&\lim_{p\to\infty}\sum_{\substack{j_2,\dots,j_{n-1}\in\mathcal S \\ (\ell_2,\dots,\ell_{n-1}) \in\mathcal P^{n-1}_{\ell_1,\ell}}}\prod_{m=2}^{n}\mathbb P(\Ydp(1) = (\ell_m, j_m), \tau_{1}^{(p)}\leq E^\lambda \nonumber
             	 \mid \bs Y^{(p)}(0) = (\ell_{m-1},\bs\alpha, j_{m-1})) \nonumber 
 	%
-	\\ &=\sum_{\substack{j_2,\dots,j_{n-1}\in\mathcal S \\ (\ell_2,\dots,\ell_{n-1}) \in\mathcal P^{n-1}_{\ell_1,\ell}}}\prod_{m=2}^{n}\lim_{p\to\infty} \mathbb P(\Ydp(1) = (\ell_m, j_m), \tau_{1}^{(p)}\leq E^\lambda \nonumber
+	\\ &=\sum_{\substack{j_2,\dots,j_{n-1}\in\mathcal S \\ (\ell_2,\dots,\ell_{n-1}) \in\mathcal P^{n-1}_{\ell_1,\ell}}}\prod_{m=2}^{n}\lim_{p\to\infty} \mathbb P(\Ydp(1) = (\ell_m, j_m), \tau_{1}^{(p)}\leq E^\lambda 
             	 \mid \bs Y^{(p)}(0) = (\ell_{m-1}, \bs\alpha,
 	 	 j_{m-1}) ),
 	 \label{eqn: 161222b}
@@ -367,16 +370,18 @@ Lemma~\ref{lem: kKKJJJF} is what is required to proceed with the proof of conver
 \end{proof}
 
 \subsection{Between the \(n\)th and \(n+1\)th orbit restart epochs}\label{sec: between n and np1}
+In the last section we proved a convergence of the QBD-RAP to the fluid queue \emph{at} the \(n\)th orbit restart epoch. However, we ultimately want to make a convergence statement about the QBD-RAP scheme at any time. The next step is therefore to show a convergence of the QBD-RAP to the fluid queue between the \(n\)th and \(n+1\)th orbit restart epoch, after which we sum over \(n\) to prove a convergence result independent of the number of orbit restart epochs. 
+
 Let \(\mathcal T_n^{(p)} = (\tau_{n}^{(p)},\tau_{n+1}^{(p)}]\) and \(\mathcal T_n^X=(\tau_n^X,\tau_{n+1}^X]\). Consider the Laplace transform 
 \begin{align}
-	\nonumber&\int_{t=0}^\infty e^{-\lambda t}\int_{x\in\calD_{\ell,j}}\mathbb P({\bs Y}^{(p)}(t) = (\ell, \wrt x, j), t\in\mathcal T_n^{(p)} \mid 
-	\bs Y^{(p)}(0)=\bs y_0^{(p)})\psi(x)\wrt t,
+	&\int_{t=0}^\infty e^{-\lambda t}\int_{x\in\calD_{\ell,j}}\mathbb P({\bs Y}^{(p)}(t) = (\ell, \wrt x, j), t\in\mathcal T_n^{(p)} \mid 
+	\bs Y^{(p)}(0)=\bs y_0^{(p)})\psi(x)\wrt t, \label{eqn: aaabbababbaa}
 	% \nonumber&\int_{t=0}^\infty e^{-\lambda t}\int_{x\in\calD_\ell}\mathbb P(L^{(p)}(t) = \ell, \widetilde X^{(p)}(t)\in\wrt x, \phi^{(p)}(t) = j, \tau_{n}^{(p)}\leq t<\tau_{n+1}^{(p)} \mid L^{(p)}(0)=\ell_0, 
 	% 	\\&\qquad \bs A^{(p)}(0)=\bs a_{\ell_0,i}^{(p)}(x_0), \phi^{(p)}(0)=i)\psi(x)\wrt t.
 \end{align}
 where \(\psi:\mathbb R\to \mathbb R\) is a bounded function. 
 
-Partitioning on the time of the \(n\)th orbit restart epoch and the phase and level at this time gives
+Partitioning (\ref{eqn: aaabbababbaa}) on the time of the \(n\)th orbit restart epoch and the phase and level at this time gives
 \begin{align}
 	&\int_{t=0}^\infty e^{-\lambda t} 
 	\int_{x\in\calD_{\ell,j}}
@@ -426,7 +431,7 @@ Applying Theorem~\ref{thm: a thm!}, then (\ref{eqn: Jk jJ KK}) converges to
 Since the fluid queue is time-homogeneous and \(E^\lambda\) memoryless, then (\ref{eqn: lkHAHJFHKJ J J H}) is equal to 
 \begin{align}
 	&\int_{x\in\calD_{\ell,j}} \int_{t=0}^\infty e^{-\lambda t} \mathbb P(\bs X(t)\in(\wrt x,j), t\in\mathcal T_n^{X} \mid  
-	\bs X(\tau_n^X) = (y_{\ell+1(j_n\in\mathcal S_-)},j_n), \tau_n^X\leq E^\lambda ) \psi(x)  \label{eqn: lkHAHJFHKJ J J 22}
+	\bs X(\tau_n^X) = (y_{\ell+1(j_n\in\mathcal S_-)},j_n), \tau_n^X\leq E^\lambda ) \psi(x).  \label{eqn: lkHAHJFHKJ J J 22}
 \end{align}
 Therefore, we have shown (\ref{eqn: vajkl;vJK:GSKJ}) converges to (\ref{eqn: lkHAHJFHKJ J J 22}) as \(p\to\infty\). 
 
@@ -462,6 +467,7 @@ Hence, we have shown the following result
 \end{lem}
 
 \subsection{A domination condition}
+% We now want to sum the expressions in Lemma~\ref{lem: LAkAKFnvnb mav h} over \(n\) to obtain a result which is independent of the number of orbit restart epochs. To do so, we use the Dominated Convergence Theorem. We prove an appropriate domination condition below.
 Our aim is to prove convergence of 
 \begin{align} 
 	&\int_{t=0}^\infty e^{-\lambda t}\int_{x\in\calD_{\ell,j}}\mathbb P({\bs Y}^{(p)}(t) = (\ell,\wrt x, j) \mid  \nonumber 
@@ -471,7 +477,7 @@ Our aim is to prove convergence of
 	\\&=\sum_{n=0}^\infty\int_{t=0}^\infty e^{-\lambda t}\int_{x\in\calD_{\ell,j}}\mathbb P({\bs Y}^{(p)}(t) = (\ell,\wrt x, j), t\in\mathcal T_n^{(p)} \mid   
 	\bs Y(0) = \bs y_0)\psi(x)\wrt t \label{eqn:GHJKLKJHGHJKL}
 \end{align}
-where the swap of the intergals and sums is justified by the Fubini-Tonelli Theorem. Now, (\ref{eqn:GHJKLKJHGHJKL}) is an infinite sum of terms appearing in Lemma~\ref{lem: LAkAKFnvnb mav h}. Hence, upon taking the limit of (\ref{eqn:GHJKLKJHGHJKL}), if we can justify the swap of the sum and the limit, we will obtain the desired result. To this end, we now show a domination condition so tht we may apply the Dominated Convergence Theorem. %The main result of this subsection is Lemma~\ref{lem: another bound 2} in which we show a bound which can serve as a dominating function so that we may apply the Dominated Convergence Theorem to justify the aforementioned swap of sum and limit. 
+where the swap of the intergals and sums is justified by the Fubini-Tonelli Theorem. Now, (\ref{eqn:GHJKLKJHGHJKL}) is an infinite sum of terms appearing in Lemma~\ref{lem: LAkAKFnvnb mav h}. Hence, upon taking the limit of (\ref{eqn:GHJKLKJHGHJKL}), if we can justify the swap of the sum and the limit, we will obtain the desired result. To this end, we now show a domination condition in Corollary~\ref{vcor: cdks d} so that we may apply the Dominated Convergence Theorem. %The main result of this subsection is Lemma~\ref{lem: another bound 2} in which we show a bound which can serve as a dominating function so that we may apply the Dominated Convergence Theorem to justify the aforementioned swap of sum and limit. 
 
 % To extend Lemma~\ref{lem: LAkAKFnvnb mav h} to show a global convergence result we use the Dominated Convergence Theorem. Here we show some geometric bounds on the probability of \(n\) level changes of the QBD-RAP and fluid queue, which ultimately serve as a dominating function in the Dominated Convergence Theorem. 
 
@@ -575,11 +581,12 @@ Note that \(b\) and \(r_1\) depend on \(p\) which has been suppressed to simplif
 %
 
 \begin{cor}\label{vcor: cdks d}
+	For \(\bs y_0=(\ell_0,\bs a_{\ell_0,i}(x_0),i),\, \lambda>0,\, \ell_0,\ell\in\mathcal K,\,i,j\in\mathcal S\) and any bounded function \(\psi\leq F\), then
 	\begin{align}
 		\Bigg|&\int_{t=0}^\infty e^{-\lambda t}\int_{x\in\calD_{\ell,j}}\mathbb P({\bs Y}(t) \in (\ell,\wrt x, j), t\in\mathcal T_n \mid 
 		\bs Y(0)=\bs y_0)
 		\psi(x) \wrt t \Bigg|
-		\leq \cfrac{F b^{n-1}}{\lambda}\label{eq: JjbCS  B k }
+		\leq \cfrac{F b^{n-1}}{\lambda}.\label{eq: JjbCS  B k }
 	\end{align}
 \end{cor}
 \begin{proof}
@@ -591,25 +598,26 @@ Note that \(b\) and \(r_1\) depend on \(p\) which has been suppressed to simplif
 	\end{align}
 	Partitioning on the time of the \(1\)st orbit restart epoch, \(\tau_1\), and the phase and level at time \(\tau_1\), then (\ref{eqn: alalal}) is equal to 
 	\begin{align}
-		&\int_{t=0}^\infty e^{-\lambda t} \int_{u_1=0}^t \sum_{j_1\in\mathcal S}\sum_{\ell_1\in\{\ell_0+1,\ell_0,\ell_0-1\}\cap\mathcal K}\mathbb P( {\bs Y}(t) \in (\ell,\mathcal D_{\ell,j},j), t\in\mathcal T_n \nonumber
+		&\int_{t=0}^\infty e^{-\lambda t} \int_{u_1=0}^t \sum_{\substack{j_1\in\mathcal S\\\ell_1\in\{\ell_0+1,\ell_0,\ell_0-1\}\cap\mathcal K}}\mathbb P( {\bs Y}(t) \in (\ell,\mathcal D_{\ell,j},j), t\in\mathcal T_n \nonumber
 		\mid \Yd(1)=(\ell_1,j_1),  \tau_1=u_1)\nonumber
 		\\&\quad\mathbb P(\Yd(1)=(\ell_1,j_1), \tau_1\in \wrt u_1
 		\mid \bs Y(0)=\bs y_0)F  \wrt t\nonumber
 		%
-		\\&=\int_{t=0}^\infty e^{-\lambda t} \int_{u_1=0}^t \sum_{j_1\in\mathcal S}\sum_{\ell_1\in\{\ell_0+1,\ell_0,\ell_0-1\}\cap\mathcal K}\mathbb P( {\bs Y}(t) \in (\ell,\mathcal D_{\ell,j},j), t-u_1\in\mathcal T_{n-1} \nonumber
-		\mid \bs Y(0)=(\ell_1,\bs \alpha,j_1))\nonumber
+		\\&=\int_{t=0}^\infty e^{-\lambda t} \int_{u_1=0}^t \sum_{\substack{j_1\in\mathcal S\\\ell_1\in\{\ell_0+1,\ell_0,\ell_0-1\}\cap\mathcal K}}\mathbb P( {\bs Y}(t) \in (\ell,\mathcal D_{\ell,j},j), t-u_1\in\mathcal T_{n-1} \nonumber
+		\mid 
+		\bs Y(0)=(\ell_1,\bs \alpha,j_1))
 		\\&\quad\mathbb P(\Yd(1)=(\ell_1,j_1), \tau_1\in \wrt u_1
 		\mid \bs Y(0)=\bs y_0)F  \wrt t, \label{eqn fLks}
 	\end{align}
 	by the time-homogeneous property of the QBD-RAP. By the convolution theorem for Laplace transforms, (\ref{eqn fLks}) is equal to 
 	\begin{align}
-		&\sum_{j_1\in\mathcal S}\sum_{\ell_1\in\{\ell_0+1,\ell_0,\ell_0-1\}\cap\mathcal K} \int_{t=0}^\infty e^{-\lambda t} \mathbb P({\bs Y}(t) \in (\ell,\mathcal D_{\ell,j},j), t\in\mathcal T_{n-1} \nonumber
+		&\sum_{\substack{j_1\in\mathcal S\\\ell_1\in\{\ell_0+1,\ell_0,\ell_0-1\}\cap\mathcal K}}\int_{t=0}^\infty e^{-\lambda t} \mathbb P({\bs Y}(t) \in (\ell,\mathcal D_{\ell,j},j), t\in\mathcal T_{n-1} \nonumber
 		\mid \bs Y(0)=(\ell_1,\bs \alpha, j_1)) \wrt t 
 		\\&\quad{}\int_{u_1=0}^\infty e^{-\lambda u_1}\mathbb P(\Yd(1)=(\ell_1,j_1), \tau_1\in \wrt u_1
 		\mid \bs Y(0)=\bs y_0)F  \nonumber 
 		%
 		%
-		\\&=\sum_{j_1\in\mathcal S}\sum_{\ell_1\in\{\ell_0+1,\ell_0,\ell_0-1\}\cap\mathcal K} \int_{t=0}^\infty e^{-\lambda t} \mathbb P({\bs Y}(t) \in (\ell,\mathcal D_{\ell,j},j), t\in\mathcal T_{n-1} \nonumber
+		\\&=\sum_{\substack{j_1\in\mathcal S\\\ell_1\in\{\ell_0+1,\ell_0,\ell_0-1\}\cap\mathcal K}}\int_{t=0}^\infty e^{-\lambda t} \mathbb P({\bs Y}(t) \in (\ell,\mathcal D_{\ell,j},j), t\in\mathcal T_{n-1} \nonumber
 		\mid \bs Y(0)=(\ell_1,\bs\alpha,j_1)) \wrt t 
 		\\&\quad{}\mathbb P(\Yd(1)=(\ell_1,j_1), \tau_1\leq E^\lambda
 		\mid \bs Y(0)=\bs y_0)F. \label{eqn fLksoioi}
@@ -629,7 +637,7 @@ Note that \(b\) and \(r_1\) depend on \(p\) which has been suppressed to simplif
 	\end{align}
 	by Lemma~\ref{lem: another bound 2}.
 	
-	Using the bound (\ref{eq: bndhs vja sdh}) in (\ref{eqn fLks}) gives 
+	Using the bound (\ref{eq: bndhs vja sdh}) in (\ref{eqn fLksoioi}) gives 
 	\begin{align}
 		&\sum_{j_1\in\mathcal S}\sum_{\ell_1\in\{\ell_0+1,\ell_0-1\}\cap\mathcal K} b^{n-1}\cfrac{1}{\lambda} 
 		\mathbb P(\Yd(1)=(\ell_1,j_1), \tau_1\leq E^\lambda
@@ -650,7 +658,7 @@ Partitioning (\ref{eqn: LLLLaaakkkss}) on the number of orbit restart epochs by 
 	\\&=\sum_{n=0}^\infty\int_{t=0}^\infty e^{-\lambda t}\int_{x\in\mathcal D_{\ell,j}} \mathbb P( {\bs Y}^{(p)}(t) \in (\ell, \wrt x, j), t\in\mathcal T_n^{(p)} \mid  
 	\bs Y^{(p)}(0)=\bs y_0^{(p)})\wrt t \psi(x). \label{eqn: KLDNVnav}
 \end{align}
-We can just the swap of the sum and integrals since 
+We can justify the swap of the sum and integrals since 
 \begin{align}
 	& \int_{t=0}^\infty e^{-\lambda t}\int_{x\in\mathcal D_{\ell,j}}\sum_{n=0}^\infty \mathbb P(  {\bs Y}^{(p)}(t) \in (\ell, \wrt x, j), t\in\mathcal T_n^{(p)} \mid\nonumber 
 	\bs Y^{(p)}(0)=\bs y_0^{(p)})\wrt t |\psi(x)| \nonumber
@@ -702,19 +710,25 @@ Thus, we have shown the following result.
 		\mid \bs X(0)=(x_0, i))\psi(x)\wrt t. \nonumber
 	\end{align}
 \end{lem}
+
+Lemma~\ref{lem: KajPOw} establishes a convergence for a given interval \(\mathcal D_\ell,\, \ell\in\mathcal K\), and phase \(j\in\mathcal S\). We now formally extend this to a global result. To do so, we find it convenient to re-write the problem in terms of expectations. 
  
-Let \(\mathcal R(L(t),\bs A(t),\varphi(t))\) be the random variable with density function \(\bs A(t)\bs v_{L(t),\varphi(t)}(x)\), \(x\in\calD_{L(t),\varphi(t)}\). Observe that 
+Let \(\mathcal R(L(t),\bs A(t),\varphi(t))\) be the random variable with density function \(\bs A(t)\bs v_{L(t),\varphi(t)}(x)\), \(x\in\calD_{L(t),\varphi(t)}\), then
 \begin{align}
 	&\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\psi(\mathcal R(L(t),\bs A(t),\varphi(t)),\varphi(t) )  \mid \nonumber
-	\bs Y^{(p)}(0)=\bs y_0^{(p)} \Bigg] \wrt t 
-	\\&=\int_{t=0}^\infty e^{-\lambda t}\int_{x\in\mathcal D_{\ell,j}}\mathbb P( {\bs Y}^{(p)}(t) = (\ell,\wrt x,j) \mid \bs Y^{(p)}(0)=\bs y_0^{(p)})  \psi(x)\wrt t.
+	\bs Y (0)=\bs y_0 \Bigg] \wrt t 
+	% \\&=\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\int_{x\in\calD_{L(t),\varphi(t)}}\bs A(t)\bs v_{L(t),\varphi(t)}(x)\psi(x,\varphi(t)),\varphi(t) )\wrt x  \mid \nonumber
+	% \bs Y^{(p)}(0)=\bs y_0^{(p)} \Bigg] \wrt t 
+	\\&=\int_{t=0}^\infty e^{-\lambda t}\int_{\bs a\in\mathcal A}\sum_{\substack{\ell\in\mathcal K\\j\in\calS}}\int_{x\in\calD_{\ell,j}}\mathbb P( {\bs Y}(t) \in (\ell,\wrt \bs a,j) \mid \bs Y(0)=\bs y_0)\bs a\bs v_{\ell,j}(x)  \psi(x)\wrt x\wrt t \nonumber 
+	\\&=\int_{t=0}^\infty e^{-\lambda t}\sum_{\substack{\ell\in\mathcal K\\j\in\calS}}\int_{x\in\mathcal D_{\ell,j}}\mathbb P( {\bs Y} (t) \in (\ell,\wrt x,j) \mid \bs Y (0)=\bs y_0 )  \psi(x)\wrt t,
 \end{align}
+and the terms in the last line are those in Lemma~\ref{lem: KajPOw}. 
 
 \begin{cor}\label{cor: lk}
 	Let \(\psi: \mathbb R\times \mathcal S \to \mathbb R\) be an arbitrary, bounded function with \(|\psi(\cdot)|\leq F\). %Further, let \(\mathcal L(X(t)) = \sum_{k\in\mathcal K}k1(X(t)\in\mathcal D_k)\) and \(\widetilde{\bs X}(t) = (\mathcal L(X(t)),X(t),\varphi(t)))\). 
-	For each \(x_0\in\mathbb R\), \(i\in\mathcal S\), \(\ell_0\in\mathcal K\), 
+	For each \(i\in\mathcal S\), \(\ell_0\in\mathcal K\), \(x_0\in\mathcal D_{\ell_0,i}\),
 	\begin{align}
-		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\psi(\mathcal R(L(t),\bs A(t),\varphi(t)),\varphi(t) )  \mid \nonumber
+		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\psi(\mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\varphi(t)),\varphi(t) )  \mid \nonumber
 		\bs Y^{(p)}(0)=\bs y_0^{(p)} \Bigg] \wrt t \nonumber
 		\\&\to \int_{t=0}^\infty e^{-\lambda t}  \mathbb E\left[\psi({\bs X}(t))\mid \bs X(0)=(x_0, i) \right] \wrt t.\nonumber
 	\end{align}
@@ -723,16 +737,16 @@ Let \(\mathcal R(L(t),\bs A(t),\varphi(t))\) be the random variable with density
 \begin{proof}
 	Consider the left-hand side 
 	\begin{align}
-		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\psi( \mathcal R(L(t),\bs A(t),\varphi(t)),\varphi(t) )   \mid 
+		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\varphi(t)),\varphi(t) )   \mid 
 		  \bs Y^{(p)}(0)=\bs y_0^{(p)} \Bigg] \wrt t \nonumber 
-		\\&= \int_{t=0}^\infty e^{-\lambda t}\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\mathbb E\Bigg[\psi( \mathcal R(\ell,\bs A(t),j),j )  1({\bs Y}^{(p)}(t)\in(\ell,\mathcal D_{\ell,j},j))  \mid \nonumber
+		\\&= \int_{t=0}^\infty e^{-\lambda t}\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\mathbb E\Bigg[\psi( \mathcal R(\ell,\bs A^{(p)}(t),j),j )  1({L}^{(p)}(t)=\ell,\varphi(t)=j))  \mid \nonumber
 		 \bs Y^{(p)}(0)=\bs y_0^{(p)} \Bigg] \wrt t \nonumber 
-		\\&= \sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[ \psi( \mathcal R(\ell,\bs A(t),j),j )1({\bs Y}^{(p)}(t)\in(\ell,\mathcal D_{\ell,j},j))  \mid 
+		\\&= \sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[ \psi( \mathcal R(\ell,\bs A^{(p)}(t),j),j )1({L}^{(p)}(t)=\ell,\varphi(t)=j))  \mid 
 		 \bs Y^{(p)}(0)=\bs y_0^{(p)} \Bigg] \wrt t, \label{eqnL AKJF cjk ajhJK}
 	\end{align}
-	where the swap of the summations and integrals is justified since \(\psi\) is bounded and by the Fubini-Tonelli Theorem. By Lemma~\ref{lem: KajPOw}, for each \(\ell\in\mathcal K\), \(j\in\calS\), the terms 
+	where the swap of the summations and integrals is on the last line justified since \(\psi\) is bounded and by the Fubini-Tonelli Theorem. By Lemma~\ref{lem: KajPOw}, for each \(\ell\in\mathcal K\), \(j\in\calS\), the terms 
 	 \begin{align}
-	 	&\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\psi( \mathcal R(\ell,\bs A(t),j), j )\wrt x 1({\bs Y}^{(p)}(t)\in(\ell,\mathcal D_{\ell,j},j))  \mid \nonumber
+	 	&\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\psi( \mathcal R(\ell,\bs A^{(p)}(t),j), j )\wrt x 1({L}^{(p)}(t)=\ell,\varphi(t)=j))  \mid \nonumber
 		 \bs Y^{(p)}(0)=\bs y_0^{(p)} \Bigg] \wrt t
 	\end{align}
 		converge to 
@@ -742,10 +756,10 @@ Let \(\mathcal R(L(t),\bs A(t),\varphi(t))\) be the random variable with density
 	
 	If \(\mathcal K\) is countably infinite, then for a given \(k\in\mathcal K\), since \(\psi\) is bounded,
 	\begin{align}
-		&\Bigg|\sum_{j\in\mathcal S}\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\psi( \mathcal R(\ell,\bs A(t),j),\varphi(t) )  1({\bs Y}^{(p)}(t)\in(\ell,\mathcal D_{\ell,j},j))  \mid \nonumber
+		&\Bigg|\sum_{j\in\mathcal S}\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\psi( \mathcal R(\ell,\bs A^{(p)}(t),j),\varphi(t) )  1({L}^{(p)}(t)=\ell,\varphi(t)=j))  \mid \nonumber
 		\bs Y^{(p)}(0)=\bs y_0^{(p)} \Bigg] \wrt t\Bigg| \nonumber 
 		%
-		\\&\leq F \sum_{j\in\mathcal S}\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[1({\bs Y}^{(p)}(t)\in(\ell,\mathcal D_{\ell,j},j))  \mid \nonumber
+		\\&\leq F \sum_{j\in\mathcal S}\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[1({L}^{(p)}(t)=\ell,\varphi(t)=j))  \mid \nonumber
 		\bs Y^{(p)}(0)=\bs y_0^{(p)}\Bigg] \wrt t \nonumber 
 		%
 		\\&\leq F  \int_{t=0}^\infty e^{-\lambda t}\mathbb P( {\bs Y}^{(p)}(t)\in(\ell,\mathcal D_{\ell,j},j) \mid   
@@ -764,47 +778,202 @@ Let \(\mathcal R(L(t),\bs A(t),\varphi(t))\) be the random variable with density
 	hence the dominating terms are summable. Hence, we may apply the Dominated Convergence Theorem to swap the necessary limits and sums, from which the result follows.
 \end{proof} 
 
-The Extended Continuity Theorem for Laplace transforms \cite[Chapter XIII, Theorem 2a]{feller1957} can now be used to claim that the QBD-RAP approximation scheme converges weakly (in space and time) to the fluid queue.
-\begin{thm}[Extended Continuity Theorem \citep{feller1957}]\label{thm: ext cont thm}
-	For \(p=1,2,\dots\) let \(U_p\) be a measure with Laplace transform \(\omega_p\). If \(\omega_p(\lambda)\to\omega(\lambda)\) for \(\lambda > a\geq 0\), then \(\omega\) is the Laplace transform of a measure \(U\) and \(U_p\to U\).
-	
-	Conversely, if \(U_p\to U\) and the sequence \(\{\omega_p(a)\}\) is bounded, then \(\omega_p(\lambda)\to\omega(\lambda)\) for \(\lambda >a\). 
+The Extended Continuity Theorem for Laplace transforms \cite[Chapter XIII, Theorem 2a]{feller1957} can now be used to claim that the QBD-RAP approximation scheme converges weakly (in space and time) to the fluid queue. 
+
+\begin{thm}
+	For all \(\bs y_0^{(p)}=(\ell,\bs a_{\ell_0,i}^{(p)}(x_0),i)\), \(\ell_0\in\mathcal K\), \(x_0\in\mathcal D_{\ell_0,i}\), \(i\in\calS\), and any bounded function \(\psi:\mathbb R\times \mathcal S \to \mathbb R\), then
+	\begin{align}
+			&\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\varphi(t)),\varphi(t) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right] \nonumber 
+			\to \mathbb E\left[\psi({\bs X}(t))\mid \bs X(0)=(x_0, i) \right] \nonumber
+	\end{align}
+	weakly in \(t\) as \(p\to \infty\). 
 \end{thm}
-Thus, by the Extended Continuity Theorem~\ref{thm: ext cont thm}
-\begin{align}
-		&\mathbb E\left[\psi( \mathcal R(L(t),\bs A(t),\varphi(t)),\varphi(t) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right] \nonumber 
-		\to \mathbb E\left[\psi({\bs X}(t))\mid \bs X(0)=(x_0, i) \right] \nonumber
-\end{align}
-weakly in \(t\) as \(p\to \infty\). 
+\begin{proof}
+	Combine the Extended Continuity Theorem for Laplace transforms \cite[Chapter XIII, Theorem 2a]{feller1957} with the convergence of Laplace transforms in Corollary~\ref{cor: lk}. 
+\end{proof}
 
 Ideally, we would like to obtain a point-wise convergence result in the variable \(t\). However, to date, this has eluded me. Although 
 \[\mathbb E\left[\psi({\bs X}(t))\mid \bs X(0)=(x_0,i) \right]\] 
 is a continuous function of \(t\) (it is a Feller semigroup), and, for \(p<\infty\), 
-\[\mathbb E\left[\psi( \mathcal R(L(t),\bs A(t),\varphi(t)),\varphi(t) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right]  \]
+\[\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\varphi(t)),\varphi(t) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right]  \]
  is continuous in \(t\), the limit 
- \[\lim\limits_{p\to\infty}\mathbb E\left[\psi( \mathcal R(L(t),\bs A(t),\varphi(t)),\varphi(t) ) \mid \bs Y^{(p)}(0)=\bs y_0^{(p)}\right]  \] need not be continuous in \(t\). Nonetheless, we can claim that 
+ \[\lim\limits_{p\to\infty}\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\varphi(t)),\varphi(t) ) \mid \bs Y^{(p)}(0)=\bs y_0^{(p)}\right]  \] need not be continuous in \(t\). Nonetheless, we can claim that 
 \begin{align}
-		&\mathbb E\left[\psi( \mathcal R(L(t),\bs A(t),\varphi(t)),\varphi(t) )    \mid \bs Y^{(p)}(0)=\bs y_0^{(p)}\right]  \nonumber
+		&\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\varphi(t)),\varphi(t) )    \mid \bs Y^{(p)}(0)=\bs y_0^{(p)}\right]  \nonumber
 		\to \mathbb E\left[\psi({\bs X}(t) )\mid \bs X(0)=(x_0, i) \right] \nonumber
 \end{align}
-for almost all \(t\geq 0\). At such values of \(t\), since \(\psi\) is arbitrary and bounded, then the Portmanteau Theorem \citep[Theorem 2.1, page 16]{billingsleyconvergence} states that the QBD-RAP approximation scheme converges in distribution to the fluid queue.
+for almost all \(t\geq 0\). At such values of \(t\), since \(\psi\) is arbitrary and bounded, then the Portmanteau Theorem \citep[Theorem 2.1]{billingsleyconvergence} states that the QBD-RAP approximation scheme converges in distribution to the fluid queue.
 
 A sufficient condition to upgrade the convergence from weak to point-wise (in the variable \(t\)) is to show that for \(t\geq 0\) 
-\[\sup_{p}\mathbb E\left[\psi( \mathcal R(L(t),\bs A(t),\varphi(t)),\varphi(t) )  \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right]  \leq M(t)<\infty\]
-and the sequence \(\mathbb E\left[\psi( \mathcal R(L(t),\bs A(t),\varphi(t)),\varphi(t) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right]  \) is eventually equicontinuous in \(t\). That is, for every \(\varepsilon>0\) there exists a \(\delta(t,\varepsilon)>0\) and an \(p_0(t,\varepsilon)\) such that \(|t-u|<\delta(t,\varepsilon)\) implies that 
+\[\sup_{p}\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\varphi(t)),\varphi(t) )  \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right]  \leq M(t)<\infty\]
+and the sequence \(\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\varphi(t)),\varphi(t) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right]  \) is eventually equicontinuous in \(t\). That is, for every \(\varepsilon>0\) there exists a \(\delta(t,\varepsilon)>0\) and an \(p_0(t,\varepsilon)\) such that \(|t-u|<\delta(t,\varepsilon)\) implies that 
 \begin{align}
-	&\nonumber \Bigg|\mathbb E\left[\psi( \mathcal R(L(t),\bs A(t),\varphi(t)),\varphi(t) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right] 
-	\\&{}-\mathbb E\left[\psi( \mathcal R(L(u),\bs A(u),\varphi(u)),\varphi(u) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)}\right] \Bigg| \nonumber 
+	&\nonumber \Bigg|\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\varphi(t)),\varphi(t) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right] 
+	\\&{}-\mathbb E\left[\psi( \mathcal R(L^{(p)}(u),\bs A^{(p)}(u),\varphi(u)),\varphi(u) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)}\right] \Bigg| \nonumber 
 	<\varepsilon
 \end{align}
 for all \(p\geq p_0(t,\varepsilon)\). 
+
+% \begin{lem}
+% 	\begin{align}
+% 		&\Bigg|\mathbb E\left[\psi( \mathcal R(L(t),\bs A(t),\varphi(t)),\varphi(t) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right] 
+% 		\\&{}-\mathbb E\left[\psi( \mathcal R(L(u),\bs A(u),\varphi(u)),\varphi(u) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)}\right] \Bigg| < Lc_{max}|t-u| \nonumber
+% 	\end{align}
+% 	i.e.~uniformly Lipschitz in \(t\), and this does not depend on \(p\). 
+% \end{lem}
+% \begin{proof}
+% 	Suppose \(i\in\calS_-\). 
+% 	\begin{align*}
+% 		&\mathbb E\left[\psi( \mathcal R(L(t+u),\bs A(t+u),\varphi(t+u)),\varphi(t+u) )   \mid L(t)=\ell,\bs A(t)=\bs a, \varphi(t)=i \right]
+% 		%
+% 		\\&=\mathbb E\left[\int_{x\in\calD_{L(t+u),\varphi(t+u)}}\bs A(t+u)\bs v_{L(t+u),\varphi(t+u)}\psi(x,\varphi(t+u) )\wrt x   \mid L(t)=\ell,\bs A(t)=\bs a, \varphi(t)=i \right]
+% 		%
+% 		\\&=\int_{L(t+u),\varphi(t+u)}\bs a e^{(c_i\bs S + T_{ii}\bs I)u}\bs v_{\ell,i}(x)\psi(x,i)\wrt x 
+% 		%
+% 		\\&\quad{}+\sum_{j\in\calS_-}\int_{L(t+u),\varphi(t+u)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}T_{ij}e^{(c_j\bs S + T_{jj}\bs I)(u-v)}\bs v_{\ell,j}(x)\psi(x,j)\wrt v\wrt x 
+% 		%
+% 		\\&\quad{}+\sum_{j\in\calS_+}\int_{L(t+u),\varphi(t+u)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}T_{ij}\bs D e^{(c_j\bs S + T_{jj}\bs I)(u-v)}\bs v_{\ell,j}(x)\psi(x,j)\wrt v\wrt x 
+% 		%
+% 		\\&\quad{}+\int_{L(t+u),\varphi(t+u)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}c_i\bs s\bs \alpha e^{(c_i\bs S + T_{ii}\bs I)(u-v)}\bs v_{\ell+1,i}(x)\psi(x,i)\wrt x 
+% 		%
+% 		\\&\quad{}+o(u^2)
+% 		%
+% 		\\&=\int_{x\in[0,\infty)} \bs a e^{(c_i\bs S + T_{ii}\bs I)u}e^{\bs Sx}\bs s\psi(\ell\Delta+m(x),i)\wrt x 
+% 		%
+% 		\\&\quad{}+\sum_{j\in\calS_-}\int_{x\in[0,\infty)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}T_{ij}e^{(c_j\bs S + T_{jj}\bs I)(u-v)}e^{\bs S x}\bs s\psi(\ell\Delta+m(x),j)\wrt v\wrt x 
+% 		%
+% 		\\&\quad{}+\sum_{j\in\calS_+}\int_{x\in[0,\infty)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}T_{ij}\bs D e^{(c_j\bs S + T_{jj}\bs I)(u-v)}e^{\bs S x}\bs s\psi((\ell+1)\Delta-m(x),j)\wrt v\wrt x 
+% 		%
+% 		\\&\quad{}+\int_{x\in[0,\infty)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}c_i\bs s\bs \alpha e^{(c_i\bs S + T_{ii}\bs I)(u-v)}e^{\bs S x}\bs s\psi((\ell-1)\Delta+m(x),i)\wrt x 
+% 		%
+% 		\\&\quad{}+o(u^2).
+% 	\end{align*}
+% 	Now, 
+% 	\begin{align*}
+% 		&\int_{x\in[0,\infty)} \bs a e^{(c_i\bs S + T_{ii}\bs I)u}e^{\bs Sx}\bs s\psi(\ell\Delta+m(x),i)\wrt x
+% 		%
+% 		\\&=\int_{x\in[0,\infty)} \bs a e^{c_i\bs S u} e^{\bs Sx}\bs se^{T_{ii}u}\psi(\ell\Delta+m(x),i)\wrt x
+% 		%
+% 		\\&=\int_{x\in[c_iu,\infty)} \bs a e^{\bs Sx}\bs se^{T_{ii}u}\psi(\ell\Delta+m(x-c_iu),i)\wrt x
+% 	\end{align*}
+% 	and 
+% 	\begin{align*}
+% 		&\int_{x\in[0,\infty)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}c_i\bs s\bs \alpha e^{(c_i\bs S + T_{ii}\bs I)(u-v)}e^{\bs S x}\bs s\psi((\ell-1)\Delta+m(x),i)\wrt v\wrt x 
+% 		%
+% 		\\&=\int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}c_i\bs s \int_{x\in[0,\infty)} \bs \alpha e^{(c_i\bs S + T_{ii}\bs I)(u-v)}e^{\bs S x}\bs s\psi((\ell-1)\Delta+m(x),i)\wrt x \wrt v
+% 		%
+% 		\\&=\int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}c_i\bs s \int_{x\in[c_i(u-v),\infty)} \bs \alpha e^{\bs S x}\bs se^{T_{ii}(u-v)}\psi((\ell-1)\Delta+m(x),i)\wrt x \wrt v
+% 		%
+% 		\\&=\int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}c_i\bs s e^{T_{ii}(u-v)} \left(\psi((\ell-1)\Delta+m(\Delta-c_i(u-v)),i) + r_2\right) \wrt v
+% 		%
+% 		\\&=\int_{v=0}^u\bs a e^{c_i\bs Sv}c_i\bs s e^{T_{ii}u} \left(\psi((\ell-1)\Delta+m(\Delta-c_i(u-v)),i) + r_2 \right) \wrt v
+% 		%
+% 		\\&=\int_{x=0}^{c_iu}\bs a e^{\bs Sx}\bs s e^{T_{ii}u} \left( \psi((\ell-1)\Delta+m(\Delta+x-c_iu)),i) + r_2 \right) \wrt x.
+% 	\end{align*}
+% 	Also, for \(v\leq c_iu\leq \Delta \), 
+% 	\begin{align*}
+% 		\psi((\ell-1)\Delta+m(\Delta+x-c_iu)) &= \psi((\ell-1)\Delta+\Delta - |mod((\Delta+x-c_iu),2\Delta) - \Delta|)
+% 		% 
+% 		\\&=\psi(\ell\Delta - |x-c_iu|).
+% 	\end{align*}
+% 	Now, 
+% 	\begin{align*}
+% 		&\left|\sum_{j\in\calS_-}\int_{x\in[0,\infty)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}T_{ij}e^{(c_j\bs S + T_{jj}\bs I)(u-v)}e^{\bs S x}\bs s\psi(\ell\Delta+m(x),j)\wrt v\wrt x \right|
+% 		%
+% 		\\&\leq \left|\sum_{j\in\calS_-}\int_{x\in[0,\infty)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}T_{ij}e^{(c_j\bs S + T_{jj}\bs I)(u-v)}e^{\bs S x}\bs s\wrt v\wrt x \right|F
+% 		%
+% 		\\&\leq \left|\sum_{j\in\calS_-} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}T_{ij}e^{(c_j\bs S + T_{jj}\bs I)(u-v)} \bs e\wrt v \right|F
+% 		%
+% 		\\&\leq \left|\sum_{j\in\calS_-} \int_{v=0}^uT_{ij}\wrt v\right|F,
+% 		% 
+% 		\\&= \left|\sum_{j\in\calS_-} uT_{ij} \right|F,
+% 	\end{align*}
+% 	similarly, 
+% 	\begin{align*}
+% 		&\left|\sum_{j\in\calS_+}\int_{x\in[0,\infty)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}T_{ij}\bs D e^{(c_j\bs S + T_{jj}\bs I)(u-v)}e^{\bs S x}\bs s\psi((\ell+1)\Delta-m(x),j)\wrt v\wrt x \right|
+% 		%
+% 		\\&\leq\left|\sum_{j\in\calS_+}\int_{x\in[0,\infty)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}T_{ij}\bs D e^{(c_j\bs S + T_{jj}\bs I)(u-v)}e^{\bs S x}\bs s\wrt v\wrt x \right|F
+% 		%
+% 		\\&\leq\left|\sum_{j\in\calS_+}\int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}T_{ij}\bs D e^{(c_j\bs S + T_{jj}\bs I)(u-v)}\bs e\wrt v \right|F
+% 		%
+% 		\\&\leq\left|\sum_{j\in\calS_+}\int_{v=0}^uT_{ij}\wrt v \right|F
+% 		%
+% 		\\&=\left|\sum_{j\in\calS_+}uT_{ij}\right|F
+% 	\end{align*}
+
+% 	Also note
+% 	\begin{align*}
+% 		\int_{x\in\calD_{\ell,i}}\bs a\bs v_{\ell,i}(x)\psi(x,i)\wrt x = \int_{x=0}^\infty\bs ae^{\bs Sx}\bs s\psi(\ell\Delta+m(x),i)\wrt x.
+% 	\end{align*}
+
+% 	Therefore, consider the derivative
+% 	\begin{align*}
+% 		&\lim_{u\to 0^+}u^{-1}\Bigg(\mathbb E\left[\psi( \mathcal R(L(t+u),\bs A(t+u),\varphi(t+u)),\varphi(t+u) )   \mid L(t)=\ell,\bs A(t)=\bs a, \varphi(t)=i \right]
+% 		\\&{}-\int_{x\in\calD_{\ell,i}}\bs a\bs v_{\ell,i}(x)\psi(x,i)\wrt x \Bigg)
+% 		\\&= \lim_{u\to 0^+} u^{-1}\Bigg(\int_{x\in[0,\infty)} \bs a e^{(c_i\bs S + T_{ii}\bs I)u}e^{\bs Sx}\bs s\psi(\ell\Delta+m(x),i)\wrt x 
+% 		%
+% 		\\&\quad{}+\sum_{j\in\calS_-}\int_{x\in[0,\infty)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}T_{ij}e^{(c_j\bs S + T_{jj}\bs I)(u-v)}e^{\bs S x}\bs s\psi(\ell\Delta+m(x),j)\wrt v\wrt x 
+% 		%
+% 		\\&\quad{}+\sum_{j\in\calS_+}\int_{x\in[0,\infty)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}T_{ij}\bs D e^{(c_j\bs S + T_{jj}\bs I)(u-v)}e^{\bs S x}\bs s\psi((\ell+1)\Delta-m(x),j)\wrt v\wrt x 
+% 		%
+% 		\\&\quad{}+\int_{x\in[0,\infty)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}c_i\bs s\bs \alpha e^{(c_i\bs S + T_{ii}\bs I)(u-v)}e^{\bs S x}\bs s\psi((\ell-1)\Delta+m(x),i)\wrt x 
+% 		%
+% 		\\&\quad{}+o(u^2)- \int_{x=0}^\infty\bs ae^{\bs Sx}\bs s\psi(\ell\Delta+m(x),i)\wrt x\Bigg).
+% 		%
+% 		\\&= \lim_{u\to 0^+}u^{-1}\Bigg(\int_{x\in[c_iu,\infty)} \bs a e^{\bs Sx}\bs se^{T_{ii}u}\psi(\ell\Delta+m(x-c_iu),i)\wrt x
+% 		\\&\quad{}+\int_{x=0}^{c_iu}\bs a e^{\bs Sx}\bs s e^{T_{ii}u} \psi((\ell-1)\Delta+m(\Delta+x-c_iu)),i)\wrt x
+% 		\\&\quad{}-\int_{x=0}^\infty\bs ae^{\bs Sx}\bs s\psi(\ell\Delta+m(x),i)\wrt x\Bigg)
+% 		%
+% 		\\&\quad{}+\lim_{u\to 0^+}u^{-1}\Bigg(\int_{x=0}^{c_iu}\bs a e^{\bs Sx}\bs s e^{T_{ii}u} r_2  \wrt x
+% 		%
+% 		\\&\quad{}+\sum_{j\in\calS_-}\int_{x\in[0,\infty)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}T_{ij}e^{(c_j\bs S + T_{jj}\bs I)(u-v)}e^{\bs S x}\bs s\psi(\ell\Delta+m(x),j)\wrt v\wrt x 
+% 		%
+% 		\\&\quad{}+\sum_{j\in\calS_+}\int_{x\in[0,\infty)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}T_{ij}\bs D e^{(c_j\bs S + T_{jj}\bs I)(u-v)}e^{\bs S x}\bs s\psi((\ell+1)\Delta-m(x),j)\wrt v\wrt x 
+% 		%
+% 		\\&\quad{}+o(u^2)\Bigg).
+% 	\end{align*}
+% 	The second limit is less than or equal to 
+% 	\begin{align*}
+% 		&\lim_{u\to 0^+}u^{-1}\Bigg(\int_{x=0}^{c_iu}\bs a e^{\bs Sx}\bs s\wrt xe^{T_{ii}u}r_2 + \left|\sum_{j\in\calS_+}uT_{ij}\right|F + \left|\sum_{j\in\calS_i}uT_{ij}\right|F + o(u^2)\Bigg) = \bs a \bs sr_2 + |T_{jj}|F.
+% 	\end{align*}
+% 	The first limit is 
+% 	\begin{align*}
+% 		&\lim_{u\to 0^+}u^{-1}\Bigg(\int_{x\in[c_iu,\infty)} \bs a e^{\bs Sx}\bs se^{T_{ii}u}\psi(\ell\Delta+m(x-c_iu),i)\wrt x
+% 		\\&\quad{}+\int_{x=0}^{c_iu}\bs a e^{\bs Sx}\bs s e^{T_{ii}u} \psi((\ell-1)\Delta+m(\Delta+x-c_iu)),i)\wrt x
+% 		\\&\quad{}-\int_{x=0}^\infty\bs ae^{\bs Sx}\bs s\psi(\ell\Delta+m(x),i)\wrt x\Bigg)
+% 		%
+% 		\\&=\lim_{u\to 0^+}u^{-1}\Bigg(\int_{x\in[c_iu,\infty)} \bs a e^{\bs Sx}\bs se^{T_{ii}u}\psi(\ell\Delta+m(x-c_iu),i)\wrt x
+% 		\\&\quad{}+\int_{x=0}^{c_iu}\bs a e^{\bs Sx}\bs s e^{T_{ii}u} \psi(\ell\Delta - |x-c_iu|)\wrt x
+% 		\\&\quad{}-\int_{x=0}^\infty\bs ae^{\bs Sx}\bs s\psi(\ell\Delta+m(x),i)\wrt x\Bigg)
+% 		%
+% 		\\&=\lim_{u\to 0^+}u^{-1}\Bigg(\int_{x\in[c_iu,\Delta)} \bs a e^{\bs Sx}\bs se^{T_{ii}u}\psi(\ell\Delta+(x-c_iu),i)\wrt x
+% 		\\&\quad{}+\int_{x=0}^{c_iu}\bs a e^{\bs Sx}\bs s e^{T_{ii}u} \psi(\ell\Delta - |x-c_iu|)\wrt x
+% 		\\&\quad{}+\int_{x\in[\Delta,\infty)} \bs a e^{\bs Sx}\bs se^{T_{ii}u}\psi(\ell\Delta+m(x-c_iu),i)\wrt x
+% 		\\&\quad{}-\int_{x=0}^\infty\bs ae^{\bs Sx}\bs s\psi(\ell\Delta+m(x),i)\wrt x\Bigg)
+% 		%
+% 		\\&=\lim_{u\to 0^+}u^{-1}\Bigg(\int_{x\in[0,\Delta)} \bs a e^{\bs Sx}\bs se^{T_{ii}u}\psi(\ell\Delta+(x-c_iu),i)\wrt x
+% 		\\&\quad{}+\int_{x\in[\Delta,\infty)} \bs a e^{\bs Sx}\bs se^{T_{ii}u}\psi(\ell\Delta+m(x-c_iu),i)\wrt x
+% 		\\&\quad{}-\int_{x=0}^\infty\bs ae^{\bs Sx}\bs s\psi(\ell\Delta+m(x),i)\wrt x\Bigg)
+% 		%
+% 		\\&=\lim_{u\to 0^+}u^{-1}\Bigg(\int_{x\in[0,\Delta)} \bs a e^{\bs Sx}\bs se^{T_{ii}u}\psi(\ell\Delta+(x-c_iu),i)\wrt x-\int_{x=0}^\Delta\bs ae^{\bs Sx}\bs s\psi(\ell\Delta+x,i)\wrt x
+% 		\\&\quad{}+\int_{x\in[\Delta,\infty)} \bs a e^{\bs Sx}\bs se^{T_{ii}u}\psi(\ell\Delta+m(x-c_iu),i)\wrt x -\int_{x=\Delta}^\infty\bs ae^{\bs Sx}\bs s\psi(\ell\Delta+m(x),i)\wrt x\Bigg)
+% 		%
+% 		\\&= \lim_{u\to 0^+}u^{-1}\Bigg(\int_{x=0}^\Delta\bs ae^{\bs Sx}\bs s\left|e^{T_{ii}u}\psi(\ell\Delta+(x-c_iu),i) - \psi(\ell\Delta+x,i)\wrt x\right|
+% 		\\&\quad{}+\int_{x\in[\Delta,\infty)} \bs a e^{\bs Sx}\bs se^{T_{ii}u}\left|\psi(\ell\Delta+m(x-c_iu),i) -\psi(\ell\Delta+m(x),i)\right|\wrt x\Bigg)
+% 		%
+% 		\\&\leq \lim_{u\to 0^+}u^{-1}\Bigg(\int_{x=0}^\Delta\bs ae^{\bs Sx}\bs s L^{\psi}|T_{ii}||c_iu|
+% 		+\int_{x\in[\Delta,\infty)} \bs a e^{\bs Sx}\bs se^{T_{ii}u}L^{\psi}|T_{ii}||c_iu|\wrt x\Bigg)
+% 		%
+% 		\\&= \lim_{u\to 0^+}u^{-1} L^{\psi}|T_{ii}||c_iu|
+% 	\end{align*}
+% \end{proof}
 
 % \begin{rem}
 % 	While the convergence result implies a loose bound on the rate of convergence, it applies to a wide class of QBD-RAP constructions. The main cause of the loose bound on the convergence rate is due to our reliance on Chebyshev's inequality. This is necessary as we try to make minimal assumptions about the matrix-exponential distributions used in the construction. In practice, we use a class of \emph{concentrated matrix-exponential distributions} found numerically in \citep{hht2020}, and for which there is relatively little known about their properties. This necessitates the generality of the convergence result. 
 % \end{rem}
 
 \section{Extension to arbitrary (but fixed) discretisation structures}
-To conclude this chapter we include some remarks as to how to extend the convergence results to arbitrary discretisation structures. 
+To conclude this chapter we include some remarks on how to extend the convergence results to arbitrary discretisation structures. 
 
 Throughout, we have assumed that all intervals are of width \(\Delta\), i.e.~\(|y_{\ell+1}-y_\ell|=\Delta\), and that on every interval the dynamics of the fluid queue are modelled based on the same matrix exponential representation \((\bs \alpha, \bs S, \bs s)\). These assumptions are, in fact, not necessary, but they do serve to simplify the presentation slightly. The convergence results can be extended to use different sequences of matrix exponential representations on each interval, provided that for each sequence of matrix exponential distributions, the variance tends to \(0\). Moreover, we can extend the results to intervals of arbitrary width, provided that the width of the intervals is not arbitrarily small. Here we describe how one would prove such results.
 
@@ -838,7 +1007,7 @@ Let the width of an interval \(\mathcal D_{\ell_0}\) be \(\Delta_{\ell_0}=y_{\el
 Given Lemma~\ref{lem: another bound sdfg}, then an equivalent of Lemma~\ref{lem: another bound 2} remains true, the proof of which follows verbatim except with the use of Lemma~\ref{lem: another bound} replaced by Lemma~\ref{lem: another bound sdfg}. Corollary~\ref{vcor: cdks d} remains true without modification. Lemma~\ref{lem: KajPOw} and Corollary~\ref{cor: lk} remain true without modification provided that \(\lim\limits_{p\to\infty}\var(Z_\ell^{(p)})\to 0\) for all \(\ell\). 
 
 \begin{rem}
-	I suspect that the approximation results can also be extended to approximating so-called \emph{multi-layer fluid queues}, as described in \cite{bo2008}. 
+	I suspect that the convergence results can also be extended to approximating so-called \emph{multi-layer fluid queues}, as described in \cite{bo2008}. 
 \end{rem}
 
 

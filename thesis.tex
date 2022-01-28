@@ -21,6 +21,10 @@
 \usepackage{placeins}
 \allowdisplaybreaks
 \usepackage[shortlabels]{enumitem}
+\usepackage[bbgreekl]{mathbbol}
+\usepackage{amsfonts}
+\usepackage{blkarray}
+\usepackage[symbol]{footmisc}
 
 \newtheorem{defn}{Definition}[chapter]
 \newtheorem{lem}[defn]{Lemma}
@@ -59,6 +63,8 @@
 \theoremstyle{definition}
 \newtheorem{example}[defn]{Example}
 
+\newcommand{\exampleFloatBarrier}{}
+
 \newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
 \newcommand{\wrt}{\, \mathrm{d}} 
 \newcommand{\diag}{\mathrm{diag}} 
@@ -72,6 +78,7 @@
 \newcommand{\vligne}[1]{\begin{bmatrix} #1 \end{bmatrix}}
 \newcommand{\Ydp}{\bm{Y}_{\bm{\alpha}}^{(p)}}
 \newcommand{\Yd}{\bm{Y}_{\bm{\alpha}}}
+\newcommand{\tr}{'}%{^{\mbox{\tiny T}}}
 
 
 \begin{document}
@@ -103,10 +110,12 @@
 
 \appendix
 % Import the appendices 
-\include{appendix1/appendix} 
-\include{appendix2/appendix} 
-\include{appendix3/appendix} 
-\include{appendix4/appendix} 
+\include{appendix_math_background/appendix}  
+\include{appendix_dg_toy/appendix} 
+\include{appendix_properties_of_DG_B/appendix} 
+\include{appendix_closing_operators/appendix} 
+\include{appendix_convergence/appendix} 
+\include{appendix_kronecker/appendix} 
 
 \backmatter
 % Add the bibliography to the table of contents

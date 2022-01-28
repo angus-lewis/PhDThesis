@@ -1,6 +1,6 @@
 %!TEX root = ../thesis.tex
 \chapter{A stochastic modelling approach to approximating fluid queues\label{sec: construction and modelling}}
-In this chapter we develop a new discretisation of a fluid queue using a \emph{quasi-birth-and-death process with rational arrival process components} (QBD-RAP). In the following chapter, Chapter \ref{sec: conv} we prove the scheme converges weakly. To improve upon the discretisation of \cite{bo2013}, we argue that the shift from QBD to QBD-RAP is necessary. The QBD construction of \cite{bo2013} uses Erlang distributions to approximate the deterministic time that the fluid queue spends in an interval on the event that the phase is constant -- it is well known that the Erlang distribution is the distribution with the smallest variance in the class of Phase-type distributions of a given order \cite{as1987}, and in this sense is the best approximation to the determinstic behaviour we want to capture. 
+In this chapter we develop a new discretisation of a fluid queue using a \emph{quasi-birth-and-death process with rational arrival process components} (QBD-RAP). In the following chapter, Chapter \ref{sec: conv} we prove the scheme converges weakly. To improve upon the discretisation of \cite{bo2013}, we argue that the shift from QBD to QBD-RAP is necessary. The QBD construction of \cite{bo2013} uses Erlang distributions to approximate the deterministic time that the fluid queue spends in an interval on the event that the phase is constant -- it is well known that the Erlang distribution is the distribution with the smallest variance in the class of Phase-type distributions of a given order \cite{as1987}, and in this sense is the best approximation to the deterministic behaviour we want to capture. 
 
 By choosing a matrix-exponential distribution with sufficiently small variance, the QBD-RAP approximation can be made arbitrarily accurate. Due to its stochastic interpretation, the QBD-RAP discretisation ensures solutions are positive, even when discontinuities are present. Unlike slope limiters and post-hoc filtering, for the QBD-RAP the positivity preserving nature is a property of the discretised operator. 
 
@@ -863,7 +863,7 @@ A third option is to approximate \(\mathbb P(\bs X(t)\in (\wrt x, j)\mid \bs X(0
 \begin{align}
 %	&\mathbb P(X(t)\in \wrt x  , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i) \nonumber
 	\label{eqn: density approx 4+}&
-		\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in (\ell, \wrt \bs a,j)\mid \bs Y(0) = (\ell_0, \bs  a_{\ell,i}(x_0), i)) \bs a \bs v_{\ell,j}(x) \wrt x ,
+		\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in (\ell, \wrt \bs a,j)\mid \bs Y(0) = (\ell_0, \bs  a_{\ell_0,i}(x_0), i)) \bs a \bs v_{\ell,j}(x) \wrt x ,
 \end{align}
 {where}
 \begin{align}
@@ -972,7 +972,7 @@ The operator \({\bs v}(x)\) is a choice which forms part of the definition of th
 % 	Some basic numerical experiments suggest this might work and could be investigated as further research. Since this reconstruction does not have a stochastic interpretation, and does not enforce positivity, we do not persue it further here. 
 % \end{rem}
 
-
+\section{Approximating Fluid-fluid queues}
 
 
 
