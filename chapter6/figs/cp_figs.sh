@@ -32,6 +32,7 @@ cp /Users/anguslewis/Documents/SFFMProject/DFQExamples.jl/hitting_times_model/re
 cp /Users/anguslewis/Documents/SFFMProject/DFQExamples.jl/hitting_times_model/reflecting_model/transient_distribution/point_mass/datat2/figs/l1_cdf_error_formatted.pdf '/Users/anguslewis/Documents/PhDThesis/chapter6/figs/hitting_times_model/reflecting_model/transient_distribution/point_mas_t_2.1'
 cp /Users/anguslewis/Documents/SFFMProject/DFQExamples.jl/hitting_times_model/reflecting_model/transient_distribution/point_mass/datat2/figs/L1_cell_probs_error_formatted.pdf '/Users/anguslewis/Documents/PhDThesis/chapter6/figs/hitting_times_model/reflecting_model/transient_distribution/point_mas_t_2.1'
 cp /Users/anguslewis/Documents/SFFMProject/DFQExamples.jl/hitting_times_model/reflecting_model/transient_distribution/point_mass/datat2/figs/ks_error_formatted.pdf '/Users/anguslewis/Documents/PhDThesis/chapter6/figs/hitting_times_model/reflecting_model/transient_distribution/point_mas_t_2.1'
+cp /Users/anguslewis/Documents/SFFMProject/DFQExamples.jl/hitting_times_model/reflecting_model/transient_distribution/point_mass/datat2/figs/order_21_CDFs_formatted.pdf '/Users/anguslewis/Documents/PhDThesis/chapter6/figs/hitting_times_model/reflecting_model/transient_distribution/point_mas_t_2.1'
 
 cp /Users/anguslewis/Documents/SFFMProject/DFQExamples.jl/wave/func_count_1/mesh_comp/figs/pdf_formatted.pdf /Users/anguslewis/Documents/PhDThesis/chapter6/figs/wave/fun1
 cp /Users/anguslewis/Documents/SFFMProject/DFQExamples.jl/wave/func_count_1/mesh_comp/figs/meshs_l1_cdf_error_formatted.pdf /Users/anguslewis/Documents/PhDThesis/chapter6/figs/wave/fun1
@@ -51,6 +52,7 @@ cp /Users/anguslewis/Documents/SFFMProject/DFQExamples.jl/wave/func_count_4/mesh
 cp /Users/anguslewis/Documents/SFFMProject/DFQExamples.jl/wave/func_count_6/mesh_comp/figs/meshs_l2_pdf_error_formatted.pdf /Users/anguslewis/Documents/PhDThesis/chapter6/figs/wave/fun6
 cp /Users/anguslewis/Documents/SFFMProject/DFQExamples.jl/wave/func_count_6/mesh_comp/figs/meshs_ks_error_formatted.pdf /Users/anguslewis/Documents/PhDThesis/chapter6/figs/wave/fun6
 cp /Users/anguslewis/Documents/SFFMProject/DFQExamples.jl/wave/func_count_6/mesh_comp/figs/L1_cell_probs.pdf /Users/anguslewis/Documents/PhDThesis/chapter6/figs/wave/fun6
+cp /Users/anguslewis/Documents/SFFMProject/DFQExamples.jl/wave/func_count_6/mesh_comp/figs/order_21_PDFs_formatted.pdf /Users/anguslewis/Documents/PhDThesis/chapter6/figs/wave/fun6
 
 cp /Users/anguslewis/Documents/SFFMProject/DFQExamples.jl/reconstructions/func_count_1/mesh_comp/figs/pdfs_formatted.pdf /Users/anguslewis/Documents/PhDThesis/chapter6/figs/comp/fun1
 cp /Users/anguslewis/Documents/SFFMProject/DFQExamples.jl/reconstructions/func_count_1/mesh_comp/figs/cdfs_formatted.pdf /Users/anguslewis/Documents/PhDThesis/chapter6/figs/comp/fun1

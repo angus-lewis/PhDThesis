@@ -1,0 +1,44 @@
+Fit log(KS) = β₀ + β₁log(N), for method DG
+LinearModel{GLM.LmResp{Vector{Float64}}, GLM.DensePredChol{Float64, CholeskyPivoted{Float64, Matrix{Float64}}}}:
+
+Coefficients:
+─────────────────────────────────────────────────────────────────────
+        Coef.   Std. Error         t  Pr(>|t|)  Lower 95%   Upper 95%
+─────────────────────────────────────────────────────────────────────
+x1  -0.704061  0.000107824  -6529.74    <1e-14  -0.704361  -0.703762
+x2  -0.026442  9.00302e-5    -293.70    <1e-09  -0.026692  -0.0261921
+─────────────────────────────────────────────────────────────────────
+
+Fit log(KS) = β₀ + β₁log(N), for method DG_limit
+LinearModel{GLM.LmResp{Vector{Float64}}, GLM.DensePredChol{Float64, CholeskyPivoted{Float64, Matrix{Float64}}}}:
+
+Coefficients:
+──────────────────────────────────────────────────────────
+    Coef.  Std. Error    t  Pr(>|t|)  Lower 95%  Upper 95%
+──────────────────────────────────────────────────────────
+x1    NaN         NaN  NaN       NaN        NaN        NaN
+x2    NaN         NaN  NaN       NaN        NaN        NaN
+──────────────────────────────────────────────────────────
+
+Fit log(KS) = β₀ + β₁log(N), for method Unif
+LinearModel{GLM.LmResp{Vector{Float64}}, GLM.DensePredChol{Float64, CholeskyPivoted{Float64, Matrix{Float64}}}}:
+
+Coefficients:
+────────────────────────────────────────────────────────────────────
+         Coef.  Std. Error        t  Pr(>|t|)  Lower 95%   Upper 95%
+────────────────────────────────────────────────────────────────────
+x1  -0.536817   0.00236822  -226.68    <1e-08  -0.543392  -0.530242
+x2  -0.0953687  0.00197741   -48.23    <1e-05  -0.100859  -0.0898785
+────────────────────────────────────────────────────────────────────
+
+Fit log(KS) = β₀ + β₁log(N), for method QBDRAP
+LinearModel{GLM.LmResp{Vector{Float64}}, GLM.DensePredChol{Float64, CholeskyPivoted{Float64, Matrix{Float64}}}}:
+
+Coefficients:
+─────────────────────────────────────────────────────────────────────
+         Coef.  Std. Error        t  Pr(>|t|)   Lower 95%   Upper 95%
+─────────────────────────────────────────────────────────────────────
+x1  -0.611344   0.00426492  -143.34    <1e-07  -0.623185   -0.599503
+x2  -0.0783993  0.00356111   -22.02    <1e-04  -0.0882865  -0.0685121
+─────────────────────────────────────────────────────────────────────
+
