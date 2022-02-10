@@ -20,3 +20,8 @@ unnormalised
 Kolmogorov-Smirnov
 CDFs
 PDE
+Gauss-Lobatto
+Riccati
+Markovian
+non-oscilatory
+resolvent

@@ -1,0 +1,1 @@
+{"rule":"COMMA_COMPOUND_SENTENCE","sentence":"^\\QThe sojourn time in a given interval on the event that the phase of the fluid is constant is a deterministic event and it is known that the Erlang distribution is the least-variable Phase-type distribution so, in this sense, the best approximation to this deterministic sojourn time.\\E$"}

@@ -1,6 +1,6 @@
 \documentclass[12pt,a4paper, twoside]{book}
-\title{My beautiful dissertation}
-\author{My Name}
+\title{Approximating fluid queues}
+\author{Angus Lewis}
 \date{\today}
 \def\degree{Doctor of Philosophy}
 \def\discipline{Applied Mathematics}
@@ -26,7 +26,7 @@
 \usepackage{blkarray}
 \usepackage[symbol]{footmisc}
 
-\newtheorem{defn}{Definition}[chapter]
+\newtheorem{defn}{Definition}[chapter] 
 \newtheorem{lem}[defn]{Lemma}
 \newtheorem{prop}[defn]{Proposition}
 \newtheorem{theo}[defn]{Theorem}
@@ -100,19 +100,21 @@
 \mainmatter
 
 % Import the chapter files
+\include{intro/chapter}
 \include{chapter1/chapter}
 \include{chapter2/chapter}
 \include{chapter3/chapter}
 \include{chapter4/chapter}
 \include{chapter5/chapter}
 \include{chapter6/chapter}
+\include{chapter7/chapter}
 % add as many as you like
 
 \appendix
 % Import the appendices 
-\include{appendix_math_background/appendix}  
+% \include{appendix_math_background/appendix}  
 \include{appendix_dg_toy/appendix} 
-\include{appendix_properties_of_DG_B/appendix} 
+% \include{appendix_properties_of_DG_B/appendix} 
 \include{appendix_closing_operators/appendix} 
 \include{appendix_convergence/appendix} 
 \include{appendix_kronecker/appendix} 

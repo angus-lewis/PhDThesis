@@ -20,7 +20,7 @@ The Laplace transform of the fluid queue corresponding to (\ref{eqn: k0jJ0}) is
 \end{align}
 \(m\geq 0\).
 
-The second term of (\ref{eqn: k0jJ0}) is a linear combination of \(\widehat{f}_{m+1,-,+}^{\ell_0,(p)}(\lambda)(x,j;x_0,k)\) which converges to \(\widehat \mu_{m,-,+}^{\ell_0}(\lambda)(x,j;x_0,i)\), so there are no issues here. The first term of (\ref{eqn: k0jJ0}) creates significantly more work. Essentially, we need to derive more bounds, analogous to the results from Appendix~\ref{app:tand}, but with the initial vector \(\bs a_{\ell_0,i}(x_0)\bs D\). 
+The second term of (\ref{eqn: k0jJ0}) is a linear combination of \(\widehat{f}_{m+1,-,+}^{\ell_0,(p)}(\lambda)(x,j;x_0,k)\) which converges to \(\widehat \mu_{m,-,+}^{\ell_0}(\lambda)(x,j;x_0,i)\), so there are no issues here. The first term of (\ref{eqn: k0jJ0}) creates significantly more work. Essentially, we need to derive more bounds, analogous to the results from Chapter~\ref{sec: conv}, but with the initial vector \(\bs a_{\ell_0,i}(x_0)\bs D\). 
 
 Analogously, for \(k\in\calS_{-0}\), \(m\geq 0\), we also have 
 \begin{align*}
@@ -114,7 +114,7 @@ Theorem~\ref{thm: a thm2!} below is analogous to Theorem~\ref{thm: a thm!} and p
 \end{proof}
 
 \section{Technical results}
-As we did in Appendix~\ref{app:tand}, we treat the cases of no changes, and \(m\geq 1\) changes, of phase from \(\calS_+\) to \(\calS_-\) and \(\calS_-\) to \(\calS_+\) separately. We start with the \emph{no changes} case. The following result is analogous to Lemma~\ref{lem: Dcoajc}, though the proof is somewhat more tedious. 
+As we did in Chapter~\ref{sec: conv}, we treat the cases of no changes, and \(m\geq 1\) changes, of phase from \(\calS_+\) to \(\calS_-\) and \(\calS_-\) to \(\calS_+\) separately. We start with the \emph{no changes} case. The following result is analogous to Lemma~\ref{lem: Dcoajc}, though the proof is somewhat more tedious. 
 
 \begin{lem}\label{lem: ppp}
 	Let \(\psi:\calD_{\ell_0}\to \mathbb R\) be bounded \(|\psi(x)|\leq F\) and let \(\lambda >0\). For \(i\in\mathcal S_-,j\in\mathcal S_-\cup\calS_{-0}\), \(x_0\in(0,\Delta)\), 
@@ -303,7 +303,7 @@ As we did in Appendix~\ref{app:tand}, we treat the cases of no changes, and \(m\
 		\bs D\right]
             	\int_{x_n=0}^\infty g_{n}(x_n) e^{\bs{S}x_n} \wrt x_n {\bs v}(x). \label{eqn: c30}
 	\end{align}
-	Here, we ultimately wish to show that (\ref{eqn: c30}) converges to \(g_{1,n}^*(\Delta-x_0,x)\). We do not do this directly, instead, we show that (\ref{eqn: c30}) is `close' to \(w_n(\Delta-x_0,x)\), then rely on the results from Appendix~\ref{app:tand} to get the desired convergence. 
+	Here, we ultimately wish to show that (\ref{eqn: c30}) converges to \(g_{1,n}^*(\Delta-x_0,x)\). We do not do this directly, instead, we show that (\ref{eqn: c30}) is `close' to \(w_n(\Delta-x_0,x)\), then rely on the results from Chapter~\ref{sec: conv} to get the desired convergence. 
 	
 	Observe that by substituting the first matrix \(\bs D\) in the expression above for its integral expression, then (\ref{eqn: c30}) is equal to 
 	\begin{align}

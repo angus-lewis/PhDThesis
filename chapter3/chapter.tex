@@ -33,42 +33,42 @@ Here, the construction of the approximating QBD-RAP is developed intuitively, fr
 It turns out that the corresponding orbit process \(\{\bs A(t)\}\) can be seen to ``track", approximately, how far \(X(t)\) is from the left of a given interval when the phase is in \(\mathcal S_+\), or how far from the right of the interval \(X(t)\) is when the phase is in \(\mathcal S_-\). This leaves us with two problems. 1) on a transition from \(\mathcal S_+\) to \(\mathcal S_-\) or \(\mathcal S_-\) to \(\mathcal S_+\) how must \(\bs A(t)\) jump to retain this information about where \(X(t)\) is within a given interval. 2) how to use the orbit position at time \(t\), \(\bs A(t)\), to obtain an approximation for the density of \(X(t)\). Answers to both problems can be derived from the \emph{residual time} of a matrix exponential distribution. Let us now formalise these concepts some more. 
 
 \section{Time to exit an interval}\label{sec: modelling}
-Consider the partition of the state space of the level of a fluid queue, \([0,M]\) into \(K\) intervals of width \(\Delta = M/(K+1)\), specifically \(\mathcal D_{k,i} = [k\Delta,(k+1)\Delta)\) if \(i\in\mathcal S_+\) and \(\mathcal D_{k,i} = (k\Delta,(k+1)\Delta]\) if \(i\in\mathcal S_-\), \(k=0,\dots,K+1\). The distinction between \(\mathcal D_{k,i}\) for \(i\in\mathcal S_+\) and \(\calS_-\) is a technical one and will be discussed later. For now, one reason we might want to specify the discretisation in this way, is that it ensures the stochastic process 
+Consider the partition of the state space of the level of a fluid queue, \([0,M]\) into \(K\) intervals of width \(\Delta = M/(K+1)\), specifically \(\mathcal D_{k,i} = [k\Delta,(k+1)\Delta)\) if \(i\in\mathcal S_+\) and \(\mathcal D_{k,i} = (k\Delta,(k+1)\Delta]\) if \(i\in\mathcal S_-\), \(k\in\mathcal K^\circ\). The distinction between \(\mathcal D_{k,i}\) for \(i\in\mathcal S_+\) and \(\calS_-\) is a technical one and will be discussed later. For now, one reason we might want to specify the discretisation in this way, is that it ensures the stochastic process 
 \begin{align}
 	\displaystyle \left\{\sum_{k\in\mathcal K}\sum_{i\in\calS} k1(X(t)\in\calD_{k,i})\right\}_{t\geq 0} \label{eqn: kfj}
 \end{align}
 is right-continuous with left limits (c\'adl\'ag). The expression (\ref{eqn: kfj}) is the discrete process of the fluid-queue which the level process of the QBD-RAP will approximate. Let \(y_k = k\Delta\), \(k=0,\dots,K+1\) and \(\calD_k = [y_k,y_{k+1}]\). We now look to model the behaviour of \(\{X(t)\}\) on an interval \(\calD_k\) over the time \([t,t+u]\) given information about the phase process over this time. 
 
 \subsection{Modelling the residual time to exit on no change of phase} 
-We first consider no change of phase in \([t,t+u]\). Suppose that \(\varphi(t)=i\in\mathcal S_+\) and \(X(t) = x\in\mathcal D_{k,i}\). Observe that on the event that there is no change of phase, \(\varphi(t+s) = i\), \(s\in[0,u]\), and at time \(t+s\) the level of the fluid queue is given by \(X(t+s) = x+c_i s\), \(s\in[0,u]\). Further, for \(u>(y_{k+1}-x)/c_i\) the level process \(\{X(t)\}\) leaves the interval \(\mathcal D_{k,i}\) at exactly time \(t+(y_{k+1} - x)/c_i\). Similarly, for \(i\in\mathcal S_-\), \(\{X(t)\}\) leaves the interval \(\mathcal D_{k,i}\) at exactly time \(t+(x-y_k)/|c_i|\) on the event that there is no change of phase on \([t,t+u]\) for \(u>(x-y_k)/|c_i|\). 
+We first consider no change of phase in \([t,t+u]\). Suppose that \(\varphi(t)=i\in\mathcal S_+\) and \(X(t) = x\in\mathcal D_{k,i}\). Observe that on the event that there is no change of phase, \(\varphi(t+s) = i\), \(s\in{}[0,u]\), and at time \(t+s\) the level of the fluid queue is given by \(X(t+s) = x+c_i s\), \(s\in{}[0,u]\). Further, for \(u>(y_{k+1}-x)/c_i\) the level process \(\{X(t)\}\) leaves the interval \(\mathcal D_{k,i}\) at exactly time \(t+(y_{k+1} - x)/c_i\). Similarly, for \(i\in\mathcal S_-\), \(\{X(t)\}\) leaves the interval \(\mathcal D_{k,i}\) at exactly time \(t+(x-y_k)/|c_i|\) on the event that there is no change of phase on \([t,t+u]\) for \(u>(x-y_k)/|c_i|\). 
 
 To approximate the deterministic behaviour observed above, consider a matrix-exponential distribution \(Z\sim ME(\bs \alpha, \bs S, \bs s)\) with mean \(\Delta\) and low variance. As we shall see later, the assumption that \(Z\) has low variance will allow us to claim that \(Z\) can be used to approximate deterministic behaviour. Let \(Z_i\sim ME(\bs \alpha, \bs S_i, \bs s_i)\) where \(\bs S_i = |c_i|\bs S\), \(\bs s_i=-\bs S_i\bs e\), \(i\in\calS\). The random variable \(Z_i\) has mean \(\Delta/|c_i|\). 
 
 Suppose first that \(X(t)=y_k\) and \(\varphi(t)=i\in\mathcal S_+\), so that \(X(t)\) will leave \(\mathcal D_{k,i}\) in exactly \(\Delta/|c_i|\) units of time on the event that the phase process of the QBD-RAP remains in \(i\) for at least this amount of time. A sensible approximation for this deterministic event is to choose the value of the orbit process at time \(t\) to be \(\bs \alpha\), \(\bs A(t)=\bs\alpha\). With this choice, the distribution of time until the next event of the QBD-RAP, on the event that the phase process remains constant will be the distribution of \(Z_i\). Observe, 
 \begin{align*}
-	\mathbb P(Z_i \in ((\Delta-\varepsilon)/|c_i|, (\Delta+\varepsilon)/|c_i|) ) 
-	&= \mathbb P(Z\in (\Delta-\varepsilon, \Delta + \varepsilon))
-%	\\&= \cfrac{\mathbb P(Z_i-u\in (\Delta/|c_i|-u-\varepsilon, \Delta/|c_i|-u + \varepsilon))}{\mathbb P(Z_i-u > 0)} 
-%	\\&\geq \mathbb P(Z-u\in (\Delta-u-\varepsilon, \Delta-u + \varepsilon))
+	\mathbb P(Z_i \in{}((\Delta-\varepsilon)/|c_i|, (\Delta+\varepsilon)/|c_i|) ) 
+	&= \mathbb P(Z\in{}(\Delta-\varepsilon, \Delta + \varepsilon))
+%	\\&= \cfrac{\mathbb P(Z_i-u\in{}(\Delta/|c_i|-u-\varepsilon, \Delta/|c_i|-u + \varepsilon))}{\mathbb P(Z_i-u > 0)} 
+%	\\&\geq \mathbb P(Z-u\in{}(\Delta-u-\varepsilon, \Delta-u + \varepsilon))
 	\\&\geq 1-\cfrac{\var(Z)}{\varepsilon^2},
 \end{align*}
-since, by Chebyshev's inequality, \(\mathbb P(Z\in (\Delta-\varepsilon, \Delta + \varepsilon)) \geq 1- \cfrac{\var(Z)}{\varepsilon^2}\). Choosing \(\varepsilon = \var(Z)^{1/3}\), then 
-\[\mathbb P(R_i(u) \in ((\Delta-\varepsilon)/|c_i|-u, (\Delta+\varepsilon)/|c_i|) )\geq 1-\var(Z)^{1/3} \approx 1, \]
+since, by Chebyshev's inequality, \(\mathbb P(Z\in{}(\Delta-\varepsilon, \Delta + \varepsilon)) \geq 1- \cfrac{\var(Z)}{\varepsilon^2}\). Choosing \(\varepsilon = \var(Z)^{1/3}\), then 
+\[\mathbb P(R_i(u) \in{}((\Delta-\varepsilon)/|c_i|-u, (\Delta+\varepsilon)/|c_i|) )\geq 1-\var(Z)^{1/3} \approx 1, \]
 when \(\var(Z)\) is small. Hence, when the variance of \(Z\) (equivalently \(Z_i\)) is low, then with high probability the time until the next event of the QBD-RAP, given the phase process remains constant will occur at approximately \(\Delta/|c_i|\). 
 
-Now, let \(R_i(u)\) be the residual time, \(R_i(u) = (Z_i-u)1\{Z_i-u>0\}\), \(i\in\calS\). After \(u\in[0,\Delta/|c_i|)\) amount of time has elapsed, on the event that \(\varphi(t+s)=i\), for all \(s\in[0,u)\), then \(X(t+u) = y_k + c_i u\). If the phase remains \(i\) for a further \(\Delta/|c_i|-u\) amount of time, then \(\{X(t)\}\) will leave \(\calD_{k,i}\) at exactly this time. Also at time \(t+u\), given \(Z_i>u\), the distribution of the residual time, \(R_i(u)\), has density 
+Now, let \(R_i(u)\) be the residual time, \(R_i(u) = (Z_i-u)1\{Z_i-u>0\}\), \(i\in\calS\). After \(u\in{}[0,\Delta/|c_i|)\) amount of time has elapsed, on the event that \(\varphi(t+s)=i\), for all \(s\in{}[0,u)\), then \(X(t+u) = y_k + c_i u\). If the phase remains \(i\) for a further \(\Delta/|c_i|-u\) amount of time, then \(\{X(t)\}\) will leave \(\calD_{k,i}\) at exactly this time. Also at time \(t+u\), given \(Z_i>u\), the distribution of the residual time, \(R_i(u)\), has density 
 \[f_{R_i(u)}(r) = \cfrac{\bs\alpha e^{\bs S_i(u+ r) } \bs s_i}{\bs\alpha e^{\bs S_iu } \bs e} = \bs A(t+u) e^{\bs S_i r}  \bs s_i.\]
 Here, the event \(Z_i>u\) approximates the event \(X(t+u)\in\calD_{k,i}\) and we want the residual time, \(R_i(u)\), to approximate the time until \(\{X(t)\}\) leaves \(\calD_{k,i}\). That is, we want \(R_i(u)\) to approximate a deterministic random variable at \(\Delta/|c_i| - u\). To this end, we observe that for \(\varepsilon>0\) and \(u<(\Delta-\varepsilon)/|c_i|\), then
 \begin{align*}
-	&\mathbb P(R_i(u) \in ((\Delta-\varepsilon)/|c_i|-u, (\Delta+\varepsilon)/|c_i|-u) ) 
-	\\&= \mathbb P(Z_i\in ((\Delta-\varepsilon)/|c_i|, (\Delta+\varepsilon)/|c_i|) ) 
-	\\&= \mathbb P(Z\in (\Delta-\varepsilon, \Delta + \varepsilon))
-%	\\&= \cfrac{\mathbb P(Z_i-u\in (\Delta/|c_i|-u-\varepsilon, \Delta/|c_i|-u + \varepsilon))}{\mathbb P(Z_i-u > 0)} 
-%	\\&\geq \mathbb P(Z-u\in (\Delta-u-\varepsilon, \Delta-u + \varepsilon))
+	&\mathbb P(R_i(u) \in{}((\Delta-\varepsilon)/|c_i|-u, (\Delta+\varepsilon)/|c_i|-u) ) 
+	\\&= \mathbb P(Z_i\in{}((\Delta-\varepsilon)/|c_i|, (\Delta+\varepsilon)/|c_i|) ) 
+	\\&= \mathbb P(Z\in{}(\Delta-\varepsilon, \Delta + \varepsilon))
+%	\\&= \cfrac{\mathbb P(Z_i-u\in{}(\Delta/|c_i|-u-\varepsilon, \Delta/|c_i|-u + \varepsilon))}{\mathbb P(Z_i-u > 0)} 
+%	\\&\geq \mathbb P(Z-u\in{}(\Delta-u-\varepsilon, \Delta-u + \varepsilon))
 	\\&\geq 1-\cfrac{\var(Z)}{\varepsilon^2}.
 \end{align*}
 Choosing \(\varepsilon = \var(Z)^{1/3}\), then 
-\[\mathbb P(R_i(u) \in ((\Delta-\varepsilon)/|c_i|-u, (\Delta+\varepsilon)/|c_i|) )\geq 1-\var(Z)^{1/3} \approx 1, \]
+\[\mathbb P(R_i(u) \in{}((\Delta-\varepsilon)/|c_i|-u, (\Delta+\varepsilon)/|c_i|) )\geq 1-\var(Z)^{1/3} \approx 1, \]
 when \(\var(Z)\) is small. 
 That is, when the variance of \(Z\) (equivalently \(Z_i\)) is low, the residual time \(R_i(u)\) will be concentrated around \(\Delta/|c_i| - u\), as required. Figure \ref{fig:residual distributions} gives an example of a density function for a \(Z_i\) with mean \(\Delta=1\) and \(c_i=1\), as well as the density function of \(R_i(0.3)\) conditional on \(Z_i>0.3\) and \(R_i(0.6)\) conditional on \(Z_i>0.6\), for comparison. Observe that the density of the residual life \(R_i(0.3)\) conditional on \(Z_i>0.3\) is concentrated around \(\Delta-0.3 = 0.7\) and, similarly the density of the residual life \(R_i(0.6)\) conditional in \(Z_i>0.6\) is concentrated around \(\Delta-0.6 = 0.4\).
 
@@ -128,19 +128,19 @@ which is exactly (\ref{eqn: orbit i}), the orbit position on the event \(E\). He
 
 % Therefore, at time \(t+u\), if there is a change of phase from \(i\in\calS_+\) to \(j\in\calS_+\) then the orbit position should not change as in both cases the orbit position \(\cfrac{\bs \alpha e^{\bs S_j |c_i|u/|c_j| } }{\bs \alpha e^{\bs S_j |c_i|u/|c_j|} \bs e }\) corresponds to an approximation to \(X(t)\) being \(|c_i|u\) units greater than \(y_k\). 
 
-%Therefore, suppose that at time \(t\), \(X(t)=y_k\), and that at time \(t+u\), \(u\in[0,\Delta/|c_i|)\), before \(\{X(t)\}\) exits the band \(\calD_{k}\), there is a change of phase from \(i\in\calS_+\) to \(j\in\calS_+\). At time \(t+u\) the position of the fluid level is \(X(t+u) = y_k+c_iu\), which is \(|c_i|u\) units to the right of \(y_k\) and \(\Delta-c_iu\) to the left of \(y_{k+1}\), the right-hand boundary of \(\calD_{k,i}\). The residual time until the level of the fluid queue leaves \(\calD_{k,j}\), on the event that it remains in phase \(j\) until this time, is \((\Delta - |c_i|u)/|c_j|\). 
+%Therefore, suppose that at time \(t\), \(X(t)=y_k\), and that at time \(t+u\), \(u\in{}[0,\Delta/|c_i|)\), before \(\{X(t)\}\) exits the band \(\calD_{k}\), there is a change of phase from \(i\in\calS_+\) to \(j\in\calS_+\). At time \(t+u\) the position of the fluid level is \(X(t+u) = y_k+c_iu\), which is \(|c_i|u\) units to the right of \(y_k\) and \(\Delta-c_iu\) to the left of \(y_{k+1}\), the right-hand boundary of \(\calD_{k,i}\). The residual time until the level of the fluid queue leaves \(\calD_{k,j}\), on the event that it remains in phase \(j\) until this time, is \((\Delta - |c_i|u)/|c_j|\). 
 
 Moreover, the residual time \(R_j(|c_i|u/|c_j|)\) has density 
 \[f_{R_j(|c_i|u/|c_j|)}(r) = \cfrac{\bs\alpha e^{\bs S_iu } }{\bs\alpha e^{\bs S_iu } \bs e}e^{\bs S_j r}\bs s_j,\]
 %and corresponds to an orbit position of \(\bs A(t+u) = \cfrac{\bs\alpha e^{\bs S_iu } }{\bs\alpha e^{\bs S_iu } \bs e}\). 
 and 
 \begin{align}
-	&\mathbb P(R_j(|c_i|u/|c_j|) \in ((\Delta-|c_i|u-\varepsilon)/|c_j|, (\Delta-|c_i|u + \varepsilon)/|c_j| )) \nonumber
-	\\&=\mathbb P(Z_j\in ((\Delta-\varepsilon)/|c_j|, (\Delta + \varepsilon)/|c_j|)) 
-	\\&=\mathbb P(Z\in (\Delta-\varepsilon ,  \Delta + \varepsilon )) 
-	% \\&=  \mathbb P(Z_j\in (\Delta/|c_j|-\varepsilon, \Delta/|c_j| + \varepsilon)) 
-%	\\&= \cfrac{\mathbb P(Z_i-u\in (\Delta/|c_i|-u-\varepsilon, \Delta/|c_i|-u + \varepsilon))}{\mathbb P(Z_i-u > 0)} 
-%	\\&\geq \mathbb P(Z-u\in (\Delta-u-\varepsilon, \Delta-u + \varepsilon))
+	&\mathbb P(R_j(|c_i|u/|c_j|) \in{}((\Delta-|c_i|u-\varepsilon)/|c_j|, (\Delta-|c_i|u + \varepsilon)/|c_j| )) \nonumber
+	\\&=\mathbb P(Z_j\in{}((\Delta-\varepsilon)/|c_j|, (\Delta + \varepsilon)/|c_j|)) 
+	\\&=\mathbb P(Z\in{}(\Delta-\varepsilon ,  \Delta + \varepsilon )) 
+	% \\&=  \mathbb P(Z_j\in{}(\Delta/|c_j|-\varepsilon, \Delta/|c_j| + \varepsilon)) 
+%	\\&= \cfrac{\mathbb P(Z_i-u\in{}(\Delta/|c_i|-u-\varepsilon, \Delta/|c_i|-u + \varepsilon))}{\mathbb P(Z_i-u > 0)} 
+%	\\&\geq \mathbb P(Z-u\in{}(\Delta-u-\varepsilon, \Delta-u + \varepsilon))
 %	\\&\geq \cfrac{1-\cfrac{\var(Z_j)}{\varepsilon^2}}{1} 
 	\\&\geq 1-\var(Z)^{1/3} \approx 1.
 \end{align}
@@ -151,7 +151,7 @@ Hence, when the variance of \(Z\) is low, the residual time, \(R_j(|c_i|u/|c_j|)
 Analogous arguments suggest that the same applies for changes of phase from \(i\in\calS_-\) to \(j\in\calS_-\). 
 
 \subsection{On a change of phase from \(i\in\calS_+\) to \(j\in\calS_-\)} 
-Now suppose \(X(t)=y_k\), \(\varphi(t)=i\in\calS_+\), and the phase remains in state \(i\) until there is a change of phase from \(i\in\calS_+\) to \(j\in\calS_-\) at time \(t+u\), \(u\in[0,\Delta/|c_i|)\). %We have reasoned, intuitively, that, for \(i\in\calS_+\) and for \(x=|c_i|u\in[0,\Delta)\), the orbit position \(\bs k(x)\) corresponds to the fluid level position \(X(t) = y_k+x\), that is \(x\) units greater than \(y_k\).  
+Now suppose \(X(t)=y_k\), \(\varphi(t)=i\in\calS_+\), and the phase remains in state \(i\) until there is a change of phase from \(i\in\calS_+\) to \(j\in\calS_-\) at time \(t+u\), \(u\in{}[0,\Delta/|c_i|)\). %We have reasoned, intuitively, that, for \(i\in\calS_+\) and for \(x=|c_i|u\in{}[0,\Delta)\), the orbit position \(\bs k(x)\) corresponds to the fluid level position \(X(t) = y_k+x\), that is \(x\) units greater than \(y_k\).  
 As before, we need to find a matrix \(\bs D(i,j)\) to map the orbit position on the event \(E\) when there is a change of phase from \(i\in\calS_+\) to \(j\in\calS_-\) at time \(t+u\), from \[\bs A(t+u^-) = \bs k(|c_i|u^-),\] 
 to 
 \[\bs A(t+u) = \cfrac{\bs k(u^-)\bs D(i,j)}{\bs k(u^-)\bs D(i,j)\bs e}=\cfrac{\bs\alpha e^{\bs S_iu} \bs D(i,j)}{\bs\alpha e^{\bs S_iu}\bs D(i,j)\bs e}\]
@@ -201,7 +201,7 @@ With this construction, and choosing \(Z\sim Erlang(p,\Delta/p)\), we recover th
 
 % Let \(\bs \Pi = diag\left(\bs \pi \right)\), where \(\vligne{\pi_k}_{k\in\{1,\dots,p\}}=:\bs \pi=\bs \alpha (-\bs{S})^{-1}/m\) and \(m=\bs \alpha (-\bs{S})^{-1}\bs e\). There is a time-reverse representation of a Phase-type distribution given by \((\widetilde{\bs \alpha}, \widetilde{\bs S}, \widetilde{\bs s})\), where \(\widetilde{\bs \alpha} = m\bs s' \bs \Pi \), \(\widetilde{\bs S} = \bs\Pi^{-1}\bs S'\bs \Pi\) and \(\widetilde{\bs s} = \bs \Pi^{-1}\bs \alpha'/m\) \cite[Page 91]{a2008}.
 
-% Rather than use the residual time \(R_i(u)\) to estimate how far \(X(t)\) is from the edge of an interval, we can use the information contained in \(J(t+u)\). Suppose there is a change of phase of the fluid queue from \(i\in\calS_+\) to \(j\in\calS_-\) at time \(t+u\) at which time \(J(t+u)=k\). At a random time before \(t+u\) the Phase-type random variable was initialised. Let \(C_{t+u}\) be the \emph{age} of the Phase-type distribution at time \(t+u\), that is, the time since the Phase-type random variable was initialised. Suppose that \(\varphi(v)=i\), \(v\in [t+u-C_{t+u}, t+u)\), that is, there has been no change of phase of the fluid queue during the current life of the Phase-type random variable. Given \(J(t+u)=k\), we wish to construct an approximation to the distribution of \(C_{t+u}\). 
+% Rather than use the residual time \(R_i(u)\) to estimate how far \(X(t)\) is from the edge of an interval, we can use the information contained in \(J(t+u)\). Suppose there is a change of phase of the fluid queue from \(i\in\calS_+\) to \(j\in\calS_-\) at time \(t+u\) at which time \(J(t+u)=k\). At a random time before \(t+u\) the Phase-type random variable was initialised. Let \(C_{t+u}\) be the \emph{age} of the Phase-type distribution at time \(t+u\), that is, the time since the Phase-type random variable was initialised. Suppose that \(\varphi(v)=i\), \(v\in{}[t+u-C_{t+u}, t+u)\), that is, there has been no change of phase of the fluid queue during the current life of the Phase-type random variable. Given \(J(t+u)=k\), we wish to construct an approximation to the distribution of \(C_{t+u}\). 
 
 % According to \cite{hmp2017}, the distribution of \(C_{t+u}\) depends on the method of observation. Here, the Phase-type distribution is observed after an exponential time with rate \(-T_{ii}\). Proposition 4.1, \cite{hmp2017} states that the cumulative distribution function (CDF) of \(C_{t+u}\), given \(J(t+u)=k\) and the process is observed after an exponential time with rate \(-T_{ii}\) is 
 % \[\mathbb P(C_{t+u}\leq a )=1-\cfrac{\bs \alpha e^{(\bs S_i + T_{ii}\bs I)a}(-(\bs S_i+ T_{ii}\bs I))^{-1}\bs e_k}{\bs \alpha (-(\bs S_i+ T_{ii}\bs I))^{-1}\bs e_k}.\]
@@ -230,7 +230,7 @@ With this construction, and choosing \(Z\sim Erlang(p,\Delta/p)\), we recover th
 % With this construction, and choosing \(Z\sim Erlang(p,\Delta/p)\), we recover the discretisation of \cite{bo2013} with discretisation parameter \(\Delta/p\).
 
 \paragraph{The matrix-exponential case}
-% Now suppose \(X(t)=y_k\), \(\varphi(t)=i\in\calS_+\), and the phase remains in state \(i\) until there is a change of phase from \(i\in\calS_+\) to \(j\in\calS_-\) at time \(t+u\), \(u\in[0,\Delta/|c_i|)\). We have reasoned, intuitively, that, for \(i\in\calS_+\) and for \(x=|c_i|u\in[0,\Delta)\), the orbit position \(\cfrac{\bs\alpha e^{\bs Sx} }{\bs\alpha e^{\bs Sx } \bs e}\) corresponds to the fluid level position \(X(t) = y_k+x\), that is \(x\) units greater than \(y_k\). Correspondingly, the residual time \(R_i(u)\) \emph{approximates} the fact that \(X(t)\) is \(\Delta-x\) units less than \(y_{k+1}\). We have also reasoned that for \(j\in\calS_-\) the orbit position \(\cfrac{\bs\alpha e^{\bs Sx} }{\bs\alpha e^{\bs Sx } \bs e}\) corresponds to the fluid level position \(X(t) = y_{k+1}-x\), that is \(x\) units less than \(y_{k+1}\), and the residual time \(R_i(u)\) \emph{approximates} the fact that \(X(t)\) is \(\Delta-x\) units greater than \(y_k\). Notice that in positive phases the orbit position describes the exact position of \(X(t)\) from the left-hand boundary of the interval but only approximates the position of \(X(t)\) from the right-hand boundary of the interval, and vice-versa for negative phases. 
+% Now suppose \(X(t)=y_k\), \(\varphi(t)=i\in\calS_+\), and the phase remains in state \(i\) until there is a change of phase from \(i\in\calS_+\) to \(j\in\calS_-\) at time \(t+u\), \(u\in{}[0,\Delta/|c_i|)\). We have reasoned, intuitively, that, for \(i\in\calS_+\) and for \(x=|c_i|u\in{}[0,\Delta)\), the orbit position \(\cfrac{\bs\alpha e^{\bs Sx} }{\bs\alpha e^{\bs Sx } \bs e}\) corresponds to the fluid level position \(X(t) = y_k+x\), that is \(x\) units greater than \(y_k\). Correspondingly, the residual time \(R_i(u)\) \emph{approximates} the fact that \(X(t)\) is \(\Delta-x\) units less than \(y_{k+1}\). We have also reasoned that for \(j\in\calS_-\) the orbit position \(\cfrac{\bs\alpha e^{\bs Sx} }{\bs\alpha e^{\bs Sx } \bs e}\) corresponds to the fluid level position \(X(t) = y_{k+1}-x\), that is \(x\) units less than \(y_{k+1}\), and the residual time \(R_i(u)\) \emph{approximates} the fact that \(X(t)\) is \(\Delta-x\) units greater than \(y_k\). Notice that in positive phases the orbit position describes the exact position of \(X(t)\) from the left-hand boundary of the interval but only approximates the position of \(X(t)\) from the right-hand boundary of the interval, and vice-versa for negative phases. 
 
 % As before, we need to find a matrix \(\bs D(i,j)\) to map the orbit position on the event \(E\), \(\bs A(t+u^-) = \cfrac{\bs\alpha e^{\bs S_iu} }{\bs\alpha e^{\bs S_iu } \bs e}\) to 
 % \[\bs A(t+u) = \cfrac{\bs A(t+u^-)\bs D(i,j)}{\bs A(t+u^-)\bs D(i,j)\bs e}=\cfrac{\cfrac{\bs\alpha e^{\bs S_iu} }{\bs\alpha e^{\bs S_iu } \bs e}\bs D(i,j)}{\cfrac{\bs\alpha e^{\bs S_iu} }{\bs\alpha e^{\bs S_iu } \bs e}\bs D(i,j)\bs e}=\cfrac{\bs\alpha e^{\bs S_iu} \bs D(i,j)}{\bs\alpha e^{\bs S_iu}\bs D(i,j)\bs e}\]
@@ -279,7 +279,7 @@ using a trapezoidal rule as follows. For the CMEs considered here, the vector fu
 \end{align}
 where the sum converges as it is a geometric series and \(\lambda <0\), \(\rho >0\). 
 
-To approximate (\ref{eqn: hdsv45KJ}) numerically, we first partition \(\left[0,\rho \right)\) into \(N\) equal-width intervals \(\left[t_n,t_{n+1}\right)\), where \(t_n = (n-1)\rho /N\), \(n=1,2,...,N+1\). On \(\left[t_n,t_{n+1}\right)\) we approximate the orbit \(\bs k(t)\) by a constant \(\bs k(t) \approx \bs k_n := \cfrac{1}{2}\left( \bs k(t_n) + \bs k(t_{n+1}) \right), \, t \in \left[t_n,t_{n+1}\right)\). Substituting this approximation into the expression for \(\bs{D}\) gives 
+To approximate (\ref{eqn: hdsv45KJ}) numerically, we first partition \(\left[0,\rho \right)\) into \(N\) equal-width intervals \(\left[t_n,t_{n+1}\right)\), where \(t_n = (n-1)\rho /N\), \(n=1,2,...,N+1\). On \(\left[t_n,t_{n+1}\right)\) we approximate the orbit \(\bs k(t)\) by a constant \(\bs k(t) \approx \bs k_n := \cfrac{1}{2}\left( \bs k(t_n) + \bs k(t_{n+1}) \right), \, t \in{}\left[t_n,t_{n+1}\right)\). Substituting this approximation into the expression for \(\bs{D}\) gives 
 \begin{align*}
 	\bs{D} &\approx \cfrac{1}{1 - e^{\lambda \rho }}\sum_{n=1}^N\int_{t_n}^{t_{n+1}} \bs f(t)\cdot\bs k_n\wrt t
 	\\&=\cfrac{1}{1 - e^{\lambda \rho }}\sum_{n=1}^N\left[e^{\bs{S}t_{n+1}}-e^{\bs{S}t_{n}}\right]\bs e \cdot\bs k_n.
@@ -297,8 +297,8 @@ Let \(X(0)=y_\ell\) and consider the event where \(\left\{\varphi(t)\right\}\) t
 	j_1 & t\in\left[t_1,t_2\right), \\
 	j_2 & t\in\left[t_2,t_3\right),
 \end{cases}\]
-and \(X(t)\in\mathcal D_\ell\), \(t\in[0,t_3)\). 
-On approximating this event, the initial orbit position is \(\bs A(0)=\bs \alpha\). The corresponding sample path of the orbit process on \(t\in[0,t_3)\), is 
+and \(X(t)\in\mathcal D_\ell\), \(t\in{}[0,t_3)\). 
+On approximating this event, the initial orbit position is \(\bs A(0)=\bs \alpha\). The corresponding sample path of the orbit process on \(t\in{}[0,t_3)\), is 
 \begin{align*}
 \bs A(t) &= \begin{cases} 
 	\cfrac{\bs \alpha e^{(\bs{S}_{j_0}+T_{{j_0}{j_0}}\bs{I})t}}{\bs \alpha e^{(\bs{S}_{j_0}+T_{{j_0}{j_0}}\bs{I})t}\bs e} & t\in\left[0,t_1\right), \\[10pt]
@@ -319,7 +319,7 @@ for some matrices \(\bs{D}({j_0},{j_1})\) and \(\bs{D}({j_2},{j_1})\). Notice th
 
 Associating \({j_1}\) with \(\calS_+\), amounts to choosing \(\bs{D}({j_0},{j_1})=\bs{I}\) and \(\bs{D}({j_1},{j_2})=\bs{D}\); associating \({j_1}\) with \(\calS_-\), amounts to choosing \(\bs{D}({j_0},{j_1})=\bs{D}\) and \(\bs{D}({j_1},{j_2})=\bs{I}\). 
 
-There are some consequences to this choice. Let \(k_2\in \calS_+\). Consider an event where the phase process of the fluid queue transitions from \({j_0}\to {j_1}\to k_2\) and there is no change of level. If \({j_1}\) is associated with \(\calS_+\), then \(\bs{D}({j_0},{j_1})=\bs{D}({j_1},k_2)=\bs{I}\) and the corresponding orbit process, given \(\bs A(0) = \bs \alpha\), is 
+There are some consequences to this choice. Let \(k_2\in{}\calS_+\). Consider an event where the phase process of the fluid queue transitions from \({j_0}\to {j_1}\to k_2\) and there is no change of level. If \({j_1}\) is associated with \(\calS_+\), then \(\bs{D}({j_0},{j_1})=\bs{D}({j_1},k_2)=\bs{I}\) and the corresponding orbit process, given \(\bs A(0) = \bs \alpha\), is 
 \begin{align*}
 \bs A(t) &= \begin{cases} 
 	\cfrac{\bs \alpha e^{\bs{S}_{j_0}t}}{\bs \alpha e^{\bs{S}_{{j_0}}t}\bs e} & t\in\left[0,t_1\right), \\[10pt]
@@ -338,7 +338,7 @@ Compare this to if \({j_1}\) is associated with \(\calS_-\). In this case \(\bs{
 	\cfrac{\bs \alpha e^{\bs{S}_{j_0}t_1}\bs{D}\bs{D}e^{\bs{S}_{k_2}(t-t_2)}}{\bs \alpha e^{\bs{S}_{j_0}t_1}\bs{D}\bs{D}e^{\bs{S}_{k_2}(t-t_2)}\bs e} & t\in\left[t_2,t_3\right).
 \end{cases}
 \end{align*}
-Ideally \(\bs D^2=\bs I\), however this is not the case here. Recall that a jump according to \(\bs{D}\) corresponds to approximating the residual life by an expectation. With this interpretation as an approximation, it suggests that we might want to minimise the number of jumps according to \(\bs D\) which occur. Therefore, for \(j_1\in \calS_0\), if transitions \(\calS_+\to j_1\to \calS_+\) occur with high probability compared to transition \(\calS_-\to j_1\to \calS_-\), then this suggests we might want to associate \(j_1\) with \(\calS_+\). Which association is chosen will depend on the parameters of the fluid queue and on which aspects of the model we wish to approximate. Although this advice is based on intuition only, numerical results in Section TBC suggest that it is reasonable. 
+Ideally \(\bs D^2=\bs I\), however this is not the case here. Recall that a jump according to \(\bs{D}\) corresponds to approximating the residual life by an expectation. With this interpretation as an approximation, it suggests that we might want to minimise the number of jumps according to \(\bs D\) which occur. Therefore, for \(j_1\in{}\calS_0\), if transitions \(\calS_+\to j_1\to \calS_+\) occur with high probability compared to transition \(\calS_-\to j_1\to \calS_-\), then this suggests we might want to associate \(j_1\) with \(\calS_+\). Which association is chosen will depend on the parameters of the fluid queue and on which aspects of the model we wish to approximate. Although this advice is based on intuition only, numerical results in Section TBC suggest that it is reasonable. 
 
 % It might be tempting to choose \(\bs D(j_0,j_1)=\bs D(j_1,j_2)=\bs D^{1/2}\) (provided that the square root matrix exists). With this choice \(\bs D(j_0,j_1)\bs D(j_1,j_2)=\bs D\) as desired. However, for sample paths which transition from \(j_0\to j_1\to k\), we have \(\bs D(j_0,j_1)\bs D(j_1,k) = \bs D^{1/2}\bs D(j_1,k)\). 
 
@@ -399,7 +399,7 @@ With this construction, jumps according to the matrix \(\bs D\) occur only on tr
 %
 %Now, we know that, given \(\varphi(t)=i\), and given that \(X(0)=y_k\), then \(X(t)\) has a degenerate distribution which is a point mass at \(t=\Delta\). Thus, we wan to choose \(PH(\bs\alpha, \bs{S})\) such that it approximates the \(\delta\) function as closely as possible. This suggests we choose \(PH(\bs\alpha, \bs{S})\) as an Erlang distribution with mean \(\Delta\) as the Erlang distribution has the lowest coefficient of variation of all PH distributions.
 %
-%Let \(\calS_+=\left\{i\in\calS\mid c_i>0\right\}\), \(\calS_-=\left\{i\in\calS\mid c_i<0\right\}\). Rather than have exactly the same representation \(PH(\bs\alpha, \bs{S})\) for each \(i\in\calS\), consider instead letting \(PH(\bs\alpha, \bs{S})\) for each \(i\in\calS_+\) and \(PH(\wt{\bs\alpha},\wt{\bs{S}})\) for each \(i \in \calS_-\), where \(PH(\wt{\bs\alpha},\wt{\bs S})\) is the time reverse representation. Assume without loss that the phases are ordered such that \(i<j\) for all \(i\in\calS_+,\,j\in\calS_-\). Construct an approximation to the distribution of \(X(t)\in\calD_k\) given \(X(0)=y_k,\,\varphi(0)=i,\, c_i>0\) as \(PH(\bs e_i \otimes \bs \alpha, \bs{Q})\) where 
+%Let \(\calS_+=\left\{i\in\calS\mid c_i>0\right\}\), \(\calS_-=\left\{i\in\calS\mid c_i<0\right\}\). Rather than have exactly the same representation \(PH(\bs\alpha, \bs{S})\) for each \(i\in\calS\), consider instead letting \(PH(\bs\alpha, \bs{S})\) for each \(i\in\calS_+\) and \(PH(\wt{\bs\alpha},\wt{\bs{S}})\) for each \(i \in{}\calS_-\), where \(PH(\wt{\bs\alpha},\wt{\bs S})\) is the time reverse representation. Assume without loss that the phases are ordered such that \(i<j\) for all \(i\in\calS_+,\,j\in\calS_-\). Construct an approximation to the distribution of \(X(t)\in\calD_k\) given \(X(0)=y_k,\,\varphi(0)=i,\, c_i>0\) as \(PH(\bs e_i \otimes \bs \alpha, \bs{Q})\) where 
 %\[\bs{Q} = \left[\begin{array}{ccccc}
 %	T_{11}\bs{I}+|c_1|\bs{S} & T_{12}\bs{I} & \hdots & T_{1,N-1}\bs{I} & T_{1,N}\bs{I} \\
 %	T_{21}\bs{I} & T_{22}\bs{I}+|c_2|\bs{S} & \hdots & T_{2,N-1}\bs{I} & T_{2,N}\bs{I} \\
@@ -424,7 +424,7 @@ With this construction, jumps according to the matrix \(\bs D\) occur only on tr
 %\paragraph{Time-reverse (?) ME renewal processes} 
 %Consider now a ME renewal process defined by \(ME(\bs\alpha, \bs{C})\) which we assume is minimal and of order \(p\). Can we come up with some time-reverse representation of this renewal process. To this end, we now detail some properties of ME renewal processes. 
 %
-%Let \(\bs{D} = \bs c\bs \alpha\) where \(\bs c = -\bs{C}\bs 1\). Asmussen and Bladt \citep{ab1999} gave such a process a stochastic interpretation (in fact, Asmussen and Bladt worked with rational arrival processes, but I think we need only consider ME renewal processes). Let \({\bs v} = span\left\{\alpha, \bs\alpha \bs{S},...,\bs\alpha \bs{S}^{p-1}\right\}\). There exists a vector-valued stochastic process \(\left\{\bs A(t)\right\}_{t}\) with \(\bs A(t)\in {\bs v}\) for all \(t\) and \(\bs A(0)=\bs\alpha\). Suppose \(\{Y_k\}\), \(k=0,1,...\) are the renewal times, and \(Y_0=0\). Between renewal epochs \(\bs A(t)\) moves deterministically according to \(\bs A(t) = \cfrac{\bs A(Y_{N(t)}) e^{\bs{C}(t-Y_{N(t)})}}{\bs A(Y_{N(t)}) e^{\bs{C}(t-Y_{N(t)})}\bs 1}\). \(\bs A(t)\) jumps at rate \(\bs A(t)\bs{D}\bs 1\) at time \(t\), and upon a jump \(\bs A(Y_k) = \cfrac{\bs A(Y_k-) \bs{D}}{\bs A(Y_k-) \bs{D}\bs 1}=\bs \alpha\) where \(Y_k-\) is the left limit at \(Y_k\). Furthermore, \(\left\{\bs A(t)\right\}\) is a strong Markov process and \(E\left[\bs A(t+s) \mid \bs A(t)\right] = \bs A(t)e^{\bs{Q}t}\) where \(\bs{Q} = \bs{C}+\bs{D}\). We know \(\bs{Q}\bs 1=\bs 0\) and \(dev(\bs{Q})=0\), that is, the dominant eigenvalue of \(\bs{Q}\) is 0.
+%Let \(\bs{D} = \bs c\bs \alpha\) where \(\bs c = -\bs{C}\bs 1\). Asmussen and Bladt \citep{ab1999} gave such a process a stochastic interpretation (in fact, Asmussen and Bladt worked with rational arrival processes, but I think we need only consider ME renewal processes). Let \({\bs v} = span\left\{\alpha, \bs\alpha \bs{S},...,\bs\alpha \bs{S}^{p-1}\right\}\). There exists a vector-valued stochastic process \(\left\{\bs A(t)\right\}_{t}\) with \(\bs A(t)\in{}{\bs v}\) for all \(t\) and \(\bs A(0)=\bs\alpha\). Suppose \(\{Y_k\}\), \(k=0,1,...\) are the renewal times, and \(Y_0=0\). Between renewal epochs \(\bs A(t)\) moves deterministically according to \(\bs A(t) = \cfrac{\bs A(Y_{N(t)}) e^{\bs{C}(t-Y_{N(t)})}}{\bs A(Y_{N(t)}) e^{\bs{C}(t-Y_{N(t)})}\bs 1}\). \(\bs A(t)\) jumps at rate \(\bs A(t)\bs{D}\bs 1\) at time \(t\), and upon a jump \(\bs A(Y_k) = \cfrac{\bs A(Y_k-) \bs{D}}{\bs A(Y_k-) \bs{D}\bs 1}=\bs \alpha\) where \(Y_k-\) is the left limit at \(Y_k\). Furthermore, \(\left\{\bs A(t)\right\}\) is a strong Markov process and \(E\left[\bs A(t+s) \mid \bs A(t)\right] = \bs A(t)e^{\bs{Q}t}\) where \(\bs{Q} = \bs{C}+\bs{D}\). We know \(\bs{Q}\bs 1=\bs 0\) and \(dev(\bs{Q})=0\), that is, the dominant eigenvalue of \(\bs{Q}\) is 0.
 %
 %Let \(\bs \pi\) be the left eigenvector of \(\bs{Q}\) corresponding to eigenvalue 0. Assume that \(\pi_i\neq0\), \(i=1,...,p\). If this is not the case then construct an invertible matrix \(\bs{{\bs v}}\) such that \(\bs{{\bs v}}\bs 1=\bs 1\), then consider the equivalent representation of the ME renewal process with \(ME(\bs\alpha \bs{{\bs v}}^{-1}, \bs{{\bs v}}\bs{C}\bs{{\bs v}}^{-1})\), and pray that \(\pi_i\neq0\), \(i=1,...,p\) (can we show that there is always such a \(\bs{{\bs v}}\)?) By choosing \(\bs{{\bs v}}\) such that \(\bs{{\bs v}}\bs 1=\bs 1\), then we maintain that the right eigenvector corresponding to \(\bs{{\bs v}}\bs{C}\bs{{\bs v}}^{-1}\) is still \(\bs 1\). 
 %
@@ -472,7 +472,7 @@ With this construction, jumps according to the matrix \(\bs D\) occur only on tr
 %	\bs c' e^{ \wt \tau_1 \bs{C}'} \bs{D}'e^{ \wt \tau_2 \bs{C}'} \bs{D}'...e^{ \wt \tau_K \bs{C}'}{\bs \alpha'}
 %\end{align*}
 %is there some sort of \emph{adjoint} process \(\wt{\bs A}(t)\), a column vector, such that 
-%\[\mathbb P(\theta_{-t} N \in \cdot \mid \mathcal F_{\left[t,\infty\right)}) = {\wt{\bs v}(\cdot)} \wt{\bs A}(t),\]
+%\[\mathbb P(\theta_{-t} N \in{}\cdot \mid \mathcal F_{\left[t,\infty\right)}) = {\wt{\bs v}(\cdot)} \wt{\bs A}(t),\]
 %where \(\theta_t\) is the shift operator \(\theta_{-t}N\left[t+s,t+s+u\right)=N\left[s,s+u\right)\), and \(\wt{\bs v}(\cdot)\) is a row-vector of basis measures. If so, do we have \(\mathbb E\left[\wt{\bs A}(t-s)|\mathcal F_{\left[t,\infty\right)}\right] = e^{\wt{\bs Q}s}\wt{\bs A}(t),\) and \(\wt{\bs A}(t) = \cfrac{e^{\wt{\bs Q}s}\wt{\bs A}(t)}{\bs e e^{\wt{ \bs Q}s}\wt{\bs A}(t)}\) on \(N\left[0,t\right]=0\)?
 %
 %\section{Phase-Type and ME renewal theory}
@@ -501,13 +501,13 @@ With this construction, jumps according to the matrix \(\bs D\) occur only on tr
 
 
 %\section{SFM approximation}
-%%\paragraph{SFMs} Let \(\left\{\varphi(t)\right\}_{t\geq 0}\) be an irreducible continuous-time Markov Chain (CTMC) with a finite state space \(\mathcal S = \left\{1,...,N\right\}\) and infinitesimal generator \(\bs{T} = \left[T_{ij}\right]_{i,j\in\mathcal S}\). Let \(\left\{(X(t),\varphi(t))\right\}_{t\geq0}\) be a Markovian stochastic fluid model (SFM) with phase variable \(\varphi(t)\) and level variable \(X(t)\in (-\infty,\infty)\). For each \(i\in\mathcal S\) there are rates \(c_i\in\mathbb R\) such that \(\cfrac{\wrt X(t)}{\wrt t} = c_i\) when \(\varphi(t)=i\). The variable \(\left\{X(t)\right\}\) is known as the buffer, or level, of the fluid process. 
+%%\paragraph{SFMs} Let \(\left\{\varphi(t)\right\}_{t\geq 0}\) be an irreducible continuous-time Markov Chain (CTMC) with a finite state space \(\mathcal S = \left\{1,...,N\right\}\) and infinitesimal generator \(\bs{T} = \left[T_{ij}\right]_{i,j\in\mathcal S}\). Let \(\left\{(X(t),\varphi(t))\right\}_{t\geq0}\) be a Markovian stochastic fluid model (SFM) with phase variable \(\varphi(t)\) and level variable \(X(t)\in{}(-\infty,\infty)\). For each \(i\in\mathcal S\) there are rates \(c_i\in\mathbb R\) such that \(\cfrac{\wrt X(t)}{\wrt t} = c_i\) when \(\varphi(t)=i\). The variable \(\left\{X(t)\right\}\) is known as the buffer, or level, of the fluid process. 
 %
 %Partition the set of all phases, \(\mathcal S\), into \(\mathcal S_+ = \left\{i\in\mathcal S\mid c_i>0\right\},\, \mathcal S_- = \left\{i\in\mathcal S\mid c_i<0\right\}, \,\mathcal S_0 = \left\{i\in\mathcal S\mid c_i=0\right\},\). Use the same partition to partition the generator 
 %\[\bs{T} = \left[\begin{array}{ccc} \bs{T}_{++} & \bs{T}_{+-} & \bs{T}_{+0} \\ \bs{T}_{-+} & \bs{T}_{--} & \bs{T}_{-0} \\ \bs{T}_{0+} & \bs{T}_{0-} & \bs{T}_{00} \end{array}\right].\]
 %Let \(\bs{C}_+ = \diag(c_i,i\in\mathcal S_+)\), and \(\bs{C}_- = \diag(|c_i|,i\in\mathcal S_-)\). 
 
-%Let \(Z\sim ME_p(\bs \alpha, \bs{S}, \bs s)\) of dimension \(p\) with \(\bs\alpha\bs e = 1\), \(\bs s = -\bs{S}\bs e\) and mean \(\Delta\). Let \(\{\bs A(t)\} = \left\{\bs A(t)\right\}_{t\geq 0}\) be a \(N\times p\)-dimensional vector-valued stochastic process which is a piecewise-deterministic Markov process. The sample path behaviour of \(\{\bs A(t)\}\) is as follows. For some \(i\in \mathcal \bs{S}\), let \(\bs a_i\) be a vector such that \(\bs a_i\bs e = 1\) and \((\bs a_i,\bs{S},\bs s)\) is a representation of a ME distribution. Let 
+%Let \(Z\sim ME_p(\bs \alpha, \bs{S}, \bs s)\) of dimension \(p\) with \(\bs\alpha\bs e = 1\), \(\bs s = -\bs{S}\bs e\) and mean \(\Delta\). Let \(\{\bs A(t)\} = \left\{\bs A(t)\right\}_{t\geq 0}\) be a \(N\times p\)-dimensional vector-valued stochastic process which is a piecewise-deterministic Markov process. The sample path behaviour of \(\{\bs A(t)\}\) is as follows. For some \(i\in{}\mathcal \bs{S}\), let \(\bs a_i\) be a vector such that \(\bs a_i\bs e = 1\) and \((\bs a_i,\bs{S},\bs s)\) is a representation of a ME distribution. Let 
 %\[Q = \left[\begin{array}{ccc}  \bs{C}_+ \otimes \bs{S} &&\\ &   \bs{C}_- \otimes \bs{S} & \\ &&0\end{array}\right],\]
 %and \(\bs q = -Q\bs e\). 
 %Given \(\bs A_0 = \bs a = (\bs 0_{(i-1)p},\bs a_i,\bs 0_{(N-i-1)p})\), \(\{\bs A(t)\}\) evolves deterministically according to
@@ -525,7 +525,7 @@ We now proceed to describe the evolution of the orbit and phase processes, befor
 \begin{align}\label{eqn: At DE}
 \cfrac{\wrt}{\wrt t}\bs A(t) = \bs A(t)(\bs{S}_i - \bs A(t) (\bs{S}_i + T_{ii}\bs{I}_p)\bs e)\bs{I}_p.
 \end{align}
-Let \(\bs a \in \mathcal A\) be an arbitrary vector in \(\mathcal A\). On the event that no events occur before time \(t+u\), \(\bs A(u) = \bs a\in\mathcal A\) and \({\phi}(u)=i\), the solution to (\ref{eqn: At DE}) states that \(\bs A({t+u})\) evolves deterministically according to 
+Let \(\bs a \in{}\mathcal A\) be an arbitrary vector in \(\mathcal A\). On the event that no events occur before time \(t+u\), \(\bs A(u) = \bs a\in\mathcal A\) and \({\phi}(u)=i\), the solution to (\ref{eqn: At DE}) states that \(\bs A({t+u})\) evolves deterministically according to 
 \[\bs A({t+u}) =  \cfrac{\bs a e^{(\bs{S}_i+T_{ii}\bs{I}_p)t}}{\bs a e^{(\bs{S}_i+T_{ii}\bs{I}_p)t} \bs e} = \cfrac{\bs a e^{\bs{S}_i t}}{\bs a e^{\bs{S}_i t} \bs e}.\] 
 
 At time \(t\) an event occurs at rate 
@@ -562,7 +562,7 @@ The following result states that \(\left\{{\phi}(t)\right\}\) has the same distr
 	For \(n>1\), by partitioning on the times of the first \(n-1\) level changes, \(\tau_1,\dots,\tau_n\), we get 
 	\begin{align*}
 		&\mathbb P(\Theta_i> t, \tau_{n-1}< t \leq \tau_n \mid \bs A(0) = \bs a) 
-		\\&= \int_{t_1=0}^t\int_{t_2=t_1}^t\hdots\int_{t_{n-1}=t_{n-2}}^t \mathbb P(\Theta_i> t, t \leq \tau_n, \tau_{n-1}\in \wrt t_{n-1},\dots \tau_2\in\wrt t_2, \tau_1\in\wrt t_1 \mid \bs A(0) = \bs a)
+		\\&= \int_{t_1=0}^t\int_{t_2=t_1}^t\hdots\int_{t_{n-1}=t_{n-2}}^t \mathbb P(\Theta_i> t, t \leq \tau_n, \tau_{n-1}\in{}\wrt t_{n-1},\dots \tau_2\in\wrt t_2, \tau_1\in\wrt t_1 \mid \bs A(0) = \bs a)
 		\\&=\displaystyle{\int_{t_1=0}^t\int_{t_2=t_1}^t\hdots\int_{t_{n-1}=t_{n-2}}^t} \bs a e^{(\bs{S}_i+T_{ii}\bs{I}_p)t_1}\bs s_i
 			\left(\prod_{k=2}^{n-1} \bs \alpha e^{(\bs{S}_i+T_{ii}\bs{I}_p)(t_k-t_{k-1})} \bs s_i\right) 
 			\\&\qquad\displaystyle{\times\bs \alpha e^{(\bs{S}_i+T_{ii}\bs{I}_p)(t-t_{n-1})}\bs e}\wrt t_{n-1}\wrt t_{n-2}\hdots\wrt t_{1}.
@@ -669,7 +669,7 @@ We collect the probabilities \(p_{ij}\) into the matrices \(\bs P_{-+} = [p_{ij}
 
 Adjacent to the boundary at \(y_0=0\) is the band \(\mathcal D_0=[0,\Delta]\) which corresponds to level \(0\) for the QBD-RAP. We denote the boundary of the QBD-RAP as level \(-1\), which corresponds to \(\{0\}\) for the fluid queue. Modelling the behaviour of the fluid queue at boundaries can be broken down into three components. 1) Modelling the time and phase when the fluid level hits the boundary. 2) Modelling the phase whilst the fluid level remains at the boundary. 3) Modelling the fluid level and phase at the exit from the boundary. 
 
-We claim that the event \(\{L(t)=\ell,\phi(t)=i\}\) models the event \(\{X(t)\in\mathcal D_{\ell,i},\varphi(t)=i\}\), and further that instants \(u\) with \(L(u^-)\neq L(u), \phi(u)=i\) model the events \(\{X(u^-)\in \mathcal D_{\ell,i}, X(u)\notin\mathcal D_{\ell,i},\varphi(u)=i\}\). With this in mind, we suppose that when the QBD-RAP is in level \(0\) in phase \(i\in\mathcal S_-\) and there is a change of level, this corresponds to approximating the event that the fluid level \(\{X(t)\}\) hits the boundary at \(0\). We refer to this as the QBD-RAP hitting the boundary also. We show later that, using matrix exponentials with sufficiently small variance in the construction of the QBD-RAP, then the distribution of time until the QBD-RAP first hits the boundary closely models the time until the fluid level hits the boundary. This addresses component 1). 
+We claim that the event \(\{L(t)=\ell,\phi(t)=i\}\) models the event \(\{X(t)\in\mathcal D_{\ell,i},\varphi(t)=i\}\), and further that instants \(u\) with \(L(u^-)\neq L(u), \phi(u)=i\) model the events \(\{X(u^-)\in{}\mathcal D_{\ell,i}, X(u)\notin\mathcal D_{\ell,i},\varphi(u)=i\}\). With this in mind, we suppose that when the QBD-RAP is in level \(0\) in phase \(i\in\mathcal S_-\) and there is a change of level, this corresponds to approximating the event that the fluid level \(\{X(t)\}\) hits the boundary at \(0\). We refer to this as the QBD-RAP hitting the boundary also. We show later that, using matrix exponentials with sufficiently small variance in the construction of the QBD-RAP, then the distribution of time until the QBD-RAP first hits the boundary closely models the time until the fluid level hits the boundary. This addresses component 1). 
 
 %Assuming the fluid process \(\{X(t)\}\) is continuous then we may use the QBD-RAP to approximate the fluid queue hitting the boundary. For example, with a regulated lower boundary at \(x=0\), place \(x=0\) at the boundary of the first of the bands \(\mathcal D_0=[0,\Delta]\) which corresponds to level \(\ell =0\). When the QBD-RAP process, \(\{(L(t), \bs A(t), \varphi(t))\}\) exits level \(0\) in a phase \(j\in\mathcal S_-\), then we correspond this with the event that fluid queue is hits level \(x=0\) in phase \(j\). Corollary~\ref{cor: aln222} states that, for sufficiently large \(p\), the construction described here models distribution of time until \(\{X(t)\}\) leaves \(\mathcal D_0\) arbitrarily closely, and therefore we claim that the QBD-RAP approximation models hitting the boundary at \(x=0\) arbitrarily closely. 
 
@@ -716,7 +716,7 @@ The top-left block represents the point masses due to the sticky boundary. The b
 
 Upper boundaries can be included in an analogous manner. 
 
-The orbit process \(\{\bs A(t)\}\) is not required to model the behaviour at the sticky boundary. However, we suppose that \(\bs A(t)=1\) at the boundaries. This choice is arbitrary but allows us to generalise some notation later when we are describing the evolution of the QBD-RAP. Further, for boundaries at \(y_0=0\) and \(y_{K+1} = (K+1)\Delta\), we let the level process take the value \(L(t)=-1\) at the lower boundary, and \(L(t)=K+1\) at the upper boundary. Denote the set of levels (including boundary levels) by \(\mathcal K = \{-1,0,\dots,K,K+1\}\). 
+The orbit process \(\{\bs A(t)\}\) is not required to model the behaviour at the sticky boundary. However, we suppose that \(\bs A(t)=1\) at the boundaries. This choice is arbitrary but allows us to generalise some notation later when we are describing the evolution of the QBD-RAP. Further, for boundaries at \(y_0=0\) and \(y_{K+1} = (K+1)\Delta\), we let the level process take the value \(L(t)=-1\) at the lower boundary, and \(L(t)=K+1\) at the upper boundary. Denote the set of levels, including boundary levels, by \(\mathcal K = \{-1,0,\dots,K,K+1\}\) and without boundary levels by \(\mathcal K^\circ=\{0,1,\dots,K\}\). 
 
 \begin{rem}\label{rem: 111}
 	It may be possible to extend the QBD-RAP approximation to model jumps into and out of the boundary, provided that the jumps into/out of the boundary happen at an intensity which can be described by a matrix exponential distribution. 
@@ -727,7 +727,7 @@ The orbit process \(\{\bs A(t)\}\) is not required to model the behaviour at the
 \section{Initial conditions}\label{sec: initial conditions}
 %To this point, we have assumed that \((X(0),\varphi(0))=(y_\ell,i), \,i\in\mathcal S_+\) or \((X(0),\varphi(0))=(y_{\ell+1},i), \,i\in\mathcal S_-\), i.e., the initial position of the fluid is at the edge of the cell. In these cases, the appropriate initial orbit position is \(\bs \alpha\). We now generalise this so that we can approximate arbitrary initial conditions. 
 
-%To motivate the construction, first consider the initial condition for the QBD-RAP approximation, \((L(0),\bs A(0), \varphi(0))=(\ell,\bs \alpha,i)\), corresponding to the initial condition of the fluid queue \((X(0),\varphi(0))=(y_\ell,i),\) for some \(i\in\mathcal S_+\). After time \(t\), \(c_it\in[0,\Delta)\), and assuming that no events of the QBD-RAP have occurred by this time, the position of the QBD-RAP is \((L(t),\bs A(t),\varphi(t)) = (\ell, \bs A(t), i),\) where \(\bs A(t) = \cfrac{\bs \alpha e^{c_i\bs{S}t}}{\bs \alpha e^{c_i\bs{S}t}\bs e}\). The level of the fluid at the same time is \(X(t) = y_\ell + c_i t\). 
+%To motivate the construction, first consider the initial condition for the QBD-RAP approximation, \((L(0),\bs A(0), \varphi(0))=(\ell,\bs \alpha,i)\), corresponding to the initial condition of the fluid queue \((X(0),\varphi(0))=(y_\ell,i),\) for some \(i\in\mathcal S_+\). After time \(t\), \(c_it\in{}[0,\Delta)\), and assuming that no events of the QBD-RAP have occurred by this time, the position of the QBD-RAP is \((L(t),\bs A(t),\varphi(t)) = (\ell, \bs A(t), i),\) where \(\bs A(t) = \cfrac{\bs \alpha e^{c_i\bs{S}t}}{\bs \alpha e^{c_i\bs{S}t}\bs e}\). The level of the fluid at the same time is \(X(t) = y_\ell + c_i t\). 
 We argued earlier that we can think of the orbit \(\bs k(x)\) as corresponding to the fluid being a distance of \(x\) from the left boundary of an interval when \(i\in\calS_+\), or from the right boundary of an interval when \(i\in\calS_-\). With this interpretation, an approximation to the initial condition \(\bs X(0) = (X(0),\varphi(0))=(x_0,i),\,x_0\in\mathcal D_{\ell,i},\,i\in\mathcal S_+\cup\calS_{+0}\) is to set the initial orbit to \(\bs k(x_0-y_{\ell})\). Similarly, an approximation to the initial condition \(\bs X(0)=(x_0,i), \,x_0\in\mathcal D_{\ell,i}, x_0\neq y_{\ell+1},\,i\in\mathcal S_-\cup\calS_{-0}\) is to set the initial orbit position to \(\bs k(y_{\ell+1}-x_0).\) 
 
 We use the notation \(\bs a_{\ell,i}(x_0) = \bs a_{\ell,+}(x_0) = \bs k(x_0-y_\ell)\) for the initial orbit position corresponding to \(x_0\) when the initial phase is \(i\in\calS_+\) and \(x_0\in\calD_{\ell,i}\). Similarly, for \(i\in\calS_-\) and \(x_0\in\calD_{\ell,i}\) define the notation \(\bs a_{\ell,i}(x_0) = \bs a_{\ell,-}(x_0) = \bs k(y_{\ell+1}-x_0)\). 
@@ -735,7 +735,7 @@ We use the notation \(\bs a_{\ell,i}(x_0) = \bs a_{\ell,+}(x_0) = \bs k(x_0-y_\e
 More generally, given an initial measure \(\mu_i(\cdot):= \mathbb P(X(0)\in\cdot,\varphi(0)=i)\), an approximation to this initial condition is to set the orbit to \(\displaystyle\int_{x\in\calD_{\ell,i}}\bs a_{\ell,i} (x) \wrt \mu_i\), for \(i\in\mathcal S,\, \ell\in\mathcal K\setminus\{-1,K+1\}\). 
 
 \paragraph{Initial conditions for phases \(i\in\calS_0\)}
-While the augmented state-space scheme described above is a convergent one, the analysis of the QBD-RAP scheme is \emph{greatly} simplified if we allow initial conditions which allocate \(0\) probability to phases in \(i\in\calS_{+0}\cup\calS_{-0}\) only. To see why initial mass in \(\mathcal S_{+0}\cup\calS_{-0}\) might introduce further complexity, consider a sample path with \(\varphi(0)=k\in\calS_{+0}\) and \(\bs A(0)=\bs a\in\mathcal A\). On \(\varphi(u)\in\calS_{+0},\) for all \(u\in[0,t)\), then \(\bs A(u) = \bs a \) is constant. Upon the phase leaving \(\calS_{+0}\), at time \(t\), say, the phase will either jump to \(\calS_+\) or \(\calS_-\). If \(\varphi(t)\) jumps to \(i\in\calS_+\), the orbit process at time \(t\) will be \(\bs A(t)=\bs a \) and the process evolve from time \(t\) as if it has started in phase \(i\in\calS_+\) with initial orbit \(\bs a \) -- there are no major issues in this case. If, however, \(\varphi(t)\) jumps to \(i\in\calS_-\), then the orbit process will jump to \(\bs A(t) = \bs a \bs D\) at time \(t\). From time \(t\) onward the QBD-RAP process will evolve as if it has started in phase \(i\in\calS_-\) with initial orbit \(\bs a \bs D\). With the way we have structured the proof of convergence, we then have to complete two analyses of the QBD-RAP process -- one for the initial condition \(\bs a\) and another for the initial condition \(\bs a\bs D\). 
+While the augmented state-space scheme described above is a convergent one, the analysis of the QBD-RAP scheme is \emph{greatly} simplified if we allow initial conditions which allocate \(0\) probability to phases in \(i\in\calS_{+0}\cup\calS_{-0}\) only. To see why initial mass in \(\mathcal S_{+0}\cup\calS_{-0}\) might introduce further complexity, consider a sample path with \(\varphi(0)=k\in\calS_{+0}\) and \(\bs A(0)=\bs a\in\mathcal A\). On \(\varphi(u)\in\calS_{+0},\) for all \(u\in{}[0,t)\), then \(\bs A(u) = \bs a \) is constant. Upon the phase leaving \(\calS_{+0}\), at time \(t\), say, the phase will either jump to \(\calS_+\) or \(\calS_-\). If \(\varphi(t)\) jumps to \(i\in\calS_+\), the orbit process at time \(t\) will be \(\bs A(t)=\bs a \) and the process evolve from time \(t\) as if it has started in phase \(i\in\calS_+\) with initial orbit \(\bs a \) -- there are no major issues in this case. If, however, \(\varphi(t)\) jumps to \(i\in\calS_-\), then the orbit process will jump to \(\bs A(t) = \bs a \bs D\) at time \(t\). From time \(t\) onward the QBD-RAP process will evolve as if it has started in phase \(i\in\calS_-\) with initial orbit \(\bs a \bs D\). With the way we have structured the proof of convergence, we then have to complete two analyses of the QBD-RAP process -- one for the initial condition \(\bs a\) and another for the initial condition \(\bs a\bs D\). 
 
 A solution to this problem is to augment a set of ephemeral states to the QBD-RAP which capture the initial sojourn in \(\calS_0\) only. Suppose we wish to approximate a fluid queue with the initial condition \(\mu_k\) where \(\mu_k\) has mass 1. Let us denote the set of ephemeral states by \(\calS_0^{*,k}\) and each state in \(\calS_0^{*,k}\) by \(i^*\). Each state \(i^*\in\calS_0^{*,k}\) is a copy of \(i\in\calS_0\), and, in \(\calS_0^{*,k}\) the phase process has the same phase dynamics as it does in \(\calS_0\). At time \(0\), we start the QBD-RAP in the ephemeral set of states \(\calS_0^{*,k}\) in phase \(k^*\in\calS_0^{*,k}\). While in \(\calS_0^{*,k}\), the phase process evolves according to the generator \(\bs T_{00}\). Upon exiting the ephemeral set \(\calS_0^{*,k}\) at time \(t\), say, the QBD-RAP process jumps to \(L(t)=\ell,\, \bs A(t)=\int_{\calD_{\ell,i}}\bs a_{\ell,i}(x)\wrt \mu_k,\,\varphi(t)=i\), where \(\ell\in\mathcal K\), \(i\in\calS_+\cup\calS_-\). 
 
@@ -782,11 +782,11 @@ Suppose that the QBD-RAP is in level \(L(t)=\ell\), phase \(\phi(t)=j\in\calS_+\
 
 Similarly, for \(j\in\mathcal S_-\), if the QBD-RAP remains in phase \(j\) then the QBD-RAP approximation will transition out of level \(\ell\) in the infinitesimal time interval \(t+\wrt u\) with density \(\bs a e^{|c_j|\bs{S}u}|c_j|\bs s\wrt u\). At the time of the transition of level, we estimate the position of \(X(t+u)\) by \(X(t+u)\approx y_{\ell}\). Tracing this back to time \(t\), we estimate the position of \(X(t)\) as \(X(t)\approx y_{\ell} + |c_j|u\). Reverse engineering this logic, the approximation to the density \(X(t) \in\wrt x\) is \(\bs a e^{|c_j|\bs S(x-y_{\ell})/|c_j|}|c_j|\bs s \wrt x/|c_j|\), since \(\wrt x = |c_j|\wrt u\). 
 
-For phases \(j\in\mathcal S_0\), if phase \(j\) is associated with \(\mathcal S_+\), we use the same approximation as if \(j\in \mathcal S_+\), and if phase \(j\in\mathcal S_0\) is associated with \(\mathcal S_-\), we use the same approximation as if \(j\in \mathcal S_-\).
+For phases \(j\in\mathcal S_0\), if phase \(j\) is associated with \(\mathcal S_+\), we use the same approximation as if \(j\in{}\mathcal S_+\), and if phase \(j\in\mathcal S_0\) is associated with \(\mathcal S_-\), we use the same approximation as if \(j\in{}\mathcal S_-\).
 
-This reasoning leads to an approximation of the distribution of the fluid at time \(t\), \(\mathbb P(\bs X(t)\in (\wrt x,j) \mid \bs X(0)=(x_0,i)) \), as
+This reasoning leads to an approximation of the distribution of the fluid at time \(t\), \(\mathbb P(\bs X(t)\in{}(\wrt x,j) \mid \bs X(0)=(x_0,i)) \), as
 \begin{align}
-		&\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in (\ell, \wrt \bs a, j)\mid \bs Y(0)=\bs y_0)
+		&\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in{}(\ell, \wrt \bs a, j)\mid \bs Y(0)=\bs y_0)
 		\bs a e^{\bs{S}z} \bs s \wrt x,
 		%
 		% \\&\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs a_{\ell_0,i}(x_0), \phi(0) = i)  
@@ -803,7 +803,7 @@ where \(x\in\mathcal D_{\ell,j}\), \(x_0\in\mathcal D_{\ell_0,i}\), \(\bs y_0 = 
 		y_{\ell+1} - x & i\in\calS_+.
 	\end{cases}
 \]
-%For example, for the augmented scheme in Section~\ref{subsec: augmented }, we approximate \(\mathbb P(X(t)\in \wrt x , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i)\) by 
+%For example, for the augmented scheme in Section~\ref{subsec: augmented }, we approximate \(\mathbb P(X(t)\in{}\wrt x , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i)\) by 
 %\begin{align}
 %	\label{eqn: density approx aug}
 %		&\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\varphi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs a, \varphi(0) = i) \bs a e^{\bs{S}(y_{\ell+1}-x)} \bs s \wrt x & j\in\mathcal S_+\cup \mathcal S_{+0},
@@ -813,10 +813,10 @@ where \(x\in\mathcal D_{\ell,j}\), \(x_0\in\mathcal D_{\ell_0,i}\), \(\bs y_0 = 
 
 While the estimate (\ref{eqn: density approx aug}) is appealing, it is, however, defective -- it does not integrate to 1 for any finite-dimensional matrix exponential distribution. To see this, compute 
 \begin{align*}
-	&\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\int_{z\in\mathcal D_{\ell,j}}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in (\ell, \wrt \bs a, j)\mid \bs Y(0)=\bs y_0) \bs a e^{ \bs{S}z} \bs s \wrt z
+	&\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\int_{z\in\mathcal D_{\ell,j}}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in{}(\ell, \wrt \bs a, j)\mid \bs Y(0)=\bs y_0) \bs a e^{ \bs{S}z} \bs s \wrt z
 	% \\&\qquad{}{}+\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S_-\cup \calS_{-0}}\int_{x\in\mathcal D_{\ell,j}}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a, \phi(t) = j\mid L(0)=\ell_0, 
 	% \\&\qquad{}\qquad{}\bs A(0) = \bs  a_{\ell,i}(x_0), \phi(0) = i) \bs a e^{ \bs{S}(x-y_\ell)} \bs s \wrt x
-	\\&= \sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in (\ell, \wrt \bs a, j)\mid \bs Y(0)=\bs y_0) (1-\bs a e^{ \bs{S}\Delta}\bs e  )
+	\\&= \sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in{}(\ell, \wrt \bs a, j)\mid \bs Y(0)=\bs y_0) (1-\bs a e^{ \bs{S}\Delta}\bs e  )
 	\\&<1,
 	% &\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\int_{z\in\mathcal D_{\ell,j}}\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a, \phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), 
 	% \\&\qquad{}\qquad{}\phi(0) = i) \bs a e^{ \bs{S}z} \bs s \wrt z
@@ -827,10 +827,10 @@ While the estimate (\ref{eqn: density approx aug}) is appealing, it is, however,
 	% \\&<1,
 \end{align*}
 since \(\bs a e^{\bs{S}u} \bs e>0\) for any \(u>0\). For an orbit position \(\bs A(t)=\bs a\), the amount of mass missing from each level and phase is 
-\[\mathbb P(\bs Y(t)\in (\ell, \wrt \bs a,j)\mid \bs Y(0)=\bs y_0) \bs a e^{\bs{S}\Delta} \bs e \wrt x.\]
-The problem is that the triple \((\bs a,\bs S, \bs s)\) defines a distribution on \(x\in[0,\infty)\), however, it only makes sense to take \(x\in[0,\Delta)\) in the approximation scheme.
+\[\mathbb P(\bs Y(t)\in{}(\ell, \wrt \bs a,j)\mid \bs Y(0)=\bs y_0) \bs a e^{\bs{S}\Delta} \bs e \wrt x.\]
+The problem is that the triple \((\bs a,\bs S, \bs s)\) defines a distribution on \(x\in{}[0,\infty)\), however, it only makes sense to take \(x\in{}[0,\Delta)\) in the approximation scheme.
 
-%One way to rectify this is to renormalise the estimates in the right-hand side of (\ref{eqn: density approx aug})-(\ref{eqn: density approx aug2}) with the missing mass, i.e.~the approximation to \(\mathbb P(X(t)\in \wrt x , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i) \) is
+%One way to rectify this is to renormalise the estimates in the right-hand side of (\ref{eqn: density approx aug})-(\ref{eqn: density approx aug2}) with the missing mass, i.e.~the approximation to \(\mathbb P(X(t)\in{}\wrt x , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i) \) is
 %\begin{align}
 %	\label{eqn: density approx 2}
 %		\displaystyle\int_{\bs a \in\mathcal A} \mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), \phi(0) = i) \cfrac{\bs a e^{ \bs{S}(y_{\ell+1}-x)} \bs s}{1-\bs a e^{ \bs{S}\Delta} \bs e} \wrt x \intertext{for \(j\in\mathcal S_+\cup \calS_{+0}\), and}
@@ -839,9 +839,9 @@ The problem is that the triple \((\bs a,\bs S, \bs s)\) defines a distribution o
 %\end{align}
 %for \(j\in\mathcal S_-\cup \calS_{-0}.\) This renormalisation distributes any missing mass over the interval \(\calD_{\ell,j}\) proportional to the estimated density in the region. 
 
-To partially rectify this we can instead approximate \(\mathbb P(\bs X(t)\in (\wrt x, j)\mid \bs X(0)=(x_0, i)) \) by
+To partially rectify this we can instead approximate \(\mathbb P(\bs X(t)\in{}(\wrt x, j)\mid \bs X(0)=(x_0, i)) \) by
 \begin{align}
-%	&\mathbb P(X(t)\in \wrt x  , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i) \nonumber
+%	&\mathbb P(X(t)\in{}\wrt x  , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i) \nonumber
 	\label{eqn: density approx 3+}&
 	\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in(\ell, \wrt \bs a, j)\mid \bs Y(0)=\bs y_0) \bs a \bs u_{\ell,j}(x) \wrt x ,
 	% \displaystyle\int_{\bs a \in\mathcal A}\mathbb P(L(t) = \ell, \bs A(t)\in\wrt \bs a,\phi(t) = j\mid L(0)=\ell_0, \bs A(0) = \bs  a_{\ell,i}(x_0), \phi(0) = i) \bs a u_i^\ell(x) \wrt x ,
@@ -853,17 +853,17 @@ To partially rectify this we can instead approximate \(\mathbb P(\bs X(t)\in (\w
 			\bs a \left(e^{ \bs{S}(x-y_\ell)} \bs s+e^{ \bs{S}(2\Delta-(x-y_\ell))} \bs s\right), & j\in\calS_-. \\ 
 		\end{cases}\label{eqn: density approx 3+a}
 \end{align}
-Intuitively, we take the density function \(\bs ae^{\bs{S}x}\bs s\) on \(x \in [0,2\Delta)\), and `fold' it back on itself around \(\Delta\), to create a density function on \([0,\Delta)\), 
-\[\bs ae^{\bs{S}x}\bs s +\bs ae^{\bs{S}(2\Delta-x)}\bs s,\, x \in [0,\Delta).\]
+Intuitively, we take the density function \(\bs ae^{\bs{S}x}\bs s\) on \(x \in{}[0,2\Delta)\), and `fold' it back on itself around \(\Delta\), to create a density function on \([0,\Delta)\), 
+\[\bs ae^{\bs{S}x}\bs s +\bs ae^{\bs{S}(2\Delta-x)}\bs s,\, x \in{}[0,\Delta).\]
 The missing mass is now proportional to 
 \[\bs a e^{\bs S 2\Delta}\bs e,\]
 which is less than the quantity \(\bs a e^{\bs S \Delta}\bs e\) from the approximation scheme (\ref{eqn: density approx aug}). There is nothing special about the choice of truncating the distribution at \(2\Delta\) in this construction, and we could choose any truncation value greater than \(\Delta\).
 
-A third option is to approximate \(\mathbb P(\bs X(t)\in (\wrt x, j)\mid \bs X(0)=(x_0, i)) \) by
+A third option is to approximate \(\mathbb P(\bs X(t)\in{}(\wrt x, j)\mid \bs X(0)=(x_0, i)) \) by
 \begin{align}
-%	&\mathbb P(X(t)\in \wrt x  , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i) \nonumber
+%	&\mathbb P(X(t)\in{}\wrt x  , \varphi(t) = j\mid X(0)=x_0, \varphi(0) = i) \nonumber
 	\label{eqn: density approx 4+}&
-		\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in (\ell, \wrt \bs a,j)\mid \bs Y(0) = (\ell_0, \bs  a_{\ell_0,i}(x_0), i)) \bs a \bs v_{\ell,j}(x) \wrt x ,
+		\displaystyle\int_{\bs a \in\mathcal A}\mathbb P(\bs Y(t) \in{}(\ell, \wrt \bs a,j)\mid \bs Y(0) = (\ell_0, \bs  a_{\ell_0,i}(x_0), i)) \bs a \bs v_{\ell,j}(x) \wrt x ,
 \end{align}
 {where}
 \begin{align}
@@ -888,7 +888,7 @@ Here, we take the density function \(\bs a e^{\bs S x}\bs s\), defined on \([0,\
 %\end{itemize}
 %Meanwhile, (\ref{eqn: density approx 3+})-(\ref{eqn: density approx 3-}) maintains positivity and smoothness. 
 
-The difference between the approximation schemes is the way in which the vector \(\bs a\) is used. We generalise this idea with the concept of \emph{closing operators} which is a linear operator \({\bs v}(x):\mathcal A \to \mathbb R,\) for each \(x\in[0,\Delta)\). For example, the closing operator in Equations (\ref{eqn: density approx aug}) is the operator \({\bs v}(x),\,x\in[0,\Delta)\) such that for any \(\bs a \in \mathcal A\), 
+The difference between the approximation schemes is the way in which the vector \(\bs a\) is used. We generalise this idea with the concept of \emph{closing operators} which is a linear operator \({\bs v}(x):\mathcal A \to \mathbb R,\) for each \(x\in{}[0,\Delta)\). For example, the closing operator in Equations (\ref{eqn: density approx aug}) is the operator \({\bs v}(x),\,x\in{}[0,\Delta)\) such that for any \(\bs a \in{}\mathcal A\), 
 \begin{align}
 	\bs a {\bs v}(x) &= \bs a e^{\bs Sx}\bs s.\label{eqn: alal}
 	%\\\bs a {\bs v}_-(x-y_\ell) &= \bs a e^{\bs S(x-y_{\ell})}\bs s,\label{eqn:ndaenf}
@@ -930,12 +930,12 @@ The operator \({\bs v}(x)\) is a choice which forms part of the definition of th
 	\[\mathbb E[\bs A(t) {\bs v}(x)] \neq \mathbb E[\bs A(t)]{\bs v}(x).\]
 	For example, with (\ref{eqn: nonlin}), 
 	\begin{align}
-		\mathbb E[\bs A(t) {\bs v}(x)] = \int_{\bs a \in\mathcal A} \mathbb P(\bs A(t) \in \wrt \bs a) \cfrac{\bs a \left(e^{ \bs{S}x} \bs s + e^{ \bs{S}(2\Delta-x)} \bs s\right)}{1-\bs a e^{\bs S 2\Delta}\bs e}.\label{eqn:nonlin2}
+		\mathbb E[\bs A(t) {\bs v}(x)] = \int_{\bs a \in\mathcal A} \mathbb P(\bs A(t) \in{}\wrt \bs a) \cfrac{\bs a \left(e^{ \bs{S}x} \bs s + e^{ \bs{S}(2\Delta-x)} \bs s\right)}{1-\bs a e^{\bs S 2\Delta}\bs e}.\label{eqn:nonlin2}
 	\end{align}
 	While the calculation in (\ref{eqn:nonlin2}) is theoretically possible, practically it is not. The seemingly innocuous integral over \(\bs a \in\mathcal A\) actually amounts to an integral over all possible sample paths of the QBD-RAP (i.e.~all possible event times of the QBD-RAP before time \(t\)) and in general, there is no `nice' way to do this computation. 
 	
 	In the linear case, computation of
-	\[\mathbb E[\bs A(t)] = \int_{\bs a\in\mathcal A} \mathbb P(\bs A(t) \in \wrt \bs a) \bs a,\]
+	\[\mathbb E[\bs A(t)] = \int_{\bs a\in\mathcal A} \mathbb P(\bs A(t) \in{}\wrt \bs a) \bs a,\]
 	amounts to a matrix-exponential calculation. 
 
 	In practice we may use 
@@ -973,9 +973,14 @@ The operator \({\bs v}(x)\) is a choice which forms part of the definition of th
 % \end{rem}
 
 \section{Approximating Fluid-fluid queues}
+We conclude this chapter with a few remarks about applying the QBD-RAP approximation to approximate operators arising in the analysis of fluid-fluid queues \cite{bo2014}. 
 
+First, a comment on approximating the operator \(\mathbb R\), defined in Lemma~\ref{lemma: D(s)}. Recall from Section~\ref{sec: approx r}, in the context of the DG method we could approximate \(\mathbb R\) as a projection. In the context of the QBD-RAP scheme it is less clear how one can approximate \(\mathbb R\), in general. If the rate functions \(r_i(x)\) are piecewise constant with \(r_i(x)=r_i^k\) on cell \(\calD_k\), then a suitable approximation for \(\mathbb R^k_i\) is \(1/|r_i^k|\bs I_{p}\), a diagonal matrix with \(1/|r_i^k|\) down the diagonal -- this is the case in the numerical experiments in Chapter~\ref{sec: numerics}. For more general cases we could consider approximating \(r_i(x)\) by a piecewise constant function, then apply the method above.
 
+Second, a comment on the approximation \(\bs \Psi\) of the first-return operator \(\mathbb \Psi\), characterised in Theorem~\ref{theo:Psi}. Given the stochastic interpretation of the QBD-RAP scheme, and assuming the rate functions \(r_i(x)\) are piecewise constant with \(r_i(x)=r_i^k\) on each cell \(\calD_k\), the QBD-RAP approximation of the fluid-fluid queue forms a RAP-modulated fluid process \citep{p2019,bgnp2021}. Hence, the approximation \(\bs \Psi\) has a stochastic interpretation in terms of the first-return operator of the RAP-modulated fluid process. By Proposition~4.3 of \cite{p2019}, the approximation \(\bs \Psi\) has the property \(\bs \Psi \bs 1=\bs 1\) if the event that level process of the RAP-modulated fluid returns to \(0\) in finite time occurs with probability 1. 
 
+\section{Briefly on expected accuracy}
+Recall that we use the class of concentrated matrix exponential distributions (CMEs) found numerically in \citep{hht2020}, this class of CMEs, we take the index \(p\) to be the order of the representation and, moreover, we take \(p\) to be odd. \cite{hht2020} estimate that the variance of their class CMEs decreases faster than order \(1/p^2\) and estimate that asymptotic decreases to be of order \(p^{2.14}\) for odd \(p\). Hence, we might expect the rate of convergence of the QBD-RAP scheme to be approximately order \(1/p^2\) for certain problems. This is in line with the positivity preserving DG scheme mentioned in \ref{sec: anoth pos pres}. We investigate the performance of the QBD-RAP method further in Chapter~\ref{sec: numerics}.  %The justification for considering representations of odd orders only is that the variance of CME representations of orders \(2p\) and \(2p-1\) are relatively similar and therefore have similar abilities to represent the delta function \citep{hht2020}. Hence, if we construct a QBD-RAP approximation with a representation of order \(2p\) we expect it to perform only marginally better than an approximation constructed with representations of order \(2p-1\). However, the computational cost of the latter is lower, so we opt for the order \(2p-1\) representation. 
 
 
 

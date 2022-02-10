@@ -1,0 +1,91 @@
+%!TEX root = ../thesis.tex
+\chapter{Introduction \label{ch:intro}} 
+% intro to intro
+% contextual background
+	% Fluid queues 
+		% definition
+		% applications 
+		% existing results 
+	% Fluid-fluid queues
+		% definition 
+		% basic analysis in terms of generators
+		% the need for approximation and how the old work doesn't fit here
+	% The DG method
+		% pertition into cells
+		% project on to a basis
+		% problems: oscillations
+		% soutions and why they dont fit
+		% observation about constant-basis methods
+		% this thesis asks the question: motivated by the constant basis being a probability model, can we dream up a more accurate probability model to approximate a fluid queue?
+	% On the structure of the constant basis/uniformisation method (QBD)
+	% least variable is PH, so what about MEs?
+% structure of the thesis
+	% rest of chapter 1 gives mathematical preliminaries
+	% chapter 2 explains the DG method, problems/oscillations, slope limiting, and appllication to SFFMs
+	% inspired by the structure of the order-1 scheme, and to solve the negativity problem, chapter 3 introduces a new approximation method; The QBD-RAP. In this chapter we derive the intuitively of the model and explain it's dynamics.
+	% we then move to convergence, with chapter 4 proving a convergence of the QBD-RAP up to the first hitting time of the fluid queue on the edges of an interval. technical results and extensions are left to the appendix: certain properties of closing vectors, convergence without ephemeral phases, and certain matrix algebraic manipulations. 
+	% chapter 5 stitches together the results of chapter 4 to prove a global result about convergence
+	% chapter 6 investigate, numerically, the performance of the DG, DG with limiter, uniformisation and QBD-RAP schemes. 
+	% chapter 7  makes concluding remarks.
+% mathematical preliminaries 
+	% CTMCs
+	% fluid queues
+	% fluid-fluid queues and operator-analytic expressions (all of them)
+		% the equations of bo2014
+		% meets the partition of the DG/QBD-RAP, and reconstructing the Fil sets 
+    % why we cant solve the equations, what we need to approximate to solve it, i.e. B, R, then D, Psi
+	% projections
+	% phase-type distributions 
+		% definition
+		% least variable property
+	% matrix exponentials
+		% definition 
+		% properties 
+		% verification that parameters give an ME
+		% CMEs
+	% QBD-RAPs, then QBDs as a special case
+		% orbit processes, their interpretation for PH and how they differ for MEs
+	% convergence theorems 
+		% DCT 
+		% Continuity of Laplace transforms
+
+		
+% THE ROUGH IDEA & CONTEXT
+% 	THE CONTEXT: FLUID-FLUID QUEUES
+%	PDEs 
+%	NON-NEGATIVITY & CONSERVATION 
+% MATHEMATICAL PRELIMINARIES
+
+An fluid queue is a two-dimensional stochastic process \(\{{\bs X}(t)\} = \{( X(t),\varphi(t))\}_{t\geq0}\). The phase process, also known as the driving process, \(\{\varphi(t)\}_{t\geq0}\), is a continuous-time Markov chain (CTMC) and determines the rate at which \(\{ X(t)\}\) moves. The level process, \(\{ X(t)\}_{t\geq0}\), is real-valued, continuous, piecewise linear and deterministic given \(\{\varphi(t)\}\). 
+ 
+Stochastic fluid queues have found a variety of applications such as telecommunications (see \cite{anick1982}, a canonical application in this area), power systems \citep{hydro}, risk processes \citep{betal2005} and environmental modelling \citep{wurm2020}. Fluid queues are relatively well studied. Largely, the analysis of fluid queues falls into two categories, matrix-analytic methods e.g.~\cite{ajr2005,ar2003,ar2004,bean2005b,bean2005,bot08,bean2009,dasilva2005,latouche2018}, and differential equation-based methods \cite{anick1982,kk1995,blnos2022}. %For example, Ramaswami CITE, analysed fluid queues by mapping them to a quasi-birth-and-death process (QBD), after which they applied known matrix-analytic methods for QBDs to compute quantities of interest. Anick Mitra Sondhi CITE, analysed fluid queues using a more direct differential equation-based method. Since Ramaswami's CITE initial work, there has been significant developments in the analysis of fluid queues CITE and related algorithms CITE. 
+
+More recently, \cite{bo2014} extended fluid queues to so-called \emph{stochastic fluid-fluid queues}. In a fluid-fluid queue there is a second level process, \(\{Y(t)\}_{t\geq0}\) which is itself driven by a fluid queue, \(\{(X(t),\varphi(t))\}_{t\geq0}\), so \((X(t),\varphi(t))\) determines the rate at which \(\{Y(t)\}\) moves. The analysis of \cite{bo2014}, is in principle similar to the matrix-analytic methods of \cite{bean2005}, and derives results about the second level process \(\{Y(t)\}_{t\geq0}\) in terms of the infinitesimal generator (a differential operator) of the fluid queue, \(\{(X(t),\varphi(t))\}_{t\geq0}\). For practical computation of the results of \cite{bo2014}, a discretisation of the infinitesimal generator of the fluid queue can be used. To this end, to date, two possible discretisation have been suggested. Taking a differential equations-based approach, \cite{blnos2022} use the discontinuous Galerkin (DG) method to discretise this operator, while \cite{bo2013} take a stochastic modelling and matrix-analytic methods approach to approximate the fluid-queue by a quasi-birth-and-death (QBD) process. The QBD approximation of \cite{bo2013} is derived via a uniformisation argument, so we refer to it as the uniformisation approximation scheme throughout this thesis. Both approaches are insightful and offer different tools and perspectives with which to analyse the resulting approximations. It turns out that the uniformisation scheme of \cite{bo2013} is a subclass of the former; the uniformisation scheme can be viewed as the simplest DG scheme where the operator is projected onto a basis of piecewise constant functions with an upwind flux.
+
+%A QBD can be viewed as a two-dimensional CTMC, \(\{(L(t),\varphi(t))\}_{t\geq0}\), where \(\{L(t)\}\) is the discrete level process, and \(\{\varphi(t)\}_{t\geq0}\) is the phase process. The level process \(\{L(t)\}\) is skip free, meaning that, given the process is at level \(L(t)=\ell\), is may only jump to \(\ell+1\) or \(\ell-1\) at jump epochs. The sojourn time of \(\{L(t)\}\) in a given level follows a phase-type distribution 
+
+In the context of approximating fluid queues, one advantage of the uniformisation scheme and, equivalently, a DG scheme with constant basis functions, is that is guarantees probabilities computed from the approximation are positive \citep[Section~3.3]{koltai2011}. One justification for the positivity preserving property of the uniformisation scheme is from its interpretation as a stochastic process. For higher order DG schemes there is no such interpretation and positivity is not guaranteed \citep[Section~3.3]{koltai2011}. Moreover, higher-order DG approximation schemes may produce negative and oscillatory solutions, particularly when discontinuities or steep gradients are present. Methods to navigate the problem of negative and oscillatory solutions have been developed, such as filtering and slope limiting (see \cite{c99}, or \cite{nodalDGBook},~Section~5.6 and references therein). Slope limiting alters the discretised operator in regions where oscillations are detected and reduces the order of the approximation to linear in these regions. Filtering is a post-hoc method which looks to recover an accurate solution, given an oscillatory approximation. 
+
+Depending on the context, filtering of the approximate solution to remove oscillations may not necessarily guarantee a strictly non-negative approximation, or may result in severe smearing of the solution at discontinuities or regions with steep gradients \citep[Section~5.6.1]{nodalDGBook}. Moreover, filtering requires us to make a trade-off between filtering enough of the oscillations away while maintaining sufficient accuracy -- a choice which may not be obvious \emph{a priori}. Slope limiting does guarantee positivity but reduces the approximation to linear where oscillations in the approximate solution are detected \citep[Section~5.6.1]{nodalDGBook}. Furthermore, limiting and filtering do not distinguish between natural oscillations which are a fundamental feature of the solution and spurious oscillations which are caused by the approximation scheme, and they may remove both from the approximation. This can lead to an unnecessary loss of accuracy in the approximation (see \citep{nodalDGBook},~Example~5.8). 
+
+In the context of approximating the first return operator of a fluid-fluid queue the application of a slope limiter would amount to post-processing the solution, reducing the order of the approximation in areas where oscillations are detected to linear. Otherwise, perhaps another approach would be to re-compute the solution with lower-order basis if a higher-order approximation happens to be oscillatory, but this is a post-hoc solution which would essentially require computing two solutions. Post-hoc filtering of the solution is also possible, but we would still need to tune the filter appropriately. Both filtering and slope limiting are also dependent on the initial condition. 
+
+In approximating the first return operator of a fluid-fluid queue we first approximate an operator-Riccati equation by a matrix-Riccati equation by substituting in matrix approximations to the infinitesimal generator of the fluid queue which are constructed via the DG scheme \cite{blnos2022}. We then solve the matrix-Riccati equation via an iterative procedure \citep{bean2005b,blnos2022}. For the DG method there is a limited theoretical backing as to why we may approximate the operator-Riccati equation with the matrix-Riccati equation other than it is a sensible thing to do, and it seems to work in practice. In the case of the QBD approximation of \cite{bo2013} this is more justifiable as in this case the resulting matrix-Riccati equation can be derived by considering the first-return probabilities for a fluid queue driven by the QBD \citep{bean2005} where the rates of the fluid are determined by a piecewise constant approximation to \(r_i(x)\). 
+
+Motivated by this, this thesis derives a new approximation to a fluid queue. The approximation is inspired by the observation that the Markov chain approximation of \cite{bo2013} effectively uses Erlang distributions to model the sojourn time in a given interval on the event that the phase of the fluid is constant. The sojourn time in a given interval on the event that the phase of the fluid is constant is a deterministic event, and it is known that the Erlang distribution is the least-variable Phase-type distribution so, in this sense, the best approximation to this deterministic sojourn time. Thus, it appears that the approximation of \cite{bo2013} is the best-possible Markov chain approximation. Recently, there has been much work on a class of concentrated matrix exponential distributions \cite{hhat2020} which are postulated to be the least-variable matrix exponential distribution. Matrix exponential distributions generalise Phase-type distributions; they have the same functional form, without the restriction that the distribution has an interpretation in terms of the absorption time of a continuous-time Markov chain. A class of stochastic processes, known as quasi-birth-and-death-processes with rational-arrival-process components (QBD-RAPs) \cite{bn2010}, extend QBDs, which have Phase-type inter-event times, to allow matrix-exponentially distributed inter-event times. Thus, by using matrix exponential distributions, we attempt to construct a QBD-RAP which better captures the dynamics of the fluid queue than the QBD approximation in \cite{bo2013}, while retaining a stochastic interpretation. 
+
+As the QBD-RAP has a stochastic interpretation then the approximations it produces are guaranteed to have non-negative density functions. Moreover, the matrix-Riccati equation we solve to approximate the first-return distribution of a fluid-fluid queue can be derived by considering the first-return probabilities for a RAP-modulated fluid queue driven by the QBD-RAP \citep{p2019,bgnp2021}. Another attractive property is that the QBD-RAP (and uniformisation) method are guaranteed to produce non-negative estimates of probabilities for any initial condition without any further computation or post-processing, which also means that the approximations to operators we get from the QBD-RAP (and uniformisation) scheme are linear; a desirable mathematical property.
+
+The structure of this thesis is as follows. The rest of this chapter is dedicated to mathematical preliminaries and introduces the main mathematical objects and tools which we will need. In particular, we go into detail describing operators arising in the analysis of fluid-fluid queues and introducing them in such a way to make clear how the approximations we develop correspond to the theoretical operators. 
+
+Chapter~\ref{ch:galerkin} demonstrates a way that we can use the discontinuous Galerkin (DG) method to approximate certain operators and distributions of fluid and fluid-fluid queues. Due to issues with oscillations in the approximations produced by the DG scheme, at the end of Chapter~\ref{ch:galerkin} we also describe \emph{slope limiting} -- a method which can be used to prevent oscillations and non-monotonic CDFs. However, one of the problems we are interested in solving is how to approximate the first-return operator of a fluid-fluid queue, which is a non-standard problem for the DG method. It is not clear how to use the concept of \emph{slope limiting} in the context of approximating the first-return operator of a fluid-fluid queue. 
+
+In the following chapter, Chapter~\ref{sec: construction and modelling}, we develop a new approximation scheme which, due to its interpretation as a stochastic process (a QBD-RAP), ensures all approximations to CDFs are non-decreasing. The chapter takes a stochastic modelling approach to developing the approximation scheme. Once we have established the new approximation scheme, we then attempt to prove convergence of the approximation scheme in Chapters~\ref{sec: conv}~and~\ref{ch: global results} via certain Laplace transforms with respect to time. Chapter~\ref{sec: conv} utilises methods and ideas relating specifically to QBD-RAPs and matrix-exponential distributions. Ultimately, Chapter~\ref{sec: conv} proves that, on the event that the QBD-RAP has not-yet seen an \emph{orbit restart epoch} (which is much like a change of level, but not always), certain Laplace transforms with respect to time of the QBD-RAP scheme converge to corresponding Laplace transforms with respect to time of the fluid queue on the event that the level of the fluid queue remains in a given interval. In this sense, this is a local convergence result as it relates only to convergence to the fluid queue in an interval. 
+
+Chapter~\ref{ch: global results} then looks to extend the local convergence result to a global convergence results on the whole domain of approximation. Chapter~\ref{ch: global results} uses more traditional Markov process arguments which rely on properties such as the strong Markov property, time-homogeneity and the Law of total probability. In Chapter~\ref{ch: global results} we first consider the discrete-time process which the process embedded in the QBD-RAP at times when the QBD-RAP sees an orbit restart epoch and prove that the embedded process converges in distribution to a corresponding embedded process in the fluid queue. The rest of Chapter~\ref{ch: global results} then attempt to prove a global converge result. The main result being Theorem~\ref{thm: big thm} which states that the QBD-RAP approximation scheme converges weakly (weakly with respect to the spatial and temporal variable) to the distribution of the fluid queue. 
+
+Once we have established a few methods for approximating fluid queues, Chapter~\ref{sec: numerics} then numerically explores some properties of the approximations numerically. Given that the QBD-RAP scheme was developed so that it guarantees positivity of the approximation, we largely focus on problems with discontinuities. 
+
+Finally, Chapter~\ref{ch: conclusion} makes concluding remarks. 
+
+To help the reader understand the notations used in the DG scheme, we provide a small toy model example in Appendix~\ref{appendix:example}. The rest of the appendices contain technical results relating to proving the convergence of the QBD-RAP approximation scheme. Appendix~\ref{appendix: sec: 2} proves that the \emph{closing operator} introduced as part of the QBD-RAP scheme have the properties we claim they do to prove convergence in Chapter~\ref{sec: conv}. Appendix~\ref{app:extend conv} extends some results from Chapter~\ref{sec: conv} to a setting which requires slightly less computation. Lastly, Appendix~\ref{appendix: kronecker} provides some algebraic results which help us to manipulate certain Laplace transforms from Chapter~\ref{sec: conv}.
