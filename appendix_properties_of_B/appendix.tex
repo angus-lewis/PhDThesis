@@ -1,22 +1,22 @@
-\section{Properties of the DG operator \(\bs B\)}\label{sec:properties}
+\chapter{Properties of the DG operator \(\bs B\)\label{sec:properties}}
 In this section we prove that the DG approximation \(\bs B\) conserves probability. 
 
-Recall that the coefficients \({\boldsymbol a}_{k,i}(t)\) can be used to construct an approximate solution to a differential equation at time \(t\) as \(u_{k,i}(x,t)={\boldsymbol a}_{k,i}(t)\boldsymbol \phi_k(x)\tr{}.\) For \(i\in\calS,\,k\in\mathcal K,\,r\in\mathcal N_k\), define \(\alpha_{k,i}^r(t) := a_{k,i}^r(t)\displaystyle\int_{x\in\calD_k}\phi^r_k(x)\wrt x,\) and row-vectors \(\boldsymbol \alpha_{k,i}(t)=(\alpha_{k,i}^r(t))_{r\in\mathcal N_k}\). Motivated by the fact that we may be interested in approximations of the probabilities \(\mathbb P(X(t)\in\calD_k,\varphi(t)=i)\) rather than the function \(u_{k,i}\) itself, we can pose the problem equivalently in terms of the integrals 
-\[\mathbb P\left(X(t)\in\calD_k,\varphi(t)=i\right)\approx{\boldsymbol a}_{k,i}(t)\int_{x\in\calD_k}\boldsymbol \phi_k(x)\tr{}\wrt x={\boldsymbol \alpha}_{k,i}(t)\boldsymbol 1.\] 
+Recall that the coefficients \({\boldsymbol a}_{k,i}(t)\) can be used to construct an approximate solution to a differential equation at time \(t\) as \(u_{k,i}(x,t)={\boldsymbol a}_{k,i}(t)\boldsymbol \phi_k(x)\tr{}.\) For \(i\in\calS,\,k\in\mathcal K,\,r\in\{1,...,p_k\}\), define \(\alpha_{k,i}^r(t) := a_{k,i}^r(t)\displaystyle\int_{x=y_k}^{y_{k+1}}\phi^r_k(x)\wrt x,\) and row-vectors \(\boldsymbol \alpha_{k,i}(t)=(\alpha_{k,i}^r(t))_{r\in\{1,...,p_k\}}\). Motivated by the fact that we may be interested in approximations of the probabilities \(\mathbb P(X(t)\in\calD_{k,i},\varphi(t)=i)\) rather than the function \(u_{k,i}\) itself, we can pose the problem equivalently in terms of the integrals 
+\[\mathbb P\left(X(t)\in\calD_{k,i},\varphi(t)=i\right)\approx{\boldsymbol a}_{k,i}(t)\int_{x\in\calD_{k,i}}\boldsymbol \phi_k(x)\tr{}\wrt x={\boldsymbol \alpha}_{k,i}(t)\boldsymbol 1.\] 
 Define
 \[\boldsymbol \alpha_k(t) = (\boldsymbol \alpha_{k,i}(t))_{i\in\calS},\mbox{ and } \boldsymbol \alpha(t)=(\boldsymbol \alpha_k(t)))_{k\in\mathcal K},\]
 and matrices 
 \begin{align*}
-\bs P_k &= \diag\left(\int_{x\in\calD_k}\phi^r_k(x)\wrt x\right)_{ r\in\mathcal N_k},\, k\in\mathcal K^\circ,
+\bs P_k &= \diag\left(\int_{x=y_k}^{y_{k+1}}\phi^r_k(x)\wrt x\right)_{ r\in\{1,...,p_k\}},\, k\in\mathcal K^\circ,
 \\\bs P &=\left[\begin{array}{ccc}
-		\bs I_{N_{|\calS|}}\otimes \bs P_0 & &\\
+		\bs I_{N}\otimes \bs P_0 & &\\
 		& \ddots &\\
-		& & \bs I_{N_{|\calS|}}\otimes \bs P_K
+		& & \bs I_{N}\otimes \bs P_K
 	\end{array}\right].
 \end{align*}
-By choosing the basis \(\{\phi_{k}^r\}_{r\in\mathcal N_k,k\in\mathcal K^\circ}\) such that \(\int_{x\in\calD_k}\phi^r_k(x)\wrt x\neq 0\) for all \(r,k\), then \(\bs P\) is invertible. This is the case for the Lagrange polynomials, but not, for example, for the Legendre polynomials. We can (loosely) interpret the new coefficients \(\alpha_{k,i}^r(t)\) as representing the amount of probability captured by the basis function \(\phi^r_k(x)\) in phase \(i\).
+By choosing the basis \(\{\phi_{k}^r\}_{r\in\{1,...,p_k\},k\in\mathcal K^\circ}\) such that \(\int_{x=y_k}^{y_{k+1}}\phi^r_k(x)\wrt x\neq 0\) for all \(r,k\), then \(\bs P\) is invertible. This is the case for the Lagrange polynomials, but not, for example, for the Legendre polynomials. We can (loosely) interpret the new coefficients \(\alpha_{k,i}^r(t)\) as representing the amount of probability captured by the basis function \(\phi^r_k(x)\) in phase \(i\).
 
-The differential equation (\ref{eqn: DG ODE w BCs}) can be equivalently expressed as 
+The differential equation~(\ref{eqn: DG ODE w BCs}) can be equivalently expressed as 
 \(\label{eqn: DG alpha ODE w BCs}
 	\cfrac{\wrt}{\wrt t} \boldsymbol \alpha(t)
 	% 
@@ -38,15 +38,15 @@ Let
 \begin{align*}
  {  {\mathfrak{\bs B}}}^{{-1}0} &:= \bs T_{{-1}+}\otimes\left( \boldsymbol\phi_0(0)\bs M_0^{-1}\bs P_0\right),
  %
- \\ {  {\mathfrak{\bs B}}}^{0{-1}} &:=-\left[c_ip_{ij}^{-1}\mathbb 1_{(c_i<0)}\right]_{i\in\calS,j\in\calS_{{-1}}}\otimes \bs P_0^{-1}\boldsymbol \phi_0(0)\tr{},
+ \\ {  {\mathfrak{\bs B}}}^{0{-1}} &:=-\left[c_ip_{ij}^{-1} 1{(c_i<0)}\right]_{i\in\calS,j\in\calS_{{-1}}}\otimes \bs P_0^{-1}\boldsymbol \phi_0(0)\tr{},
  %
  \\ {  {\mathfrak{\bs B}}}^{{K+1} K} &:= \bs T_{{K+1}-}\otimes \left(\boldsymbol\phi_K(b)\bs M_K^{-1}\bs P_K\right)
  %
- \\ {  {\mathfrak{\bs B}}}^{K {K+1}} &:= \left[c_ip_{ij}^{K+1}\mathbb 1_{(c_i>0)}\right]_{i\in\calS,j\in\calS_{K+1}} \otimes  \bs P_K^{-1} \boldsymbol\phi_K(b)\tr{},
+ \\ {  {\mathfrak{\bs B}}}^{K {K+1}} &:= \left[c_ip_{ij}^{K+1} 1{(c_i>0)}\right]_{i\in\calS,j\in\calS_{K+1}} \otimes  \bs P_K^{-1} \boldsymbol\phi_K(b)\tr{},
  %
  \\\mathfrak{\bs B}^{kk}_{ij} &:= \begin{cases}
-    	T_{ii}\bs I_{N_k} + c_i\bs P_k^{-1}(\bs F_i^{kk}+\bs G_k)\bs M_k^{-1}\bs P_k & i = j, \\
-	T_{ij}\bs I_{N_k} & i \neq j,
+    	T_{ii}\bs I_{p_k} + c_i\bs P_k^{-1}(\bs F_i^{kk}+\bs G_k)\bs M_k^{-1}\bs P_k & i = j, \\
+	T_{ij}\bs I_{p_k} & i \neq j,
     \end{cases}\quad \mbox{ for \(k=1,2,\dots K-1\),}
  %
  \\\mathfrak{\bs B}^{00}_{ij} &:= \begin{cases}
@@ -61,27 +61,27 @@ T_{ij}\bs I_{N_K} + c_ip_{ij}^{K+1} 1(c_i>0)\bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}
 %
  \\\mathfrak{\bs B}^{k,k+1}_{ij} &:= \begin{cases}
 	c_i\bs P_k^{-1}\bs F_i^{k,k+1}\bs M_{k+1}^{-1}\bs P_{k+1} & i = j, \\
-	\bs 0_{N_k} & i \neq j,
+	\bs 0_{p_k} & i \neq j,
     \end{cases}\quad \mbox{ for \(k=0,1,\dots K-1\),}
  %
  \\\mathfrak{\bs B}^{k-1,k}_{ij} &:= \begin{cases}
     	c_i\bs P_k^{-1}\bs F_i^{k,k-1}\bs M_{k-1}^{-1}\bs P_{k-1} & i = j, \\
-	\bs 0_{N_k} & i \neq j,
+	\bs 0_{p_k} & i \neq j,
     \end{cases},\quad \mbox{ for \(k=2,\dots K\),}
 \\
-     {  {\mathfrak{\bs B}}}^{kk}%&=\left[\begin{array}{ccc}T_{11}I_{N_k} + c_1P_k^{-1}(F_1^{kk}+G_k)M_k^{-1}P_k & T_{12}I_{N_k} & T_{1N_\calS}I_{N_k}  \\ T_{21}I_{N_k} & & \\ \vdots &\ddots & \vdots \\ & &   T_{N_\calS-1,N_\calS}I_{N_k} \\  T_{N_\calS1}I_{N_k} &  T_{N_\calS,N_\calS-1}I_{N_k} & T_{N_\calS,N_\calS}I_{N_k} +c_{N_\calS}P_k^{-1}(F_{N_\calS}^{kk}+G_k)M_k^{-1}P_k\end{array}\right]
+     {  {\mathfrak{\bs B}}}^{kk}%&=\left[\begin{array}{ccc}T_{11}I_{p_k} + c_1P_k^{-1}(F_1^{kk}+G_k)M_k^{-1}P_k & T_{12}I_{p_k} & T_{1N}I_{p_k}  \\ T_{21}I_{p_k} & & \\ \vdots &\ddots & \vdots \\ & &   T_{N-1,N}I_{p_k} \\  T_{N1}I_{p_k} &  T_{N,N-1}I_{p_k} & T_{N,N}I_{p_k} +c_{N}P_k^{-1}(F_{N}^{kk}+G_k)M_k^{-1}P_k\end{array}\right]
 %    %
-%    &=:\left[\begin{array}{ccc} {  {\mathfrak B}}_{11}^{kk} &  {  {\mathfrak B}}^{kk}_{12} &  {  {\mathfrak B}}^{kk}_{1N_\calS}  \\  {  {\mathfrak B}}^{kk}_{21} & & \\ \vdots &\ddots & \vdots \\ & &    {  {\mathfrak B}}^{kk}_{N_\calS-1,N_\calS} \\   {  {\mathfrak B}}^{kk}_{N_\calS1} &   {  {\mathfrak B}}^{kk}_{N_\calS,N_\calS-1} &  {  {\mathfrak B}}^{kk}_{N_\calS,N_\calS} \end{array}\right], 
+%    &=:\left[\begin{array}{ccc} {  {\mathfrak B}}_{11}^{kk} &  {  {\mathfrak B}}^{kk}_{12} &  {  {\mathfrak B}}^{kk}_{1N}  \\  {  {\mathfrak B}}^{kk}_{21} & & \\ \vdots &\ddots & \vdots \\ & &    {  {\mathfrak B}}^{kk}_{N-1,N} \\   {  {\mathfrak B}}^{kk}_{N1} &   {  {\mathfrak B}}^{kk}_{N,N-1} &  {  {\mathfrak B}}^{kk}_{N,N} \end{array}\right], 
     %
-    &=:\left[\begin{array}{ccc} {  {\mathfrak{\bs B}}}_{11}^{kk} &  \hdots &  {  {\mathfrak{\bs B}}}^{kk}_{1N_\calS}  \\ \vdots &\ddots & \vdots \\   {  {\mathfrak{\bs B}}}^{kk}_{N_\calS1} &  \hdots &  {  {\mathfrak{\bs B}}}^{kk}_{N_\calS,N_\calS} \end{array}\right], \mbox{ for \(k\in\mathcal K^\circ\),}
+    &=:\left[\begin{array}{ccc} {  {\mathfrak{\bs B}}}_{11}^{kk} &  \hdots &  {  {\mathfrak{\bs B}}}^{kk}_{1N}  \\ \vdots &\ddots & \vdots \\   {  {\mathfrak{\bs B}}}^{kk}_{N1} &  \hdots &  {  {\mathfrak{\bs B}}}^{kk}_{N,N} \end{array}\right], \mbox{ for \(k\in\mathcal K^\circ\),}
     %
-\\ {  {\mathfrak{\bs B}}}^{k,k+1}%&=\left[\begin{array}{ccc}c_1P_k^{-1}F_1^{k,k+1}M_{k+1}^{-1}P_{k+1}&  & \\  &\ddots &  \\ & &   \\  &  &c_{N_\calS}P_k^{-1}F_{N_\calS}^{k,k+1}M_{k+1}^{-1}P_{k+1} \end{array}\right] 
+\\ {  {\mathfrak{\bs B}}}^{k,k+1}%&=\left[\begin{array}{ccc}c_1P_k^{-1}F_1^{k,k+1}M_{k+1}^{-1}P_{k+1}&  & \\  &\ddots &  \\ & &   \\  &  &c_{N}P_k^{-1}F_{N}^{k,k+1}M_{k+1}^{-1}P_{k+1} \end{array}\right] 
 %
-&=:\left[\begin{array}{ccc} {  {\mathfrak{\bs B}}}^{k,k+1}_{1,1}& \hdots &  {  {\mathfrak{\bs B}}}^{k,k+1}_{1,N_\calS}\\  \vdots &\ddots & \vdots \\  {  {\mathfrak{\bs B}}}^{k,k+1}_{N_\calS,1} & \hdots & {  {\mathfrak{\bs B}}}^{k,k+1}_{N_\calS,N_\calS} \end{array}\right],\mbox{ for \(k=0,1,\dots K-1\),}
+&=:\left[\begin{array}{ccc} {  {\mathfrak{\bs B}}}^{k,k+1}_{1,1}& \hdots &  {  {\mathfrak{\bs B}}}^{k,k+1}_{1,N}\\  \vdots &\ddots & \vdots \\  {  {\mathfrak{\bs B}}}^{k,k+1}_{N,1} & \hdots & {  {\mathfrak{\bs B}}}^{k,k+1}_{N,N} \end{array}\right],\mbox{ for \(k=0,1,\dots K-1\),}
 %
-\\ {  {\mathfrak{\bs B}}}^{k,k-1}%&=\left[\begin{array}{ccc}c_1P_k^{-1}F_1^{k,k-1}M_{k-1}^{-1}P_{k-1}&  & \\  &\ddots &  \\  &  &c_{N_\calS}P_k^{-1}F_{N_\calS}^{k,k-1}M_{k-1}^{-1}P_{k-1} \end{array}\right]
+\\ {  {\mathfrak{\bs B}}}^{k,k-1}%&=\left[\begin{array}{ccc}c_1P_k^{-1}F_1^{k,k-1}M_{k-1}^{-1}P_{k-1}&  & \\  &\ddots &  \\  &  &c_{N}P_k^{-1}F_{N}^{k,k-1}M_{k-1}^{-1}P_{k-1} \end{array}\right]
 %
-&=:\left[\begin{array}{ccc} {  {\mathfrak{\bs B}}}^{k,k-1}_{1,1}& \hdots &  {  {\mathfrak{\bs B}}}^{k,k-1}_{1,N_\calS}\\  \vdots &\ddots & \vdots \\  {  {\mathfrak{\bs B}}}^{k,k-1}_{N_\calS,1} & \hdots & {  {\mathfrak{\bs B}}}^{k,k-1}_{N_\calS,N_\calS} \end{array}\right], \mbox{ for \(k=1,2,\dots K\).}
+&=:\left[\begin{array}{ccc} {  {\mathfrak{\bs B}}}^{k,k-1}_{1,1}& \hdots &  {  {\mathfrak{\bs B}}}^{k,k-1}_{1,N}\\  \vdots &\ddots & \vdots \\  {  {\mathfrak{\bs B}}}^{k,k-1}_{N,1} & \hdots & {  {\mathfrak{\bs B}}}^{k,k-1}_{N,N} \end{array}\right], \mbox{ for \(k=1,2,\dots K\).}
 \end{align*} 
 Then
 \begin{align*}
@@ -96,48 +96,48 @@ Then
 \end{array}\right].\end{align*}
 
 	\begin{rem}
-	One may recognise the structure of \( {  {\mathfrak{\bs B}}}\) as the structure of a quasi-birth-and-death process (QBD), with levels \(k\in\mathcal K^\circ\). This raises the question of whether \( {  {\mathfrak{\bs B}}}\) is indeed a representation of the generator matrix of a QBD, or QBD-like process. In the case of a constant basis function on each cell, i.e.~\(N_k=1\) and \(\phi_k^1(x)\propto1\), \(k\in\mathcal K^\circ\), then \( {  {\mathfrak{\bs B}}}\) is the generator of a QBD: it has zero row-sums, negative diagonal entires, and non-negative off-diagonal entries, the QBD-phase variable is \(\{\varphi_t\}\) and the level is \(k\in\mathcal K\). In fact, if \(\Delta_k\) is the same for every \(k\in\mathcal K^\circ\), then this is the same QBD discretisation of a stochastic fluid process analysed by \cite{bo2013}. However, for higher-degree polynomials \(\mathfrak{\bs B}\) is not necessarily the generator of a QBD process. We conjecture that, using polynomial basis functions, then \(N_k=1\) and \(\phi_k^1(x)\propto1\), \(k\in\mathcal K^\circ\) is the only DG approximation which has an interpretation as a QBD-like process -- not even as a QBD-RAP \citep{bn2010}.
+	One may recognise the structure of \( {  {\mathfrak{\bs B}}}\) as the structure of a quasi-birth-and-death process (QBD), with levels \(k\in\mathcal K^\circ\). This raises whether \( {  {\mathfrak{\bs B}}}\) is indeed a representation of the generator matrix of a QBD, or QBD-like process. In the case of a constant basis function on each cell, i.e.~\(p_k=1\) and \(\phi_k^1(x)\propto1\), \(k\in\mathcal K^\circ\), then \( {  {\mathfrak{\bs B}}}\) is the generator of a QBD: it has zero row-sums, negative diagonal entries, and non-negative off-diagonal entries, the QBD-phase variable is \(\{\varphi(t)\}\) and the level is \(k\in\mathcal K\). In fact, if \(\Delta_k\) is the same for every \(k\in\mathcal K^\circ\), then this is the same QBD discretisation of a stochastic fluid process analysed by \cite{bo2013}. However, for higher-degree polynomials \(\mathfrak{\bs B}\) is not necessarily the generator of a QBD process. We conjecture that, using polynomial basis functions, then \(p_k=1\) and \(\phi_k^1(x)\propto1\), \(k\in\mathcal K^\circ\) is the only DG approximation which has an interpretation as a QBD-like process -- not even as a QBD-RAP \citep{bn2010}.
 	\end{rem}
 	
-	In the following lemma, we use the following properties of the Lagrange interpolating polynomials defined by the Gauss-Lobatto quadrature nodes. 
-	\paragraph{Property 1} \(\displaystyle\sum_{s=1}^{N_k} \phi_k^s(x) = \begin{cases} 1&x\in\calD_k,\\ 0 & x\notin \calD_k.\end{cases}\)
+	For simplicity, define \(\calD_k=[y_k,y_{k+1}]\). In the following lemma, we use the following properties of the Lagrange interpolating polynomials defined by the Gauss-Lobatto quadrature nodes. 
+	\paragraph{Property 1} \(\displaystyle\sum_{s=1}^{p_k} \phi_k^s(x) = \begin{cases} 1&x\in\calD_k,\\ 0 & x\notin \calD_k.\end{cases}\)
 
-	For \(k\in\mathcal K^\circ\), let \(\boldsymbol e_n^k\) be a row-vector of length \(N_k\) with a 1 in the \(n\)th position and zeros elsewhere.
-	\paragraph{Property 2} At the cell edges, \(\bs \phi_k(y_k) = \bs e_1^k\) and \(\bs\phi_k(y_{k+1})=\bs e_{N_k}^k\), \(k\in\mathcal K^\circ\). 
+	For \(k\in\mathcal K^\circ\), let \(\boldsymbol e_n^k\) be a row-vector of length \(p_k\) with a 1 in the \(n\)th position and zeros elsewhere.
+	\paragraph{Property 2} At the cell edges, \(\bs \phi_k(y_k) = \bs e_1^k\) and \(\bs\phi_k(y_{k+1})=\bs e_{p_k}^k\), \(k\in\mathcal K^\circ\). 
 
 \begin{lem}
-	If \(\{\phi^r_k(x)\}_{r\in\mathcal N_k}\), are chosen as the Lagrange interpolating polynomials on \(\mathcal D_k\), \(k\in\mathcal K^\circ\), then the matrix \( {  {\mathfrak{\bs B}}}\) has zero row-sums. 
+	If \(\{\phi^r_k(x)\}_{r\in\{1,...,p_k\}}\), are chosen as the Lagrange interpolating polynomials on \(\mathcal D_k\), \(k\in\mathcal K^\circ\), then the matrix \( {  {\mathfrak{\bs B}}}\) has zero row-sums. 
 \end{lem}
 \begin{proof}
 	First we make numerous algebraic observations. Let \(\boldsymbol 1\) and \(\boldsymbol 0\) be column vectors of ones and zeros, respectively, with an appropriate length depending on the context. Using Property 1, observe that 
 	\begin{align*}
-        \bs M_k\boldsymbol 1 &= \left(\sum_{s=1}^{N_k} \int_{x\in\calD_k}\phi^r_k(x)\phi_s^k(x)\wrt x\right)_{r\in\mathcal N_k}\tr{}
+        \bs M_k\boldsymbol 1 &= \left(\sum_{s=1}^{p_k} \int_{x\in\calD_k}\phi^r_k(x)\phi_s^k(x)\wrt x\right)_{r\in\{1,...,p_k\}}\tr{}
 	%
-        \\&= \left(\int_{x\in\calD_k}\phi^r_k(x)\sum_{s=1}^{N_k} \phi_s^k(x)\wrt x \right)_{r\in\mathcal N_k} \tr{}
+        \\&= \left(\int_{x\in\calD_k}\phi^r_k(x)\sum_{s=1}^{p_k} \phi_s^k(x)\wrt x \right)_{r\in\{1,...,p_k\}} \tr{}
         %
-        \\&= \left(\int_{x\in\calD_k}\phi^r_k(x)\wrt x\right)_{r\in\mathcal N_k} \tr{}
+        \\&= \left(\int_{x\in\calD_k}\phi^r_k(x)\wrt x\right)_{r\in\{1,...,p_k\}} \tr{}
         %
         \\&= \bs P_k\boldsymbol 1,
 	\end{align*}
 	hence \(\bs M_k^{-1}\bs P_k\boldsymbol 1=\boldsymbol 1\). Also, 
 	\begin{align*}
-        \bs G_k\bs M_k^{-1}\bs P_k\boldsymbol 1 = \bs G_k\boldsymbol 1 &= \left(\sum_{s=1}^{N_k} \int_{x\in\calD_k}\phi^r_k(x)\cfrac{\wrt }{\wrt x}\phi_k^s(x)\wrt x\right)_{r\in\mathcal N_k} \tr{}
+        \bs G_k\bs M_k^{-1}\bs P_k\boldsymbol 1 = \bs G_k\boldsymbol 1 &= \left(\sum_{s=1}^{p_k} \int_{x\in\calD_k}\phi^r_k(x)\cfrac{\wrt }{\wrt x}\phi_k^s(x)\wrt x\right)_{r\in\{1,...,p_k\}} \tr{}
 	%
-        \\&= \left(\int_{x\in\calD_k}\phi^r_k(x)\cfrac{\wrt }{\wrt x}\sum_{s=1}^{N_k} \phi_k^s(x)\wrt x \right)_{r\in\mathcal N_k} \tr{}
+        \\&= \left(\int_{x\in\calD_k}\phi^r_k(x)\cfrac{\wrt }{\wrt x}\sum_{s=1}^{p_k} \phi_k^s(x)\wrt x \right)_{r\in\{1,...,p_k\}} \tr{}
 	%
-        \\&= \left(\int_{x\in\calD_k}\phi^r_k(x)\cfrac{\wrt }{\wrt x}1\wrt x\right)_{r\in\mathcal N_k} \tr{}
+        \\&= \left(\int_{x\in\calD_k}\phi^r_k(x)\cfrac{\wrt }{\wrt x}1\wrt x\right)_{r\in\{1,...,p_k\}} \tr{}
 	%
         \\&= \boldsymbol 0,
 	\end{align*}
-	where we have again used Property 1. Consider \(c_i>0\) and let \(\boldsymbol b\) and \(\boldsymbol d\) be arbitrary row-vectors of length \(N_k\) and \(N_{k+1}\), respectively. By Property 2, for \(k\in\mathcal K^\circ,\)
+	where we have again used Property 1. Consider \(c_i>0\) and let \(\boldsymbol b\) and \(\boldsymbol d\) be arbitrary row-vectors of length \(p_k\) and \(p_{k+1}\), respectively. By Property 2, for \(k\in\mathcal K^\circ,\)
 	\begin{align*}
-        \bs F_i^{kk}\boldsymbol b &= -\boldsymbol \phi_k(y_{k+1})\tr{} \boldsymbol \phi_k(y_{k+1})\boldsymbol b \\&= -(\bs e^k_{N_k})\tr{} \bs e_{N_k}^k\bs b \\&= -b_{N_k}(\boldsymbol e_{N_k}^k)\tr{},
+        \bs F_i^{kk}\boldsymbol b &= -\boldsymbol \phi_k(y_{k+1})\tr{} \boldsymbol \phi_k(y_{k+1})\boldsymbol b \\&= -(\bs e^k_{p_k})\tr{} \bs e_{p_k}^k\bs b \\&= -b_{p_k}(\boldsymbol e_{p_k}^k)\tr{},
         %
-        \\\bs F_i^{k,k+1}\boldsymbol d &= \boldsymbol \phi_{k}(y_{k+1})\tr{} \boldsymbol \phi_{k+1}(y_{k+1})\boldsymbol d \\&= (\bs e^{k}_{N_k})\tr{} \bs e_{1}^{k+1}\bs d \\&= d_{1}(\boldsymbol e_{N_{k}}^{k})\tr{}.
+        \\\bs F_i^{k,k+1}\boldsymbol d &= \boldsymbol \phi_{k}(y_{k+1})\tr{} \boldsymbol \phi_{k+1}(y_{k+1})\boldsymbol d \\&= (\bs e^{k}_{p_k})\tr{} \bs e_{1}^{k+1}\bs d \\&= d_{1}(\boldsymbol e_{N_{k}}^{k})\tr{}.
 	\end{align*}
 	Hence, observe that 
 	\begin{align*}
-		&\bs P_k^{-1}\bs F_i^{kk} \bs M_k^{-1} \bs P_k \bs 1 = \bs P_k^{-1} \bs \phi_k(y_k)'\bs 1 = -\bs P_k^{-1}\bs F_i^{k,k+1} \bs M_k^{-1} \bs P_k \bs 1 = - \bs P_k^{-1}(\bs e_{N_k}^k)',
+		&\bs P_k^{-1}\bs F_i^{kk} \bs M_k^{-1} \bs P_k \bs 1 = \bs P_k^{-1} \bs \phi_k(y_k)'\bs 1 = -\bs P_k^{-1}\bs F_i^{k,k+1} \bs M_k^{-1} \bs P_k \bs 1 = - \bs P_k^{-1}(\bs e_{p_k}^k)',
 	\end{align*}
 	for \(k=0,1,\dots,K-1\). 
 	Similarly, for \(c_i<0\), 
@@ -149,7 +149,7 @@ Then
 	Now, with the above observations made, we first claim that, for \(c_i>0\), and \(k=0,1,...,K-1\), 
 	\begin{align*}
 		\sum_{j\in\calS}\mathfrak{\bs B}^{kk}_{ij}\bs 1 + \mathfrak{\bs B}^{kk+1}_{ij}\bs 1
-		&=\sum_{j\in\calS}T_{ij}\bs I_{N_k}\bs 1 + c_i \bs P_k^{-1}(\bs F_i^{kk}+\bs G_k)\bs M_k^{-1}\bs P_k\boldsymbol 1 + c_i \bs P_k^{-1}\bs F_i^{k,k+1}\bs M_k^{-1}\bs P_k\boldsymbol 1 
+		&=\sum_{j\in\calS}T_{ij}\bs I_{p_k}\bs 1 + c_i \bs P_k^{-1}(\bs F_i^{kk}+\bs G_k)\bs M_k^{-1}\bs P_k\boldsymbol 1 + c_i \bs P_k^{-1}\bs F_i^{k,k+1}\bs M_k^{-1}\bs P_k\boldsymbol 1 
 		\\&=\bs 0.
 	\end{align*}
 	The first sum is zero since \(\bs T\) is a generator of a continuous-time Markov chain. This leaves the other two terms, which, using our observations, we get 
@@ -163,13 +163,14 @@ Then
 		&\sum_{j\in\calS}\mathfrak{\bs B}^{KK}_{ij}\bs 1 + \mathfrak{\bs B}^{K{K+1}}_{ij}\bs 1
 		\\&= \sum_{j\in\calS}T_{ij}\bs I_{N_K}\bs 1-\sum_{j\in\calS_-} c_ip_{ij}^{K+1} \bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K \bs 1 -\sum_{j\in\calS_{{K+1} }}c_ip_{ij}^{K+1} \bs P_K^{-1}\boldsymbol \phi_K(0)\tr{}\bs 1 
 		\\&\quad{} + c_i \bs P_K^{-1}(\bs F_i^{KK}+\bs G_K)\bs M_K^{-1}\bs P_K\boldsymbol 1 
-		\\&= -\sum_{j\in\calS_-} c_ip_{ij}^{K+1} \bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K \bs 1 -\sum_{j\in\calS_{{K+1}}}c_ip_{ij}^{K+1} \bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K\bs 1+ c_i \bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K\boldsymbol 1
+		\\&= -\sum_{j\in\calS_-} c_ip_{ij}^{K+1} \bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K \bs 1 
+		\\&{}\quad-\sum_{j\in\calS_{{K+1}}}c_ip_{ij}^{K+1} \bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K\bs 1+ c_i \bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K\boldsymbol 1
 		\\&\quad{}+ c_i \bs P_K^{-1}\bs G_K\bs M_K^{-1}\bs P_K\boldsymbol 1
 		%
 		\\&= - c_i \bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K \bs 1 + c_i \bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K\boldsymbol 1 + c_i \bs P_K^{-1}\bs G_K\boldsymbol 1
 		\\&= \bs 0.
 	\end{align*}
-	% Similarly, for \(c_i<0\), and row-vectors \(\boldsymbol b\) and \(\boldsymbol d\) of length \(N_k\) and \(N_{k-1}\), respectively, 
+	% Similarly, for \(c_i<0\), and row-vectors \(\boldsymbol b\) and \(\boldsymbol d\) of length \(p_k\) and \(N_{k-1}\), respectively, 
 	% \begin{align*}
 	% 	\bs F_i^{kk}\boldsymbol b &= \boldsymbol \phi^k(y_{k})\tr{} \boldsymbol \phi^k(y_{k})\boldsymbol b \\&= (\bs e^{k}_{1})\tr{} \bs e_{1}^{k}\bs b  \\&= b_{1}(\boldsymbol e_{1}^k)\tr{} 
 	% 	%
@@ -179,7 +180,7 @@ Then
 		Similarly, for \(c_i<0\) and \(k=1,...,K\), using the same arguments as before we have
 	\begin{align*}
 		\sum_{j\in\calS}\mathfrak{\bs B}^{kk}_{ij}\bs 1 + \mathfrak{\bs B}^{kk-1}_{ij}\bs 1
-		&=\sum_{j\in\calS}T_{ij}\bs I_{N_k}\bs 1 + c_i \bs P_k^{-1}(\bs F_i^{kk}+\bs G_k)\bs M_k^{-1}\bs P_k\boldsymbol 1 + c_i \bs P_k^{-1}\bs F_i^{k,k-1}\bs M_k^{-1}\bs P_k\boldsymbol 1
+		&=\sum_{j\in\calS}T_{ij}\bs I_{p_k}\bs 1 + c_i \bs P_k^{-1}(\bs F_i^{kk}+\bs G_k)\bs M_k^{-1}\bs P_k\boldsymbol 1 + c_i \bs P_k^{-1}\bs F_i^{k,k-1}\bs M_k^{-1}\bs P_k\boldsymbol 1
 		% \\&= \boldsymbol 0 + c_i \bs P_k^{-1}(\bs F_i^{kk}+\bs G_k)\bs M_k^{-1}\bs P_k\boldsymbol 1 + c_i \bs P_k^{-1}\bs F_i^{k,k+1}\bs M_{k-1}^{-1}\bs P_{k-1}\boldsymbol 1
 		% \\&= c_i \bs P_k^{-1}(\bs F_i^{kk}+\bs G_k)\boldsymbol 1 + c_i \bs P_k^{-1}\bs F_i^{k,k-1}\boldsymbol 1
 		% \\&= c_i \bs P_k^{-1}\bs F_i^{kk}\boldsymbol 1 + c_i \bs P_k^{-1}\bs G_k\boldsymbol 1 + c_i \bs P_k^{-1}\bs F_i^{k,k-1}\boldsymbol 1
@@ -202,7 +203,7 @@ Then
 	\begin{align*}
 		\mathfrak{\bs B}^{{-1},{-1}}\boldsymbol 1 +  {  {\mathfrak{\bs B}}}^{{-1}0}\boldsymbol 1 
 		&= \bs T_{{-1},{-1}}\boldsymbol 1 + \left[\bs T_{{-1}+}\otimes\left( \boldsymbol\phi_0(0)\bs M_0^{-1}\bs P_0\right)\right]\boldsymbol 1. 
-		\intertext{Swapping the order of summation and recalling \(\bs M_k^{-1}\bs P_k\boldsymbol 1=\boldsymbol 1\) then this is equal to}
+		\intertext{ Swapping the order of summation and recalling \(\bs M_k^{-1}\bs P_k\boldsymbol 1=\boldsymbol 1\) then this is equal to}
 		\bs T_{{-1},{-1}}\boldsymbol 1 + \left[\bs T_{{-1}+}\otimes\left( \boldsymbol\phi_0(0)\bs M_0^{-1}\bs P_0\right)\boldsymbol 1\right]\boldsymbol 1 
 		%
 		&= \bs T_{{-1},{-1}}\boldsymbol 1 + \left[\bs T_{{-1}+}\otimes \boldsymbol e_1^0\bs 1\right]\bs 1
@@ -232,9 +233,9 @@ Then
 \begin{cor}
 	The DG approximation to the generator \(  \bs B\) conserves probability. That is, for all \(t\geq 0\), 
 	\begin{align*}
-	&\sum_{i\in\calS_{-1}}q_{{-1},i}(t)+\sum_{i\in\calS_{K+1}}q_{{K+1},i}(t)+\sum_{i\in\calS} \int_{x\in[0,b]}u_i(x,t)\wrt x 
+	&\sum_{i\in\calS_{-1}}q_{{-1},i}(t)+\sum_{i\in\calS_{K+1}}q_{{K+1},i}(t)+\sum_{i\in\calS} \int_{x\in(0,b)}u_i(x,t)\wrt x 
 	%
-	\\&= \sum_{i\in\calS_{-1}}q_{{-1},i}(0)+\sum_{i\in\calS_{K+1}}q_{{K+1},i}(0)+\sum_{i\in\calS} \int_{x\in[0,b]}u_i(x,0)\wrt x.
+	\\&= \sum_{i\in\calS_{-1}}q_{{-1},i}(0)+\sum_{i\in\calS_{K+1}}q_{{K+1},i}(0)+\sum_{i\in\calS} \int_{x\in(0,b)}u_i(x,0)\wrt x.
 	\end{align*}
 \end{cor}
 \begin{proof}
@@ -246,64 +247,68 @@ Then
 %	%
 %	= \boldsymbol \alpha(0)\boldsymbol 1. 
 %\end{align*}
-Let \(\{\psi^r_k(x)\}_{r\in\mathcal N_k,k\in\mathcal K^\circ},\) be a basis for \(span(\phi^r_k(x),r\in\mathcal N_k,k\in\mathcal K^\circ)\), where \(\{\phi^r_k(x)\}_{r\in\mathcal N_k,k\in\mathcal K^\circ}\) are the Lagrange polynomials. Also define \(\psi_1^{-1}(x)=\delta(x)\) and \(\psi_1^{K+1}(x)=\delta(x-b)\) to capture the point masses at the boundaries. Let us use the same vector notation for the basis \(\psi^r_k(x)\) as we do for \(\phi^r_k(x)\). For \(k\in\mathcal K^\circ\), since \(\{\psi^r_k(x)\}_{r\in\mathcal N_k}\) and \(\{\phi^r_k(x)\}_{r\in\mathcal N_k}\) have the same span, then there is a matrix \(\bs V^k\) such that  \(\bs \psi_k(x)\tr{} = \bs V^k\bs \phi_k(x)\tr{}\). Trivially, this also holds for \(k={-1},{K+1}\). 
+Let \(\{\psi^r_k(x)\}_{r\in\{1,...,p_k\},k\in\mathcal K^\circ},\) be a basis for \(span(\phi^r_k(x),r\in\{1,...,p_k\},k\in\mathcal K^\circ)\), where \(\{\phi^r_k(x)\}_{r\in\{1,...,p_k\},k\in\mathcal K^\circ}\) are the Lagrange polynomials. Also define \(\psi_1^{-1}(x)=\delta(x)\) and \(\psi_1^{K+1}(x)=\delta(x-b)\) to capture the point masses at the boundaries. Let us use the same vector notation for the basis \(\psi^r_k(x)\) as we do for \(\phi^r_k(x)\). For \(k\in\mathcal K^\circ\), since \(\{\psi^r_k(x)\}_{r\in\{1,...,p_k\}}\) and \(\{\phi^r_k(x)\}_{r\in\{1,...,p_k\}}\) have the same span, then there is a matrix \(\bs V^k\) such that  \(\bs \psi_k(x)\tr{} = \bs V^k\bs \phi_k(x)\tr{}\). Trivially, this also holds for \(k={-1},{K+1}\). 
 
 Let 
-\[ \bs W = \left[\begin{array}{ccc}
+\begin{align*}
+	\bs W &= \left[\begin{array}{ccc}
 		\bs I_{|\calS_{-1}|} & & \\
 		& \bs P &  \\
 		& & \bs I_{|\calS_{K+1}|}
 	\end{array}\right]
-\mbox{ and }
-  \bs V = \left[\begin{array}{ccccc}
+\end{align*}{ and }
+\begin{align*}
+  \bs V &= \left[\begin{array}{ccccc}
 		\bs I_{|\calS_{-1}|} & & & &  \\
 		& \bs V^0 & & &  \\
 		& & \ddots & & \\
 		& & & \bs V^K \\
 		& & & & \bs I_{|\calS_{K+1}|}
-	\end{array}\right]. \]
-For a DG approximation, \(\bs B\), constructed from the basis \(\{\psi^r_k\}_{r\in\mathcal N_k,k\in\mathcal K}\), it can be shown that \(\bs B\) is similar to \( {  {\mathfrak{\bs B}}}\) with similarity matrix, \(\bs V\bs W\), such that \(  \bs B_{ij} =  \bs V\bs W{ \mathfrak{\bs B}}_{ij}\bs W^{-1}\bs V^{-1},\,i,j\in\calS\).
-Therefore 
+	\end{array}\right]. 
+\end{align*}
+For a DG approximation, \(\bs B\), constructed from the basis \(\{\psi^r_k\}_{r\in\{1,...,p_k\},k\in\mathcal K}\), it can be shown that \(\bs B\) is similar to \( {  {\mathfrak{\bs B}}}\) with similarity matrix, \(\bs V\bs W\), such that 
+\[  \bs B_{ij} =  \bs V\bs W{ \mathfrak{\bs B}}_{ij}\bs W^{-1}\bs V^{-1},\,i,j\in\calS.\]
+Therefore, 
 \begin{align*} 
-	\int_{x\in[0,b]}  \bs B_{ij}\bs\psi(x)\tr{} \wrt x &= \bs V\bs W { \mathfrak{\bs B}}_{ij}\bs W^{-1}\bs V^{-1}\int_{x\in[0,b]} \bs V\bs \phi(x)\tr{}\wrt x 
+	\int_{x\in(0,b)}  \bs B_{ij}\bs\psi(x)\tr{} \wrt x &= \bs V\bs W { \mathfrak{\bs B}}_{ij}\bs W^{-1}\bs V^{-1}\int_{x\in(0,b)} \bs V\bs \phi(x)\tr{}\wrt x 
 	%
 	\\&=\bs V\bs W { \mathfrak{\bs B}}_{ij}\bs W^{-1} \bs W\bs 1 \\&= \bs V \bs W { \mathfrak{\bs B}}_{ij}\bs 1,
 \end{align*}
-since \(\displaystyle\int_{x\in[0,b]} \bs \phi(x)\tr{}\wrt x =\bs W\bs 1\).
+since \(\displaystyle\int_{x\in(0,b)} \bs \phi(x)\tr{}\wrt x =\bs W\bs 1\).
 The row sums of \(\mathfrak{\bs B}\) are 0, hence 
 \begin{align}\label{eqn:Bsums0} 
-	\int_{x\in[0,b]}  \sum_{j\in\calS}\bs B_{ij}\bs\psi(x)\tr{} \wrt x  &=  \bs V\bs W \sum_{j\in\calS}{ \mathfrak{\bs B}}_{ij}\bs 1 \\&=  \bs V\bs W \bs 0 \\&= \bs 0.
+	\int_{x\in(0,b)}  \sum_{j\in\calS}\bs B_{ij}\bs\psi(x)\tr{} \wrt x  &=  \bs V\bs W \sum_{j\in\calS}{ \mathfrak{\bs B}}_{ij}\bs 1 \\&=  \bs V\bs W \bs 0 \\&= \bs 0.
 \end{align}
 
-Let \( {}^\psi \bs a_i(t)\), \(i\in\calS\) denote the coefficients related to the DG approximation constructed with the basis \(\{\psi^r_k\}_{r\in\mathcal N_k,k\in\mathcal K}\) (to distinguish them from \(\bs a\) and \(\bs \alpha\) used above). The DE constructed by the DG method is
+Let \( {}^\psi \bs a_i(t)\), \(i\in\calS\) denote the coefficients related to the DG approximation constructed with the basis \(\{\psi^r_k\}_{r\in\{1,...,p_k\},k\in\mathcal K}\) (to distinguish them from \(\bs a\) and \(\bs \alpha\) used above). The DE constructed by the DG method is
 \begin{align*}
-	\cfrac{\wrt}{\wrt t}\left({}^\psi \boldsymbol a_j (t)\right)\boldsymbol \psi(x) = \sum_{i\in\calS}\left({}^\psi \boldsymbol a_i (t)\right)\bs B_{ij}\bs\psi(x).
+	\cfrac{\wrt}{\wrt t}\left({}^\psi \boldsymbol a_j (t)\right)\boldsymbol \psi(x)\tr{} = \sum_{i\in\calS}\left({}^\psi \boldsymbol a_i (t)\right)\bs B_{ij}\bs\psi(x)\tr{}.
 \end{align*}
-Integrating over \(x\in [0,b]\) and summing over \(j\in\calS\) we get
+Integrating over \(x\in (0,b)\) and summing over \(j\in\calS\) we get
 \begin{align*}
-	\int_{x\in[0,b]}\sum_{j\in\calS}\cfrac{\wrt}{\wrt t}\left({}^\psi \boldsymbol a_j (t)\right)\boldsymbol \psi(x)\wrt x = \int_{x\in[0,b]}\sum_{j\in\calS}\sum_{i\in\calS}\left({}^\psi \boldsymbol a_i (t)\right)\bs B_{ij}\bs\psi(x).
+	\int_{x\in(0,b)}\sum_{j\in\calS}\cfrac{\wrt}{\wrt t}\left({}^\psi \boldsymbol a_j (t)\right)\boldsymbol \psi(x)\tr{}\wrt x = \int_{x\in(0,b)}\sum_{j\in\calS}\sum_{i\in\calS}\left({}^\psi \boldsymbol a_i (t)\right)\bs B_{ij}\bs\psi(x)\tr{}.
 \end{align*}
 Exchanging the order of operations gives 
 \begin{align}\label{eqn:totalprobDE}
-	\cfrac{\wrt}{\wrt t}\sum_{j\in\calS} \left({}^\psi \boldsymbol a_j (t)\right)\int_{x\in[0,b]} \boldsymbol \psi(x)\wrt x =  \sum_{i\in\calS}\left({}^\psi \boldsymbol a_i (t)\right)\int_{x\in[0,b]}\sum_{j\in\calS}\bs B_{ij}\bs\psi(x)\wrt x = 0,
+	\cfrac{\wrt}{\wrt t}\sum_{j\in\calS} \left({}^\psi \boldsymbol a_j (t)\right)\int_{x\in(0,b)} \boldsymbol \psi(x)\tr{}\wrt x =  \sum_{i\in\calS}\left({}^\psi \boldsymbol a_i (t)\right)\int_{x\in(0,b)}\sum_{j\in\calS}\bs B_{ij}\bs\psi(x)\tr{}\wrt x = 0,
 \end{align}
-where the right-hand side is \(0\) due to Equation (\ref{eqn:Bsums0}). This holds for all \(t\geq 0\). The left-hand side of (\ref{eqn:totalprobDE}) is the rate of change (with respect to time) of the total mass of the system. Since this is \( 0\) for all \(t\geq 0\), there is no change in the total mass of the system and thus probability is conserved. 
+where the right-hand side is \(0\) due to Equation~(\ref{eqn:Bsums0}). This holds for all \(t\geq 0\). The left-hand side of (\ref{eqn:totalprobDE}) is the rate of change (with respect to time) of the total mass of the system. Since this is \( 0\) for all \(t\geq 0\), there is no change in the total mass of the system and thus probability is conserved. 
 %\begin{align*}
-%	&\sum_{i\in\calS_{-1}}q_{{-1},i}(t)+\sum_{i\in\calS_{K+1}}q_{{K+1},i}(t)+\sum_{i\in\calS}\int_{x\in[0,b]} u_i(x,t)\wrt x 
+%	&\sum_{i\in\calS_{-1}}q_{{-1},i}(t)+\sum_{i\in\calS_{K+1}}q_{{K+1},i}(t)+\sum_{i\in\calS}\int_{x\in(0,b)} u_i(x,t)\wrt x 
 %	%
-%	\\&=\sum_{i\in\calS_{-1}}q_{{-1},i}(t)+\sum_{i\in\calS_{K+1}}q_{{K+1},i}(t)+\sum_{i\in\calS}\int_{x\in[0,b]}\boldsymbol a_i(t) \boldsymbol \psi(x)\wrt x 
+%	\\&=\sum_{i\in\calS_{-1}}q_{{-1},i}(t)+\sum_{i\in\calS_{K+1}}q_{{K+1},i}(t)+\sum_{i\in\calS}\int_{x\in(0,b)}\boldsymbol a_i(t) \boldsymbol \psi(x)\wrt x 
 %	%
-%	\\&=\sum_{j\in\calS}\int_{x\in[0,b]}\left[\vligne{\bs q_{{-1}}(0) & \boldsymbol a(0) & \bs q_{{K+1}}(0)} \exp(  Bt)\right]_{j}\boldsymbol \psi(x)\wrt x 
+%	\\&=\sum_{j\in\calS}\int_{x\in(0,b)}\left[\vligne{\bs q_{{-1}}(0) & \boldsymbol a(0) & \bs q_{{K+1}}(0)} \exp(  Bt)\right]_{j}\boldsymbol \psi(x)\wrt x 
 %	%
-%	\\&=\sum_{j\in\calS}\int_{x\in[0,b]}\left[\vligne{\bs q_{{-1}}(0) & \boldsymbol a(0) & \bs q_{{K+1}}(0)} \left(I+  Bt + \cfrac{  B^2t^2}{2!}+...\right)\right]_{j}\boldsymbol \psi(x)\wrt x
+%	\\&=\sum_{j\in\calS}\int_{x\in(0,b)}\left[\vligne{\bs q_{{-1}}(0) & \boldsymbol a(0) & \bs q_{{K+1}}(0)} \left(I+  Bt + \cfrac{  B^2t^2}{2!}+...\right)\right]_{j}\boldsymbol \psi(x)\wrt x
 %	%
-%	\\&=\sum_{i\in\calS_{-1}}q_{{-1},i}(0)+\sum_{i\in\calS_{K+1}}q_{{K+1},i}(0)+\sum_{i,j\in\calS}\int_{x\in[0,b]}\boldsymbol a_i(0)\boldsymbol \psi(x)\wrt x
+%	\\&=\sum_{i\in\calS_{-1}}q_{{-1},i}(0)+\sum_{i\in\calS_{K+1}}q_{{K+1},i}(0)+\sum_{i,j\in\calS}\int_{x\in(0,b)}\boldsymbol a_i(0)\boldsymbol \psi(x)\wrt x
 %	%
-%	\\&=\sum_{i\in\calS_{-1}}q_{{-1},i}(0)+\sum_{i\in\calS_{K+1}}q_{{K+1},i}(0)+\sum_{i\in\calS}\int_{x\in[0,b]} u_i(x,0)\wrt x.
+%	\\&=\sum_{i\in\calS_{-1}}q_{{-1},i}(0)+\sum_{i\in\calS_{K+1}}q_{{K+1},i}(0)+\sum_{i\in\calS}\int_{x\in(0,b)} u_i(x,0)\wrt x.
 %\end{align*}
 \end{proof}
 %\begin{remark}
-%	For any choice of basis \(\{\phi^r_k(x)\}_{r\in\{1,...,N_k\},k\in\{1,...,K\}}\) which spans the set of polynomials of degree \(N_k-1\), the DG approximation constructed with this basis will conserve probability. 
+%	For any choice of basis \(\{\phi^r_k(x)\}_{r\in\{1,...,p_k\},k\in\{1,...,K\}}\) which spans the set of polynomials of degree \(p_k-1\), the DG approximation constructed with this basis will conserve probability. 
 %\end{remark}
 
 % \section{Putting it all together}
@@ -327,4 +332,4 @@ where the right-hand side is \(0\) due to Equation (\ref{eqn:Bsums0}). This hold
 % %\end{align*}
 % %Intuitively, \(\boldsymbol a_{k,i}(t)T_{ii}\bs \phi^k(x)\tr{} +  c_i\boldsymbol a_{k,i}(t) G_kM_k^{-1}\bs \phi^k(x)\tr{} + c_i\bs a_{k,i}(t)F_i^{k,k}M_k^{-1}\bs \phi^k(x)\tr{} \) can be seen to approximate the density of \(\mu_{k,i}\mathbb B_{ii}^{kk}(\wrt x)\) -- the first term \(\boldsymbol a_{k,i}(t)T_{ii}\bs \phi^k(x)\tr{}\) represents stochastic jumps out of phase \(i\), the second term \(c_i\boldsymbol a_{k,i}(t) G_kM_k^{-1}\bs \phi^k(x)\tr{}\) represents the movement of density within cell \(\calD_k\) by moving the density between basis functions, and the last term \(c_i\bs a_{k,i}(t)F_i^{k,k}M_k^{-1}\bs \phi^k(x)\tr{}\) represents the flow of density out of the cell \(\calD_k\). Similarly \(\boldsymbol a_{k,i}(t)T_{ij}\bs \phi^k(x)\tr{}\) can be seen to approximate the density of \(\mu_{k,i}\mathbb B_{ij}^{kk}(\wrt x)\), \(i\neq j\), stochastic jumps from phase \(i\) to phase \(j\) within cell \(\calD_k\). Also \(c_i\bs a_i^{k-1}(t)F_i^{k-1,k}M_k^{-1} \bs \phi^k(x)\tr{}\) and \(c_i\bs a_i^{k+1}(t)F_i^{k+1,k}M_k^{-1}\bs \phi^k(x)\tr{} \) approximate the densities of \(\mu_i^{k-1}\mathbb B_{ij}^{k-1,k}(\wrt x)\) and \(\mu_i^{k+1}\mathbb B_{ij}^{k+1,k}(\wrt x)\), respectively. 
 
-% Given we have now truncated the space and added boundaries, let us define \(\mathcal M_{0,b}\) as the set of measures, \(\mu_i\), which admit an absolutely continuous density on \((0,b)\), may have a point mass at \(x=0\) if \(i\in\mathcal S_{-1}\), and another at \(x=b\) if \(i\in\calS_{{K+1}}\). The set \(\mathcal M_{0,b}\) is the domain of the operator \(\mathbb B\) truncated to the interval \([0,b]\) with regulated boundaries at \(x=0\) and \(x=b\). Also, redefine \(\mathcal K^m_i = \{k\in\{{-1},1,...,K,{K+1}\}\mid   l  (\calD_k\cap\calF_i^m) =    l (\calD_k) \}\) for \(i\in\calS,m\in\{+,-,0\}\) for all \(   l\in\mathcal M_{0,b} \). 
+% Given we have now truncated the space and added boundaries, let us define \(\mathcal M_{0,b}\) as the set of measures, \(\mu_i\), which admit an absolutely continuous density on \((0,b)\), may have a point mass at \(x=0\) if \(i\in\mathcal S_{-1}\), and another at \(x=b\) if \(i\in\calS_{{K+1}}\). The set \(\mathcal M_{0,b}\) is the domain of the operator \(\mathbb B\) truncated to the interval \((0,b)\) with regulated boundaries at \(x=0\) and \(x=b\). Also, redefine \(\mathcal K^m_i = \{k\in\{{-1},1,...,K,{K+1}\}\mid   l  (\calD_k\cap\calF_i^m) =    l (\calD_k) \}\) for \(i\in\calS,m\in\{+,-,0\}\) for all \(   l\in\mathcal M_{0,b} \). 

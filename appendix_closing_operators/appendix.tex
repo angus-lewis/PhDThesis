@@ -1,10 +1,10 @@
 %!TEX root = ../thesis.tex
 \chapter{Properties of closing operators}\label{appendix: sec: 2}
-This appendix is dedicated to proving that the closing operators in (\ref{eqn: density approx aug}), (\ref{eqn: density approx 3+}), and (\ref{eqn: density approx 4+}) have the Properties~\ref{properties: some props}, which we recall below, for convenience.
+This appendix is dedicated to proving that the closing operators in (\ref{eqn: alal})-(\ref{eqn:5462}) have the Properties~\ref{properties: some props}, which we recall below, for convenience.
 
 \renewcommand{\thedefn}{\arabic{chapter}.\arabic{defn}}
 \addtocounter{defn}{1}
-\setcounter{chapter}{4}
+\setcounter{chapter}{5}
 \begin{property}\label{properties: some props2}
 	Let \(\{\bs v^{(p)}(x)\}_{p\geq 1}\) be a sequence of closing operators such that they may be decomposed into \(\bs v^{(p)}(x)=\bs w^{(p)}(x) + \widetilde{\bs w}^{(p)}(x)\), where; \\
 	\subproperty \label{properties: -12} for \(x\in[0,\Delta),u,v\geq 0\),  
@@ -38,7 +38,7 @@ This appendix is dedicated to proving that the closing operators in (\ref{eqn: d
 % yuck 
 
 \section{The closing operator \(\bs v(x) = e^{\bs S x}\bs s\)}
-For the closing operator \(\bs v(x) = e^{\bs Sx}\bs s\) we may set \(\widetilde{\bs w}(x) = \bs 0\), so Properties~\ref{properties: -1} and \ref{properties: 0} hold trivially.
+For the closing operator \(\bs v(x) = e^{\bs Sx}\bs s\) we may set \(\widetilde{\bs w}(x) = \bs 0\), so Properties~\ref{properties: -1} and~\ref{properties: 0} hold trivially.
 
 \begin{lem}\label{lem: akc}
 	The closing operator \(\bs v(x) = e^{\bs Sx}\bs s\) has Property~\ref{properties: 1}.
@@ -59,7 +59,7 @@ For the closing operator \(\bs v(x) = e^{\bs Sx}\bs s\) we may set \(\widetilde{
 	The closing operator \(\bs v(x) = e^{\bs S x}\bs s\) has Property~\ref{properties: -2}.
 	
 	For \(\bs a\in\mathcal A,\, u\geq 0, \)
-	\[\int_{x=0}^\Delta \bs a e^{\bs Su}e^{\bs Sx}\bs v(x)\wrt x = \int_{x=0}^\Delta \bs a e^{\bs Su}e^{\bs Sx}\bs s\wrt x \leq \bs a e^{\bs Su}\bs e.\]	
+	\[\int_{x=0}^\Delta \bs a e^{\bs Su}\bs v(x)\wrt x = \int_{x=0}^\Delta \bs a e^{\bs Su}e^{\bs Sx}\bs s\wrt x \leq \bs a e^{\bs Su}\bs e.\]	
 \end{cor}
 \begin{proof}
 	\[\int_{x=0}^\Delta \bs a e^{\bs Su}e^{\bs Sx}\bs s\wrt x = \bs a e^{\bs Su}\bs e-\bs a e^{\bs S(u+\Delta)}\bs e \leq \bs a e^{\bs Su}\bs e,\]
@@ -69,27 +69,34 @@ For the closing operator \(\bs v(x) = e^{\bs Sx}\bs s\) we may set \(\widetilde{
 \begin{cor}\label{cor: cond bnd 2 V}
 	The closing operator \(\bs v(x)=e^{\bs S x}\bs s\) has Property~\ref{properties: 2}.
 
-	Let \(g\) be a function satisfying the Assumptions \ref{asu: g} and consider the closing operator \({\bs v}(x)=e^{\bs Sx}\bs s\). For \(u\leq \Delta-\varepsilon \), \(v\geq 0\), 
+	Let \(g\) be a function satisfying the Assumptions~\ref{asu: g} and consider the closing operator \({\bs v}(x)=e^{\bs Sx}\bs s\). For \(u\leq \Delta-\varepsilon \), \(v\geq 0\), 
 	\[\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} {\bs v}(v)g(x)\wrt x = g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon) + r_{\bs v} (u,v),\]
-	where \[\displaystyle R_{\bs v,1} = \int_{u=0}^{\Delta-\varepsilon}|r_{\bs v}(u,v)|\wrt u \leq r_2\Delta + 2\varepsilon G + \Delta G \cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}\]
-	and \[R_{\bs v,2} = \int_{u=0}^\Delta |r_{\bs v}(u,v)| \wrt u\leq R_{{\bs v},1}\leq r_2\Delta + 2\varepsilon G + \Delta G \cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}.\] 
+	where 
+	\begin{align*}
+		\displaystyle R_{\bs v,1} &= \int_{u=0}^{\Delta-\varepsilon}|r_{\bs v}(u,v)|,
+		\\R_{\bs v,2} &= \int_{u=0}^\Delta |r_{\bs v}(u,v)| \wrt u,
+	\end{align*}
+	and 
+	\[R_{\bs v,1},R_{\bs v,2}\leq r_2\Delta + 2\varepsilon G + \Delta G \cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}.\]
 \end{cor}
 \begin{proof}
 	By Corollary~\ref{cor: cond bnd 2}, 
 	\[\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} {\bs v}(v)g(x)\wrt x = g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon) + r_3 (u+v),\]
 	so \(r_{\bs v}(u,v)=r_3(u+v)\). All that remains to be shown are the bounds. To this end, observe 
 	\begin{align*}
-		R_{{\bs v},1} \leq \displaystyle\int_{u=0}^{\Delta}|r_{\bs v}(u,v)|\wrt u 
-		 &= \displaystyle\int_{u=0}^{\Delta} r_3(u+v)\wrt u 
+		R_{{\bs v},1} 
+		 &= \displaystyle\int_{u=0}^{\Delta} |r_3(u+v)|\wrt u 
 		 %
 %		 \\&\leq \displaystyle\int_{u=0}^{2\Delta} r_3(u+v)\wrt u
 		 %
-		 \leq r_2\Delta + 2\varepsilon G + \Delta G \cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2},
+		 \\&\leq \int_{u=0}^{\Delta-\varepsilon} |r_3(u)|\wrt u + \int_{u=\Delta-\varepsilon}^{\Delta + \varepsilon} |r_3(u)|\wrt u+ \int_{u=\Delta+\varepsilon}^{2\Delta+\varepsilon} |r_3(u)|\wrt u
+		 \\&\leq \int_{u=0}^{\Delta-\varepsilon} |r_2|\wrt u + \int_{u=\Delta-\varepsilon}^{\Delta + \varepsilon} G\wrt u+ \int_{u=\Delta+\varepsilon}^{2\Delta+\varepsilon} G \cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}\wrt u
+		 \\&\leq |r_2|\Delta + 2\varepsilon G + \Delta G \cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}.
 	\end{align*}
-	since \(r_{3}(u,v)\geq 0\) for all \(u,v\geq 0\). Similarly,
+	Similarly,
 	\begin{align*}
-		 R_{{\bs v},2} \leq \displaystyle\int_{v=0}^{\Delta}r_{\bs v}(u,v)\wrt v 
-		 &= \displaystyle\int_{v=0}^{\Delta} r_3(u+v)\wrt v 
+		 R_{{\bs v},2} 
+		 &= \displaystyle\int_{v=0}^{\Delta} |r_3(u+v)|\wrt v 
 		 %
 %		 \\&\leq \displaystyle\int_{u=0}^{2\Delta} r_3(u+v)\wrt u
 		 %
@@ -122,7 +129,7 @@ Let \(\widehat{\bs v}(x)\) be the closing operator,
 \[  \widehat{\bs v}(x) =   \left(e^{\bs{S} x}\bs s  + e^{\bs{S} (2\Delta-x)}\bs s\right),\]
 for \(x\in[0,\Delta)\).
 
-For the closing operator \(\widehat{\bs v}(x)\) we may set \(\widetilde{\bs w}(x) = \bs 0\), so Properties~\ref{properties: -1} and \ref{properties: 0} hold trivially.
+For the closing operator \(\widehat{\bs v}(x)\) we may set \(\widetilde{\bs w}(x) = \bs 0\), so Properties~\ref{properties: -1} and~\ref{properties: 0} hold trivially.
 
 \begin{lem}\label{lem: akxnj}
 	The closing operator \(\widehat{\bs v}(x)\) has the Property~\ref{properties: 1}.
@@ -139,14 +146,14 @@ Let \(\bs a   \in \mathcal A\) be arbitrary. By definition
 				\\& = \bs a  e^{\bs Su}  \left(e^{\bs{S}x}\bs e + e^{\bs{S}(2\Delta-x)}\bs e\right)
 	\end{align*}
 	since \((-\bs S)^{-1}\) and \(e^{\bs Sx}\) commute and \(\bs s = -\bs S e\). 
-	By Lemma~\ref{lem: akc} this is less than or equal to, 
+	Since \(\bs a e^{\bs Sx}\bs e\) is decreasing this is less than or equal to 
 	\begin{align}
         		& \bs a   e^{\bs Su} \left(\bs e + \bs e\right) = 2 \bs a   e^{\bs Su} \bs e. \label{eqn:mzm}
 	\end{align}
 \end{proof}
 
 \begin{lem}
-	The closing operator \(\widehat{\bs v}(x)\) has the property \ref{properties: -2}. 
+	The closing operator \(\widehat{\bs v}(x)\) has the property~\ref{properties: -2}. 
 	
 	For \(\bs a\in\mathcal A\), \(u\geq 0\), 
 	\[\int_{x=0}^\Delta \bs a e^{\bs Su}\widehat{\bs v}(x)\wrt x\leq\bs ae^{\bs Su}\bs e\]
@@ -158,19 +165,14 @@ Let \(\bs a   \in \mathcal A\) be arbitrary. By definition
 \begin{cor}\label{cor: cond bnd 2 U}
 	The closing operator \(\widehat{\bs v}(x)\) has the Property~\ref{properties: 2}.
 
-	Let \(g\) be a function satisfying the Assumptions \ref{asu: g}. For \(u\leq \Delta-\varepsilon \), \(v\in[ 0,\Delta)\), 
+	Let \(g\) be a function satisfying the Assumptions~\ref{asu: g}. For \(u\leq \Delta-\varepsilon \), \(v\in[ 0,\Delta)\), 
 	\[\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} {\widehat{\bs v}}(v)g(x)\wrt x = g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon) + r_{\widehat{\bs v}} (u,v),\]
 	where 
 	\[\left|r_{\widehat{\bs v}} (u,v)\right|\leq r_3 (u+v) + r_3 (u+2\Delta - v).\]
 	Furthermore,  
 	\begin{align*}
-		&\int_{u=0}^{\Delta}| r_{\widehat{\bs v}}(u,v)|\wrt u
-		\leq R_{{\widehat{\bs v}},1},
-	\end{align*}
-	and
-	\begin{align*}
-		&\int_{v=0}^{\Delta}| r_{\widehat{\bs v}}(u,v)|\wrt u
-		\leq R_{{\widehat{\bs v}},2},
+		R_{{\widehat{\bs v}},1}&=\int_{u=0}^{\Delta}| r_{\widehat{\bs v}}(u,v)|\wrt u,
+		\\R_{{\widehat{\bs v}},2}&=\int_{v=0}^{\Delta}| r_{\widehat{\bs v}}(u,v)|\wrt u,
 	\end{align*}
 	where 
 	\[R_{{\widehat{\bs v}},1},\, R_{{\widehat{\bs v}},2} \leq 2\left(\Delta r_2 + 2\varepsilon G + \Delta\cfrac{\var(Z)/\varepsilon^2}{1-\var(Z)/\varepsilon^2}\right).\]
@@ -237,7 +239,7 @@ Let \(\bs a   \in \mathcal A\) be arbitrary. By definition
 
 % The error term \(r_{{\bs u}}(u,v)\) depends on \(p\) so we should write \(r_{{\bs u}}^{(p)}(u,v)\). The error term \(r_{{\bs u}}^{(p)}(u,v)\) has similar properties to \(r_3^{(p)}(u+v)\); we can prove that it converges point-wise to \(0\) only on some areas of its domain, however when we integrate the error against bounded functions on bounded domains, then the resulting integral tends to \(0\). 
 
-\section{The closing operator \(\overline{\bs v} (x) = \left(e^{\bs{S} x} + e^{\bs{S} (2\Delta-x)}\right)\left[I-e^{\bs S  2\Delta}\right]^{-1}\bs s \)}
+\section{The closing operator \(\overline{\bs v} (x)\)}% = \left(e^{\bs{S} x} + e^{\bs{S} (2\Delta-x)}\right)\left[I-e^{\bs S  2\Delta}\right]^{-1}\bs s \)}
 
 Let \(\overline{\bs v} (x)\) be the closing operator 
 \[\overline{\bs v}(x) = \left(e^{\bs{S}x} + e^{\bs{S}(2\Delta-x)}\right)\left[I-e^{\bs S 2\Delta}\right]^{-1}\bs s,\]
@@ -257,8 +259,9 @@ We decompose the closing operator \(\displaystyle \overline{\bs v}(x)=\bs w(x)+\
 	\begin{align*}
 		 \bs a e^{\bs S(u+v)}(-\bs S)^{-1}\overline{\bs v}(x)\wrt x &= \sum_{n=0}^\infty\bs a e^{\bs S(x+u+v+2n\Delta)}\bs e + \bs a  e^{\bs S(2\Delta-x + u + v + 2n\Delta)} \bs e
 		\\ &\leq \sum_{n=0}^\infty \bs a e^{\bs S(x+u+2n\Delta)}\bs e + \bs a  e^{\bs S(2\Delta-x + u + 2n\Delta)} \bs e
-		\\ &= \bs a e^{\bs Su}(-\bs S)^{-1}\overline{\bs v}(x)\wrt x.
+		\\ &= \bs a e^{\bs Su}(-\bs S)^{-1}\overline{\bs v}(x)\wrt x,
 	\end{align*}
+	where the inequality holds since \(\bs ae^{\bs Sx}\bs e\) is decreasing.
 \end{proof}
 
 \begin{lem}\label{lem: akxnj2}
@@ -277,20 +280,20 @@ We decompose the closing operator \(\displaystyle \overline{\bs v}(x)=\bs w(x)+\
 		\\&=\sum_{n=1}^\infty \mathbb P(Z>u+x+2n\Delta) + \mathbb P(Z>u+2\Delta-x+2n\Delta)
 		\\&\leq 2 \sum_{n=1}^\infty \mathbb P(Z>2n\Delta).
 	\end{align*}
-	By Chebyshev's inequality, \(\mathbb P(Z>2n\Delta)\leq \cfrac{\var(Z)}{\Delta^2(1+2(n-1))^2}\). Therefore
+	By Chebyshev's inequality, \(\mathbb P(Z>2n\Delta)\leq \cfrac{\var(Z)}{\Delta^2(1+2(n-1))^2}\). Therefore,
 	\begin{align}
 		2 \sum_{n=1}^\infty \mathbb P(Z>2n\Delta)
-		& \leq 2 \cfrac{\var(Z)}{\Delta^2} \sum_{n=0}^\infty \cfrac{1}{(1+2n)^2}.
+		& \leq 2 \cfrac{\var(Z)}{\Delta^2} \sum_{n=0}^\infty \cfrac{1}{(1+2n)^2}. \label{eqn: jfeaaaa}
 	\end{align}
 	Now, consider the sum 
 	\begin{align}
 		\sum_{n=1}^\infty \cfrac{1}{n^2} = \sum_{n=1}^\infty \cfrac{1}{(2n)^2} + \sum_{n=0}^\infty \cfrac{1}{(1+2n)^2} = \cfrac{1}{4}\sum_{n=1}^\infty \cfrac{1}{n^2} + \sum_{n=0}^\infty \cfrac{1}{(1+2n)^2}.
 	\end{align}
-	The solution to the \emph{Basel problem} states that \(\displaystyle\sum_{n=1}^\infty 1/n^2=\pi^2/6.\) Hence 
+	The solution to the \emph{Basel problem} states that \(\displaystyle\sum_{n=1}^\infty 1/n^2=\pi^2/6.\) Hence, 
 	\[\cfrac{\pi^2}{6} = \cfrac{1}{4}\cfrac{\pi^2}{6} + \sum_{n=0}^\infty \cfrac{1}{(1+2n)^2}\]
 	and therefore 
 	\[\sum_{n=0}^\infty \cfrac{1}{(1+2n)^2} = \cfrac{\pi^2}{8}.\]
-	Thus, (\ref{eqn: weha cjcweyugeiow}) is less than or equal to 
+	Thus, (\ref{eqn: jfeaaaa}) is less than or equal to 
 	\[\cfrac{\var(Z)}{\Delta^2}\cfrac{\pi^2}{4}.\]
 \end{proof}
 
@@ -313,10 +316,10 @@ Since \(\bs w(x)=\widehat{\bs v}(x)\) then, from the results of the previous sec
 \begin{cor}\label{cor: cond bnd 2 U2}
 	The closing operator \(\overline{\bs v}(x)\) has Property~\ref{properties: 2}.
 
-	Let \(g\) be a function satisfying the Assumptions \ref{asu: g}. For \(u\leq \Delta-\varepsilon \), \(v\in[ 0,\Delta)\), 
+	Let \(g\) be a function satisfying the Assumptions~\ref{asu: g}. For \(u\leq \Delta-\varepsilon \), \(v\in[ 0,\Delta)\), 
 	\[\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} \overline{\bs v}(v)g(x)\wrt x = g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon) + r_{\overline{\bs v}} (u,v),\]
 	where 
-	\[\left|r_{\overline{\bs v}} (u,v)\right|\leq r_{\bs u} (u,v) + \cfrac{G \varepsilon^2 \pi^2}{4\Delta^2}.\]
+	\[\left|r_{\overline{\bs v}} (u,v)\right|\leq r_{\widehat{\bs v}} (u,v) + \cfrac{G \varepsilon^2 \pi^2}{4\Delta^2}.\]
 	Furthermore,  
 	\begin{align*}
 		R_{{\overline{\bs v}},1}&=\int_{u=0}^{\Delta}| r_{\overline{\bs v}}(u,v)|\wrt u\leq R_{{\widehat{\bs v}},1} + \cfrac{G \varepsilon^2 \pi^2}{4\Delta},
@@ -333,18 +336,18 @@ Since \(\bs w(x)=\widehat{\bs v}(x)\) then, from the results of the previous sec
 		%
 		\\&= \int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} {\widehat{\bs v}}(v)g(x)\wrt x + \int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} \left(e^{\bs{S} v} + e^{\bs{S} (2\Delta-v)}\right)\sum_{n=1}^\infty e^{\bs S2n\Delta}\bs s g(x)\wrt x. \label{eqn: ghi is this a2}
 	\end{align}
-	By Lemma \ref{cor: cond bnd 2 U} the first term is 
+	By Lemma~\ref{cor: cond bnd 2 U} the first term is 
 	\(g(\Delta-u-v) 1(u+v\leq\Delta-\varepsilon) + r_{{\widehat{\bs v}}} (u,v),\)
 	where 
 	\(\left|r_{\widehat{\bs v}} (u,v)\right|\leq r_3 (u+v) + r_3 (u+2\Delta - v).\)
 
-	Since \(g\leq G\), the second term is less than or equal to 
+	Since \(g\leq G\), the second term in (\ref{eqn: ghi is this a2}) is less than or equal to 
 	\begin{align*}
 		G\int_{x=0}^\infty \cfrac{\bs \alpha  e^{\bs{S} (u+x)} }{\bs \alpha  e^{\bs{S} u} \bs e} \left(e^{\bs{S} v} + e^{\bs{S} (2\Delta-v)}\right)\sum_{n=1}^\infty e^{\bs S2n\Delta}\bs s \wrt x
 		%
 		&= G \cfrac{\bs \alpha  e^{\bs{S} u} }{\bs \alpha  e^{\bs{S} u} \bs e} \left(e^{\bs{S} v} + e^{\bs{S} (2\Delta-v)}\right)\sum_{n=1}^\infty e^{\bs S2n\Delta}\bs e.
 	\end{align*}
-	By similar arguments to those used in the proof of Lemma \ref{lem: akxnj2} we can show that this is less than or equal to 
+	By similar arguments to those used in the proof of Lemma~\ref{lem: akxnj2} we can show that this is less than or equal to 
 	\begin{align*}
 		\cfrac{G}{\bs \alpha  e^{\bs{S} u} \bs e} \cfrac{\var(Z)}{\Delta^2}\cfrac{\pi^2}{4}.
 	\end{align*}
@@ -368,5 +371,5 @@ Since \(\bs w(x)=\widehat{\bs v}(x)\) then, from the results of the previous sec
 	\end{align*}
 	and similarly, 
 	\[R_{\overline{\bs v},2} = \int_{v=0}^\Delta |r_{\overline{\bs v}} (u,v) |\wrt v \leq R_{{{\widehat{\bs v}}},2} + \cfrac{G \varepsilon^2 \pi^2}{4\Delta}\]
-	where we have used Lemma \ref{cor: cond bnd 2 U}. 
+	where we have used Lemma~\ref{cor: cond bnd 2 U}. 
 \end{proof}

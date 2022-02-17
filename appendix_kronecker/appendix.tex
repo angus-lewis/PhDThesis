@@ -39,13 +39,13 @@ A property of the Kronecker sum is
 	e^{\bs A\oplus \bs{B}}= e^{\bs A}\otimes e^{\bs{B}}.
 \end{align}
 \begin{proof}
-	First, the matrices \(\bs A\otimes \bs{I}_m\) and \(\bs{I}_n\otimes \bs{B}\) commute; from the mixed product rule their product is \(\bs A\otimes \bs{B}\). Hence 
+	First, the matrices \(\bs A\otimes \bs{I}_m\) and \(\bs{I}_n\otimes \bs{B}\) commute; from the mixed product rule their product is \(\bs A\otimes \bs{B}\). Hence, 
 	\[e^{\bs A\oplus \bs{B}} = e^{\bs A\otimes \bs{I}_m}e^{\bs{I}_n\otimes \bs{B}}.\]
 	We now show that \(e^{\bs A\otimes \bs{I}_m} = e^{\bs A}\otimes \bs{I}_m\) and \(e^{\bs{I}_n\otimes \bs{B}}=\bs{I}_n\otimes e^{\bs{B}}\). The latter follows from the fact that \(\bs{I}_n\otimes \bs{B}\) is a block diagonal matrix with blocks \(\bs{B}\), hence its exponential is also block diagonal with blocks equal to the exponential of \(\bs{B}\). The former follows from 
 	\begin{align}
 	e^{\bs A\otimes \bs{I}_m} &= \sum_{n=0}^\infty \cfrac{1}{n!}\left(\bs A\otimes \bs{I}_m\right)^n \nonumber
 	\\&= \sum_{n=0}^\infty \cfrac{1}{n!}\left(\bs A^n\otimes \bs{I}_m\right) \nonumber
-	\\&=\left(\sum_{n=0}^\infty \cfrac{1}{n!}\bs A\otimes \bs{I}_m\right) \nonumber
+	\\&=\left(\sum_{n=0}^\infty \cfrac{1}{n!}\bs A^n\otimes \bs{I}_m\right) \nonumber
 	\\&=e^{\bs A}\otimes \bs{I}_m.\label{eqn:09ksdjgah}
 	\end{align}
 	
@@ -62,7 +62,7 @@ A property of the Kronecker sum is
 	=   \int_{x=0}^\infty e^{{\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)x}}\otimes e^{\bs{S}x} \wrt x \left(\bs{C}\otimes \bs{I}\right)^{-1}.  \label{eqn:lstsimplify}\end{align}
 \end{lem}
 \begin{proof}
-	Computing the integral on the left-hand side and then factorising the result and using the \ref{eqn:mpr} multiple times gives
+	Computing the integral on the left-hand side and then factorising the result and using the~\ref{eqn:mpr} multiple times gives
 	\begin{align}
             	\int_{t=0}^\infty e^{-\lambda t} e^{\left(\bs{T}\otimes \bs{I} + \bs{C}\otimes \bs{S}\right)t} \wrt t\nonumber 
             	%
@@ -78,7 +78,7 @@ A property of the Kronecker sum is
 		& - \left[\left(\bs{C}\otimes \bs{I}\right)\left(\left(\bs{C}^{-1}\otimes \bs{I}\right)\left(\bs{T}\otimes \bs{I} \right)+ \bs{I}\otimes \bs{S} - \left(\bs{C}^{-1}\otimes \bs{I}\right)\lambda \bs{I}\right)\right]^{-1}. \label{eqn: ref this one 13}
 		%
 	\end{align}
-	{Using the \ref{eqn:mpr} and algebraic manipulation, (\ref{eqn: ref this one 13}) is equal to }
+	{Using the~\ref{eqn:mpr} and algebraic manipulation, (\ref{eqn: ref this one 13}) is equal to }
 	\begin{align}
 		&- \left[\left(\bs{C}\otimes \bs{I}\right)\left(\left(\bs{C}^{-1}\bs{T}\right)\otimes \bs{I} + \bs{I}\otimes \bs{S} - \left(\bs{C}^{-1}\lambda \bs{I}\right)\otimes \bs{I}\right)\right]^{-1} \nonumber
 		%
@@ -89,7 +89,7 @@ A property of the Kronecker sum is
 	\end{align}
 	by definition of the Kronecker sum.
 	
-	Now, for an invertible matrix \(\bs A\) we can write \(-\bs A^{-1} = \displaystyle\int_{x=0}^\infty e^{\bs Ax}\wrt x\). Therefore (\ref{eqn: is an integral}) is 
+	Now, for an invertible matrix \(\bs A\) we can write \(-\bs A^{-1} = \displaystyle\int_{x=0}^\infty e^{\bs Ax}\wrt x\). Therefore, (\ref{eqn: is an integral}) is 
 	\begin{align*}
 		-\left[\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)\right)\oplus \bs{S}\right]^{-1}\left(\bs{C}\otimes \bs{I}\right)^{-1}
 		&= \int_{x=0}^\infty e^{\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)x\right)\oplus \bs{S}x}\wrt x\left(\bs{C}\otimes \bs{I}\right)^{-1}.
@@ -124,7 +124,7 @@ Let \(\bs H_{12}(t)\) be the top-right quadrant of \(e^{\bs Bt}\) of size \(m_1\
 	\bs H_{12}(t) &= \vligne{  \bs I_{m_1\times m_1} & \bs 0}e^{\bs Bt} \left[\begin{array}{c} \bs 0 \\ \bs I_{m_2\times m_2}\end{array}\right]. \label{eqn: p03j}
 \end{align}
 Denote by \(\widehat{\bs H}_{11}(\lambda):=\displaystyle \int_{t=0}^\infty e^{-\lambda t}\bs H_{11}(t)\wrt t\) and by \(\widehat{\bs H}_{12}(\lambda):=\displaystyle \int_{t=0}^\infty e^{-\lambda t}\bs H_{12}(t)\wrt t\), the Laplace transforms of \(\bs H_{11}(t)\) and \(\bs H_{12}(t)\), respectively. Using Lemma~\ref{lem: sfkjgn} we can show the following result. 
-\begin{lem}
+\begin{lem} Assuming \(\lambda >0\) and \(\lambda\bs I-\bs B_{22}\) is invertible, then 
 	\begin{align}
 		\widehat{\bs H}_{11}(\lambda) &= \int_{x=0}^\infty e^{\left(\bs B_{11} -\lambda \bs I_{m_1\times m_1} + \bs B_{12}(\lambda \bs I_{m_2\times m_2}- \bs B_{22})^{-1}\bs B_{21}\right)x} \wrt x,\label{eqn: 202}
 		%
@@ -192,17 +192,19 @@ Now, recall the matrix-functions
 \end{align*}
 from Chapter~\ref{sec: conv}.
 \begin{cor}\label{cor: mpr B}
-	For \(m\in\{+,-\}\) the top-left quadrant of size \(m_1\times m_1=|\calS_m|\cdot p \times |\calS_m|\cdot p\) of \(e^{\bs B_{mm}t}\), 
+	For \(m\in\{+,-\}\) the top-left quadrant of size \(m_1\times m_1=|\calS_m|  p \times |\calS_m|  p\) of \(e^{\bs B_{mm}t}\), 
 	\begin{align}
-		&\vligne{\bs I & \bs 0}\int_{t=0}^\infty e^{-\lambda t} \exp\left\{\left[\begin{array}{cc} \bs T_{mm}\otimes \bs I + \bs C_m\otimes \bs S & \bs T_{m0}\otimes \bs I \\ \bs T_{0m} \otimes \bs I & \bs T_{00}\otimes \bs I \end{array}\right]t\right\} \wrt t\left[\begin{array}{c} \bs I \\ \bs 0 \end{array}\right], \nonumber
+		&\vligne{\bs I_{|\calS_m|  p\times |\calS_m|  p} & \bs 0_{|\calS_m|  p\times |\calS_0|  p}}\int_{t=0}^\infty e^{-\lambda t} \exp\left\{\left[\begin{array}{cc} \bs T_{mm}\otimes \bs I + \bs C_m\otimes \bs S & \bs T_{m0}\otimes \bs I \\ \bs T_{0m} \otimes \bs I & \bs T_{00}\otimes \bs I \end{array}\right]t\right\} \wrt t
+		\\&\quad{}\times \left[\begin{array}{c} \bs I_{|\calS_m|  p\times |\calS_m|  p} \\ \bs 0_{|\calS_0|  p\times |\calS_m|  p} \end{array}\right], \nonumber
 	\end{align}
 	is given by 
 	\begin{align}
 		\int_{x=0}^\infty e^{\bs Q_{mm} (\lambda)x}\otimes  e^{\bs S x}\wrt x(\bs C_m^{-1}\otimes \bs I).\label{eqn: skagh87} 
 	\end{align}
-	For \(m\in\{+,-\}\) the top-right quadrant of size \(m_1\times m_2=|\calS_m|\cdot p\times |\calS_0|\cdot p\) of  \(e^{\bs B_{mm}t}\), 
+	For \(m\in\{+,-\}\) the top-right quadrant of size \(m_1\times m_2=|\calS_m|  p\times |\calS_0|  p\) of  \(e^{\bs B_{mm}t}\), 
 	\begin{align}
-		&\vligne{\bs I & \bs 0}\int_{t=0}^\infty e^{-\lambda t} \exp\left\{\left[\begin{array}{cc} \bs T_{mm}\otimes \bs I + \bs C_m\otimes \bs S & \bs T_{m0}\otimes \bs I \\ \bs T_{0m} \otimes \bs I & \bs T_{00}\otimes \bs I \end{array}\right]t\right\} \wrt t \left[\begin{array}{c}\bs 0 \\ \bs I\end{array}\right] ,\nonumber
+		&\vligne{\bs I_{|\calS_m|  p\times |\calS_m|  p} & \bs 0_{|\calS_m|  p\times |\calS_0|  p}}\int_{t=0}^\infty e^{-\lambda t} \exp\left\{\left[\begin{array}{cc} \bs T_{mm}\otimes \bs I + \bs C_m\otimes \bs S & \bs T_{m0}\otimes \bs I \\ \bs T_{0m} \otimes \bs I & \bs T_{00}\otimes \bs I \end{array}\right]t\right\} \wrt t 
+		\\&\quad{}\times \left[\begin{array}{c}\bs 0_{|\calS_m|  p\times |\calS_m|  p} \\ \bs I_{|\calS_0|  p\times |\calS_0|  p}\end{array}\right] ,\nonumber
 	\end{align}
 	is given by
 	\begin{align}
@@ -210,13 +212,13 @@ from Chapter~\ref{sec: conv}.
 	\end{align}
 	Also, 
 	\begin{align}
-		&\vligne{\bs I & \bs 0 }\int_{t=0}^\infty e^{-\lambda t} e^{\bs{B}_{mm}t} \wrt t \bs{B}_{m{n}} %= \vligne{\bs I & \bs 0 }\int_{t=0}^\infty e^{-\lambda t} e^{\bs{B}_{mm}t} \wrt t  \left[\begin{array}{cc} \bs{T}_{mn}\otimes \bs{D} & \bs 0 \\ \bs T_{0n}\otimes \bs D & \bs 0 \end{array}\right]
-	= \int_{x=0}^\infty \bs H^{mn}(\lambda,x)  \otimes  e^{\bs S x}\bs D\wrt x\left(\vligne{\bs I_{pn} & \bs 0_{pn\times p|\calS_0|}}\right), \label{eqn: akgj987adKLDJ}
+		&\vligne{\bs I_{|\calS_m|  p\times |\calS_m|  p} & \bs 0_{|\calS_m|  p\times |\calS_0|  p} }\int_{t=0}^\infty e^{-\lambda t} e^{\bs{B}_{mm}t} \wrt t \bs{B}_{m{n}} %= \vligne{\bs I & \bs 0 }\int_{t=0}^\infty e^{-\lambda t} e^{\bs{B}_{mm}t} \wrt t  \left[\begin{array}{cc} \bs{T}_{mn}\otimes \bs{D} & \bs 0 \\ \bs T_{0n}\otimes \bs D & \bs 0 \end{array}\right]
+		\\&= \int_{x=0}^\infty \bs H^{mn}(\lambda,x)  \otimes  e^{\bs S x}\bs D\wrt x\left(\vligne{\bs I_{|\calS_n|p} & \bs 0_{|\calS_n|p\times |\calS_0|p}}\right), \label{eqn: akgj987adKLDJ}
 \end{align}
 for \(m,n\in\{+,-\}\), \(m\neq n\).
 \end{cor}
 \begin{proof}
-	From Lemma~\ref{lem: sfkjgn} the top-left quadrant of size \(m_1\times m_1=|\calS_m|\cdot p \times |\calS_m|\cdot p\) of the integral with respect to \(t\) on the left-hand side of (\ref{eqn: skagh87}) is 
+	From Lemma~\ref{lem: sfkjgn} the top-left quadrant of size \(m_1\times m_1=|\calS_m|  p \times |\calS_m|  p\) of the integral with respect to \(t\) on the left-hand side of (\ref{eqn: skagh87}) is 
 	\begin{align}
 		\int_{t=0}^\infty e^{\left(\bs T_{mm}\otimes \bs I + \bs C_m\otimes \bs S - \lambda \bs I+ (\bs T_{m0}\otimes \bs I)(\lambda \bs I-\bs T_{00}\otimes \bs I)^{-1}(\bs T_{0m}\otimes \bs I)\right)t}\wrt t. \label{eqn: akjf768}
 	\end{align}
@@ -228,7 +230,7 @@ for \(m,n\in\{+,-\}\), \(m\neq n\).
 	\end{align}
 	from the definition of \(\bs Q_{mm}(\lambda)\). This proves (\ref{eqn: skagh87}). 
 	
-	Now, from Lemma~\ref{lem: sfkjgn} the top-right quadrant of size \(m_1\times m_2=|\calS_m|\cdot p\times |\calS_0|\cdot p\) of the integral with respect to \(t\) on the left-hand side of (\ref{eqn: skagh873}) is 
+	Now, from Lemma~\ref{lem: sfkjgn} the top-right quadrant of size \(m_1\times m_2=|\calS_m|  p\times |\calS_0|  p\) of the integral with respect to \(t\) on the left-hand side of (\ref{eqn: skagh873}) is 
 	\begin{align}
 		&\int_{t=0}^\infty e^{\left(\bs T_{mm}\otimes \bs I + \bs C_m\otimes \bs S - \lambda \bs I+ (\bs T_{m0}\otimes \bs I)(\lambda \bs I-\bs T_{00}\otimes \bs I)^{-1}(\bs T_{0m}\otimes \bs I)\right)t}(\bs T_{m0}\otimes \bs I)(\lambda \bs I - \bs T_{00}\otimes \bs I)^{-1} \nonumber 
 		\\&\qquad\times (\bs T_{0m}\otimes \bs I)\wrt t. \label{eqn: akjf768f}
@@ -240,7 +242,7 @@ for \(m,n\in\{+,-\}\), \(m\neq n\).
 	Now, 
 	\begin{align*}
 		\displaystyle (\lambda \bs I - \bs T_{00}\otimes \bs I)^{-1} &= \int_{u=0}^\infty e^{-(\lambda \bs I - \bs T_{00}\otimes \bs I)u}\wrt u \\&= \int_{u=0}^\infty e^{-\lambda u} e^{(\bs T_{00}\otimes \bs I)u}\wrt u \\&= \int_{u=0}^\infty e^{-\lambda u} e^{\bs T_{00}u}\otimes \bs I \wrt u,
-	\end{align*} by (\ref{eqn:09ksdjgah}). Using this and the \ref{eqn:mpr} we can write  
+	\end{align*} by (\ref{eqn:09ksdjgah}). Using this and the~\ref{eqn:mpr} we can write  
 	\begin{align}
 		&(\bs C_m\otimes \bs I)^{-1}(\bs T_{m0}\otimes \bs I)(\lambda \bs I - \bs T_{00}\otimes \bs I)^{-1}(\bs T_{0m}\otimes \bs I) \nonumber
 		\\&= (\bs C_m^{-1}\otimes \bs I)(\bs T_{m0}\otimes \bs I)\int_{u=0}^\infty e^{-\lambda u} e^{\bs T_{00}u}\otimes \bs I \wrt u(\bs T_{0m}\otimes \bs I) \nonumber
@@ -250,18 +252,19 @@ for \(m,n\in\{+,-\}\), \(m\neq n\).
 
 Now, using (\ref{eqn: skagh87}) and (\ref{eqn: skagh873}) we can write 
 \begin{align}
-	\nonumber&\vligne{\bs I & \bs 0 }\int_{t=0}^\infty e^{-\lambda t} e^{\bs{B}_{mm}t} \wrt t \bs{B}_{m{n}} = \vligne{\bs I & \bs 0 }\int_{t=0}^\infty e^{-\lambda t} e^{\bs{B}_{mm}t} \wrt t  \left[\begin{array}{cc} \bs{T}_{mn}\otimes \bs{D} & \bs 0 \\ \bs T_{0n}\otimes \bs D & \bs 0 \end{array}\right]
+	\nonumber&\vligne{\bs I_{|\calS_m|p\times |\calS_m|p} & \bs 0_{|\calS_m|p\times |\calS_0|p} }\int_{t=0}^\infty e^{-\lambda t} e^{\bs{B}_{mm}t} \wrt t \bs{B}_{m{n}} 
+	\\\nonumber &= \vligne{\bs I_{|\calS_m|p\times |\calS_m|p} & \bs 0_{|\calS_m|p\times |\calS_0|p} }\int_{t=0}^\infty e^{-\lambda t} e^{\bs{B}_{mm}t} \wrt t  \left[\begin{array}{cc} \bs{T}_{mn}\otimes \bs{D} & \bs 0 \\ \bs T_{0n}\otimes \bs D & \bs 0 \end{array}\right]
 	%
 %	\\\nonumber& =\left[ \begin{array}{cc} \displaystyle \int_{x=0}^\infty e^{\bs Q_{mm}(\lambda)x}\otimes  e^{\bs S x}\wrt x(\bs C_m^{-1} \otimes \bs I) & \displaystyle \int_{x=0}^\infty e^{\bs Q_{mm}(\lambda)x}\otimes  e^{\bs S x}\wrt x((\bs C_m^{-1}\bs T_{m0}(\lambda \bs I - \bs T_{00})^{-1})\otimes \bs I)  \end{array}\right]
 %	\\\nonumber&\quad\times\left[\begin{array}{cc} \bs{T}_{mn}\otimes \bs{D} & \bs 0 \\ \bs T_{0n}\otimes \bs D & \bs 0 \end{array}\right]
 	%
-	\\&= \int_{x=0}^\infty e^{\bs Q_{mm}(\lambda)x}\otimes  e^{\bs S x}\wrt x (\bs C_m^{-1}(\bs{T}_{mn} + \bs T_{m0}(\lambda \bs I - \bs T_{00})^{-1}\bs T_{0n}) \vligne{\bs I_n & \bs 0_{n\times |\calS_0|}} \otimes \bs D) \nonumber
+	\\&= \int_{x=0}^\infty e^{\bs Q_{mm}(\lambda)x}\otimes  e^{\bs S x}\wrt x (\bs C_m^{-1}(\bs{T}_{mn} + \bs T_{m0}(\lambda \bs I - \bs T_{00})^{-1}\bs T_{0n}) \vligne{\bs I_{|\calS_n|\times |\calS_n|} & \bs 0_{|\calS_n|\times |\calS_0|}} \otimes \bs D) \nonumber
 	%
-	\\&= \int_{x=0}^\infty e^{\bs Q_{mm}(\lambda)x}\otimes  e^{\bs S x}\wrt x \left( \left( \bs{Q}_{mn} (\lambda) \vligne{\bs I_n & \bs 0_{n\times |\calS_0|}} \right) \otimes \bs D\right)  \nonumber
+	\\&= \int_{x=0}^\infty e^{\bs Q_{mm}(\lambda)x}\otimes  e^{\bs S x}\wrt x \left( \left( \bs{Q}_{mn} (\lambda) \vligne{\bs I_{|\calS_n|} & \bs 0_{|\calS_n|\times |\calS_0|}} \right) \otimes \bs D\right)  \nonumber
 	%
-	\\&= \int_{x=0}^\infty \left(\bs H^{mn}(\lambda,x) \vligne{\bs I_n & \bs 0_{n\times |\calS_0|}}\right) \otimes  e^{\bs S x}\bs D\wrt x,\nonumber
+	\\&= \int_{x=0}^\infty \left(\bs H^{mn}(\lambda,x) \vligne{\bs I_{|\calS_n|} & \bs 0_{|\calS_n|\times |\calS_0|}}\right) \otimes  e^{\bs S x}\bs D\wrt x,\nonumber
 	%
-	\\&= \int_{x=0}^\infty \bs H^{mn}(\lambda,x)  \otimes  e^{\bs S x}\bs D\wrt x,\vligne{\bs I_{pn} & \bs 0_{pn\times p|\calS_0|}}, \label{eqn: akgj987ad}
+	\\&= \int_{x=0}^\infty \bs H^{mn}(\lambda,x)  \otimes  e^{\bs S x}\bs D\wrt x,\vligne{\bs I_{|\calS_m|p\times |\calS_n|p} & \bs 0_{|\calS_n|p\times |\calS_0|p}}, \label{eqn: akgj987ad}
 \end{align}
-for \(m,n\in\{+,-\}\), \(m\neq n\) which is (\ref{eqn: akgj987adKLDJ}), where the last line holds from the \ref{eqn:mpr}. 
+for \(m,n\in\{+,-\}\), \(m\neq n\) which is (\ref{eqn: akgj987adKLDJ}), where the last line holds from the~\ref{eqn:mpr}. 
 \end{proof}
