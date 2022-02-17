@@ -52,11 +52,11 @@ where \(\boldsymbol f(x,t) = \left(f_i(x,t)\right)_{i\in\mathcal S}\) is a row-v
 \section{Cells, test functions, and weak formulation}
 To begin with, consider an unbounded first fluid level \(\{\ddot X_t,t\geq0\}\), \(\ddot X_t\in(-\infty,\infty)\). We will eventually truncate this space so that we have a finite dimensional approximation; however, this requires a discussion on boundary conditions which we save for later. Let \(\mathcal D_{k,i} = [y_k,y_{k+1}),\, k\in\mathbb Z\) for \(i\in\calS_+\cup\calS_0\) and \(\mathcal D_{k,i} = (y_k,y_{k+1}],\, k\in\mathbb Z\) for \(i\in\calS_-\), \(y_k<y_{k+1}\), partition the domain \((-\infty,\infty)\). We call the \(\calD_{k,i}\) \textit{cells} and define \(\Delta_k=y_{k+1}-y_k\). 
 
-For each \(k\) we choose \(N_k\) linearly independent functions \(\{\phi^r_k\}_{r=1}^{N_k}\), compactly supported on \(\calD_{k,i}\) (i.e.~\(\phi^r_k(x)=0\) for \(x\notin\calD_{k,i}\)) to form a basis for the space \(W_k\), in which we formulate the approximation. Here, as is standard in DG methods \citep{nodalDGBook}, we take \(\{\phi^r_k\}_{r=1}^{N_k}\) to be the space of polynomials of degree \(N_k-1\). It is convenient in this work to take \(\{\phi^r_k\}_{r=1}^{N_k}\) as a basis of Lagrange interpolating polynomials defined by the Gauss-Lobatto quadrature points, since our approximations inherit nice properties from this \citep{nodalDGBook}. However, the constructions presented here are general, and any basis can be used. For the sake of illustration, the reader may think of \(\{\phi^r_k\}_{r=1}^{N_k}\) as the Lagrange polynomials. On each cell \(\mathcal D_{k,i}\) we approximate 
-\[f_i(x,t)\approx u_{k,i}(x,t)=\sum\limits_{r=1}^{N_k}a_{k,i}^r(t)\phi^r_k(x),\] 
+For each \(k\) we choose \(p_k\) linearly independent functions \(\{\phi^r_k\}_{r=1}^{p_k}\), compactly supported on \(\calD_{k,i}\) (i.e.~\(\phi^r_k(x)=0\) for \(x\notin\calD_{k,i}\)) to form a basis for the space \(W_k\), in which we formulate the approximation. Here, as is standard in DG methods \citep{nodalDGBook}, we take \(\{\phi^r_k\}_{r=1}^{p_k}\) to be the space of polynomials of degree \(p_k-1\). It is convenient in this work to take \(\{\phi^r_k\}_{r=1}^{p_k}\) as a basis of Lagrange interpolating polynomials defined by the Gauss-Lobatto quadrature points, since our approximations inherit nice properties from this \citep{nodalDGBook}. However, the constructions presented here are general, and any basis can be used. For the sake of illustration, the reader may think of \(\{\phi^r_k\}_{r=1}^{p_k}\) as the Lagrange polynomials. On each cell \(\mathcal D_{k,i}\) we approximate 
+\[f_i(x,t)\approx u_{k,i}(x,t)=\sum\limits_{r=1}^{p_k}a_{k,i}^r(t)\phi^r_k(x),\] 
 where \(a_{k,i}^r(t)\) are yet-to-be-determined time-dependent coefficients. We refer to \(u_{k,i}\) as the \textit{local} approximation on cell \(k\), while the \textit{global} approximation is given by \(\sum\limits_{k\in\mathbb Z}u_{k,i}\) on the whole domain. The whole approximation space is \(\bigoplus\limits_{k\in\mathbb Z} W_k\).
 
-Let \(\mathcal N_k := \left\{1,\dots,N_k\right\},\, k \in \mathbb Z\). For \(k\in\mathbb Z,\) define \textit{local} row-vectors 
+Let \(\mathcal N_k := \left\{1,\dots,p_k\right\},\, k \in \mathbb Z\). For \(k\in\mathbb Z,\) define \textit{local} row-vectors 
 \[\boldsymbol \phi_k(x) = (\phi^r_k(x))_{r\in\mathcal N_k}, \quad \boldsymbol a_{k,i}(x) = (a_{k,i}^r(x))_{r\in\mathcal N_k},\,i\in\mathcal S.\]
 %Also define \textit{global} row-vectors 
 %\[\boldsymbol \phi(x) = (\boldsymbol\phi^k(x))_{k\in\{1,...,K\}},\quad \boldsymbol a_i(x) = (\boldsymbol a_{k,i}(x))_{k\in\{1,...,K\}},\,i\in\mathcal S.\]
@@ -97,7 +97,7 @@ Now, \(f_j^W(x,t)\in W\) so, on \(\mathcal D_{k,j}\), it can be expressed as \(u
 %	%
 %	\\ {}+  \int_{x\in\calD_k}\boldsymbol a_{k,j}(t) \boldsymbol \phi^k(x)\tr{}c_j\cfrac{\wrt}{\wrt x}\phi^r_k(x)\wrt x - c_j[f_j(x,t)\phi^r_k(x)]_{x=y_k}^{x=y_{k+1}}.\end{multlined}
 %\end{align*}
-and repeat this for all test functions \(\phi^r_k(x)\), \(r=1,...,N_k\), to get the following system of equations,
+and repeat this for all test functions \(\phi^r_k(x)\), \(r=1,...,p_k\), to get the following system of equations,
 \begin{align}
 	\begin{multlined}[t]\int_{x=y_k}^{y_{k+1}}\cfrac{\wrt}{\wrt t} \boldsymbol a_{k,j}(t) \boldsymbol \phi_k(x)\tr{}\boldsymbol \phi_k(x)\wrt x = \int_{x=y_k}^{y_{k+1}}\sum_{i\in\calS} \boldsymbol a_{k,i}(t) \boldsymbol \phi_k(x)\tr{}T_{ij}\boldsymbol\phi_k (x)\wrt x  
 	%
@@ -119,7 +119,7 @@ We can write (\ref{eqn:DG system}) as
 	+  c_j\boldsymbol a_{k,j}(t) \bs G_k - c_j[f_j(x,t)\boldsymbol\phi_k(x)]_{x=y_k}^{x=y_{k+1}}.\label{eqn:DG matrix}
 \end{align}
 
-It remains to approximate the \textit{flux}, \(f_j(x,t)\) at the cell edges \(y_k,\,k\in\mathbb Z\), so that we may evaluate the terms \([f_j(x,t)\phi^r_k(x)]_{x=y_k}^{x=y_{k+1}}\), \(r=1,...,N_k,\,k\in\mathbb Z\). This is the key for DG -- it joins the local approximations on each cell into a global approximation on the whole domain of approximation. The flux is the instantaneous rate (with respect to time) at which density moves across the boundaries \(y_k,\,k\in\mathbb Z\). There are different choices for the flux, and we refer the reader to \citep{c99,nodalDGBook}, and references therein, for some discussion of the topic. Here, we choose the \textit{upwind} scheme, which, as we shall see, closely resembles the flux terms from the generator \(\mathbb B\). The approximate flux, also known as the \textit{numerical flux}, is given by 
+It remains to approximate the \textit{flux}, \(f_j(x,t)\) at the cell edges \(y_k,\,k\in\mathbb Z\), so that we may evaluate the terms \([f_j(x,t)\phi^r_k(x)]_{x=y_k}^{x=y_{k+1}}\), \(r=1,...,p_k,\,k\in\mathbb Z\). This is the key for DG -- it joins the local approximations on each cell into a global approximation on the whole domain of approximation. The flux is the instantaneous rate (with respect to time) at which density moves across the boundaries \(y_k,\,k\in\mathbb Z\). There are different choices for the flux, and we refer the reader to \citep{c99,nodalDGBook}, and references therein, for some discussion of the topic. Here, we choose the \textit{upwind} scheme, which, as we shall see, closely resembles the flux terms from the generator \(\mathbb B\). The approximate flux, also known as the \textit{numerical flux}, is given by 
 \[f^*_j(x,t) = sign(c_j)\lim_{\varepsilon\to0^+}u_j(x-\varepsilon c_j,t),\]
 at each \(x=y_k,\,k\in\mathbb Z\). 
 Intuitively, the upwind flux takes the value of the density immediately on the upwind side of each \(y_k\). 
@@ -211,9 +211,9 @@ and the double-infinite block-tridiagonal matrix
 \end{align*}
 where, for \(k\in\mathbb Z\), 
 \begin{align*}
-    \ddot{{\bs B}}^{kk}&=\left[\begin{array}{ccc}T_{11}\bs I + c_1(\bs F_1^{kk}+\bs G_k)\bs M_k^{-1} & T_{12}\bs I & T_{1N_\calS}\bs I  \\ T_{21}\bs I & & \\ \vdots &\ddots & \vdots \\ & &   T_{N_\calS-1,N_\calS}\bs I \\  T_{N_\calS1}\bs I &  T_{N_\calS,N_\calS-1}\bs I & T_{N_\calS,N_\calS}\bs I +c_{N_\calS}(\bs F_{N_\calS}^{kk}+\bs G_k)\bs M_k^{-1}\end{array}\right],\\
-	\ddot{{\bs B}}^{k,k+1}&=\left[\begin{array}{ccc}c_1\bs F_1^{k,k+1}\bs M_{k+1}^{-1}&  & \\  &\ddots & \\  &  &c_{N_\calS}\bs F_{N_\calS}^{k,k+1}\bs M_{k+1}^{-1} \end{array}\right],\\
-	\ddot{{\bs B}}^{k,k-1}&=\left[\begin{array}{ccc}c_1\bs F_1^{k,k-1}\bs M_{k-1}^{-1}&  & \\  &\ddots &  \\  &  &c_{N_\calS}\bs F_{N_\calS}^{k,k-1}\bs M_{k-1}^{-1} \end{array}\right].
+    \ddot{{\bs B}}^{kk}&=\left[\begin{array}{ccc}T_{11}\bs I + c_1(\bs F_1^{kk}+\bs G_k)\bs M_k^{-1} & T_{12}\bs I & T_{1N}\bs I  \\ T_{21}\bs I & & \\ \vdots &\ddots & \vdots \\ & &   T_{N-1,N}\bs I \\  T_{N1}\bs I &  T_{N,N-1}\bs I & T_{N,N}\bs I +c_{N}(\bs F_{N}^{kk}+\bs G_k)\bs M_k^{-1}\end{array}\right],\\
+	\ddot{{\bs B}}^{k,k+1}&=\left[\begin{array}{ccc}c_1\bs F_1^{k,k+1}\bs M_{k+1}^{-1}&  & \\  &\ddots & \\  &  &c_{N}\bs F_{N}^{k,k+1}\bs M_{k+1}^{-1} \end{array}\right],\\
+	\ddot{{\bs B}}^{k,k-1}&=\left[\begin{array}{ccc}c_1\bs F_1^{k,k-1}\bs M_{k-1}^{-1}&  & \\  &\ddots &  \\  &  &c_{N}\bs F_{N}^{k,k-1}\bs M_{k-1}^{-1} \end{array}\right].
 \end{align*} 
 The global system of equations is 
 \begin{align}\label{eqn:DG ODE}
@@ -289,13 +289,13 @@ and \(\otimes\) is the Kronecker product.
 
 For future reference, we also define the matrices \({{\bs B}}^{k\ell}_{ij}\) for \(k\in\{2,\dots,K-1\}\) by
 \begin{align*}
-	{{\bs B}}^{kk}_{ij} &= \begin{cases}T_{ij}\bs I_{N_k} + c_i(\bs F_i^{kk}+\bs G_k)\bs M_k^{-1} & i=j,\\T_{ij} \bs I_{N_k}& i\neq j,\end{cases}
+	{{\bs B}}^{kk}_{ij} &= \begin{cases}T_{ij}\bs I_{p_k} + c_i(\bs F_i^{kk}+\bs G_k)\bs M_k^{-1} & i=j,\\T_{ij} \bs I_{p_k}& i\neq j,\end{cases}
 \\	{{\bs B}}^{k\ell}_{ij} &= \begin{cases}c_i\bs F_i^{k\ell}\bs M_\ell^{-1} & i=j,\\\bs 0 & i\neq j,\end{cases}\quad \ell \in \{k-1,k\}
 \end{align*}
 and
 \begin{align*}
-	{{\bs B}}^{00}_{ij} &= \begin{cases}T_{ij}\bs I_{N_k} + c_i(\bs F_i^{00}+\bs G_0)\bs M_0^{-1} & i=j,\\T_{ij}\bs I_{N_k} - 1(c_i<0,c_j>0)c_ip_{ij}^{-1} \bs F_i^{00}\bs M_0^{-1} & i\neq j,\end{cases}
-\\	{{\bs B}}^{KK}_{ij} &= \begin{cases}T_{ij}\bs I_{N_k} + c_i(\bs F_i^{KK}+\bs G_K)\bs M_K^{-1} & i=j,\\T_{ij}\bs I_{N_K} + 1(c_i>0,c_j<0)c_ip_{ij}^{K+1} \bs F_i^{KK}\bs M_K^{-1} & i\neq j.\end{cases}
+	{{\bs B}}^{00}_{ij} &= \begin{cases}T_{ij}\bs I_{p_k} + c_i(\bs F_i^{00}+\bs G_0)\bs M_0^{-1} & i=j,\\T_{ij}\bs I_{p_k} - 1(c_i<0,c_j>0)c_ip_{ij}^{-1} \bs F_i^{00}\bs M_0^{-1} & i\neq j,\end{cases}
+\\	{{\bs B}}^{KK}_{ij} &= \begin{cases}T_{ij}\bs I_{p_k} + c_i(\bs F_i^{KK}+\bs G_K)\bs M_K^{-1} & i=j,\\T_{ij}\bs I_{p_K} + 1(c_i>0,c_j<0)c_ip_{ij}^{K+1} \bs F_i^{KK}\bs M_K^{-1} & i\neq j.\end{cases}
 \end{align*}
 
 After the addition of the boundary conditions, the system of ODEs (\ref{eqn:DG ODE}) can now be written as 
@@ -315,9 +315,9 @@ Approximations \( \bs B^{mn}_{ij}\), \( \bs B_{ij}\), and \( \bs B^{mn}\) to \(\
 \end{align*}
 % where \(\bs B = \widehat{{\bs B}}\widehat{\bs M}^{-1}\) and \(\widehat{\bs M} = \left[\begin{array}{ccccc}
 % 	\bs I_{|\calS_{-1}|} & & & & \\
-% 	& \bs I_{N_S}\otimes \bs M_1 & & & \\
+% 	& \bs I_{p_S}\otimes \bs M_1 & & & \\
 % 	& & \ddots & & \\
-% 	& & & \bs I_{N_S}\otimes \bs M_K & \\
+% 	& & & \bs I_{p_S}\otimes \bs M_K & \\
 % 	& & & & \bs I_{|\calS_{K+1}|}
 % \end{array}\right]\), that is, 
 % \[\bs B = \left[\begin{array}{llllll}
@@ -349,7 +349,7 @@ Given our approximation \(\bs B\) to the generator \(\mathbb B\) we now follow t
 
 It may be convenient to think of our approximations in terms of approximations of kernels. Recall that the operators in \citep{bo2014} can be thought of in terms of kernels. That is, for some function \(\bs g = (g_i(x))_{i\in\calS}\), we can write \(\bs \mu \mathbb B \boldsymbol g\tr{} = \displaystyle \sum\limits_{k,\ell\in\mathcal K}\sum\limits_{i,j\in\calS} \displaystyle \int_{x,y}\wrt \mu_i(x) \mathbb B_{ij}^{k\ell}(x,\wrt y)g_j(y)\) where \(\mathbb B_{ij}^{k\ell}(x,\wrt y)\) is the kernel of the operator \(\mathbb B_{ij}^{k\ell}\). 
 
-Let \(\boldsymbol a_{-1}(t):=\boldsymbol q_{-1}(t)\) and \(\boldsymbol a_{K+1}(t):=\boldsymbol q_{K+1}(t)\), and define basis functions \(\bs\phi_{-1}(x) = \phi_{-1}^1(x) = \delta(x)\) and \(\bs\phi_{K+1}(x) = \phi_{K+1}^1(x) = \delta(x-b)\), where \(\delta\) is the Dirac delta, \(N_{-1} = N_{K+1} = 1\), and \(\mathcal N_{-1} = \mathcal N_{K+1} = \{1\}\). Also define \({\bs M}_{-1}=\bs I_{|\calS_{-1}|}\), \({\bs M}_{K+1}=\bs I_{|\calS_{K+1}|}\), the block-diagonal matrix \(\bs M=diag(\bs M_k,k\in\mathcal K)\), and row-vectors 
+Let \(\boldsymbol a_{-1}(t):=\boldsymbol q_{-1}(t)\) and \(\boldsymbol a_{K+1}(t):=\boldsymbol q_{K+1}(t)\), and define basis functions \(\bs\phi_{-1}(x) = \phi_{-1}^1(x) = \delta(x)\) and \(\bs\phi_{K+1}(x) = \phi_{K+1}^1(x) = \delta(x-b)\), where \(\delta\) is the Dirac delta, \(p_{-1} = p_{K+1} = 1\), and \(\mathcal N_{-1} = \mathcal N_{K+1} = \{1\}\). Also define \({\bs M}_{-1}=\bs I_{|\calS_{-1}|}\), \({\bs M}_{K+1}=\bs I_{|\calS_{K+1}|}\), the block-diagonal matrix \(\bs M=diag(\bs M_k,k\in\mathcal K)\), and row-vectors 
 \[\boldsymbol \phi(x) = (\bs\phi_k(x))_{k\in\mathcal K}, \quad \boldsymbol a_i(t) = (\bs a_{k,i}(t))_{k\in\mathcal K},\,i\in\calS.\]
 
 To pose the approximation \(\bs B\) in kernel form let \(\boldsymbol a_i \boldsymbol \phi(x)\tr{}\in W,\,i\in\calS\) be the initial density of the process, and \(\boldsymbol \phi(x)\bs b_i\tr{}\in W,\,i\in\calS\) be a test function. Observe that, from our DG construction earlier and the definition of \({\bs M}\), 
@@ -362,7 +362,7 @@ as an approximation to the kernel \(\mathbb B_{ij}(x,\wrt y)\). This concept can
 Recall the operator \(\mathbb R^k\) from Lemma~\ref{lemma: D(s)}. Essentially, the operator \(\mathbb R^k\) takes an initial measure \(\boldsymbol \mu_k\) and multiplies each element by \(1/|r_i(x)|\) on cells \(\calD_k\) where \(r_i(x)\neq 0\). In the context of DG the initial distribution is given by \(\boldsymbol a_i \boldsymbol \phi(x)\tr{}\in W,\,i\in\calS\). Thus, for \(k\in\mathcal K\) such that \(r_i(x)\neq0\) on \(\calD_k\), we have 
 \[\boldsymbol a_{k,i} \boldsymbol \phi_k(x)\tr{}\mathbb R^k_i = \cfrac{\boldsymbol a_{k,i} \boldsymbol \phi_k(x)\tr{}}{|r_i(x)|}.\]
 Decompose the right-hand side into a component which lies in \(W\) and another orthogonal to \(W\): 
-\[\cfrac{\boldsymbol a_{k,i} \boldsymbol \phi_k(x)\tr{}}{|r_i(x)|} = \bs \rho_{k,i} \bs \phi_k(x)\tr{} + g_i^\perp(x),\] where \(\bs \rho_{k,i} \bs\phi_k(x)\tr{}\in W\), \(g_i^\perp \in W^\perp\). Now, multiply by test functions \(\{\phi^r_k(x)\}_{r=1}^{N_k}\) and integrate over \([0,b]\):
+\[\cfrac{\boldsymbol a_{k,i} \boldsymbol \phi_k(x)\tr{}}{|r_i(x)|} = \bs \rho_{k,i} \bs \phi_k(x)\tr{} + g_i^\perp(x),\] where \(\bs \rho_{k,i} \bs\phi_k(x)\tr{}\in W\), \(g_i^\perp \in W^\perp\). Now, multiply by test functions \(\{\phi^r_k(x)\}_{r=1}^{p_k}\) and integrate over \([0,b]\):
 \begin{align*}
 	\boldsymbol a_{k,i}\int_{x\in[0,b]} \cfrac{ \boldsymbol \phi_k(x)\tr{}\bs \phi_k(x)}{|r_i(x)|}\wrt x
 	&=\bs \rho_{k,i} \int_{x\in[0,b]}\bs \phi_k(x)\tr{}\bs \phi_k(x)\wrt x + \int_{x\in[0,b]} g_i^\perp(x)\bs\phi_k(x)\wrt x 
