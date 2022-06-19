@@ -50,3 +50,6 @@ DG-lim
 summable
 DG-lin-lim
 piecewise-linear
+Sobolev
+piecewise-polynomial
+block-tridiagonal

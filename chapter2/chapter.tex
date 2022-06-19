@@ -4,7 +4,7 @@
 In this chapter we introduce the discontinuous Galerkin (DG) method applied to fluid queues to approximate the operator-analytic expressions for fluid-fluid queues in \cite{bo2014}. 
 \begin{center}
 	\begin{minipage}{0.8\textwidth}
-		\textit{Apart from Sections~\ref{sec: other applications}-\ref{sec: slope limiting}, this chapter has been taken from Section~4 and 5 of \cite{blnos2022} with only minor changes, such as notations, so that this chapter is consistent with the rest of the thesis. I am a co-author of the paper \cite{blnos2022}. %The conceptualisation of \cite{blnos2022} was originally by Vikram Sunkara, Nigel Bean and Giang Nguyen, and the original coding was done by Vikram Sunkara. I made significant contributions to Section~3 of the paper, expressing the operator-theoretic expressions to use the same partition as the approximation scheme. I contributed Sections~4.4 and 5.1. I extended the numerical experiments in Section~6 to higher orders and made all the plots in Section~6. Appendix~A is also my original work. I did a significant proportion of the writing of the manuscript and addressed the reviewers comments and also developed code for the numerical experiments.
+		\textit{Apart from Sections~\ref{sec: other applications}-\ref{sec: slope limiting}, this chapter has been taken from Section~4 and 5 of \cite{blnos2022} with only minor changes, such as notation, so that this chapter is consistent with the rest of the thesis. I am a co-author of the paper \cite{blnos2022}. %The conceptualisation of \cite{blnos2022} was originally by Vikram Sunkara, Nigel Bean and Giang Nguyen, and the original coding was done by Vikram Sunkara. I made significant contributions to Section~3 of the paper, expressing the operator-theoretic expressions to use the same partition as the approximation scheme. I contributed Sections~4.4 and 5.1. I extended the numerical experiments in Section~6 to higher orders and made all the plots in Section~6. Appendix~A is also my original work. I did a significant proportion of the writing of the manuscript and addressed the reviewers comments and also developed code for the numerical experiments.
 		}
 	\end{minipage}
 	\end{center}
@@ -13,7 +13,7 @@ In this chapter we introduce the discontinuous Galerkin (DG) method applied to f
 % Problems with DG, non-neg/oscillations
     % solutions: filtering and limiting
 % Approximating R: projection, interpolation, cell averages (eluding to QBD-RAP and unif method)
-% Approximating Psi (and the stationary distribution, but this isnt really necessary)
+% Approximating Psi (and the limiting distribution, but this isnt really necessary)
     % constructing D
     % solving the matrix-Riccati equation, iteration/algorithm. 
 
@@ -22,7 +22,7 @@ In this chapter we introduce the discontinuous Galerkin (DG) method applied to f
 
 % \section{Discontinuous Galerkin Approximation of the Generator of a Fluid Queue}
 	% \label{sec:DG}
-Discontinuous Galerkin (DG) methods can be used to approximate the solutions to systems of partial differential equations (PDEs). For a most readable and practical text on DG methods we refer the reader to \cite{nodalDGBook}. Here we describe how one can apply the DG method to approximate fluid queues and fluid-fluid queues. In finite-element methods, such as the DG method, the domain of approximation is partitioned into intervals, referred to individually as \textit{cells} and collectively as a \textit{mesh}. On each cell we construct a finite-dimensional smooth Sobolev space using piecewise-polynomial basis functions, and then project the partial differential equations onto this space. This projection leads to a new system of equations which represent a \textit{weak form} of the original system of PDEs. Next, we approximate the \textit{flux operator} which moves probability from one cell to another, in a manner similar to the underlying principle of a finite-volume approximation. This creates a system of ordinary differential equations which is known as a \emph{semi-discrete system} (discrete in the spatial variable but continuous in time). We can solve the semi-discrete system to approximate transient distributions of the fluid queue or, as we do in Section~\ref{sec:DGSFFM}, we can extract and manipulate an approximation to the generator of the fluid queue to approximate performance measures of fluid-fluid queues. The DG method conserves probability. Here we construct the DG approximation to the matrix of operators \(\mathbb B\) which we use later to construct a DG approximation to \(\mathbb D(s)\) then \(\mathbb\Psi(s)\), and ultimately the stationary distribution of a stochastic fluid-fluid queue. 
+Discontinuous Galerkin (DG) methods can be used to approximate the solutions to systems of partial differential equations (PDEs). For a most readable and practical text on DG methods we refer the reader to \cite{nodalDGBook}. Here we describe how one can apply the DG method to approximate fluid queues and fluid-fluid queues. In finite-element methods, such as the DG method, the domain of approximation is partitioned into intervals, referred to individually as \textit{cells} and collectively as a \textit{mesh}. On each cell we construct a finite-dimensional smooth Sobolev space using piecewise-polynomial basis functions, and then project the partial differential equations onto this space. This projection leads to a new system of equations which represent a \textit{weak form} of the original system of PDEs. Next, we approximate the \textit{flux operator} which moves probability from one cell to another, in a manner similar to the underlying principle of a finite-volume approximation. This creates a system of ordinary differential equations which is known as a \emph{semi-discrete system} (discrete in the spatial variable but continuous in time). We can solve the semi-discrete system to approximate transient distributions of the fluid queue or, as we do in Section~\ref{sec:DGSFFM}, we can extract and manipulate an approximation to the generator of the fluid queue to approximate performance measures of fluid-fluid queues. The DG method conserves probability. Here we construct the DG approximation to the matrix of operators \(\mathbb B\) which we use later to construct a DG approximation to \(\mathbb D(s)\) then \(\mathbb\Psi(s)\), and ultimately the limiting distribution of a stochastic fluid-fluid queue. 
 
 \section{The partial differential equation}
 We start by introducing the PDE from which we will extract the approximation to the generator \(\mathbb B\). 
@@ -54,7 +54,7 @@ To begin with, consider an unbounded first fluid level \(\{\ddot X_t,t\geq0\}\),
 
 For each \(k\) we choose \(p_k\) linearly independent functions \(\{\phi^r_k\}_{r=1}^{p_k}\), compactly supported on \(\calD_{k,i}\) (i.e.~\(\phi^r_k(x)=0\) for \(x\notin\calD_{k,i}\)) to form a basis for the space \(W_k\), in which we formulate the approximation. Here, as is standard in DG methods \citep{nodalDGBook}, we take \(\{\phi^r_k\}_{r=1}^{p_k}\) to be the space of polynomials of degree \(p_k-1\). It is convenient in this work to take \(\{\phi^r_k\}_{r=1}^{p_k}\) as a basis of Lagrange interpolating polynomials defined by the Gauss-Lobatto quadrature points, since our approximations inherit nice properties from this \citep{nodalDGBook}. However, the constructions presented here are general, and any basis can be used. For the sake of illustration, the reader may think of \(\{\phi^r_k\}_{r=1}^{p_k}\) as the Lagrange polynomials. On each cell \(\mathcal D_{k,i}\) we approximate 
 \[f_i(x,t)\approx u_{k,i}(x,t)=\sum\limits_{r=1}^{p_k}a_{k,i}^r(t)\phi^r_k(x),\] 
-where \(a_{k,i}^r(t)\) are yet-to-be-determined time-dependent coefficients. We refer to \(u_{k,i}\) as the \textit{local} approximation on cell \(k\), while the \textit{global} approximation is given by \(\sum\limits_{k\in\mathbb Z}u_{k,i}\) on the whole domain. The whole approximation space is \(\bigoplus\limits_{k\in\mathbb Z} W_k\).
+where \(a_{k,i}^r(t)\) are yet-to-be-determined time-dependent coefficients. We refer to \(u_{k,i}\) as the \textit{local} approximation on cell \(k\), while the \textit{global} approximation is given by \(\sum\limits_{k\in\mathbb Z}u_{k,i}\) on the whole domain. The whole approximation space is \(\bigoplus\limits_{k\in\mathbb Z} W_k\), the direct sum of the spaces \(W_k\), \(k\in\mathbb Z\).
 
 Let \(\mathcal N_k := \left\{1,\dots,p_k\right\},\, k \in \mathbb Z\). For \(k\in\mathbb Z,\) define \textit{local} row-vectors 
 \[\boldsymbol \phi_k(x) = (\phi^r_k(x))_{r\in\mathcal N_k}, \quad \boldsymbol a_{k,i}(x) = (a_{k,i}^r(x))_{r\in\mathcal N_k},\,i\in\mathcal S.\]
@@ -62,7 +62,7 @@ Let \(\mathcal N_k := \left\{1,\dots,p_k\right\},\, k \in \mathbb Z\). For \(k\i
 %\[\boldsymbol \phi(x) = (\boldsymbol\phi^k(x))_{k\in\{1,...,K\}},\quad \boldsymbol a_i(x) = (\boldsymbol a_{k,i}(x))_{k\in\{1,...,K\}},\,i\in\mathcal S.\]
 Note that we will always use the letter \(r\) to index the basis function within each cell.
 
-The DG method proceeds by first considering the \textit{weak-formulation} of the PDE, which is constructed from the \textit{strong-form} of the PDE, Equation~(\ref{eqn:pde_density_matrix}). In general, to construct the weak-form we need a set of test functions, say \(W\). Now, take the strong form of the PDE, multiply it by some test function \(\psi(x)\in W\), integrate with respect to \(x\), and apply integration by parts to the derivative with respect to \(x\), to get 
+The DG method proceeds by first considering the \textit{weak-formulation} of the PDE, which is constructed from the \textit{strong-form} of the PDE, Equation~(\ref{eqn:pde_density_matrix}). In general, to construct the weak-form we need a set of test functions, say \(W\). Now, take the strong form of the PDE, multiply it by some test function \(\psi(x)\in W\), integrate with respect to \(x\), and apply integration by parts to get 
 \begin{align}
 \begin{multlined}[t]
 	\int_{x\in\mathbb R}\cfrac{\partial}{\partial t} f_j(x,t)\psi(x)\wrt x = \int_{x\in\mathbb R} \sum_{i\in\calS}f_i(x,t)T_{ij}\psi(x)\wrt x 
@@ -91,13 +91,13 @@ since \(\phi^r_k\) is compactly supported on \(\calD_{k,j}\), for all \(j\in\mat
 	%
 	\\{} + \int_{x=y_k}^{y_{k+1}} f_j^W(x,t)c_j\cfrac{\wrt}{\wrt x}\phi^r_k(x)\wrt x - [f_j(x,t)c_j\phi^r_k(x)]_{x=y_k}^{x=y_{k+1}}. \end{multlined} \label{eqn:hash}
 \end{align}
-Now, \(f_j^W(x,t)\in W\) so, on \(\mathcal D_{k,j}\), it can be expressed as \(u_{k,j}(x,t):=\boldsymbol a_{k,j}(t) \boldsymbol \phi_k(x)\tr{}\), which we now substitute into (\ref{eqn:hash})
+Now, \(f_j^W(x,t)\in W\) so, on \(\mathcal D_{k,j}\), it can be expressed as \(u_{k,j}(x,t):=\boldsymbol a_{k,j}(t) \boldsymbol \phi_k(x)\tr{}\), where the prime, \({}\tr{}\), denotes the transpose, which we now substitute into (\ref{eqn:hash})
 %\begin{align*}
 %	\begin{multlined}[t]\int_{x\in\calD_k}\cfrac{\wrt}{\wrt t} \boldsymbol a_{k,j}(t) \boldsymbol \phi^k(x)\tr{}\phi^r_k(x)\wrt x = \int_{x\in\calD_k}\sum_{i\in\calS} \boldsymbol a_{k,i}(t) \boldsymbol \phi^k(x)\tr{}T_{ij}\phi^r_k(x)\wrt x  
 %	%
 %	\\ {}+  \int_{x\in\calD_k}\boldsymbol a_{k,j}(t) \boldsymbol \phi^k(x)\tr{}c_j\cfrac{\wrt}{\wrt x}\phi^r_k(x)\wrt x - c_j[f_j(x,t)\phi^r_k(x)]_{x=y_k}^{x=y_{k+1}}.\end{multlined}
 %\end{align*}
-and repeat this for all test functions \(\phi^r_k(x)\), \(r=1,...,p_k\), to get the following system of equations,
+and repeat this for all test functions \(\phi^r_k(x)\), \(r=1,...,p_k\), to get the system of equations,
 \begin{align}
 	\begin{multlined}[t]\int_{x=y_k}^{y_{k+1}}\cfrac{\wrt}{\wrt t} \boldsymbol a_{k,j}(t) \boldsymbol \phi_k(x)\tr{}\boldsymbol \phi_k(x)\wrt x = \int_{x=y_k}^{y_{k+1}}\sum_{i\in\calS} \boldsymbol a_{k,i}(t) \boldsymbol \phi_k(x)\tr{}T_{ij}\boldsymbol\phi_k (x)\wrt x  
 	%
@@ -199,7 +199,7 @@ The matrices \(\bs F_j^{k-1,k},\,\bs F_j^{k,k},\) and \(\bs F_j^{k+1,k}\) are th
 
 To write this out as a \textit{global} system, define the row-vectors 
 \[\boldsymbol a_k(t) = (\boldsymbol a_{k,i}(t))_{i\in\mathcal S},\quad \boldsymbol a(t) = (\boldsymbol a_k(t))_{k\in\mathbb Z},\]
-and the double-infinite block-tridiagonal matrix 
+and the doubly-infinite block-tridiagonal matrix 
 \begin{align*}
 % \ddot{\bs M} &= \left[\begin{array}{ccc}\ddots&&\\&\bs I_{N_\calS}\otimes \bs M_k&\\&&\ddots\end{array}\right],
 % \intertext{where \(N_\calS=|\calS|\), \(\otimes\) is the Kronecker product, and the block-tridiagonal matrix}
@@ -227,7 +227,7 @@ Let $[0,b]$ be the domain of the approximation, where $b < \infty$. We partition
 
 For states with \(c_i\leq 0\), there is the possibility of point mass accumulating at the boundary at~\(0\). Denote these point masses by \(q_{{-1},i}(t)\) for \(i\in\mathcal S_{-1}\). For states with \(c_i>0\) there is no possibility of a point mass at \(0\). Similarly, for \(c_i\geq 0\) there is the possibility of a point mass at \(b\). Denote these point masses by \(q_{{K+1},i}(t)\), for \(i\in\mathcal S_{K+1}\). For states with \(c_i<0\) there is no possibility of a point mass at \(b\). Let \(\bs q_{-1}(t)=(q_{{-1},i}(t))_{i\in\calS_{-1}}\) and \(\bs q_{K+1}(t) = (q_{{K+1},i}(t))_{i\in\calS_{K+1}}\) and \(\bs f_m(x,t) = (f_i(x,t))_{i\in\calS_m}\), \(m\in\{+,-,0\}\). 
 
-Let us first consider the boundary at \( X_t=0\). The following boundary conditions describe the evolution of probability/density of a stochastic fluid queue with a boundary at \(0\);
+Let us first consider the boundary at \( X_t=0\). The boundary conditions that describe the evolution of probability/density of a stochastic fluid queue with a boundary at \(0\) are;
 \begin{align}\label{eqn:BC1}
 \cfrac{\wrt}{\wrt t}\bs q_{-1}(t) &= \bs q_{-1}(t) \bs T_{{-1},{-1}} + \boldsymbol f_-(0,t)\bs C_-\bs P_{-,{-1}},
 \\\label{eqn:BC2}
@@ -287,7 +287,7 @@ where
 \end{align*} 
 and \(\otimes\) is the Kronecker product. 
 
-For future reference, we also define the matrices \({{\bs B}}^{k\ell}_{ij}\) for \(k\in\{2,\dots,K-1\}\) by
+For future reference, we also define the matrices \({{\bs B}}^{k\ell}_{ij}\) for \(k\in\{2,\dots,K-1\}\), \(\ell\in\{k-1,k\},\) \(i,j\in\calS\), by
 \begin{align*}
 	{{\bs B}}^{kk}_{ij} &= \begin{cases}T_{ij}\bs I_{p_k} + c_i(\bs F_i^{kk}+\bs G_k)\bs M_k^{-1} & i=j,\\T_{ij} \bs I_{p_k}& i\neq j,\end{cases}
 \\	{{\bs B}}^{k\ell}_{ij} &= \begin{cases}c_i\bs F_i^{k\ell}\bs M_\ell^{-1} & i=j,\\\bs 0 & i\neq j,\end{cases}\quad \ell \in \{k-1,k\}
@@ -345,7 +345,7 @@ We prove the following result in Appendix~\ref{sec:properties}.
 
 
 \section{Application to a fluid-fluid queue}\label{sec:DGSFFM}
-Given our approximation \(\bs B\) to the generator \(\mathbb B\) we now follow the recipe from \cite{bo2014}, replacing the actual generator \(\mathbb B\) with its approximation \({  \bs B}\), to construct approximations, \(\bs \pi\) and \(\bs p\), to the stationary operators, \(\bbpi\) and \(\mathbb p\).
+Given our approximation \(\bs B\) to the generator \(\mathbb B\) we now follow the recipe from \cite{bo2014}, replacing the actual generator \(\mathbb B\) with its approximation \({  \bs B}\), to construct approximations, \(\bs \pi\) and \(\bs p\), to the limiting operators, \(\bbpi\) and \(\mathbb p\).
 
 It may be convenient to think of our approximations in terms of approximations of kernels. Recall that the operators in \citep{bo2014} can be thought of in terms of kernels. That is, for some function \(\bs g = (g_i(x))_{i\in\calS}\), we can write \(\bs \mu \mathbb B \boldsymbol g\tr{} = \displaystyle \sum\limits_{k,\ell\in\mathcal K}\sum\limits_{i,j\in\calS} \displaystyle \int_{x,y}\wrt \mu_i(x) \mathbb B_{ij}^{k\ell}(x,\wrt y)g_j(y)\) where \(\mathbb B_{ij}^{k\ell}(x,\wrt y)\) is the kernel of the operator \(\mathbb B_{ij}^{k\ell}\). 
 
@@ -407,7 +407,7 @@ where \(\bs\phi^+(x) = (\bs\phi_k(x))_{i\in\calS_k^+,k\in\mathcal K^+}\) and \(\
 \\&{}+ \int_{z_1}\bs\phi^+(x){\bs M}_+^{-1}\bs \Psi(s)\bs\phi^-(z_1)\tr{}\bs\phi^-(z_1){\bs M}_-^{-1}  \bs D^{--}(s)\bs\phi^-(y)\tr{}\wrt z_1\wrt y
 = 0.
 \end{align*}
-Multiplying on the left by \(\bs\phi^+(x)\tr{}\) and on the right by \(\bs\phi^-(y)\), integrating over both \(x\) and \(y\), then post-multiplying by \({\bs M}^{-1}_-\) gives the following matrix Riccati equation
+Multiplying on the left by \(\bs\phi^+(x)\tr{}\) and on the right by \(\bs\phi^-(y)\), integrating over both \(x\) and \(y\), then post-multiplying by \({\bs M}^{-1}_-\) gives the matrix Riccati equation
 \begin{align}\label{eqn:RiccatiPsi}
     \bs D^{+-}(s)
 + \bs \Psi(s)   \bs D^{-+}(s)\bs \Psi(s)
@@ -415,14 +415,14 @@ Multiplying on the left by \(\bs\phi^+(x)\tr{}\) and on the right by \(\bs\phi^-
 + \bs \Psi(s)  \bs D^{--}(s)
 = \bs 0.
 \end{align}
-Thus, we may find \(\bs \Psi(s)\) by solving \eqref{eqn:RiccatiPsi}, using one of the methods in \citep{bot08}. Here, we use the Newtons method. 
+Thus, we may find \(\bs \Psi(s)\) by solving \eqref{eqn:RiccatiPsi}, using one of the methods in \citep{bot08}. Here, we use Newtons method. 
 
 \begin{rem}
 	Given the stochastic interpretation of \(\mathbb\Psi(0)\) we know that \( \bs \mu^+ \mathbb\Psi(0)([0,\infty))=1\) for every vector of measures \( \bs \mu^+\) such that \( \bs \mu^+([0,\infty)\boldsymbol 1 = 1\), when a fluid-fluid queue is recurrent. It appears that this result carries over to the matrix \(\bs \Psi(0)\) giving the property that \(\displaystyle\int_{y\in[0,b]} \bs \Psi(0)\bs\phi^-(y)\tr{}\wrt y = \bs 1\). However, we have only observed this numerically and have no proof of this property. 
 \end{rem}
 
-\subsection{Putting it all together: constructing an approximation to the stationary distribution}
-We find an approximation to the stationary distribution by replacing the theoretical operators in Theorem~\ref{theo:density} with their approximations. Table~\ref{table:notations} defines the notation we use for the DG approximations to stationary operators. 
+\subsection{Putting it all together: constructing an approximation to the limiting distribution}
+We find an approximation to the limiting distribution by replacing the theoretical operators in Theorem~\ref{theo:density} with their approximations. Table~\ref{table:notations} defines the notation we use for the DG approximations to limiting operators. 
 
  \begin{table}[h!]
  \centering
@@ -457,7 +457,7 @@ We find an approximation to the stationary distribution by replacing the theoret
 	%\approx \bs \pi_{i}^{K+1}(y). \end{array}
 	\)\\\hline
  \end{tabular}
- \caption{Notation for the approximation of the stationary operators of a fluid-fluid queue. The first column contains the operators which we are approximating, the second column contains indices for which the operators are defined, the third column defines the notation we use for the coefficients of the approximation, and the last column defines how the coefficients and basis functions are used to approximate the operators. \label{table:notations}}
+ \caption{Notation for the approximation of the limiting operators of a fluid-fluid queue. The first column contains the operators which we are approximating, the second column contains indices for which the operators are defined, the third column defines the notation we use for the coefficients of the approximation, and the last column defines how the coefficients and basis functions are used to approximate the operators. \label{table:notations}}
  \end{table}
 
 %  \begin{table}[h!]
@@ -483,7 +483,7 @@ We find an approximation to the stationary distribution by replacing the theoret
 %	&\(\pi_{k,i}^r(y)\) & \(\begin{array}{l}i\in\calS,\,r\in\{1,...,N_k\},\\k\in\bigcup\limits_{m\in\{+,-,0\}}\mathcal K_i^m\setminus \{{-1}\cup{K+1}\}.\end{array}\) & \(\bbpi_{k,i}(y)(\wrt x) %:= \lim\limits_{t\to\infty}\mathbb{P}\left[Y_t \in \wrt y, X_{t} \in \wrt x, \varphi_{t} = i\right]\\
 %	\approx\displaystyle\sum\limits_{r=1}^{N_k} {\pi}_{k,i}^r(y) \phi^r_k(x)\wrt x,\,y>0,\, x\in\calD_k.\)\\\hline
 % \end{tabular}
-% \caption{Notation for the approximation of the stationary operators of an SFFM.\label{table:notations}}
+% \caption{Notation for the approximation of the limiting operators of an SFFM.\label{table:notations}}
 % \end{table}
  
 With the notation in Table~\ref{table:notations} define row-vectors 
@@ -565,7 +565,7 @@ Similarly, the coefficients \( {\boldsymbol{p}}\) are given by
 %%	\( {\bs\xi} = \vligne{ {\bs\xi}_{-1} &  {\bs\xi}^\circ &  {\bs\xi}_{K+1}}\), where \( {\bs\xi}_{-1}=( {\xi}_{{-1},i})_{\{\i\in\calS_{-1}\mid r_i(0)<0\}}\) and \( {\bs\xi}_{K+1}=( {\xi}_{{K+1},i})_{\{\i\in\calS_{K+1}\mid r_i(0)<0\}}\) are associated with the boundaries at \(0\) and \(b\), respectively, and \( {\bs\xi}^\circ\) is associated with the interior \(x\in(0,b)\). Let us denote the elements of \( {\bs{\xi}}^\circ\) as \( {\xi}_{k,i}^r\), \(i\in\calS,\,r\in\{1,...,N_k\},\,k\in\mathcal K_i^-\) where the elements are ordered by \(k\) then \(i\) and then \(r\).
 %%	We construct an approximation to the density of \(\lim\limits_{n\to\infty}\mathbb{P}\left[X_{\theta_n} \in \wrt x, \varphi_{\theta_n} = i\right]\) as \(\displaystyle\sum\limits_{\substack{k\in\mathcal K_i^- \\r\in\{1,...,N_k\}}} {\xi}_{k,i}^r \phi^r_k(x)\). An approximation to \(\lim\limits_{n\to\infty}\mathbb{P}\left[X_{\theta_n} = 0, \varphi_{\theta_n} = i\right]\) is \( {\xi}_{{-1},i}\) and an approximation to the artificial point mass \(\lim\limits_{n\to\infty}\mathbb{P}\left[X_{\theta_n} = b, \varphi_{\theta_n} = i\right]\) is \( {\xi}_{{K+1},i}\).
 %	
-%	Next, we seek to approximate the stationary operators \(\bs p\) defined in (\ref{eqn:jointmass}). For \(i,k,r\) such that \(i\in\calS,\,r\in\{1,...,N_k\},\,k\in\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m\setminus \{{-1}\cup{K+1}\}\), coefficients \(p_{k,i}^r\) to be determined later, such that 
+%	Next, we seek to approximate the limiting operators \(\bs p\) defined in (\ref{eqn:jointmass}). For \(i,k,r\) such that \(i\in\calS,\,r\in\{1,...,N_k\},\,k\in\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m\setminus \{{-1}\cup{K+1}\}\), coefficients \(p_{k,i}^r\) to be determined later, such that 
 %\[\displaystyle\sum\limits_{r\in\{1,...,N_k\}}p_{k,i}^r \phi^r_k(x),\quad x \in \calD_k,\]
 %is an approximation to the density of \(\lim\limits_{t\to\infty}\mathbb{P}\left[Y_t = 0, X_{t} \in \wrt x, \varphi_{t} = i\right]\) on \(x\in\calD_k\). For \(i,k,r\) such that \(i\in\calS,\,r=1,\,k\in\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m\cap \{{-1}\cup{K+1}\},\) define point masses \(p_{k,i}^r\) such that \(p_{i,r}^{-1}\) and \(p_{i,r}^{K+1}\) approximate the point masses \(\lim\limits_{t\to\infty}\mathbb{P}\left[Y_t=0, X_{t} = 0, \varphi_{t} = i\right]\) and \(\lim\limits_{t\to\infty}\mathbb{P}\left[Y_t = 0, X_{t} = b, \varphi_{t} = i\right]\), respectively. In vector form, for \(i,k\) such that \(i\in\calS,\,k\in\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m\), let \( {\bs{p}}_{k,i} = (  p_{k,i}^r)_{r\in\{1,...,N_k\}}\), for \(k\in\bigcup\limits_{i\in\calS}\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m\), let \( {\bs{p}}^k = (  p_{k,i})_{\{i\in\calS\mid r_i(x)\leq 0,x\in\calD_k\}}\) and let \( {\bs{p}} = (  p^k)_{k\in\bigcup\limits_{i\in\calS}\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m}\). Again, by proceeding similarly to the derivation of (\ref{eqn:RiccatiPsi}), that the DG approximation to \( {\boldsymbol{p}}\) is 
 %	\[\vligne{\bs{p}^{-}  & \bs{p}^{0}} = z \vligne{{\bbxi} & \bs{0}} 
@@ -619,7 +619,7 @@ To assist the reader in understanding these constructions and the notation we pr
 % how I use/analyse it in the numerics section
 
 \section{Other problems we can solve with cell-based approximation schemes}\label{sec: other applications}
-The utility of the DG scheme (or any of the approximation schemes considered in this thesis, for that matter) for fluid queues is not limited to approximating the first return and stationary operators of fluid-fluid queues. For example, we can use a DG scheme to approximate the transient distribution of the fluid queue at time \(t\), which requires us to find the coefficients \(\vligne{\bs q_{-1}(t) & \bs a(t) & \bs q_{{K+1}}(t)}\), given an initial condition, typically by numerically integrating (\ref{eqn: DG ODE w BCs}). An approximation to the stationary distribution of the fluid queue can be found by solving 
+The utility of the DG scheme (or any of the approximation schemes considered in this thesis, for that matter) for fluid queues is not limited to approximating the first return and limiting operators of fluid-fluid queues. For example, we can use a DG scheme to approximate the transient distribution of the fluid queue at time \(t\), which requires us to find the coefficients \(\vligne{\bs q_{-1}(t) & \bs a(t) & \bs q_{{K+1}}(t)}\), given an initial condition, typically by numerically integrating (\ref{eqn: DG ODE w BCs}). An approximation to the limiting distribution of the fluid queue can be found by solving 
 \begin{align*}
 	\bs b \bs B &= \bs 0,
 	\\ \bs b \bs 1 &= \bs 1,
@@ -628,7 +628,7 @@ for the coefficients \(\bs b\). We can also approximate first hitting times. For
 \[\cfrac{\wrt}{\wrt t}\bs a_k(t)=\bs a_k(t)\bs B^{kk},\]
 over time. 
 
-Indeed, the DG scheme has the potential to answer many mathematical questions for fluid queues. However, one reason it may not have found such widespread use in the context of fluid queues is the aforementioned difficulties surrounding discontinuous solutions, which we often want to consider. Moreover, there are sometimes other techniques which can give exact solutions, for example exact expressions for transient quantities are derived in \cite{rs2003,ar2004,bean2005,bean2009}, and for the stationary distribution are derived in \cite{ajr2005,dasilva2005,lnp13,s2017}. 
+Indeed, the DG scheme has the potential to answer many mathematical questions for fluid queues. However, one reason DG schemes may not have found such widespread use in the context of fluid queues is the difficulties surrounding discontinuous solutions, which we elaborate on in Section~\ref{sec: slope limiting} and demonstrate in Chapter~\ref{sec: numerics} (see also Section~5.6~\cite{nodalDGBook}), which we often want to consider. Moreover, there are sometimes other techniques which can give exact solutions, for example exact expressions for transient quantities are derived in \cite{rs2003,ar2004,bean2005,bean2009}, and for the limiting distribution are derived in \cite{ajr2005,dasilva2005,lnp13,s2017}. 
 
 Nonetheless, the DG scheme can be used to answer a very broad range of questions about fluid queues (such as transient distributions, hitting times on complex geometries, and of course analysis of fluid-fluid queues) which have no exact, readily computable solution. Moreover, we will numerically investigate the performance of the DG scheme (and other numerical schemes which we will develop) in Chapter~\ref{sec: numerics} which require numerical integration with respect to time. Hence, we now briefly introduce the numerical time integration scheme which we use in this thesis, as well as some issues pertaining to oscillatory approximations. 
 
@@ -659,7 +659,7 @@ The \(t\)-step size needs to be chosen to be sufficiently small so that the time
 where \(z_{r-1}\leq z_r\), \(z_1=-1\), \(z_{p+1}=1\) and \(z_r, r=2,...,p,\) are the \(p-1\) zeros of the first derivative of \(P_{p}(x)\), the order \(p\) Legendre polynomial. This follows advice from \cite{nodalDGBook}. 
 
 \section{Slope limiters}\label{sec: slope limiting}
-A well-know problem with DG schemes is that, in the presence of steep gradients or discontinuities, spurious oscillations in the approximate solution can occur and positivity is not guaranteed (see \cite{nodalDGBook}~Section~5.6, and \cite{koltai2011}~Section~3.3, for example). To rectify this, in some contexts, slope limiting can be used (see \cite{c99}, or \cite{nodalDGBook},~Section~5.6.2 and references therein). Slope limiting alters the DG approximation in regions where oscillations are detected to ensure non-oscillatory and non-negativity by reducing the order of the approximation to linear and limiting the gradient of the approximation in these regions. However, limiting does not distinguish between natural oscillations, which are a fundamental feature of the solution, and spurious oscillations, which are caused by the approximation scheme. As a result, the limiter may unnecessarily reduce the accuracy of the scheme in the presence of natural oscillations (see \citep{nodalDGBook},~Example~5.8). Furthermore, slope limiting adds an extra computational cost on top of the approximation scheme and means that the resultant approximation to certain operators are no longer linear.
+A well-know problem with DG schemes is that, in the presence of steep gradients or discontinuities, spurious oscillations in the approximate solution can occur and positivity is not guaranteed (see \cite{nodalDGBook}~Section~5.6, and \cite{koltai2011}~Section~3.3, for example). To rectify this, in some contexts, slope limiting can be used (see \cite{c99}, or \cite{nodalDGBook},~Section~5.6.2 and references therein). Slope limiting alters the DG approximation in regions where oscillations are detected to ensure non-oscillatory by reducing the order of the approximation to linear and limiting the gradient of the approximation in these regions. However, limiting does not distinguish between natural oscillations, which are a fundamental feature of the solution, and spurious oscillations, which are caused by the approximation scheme. As a result, the limiter may unnecessarily reduce the accuracy of the scheme in the presence of natural oscillations (see \citep{nodalDGBook},~Example~5.8). Furthermore, slope limiting adds an extra computational cost on top of the approximation scheme and means that the resultant approximation to certain operators are no longer linear.
 
 We now describe a simple slope limiter known as the \emph{Generalised MUSCL} scheme \citep{c99} (see also \citep{nodalDGBook},~Section~5.6.1). Define the \emph{minmod} function 
 \begin{align*}
@@ -700,12 +700,12 @@ where \(\Pi^{lim}\) is the slope limiter function which determines on which cell
 
 We refer to this (vanilla) application of a limiter to the DG scheme as the DG-lim scheme. 
 
-\paragraph{Consequences of slope limiting} We have already mentioned that the Generalised MUSCL slope limiter reduces the order to linear in regions where oscillatory solutions are detected. When slope limiting is used in conjunction with a time-integration scheme the reduction in order may not be local in time and may persist past the time when the limiter first detected oscillations. For example, consider a problem with an initial condition which introduces oscillations into the numerical approximation. If the slope limiter is applied to the initial condition then, in the region around the oscillations, the approximation to the initial condition will be linear. Even if the slope limiter is not applied (or not needed) after this point, the initial condition has still been altered, perhaps significantly, from the original approximation and this can affect the accuracy of transient approximations. This is not to say that the slope-limited-regions of the approximation will \emph{always} remain linear. When no oscillations are detected, the DG scheme can use the full power of the high-order polynomial basis to approximate the solution, and this is one of the advantages of Generalised slope limiter described. Instead, we want to point out that once the limiter is applied at one time point, the approximation becomes linear which will affect the accuracy of subsequent computations. 
+\paragraph{Consequences of slope limiting} We have already mentioned that the Generalised MUSCL slope limiter reduces the order to linear in regions where oscillatory solutions are detected. When slope limiting is used in conjunction with a time-integration scheme the reduction in order may not be local in time and may persist past the time when the limiter first detected oscillations. For example, consider a problem with an initial condition which introduces oscillations into the numerical approximation. If the slope limiter is applied to the initial condition then, in the region around the oscillations, the approximation to the initial condition will be linear. Even if the slope limiter is not applied (or not needed) after this point, the initial condition has still been altered, perhaps significantly, from the original approximation and this can affect the accuracy of transient approximations. This is not to say that the slope-limited-regions of the approximation will \emph{always} remain linear. When no oscillations are detected, the DG scheme can use the full power of the high-order polynomial basis to approximate the solution, and this is one of the advantages of generalised slope limiter described. Instead, we want to point out that once the limiter is applied at one time point, the approximation becomes linear which will affect the accuracy of subsequent computations. 
 
 \subsection{Another slope limiting scheme}\label{sec: anoth pos pres}
-The advantage of the approach above is that, in areas of the approximation where the solution is smooth, then the high-order accuracy of the method can be retained, while maintaining positivity where necessary. However, if the problem at hand is dominates by discontinuities and/or if there are no regions of the solution of interest which are smooth, then there is no real advantage in this approach as the limiter will reduce the approximate solution to linear in all regions of interest. Hence, we may as well just use a linear scheme and save on some computation. 
+The advantage of the approach above is that, in areas of the approximation where the solution is smooth, then the high-order accuracy of the method can be retained, while maintaining positivity where necessary. However, if the problem at hand is dominated by discontinuities and/or if there are no regions of the solution of interest which are smooth, then there is no real advantage in this approach as the limiter will reduce the approximate solution to linear in all regions of interest. Hence, we may as well just use a linear scheme and save on some computation. 
 
-Perhaps a better approach would be to use a linear scheme with a smaller cell width such that the computational work remains approximately the same. For example, for a DG scheme with \(2p\) basis functions on a cell, \(\mathcal D_k\), of width \(\Delta\), say, we construct block matrices of dimension \(2p\times 2p\) (i.e.~the mass, stiffness and flux matrices, \(\bs M_k\), \(\bs G_k\), and \(\bs F^{k\ell}\), respectively) and compute the approximate solution using these matrices. Alternatively, consider breaking the cell, \(\mathcal D_k\), up into \(p\) sub-cells of width \(\Delta/p\) and using a DG scheme with \(2\) basis functions on each sub-cell (i.e.~a linear basis on each cell). On each of the \(p\) sub-cells we construct block matrices of size \(2\times 2\). To approximate the solution on the original interval \(\mathcal D_k\) we form the \(p\) approximations on each sub-cell into larger matrices which are of dimension \(2p\times 2p\), and we then use in the same way as before. Thus, the scheme with \(2p\) basis functions on the cell \(\calD_k\), and the scheme with a 2 basis functions on \(p\) sub-cell have approximately the same computational cost (the latter scheme results in a sparser matrix). 
+Perhaps a better approach would be to use a linear scheme with a smaller cell width such that the computational work remains approximately the same. For example, for a DG scheme with \(2p\) basis functions on a cell, \(\mathcal D_k\), of width \(\Delta\), say, we construct block matrices of dimension \(2p\times 2p\) (i.e.~the mass, stiffness and flux matrices, \(\bs M_k\), \(\bs G_k\), and \(\bs F^{k\ell}\), respectively) and compute the approximate solution using these matrices. Alternatively, consider breaking the cell, \(\mathcal D_k\), up into \(p\) sub-cells of width \(\Delta/p\) and using a DG scheme with \(2\) basis functions on each sub-cell (i.e.~a linear basis on each cell). On each of the \(p\) sub-cells we construct block matrices of size \(2\times 2\). To approximate the solution on the original interval \(\mathcal D_k\) we form the \(p\) approximations on each sub-cell into larger matrices which are of dimension \(2p\times 2p\), and then use in the same way as before. Thus, the scheme with \(2p\) basis functions on the cell \(\calD_k\), and the scheme with a 2 basis functions on each of the \(p\) sub-cell have approximately the same computational cost (the latter scheme results in a sparser matrix). 
 
 If we know \emph{a priori} that we will apply the slope limiter to cell \(\calD_k\), then intuitively we suspect that the latter scheme may be far more accurate; it will approximate the solution on \(\calD_k\) by a piecewise linear function with \(p\) pieces, whereas the DG scheme with \(2p\) basis functions on cell \(\calD_k\) will, after limiting, represent the solution as a single linear function on \(\calD_k\). 
 
@@ -732,8 +732,8 @@ One advantage of the QBD-RAP (and uniformisation) scheme we develop in this thes
 % added computational cost when lots of limiting is needed
 % 
 
-\subsection{Briefly on accuracy}
-As a rough guide on accuracy we now paraphrase some know results on the accuracy of the DG method for a similar kind of problem to the one under study here. For certain scalar conservation-law problems, under certain regularity conditions on the continuity and bounded-ness of the solution and its derivatives, on the grid used, on the flux function, and on the numerical flux, then one can expect accuracy proportional to \(\Delta^{p}\) for the DG approximation of the solution, provided the DG scheme uses a polynomial basis with \(p\) functions on each cell, a regular grid of \(\Delta = \max \Delta_k\) is used and a second-order SSPRK method is used to integrate over time \citep[Sections~5.5,~5.8, and references therein]{nodalDGBook}. Applying this result to the DG-lin-lim scheme in Section~\ref{sec: anoth pos pres}, we might expect accuracy of order \((\Delta/p)^2\) under the same regularity conditions.
+\subsection{Briefly, on accuracy}
+As a rough guide on accuracy we now paraphrase some known results on the accuracy of the DG method for a similar kind of problem to the one under study here. For certain scalar conservation-law problems, under certain regularity conditions on the continuity and bounded-ness of the solution and its derivatives, on the grid used, on the flux function, and on the numerical flux, then one can expect accuracy proportional to \(\Delta^{p}\) for the DG approximation of the solution, provided the DG scheme uses a polynomial basis with \(p\) functions on each cell, a regular grid of \(\Delta = \max \Delta_k\) is used and a second-order SSPRK method is used to integrate over time \citep[Sections~5.5,~5.8, and references therein]{nodalDGBook}. Applying this result to the DG-lin-lim scheme in Section~\ref{sec: anoth pos pres}, we might expect accuracy of order \((\Delta/p)^2\) under the same regularity conditions.
 
 % To quote Section~5.7 of \cite{nodalDGBook} SSPRK methods ``can be used with advantage for problems with strong shocks and discontinuities, as they guarantee that no additional oscillations are introduced as part of the time-integration process.''
 
