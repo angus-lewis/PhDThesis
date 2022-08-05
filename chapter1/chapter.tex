@@ -126,10 +126,14 @@ The Chapman-Kolmogorov equations state that
 % Markov processes, time-homogeneity, strong Markov prperty, partitioning and LOTP
 
 \section{Some semigroup theory}
-The evolution of Markov processes can be described by an \emph{operator semigroup}. Semigroups also arise in other contexts related to the analysis of fluid queues and fluid-fluid queues (see, for example, Sections~\ref{sec: ffq intro} and~\ref{sec: transient ffq intro}). Semigroups (and therefore Markov processes) can be characterised by their \emph{infinitesimal generator}, or generator for short. One of the aims of this thesis is to approximate the generator of a fluid queue. Here we very briefly introduce semigroups and their \emph{infinitesimal generators}. 
+The evolution of Markov processes can be described by an \emph{operator semigroup}. Semigroups also arise in other contexts related to the analysis of fluid queues and fluid-fluid queues (see, for example, Sections~\ref{sec: ffq intro} and~\ref{sec: transient ffq intro}). Semigroups (and therefore Markov processes) can be characterised by their \emph{infinitesimal generator}, or generator for short. One of the aims of this thesis is to approximate the generator of a fluid queue. Here we very briefly introduce semigroups and their \emph{infinitesimal generators}. We refer to the reader to \cite{ethierkurtz} for more details (see also \cite{kallenberg}, or the more approachable course notes of \cite{shalizi}). 
 
 \subsubsection{Operators}
-Let \(L\) be a Banach space (a vector space with a metric and where Cauchy sequences converge to a point within the space). An operator is a mapping which takes elements of a vector space and sends them to elements of a vector space (not necessarily the same space). That is, let \(V\) and \(W\) be normed vector spaces, then \(\mathbb B:\mathcal D(\mathbb B)\subset V\to W\) is an operator. The set \(\mathcal D(\mathbb B)\) is the domain of the operator, and is not necessarily all of \(V\). When specification of the domain is unnecessary we sometimes write \(\mathbb B:V\to W\). Let \(c\in \mathbb R\) and \(v\in V\), \(w\in W\). Then \(\mathbb B\) is a \emph{linear} operator if \(\mathbb B(cv) = c(\mathbb Bv)\) and \(\mathbb B(v+w)=\mathbb Bv+\mathbb Bw\). We define the norm of an operator as \(||\mathbb B||=\sup_{v\in V}\cfrac{||\mathbb Bv||_W}{||v||_V}\), where \(||\cdot||_V\) and \(||\cdot||_W\) are the norms attached to \(V\) and \(W\), respectively.  An operator is said to be bounded if \(||\mathbb B||<M\) for some \(M<\infty, M\in \mathbb R\), for every \(v\in V\). 
+Let \(L\) be a \emph{Banach space}. A Banach space is a \emph{complete, normed} vector space. Complete means that every Cauchy sequence of points in \(L\) has a limit which also lies in \(L\). Normed means that a norm is defined on \(L\). Intuitively, a norm is a function which tells us the distance between two points in \(L\). 
+
+An \emph{operator} is a mapping which takes elements of a vector space and sends them to elements of a vector space (not necessarily the same space). That is, let \(V\) and \(W\) be normed vector spaces, then \(\mathbb B:\mathcal D(\mathbb B)\to W\) is an operator. The set \(\mathcal D(\mathbb B)\subseteq V\) is the domain of the operator, and is not necessarily all of \(V\). When specification of the domain is unnecessary we sometimes write \(\mathbb B:V\to W\). 
+
+Let \(c\in \mathbb R\) and \(v\in V\), \(w\in W\). Then \(\mathbb B\) is a \emph{linear} operator if \(\mathbb B(cv) = c(\mathbb Bv)\) and \(\mathbb B(v+w)=\mathbb Bv+\mathbb Bw\). We define the norm of an operator as \(||\mathbb B||=\sup_{v\in V}\cfrac{||\mathbb Bv||_W}{||v||_V}\), where \(||\cdot||_V\) and \(||\cdot||_W\) are the norms defined on \(V\) and \(W\), respectively.  An operator is said to be bounded if \(||\mathbb B||<M\) for some \(M<\infty, M\in \mathbb R\), for every \(v\in V\). 
 
 % For example, let \(L\) be the space of real, smooth functions for which \(f(x)\to 0\) as \(x\to \infty\), and consider the sup norm, \(||f||=\sup\limits_{x\in\mathbb R}f(x)\). Then differentiation is an operator which maps \(L\) to it self. That is \(B=\cfrac{\wrt}{\wrt x}:L\to L\). In addition \(B\) is linear since for any \(f,g\in L\), \(B(f+g) = \cfrac{\wrt}{\wrt x}(f(x)+g(x)) =  \cfrac{\wrt}{\wrt x}f(x) +  \cfrac{\wrt}{\wrt x}g(x)\) and \(B(cf)= \cfrac{\wrt}{\wrt x}cf(x)=c \cfrac{\wrt}{\wrt x}f(x)\). The operator \(B\) is, however, not bounded.
 
@@ -137,7 +141,7 @@ Let \(L\) be a Banach space (a vector space with a metric and where Cauchy seque
 
 % For example, let \(B=\cfrac{\wrt}{\wrt x}:C^1[0,1]\subset C^0[0,1]\to C^0[0,1]\), where \(C^n[0,1]\) is the set of all \(n\)-times continuously differentiable functions on the interval \([0,1]\). The graph of \(B\) is the set \(G(B)=\{(f,Bf); f\in C^1[0,1]\}\). The operator \(B\) is closed since for any \(f_n\in C^1[0,1]\) with \(f_n\to f\) and \(Bf_n = \cfrac{\wrt f_n}{\wrt x}=g_n\to g\), then \(f\in C^1[0,1]=\mathcal D(B)\) and \(Bf=g\). Notice that we can construct \(\{f_n\}\) such that \(f_n\to f\notin \mathcal D(B)\) (e.g.~from the Weierstrass Approximation Theorem there is a sequence of polynomials in \(C^1[0,1]\) converging to \(f(x)=|x-1/2|\notin C^1[0,1]\)) but in these cases \(Bf_n = \cfrac{\wrt f_n}{\wrt x}=g_n\) must not converge. 
 
-\subsubsection{Semigroups}  A family of linear operators is a collection of indexed linear operators \(\{\mathbb B(i)\}_{i\in I}\) where \(I\) is some index set. That is, for each \(i\in I\), \(\mathbb B(i)\) is a linear operator. A family of operators \(\{\mathbb T(t)\}_{t\geq 0}\), \(\mathbb T(t):L\to L\), is said to have the \emph{semigroup} property if \(\mathbb T(t+s)=\mathbb T(t)\mathbb T(s)\). If \(\mathbb T(0)=I\), the identity operator, then the family \(\{\mathbb T(t)_{t\geq 0}\) is known as a semigroup. If \(\mathbb T(t)f\to f\) as \(t\to 0^+\), then \(\{\mathbb T(t)\}_{t\geq 0}\) is said to be strongly continuous. If \(||\mathbb T(t)||\leq 1\) for all \(t\geq 0\) then \(\{\mathbb T(t)\}_{t\geq 0}\) is known as a contraction semigroup.
+\subsubsection{Semigroups}  A family of linear operators is a collection of indexed linear operators \(\{\mathbb B(i)\}_{i\in I}\) where \(I\) is some index set. For each \(i\in I\), \(\mathbb B(i)\) is a linear operator. A family of operators \(\{\mathbb T(t)\}_{t\geq 0}\), \(\mathbb T(t):L\to L\), is said to have the \emph{semigroup} property if \(\mathbb T(t+s)=\mathbb T(t)\mathbb T(s)\). If \(\mathbb T(0)=I\), the identity operator, then the family \(\{\mathbb T(t)_{t\geq 0}\) is known as an operator semigroup. If \(f\in L,\, \mathbb T(t)f\to f\) as \(t\to 0^+\), then \(\{\mathbb T(t)\}_{t\geq 0}\) is said to be strongly continuous. If \(||\mathbb T(t)||\leq 1\) for all \(t\geq 0\) then \(\{\mathbb T(t)\}_{t\geq 0}\) is known as a contraction semigroup.
 
 For example, for a bounded linear operator \(\mathbb B:\mathcal D(\mathbb B)\to \mathcal D(\mathbb B)\), define the operator exponential as \(e^{\mathbb Bt}:=\sum_{k=0}^\infty\cfrac{1}{k!}t^k\mathbb B^k\) where, for \(f\in \mathcal D(\mathbb B)\), \(\mathbb B^kf\) is defined recursively by \(\mathbb B^k f = \mathbb B^{k-1} (\mathbb B f)\). It can be shown that \(e^{\mathbb B(t+s)}=e^{\mathbb Bt}e^{\mathbb Bs}\), and from the definition \(e^{\mathbb B0}=I\), hence \(\{e^{\mathbb Bt}:t\geq 0\}\) is a semigroup. As another example, let \(\mathbb B=\cfrac{d}{dx}:C^\omega(\mathbb R) \to C^\omega(\mathbb R)\), where \(C^\omega(\mathbb R)\) is the class of analytic functions on the whole of \(\mathbb R\). Then \(\mathbb T(t)f(x)=\sum_{k=0}^\infty \cfrac{1}{k!}t^k\cfrac{\wrt^k}{\wrt x^k}f(x)=f(x-t)\), and the sum converges since \(f\in C^\omega(\mathbb R)\); the series representation is the Taylor series of \(f\) about the point \(x\) and the operator \(\mathbb T(t)f(x)=f(x-t)\) is the shift operator. The semigroup property follows since 
 \[\mathbb T(t)\mathbb T(s)f(x)=\mathbb T(t)f(x-s)=f(x-s-t)=\mathbb T(t+s)f(x).\]
@@ -154,10 +158,11 @@ The operator \(R_s\) is known as the resolvent.
 
 One of the fundamental results of semigroup theory is the Hille-Yosida Theorem which essentially states that a semigroup is entirely characterised by its generator. This is not immediately obvious as the generator is defined on a subset of \(L\) only, whereas \(\{\mathbb T(t)\}\) is defined on all of \(L\).
 
-% \section{Markov processes and semigroups}
-% Semigroups arise naturally in Markov processes. Let \(\{X(t):t\geq 0\}\) be a Markov process with state space \(\mathcal S\). The Markov property states that for \(s,t\geq 0\), \(X(t+s)\) is independent of \(X(u),\, 0\leq u<t\) given \(X(t)\). That is, \(P(X(t+s)\in\mathcal{E} \mid X(t), X(u), 0\leq u<t)=P(X(t+s)\in\mathcal{E} \mid X(t))\). If \(P(X(t+s)\in\mathcal{E} \mid X(t))=P(X(s)\in\mathcal{E} \mid X(0))\), that is the distributions are invariant under translation by \(t\), then \(X(t)\) is said to be time-homogeneous. Where necessary, we will use the notation \(X_\mu(t)\) to denote the Markov process with initial distribution \(\mu\), i.e.~\(P(X(0)\in\cdot)=\mu(\cdot)\), and \(X_x(t)\) to be the Markov process with initial distribution \(\delta(x)\). Markov processes can be characterised by \emph{probability kernels}.
- 
-% Let \((U,\mathcal U)\) and \((V,\mathcal V)\) be two measure spaces, then a probability kernel \(\nu\), is a mapping \(\nu:U\times \mathcal V\to \mathbb R_+\) such that \(\nu(u,\mathcal{E})\) is \(\mathcal U\)-measurable in \(u\in U\) for fixed \(\mathcal{E}\in \mathcal V\), and a probability measure in \(\mathcal{E}\in \mathcal V\) for fixed \(u\in U\). We say that \(\nu\) is a probability kernel from \(U\) to \(V\). 
+\subsubsection{Markov processes and semigroups}
+Semigroups arise naturally in Markov processes. Let \(\{X(t):t\geq 0\}\) be a Markov process with state space \(\mathcal S\). The Markov property states that, given \(X(t)\), then for \(s,t\geq 0\), \(X(t+s)\) is independent of \(X(u),\, 0\leq u<t\). That is, \[P(X(t+s)\in\mathcal{E} \mid X(t), X(u), 0\leq u<t)=P(X(t+s)\in\mathcal{E} \mid X(t)).\] 
+If \(P(X(t+s)\in\mathcal{E} \mid X(t))=P(X(s)\in\mathcal{E} \mid X(0))\), are invariant under translation by \(t\), then \(X(t)\) is said to be time-homogeneous.
+
+% Markov processes can be characterised by \emph{probability kernels}. Let \((U,\mathcal U)\) and \((V,\mathcal V)\) be two measure spaces, then a probability kernel \(\nu\), is a mapping \(\nu:U\times \mathcal V\to \mathbb R_+\) such that \(\nu(u,\mathcal{E})\) is \(\mathcal U\)-measurable in \(u\in U\) for fixed \(\mathcal{E}\in \mathcal V\), and a probability measure in \(\mathcal{E}\in \mathcal V\) for fixed \(u\in U\). We say that \(\nu\) is a probability kernel from \(U\) to \(V\). 
 
 % With a probability kernel comes associated integral operators. For a measure \(\mu\) on \((U,\mathcal U)\), then 
 % \[\mu \nu (\mathcal{E})=\int_{U} \mu(\wrt x) \nu(x,\mathcal{E})\]
@@ -166,7 +171,24 @@ One of the fundamental results of semigroup theory is the Hille-Yosida Theorem w
 % We can also compose two transition kernels. Let \(\nu\) be a transition kernel from \(U\) to \(V\) and \(\eta\) be a transition kernel from \(V\) to \(W\). Then \(\nu\eta\) is also a probability kernel from \(U\) to \(W\);
 % \[\nu\eta(x,\mathcal{E}) = \int_{V}\nu(x,\wrt y)\eta(y,\mathcal{E}).\]
  
-% Let \(\mu_{t}(\cdot)=P(X(t)\in \cdot)\) for \(t\geq 0\) be a one-parameter family of measures on \((\mathcal S,\mathcal F)\), and \(\nu_{t}(x,\cdot)=P(X(t)\in\cdot \mid X(0)=x)\) for \(t\geq 0\) be a one-parameter family of probability kernels from \(\mathcal S\) to \(\mathcal S\). Then \(\mu_t\) and \(\nu_{t}\) characterise the time-homogeneous Markov process \(X(t)\). The probability kernel \(\nu_t\) is referred to as a transition kernel. The kernels \(\nu_t\) form a semigroup since, using the law of total probability and time-homogeneity, 
+Consider the expectation
+\[\mathbb E[f(X(t))\mid X(0)=x]=\int_{y\in\calS} f(y) P(X(t)\in\wrt y\mid X(0)=x),\]
+where \(f\) is some bounded function. Expectation is an operator which is acting on a function \(f\). The expectation depends on \(t\) and \(x\) as these define the distribution with which we are taking the expectation, hence, let us write 
+\[\mathbb T(t)f(x) = \mathbb E[f(X(t))\mid X(0)=x].\]
+The result of the operator acting on \(f\), \(\mathbb T(t)f(x)\), is another function.
+
+By the Markov property, for some \(s\in[0,t]\), 
+\begin{align*}
+	&\int_{y\in\calS} f(y) P(X(t)\in\wrt y \mid X(0)=x)
+	\\&=\int_{y\in\calS}\int_{z\in\mathcal S}f(y) P(X(t)\in\wrt y\mid X(s)=z) P(X(s)\in\wrt z\mid X(0)=x)
+	\\&=\int_{y\in\calS}\int_{z\in\mathcal S}\mathbb E[f(X(t))\mid X(s)=z] P(X(s)\in\wrt z\mid X(0)=x)
+	\\&=\int_{y\in\calS}\int_{z\in\mathcal S} \mathbb E[f(X(t-s))\mid X(0)=z]P(X(s)\in\wrt z\mid X(0)=x),
+	\\&=\int_{y\in\calS}\int_{z\in\mathcal S} (\mathbb T(t-s)f(z))P(X(s)\in\wrt z\mid X(0)=x),
+	\\&=\mathbb T(s) (\mathbb T(t-s)f)(x),
+\end{align*}
+where the third equality holds by time-homogeneity. Hence, \(\{\mathbb T(t)(\cdot)\}_{t\geq 0}\) is an operator semigroup. Moreover, since \(f\) is bounded, then \(\mathbb T(t)f(x) = \mathbb E[f(X(t))\mid X(0)=x] \leq F\), which means that \(\{\mathbb T(t)\}\) is a contraction semigroup.
+
+% Let \(\nu_{t}(x,\cdot)=P(X(t)\in\cdot \mid X(0)=x)\) for \(t\geq 0\) be a one-parameter family of probability kernels from \(\mathcal S\) to \(\mathcal S\). Then \(\mu_t\) and \(\nu_{t}\) characterise the time-homogeneous Markov process \(X(t)\). The probability kernel \(\nu_t\) is referred to as a transition kernel. The kernels \(\nu_t\) form a semigroup since, using the law of total probability and time-homogeneity, 
 % \begin{align*}
 % \nu_{t+s}(x,\mathcal{E})&=P(X(t+s)\in\mathcal{E}\mid X(0)=x)
 % \\&=\int_{y\in\mathcal S}P(X(t)\in\wrt y\mid X(0)=x)P(X(t+s)\in\mathcal{E}\mid X(t)=y)
@@ -734,7 +756,7 @@ Here we recount some facts about matrix exponential distributions. See \cite{MEi
 	for integers \(m_1,\,m_2,\,p_j,\) and \(q_j\) and some real constants \(c_{jk},\,d_{jk},\,e_{jk},\,\mu_j,\,\eta_j,\) and \(\sigma_j\). Here \(\mu_j,\, j=1,\dots,m_1\) are the real eigenvalues of \(\bs S\), while \(\eta_j+i\sigma_j, \, \eta_j-i\sigma_j,\, j=1,\dots,m_2\) denote its complex eigenvalues, which come in conjugate pairs. Thus, \(m_1+2m_2\) is the total number of eigenvalues, while the dimension of the representation is given by \(\displaystyle p=\sum_{j=1}^{m+1}p_j + 2\sum_{j=1}^{m_2}q_j\). 
 \end{thm}
 \begin{thm}[Theorem 4.1.4, \cite{MEinAP}]\label{thm: 4.1.4}
-	Consider the nonvanishing terms of the matrix exponential density (\ref{eqn: spec}), \emph{i.e.}, the terms for which \(c_{jk}\neq 0,\,d_{jk}\neq 0,\) or \(e_{jk}\neq 0\). Among the corresponding eigenvalues \(\lambda_j\), there is a real dominating eigenvalue \(\kappa\), say. That is, \(\kappa\) is real, \(\kappa \geq Re(\lambda_j)\) for all \(j\), and the multiplicity of \(\kappa\) is at least the multiplicity of every other eigenvalue with real part \(\kappa\).
+	Consider the non-vanishing terms of the matrix exponential density (\ref{eqn: spec}), \emph{i.e.}, the terms for which \(c_{jk}\neq 0,\,d_{jk}\neq 0,\) or \(e_{jk}\neq 0\). Among the corresponding eigenvalues \(\lambda_j\), there is a real dominating eigenvalue \(\kappa\), say. That is, \(\kappa\) is real, \(\kappa \geq Re(\lambda_j)\) for all \(j\), and the multiplicity of \(\kappa\) is at least the multiplicity of every other eigenvalue with real part \(\kappa\).
 \end{thm}
 \begin{cor}[Corollary 4.1.5, \cite{MEinAP}]
 If \((\bs \alpha, \bs S, \bs s)\) is a representation for a matrix exponential distribution, then \(\bs S\) has a real dominating eigenvalues.
@@ -750,6 +772,16 @@ A \emph{representation} of a matrix exponential distribution is a triplet \((\bs
 
 For a given \(p\times p\) matrix \(\bs S\), denote by \(\mathcal{A}\subset \mathbb R^p\) the space of all possible vectors \(\bs a\) such that \((\bs a, \bs S)\) is a valid representation of a (possibility defective) matrix exponential distribution. %By CITE it is known that \(\mathcal{E}\) is a closed, bounded, convex, affine subspace of \(\mathbb R^p\). 
 
+\subsubsection*{Concentrated matrix exponential distributions}
+Recently, the class of \emph{concentrated matrix exponential distributions} (CMEs) has been investigated \citep{ert2006,hstz2016,ert2006,hht2020,mt2021}. As the name suggests, concentrated matrix exponential distributions are matrix exponential distributions with a very low coefficient of variation (variance relative to the mean). As the order, \(p\), of the representation increases, the variance of concentrated matrix exponential distributions decreases at rate approximately \(\mathcal O(1/p^2)\). For comparison, the variance of an Erlang distribution, the most concentrated Phase-type distribution, decreases at rate \(\mathcal O(1/p)\) as the order \(p\) increases \citep{as1987}. In this thesis we use CMEs to approximate deterministic events. For a given order, concentrated matrix exponential distributions have a much lower coefficient of variation than any phase type of the same order, and therefore a better ability to model determinism. 
+
+The class of concentrated matrix exponential distributions (CMEs) found numerically in \citep{hht2020} and computationally efficient expressions for the density and moments of CMEs are provided in \citep{hht2020}. 
+
+CMEs exist for all orders, however, in our computations we only use CMEs with odd order. The justification for considering representations of odd orders only is that the variance of CME distributions of orders \(2p\) and \(2p-1\) are relatively similar and therefore have similar abilities to represent the delta function \citep{hht2020}. Hence, if we construct an approximation with a representation of order \(2p\) we expect it to perform only marginally better than an approximation constructed with representations of order \(2p-1\). However, the computational cost of the latter is lower, so we opt for the order \(2p-1\) representation. 
+
+From the definition of the class of CME distributions, for a given CME with odd order, \(p\), and representation \((\bs\alpha,\bs S)\), the matrix \(\bs S\) has one real eigenvalue, and \(p-1\) complex eigenvalues and all eigenvalues have the same real part \cite{hht2020}. 
+
+For CMEs considered here, the vector function \(\bs k(t)=\cfrac{\bs \alpha e^{St}}{\bs \alpha e^{St}\bs e}\) is periodic with period \(\rho = 2\pi/\omega\) where \(\omega=min_i(|\Im(\lambda_i)|)\), \(\lambda_i\) are the eigenvalues of \(\bs{S}\) and \(\Im(z)\) is the imaginary component of a complex number \(z\). We leverage this fact to simplify some numerical integration in Chapter~\ref{sec: construction and modelling}. 
 
 
 %\subsection{Rational arrival processes}
@@ -897,6 +929,196 @@ Collectively, we refer to Theorems~\ref{Fubini} and~\ref{Tonelli} together as th
 
 In the context of probability, the function \(f\) which we are integrating is often positive, so Tonelli's Theorem is all that is required to justify a swap of iterated integrals. 
 
+\section{Discontinuous Galerkin}
+The discontinuous Galerkin (DG) method is a general methodology for numerically approximating solutions to differential equations. The discontinuous Galerkin method is a finite-element method which approximates differential operators by finite dimensional matrices. In this thesis we use the discontinuous Galerkin method to approximate the infinitesimal generator of a fluid queue. Here, we give a very brief introduction to discontinuous Galerkin methods in general and refer the reader to Chapter~\ref{ch:galerkin} for details on the application to fluid queues, and to \cite{nodalDGBook} for more details on the method in general. 
+
+Intuitively, the DG method works by first partitioning the spatial domain into cells, on each cell a basis of (typically polynomial) functions is defined, then the differential equation is projected onto the basis of polynomials. Thus, the differential equation is discretised it two ways, by the partition of space into cells, then by the projection onto a finite dimensional basis. Linking the cells together essentially amounts to defining boundary conditions for each cell. To form the boundary condition for cells adjacent to the boundary we take the boundary condition defined by the problem we are solving and discretise it. For cells in the interior the boundary condition is defined by the solution on the adjacent cell. In the context of conservation laws (which is what we solve in this thesis), the boundary conditions on each cell are known as the \emph{flux}, as they describe the rate, with respect to time, that the conserved quantity flows across the boundaries of the cell. The flux is discretised and is known as the \emph{numerical flux}.
+
+Typically, polynomial functions are used as the basis for the DG method. The main choices to make in defining the scheme are the grid which defines the cells, the order of the polynomial basis, and the choice of numerical flux. 
+
+\cite{nodalDGBook} claim that the first discontinuous Galerkin finite element scheme was developed in \cite{reed1973} where they use the method to solve the first order differential equation
+\[\sigma u + \nabla \cdot (a u) = f,\]
+in a 2-dimensional spatial domain, where \(\sigma\) is a constant, \(a\) is a piecewise constant function, and \(u\) is the unknown. The literature has since expanded and includes (but is not limited to) theory on the convergence rate of the scheme, the choice of \emph{numerical flux} used (we will define this later), the choice of spatial discretisation used, and applications to a range of other problems including higher-order differential equations and to partial differential equations (PDEs) such as non-linear conservation law. The PDE which describes the evolution of the distribution of a fluid queue is a conservation law as probability must be conserved. 
+
+In one dimension, linear conservation laws take the form 
+\begin{align}
+	&\cfrac{\partial u( x, t)}{\partial t} - \cfrac{\partial}{\partial x} ( c(t) u( x, t)) = 0,\,  x \in \Omega, \label{eqn: cons law}
+	\\& u( x,t)= g( x,t),\tag{boundary condition}
+	\\& u( x,0)=f( x).\tag{initial condition}
+\end{align}
+where \(\Omega\) is the region of interest. Here \(u\) is the conserved quantity, which we will refer to as \emph{mass}, but it could really be any conserved quantity. 
+
+To solve conservation laws with the DG method the spatial domain \(\Omega\) is partitioned into cells (intervals) \(\mathcal D_k = [y_k,y_{k+1}]\), \(k=0,...,K-1\). For each cell \(\calD_k\) we choose \(p_k\) linearly independent functions \(\{\phi^r_k\}_{r=1}^{p_k}\), compactly supported on \(\calD_{k}\) (i.e.~\(\phi^r_k(x)=0\) for \(x\notin\calD_{k}\)). Typically, we take \(\phi_k^r(x)\) to be a basis of polynomial functions. The functions \(\{\phi^r_k\}_{r=1}^{p_k}\) span some function space, \(W_k\) say, and further form a basis for this space. It is convenient in this work to take \(\{\phi^r_k\}_{r=1}^{p_k}\) as a basis of \emph{Lagrange interpolating polynomials} defined by the \emph{Gauss-Lobatto quadrature points} \citep{nodalDGBook} (see also Section~\ref{eqn: la}). For the sake of illustration, the reader may think of \(\{\phi^r_k\}_{r=1}^{p_k}\) as the Lagrange polynomials. On each cell \(\mathcal D_{k}\) we approximate 
+\[u(x,t)\approx u_{k}(x,t)=\sum\limits_{r=1}^{p_k}a_{k}^r(t)\phi^r_k(x),\] 
+where \(a_{k}^r(t)\) are yet-to-be-determined time-dependent coefficients. The approximation \(u_{k}\) is referred to as the \textit{local} approximation on cell \(k\), while the \textit{global} approximation is given by \(\sum\limits_{k=0}^{K-1} u_{k}\) on the whole domain \(\Omega\). The whole approximation space is \(\bigoplus\limits_{k\in\mathbb Z} W_k\), the direct sum of the spaces \(W_k\), \(k\in\{0,...,K-1\}\).
+
+First, consider multiplying (\ref{eqn: cons law}) by the row vector \(\bs \phi_k(x)=[\phi_k^1(x),...,\phi_k^{p_k}(x)]\) and integrating by parts over \(\calD_k\),
+\begin{align}
+	&\int_{x\in \calD_k}\cfrac{\partial u(x,t)}{\partial t}\bs\phi_k(x)\wrt x + \int_{x\in \calD_k} c(t) u(x,t)\cfrac{\partial}{\partial x} \bs \phi_k( x)\wrt x - c(t)[u(x,t)\bs \phi_k(x)]_{x=y_k}^{y_{k+1}} = 0.\label{eqn: hadndjj}
+\end{align}
+For a sufficiently large basis of functions, then (\ref{eqn: hadndjj}) is equivalent to the PDE (\ref{eqn: cons law}). The term \(- c(t)[u(x,t)\bs \phi_k(x)]_{x=y_k}^{y_{k+1}}\) is known as the \emph{flux} as it describes the rate at which mass flows into and out of the cell \(\calD_k\). The flux is essentially a boundary condition on the cell \(\calD_k\) and is specified by the value of the solution on the adjoining cells. When \(c(t)\) is positive (negative) then mass flows into (out of) cell \(\calD_k\) at the left-hand boundary and out of (into) cell \(\calD_k\) at the right-hand boundary. Suppose that \(c(t)\) is positive. When \(u\) is continuous, then \(u(y_{k}^-,t)=u(y_k,t),\) where \(y^-\) is the left limit at \(y\), hence the flux into cell \(\calD_k\) in Equation (\ref{eqn: cons law}) is \(c(t)u(y_k^-,t)\bs \phi_k(y_k)\). The flux out of cell \(\calD_k\) is \(c(t)u(y_{k+1}^-,t)\bs \phi_k(y_{k+1})\). Using this, rewrite (\ref{eqn: hadndjj})
+\begin{align}
+	&\int_{x\in \calD_k}\cfrac{\partial u(x,t)}{\partial t}\bs\phi_k(x)\wrt x + \int_{x\in \calD_k} c(t) u(x,t)\cfrac{\partial}{\partial x} \bs \phi_k( x)\wrt x \nonumber
+	\\&\qquad\qquad{}- c(t)[u(y_{k+1}^-,t)\bs \phi_k(y_{k+1}) - u(y_{k}^-,t)\bs \phi_k(y_{k})] = 0.\label{eqn: hadndjjj}
+\end{align}
+We can proceed analogously when \(c(t)\) is negative. 
+
+Upon substituting the approximations \(u_k\) and \(u_{k-1}\) into (\ref{eqn: hadndjjj}) 
+\begin{align}
+	&\int_{x\in \calD_k}\cfrac{\partial\bs a_k(t)}{\partial t}\bs \phi_k(x)\tr{}\bs\phi_k(x)\wrt x + \int_{x\in \calD_k} c(t) \bs a_k(t)\bs\phi_k(x)\tr{}\cfrac{\partial}{\partial x} \bs \phi_k( x)\wrt x \nonumber
+	\\&\qquad\qquad{}- c(t)[\bs a_k(t)\bs\phi_k(y_{k+1}^-)\tr{}\bs \phi_k(y_{k+1}) - \bs a_{k-1}(t)\bs\phi_{k-1}(y_{k}^-)\tr{}\bs \phi_k(y_{k})].\nonumber
+	\\&=\cfrac{\wrt \bs a_k(t)}{\wrt t}\bs M_k + c(t) \bs a_k(t)\bs G_k - c(t)[\bs a_k(t)\bs F_{k,k} - \bs a_{k-1}(t)\bs F_{k-1,k}]\nonumber
+	\\&= 0,\label{eqn: hadndj}
+\end{align}
+where 
+\[\bs M_k := \int_{x\in\calD_k}\boldsymbol \phi_k(x)\tr{}\boldsymbol \phi_k(x)\wrt x,\quad \bs G_k := \int_{x\in\calD_k}\boldsymbol \phi_k(x)\tr{}\cfrac{\wrt}{\wrt x} \boldsymbol \phi_k(x)\wrt x,\]
+\[\bs F_{k,k} := \bs\phi_k(y_{k+1}^-)\tr{}\bs \phi_k(y_{k+1}),\quad \bs F_{k-1,k} := \bs\phi_{k-1}(y_{k}^-)\tr{}\bs \phi_k(y_{k}),\]
+and are known as the \emph{mass}, \emph{stiffness} and \emph{flux} matrices. Thus, the approximation has reduced the problem to a system of ordinary differential equations. One can determine the coefficients \(\bs a_k(t)\), \(k=0,...,K-1\), from the initial condition \(\bs a_k(0)\), \(k=0,...,K-1\), then integrating over time, perhaps numerically. The initial coefficients \(\bs a_k(0)\), \(k=0,...,K-1\), can be found by projecting the initial condition onto the basis of polynomial functions, \(\{\phi_k^r\}_{k,r}\). 
+
+One subtlety is the choice of numerical flux. We arrived at the numerical flux above using a continuity argument. However, the approximate solution \(\sum_{k=0}^{K-1}u_k(x,t)\) is discontinuous at the points \({y_{k}}\). It turns out that the choice of numerical flux is not unique and there are range of values we may choose from. The numerical flux above is known as the \emph{upwind} flux -- we use it throughout this thesis and do not explore others. Other choices which define a discontinuous Galerkin scheme are the basis functions used and the cell geometries. We refer the reader to \citep{nodalDGBook} and reference therein for more details. 
+
+Typically, DG schemes are used to solve physical problems in 2 or 3 dimensions. The cell geometries become more complex in higher dimensions and this complicates matters somewhat, but the underlying principles and intuition is the same. In this thesis we solve problems with one spatial dimension only.
+
+Two properties make the DG scheme a natural choice to solve the problem present in this thesis. High-order accuracy enabled by the use of basis functions to model the solution on each cell, and the cell-based structure of the method with cells related to each other at cell edges only and only to neighbouring cells. Finite difference methods can achieve high-order accuracy, however they are not cell-based, which makes them not a natural choice to solve the problems in this thesis. Finite volume methods are cell-based, but do not have the same high-order accuracy as the DG method. Further, approximating flux terms with greater accuracy in the finite volume method can introduce dependencies between cells which are not neighbours and this creates difficulties for the application in this thesis. 
+
+\subsection{Time-integration schemes}\label{sec: time integration}
+In this thesis we numerically integrate ODEs of the form
+\begin{align}\label{eqn: DG ODE w BCs 3}
+	\cfrac{\wrt}{\wrt t} \boldsymbol a(t)
+	% 
+	= \boldsymbol a(t) \bs Q
+\end{align}
+where \(\bs a(t)\) is a vector of coefficients and \(\bs Q\) a matrix, given an initial condition \(\bs a(0)\). To do so, we employ the strong stability preserving Runge-Kutta (SSPRK) scheme of order 4 with 5 stages \citep{sr2002}. SSPRK methods are a family of Runge-Kutta methods which, to quote Section~5.7 of \cite{nodalDGBook}, ``...can be used with advantage for problems with strong shocks and discontinuities, as they guarantee that no additional oscillations are introduced as part of the time-integration process.'' 
+
+In our context, the SSPRK method with \(s\) stages has the form 
+\begin{align*}
+	&\bs v^{(0)} = \bs a(t),\\
+	%
+	&\bs v^{(\ell)} = \sum_{k=0}^{\ell-1} \alpha_{\ell k}\bs v^{(k)} + h\beta_{\ell k}  \bs v^{(k)}\bs Q,\, \ell = 1,\dots,s,\\
+	%
+	&\bs a(t+h) =\bs v^{(s)},
+\end{align*}
+where \(\alpha_{\ell k}\) and \(\beta_{\ell k}\) are coefficients which define the scheme and \(h\) is the \(t\)-step size. To ensure the stability-preserving property the coefficients \(\alpha_{\ell k}\) and \(\beta_{\ell k}\) are chosen to be positive so that \(\bs v^{(s)}\) is a convex combination of forward-Euler steps. Moreover, the coefficients \(\alpha_{\ell k}\) and \(\beta_{\ell k}\) are optimised so that the allowable \(t\)-step size is as large as possible. The maximum allowable \(t\)-step size is \(h_{RK}\), and we require 
+\[h_{RK} \leq \min_{\ell k}\cfrac{\alpha_{\ell k}}{\beta_{\ell k}}h_E,\]
+where \(h_E\) is the maximum allowable \(t\)-step size for the forward-Euler scheme. 
+
+The \(t\)-step size needs to be chosen to be sufficiently small so that the time integration is stable. Here, for an order \(p\) DG scheme we choose the time step to be less than 
+\[\max_{i\in\calS}|c_i|\min_{r\in{2,...,p+1}}\left(z_{r}-z_{r-1}\right) \cfrac{\min_{k}{\Delta}_k}{2}\]
+where \(z_{r-1}\leq z_r\), \(z_1=-1\), \(z_{p+1}=1\) and \(z_r, r=2,...,p,\) are the \(p-1\) zeros of the first derivative of \(P_{p}(x)\), the order \(p\) Legendre polynomial. This follows advice from \cite{nodalDGBook}. 
+
+\subsection{Slope limiters}\label{sec: slope limiting}
+A well-know problem with DG schemes is that, in the presence of steep gradients or discontinuities, spurious oscillations in the approximate solution can occur and positivity is not guaranteed (see \cite{nodalDGBook}~Section~5.6, and \cite{koltai2011}~Section~3.3, for example). To rectify this, in some contexts, slope limiting can be used (see \cite{c99}, or \cite{nodalDGBook},~Section~5.6.2 and references therein). Slope limiting alters the DG approximation in regions where oscillations are detected to ensure non-oscillatory by reducing the order of the approximation to linear and limiting the gradient of the approximation in these regions. However, limiting does not distinguish between natural oscillations, which are a fundamental feature of the solution, and spurious oscillations, which are caused by the approximation scheme. As a result, the limiter may unnecessarily reduce the accuracy of the scheme in the presence of natural oscillations (see \citep{nodalDGBook},~Example~5.8). Furthermore, slope limiting adds an extra computational cost on top of the approximation scheme and means that the resultant approximation to certain operators are no longer linear.
+
+We now describe a simple slope limiter known as the \emph{Generalised MUSCL} scheme \citep{c99} (see also \citep{nodalDGBook},~Section~5.6.1). Define the \emph{minmod} function 
+\begin{align*}
+	m(a_1,a_2,a_3)=\begin{cases}
+		s\min_{i\in\{1,2,3\}}|a_i|, & |s|=1, \\
+		0, &\mbox{otherwise},
+	\end{cases}
+\end{align*}
+where \(s=\frac{1}{3}\sum\limits_{i=1}^{3}\mbox{sign}(a_i)\). When all three arguments, \(a_1,\,a_2\) and \(a_3\) have the same sign, the minmod function returns the smallest of the three arguments with the correct sign, otherwise the signs of the three arguments differ and the minmod function returns zero. In the context of DG the three arguments \(a_1,\,a_2\) and \(a_3\) are the estimates of the average gradient of the approximate solution near a given cell. When the signs of \(a_1,\,a_2\) and \(a_3\) differ, this suggests an oscillation in the approximate solution. 
+
+Now, define \(\overline u_{k}\) as the average value of the approximate solution on cell \(k\), then the slope limited solution on cell \(k\) is the linear approximant 
+\begin{align*}
+	\Pi_{k}^{lim}(u_k)=\overline u_{k} + (x-\overline y_k)m\left(\Pi^1_{\partial x}u_k,\cfrac{\overline u_{k+1}-\overline u_{k}}{\Delta_k},\cfrac{\overline u_{k}-\overline u_{k-1}}{\Delta_k}\right),
+\end{align*}
+where \(\Pi^1_{\partial x}u_k\) is the slope of the linear projection of \(u_k\) on cell \(k\) and \(\overline y_k=(y_k+y_{k+1})/2\) is the centre of the \(k\)th cell. 
+
+In non-oscillatory regions of the solution the slope limiter is unnecessary and reduces accuracy, so we only apply the limiter to cells \(k\) where oscillations are detected. To determine which cells need limiting we compute 
+\begin{align*}
+	v_k^L &:= \overline{u}_{k} - m(\overline{u}_{k} - {u}_{k}^L,\overline{u}_{k}-\overline{u}_{k-1},\overline{u}_{k+1}-\overline{u}_{k}),
+	\\v_k^R &:= \overline{u}_{k} + m(\overline{u}_{k} - {u}_{k}^R,\overline{u}_{k}-\overline{u}_{k-1},\overline{u}_{k+1}-\overline{u}_{k}),
+\end{align*}
+where \({u}_{k}^L\) and \({u}_{k}^R\) are the values of the approximate solution on cell \(k\) evaluated at the left-hand and right-hand edges of the cell. We apply the slope limiter to cell \(k\) if \(v_k^L\neq u_k^L\) or \(v_k^R\neq u_k^R\), otherwise the approximation on cell \(k\) is left unaltered. 
+
+% Notice that the process of limiting is essentially a post-processing of the approximate solution after applying 
+
+% In the context of approximating the first return operator of a fluid-fluid queue there is no direct equivalent of slope limiting, other than, perhaps, to re-compute the solution with constant basis function if a higher-order approximation happens to be oscillatory, but this is a post-hoc solution which would essentially require computing two solutions. 
+
+\subsection{Slope limiters and time integration}\label{subsec: slope lim and int}
+To use slope limiters within the SSPRK scheme we first project the initial condition on to \(W\), the set of polynomial basis functions, and apply the slope limiter to the projection to determine the initial coefficients \(\bs a(0)\). To find the coefficients for the approximate solution to the transient distribution at time \(t_0\) we take the (limited) initial condition \(\bs a(0)\) and evolve it forward in time until \(t_0\) via numerical integration of the differential equation~(\ref{eqn: DG ODE w BCs 3}). At each stage of the time-integration we apply the slope limiter, i.e.~the scheme above with a slope limiter is 
+\begin{align*}
+	&\bs v^{(0)} = \bs a(t),\\
+	%
+	&\bs v^{(\ell)} = \Pi^{lim}\left(\sum_{k=0}^{\ell-1} \alpha_{\ell k}\bs v^{(k)} + h\beta_{\ell k}  \bs v^{(k)}\bs Q\right),\, \ell = 1,\dots,s,\\
+	%
+	&\bs a(t+h) =\bs v^{(s)},
+\end{align*} 
+where \(\Pi^{lim}\) is the slope limiter function which determines on which cells the solution needs limiting, and if so, applies the limiter \(\Pi_k^{lim}\). 
+
+We refer to this (vanilla) application of a limiter to the DG scheme as the DG-lim scheme. 
+
+\paragraph{Consequences of slope limiting} We have already mentioned that the Generalised MUSCL slope limiter reduces the order to linear in regions where oscillatory solutions are detected. When slope limiting is used in conjunction with a time-integration scheme the reduction in order may not be local in time and may persist past the time when the limiter first detected oscillations. For example, consider a problem with an initial condition which introduces oscillations into the numerical approximation. If the slope limiter is applied to the initial condition then, in the region around the oscillations, the approximation to the initial condition will be linear. Even if the slope limiter is not applied (or not needed) after this point, the initial condition has still been altered, perhaps significantly, from the original approximation and this can affect the accuracy of transient approximations. This is not to say that the slope-limited-regions of the approximation will \emph{always} remain linear. When no oscillations are detected, the DG scheme can use the full power of the high-order polynomial basis to approximate the solution, and this is one of the advantages of generalised slope limiter described. Instead, we want to point out that once the limiter is applied at one time point, the approximation becomes linear which will affect the accuracy of subsequent computations. 
+
+\subsection{Another slope limiting scheme}\label{sec: anoth pos pres}
+The advantage of the approach above is that, in areas of the approximation where the solution is smooth, then the high-order accuracy of the method can be retained, while maintaining positivity where necessary. However, if the problem at hand is dominated by discontinuities and/or if there are no regions of the solution of interest which are smooth, then there is no real advantage in the approach above as the limiter will reduce the approximate solution to linear in all regions of interest. Hence, we may as well just use a linear scheme and save on some computation. 
+
+Perhaps a better approach would be to use a linear scheme with a smaller cell width such that the computational work remains approximately the same. For example, for a DG scheme with \(2p\) basis functions on a cell, \(\mathcal D_k\), of width \(\Delta\), say, we construct block matrices of dimension \(2p\times 2p\) (i.e.~the mass, stiffness and flux matrices, \(\bs M_k\), \(\bs G_k\), and \(\bs F^{k\ell}\), respectively) and compute the approximate solution using these matrices. Alternatively, consider breaking the cell, \(\mathcal D_k\), up into \(p\) sub-cells of width \(\Delta/p\) and using a DG scheme with \(2\) basis functions on each sub-cell (i.e.~a linear basis on each cell). On each of the \(p\) sub-cells we construct block matrices of size \(2\times 2\). To approximate the solution on the original interval \(\mathcal D_k\) we form the \(p\) approximations on each sub-cell into larger matrices which are of dimension \(2p\times 2p\), and then use in the same way as before. Thus, the scheme with \(2p\) basis functions on the cell \(\calD_k\), and the scheme with a 2 basis functions on each of the \(p\) sub-cell have approximately the same computational cost (the latter scheme results in a sparser matrix). 
+
+If we know \emph{a priori} that we will apply the slope limiter to cell \(\calD_k\), then intuitively we suspect that the latter scheme may be far more accurate; it will approximate the solution on \(\calD_k\) by a piecewise linear function with \(p\) pieces, whereas the DG scheme with \(2p\) basis functions on cell \(\calD_k\) will, after limiting, represent the solution as a single linear function on \(\calD_k\). 
+
+We refer to this scheme as the DG-lin-lim scheme, as it is a linear DG scheme with a limiter.
+
+\subsection{Briefly, on accuracy}
+As a rough guide on accuracy we now paraphrase some known results on the accuracy of the DG method from \cite[Sections~5.5,~5.8]{nodalDGBook} for a similar kind of problem to the one under study here. For certain scalar conservation-law problems, under certain regularity conditions on the continuity and bounded-ness of the solution and its derivatives, on the grid used, on the flux function, and on the numerical flux, then one can expect accuracy proportional to \(\Delta^{p}\) for the DG approximation of the solution, provided the DG scheme uses a polynomial basis with \(p\) functions on each cell, a regular grid of \(\Delta = \max \Delta_k\) is used and a second-order SSPRK method is used to integrate over time \citep[Sections~5.5,~5.8, and references therein]{nodalDGBook}. Applying this result to the DG-lin-lim scheme in Section~\ref{sec: anoth pos pres}, we might expect accuracy of order \((\Delta/p)^2\) under the same regularity conditions.
+
+% To quote Section~5.7 of \cite{nodalDGBook} SSPRK methods ``can be used with advantage for problems with strong shocks and discontinuities, as they guarantee that no additional oscillations are introduced as part of the time-integration process.''
+
+% why the MUSCL limiter?
+%   it requires no tuning and guarentees non-negativity
+%   some other positivity-preserving methods require tuning and can still produce negative results if not tuned properly
+%   ^ same goes for filtering
+
+% Consider the partial differential equation 
+% \[\cfrac{\partial f}{\partial t}+\cfrac{\partial c(f)}{\partial x}=0,\, x\in[a,b],\]
+% where \(c\) is some function, and subject to appropriate initial, \(f(x,0)=f_0(x)\), and boundary conditions, \(f(a,t)=g(t),\) assuming \(c\geq 0\). The method first supposes that the solution is of the form \(f(x,t)\) translates the above differential equation, which is in \emph{strong form}, into a \emph{weak form} by multiplying by a test function \(\psi\), integrating with respect to \(x\) and applying integration by parts; 
+% \begin{align*}
+% 	% &\int_{x=a}^b\cfrac{\partial f(x)}{\partial t}\psi(x)\wrt x+\int_{x=a}^b\cfrac{\partial c(f)}{\partial x}\psi(x)\wrt x
+% 	\int_{x=a}^b\cfrac{\partial f(x)}{\partial t}\psi(x)\wrt x+\int_{x=a}^b c(f)\cfrac{\wrt\psi(x)}{\wrt x}\wrt x - [c(f(x,t))]_{x=a}^b = 0. 
+% \end{align*}
+% The weak form 
+
+\section{Sundry mathematical concepts}\label{eqn: la}
+\subsection*{Polynomials}
+In this thesis, we use the discontinuous Galerkin method to approximate the generator, a differential operator, of a fluid queue. The discontinuous Galerkin method involves projecting the operator equation onto a basis of functions, typically polynomials. A convenient basis with which to work is the interpolating Lagrange polynomials. The order \(p-1\) Lagrange polynomials are defined by a set of points, \(\xi_i, i=1,...,p\), (the \(\xi_i\)'s must be distinct), and are given by 
+\[\ell_i(r)=\prod_{\substack{j=1\\j\neq i}}^p \cfrac{r-\xi_j}{\xi_i-\xi_j},\, i=1,...,p.\]
+A convenient property of the Lagrange polynomials is 
+\[l_i(\xi_j)=\begin{cases}1 & \mbox{ if } i=j, \\ 0 & \mbox{ otherwise.} \end{cases}\]
+
+Sometimes it is more convenient to work with \emph{orthogonal} polynomials. For example, the Legendre polynomials, which can be defined recursively by 
+\begin{align*}
+	P_0(x)&=1,
+	\\P_1(x)&=x, 
+	\\(n+1)P_{n+1}(x)&=(2n+1)xP_n(x)-nP_{n-1}(x),
+\end{align*}
+and are orthogonal on \([-1,1]\). 
+
+The zeros of \((1-x^2)P_n'(x)\) define the \emph{Legendre-Gauss-Lobatto} points, which are used, among other things, for numerically approximating integrals via quadrature.
+
+\subsection*{Numerical integration}
+To numerically approximate integrals in the discontinuous Galerkin schemes in this thesis we can use Gauss-Lobatto quadrature. Consider the integral of some function \(f\) over the interval \([-1,1]\). Quadrature approximates the integral by evaluating the function on a set of points, \(x_i,\, i=1,...,p\), and computing the weighted sum
+\[\int_{-1}^1f(x)\wrt x \approx \sum_{i=1}^p f(x_i)w_i,\]
+where \(w_i\) are weights. There are various quadrature schemes which one can use. 
+
+For the discontinuous Galerkin method, Gauss-Lobatto quadrature is convenient as in both we evaluate the function at the end points of the interval. For Gauss-Lobatto quadrature, the nodes, \(x_i, i=1,...,p\) is the zero of \((1-x^2)P_n'(x)\) where \(P_n\) is the \(n\)th Legendre polynomial, the weights are given by 
+\begin{align*}
+	w_1&=1,
+	\\w_i&=\cfrac{2}{n(n-1)[P_{n-1}(x_i)]^2}, \, i\neq 1, p,
+	\\w_p&=1.
+\end{align*}
+Gauss-Lobatto quadrature is accurate for polynomials up to degree \(2p-3\). An integral over the interval \([a,b]\) can be approximated by 
+\[\int_{a}^bf(x)\wrt x \approx \cfrac{b-a}{2}\sum_{i=1}^p f\left(\cfrac{b-a}{2}x_i+\cfrac{a+b}{2}\right)w_i.\]
+
+We also use a trapezoidal integration rule at times. Consider the integral \(\int_{a}^bf(x)\wrt x\). A trapezoidal rule with \(p\) evenly spaced grid-points approximates the integral via 
+\[\int_{a}^bf(x)\wrt x \approx \sum_{i=2}^p \cfrac{f(x_{i-1}+f(x_i))}{2}\Delta,\]
+where \(x_i=a+(i-1)\Delta\), \(i=1,...,p\), and \(\Delta = \cfrac{b-a}{p-1}.\) 
+
+\subsection*{Measuring the difference between distributions}
+In the numerical investigations in this thesis we evaluate approximation schemes by comparing the resulting approximations they produce with a ground truth. For comparing distributions we use \(L^p\) \emph{norms} and the Kolmogorov-Smirnov distance. The \(L^p\) norm of a function \(f\) is given by 
+\[\left(\int |f(x)|^p\wrt x\right)^{1/p}.\]
+The Kolmogorov-Smirnov distance between two distribution functions, \(F_1\), \(F_2\) is 
+\[\sup_{x}|F_1(x)-F_2(x)|.\]
+
 \section{More on relevant literature \& the context of the thesis} 
 In the process of introducing the technical concepts we have already covered some the relevant literature. Here, we provide some more context for the contributions of this thesis. The focus of this thesis is on developing numerical approximations of fluid queues such that we may approximate the operator-analytic analysis of fluid-fluid queues form \cite{bo2014}. %The analysis of fluid-fluid queues in \cite{bo2014} relies on a certain transient analysis of the driving process, which is a fluid queue.
 
@@ -904,7 +1126,7 @@ In the process of introducing the technical concepts we have already covered som
 
 Returning now to \cite{bo2014} which introduces the fluid-fluid queue in its generality and derives operator-analytic expressions for the first-return operator of the second fluid and the joint limiting distribution. Their analysis is inspired by the analysis of classical fluid queues in \cite{bean2005} whereby matrix-analytic expressions for the fluid level are derived in terms of the generator of the driving process. The driving process of a fluid-fluid queue is a fluid queue. The analysis of \cite{bo2014} requires specific expressions about the transient distribution of the fluid queue which cannot, in general, be obtained from the existing literature.
 
-\paragraph{Transient analysis of fluid queues} The analysis of fluid queues can be classified broadly into two approaches, matrix-analytic methods (for example, \cite{ajr2005,ar2003,ar2004,bean2005b,bean2005,bot08,bean2009,dasilva2005,latouche2018}) and differential equations based approaches (such as \cite{anick1982,kk1995,blnos2022}). Often, it is the limiting distribution of the fluid queue which is of interest. In the context of the analysis of fluid-fluid queue as in \cite{bo2014}, however, we require information about the transient distribution of the fluid queue. Specifically, on the event that the second fluid is non-decreasing (non-increasing), we need to know the amount of fluid to have flowed into or out of the second level process, the time (or Laplace transform of time) taken to do so, and the position of the first fluid and phase at the time when the in-out process of the second fluid reaches a given height. Moreover, we want the resulting expressions to be readily computable. None of the existing literature gives exact expressions which have all the aforementioned properties. Even if we consider a simpler model where the rates \(r_i(x)\) are constant on intervals \(\calD_{k,i}\), then the existing results are not satisfactory. Perhaps the closest is the work of \cite{bean2009} who compute expressions for the Laplace transform with respect to the time take for the fluid to exit an interval, \(\calD_{k,i}\), say, on the even that fluid exits in some phase \(j\), given it started within the interval at some point \(x_0\) and in some phase \(i\). These expressions could perhaps be used to analyse a fluid-fluid queue where the rates \(r_i(x)=r_k\) for all \(i\in\calS\), and \(x\in\calD_{k,i}\). Even with this simplified fluid-fluid queue, it is unclear how we could use these expressions to compute the position of the second fluid. 
+\paragraph{Transient analysis of fluid queues} The analysis of fluid queues can be classified broadly into three approaches, matrix-analytic methods (for example, \cite{ajr2005,ar2003,ar2004,bean2005b,bean2005,bot08,bean2009,dasilva2005,latouche2018}), differential equations based approaches (such as \cite{anick1982,kk1995,blnos2022}) and analyses based on recurrence relations (for example, \cite{sericola1998,sericola1999,sericola2001}). Often, it is the limiting distribution of the fluid queue which is of interest. In the context of the analysis of fluid-fluid queue as in \cite{bo2014}, however, we require information about the transient distribution of the fluid queue. Specifically, on the event that the second fluid is non-decreasing (non-increasing), we need to know the amount of fluid to have flowed into or out of the second level process, the time (or Laplace transform of time) taken to do so, and the position of the first fluid and phase at the time when the in-out process of the second fluid reaches a given height. Moreover, we want the resulting expressions to be readily computable. None of the existing literature gives exact expressions which have all the aforementioned properties. Even if we consider a simpler model where the rates \(r_i(x)\) are constant on intervals \(\calD_{k,i}\), then the existing results are not satisfactory. Perhaps the closest is the work of \cite{bean2009} who compute expressions for the Laplace transform with respect to the time take for the fluid to exit an interval, \(\calD_{k,i}\), say, on the even that fluid exits in some phase \(j\), given it started within the interval at some point \(x_0\) and in some phase \(i\). These expressions could perhaps be used to analyse a fluid-fluid queue where the rates \(r_i(x)=r_k\) for all \(i\in\calS\), and \(x\in\calD_{k,i}\). Even with this simplified fluid-fluid queue, it is unclear how we could use these expressions to compute the position of the second fluid. 
 
 An approximate method which is appropriate for the analysis of fluid-fluid queues has been proposed. The method of \cite{bo2013}, which we refer to as the uniformisation method as it is derived via uniformisation arguments, approximates a fluid queue by a discrete-time Markov chain. \cite{bo2013} approximate the fluid queue \(\{(\dot X(t),\varphi(t))\}\) by the quasi-birth-and-death-process \(\{(L(t),\varphi(t))\}\). In both processes, \(\{\varphi(t)\}\) is the same so there is no approximation in phase process. The level process \(\{L(t)\}\) approximates the level process \(\{\dot X(t)\}\). Specifically, \cite{bo2013} derive the level process such that the event that \(L(t)=k\) and \(\varphi(t)\) approximates the event \(\dot X(t)\in \calD_{k,i}\) and \(\varphi(t)=i\), where all the levels \(\{\calD_{k,i}\}_{k}\) have the same width, \(\Delta=y_{k+1}-y_k\). By considering arbitrarily small \(\Delta\), they prove that the distribution of the quasi-birth-and-death-process \(\{(L(t),\varphi(t))\}\) can be made arbitrarily close to the distribution of the fluid queue \(\{(\dot X(t),\varphi(t))\}\). Replacing the driving process of the fluid-fluid queue, \(\{(\dot X(t),\varphi(t))\}\), by the approximation \(\{(L(t),\varphi(t))\}\) and approximating the rate functions \(r_i(x)\) by constants on each interval \(\calD_k\) yields a classical fluid queue which, intuitively, approximates the fluid-fluid queue. \cite{bo2013} numerically investigate the ability of their approximation to approximate \(\bs \Psi_X\). To date, the uniformisation approximation has not been applied in the context of fluid-fluid queues, and its ability to approximate transient quantities of fluid queues (other than the aforementioned investigation of \(\bs\Psi_X\)) has not been well studied. In Chapter~\ref{sec: numerics} we investigate the numerical performance of the uniformisation approximation and show that it is effective. However, of the methods considered in Chapter~\ref{sec: numerics}, its performance is the poorest and its rate of convergence is the slowest for the numerical experiments we conduct. Though we should not rush to discount the uniformisation approximation. Due to the stochastic interpretation of the uniformisation approximation as a QBD, approximations to probabilities are guaranteed to be non-negative, and we can employ probabilistic techniques to analyse the approximation (as \cite{bo2013} did). Moreover, its simplicity lends itself more easily to mathematical analysis. Further, when the uniformisation scheme is used in the context of approximating a fluid-fluid queue the resultant approximation is itself a fluid queue, and this stochastic interpretation could aid in the analysis of this approximation. 
 
