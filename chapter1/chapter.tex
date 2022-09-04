@@ -742,193 +742,6 @@ The operator ${\bbpi}^{m}(y)$, for $m \in \{+,-,0\}$ and $y > 0$, and the probab
 
 At this point we reiterate that Equations~(\ref{11})-(\ref{14}) are operator equations and are only amenable to numerical evaluation in the simplest of cases. Sources of this intractability come from, for example, the need to find the inverse operator \(( - \mathbb B^{00})^{-1}\), and the need to find the solution, \(\mathbb \Psi(s)\), of the operator equation in Theorem~\ref{theo:Psi}. There is also the complexity of the partition of the operators defined by the sets \(\mathcal F_{i}^m,\, i\in\calS,\,m\in\{+,-,0\}\). Therefore, there is the need for approximation schemes such as those presented in this thesis. 
 
-\section{Quasi-birth-and-death processes with rational arrival process components}\label{qbd-rap intro}
-One of the approximation schemes we develop in this thesis is based on a suitably defined quasi-birth-and-death process with rational-arrival-process components (QBD-RAP). QBD-RAP processes are built from matrix-exponentially distributed inter-event times. We now introduce the class of matrix exponential distributions and recount some important properties before introducing the QBD-RAP. 
-
-\subsection{Matrix exponential distributions}
-Here we recount some facts about matrix exponential distributions. See \cite{MEinAP} for a more detailed exposition. A random variable, \(Z\), is said to have a matrix exponential distribution if it has a distribution function of the form \(1-\bs \alpha e^{\bs Sx}(-\bs S)^{-1}\bs s\), where \(\bs \alpha\) is a \(1\times p\) \emph{initial vector}, \(\bs S\) a \(p\times p\) matrix, and \(\bs s\) a \(p\times 1\) \emph{closing vector}, and \(\displaystyle e^{\bs S x} := \sum_{n=0}^\infty \cfrac{\left(\bs Sx\right)^n}{n!}\) is the matrix exponential. The density function of \(Z\) is given by \(f_Z(x) = \bs\alpha e^{\bs S x}\bs s\). The only restrictions on the parameters \((\bs \alpha, \bs S, \bs s)\) are that \(\bs \alpha e^{\bs S x} \bs s\) be a valid density function, i.e.~\(\bs \alpha e^{\bs S x} \bs s\geq 0,\) for all \(x\geq 0\) and \(\lim_{x\to\infty} 1-\bs \alpha e^{\bs Sx}(-\bs S)^{-1}\bs s = 1.\) In general, in \cite{MEinAP}, there is the possibility of an \emph{atom} (a point mass) at 0, but here we do not consider this possibility. The condition that \(\bs \alpha e^{\bs Sx}\bs s\) be a valid density imposes some properties on representations \((\bs \alpha, \bs S, \bs s)\). However, in general there is no way to determine whether, a given triplet \((\bs \alpha, \bs S, \bs s)\) is a representation of a matrix exponential distribution, or not. Nonetheless, some properties of a triplet \((\bs \alpha, \bs S, \bs s)\) are known, such as the following, which is used in the characterisation of QBD-RAPs. 
-\begin{thm}[Theorem 4.1.3, \cite{MEinAP}]
-	The density function of a matrix exponential distribution with representation \((\bs\alpha, \bs S, \bs s)\) can be expressed in terms of real-valued constants as 
-	\begin{align}
-		\psi(x)&=\sum_{j=1}^{m_1} \sum_{k=1}^{p_j} c_{jk} \cfrac{x^{k-1}}{(k-1)!} e^{\mu_jx} + \sum_{j=1}^{m+2}\sum_{k=1}^{q_j} d_{jk}\cfrac{x^{k-1}}{(k-1)!}e^{\eta_jx}\cos(\sigma_jx) \nonumber 
-		\\&\quad{}+ \sum_{j=1}^{m_2}\sum_{k=1}^{q_j}e_{jk}\cfrac{x^{k-1}}{(k-1)!}e^{\eta_jx}\sin(\sigma_jx), \label{eqn: spec}
-	\end{align}
-	for integers \(m_1,\,m_2,\,p_j,\) and \(q_j\) and some real constants \(c_{jk},\,d_{jk},\,e_{jk},\,\mu_j,\,\eta_j,\) and \(\sigma_j\). Here \(\mu_j,\, j=1,\dots,m_1\) are the real eigenvalues of \(\bs S\), while \(\eta_j+i\sigma_j, \, \eta_j-i\sigma_j,\, j=1,\dots,m_2\) denote its complex eigenvalues, which come in conjugate pairs. Thus, \(m_1+2m_2\) is the total number of eigenvalues, while the dimension of the representation is given by \(\displaystyle p=\sum_{j=1}^{m+1}p_j + 2\sum_{j=1}^{m_2}q_j\). 
-\end{thm}
-\begin{thm}[Theorem 4.1.4, \cite{MEinAP}]\label{thm: 4.1.4}
-	Consider the non-vanishing terms of the matrix exponential density (\ref{eqn: spec}), \emph{i.e.}, the terms for which \(c_{jk}\neq 0,\,d_{jk}\neq 0,\) or \(e_{jk}\neq 0\). Among the corresponding eigenvalues \(\lambda_j\), there is a real dominating eigenvalue \(\kappa\), say. That is, \(\kappa\) is real, \(\kappa \geq Re(\lambda_j)\) for all \(j\), and the multiplicity of \(\kappa\) is at least the multiplicity of every other eigenvalue with real part \(\kappa\).
-\end{thm}
-\begin{cor}[Corollary 4.1.5, \cite{MEinAP}]
-If \((\bs \alpha, \bs S, \bs s)\) is a representation for a matrix exponential distribution, then \(\bs S\) has a real dominating eigenvalues.
-\end{cor}
-\begin{thm}[Theorem 4.1.6, \cite{MEinAP}]
-	Let \(Z\) be a matrix-exponentially distributed random variable with density (\ref{eqn: spec}). Then the dominant real eigenvalue \(\kappa\) of Theorem~\ref{thm: 4.1.4} is strictly negative. 
-\end{thm}
-We define \(dev(\bs S)\) to be the real dominating eigenvalue of \(\bs S\), that is \(dev(\bs S)=\kappa\) in Theorem~\ref{thm: 4.1.4}.
-
-The class of matrix exponential distributions is characterised as the class of probability distributions which have a rational Laplace transform. That is, \(\displaystyle \int_{x=0}^\infty e^{-\lambda x}\bs \alpha e^{\bs S x}\bs s \wrt x\) is a ratio of two polynomial functions in \(\lambda\). Matrix exponential distributions are an extension of Phase-type distributions, where for the latter, \(\bs S\) must be a sub-generator matrix of a CTMC, \(\bs s = -\bs S\bs e\) where \(\bs e\) is a \(1\times p\) vector of ones, and \(\bs \alpha\) is a discrete probability distribution.  
-
-A \emph{representation} of a matrix exponential distribution is a triplet \((\bs \alpha, \bs S, \bs s)\), and we write \(Z\sim ME(\bs \alpha, \bs S, \bs s)\) to denote that \(Z\) has a matrix exponential distribution with this representation. The order of the representation is the dimension of the square matrix \(\bs S\), i.e.~if \(\bs S\) is \(p\times p\), then the matrix exponential distribution is said to be of order \(p\). Representations of matrix-exponential distributions are not unique \citep{MEinAP}. A representation is called \emph{minimal} when \(\bs S\) has the smallest possible dimension. Throughout this work, we assume that the representation of any matrix exponential distribution is minimal. Let \(\bs e_i\) be a vector with a 1 in the \(i\)th position and zeros elsewhere. We assume that \(\bs s = -\bs S\bs e\), and that \((\bs e_i,\bs S,\bs s)\) for \(i=1,\dots,p\) are representations of matrix exponential distributions. It is always possible to find such a representation \cite[Theorem 4.5.17, Corollary 4.5.18]{MEinAP}. As such, we abbreviate our notation \(Z\sim ME(\bs \alpha, \bs S, \bs s)\) to \(Z\sim ME(\bs \alpha, \bs S)\). Further, given \(\bs s=-\bs S\bs e\) then observe that  \(\displaystyle \int_{x=0}^\infty e^{\bs S x} \bs s\wrt x = (-\bs S)^{-1}\bs s= \bs e\). 
-
-For a given \(p\times p\) matrix \(\bs S\), denote by \(\mathcal{A}\subset \mathbb R^p\) the space of all possible vectors \(\bs a\) such that \((\bs a, \bs S)\) is a valid representation of a (possibility defective) matrix exponential distribution. %By CITE it is known that \(\mathcal{E}\) is a closed, bounded, convex, affine subspace of \(\mathbb R^p\). 
-
-\subsubsection*{Concentrated matrix exponential distributions}
-Recently, the class of \emph{concentrated matrix exponential distributions} (CMEs) has been investigated \citep{ert2006,hstz2016,ert2006,hht2020,mt2021}. As the name suggests, concentrated matrix exponential distributions are matrix exponential distributions with a very low coefficient of variation (variance relative to the mean). As the order, \(p\), of the representation increases, the variance of concentrated matrix exponential distributions decreases at rate approximately \(\mathcal O(1/p^2)\). For comparison, the variance of an Erlang distribution, the most concentrated Phase-type distribution, decreases at rate \(\mathcal O(1/p)\) as the order \(p\) increases \citep{as1987}. In this thesis we use CMEs to approximate deterministic events. For a given order, concentrated matrix exponential distributions have a much lower coefficient of variation than any phase type of the same order, and therefore a better ability to model determinism. 
-
-The class of concentrated matrix exponential distributions (CMEs) found numerically in \citep{hht2020} and computationally efficient expressions for the density and moments of CMEs are provided in \citep{hht2020}. 
-
-CMEs exist for all orders, however, in our computations we only use CMEs with odd order. The justification for considering representations of odd orders only is that the variance of CME distributions of orders \(2p\) and \(2p-1\) are relatively similar and therefore have similar abilities to represent the delta function \citep{hht2020}. Hence, if we construct an approximation with a representation of order \(2p\) we expect it to perform only marginally better than an approximation constructed with representations of order \(2p-1\). However, the computational cost of the latter is lower, so we opt for the order \(2p-1\) representation. 
-
-From the definition of the class of CME distributions, for a given CME with odd order, \(p\), and representation \((\bs\alpha,\bs S)\), the matrix \(\bs S\) has one real eigenvalue, and \(p-1\) complex eigenvalues and all eigenvalues have the same real part \cite{hht2020}. 
-
-For CMEs considered here, the vector function \(\bs k(t)=\cfrac{\bs \alpha e^{St}}{\bs \alpha e^{St}\bs e}\) is periodic with period \(\rho = 2\pi/\omega\) where \(\omega=min_i(|\Im(\lambda_i)|)\), \(\lambda_i\) are the eigenvalues of \(\bs{S}\) and \(\Im(z)\) is the imaginary component of a complex number \(z\). We leverage this fact to simplify some numerical integration in Chapter~\ref{sec: construction and modelling}. 
-
-
-%\subsection{Rational arrival processes}
-%Let \(N\) be a simple point process, with event time \(Y_0=0<Y_1<Y_2<\cdot\). Let \(\{N(t)\}_{t\geq0}\) be the right-continuous counting process associated with \(N\); \(N(t)\) returns the number of events by time \(t\). Denote by \(f_{N,n}(y_1,\dots,y_n)\) the joint density of \(Y_1, Y_2-Y_1, \dots,Y_n-Y_{n-1}\), the first \(n\) inter-arrival times. For a matrix \(\bs B\) let \(dev(\bs B)\) denote the dominant eigenvalue of \(\bs B\) (the one with maximal real part). Theorem 1.1 of Asmussen and Bladt CITE states that the point process \(N\) is a RAP if there exists matrices \(\bs S\), \(\bs D\), a row vector \(\bs\alpha\), and a column vector \(\bs s\) such that \(dev(\bs S)<1\), \(dev(\bs S+\bs D)=0\), \((\bs S+\bs D)\bs e=0,\) and 
-%\[f_{N,n}(y_1,\dots,y_n) = \bs \alpha e^{\bs Sy_1} \bs D e^{\bs Sy_1} \bs D \dots e^{\bs Sy_n} \bs s.\]
-%Here \(\bs s\) can be taken to be \(\bs D e\). The \(n\)th inter-arrival, \(T_n-T_{n-1}\), has a matrix exponential distribution with density \(\bs \alpha(-\bs S\bs D )^{n-1}e^{\bs S y_n}\bs s\). Denote such a process \(N \sim RAP(\bs \alpha, \bs S, \bs D)\). 
-%
-%Asmussen and Bladt CITE, Corollary 2.2, show that associated with the RAP is a row-vector-valued \emph{orbit} process, \(\{\bs A(t)\}_{t\geq0},\), 
-%\[\bs A(t) = \cfrac{\bs \alpha\left( \prod_{i=1}^{N(t)} e^{\bs S(Y_{i}-Y_{i-1})}\bs S\right)e^{\bs S t-Y_{N(t)}}}{\bs \alpha\left( \prod_{i=1}^{N(t)} e^{\bs S(Y_{i}-Y_{i-1})}\bs S\right)e^{\bs S( t-Y_{N(t)})}\bs e}.\]
-%Thus, \(\{\bs A(t)\}\) is a piecewise-deterministic Markov process where, in between jumps \(\{\bs A(t)\}\) according to 
-%\[\bs A(t) = \cfrac{\bs A(Y_{N(t)}^-)e^{\bs S(t-Y_{N(t)})}}{\bs A(Y_{N(t)}^-)e^{\bs S(t-Y_{N(t)})}\bs e},\]
-%where \(\bs A(Y_{N(t)}^-) = \lim_{u\to 0^+}\bs A(Y_{N(t)}-u)\). The process \(\{\bs A(t)\}\) jumps at event times of \(N\). At time \(t\) the intensity with which \(\{\bs A(t)\}\) has a jump is \(\bs A(t) \bs D\bs e\), and upon a jump at time \(t\), the new position of the orbit is \(\bs A(t) = \bs A(t^-) \bs D/\bs A(t^-) \bs D\bs e\). 
-%
-%RAPs are an extension of Markovian arrival processes (MAPs) to include matrix-exponential inter-arrival times. For MAPs, the vector \(\bs A(t)\) is a vector of posterior probabilities of a continuous-time Markov chain. 
-%
-%Intuitively, \(\bs A(t)\) encodes all of the information about the jump times of the RAP up to time \(t\). Let \(\mathcal F_{t}\) be the \(\sigma\)-algebra generated by \(N(u), u\in[0,t]\). Then \(N\mid \mathcal F_t \equiv N\mid \bs A(t) \sim ME(\bs A(t), \bs S, \bs S)\). In words, the future of the point process after time \(t\) given all of the information about the process up to and including time \(t\), is distributed as a RAP with initial vector \(\bs A(t)\). 
-
-\subsection{QBD-RAPs}\label{sec: qbd-rap}
-% As RAPs are an extension of Markovian arrival processes to include matrix-exponential inter-arrival times, QBD-RAPs are extensions of QBDs to include matrix-exponential times between level changes. 
-
-To define a QBD-RAP we first need a Batch (Marked) rational-arrival-process (RAP). Let \(\mathscr K\subset \mathbb Z\) be a set of \emph{marks}. Let \(N\) be a point process, and \(Y_0=0<Y_1<Y_2\cdots\) be event times of \(N\). Let \(\{N(t)\}\) be the counting process associated with \(N\) such that \(N(t)\) returns the number of events by time \(t\). Associated with the \(n\)th event is a mark \(M_n\). For \(i\in\mathscr K\), let \(N_i\) be simple point processes associated with events with marks of type \(i\) only, and let \(\{N_i(t)\}_{t\geq 0}\) be the associated counting processes of events of mark \(i\). Denote by \(f_{N,n}(y_1,m_1,y_2,m_2,\dots,y_n,m_n)\) the joint density, probability mass function of the first \(n\) inter-arrival times, \(Y_1,Y_2-Y_1,\dots,Y_n-Y_{n-1}\), and the associated marks \(M_n\). From Bean and Nielsen \cite[Theorem 1]{bn2010} we have the following. 
-\begin{thm}
-A process \(N\) is a Marked RAP if there exist matrices \(\bs S\), \(\bs D_i,\,i\in\mathscr K\), and a row vector \(\bs \alpha\) such that \(dev(\bs S)<0\), \(dev(\bs S+\bs D)=0\), \((\bs S+\bs D)\bs e = 0\), \(\bs D = \sum_{i\in\mathscr K} \bs D_i\), and 
-\begin{align}f_{N,n}(y_1,m_1,y_2,m_2,\dots,y_n,m_n) = \bs \alpha e^{\bs S y_1}\bs D_{m_1} e^{\bs S y_2} \bs D_{m_2}\dots e^{\bs S y_n} \bs D_{m_n}\bs e.\label{eqn: brap}\end{align}
-Conversely, if a point process has the property (\ref{eqn: brap}) then it is a Marked RAP.
-\end{thm}
-
-Denote such a process \(N\sim BRAP(\bs \alpha, \bs S, \bs D_i,\,i\in\mathscr K).\)
-
-Also, from \cite{bn2010}, associated with a Marked RAP is a row-vector-valued \emph{orbit} process, \(\{\bs A(t)\}_{t\geq0},\)
-\[\bs A(t) = \cfrac{\bs \alpha\left( \prod\limits_{i=1}^{N(t)} e^{\bs S(Y_{i}-Y_{i-1})}\bs D_{M_i}\right)e^{\bs S (t-Y_{N(t)})}}{\bs \alpha\left( \prod\limits_{i=1}^{N(t)} e^{\bs S(Y_{i}-Y_{i-1})}\bs D_{M_i}\right)e^{\bs S( t-Y_{N(t)})}\bs e}.\]
-Thus, \(\{\bs A(t)\}\) is a piecewise-deterministic Markov process where, in between events \(\{\bs A(t)\}\) evolves deterministically according to 
-\[\bs A(t) = \cfrac{\bs A(Y_{N(t)}^-)e^{\bs S(t-Y_{N(t)})}}{\bs A(Y_{N(t)}^-)e^{\bs S(t-Y_{N(t)})}\bs e},\]
-where \(\bs A(Y_{N(t)}^-) = \lim_{u\to 0^+}\bs A(Y_{N(t)}-u)\). The process \(\{\bs A(t)\}\) can jump at event times of \(N\) (the process may not actually jump at these times, but we may still refer to it a `jump' and typically the dynamics change at this point). At time \(t\) the intensity with which \(\{\bs A(t)\}\) has a jump is \(\bs A(t) \bs D\bs e\), i.e.~\(\mathbb P(N(t)=n,N(t+dt)=n+1)=\bs A(t) \bs D\bs e\wrt t\). Upon an event the event is associated with mark \(i\) with probability \(\bs A(t) \bs D_i\bs e/\bs A(t) \bs D\bs e\). Upon on an event at time \(t\) with mark \(i\), the new position of the orbit is \(\bs A(t) = \bs A(t^-) \bs D_i/\bs A(t^-) \bs D_i\bs e\). It is important to note that the jumps of the orbit process are \emph{linear} transformations of the orbit process immediately before the time of the jump. 
-
-Marked RAPs are an extension of Marked Markovian arrival processes to include matrix-exponential inter-arrival times. For Marked MAPs, the vector \(\bs A(t)\) is a vector of posterior probabilities of a continuous-time Markov chain. 
-
-Intuitively, \(\bs A(t)\) encodes all the information about the event times of the Marked RAP and associated marks up to time \(t\) that is needed to determine the future behaviour of the point process. Let \(\mathcal F_{t}\) be the \(\sigma\)-algebra generated by \(N(u), u\in[0,t]\). Then \(N\mid \mathcal F_t \equiv N\mid \bs A(t) \sim BRAP(\bs A(t), \bs S, \bs D_i,i\in\mathscr K)\). In words, the future of the point process after time \(t\) given all the information about the process up to and including time \(t\), is distributed as a Marked RAP with initial vector \(\bs A(t)\). 
-
-Now consider a Marked RAP, \(N\sim BRAP(\bs \alpha, \bs S, \bs D_i,\,i\in\{-1,0,+1\}).\) The process \(\{(L(t),\bs A(t))\}_{t\geq0}\) formed by letting \(L(t) = N_{+1}(t) - N_{-1}(t)\) is a QBD-RAP. QBDs are QBD-RAPs where the inter-event times are of Phase-type.
-
-
-% vector space? Polynomial basis?
-% me basis? semigroup? generator? 
-\section{Laplace Transforms}
-In Chapters~\ref{sec: conv} and~\ref{ch: global results} we work with an object called the \emph{Laplace transform}. For a measure \( \mu\), defined on the Borel sets of \([0,\infty)\), we define the Laplace transform of \(\mu\) to be
-\[\widehat \mu(\lambda) = \mathcal L(\mu)(\lambda) = \int_{t=0}^\infty e^{-\lambda t}\wrt \mu,\]
-where the \emph{region of convergence} is the set of values of \(\lambda\in\mathbb R\) such that the integral is finite. When \(\mu\) has a density, \(v\), then the Laplace transform is 
-\[\widehat \mu(\lambda) = \widehat v(\lambda) = \mathcal L(v)(\lambda) = \int_{t=0}^\infty e^{-\lambda t}v(x)\wrt x.\]
-When \(\mu\) is the probability measure associated with a random variable, \(Z\), say, then we may write 
-\[\widehat \mu(\lambda)=\mathbb E[e^{-\lambda Z}],\]
-and the region of convergence is at least \([0,\infty)\). 
-Further, letting \(E^\lambda\) be an exponentially distributed random variable with rate \(\lambda\) and noting that \(\mathbb P(E^\lambda >t ) = e^{-\lambda t}\), then 
-\[\widehat \mu(\lambda)=\mathbb P(Z<E^\lambda),\]
-which gives a probabilistic interpretation of the Laplace transform. 
-
-A convenient property of the Laplace transform which we utilise is the Convolution Theorem. 
-\begin{thm}[Convolution Theorem]
-	Let \(f,g: [0,\infty) \to \mathbb R\) be integrable functions, then 
-	\[\mathcal L\left(\int_{u=0}^tf(u)g(t-u)\wrt u\right)(\lambda) = \mathcal L\left(f\right)\cdot \mathcal L\left(g\right).\]
-\end{thm}
-The Convolution Theorem states that the Laplace transform of the convolution, given by \(\displaystyle \int_{u=0}^tf(u)g(t-u)\wrt u\), is equal to the product of the Laplace transform of \(f\) and \(g\). 
-
-The Laplace transform is unique in the sense that, if \(\mu\) and \(\nu\) are two measures on the Borel sets of \([0,\infty)\) and 
-\[\widehat \mu(\lambda) = \widehat \nu(\lambda)\] 
-for all \(\lambda > a\) with \(a<\infty\), then \(\mu\) and \(\nu\) are the same. In terms of functions, \(f,g: [0,\infty) \to \mathbb R\), if 
-\[\mathcal L(f)(\lambda) = \mathcal L(g)(\lambda),\]
-for all \(\lambda > a\) with \(a<\infty\), and \(f\) and \(g\) are continuous, then \(f(t)=g(t)\) for all \(t\geq 0\). Without knowing \(f\) and \(g\) are continuous, then we can only claim that 
-\(f(t)=g(t)\) for all \(t\geq 0, t\notin \mathcal N,\) where \(\mathcal N\) is a \emph{null set} with respect to Lebesgue measure. 
-
-\section{Convergence theorems}
-We use the following convergence theorems to help us prove that the QBD-RAP scheme converges weakly to the distribution of the fluid queue. The first result we state, the Portmanteau Theorem, is a sweeping statement about convergence of measures. First, let's define the notion of weak convergence. We follow \cite{portmanteaubook}. 
-
-Denote by \(\mathcal M_f(E)\) the set of all finite measures on \((E,\mathcal E)\), where \(E\) is a non-empty set and \(\mathcal E\) is a \(\sigma\)-algebra. Further, denote by \(C_b(E)\) the set of continuous bounded functions on \(E\). Let \(\mu,\,\mu_1,\,\mu_2,...\in \mathcal M_f(E)\). We say that \(\{\mu_n\}_{n\in\mathbb N}\) converges weakly to \(\mu\), formally \(\mu_n\to \mu\) weakly as \(n\to\infty\), if 
-\[\int f \wrt \mu_n \to \int f\wrt \mu,\mbox{ for all }f \in C_b(E).\]
-We use part of The Portmanteau Theorem in Chapter~\ref{ch: global results}. Let \(\mathcal M_{\leq 1}(E):=\{\mu \in \mathcal M_f(E)\mid \mu(E)\leq 1\},\) the set of all sub-probability measures on \((E,\mathcal E)\). 
-\begin{thm}[[Part of] The Portmanteau Theorem, Theorem~13.16 of \cite{portmanteaubook}]
-	Let \(E\) be a metric space and let \(\mu,\, \mu_1,\,\mu_2,... \in \mathcal M_{\leq 1}(E)\). The following are equivalent.
-	\begin{enumerate}
-		\item[(i)] \(\mu_n\to \mu\) weakly as \(n\to \infty\). 
-		\item[(ii)] \(\int f\wrt \mu_n \to \int f\wrt \mu\) for all bounded, Lipschitz continuous \(f\).
-		\\ \(\vdots\) 
-	\end{enumerate}
-\end{thm}
-There are 8 parts to The Portmanteau Theorem in \cite{portmanteaubook}, Theorem~13.16. Here we only quote to relevant parts; the other 6 parts require us to define other concepts which are not relevant to this thesis, so they are omitted. See \cite{portmanteaubook}, Theorem~13.16 for details. 
-
-Another tool we can use to show convergence of measures is to show that the Laplace transforms converge, as stated in the following theorem.
-\begin{thm}[Extended Continuity Theorem, \cite{feller1957}, Theorem 2a]\label{thm: ext cont thm}
-	For \(p=1,2,...,\) let \(U_p\) be a measure with Laplace transform \(\zeta_p\). If \(\zeta_p(\lambda)\to\zeta(\lambda)\) for \(\lambda > a\geq 0\), then \(\zeta\) is the Laplace transform of a measure \(U\) and \(U_p\to U\) [weakly].
-	
-	Conversely, if \(U_p\to U\)[weakly] and the sequence \(\{\zeta_p(a)\}\) is bounded, then \(\zeta_p(\lambda)\to\zeta(\lambda)\) for \(\lambda >a\). 
-\end{thm}
-
-In Chapters~\ref{sec: conv} and~\ref{ch: global results} we use the Dominated Convergence Theorem to aid our convergence arguments. In applied probability we often want to prove convergence of certain expressions. An approach which can simplify matters is to partition the expression on certain events where we have a simpler characterisation, thereby enabling us to prove convergence on each element in the partition. The original expression can be written as an integral over the partition. To establish the convergence result we initially desired, we can use the convergence of each element of the partition and the Dominated Convergence Theorem. I have taken the following from Theorem~1.13~\cite{steinreal}. \cite{steinreal} use the notation 
-\[\int f = \int f \wrt x = \int f \wrt m(x),\]
-where \(m\) denotes Lebesgue measure, to denote the Lebesgue integral. 
-\begin{thm}[Dominated Convergence Theorem]
-	Suppose \(\{f_n\}\) is a sequence of measurable functions such that \(f_n(x)\to f(x)\) almost everywhere with respect to \(x\), as \(n\) tends to infinity. If \(|f_n(x)|\leq g(x)\), where \(g\) is integrable, then 
-	\[\int|f_n-f|\to 0 \mbox{ as } n \to \infty,\]
-	and consequently 
-	\[\int f_n\to\int f \mbox{ as } n\to \infty.\]
-\end{thm}
-
-Also in Chapters~\ref{sec: conv} and~\ref{ch: global results} we want to manipulate infinite sums or integrals and rearrange the order of summation or integration. However, things can go awry when we swap the order of integration/summation if we are not careful. The next few results give some conditions under which we have equality under before and after swapping the order of summation/integration. Once again, we follow \cite{steinreal} quoting their Theorem~2.13. If \(f\) is a function in \(\mathbb R^{d}=\mathbb R^{d_1}\times \mathbb R^{d_2}\), the \emph{slice} of \(f\) corresponding to \(y\in\mathbb R^{d_2}\) is the function \(f^y\) of the \(x\in\mathbb R^{d_1}\) variable, given by 
-\[f^y(x)=f(x,y).\]
-Similarly, the slice of \(f\) for a fixed \(x\in\mathbb R^{d_1}\) is \(f_x(y)=f(x,y)\). 
-\begin{thm}[Fubini's Theorem]\label{Fubini}
-	Suppose \(f(x,y)\) is integrable on \(\mathbb R^{d_1}\times \mathbb R^{d_2}\). Then for almost every \(y\in\mathbb R^{d_2}\):
-	\begin{itemize}
-		\item The slice \(f^y\) is integrable on \(\mathbb R^{d_1}\).
-		\item The function defined by \(\int_{R^{d_1}} f^y(x)\wrt x\) is integrable on \(\mathbb R^{d_2}\). 
-	\end{itemize}
-	Moreover:
-	\begin{itemize}
-		\item[(iii)] \(\displaystyle\int_{R^{d_2}}\left(\int_{R^{d_1}}f(x,y)\wrt x\right)\wrt y = \int_{\mathbb R^d}f.\)
-	\end{itemize}
-\end{thm}
-\cite{steinreal} then state \begin{quotation}``Clearly, the [Fubini] theorem is symmetric in \(x\) and \(y\) so that we also may conclude that the slice \(f_x\) is integrable on \(\mathbb R^{d_2}\) for almost every \(x\). Moreover, \(\int_{\mathbb R^{d_2}}f_x(y)\wrt y\) is integrable and 
-\[\displaystyle\int_{R^{d_1}}\left(\int_{R^{d_2}}f(x,y)\wrt y\right)\wrt x = \int_{\mathbb R^d}f.\]
-In particular, Fubini's theorem states that the integral of \(f\) on \(\mathbb R^d\) can be computed by iterating lower-dimensional integrals, and that the iterations can be taken in any order
-\[\int_{R^{d_2}}\left(\int_{R^{d_1}}f(x,y)\wrt x\right)\wrt y=\displaystyle\int_{R^{d_1}}\left(\int_{R^{d_2}}f(x,y)\wrt y\right)\wrt x = \int_{\mathbb R^d}f.\mbox{''}\]
-\end{quotation}
-It is this last statement which is most powerful. Effectively, if either
-\[\int_{R^{d_2}}\left(\int_{R^{d_1}}|f(x,y)|\wrt x\right)\wrt y<\infty,\]
-or
-\[\int_{R^{d_1}}\left(\int_{R^{d_2}}|f(x,y)|\wrt y\right)\wrt x<\infty,\]
-then we can swap the order of integration. 
-
-A closely related theorem which is often used alongside Fubini's Theorem is Tonelli's Theorem. Define the \emph{extended Lebesgue integral} of an extended valued (it can take the value \(+\infty\)) non-negative function \(f\) by 
-\[\int f(x)\wrt x = \sup_{g}\int g(x)\wrt x.\]
-\begin{thm}[Tonelli's Theorem]\label{Tonelli}
-	Suppose \(f(x,y)\) is a non-negative measurable function on \(\mathbb R^{d_1}\times \mathbb R^{d_2}\). Then for almost every \(y\in\mathbb R^{d_2}\):
-	\begin{itemize}
-		\item The slice \(f^y\) is integrable on \(\mathbb R^{d_1}\).
-		\item The function defined by \(\int_{R^{d_1}} f^y(x)\wrt x\) is integrable on \(\mathbb R^{d_2}\). 
-	\end{itemize}
-	Moreover:
-	\begin{itemize}
-		\item[(iii)] \(\displaystyle\int_{R^{d_2}}\left(\int_{R^{d_1}}f(x,y)\wrt x\right)\wrt y = \int_{\mathbb R^d}f(x,y)\wrt x\wrt y \mbox{ in the extended sense}.\)
-	\end{itemize}
-\end{thm}
-
-Once again, we note that the theorem is symmetric in \(x\) and \(y\), so we can establish that we may swap the order of integration provided that \(f\) is non-negative. Tonelli's Theorem allows us to exchange the order of integration for any non-negative extended real-valued function, and includes the case where the value of the integral is infinite. In contrast, Fubini's Theorem us to exchange the order of integration for any real-valued function, provided that the integral is finite. 
-
-Collectively, we refer to Theorems~\ref{Fubini} and~\ref{Tonelli} together as the Fubini-Tonelli Theorem, but they are otherwise known collectively as just Fubini's Theorem. Often, they are used in conjunction. Since \(|f|\) is a non-negative function, then we may use Tonelli's Theorem and compute (or bound) the integral \(\int |f|\) via computing an iterated integral. If this is found to be finite, then Fubini's Theorem applies so \(f\) is integrable, and we may evaluate \(\int f\) via an iterated integral. 
-
-In the context of probability, the function \(f\) which we are integrating is often positive, so Tonelli's Theorem is all that is required to justify a swap of iterated integrals. 
 
 \section{Discontinuous Galerkin}
 The discontinuous Galerkin (DG) method is a general methodology for numerically approximating solutions to differential equations. The discontinuous Galerkin method is a finite-element method which approximates differential operators by finite dimensional matrices. In this thesis we use the discontinuous Galerkin method to approximate the infinitesimal generator of a fluid queue. Here, we give a very brief introduction to discontinuous Galerkin methods in general and refer the reader to Chapter~\ref{ch:galerkin} for details on the application to fluid queues, and to \cite{nodalDGBook} for more details on the method in general. 
@@ -1061,7 +874,7 @@ If we know \emph{a priori} that we will apply the slope limiter to cell \(\calD_
 We refer to this scheme as the DG-lin-lim scheme, as it is a linear DG scheme with a limiter.
 
 \subsection{Briefly, on accuracy}
-As a rough guide on accuracy we now paraphrase some known results on the accuracy of the DG method from \cite[Sections~5.5,~5.8]{nodalDGBook} for a similar kind of problem to the one under study here. For certain scalar conservation-law problems, under certain regularity conditions on the continuity and bounded-ness of the solution and its derivatives, on the grid used, on the flux function, and on the numerical flux, then one can expect accuracy proportional to \(\Delta^{p}\) for the DG approximation of the solution, provided the DG scheme uses a polynomial basis with \(p\) functions on each cell, a regular grid of \(\Delta = \max \Delta_k\) is used and a second-order SSPRK method is used to integrate over time \citep[Sections~5.5,~5.8, and references therein]{nodalDGBook}. Applying this result to the DG-lin-lim scheme in Section~\ref{sec: anoth pos pres}, we might expect accuracy of order \((\Delta/p)^2\) under the same regularity conditions.
+As a rough guide on accuracy we now paraphrase some known results on the accuracy of the DG method from \cite[Sections~5.5,~5.8]{nodalDGBook} for a similar kind of problem to the one under study here. For certain scalar conservation-law problems, under certain regularity conditions on the continuity and boundedness of the solution and its derivatives, on the grid used, on the flux function, and on the numerical flux, then one can expect accuracy proportional to \(\Delta^{p}\) for the DG approximation of the solution, provided the DG scheme uses a polynomial basis with \(p\) functions on each cell, a regular grid of \(\Delta = \max \Delta_k\) is used and a second-order SSPRK method is used to integrate over time \citep[Sections~5.5,~5.8, and references therein]{nodalDGBook}. Applying this result to the DG-lin-lim scheme in Section~\ref{sec: anoth pos pres}, we might expect accuracy of order \((\Delta/p)^2\) under the same regularity conditions.
 
 % To quote Section~5.7 of \cite{nodalDGBook} SSPRK methods ``can be used with advantage for problems with strong shocks and discontinuities, as they guarantee that no additional oscillations are introduced as part of the time-integration process.''
 
@@ -1078,6 +891,342 @@ As a rough guide on accuracy we now paraphrase some known results on the accurac
 % 	\int_{x=a}^b\cfrac{\partial f(x)}{\partial t}\psi(x)\wrt x+\int_{x=a}^b c(f)\cfrac{\wrt\psi(x)}{\wrt x}\wrt x - [c(f(x,t))]_{x=a}^b = 0. 
 % \end{align*}
 % The weak form 
+
+\section{Quasi-birth-and-death processes with rational arrival process components}\label{qbd-rap intro}
+One of the approximation schemes we develop in this thesis is based on a suitably defined quasi-birth-and-death process with rational-arrival-process components (QBD-RAP). QBD-RAP processes are built from matrix-exponentially distributed inter-event times. We now introduce the class of matrix exponential distributions and recount some important properties before introducing the QBD-RAP. 
+
+\subsection{Matrix exponential distributions}
+Here we recount some facts about matrix exponential distributions. See \cite{MEinAP} for a more detailed exposition. A random variable, \(Z\), is said to have a matrix exponential distribution if it has a distribution function of the form \(1-\bs \alpha e^{\bs Sx}(-\bs S)^{-1}\bs s\), where \(\bs \alpha\) is a \(1\times p\) \emph{initial vector}, \(\bs S\) a \(p\times p\) matrix, and \(\bs s\) a \(p\times 1\) \emph{closing vector}, and \(\displaystyle e^{\bs S x} := \sum_{n=0}^\infty \cfrac{\left(\bs Sx\right)^n}{n!}\) is the matrix exponential. The density function of \(Z\) is given by \(f_Z(x) = \bs\alpha e^{\bs S x}\bs s\). The only restrictions on the parameters \((\bs \alpha, \bs S, \bs s)\) are that \(\bs \alpha e^{\bs S x} \bs s\) be a valid density function, i.e.~\(\bs \alpha e^{\bs S x} \bs s\geq 0,\) for all \(x\geq 0\) and \(\lim_{x\to\infty} 1-\bs \alpha e^{\bs Sx}(-\bs S)^{-1}\bs s = 1.\) In general, in \cite{MEinAP}, there is the possibility of an \emph{atom} (a point mass) at 0, but here we do not consider this possibility. The condition that \(\bs \alpha e^{\bs Sx}\bs s\) be a valid density imposes some properties on representations \((\bs \alpha, \bs S, \bs s)\). However, in general there is no way to determine whether, a given triplet \((\bs \alpha, \bs S, \bs s)\) is a representation of a matrix exponential distribution, or not. Nonetheless, some properties of a triplet \((\bs \alpha, \bs S, \bs s)\) are known, such as the following, which is used in the characterisation of QBD-RAPs. 
+\begin{thm}[Theorem 4.1.3, \cite{MEinAP}]
+	The density function of a matrix exponential distribution with representation \((\bs\alpha, \bs S, \bs s)\) can be expressed in terms of real-valued constants as 
+	\begin{align}
+		\psi(x)&=\sum_{j=1}^{m_1} \sum_{k=1}^{p_j} c_{jk} \cfrac{x^{k-1}}{(k-1)!} e^{\mu_jx} + \sum_{j=1}^{m+2}\sum_{k=1}^{q_j} d_{jk}\cfrac{x^{k-1}}{(k-1)!}e^{\eta_jx}\cos(\sigma_jx) \nonumber 
+		\\&\quad{}+ \sum_{j=1}^{m_2}\sum_{k=1}^{q_j}e_{jk}\cfrac{x^{k-1}}{(k-1)!}e^{\eta_jx}\sin(\sigma_jx), \label{eqn: spec}
+	\end{align}
+	for integers \(m_1,\,m_2,\,p_j,\) and \(q_j\) and some real constants \(c_{jk},\,d_{jk},\,e_{jk},\,\mu_j,\,\eta_j,\) and \(\sigma_j\). Here \(\mu_j,\, j=1,\dots,m_1\) are the real eigenvalues of \(\bs S\), while \(\eta_j+i\sigma_j, \, \eta_j-i\sigma_j,\, j=1,\dots,m_2\) denote its complex eigenvalues, which come in conjugate pairs. Thus, \(m_1+2m_2\) is the total number of eigenvalues, while the dimension of the representation is given by \(\displaystyle p=\sum_{j=1}^{m+1}p_j + 2\sum_{j=1}^{m_2}q_j\). 
+\end{thm}
+\begin{thm}[Theorem 4.1.4, \cite{MEinAP}]\label{thm: 4.1.4}
+	Consider the non-vanishing terms of the matrix exponential density (\ref{eqn: spec}), \emph{i.e.}, the terms for which \(c_{jk}\neq 0,\,d_{jk}\neq 0,\) or \(e_{jk}\neq 0\). Among the corresponding eigenvalues \(\lambda_j\), there is a real dominating eigenvalue \(\kappa\), say. That is, \(\kappa\) is real, \(\kappa \geq Re(\lambda_j)\) for all \(j\), and the multiplicity of \(\kappa\) is at least the multiplicity of every other eigenvalue with real part \(\kappa\).
+\end{thm}
+\begin{cor}[Corollary 4.1.5, \cite{MEinAP}]
+If \((\bs \alpha, \bs S, \bs s)\) is a representation for a matrix exponential distribution, then \(\bs S\) has a real dominating eigenvalues.
+\end{cor}
+\begin{thm}[Theorem 4.1.6, \cite{MEinAP}]
+	Let \(Z\) be a matrix-exponentially distributed random variable with density (\ref{eqn: spec}). Then the dominant real eigenvalue \(\kappa\) of Theorem~\ref{thm: 4.1.4} is strictly negative. 
+\end{thm}
+We define \(dev(\bs S)\) to be the real dominating eigenvalue of \(\bs S\), that is \(dev(\bs S)=\kappa\) in Theorem~\ref{thm: 4.1.4}.
+
+The class of matrix exponential distributions is characterised as the class of probability distributions which have a rational Laplace transform. That is, \(\displaystyle \int_{x=0}^\infty e^{-\lambda x}\bs \alpha e^{\bs S x}\bs s \wrt x\) is a ratio of two polynomial functions in \(\lambda\). Matrix exponential distributions are an extension of Phase-type distributions, where for the latter, \(\bs S\) must be a sub-generator matrix of a CTMC, \(\bs s = -\bs S\bs e\) where \(\bs e\) is a \(1\times p\) vector of ones, and \(\bs \alpha\) is a discrete probability distribution.  
+
+A \emph{representation} of a matrix exponential distribution is a triplet \((\bs \alpha, \bs S, \bs s)\), and we write \(Z\sim ME(\bs \alpha, \bs S, \bs s)\) to denote that \(Z\) has a matrix exponential distribution with this representation. The order of the representation is the dimension of the square matrix \(\bs S\), i.e.~if \(\bs S\) is \(p\times p\), then the matrix exponential distribution is said to be of order \(p\). Representations of matrix-exponential distributions are not unique \citep{MEinAP}. A representation is called \emph{minimal} when \(\bs S\) has the smallest possible dimension. Throughout this work, we assume that the representation of any matrix exponential distribution is minimal. Let \(\bs e_i\) be a vector with a 1 in the \(i\)th position and zeros elsewhere. We assume that \(\bs s = -\bs S\bs e\), and that \((\bs e_i,\bs S,\bs s)\) for \(i=1,\dots,p\) are representations of matrix exponential distributions. It is always possible to find such a representation \cite[Theorem 4.5.17, Corollary 4.5.18]{MEinAP}. As such, we abbreviate our notation \(Z\sim ME(\bs \alpha, \bs S, \bs s)\) to \(Z\sim ME(\bs \alpha, \bs S)\). Further, given \(\bs s=-\bs S\bs e\) then observe that  \(\displaystyle \int_{x=0}^\infty e^{\bs S x} \bs s\wrt x = (-\bs S)^{-1}\bs s= \bs e\). 
+
+For a given \(p\times p\) matrix \(\bs S\), denote by \(\mathcal{A}\subset \mathbb R^p\) the space of all possible vectors \(\bs a\) such that \((\bs a, \bs S)\) is a valid representation of a (possibility defective) matrix exponential distribution. %By CITE it is known that \(\mathcal{E}\) is a closed, bounded, convex, affine subspace of \(\mathbb R^p\). 
+
+\subsubsection*{Concentrated matrix exponential distributions}
+Recently, the class of \emph{concentrated matrix exponential distributions} (CMEs) has been investigated \citep{ert2006,hstz2016,ert2006,hht2020,mt2021}. As the name suggests, concentrated matrix exponential distributions are matrix exponential distributions with a very low coefficient of variation (variance relative to the mean). As the order, \(p\), of the representation increases, the variance of concentrated matrix exponential distributions decreases at rate approximately \(\mathcal O(1/p^2)\). For comparison, the variance of an Erlang distribution, the most concentrated Phase-type distribution, decreases at rate \(\mathcal O(1/p)\) as the order \(p\) increases \citep{as1987}. In this thesis we use CMEs to approximate deterministic events. For a given order, concentrated matrix exponential distributions have a much lower coefficient of variation than any phase type of the same order, and therefore a better ability to model determinism. 
+
+The class of concentrated matrix exponential distributions (CMEs) found numerically in \citep{hht2020} and computationally efficient expressions for the density and moments of CMEs are provided in \citep{hht2020}. 
+
+CMEs exist for all orders, however, in our computations we only use CMEs with odd order. The justification for considering representations of odd orders only is that the variance of CME distributions of orders \(2p\) and \(2p-1\) are relatively similar and therefore have similar abilities to represent the delta function \citep{hht2020}. Hence, if we construct an approximation with a representation of order \(2p\) we expect it to perform only marginally better than an approximation constructed with representations of order \(2p-1\). However, the computational cost of the latter is lower, so we opt for the order \(2p-1\) representation. 
+
+From the definition of the class of CME distributions, for a given CME with odd order, \(p\), and representation \((\bs\alpha,\bs S)\), the matrix \(\bs S\) has one real eigenvalue, and \(p-1\) complex eigenvalues and all eigenvalues have the same real part \cite{hht2020}. 
+
+For CMEs considered here, the vector function \(\bs k(t)=\cfrac{\bs \alpha e^{St}}{\bs \alpha e^{St}\bs e}\) is periodic with period \(\rho = 2\pi/\omega\) where \(\omega=min_i(|\Im(\lambda_i)|)\), \(\lambda_i\) are the eigenvalues of \(\bs{S}\) and \(\Im(z)\) is the imaginary component of a complex number \(z\). We leverage this fact to simplify some numerical integration in Chapter~\ref{sec: construction and modelling}. 
+
+
+%\subsection{Rational arrival processes}
+%Let \(N\) be a simple point process, with event time \(Y_0=0<Y_1<Y_2<\cdot\). Let \(\{N(t)\}_{t\geq0}\) be the right-continuous counting process associated with \(N\); \(N(t)\) returns the number of events by time \(t\). Denote by \(f_{N,n}(y_1,\dots,y_n)\) the joint density of \(Y_1, Y_2-Y_1, \dots,Y_n-Y_{n-1}\), the first \(n\) inter-arrival times. For a matrix \(\bs B\) let \(dev(\bs B)\) denote the dominant eigenvalue of \(\bs B\) (the one with maximal real part). Theorem 1.1 of Asmussen and Bladt CITE states that the point process \(N\) is a RAP if there exists matrices \(\bs S\), \(\bs D\), a row vector \(\bs\alpha\), and a column vector \(\bs s\) such that \(dev(\bs S)<1\), \(dev(\bs S+\bs D)=0\), \((\bs S+\bs D)\bs e=0,\) and 
+%\[f_{N,n}(y_1,\dots,y_n) = \bs \alpha e^{\bs Sy_1} \bs D e^{\bs Sy_1} \bs D \dots e^{\bs Sy_n} \bs s.\]
+%Here \(\bs s\) can be taken to be \(\bs D e\). The \(n\)th inter-arrival, \(T_n-T_{n-1}\), has a matrix exponential distribution with density \(\bs \alpha(-\bs S\bs D )^{n-1}e^{\bs S y_n}\bs s\). Denote such a process \(N \sim RAP(\bs \alpha, \bs S, \bs D)\). 
+%
+%Asmussen and Bladt CITE, Corollary 2.2, show that associated with the RAP is a row-vector-valued \emph{orbit} process, \(\{\bs A(t)\}_{t\geq0},\), 
+%\[\bs A(t) = \cfrac{\bs \alpha\left( \prod_{i=1}^{N(t)} e^{\bs S(Y_{i}-Y_{i-1})}\bs S\right)e^{\bs S t-Y_{N(t)}}}{\bs \alpha\left( \prod_{i=1}^{N(t)} e^{\bs S(Y_{i}-Y_{i-1})}\bs S\right)e^{\bs S( t-Y_{N(t)})}\bs e}.\]
+%Thus, \(\{\bs A(t)\}\) is a piecewise-deterministic Markov process where, in between jumps \(\{\bs A(t)\}\) according to 
+%\[\bs A(t) = \cfrac{\bs A(Y_{N(t)}^-)e^{\bs S(t-Y_{N(t)})}}{\bs A(Y_{N(t)}^-)e^{\bs S(t-Y_{N(t)})}\bs e},\]
+%where \(\bs A(Y_{N(t)}^-) = \lim_{u\to 0^+}\bs A(Y_{N(t)}-u)\). The process \(\{\bs A(t)\}\) jumps at event times of \(N\). At time \(t\) the intensity with which \(\{\bs A(t)\}\) has a jump is \(\bs A(t) \bs D\bs e\), and upon a jump at time \(t\), the new position of the orbit is \(\bs A(t) = \bs A(t^-) \bs D/\bs A(t^-) \bs D\bs e\). 
+%
+%RAPs are an extension of Markovian arrival processes (MAPs) to include matrix-exponential inter-arrival times. For MAPs, the vector \(\bs A(t)\) is a vector of posterior probabilities of a continuous-time Markov chain. 
+%
+%Intuitively, \(\bs A(t)\) encodes all of the information about the jump times of the RAP up to time \(t\). Let \(\mathcal F_{t}\) be the \(\sigma\)-algebra generated by \(N(u), u\in[0,t]\). Then \(N\mid \mathcal F_t \equiv N\mid \bs A(t) \sim ME(\bs A(t), \bs S, \bs S)\). In words, the future of the point process after time \(t\) given all of the information about the process up to and including time \(t\), is distributed as a RAP with initial vector \(\bs A(t)\). 
+
+\subsection{QBD-RAPs}\label{sec: qbd-rap}
+% As RAPs are an extension of Markovian arrival processes to include matrix-exponential inter-arrival times, QBD-RAPs are extensions of QBDs to include matrix-exponential times between level changes. 
+
+To define a QBD-RAP we first need a Batch (Marked) rational-arrival-process (RAP). Let \(\mathscr K\subset \mathbb Z\) be a set of \emph{marks}. Let \(N\) be a point process, and \(Y_0=0<Y_1<Y_2\cdots\) be event times of \(N\). Let \(\{N(t)\}\) be the counting process associated with \(N\) such that \(N(t)\) returns the number of events by time \(t\). Associated with the \(n\)th event is a mark \(M_n\). For \(i\in\mathscr K\), let \(N_i\) be simple point processes associated with events with marks of type \(i\) only, and let \(\{N_i(t)\}_{t\geq 0}\) be the associated counting processes of events of mark \(i\). Denote by \(f_{N,n}(y_1,m_1,y_2,m_2,\dots,y_n,m_n)\) the joint density, probability mass function of the first \(n\) inter-arrival times, \(Y_1,Y_2-Y_1,\dots,Y_n-Y_{n-1}\), and the associated marks \(M_n\). From Bean and Nielsen \cite[Theorem 1]{bn2010} we have the following. 
+\begin{thm}
+A process \(N\) is a Marked RAP if there exist matrices \(\bs S\), \(\bs D_i,\,i\in\mathscr K\), and a row vector \(\bs \alpha\) such that \(dev(\bs S)<0\), \(dev(\bs S+\bs D)=0\), \((\bs S+\bs D)\bs e = 0\), \(\bs D = \sum_{i\in\mathscr K} \bs D_i\), and 
+\begin{align}f_{N,n}(y_1,m_1,y_2,m_2,\dots,y_n,m_n) = \bs \alpha e^{\bs S y_1}\bs D_{m_1} e^{\bs S y_2} \bs D_{m_2}\dots e^{\bs S y_n} \bs D_{m_n}\bs e.\label{eqn: brap}\end{align}
+Conversely, if a point process has the property (\ref{eqn: brap}) then it is a Marked RAP.
+\end{thm}
+
+Denote such a process \(N\sim BRAP(\bs \alpha, \bs S, \bs D_i,\,i\in\mathscr K).\)
+
+Also, from \cite{bn2010}, associated with a Marked RAP is a row-vector-valued \emph{orbit} process, \(\{\bs A(t)\}_{t\geq0},\)
+\[\bs A(t) = \cfrac{\bs \alpha\left( \prod\limits_{i=1}^{N(t)} e^{\bs S(Y_{i}-Y_{i-1})}\bs D_{M_i}\right)e^{\bs S (t-Y_{N(t)})}}{\bs \alpha\left( \prod\limits_{i=1}^{N(t)} e^{\bs S(Y_{i}-Y_{i-1})}\bs D_{M_i}\right)e^{\bs S( t-Y_{N(t)})}\bs e}.\]
+Thus, \(\{\bs A(t)\}\) is a piecewise-deterministic Markov process where, in between events \(\{\bs A(t)\}\) evolves deterministically according to 
+\[\bs A(t) = \cfrac{\bs A(Y_{N(t)}^-)e^{\bs S(t-Y_{N(t)})}}{\bs A(Y_{N(t)}^-)e^{\bs S(t-Y_{N(t)})}\bs e},\]
+where \(\bs A(Y_{N(t)}^-) = \lim_{u\to 0^+}\bs A(Y_{N(t)}-u)\). The process \(\{\bs A(t)\}\) can jump at event times of \(N\) (the process may not actually jump at these times, but we may still refer to it a `jump' and typically the dynamics change at this point). At time \(t\) the intensity with which \(\{\bs A(t)\}\) has a jump is \(\bs A(t) \bs D\bs e\), i.e.~\(\mathbb P(N(t)=n,N(t+dt)=n+1)=\bs A(t) \bs D\bs e\wrt t\). Upon an event the event is associated with mark \(i\) with probability \(\bs A(t) \bs D_i\bs e/\bs A(t) \bs D\bs e\). Upon on an event at time \(t\) with mark \(i\), the new position of the orbit is \(\bs A(t) = \bs A(t^-) \bs D_i/\bs A(t^-) \bs D_i\bs e\). It is important to note that the jumps of the orbit process are \emph{linear} transformations of the orbit process immediately before the time of the jump. 
+
+Marked RAPs are an extension of Marked Markovian arrival processes to include matrix-exponential inter-arrival times. For Marked MAPs, the vector \(\bs A(t)\) is a vector of posterior probabilities of a continuous-time Markov chain. 
+
+Intuitively, \(\bs A(t)\) encodes all the information about the event times of the Marked RAP and associated marks up to time \(t\) that is needed to determine the future behaviour of the point process. Let \(\mathcal F_{t}\) be the \(\sigma\)-algebra generated by \(N(u), u\in[0,t]\). Then \(N\mid \mathcal F_t \equiv N\mid \bs A(t) \sim BRAP(\bs A(t), \bs S, \bs D_i,i\in\mathscr K)\). In words, the future of the point process after time \(t\) given all the information about the process up to and including time \(t\), is distributed as a Marked RAP with initial vector \(\bs A(t)\). 
+
+Now consider a Marked RAP, \(N\sim BRAP(\bs \alpha, \bs S, \bs D_i,\,i\in\{-1,0,+1\}).\) The process \(\{(L(t),\bs A(t))\}_{t\geq0}\) formed by letting \(L(t) = N_{+1}(t) - N_{-1}(t)\) is a QBD-RAP. QBDs are QBD-RAPs where the inter-event times are of Phase-type.
+
+
+\section{Kronecker products and related results}
+Here we describe Kronecker products and sums and some of their properties (see \cite{MEinAP}, Appendix A.4, for further details). We use the results in this section to manipulate certain matrix expressions in Chapter~\ref{sec: conv}.
+
+Let 
+\[\bs A = \left[\begin{array}{ccc}a_{11} & \dots & a_{1m}\\\hdots & & \hdots \\ a_{n1}&\dots & a_{nm}\end{array}\right]
+\qquad
+\bs{B} = \left[\begin{array}{ccc}b_{11} & \dots & b_{1m'}\\\hdots & & \hdots \\ b_{n'1}&\dots & b_{n'm'}\end{array}\right]\]
+be matrices with dimensions \(n\times m\) and \(n'\times m'\), respectively. The operator \(\otimes\) is the Kronecker product of two matrices; 
+\[\bs A\otimes \bs{B} = \left[\begin{array}{ccc}a_{11}\bs{B} & \dots & a_{1m}\bs{B}\\\hdots & & \hdots \\ a_{n1}\bs{B}&\dots & a_{nm}\bs{B}\end{array}\right],\]
+which is an \(nn'\times mm'\) matrix. 
+
+Let \(\bs{C},\bs{D}\)  be matrices with dimensions \(m\times k\) and \(m'\times k'\). A property of the Kronecker Product is 
+\begin{align}
+	\left(\bs A\otimes \bs{B}\right)\left(\bs{C}\otimes \bs{D}\right) &= \bs A\bs{C}\otimes \bs{B}\bs{D}.\label{eqn:mpr}\tag{Mixed Product Rule}
+\end{align}
+\begin{proof}
+	The proof follows from 
+	\begin{align*}
+		\left[\begin{array}{cccc}a_{i1}\bs{B} & a_{i2}\bs{B}&\dots&a_{in}\bs{B}\end{array}\right]\left[\begin{array}{c}c_{1j}\bs{D}\\c_{2j}\\\vdots\\c_{nj}\bs{D} \end{array}\right] 
+		%
+		&= \left(\sum_\ell a_{i\ell}c_{\ell j}\right) \bs{B}\bs{D}
+		\\&= \left(\bs A\bs{C}\right)_{ij}\bs{B}\bs{D}.
+	\end{align*}
+\end{proof}
+
+If \(\bs A\) and \(\bs{B}\) are invertible matrices, then 
+\begin{align}\label{eqn:kron inverse}
+	\left(\bs A\otimes \bs{B}\right)^{-1} = \bs A^{-1}\otimes \bs{B}^{-1}.
+\end{align}
+
+Let \(\bs A\) and \(\bs{B}\) be \(n\times n\) and \(m\times m\) matrices, respectively. The Kronecker sum of \(\bs A\) and \(\bs{B}\) is denoted by \(\oplus\) and defined as 
+\[\bs A\oplus \bs{B} := \bs A\otimes \bs{I}_{m} + \bs{I}_{n}\otimes \bs{B}.\]
+
+The exponential of a square matrix \(\bs B\) is \[e^{\bs B} := \sum_{n=0}^\infty \cfrac{1}{n!}\bs B^n.\]
+
+A property of the Kronecker sum is 
+\begin{align}\label{eqn:kron exp}
+	e^{\bs A\oplus \bs{B}}= e^{\bs A}\otimes e^{\bs{B}}.
+\end{align}
+\begin{proof}
+	First, the matrices \(\bs A\otimes \bs{I}_m\) and \(\bs{I}_n\otimes \bs{B}\) commute; from the mixed product rule their product is \(\bs A\otimes \bs{B}\). Hence, 
+	\[e^{\bs A\oplus \bs{B}} = e^{\bs A\otimes \bs{I}_m}e^{\bs{I}_n\otimes \bs{B}}.\]
+	We now show that \(e^{\bs A\otimes \bs{I}_m} = e^{\bs A}\otimes \bs{I}_m\) and \(e^{\bs{I}_n\otimes \bs{B}}=\bs{I}_n\otimes e^{\bs{B}}\). The latter follows from the fact that \(\bs{I}_n\otimes \bs{B}\) is a block diagonal matrix with blocks \(\bs{B}\), hence its exponential is also block diagonal with blocks equal to the exponential of \(\bs{B}\). The former follows from 
+	\begin{align}
+	e^{\bs A\otimes \bs{I}_m} &= \sum_{n=0}^\infty \cfrac{1}{n!}\left(\bs A\otimes \bs{I}_m\right)^n \nonumber
+	\\&= \sum_{n=0}^\infty \cfrac{1}{n!}\left(\bs A^n\otimes \bs{I}_m\right) \nonumber
+	\\&=\left(\sum_{n=0}^\infty \cfrac{1}{n!}\bs A^n\otimes \bs{I}_m\right) \nonumber
+	\\&=e^{\bs A}\otimes \bs{I}_m.\label{eqn:09ksdjgah}
+	\end{align}
+	
+	Therefore 
+	\[e^{\bs A\oplus \bs{B}} = \left(e^{\bs A}\otimes \bs{I}_m\right)\left(\bs{I}_n\otimes e^{\bs{B}}\right),\]
+	and the result follows by the mixed product rule. 
+\end{proof}
+
+\begin{lem}\label{lem: lst mpr}
+	Let \(\bs{T}\) and \(\bs{C}\) be \(n\times n\), square matrices with \(\bs{C}\) diagonal and invertible; let \(\bs{S}\) be a \(p\times p\) matrix. Further, suppose \(\left[\bs{T}\otimes \bs{I} + \bs{C}\otimes \bs{S} - \lambda \bs{I}\right]\) is invertible for \(\lambda>0\). Then
+\begin{align}
+	&\int_{t=0}^\infty e^{-\lambda t}  e^{{\left(\bs{T}\otimes \bs{I} + \bs{C}\otimes \bs{S}\right)t}} \wrt t 
+	%
+	=   \int_{x=0}^\infty e^{{\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)x}}\otimes e^{\bs{S}x} \wrt x \left(\bs{C}\otimes \bs{I}\right)^{-1}.  \label{eqn:lstsimplify}\end{align}
+\end{lem}
+\begin{proof}
+	Computing the integral on the left-hand side and then factorising the result and using the~\ref{eqn:mpr} multiple times gives
+	\begin{align}
+            	\int_{t=0}^\infty e^{-\lambda t} e^{\left(\bs{T}\otimes \bs{I} + \bs{C}\otimes \bs{S}\right)t} \wrt t\nonumber 
+            	%
+            	&= - \left[\bs{T}\otimes \bs{I} + \bs{C}\otimes \bs{S} - \lambda \bs{I}\right]^{-1}
+		%
+		\\&= -  \left[\bs{T}\otimes \bs{I} + \left(\bs{C}\otimes \bs{I}\right)\left(\bs{I}\otimes \bs{S}\right) - \lambda \bs{I}\right]^{-1}\nonumber
+		%
+		\\&= -  \left[\left(\bs{C}\otimes \bs{I}\right)\left(\left(\bs{C}\otimes \bs{I}\right)^{-1}\left(\bs{T}\otimes \bs{I} \right)+ \bs{I}\otimes \bs{S} - \left(\bs{C}\otimes \bs{I}\right)^{-1}\lambda \bs{I}\right)\right]^{-1}. \label{eqn: ref this one 12}
+		%
+	\end{align}
+	By Equation~(\ref{eqn:kron inverse}) and since \(\bs{C}\) is invertible, (\ref{eqn: ref this one 12}) is equal to
+	\begin{align}
+		& - \left[\left(\bs{C}\otimes \bs{I}\right)\left(\left(\bs{C}^{-1}\otimes \bs{I}\right)\left(\bs{T}\otimes \bs{I} \right)+ \bs{I}\otimes \bs{S} - \left(\bs{C}^{-1}\otimes \bs{I}\right)\lambda \bs{I}\right)\right]^{-1}. \label{eqn: ref this one 13}
+		%
+	\end{align}
+	{Using the~\ref{eqn:mpr} and algebraic manipulation, (\ref{eqn: ref this one 13}) is equal to }
+	\begin{align}
+		&- \left[\left(\bs{C}\otimes \bs{I}\right)\left(\left(\bs{C}^{-1}\bs{T}\right)\otimes \bs{I} + \bs{I}\otimes \bs{S} - \left(\bs{C}^{-1}\lambda \bs{I}\right)\otimes \bs{I}\right)\right]^{-1} \nonumber
+		%
+		\\&= - \left[\left(\bs{C}\otimes \bs{I}\right)\left(\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)\right)\otimes \bs{I} + \bs{I}\otimes \bs{S}\right)\right]^{-1} \nonumber
+		%
+		\\&= - \left[\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)\right)\otimes \bs{I} + \bs{I}\otimes \bs{S}\right]^{-1}\left(\bs{C}\otimes \bs{I}\right)^{-1} \nonumber
+		\\&= - \left[\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)\right)\oplus \bs{S}\right]^{-1}\left(\bs{C}\otimes \bs{I}\right)^{-1},\label{eqn: is an integral}
+	\end{align}
+	by definition of the Kronecker sum.
+	
+	Now, for an invertible matrix \(\bs A\) we can write \(-\bs A^{-1} = \displaystyle\int_{x=0}^\infty e^{\bs Ax}\wrt x\). Therefore, (\ref{eqn: is an integral}) is 
+	\begin{align*}
+		-\left[\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)\right)\oplus \bs{S}\right]^{-1}\left(\bs{C}\otimes \bs{I}\right)^{-1}
+		&= \int_{x=0}^\infty e^{\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)x\right)\oplus \bs{S}x}\wrt x\left(\bs{C}\otimes \bs{I}\right)^{-1}.
+	\end{align*}
+	{Using the rule in Equation~(\ref{eqn:kron exp}) gives }
+	\begin{align*}
+		&\int_{x=0}^\infty e^{\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)\right)x}\otimes e^{ \bs{S}x}\wrt x\left(\bs{C}\otimes \bs{I}\right)^{-1},
+	\end{align*}
+	which is the result.
+\end{proof}
+
+% vector space? Polynomial basis?
+% me basis? semigroup? generator? 
+\section{Laplace Transforms}
+In Chapters~\ref{sec: conv} and~\ref{ch: global results} we work with an object called the \emph{Laplace transform}. For a measure \( \mu\), defined on the Borel sets of \([0,\infty)\), we define the Laplace transform of \(\mu\) to be
+\[\widehat \mu(\lambda) = \mathcal L(\mu)(\lambda) = \int_{t=0}^\infty e^{-\lambda t}\wrt \mu,\]
+where the \emph{region of convergence} is the set of values of \(\lambda\in\mathbb R\) such that the integral is finite. When \(\mu\) has a density, \(v\), then the Laplace transform is 
+\[\widehat \mu(\lambda) = \widehat v(\lambda) = \mathcal L(v)(\lambda) = \int_{t=0}^\infty e^{-\lambda t}v(x)\wrt x.\]
+When \(\mu\) is the probability measure associated with a random variable, \(Z\), say, then we may write 
+\[\widehat \mu(\lambda)=\mathbb E[e^{-\lambda Z}],\]
+and the region of convergence is at least \([0,\infty)\). 
+Further, letting \(E^\lambda\) be an exponentially distributed random variable with rate \(\lambda\) and noting that \(\mathbb P(E^\lambda >t ) = e^{-\lambda t}\), then 
+\[\widehat \mu(\lambda)=\mathbb P(Z<E^\lambda),\]
+which gives a probabilistic interpretation of the Laplace transform. 
+
+A convenient property of the Laplace transform which we utilise is the Convolution Theorem. 
+\begin{thm}[Convolution Theorem]
+	Let \(f,g: [0,\infty) \to \mathbb R\) be integrable functions, then 
+	\[\mathcal L\left(\int_{u=0}^tf(u)g(t-u)\wrt u\right)(\lambda) = \mathcal L\left(f\right)\cdot \mathcal L\left(g\right).\]
+\end{thm}
+The Convolution Theorem states that the Laplace transform of the convolution, given by \(\displaystyle \int_{u=0}^tf(u)g(t-u)\wrt u\), is equal to the product of the Laplace transform of \(f\) and \(g\). 
+
+The Laplace transform is unique in the sense that, if \(\mu\) and \(\nu\) are two measures on the Borel sets of \([0,\infty)\) and 
+\[\widehat \mu(\lambda) = \widehat \nu(\lambda)\] 
+for all \(\lambda > a\) with \(a<\infty\), then \(\mu\) and \(\nu\) are the same. In terms of functions, \(f,g: [0,\infty) \to \mathbb R\), if 
+\[\mathcal L(f)(\lambda) = \mathcal L(g)(\lambda),\]
+for all \(\lambda > a\) with \(a<\infty\), and \(f\) and \(g\) are continuous, then \(f(t)=g(t)\) for all \(t\geq 0\). Without knowing \(f\) and \(g\) are continuous, then we can only claim that 
+\(f(t)=g(t)\) for all \(t\geq 0, t\notin \mathcal N,\) where \(\mathcal N\) is a \emph{null set} with respect to Lebesgue measure. 
+
+Laplace transforms of probability measures with non-negative support and where the Laplace transform variable, \(\lambda\), is real and non-negative can be given a stochastic interpretation. Let \(W\) be a random variable with distribution function \(F_W(w)= \mathbb P(W<w)\), then \(\displaystyle\int_{w=0}^\infty e^{-\lambda w} \wrt F_W(w) = \mathbb P(W < E^{\lambda})\). That is, the Laplace transform with parameter \(\lambda >0\) is the probability that \(W\) occurs before \(E^\lambda\), an independent random exponential time with rate \(\lambda\), occurs. 
+
+\section{Convergence theorems}
+We use the following convergence theorems to help us prove that the QBD-RAP scheme converges weakly to the distribution of the fluid queue. The first result we state, the Portmanteau Theorem, is a sweeping statement about convergence of measures. First, let's define the notion of weak convergence. We follow \cite{billingsleyconvergence}.
+
+Let \(S\) be a metric space and let \(\mathcal S\) be the Borel \(\sigma\)-algebra generated by the open sub-sets of \(S\). A probability measure, \(P\), is a function which maps elements of \(\mathcal S\) (elements of \(\mathcal S\) are sets) to real numbers in the interval \([0,1]\), with \(P(S)=1\). Further, \(P\) is \emph{countably-additive}, which means that for any countable collection of \emph{disjoint} sets \(A_1, A_2,...\in\mathcal S\), then 
+\[P\left(\bigcup\limits_{n=1}^\infty A_n\right) = \sum\limits_{n=1}^\infty P\left(A_n\right).\]
+Define the notation \(Pf = \int_S f \wrt P\) where \(f:S\to \mathbb R\) is a function. Let \(P_1,P_2,...\), be a sequence of probability measures. For a given function \(f\), the sequence \(P_1f,P_2f,...\), is simply a sequence of real numbers. The sequence of probability measures \(P_1,P_2,....\), is said to \emph{converge weakly} to \(P\) if \(P_nf\to Pf\) for every bounded continuous real function \(f\). \cite{billingsleyconvergence} uses the notation \(P_n\Rightarrow P\) to denote this weak convergence. 
+
+We need a few more definitions before stating The Portmanteau Theorem. A set \(A\in\mathcal S\) is said to be a \(P\)-\emph{continuity set} if \(\partial A\) (the boundary of the set \(A\)) satisfies \(P(\partial A)=0\). Define the \emph{limit inferior} and \emph{limit superior} of a sequence of real numbers \(x_1,x_2,...,\) as
+\begin{align*}
+	\liminf_{n\to\infty} x_n &:= \lim_{n\to \infty}	\left(\inf_{m\geq n}x_m\right)
+	\intertext{and}
+	\\\limsup_{n\to\infty} x_n &:= \lim_{n\to \infty}	\left(\sup_{m\geq n}x_m\right),
+\end{align*}
+respectively. 
+
+\begin{thm}[Portmanteau Theorem I, Theorem~2.1 of \cite{billingsleyconvergence}]
+	These five conditions are equivalent.
+	\begin{enumerate}
+		\item[(i)] \(P_n\Rightarrow P\). 
+		\item[(ii)] \(P_nf\to Pf\) for all bounded, uniformly continuous \(f\).
+		\item[(iii)] \(\limsup_n P_n F \leq P F\) for all closed [sets] \(F\).
+		\item[(iv)] \(\liminf_n P_n G \leq P G\) for all open [sets] \(G\).
+		\item[(v)] \(P_n A \to P A\) for all \(P\)-continuity sets \(F\).
+	\end{enumerate}
+\end{thm}
+Some authors, such as \cite{portmanteaubook}, also include the following equivalent condition in the Portmanteau Theorem. 
+\begin{thm}[Portmanteau Theorem II, Theorem~13.16 of \cite{portmanteaubook}]\label{thm: Portmanteau}
+	\(\,\)
+	\begin{enumerate}
+		\item[(vi)] \(P_nf \to P f\) for all bounded, Lipschitz continuous \(f\).
+	\end{enumerate}
+\end{thm}
+
+Recall that a stochastic process is a sequence of random variables \(\{X(t)\}_{t\in\mathcal T}\). The \emph{finite-dimensional distributions} of \(\{X(t)\}_{t\in\mathcal T}\) are the joint distributions of the random vector \((X(t_1),X(t_2),...,X(t_n))\), where \(t_1,t_2,...,t_n\in \mathcal T\) is a finite collection of times. 
+
+Key concepts in establishing weak convergence of stochastic processes are the notions \emph{tight} and \emph{relatively compact}. Again, we follow \cite{billingsleyconvergence}. A probability measure \(P\) is said to be \emph{tight} if for each \(\varepsilon\) there exists a compact set \(K\) such that \(P(K)>1-\varepsilon\). A family of probability measures, \(\Pi\), is said to be tight if for every \(\varepsilon\) there exists a compact set \(K\) such that \(P(K)>1-\varepsilon\) for every probability measure \(P\) in \(\Pi\). The family \(\Pi\) is \emph{relatively compact} if every sequence of elements of \(\Pi\) contains a subsequence which converges weakly. 
+
+Let \(P_1,P_2,...,\) and \(P\) be probability measures of stochastic processes. \cite{billingsleyconvergence} provides the following result.
+\begin{thm}\label{thm: aofaa}
+	If \(\{P_n\}\) is relatively compact and the finite-dimensional distributions of \(P_n\) converge weakly to those of \(P\), then \(P_n\Rightarrow_n P\). 
+\end{thm}
+Further, the condition that \(\{P_n\}\) is relatively compact can be replaced by tightness due Prohorov's Theorem \citep{billingsleyconvergence}. 
+\begin{thm}
+	If \(\Pi\) is tight, then it is relatively compact.
+\end{thm}
+
+
+% Denote by \(\mathcal M_f(E)\) the set of all finite measures on \((E,\mathcal E)\), where \(E\) is a non-empty set and \(\mathcal E\) is a \(\sigma\)-algebra. Further, denote by \(C_b(E)\) the set of continuous bounded functions on \(E\). Let \(\mu,\,\mu_1,\,\mu_2,...\in \mathcal M_f(E)\). We say that \(\{\mu_n\}_{n\in\mathbb N}\) converges weakly to \(\mu\), formally \(\mu_n\to \mu\) weakly as \(n\to\infty\), if 
+% \[\int f \wrt \mu_n \to \int f\wrt \mu,\mbox{ for all }f \in C_b(E).\]
+% We use part of The Portmanteau Theorem in Chapter~\ref{ch: global results}. Let \(\mathcal M_{\leq 1}(E):=\{\mu \in \mathcal M_f(E)\mid \mu(E)\leq 1\},\) the set of all sub-probability measures on \((E,\mathcal E)\). 
+% \begin{thm}[(Part of) The Portmanteau Theorem, Theorem~13.16 of \cite{portmanteaubook}]
+% 	Let \(E\) be a metric space and let \(\mu,\, \mu_1,\,\mu_2,... \in \mathcal M_{\leq 1}(E)\). The following are equivalent.
+% 	\begin{enumerate}
+% 		\item[(i)] \(\mu_n\to \mu\) weakly as \(n\to \infty\). 
+% 		\item[(ii)] \(\int f\wrt \mu_n \to \int f\wrt \mu\) for all bounded, Lipschitz continuous \(f\).
+% 		\\ \(\vdots\) 
+% 	\end{enumerate}
+% \end{thm}
+% There are 8 parts to The Portmanteau Theorem in \cite{portmanteaubook}, Theorem~13.16. Here we only quote to relevant parts; the other 6 parts require us to define other concepts which are not relevant to this thesis, so they are omitted. See \cite{portmanteaubook}, Theorem~13.16 for details. 
+
+Another tool we can use to show convergence of measures is to show that the Laplace transforms converge, as stated in the following theorem.
+\begin{thm}[Extended Continuity Theorem, \cite{feller1957}, Theorem 2a]\label{thm: ext cont thm}
+	For \(p=1,2,...,\) let \(U_p\) be a measure with Laplace transform \(\zeta_p\). If \(\zeta_p(\lambda)\to\zeta(\lambda)\) for \(\lambda > a\geq 0\), then \(\zeta\) is the Laplace transform of a measure \(U\) and \(U_p\to U\) [weakly].
+	
+	Conversely, if \(U_p\to U\)[weakly] and the sequence \(\{\zeta_p(a)\}\) is bounded, then \(\zeta_p(\lambda)\to\zeta(\lambda)\) for \(\lambda >a\). 
+\end{thm}
+
+In Chapters~\ref{sec: conv} and~\ref{ch: global results} we use the Dominated Convergence Theorem to aid our convergence arguments. In applied probability we often want to prove convergence of certain expressions. An approach which can simplify matters is to partition the expression on certain events where we have a simpler characterisation, thereby enabling us to prove convergence on each element in the partition. The original expression can be written as an integral over the partition. To establish the convergence result we initially desired, we can use the convergence of each element of the partition and the Dominated Convergence Theorem. I have taken the following from Theorem~1.13~\cite{steinreal}. \cite{steinreal} use the notation 
+\[\int f = \int f \wrt x = \int f \wrt m(x),\]
+where \(m\) denotes Lebesgue measure, to denote the Lebesgue integral. 
+\begin{thm}[Dominated Convergence Theorem]
+	Suppose \(\{f_n\}\) is a sequence of measurable functions such that \(f_n(x)\to f(x)\) almost everywhere with respect to \(x\), as \(n\) tends to infinity. If \(|f_n(x)|\leq g(x)\), where \(g\) is integrable, then 
+	\[\int|f_n-f|\to 0 \mbox{ as } n \to \infty,\]
+	and consequently 
+	\[\int f_n\to\int f \mbox{ as } n\to \infty.\]
+\end{thm}
+
+Also in Chapters~\ref{sec: conv} and~\ref{ch: global results} we want to manipulate infinite sums or integrals and rearrange the order of summation or integration. However, things can go awry when we swap the order of integration/summation if we are not careful. The next few results give some conditions under which we have equality under before and after swapping the order of summation/integration. Once again, we follow \cite{steinreal} quoting their Theorem~2.13. If \(f\) is a function in \(\mathbb R^{d}=\mathbb R^{d_1}\times \mathbb R^{d_2}\), the \emph{slice} of \(f\) corresponding to \(y\in\mathbb R^{d_2}\) is the function \(f^y\) of the \(x\in\mathbb R^{d_1}\) variable, given by 
+\[f^y(x)=f(x,y).\]
+Similarly, the slice of \(f\) for a fixed \(x\in\mathbb R^{d_1}\) is \(f_x(y)=f(x,y)\). 
+\begin{thm}[Fubini's Theorem]\label{Fubini}
+	Suppose \(f(x,y)\) is integrable on \(\mathbb R^{d_1}\times \mathbb R^{d_2}\). Then for almost every \(y\in\mathbb R^{d_2}\):
+	\begin{itemize}
+		\item The slice \(f^y\) is integrable on \(\mathbb R^{d_1}\).
+		\item The function defined by \(\int_{R^{d_1}} f^y(x)\wrt x\) is integrable on \(\mathbb R^{d_2}\). 
+	\end{itemize}
+	Moreover:
+	\begin{itemize}
+		\item[(iii)] \(\displaystyle\int_{R^{d_2}}\left(\int_{R^{d_1}}f(x,y)\wrt x\right)\wrt y = \int_{\mathbb R^d}f.\)
+	\end{itemize}
+\end{thm}
+\cite{steinreal} then state \begin{quotation}``Clearly, the [Fubini] theorem is symmetric in \(x\) and \(y\) so that we also may conclude that the slice \(f_x\) is integrable on \(\mathbb R^{d_2}\) for almost every \(x\). Moreover, \(\int_{\mathbb R^{d_2}}f_x(y)\wrt y\) is integrable and 
+\[\displaystyle\int_{R^{d_1}}\left(\int_{R^{d_2}}f(x,y)\wrt y\right)\wrt x = \int_{\mathbb R^d}f.\]
+In particular, Fubini's theorem states that the integral of \(f\) on \(\mathbb R^d\) can be computed by iterating lower-dimensional integrals, and that the iterations can be taken in any order
+\[\int_{R^{d_2}}\left(\int_{R^{d_1}}f(x,y)\wrt x\right)\wrt y=\displaystyle\int_{R^{d_1}}\left(\int_{R^{d_2}}f(x,y)\wrt y\right)\wrt x = \int_{\mathbb R^d}f.\mbox{''}\]
+\end{quotation}
+It is this last statement which is most powerful. Effectively, if either
+\[\int_{R^{d_2}}\left(\int_{R^{d_1}}|f(x,y)|\wrt x\right)\wrt y<\infty,\]
+or
+\[\int_{R^{d_1}}\left(\int_{R^{d_2}}|f(x,y)|\wrt y\right)\wrt x<\infty,\]
+then we can swap the order of integration. 
+
+A closely related theorem which is often used alongside Fubini's Theorem is Tonelli's Theorem. Define the \emph{extended Lebesgue integral} of an extended valued (it can take the value \(+\infty\)) non-negative function \(f\) by 
+\[\int f(x)\wrt x = \sup_{g}\int g(x)\wrt x.\]
+\begin{thm}[Tonelli's Theorem]\label{Tonelli}
+	Suppose \(f(x,y)\) is a non-negative measurable function on \(\mathbb R^{d_1}\times \mathbb R^{d_2}\). Then for almost every \(y\in\mathbb R^{d_2}\):
+	\begin{itemize}
+		\item The slice \(f^y\) is integrable on \(\mathbb R^{d_1}\).
+		\item The function defined by \(\int_{R^{d_1}} f^y(x)\wrt x\) is integrable on \(\mathbb R^{d_2}\). 
+	\end{itemize}
+	Moreover:
+	\begin{itemize}
+		\item[(iii)] \(\displaystyle\int_{R^{d_2}}\left(\int_{R^{d_1}}f(x,y)\wrt x\right)\wrt y = \int_{\mathbb R^d}f(x,y)\wrt x\wrt y \mbox{ in the extended sense}.\)
+	\end{itemize}
+\end{thm}
+
+Once again, we note that the theorem is symmetric in \(x\) and \(y\), so we can establish that we may swap the order of integration provided that \(f\) is non-negative. Tonelli's Theorem allows us to exchange the order of integration for any non-negative extended real-valued function, and includes the case where the value of the integral is infinite. In contrast, Fubini's Theorem us to exchange the order of integration for any real-valued function, provided that the integral is finite. 
+
+Collectively, we refer to Theorems~\ref{Fubini} and~\ref{Tonelli} together as the Fubini-Tonelli Theorem, but they are otherwise known collectively as just Fubini's Theorem. Often, they are used in conjunction. Since \(|f|\) is a non-negative function, then we may use Tonelli's Theorem and compute (or bound) the integral \(\int |f|\) via computing an iterated integral. If this is found to be finite, then Fubini's Theorem applies so \(f\) is integrable, and we may evaluate \(\int f\) via an iterated integral. 
+
+In the context of probability, the function \(f\) which we are integrating is often positive, so Tonelli's Theorem is all that is required to justify a swap of iterated integrals. 
 
 \section{Sundry mathematical concepts}\label{eqn: la}
 \subsection*{Polynomials}

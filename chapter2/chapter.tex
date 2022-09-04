@@ -22,20 +22,20 @@ In this chapter we introduce the discontinuous Galerkin (DG) method applied to f
 
 % \section{Discontinuous Galerkin Approximation of the Generator of a Fluid Queue}
 	% \label{sec:DG}
-Discontinuous Galerkin (DG) methods can be used to approximate the solutions to systems of partial differential equations (PDEs). Here we describe how one can apply the DG method to approximate fluid queues and fluid-fluid queues. In finite-element methods we project the partial differential equations onto a set of piecewise polynomial functions. This projection leads to a new system of equations which represent a \textit{weak form} of the original system of PDEs. Next, we approximate the \textit{flux operator} which moves probability from one cell to another. This creates a system of ordinary differential equations which is known as a \emph{semi-discrete system} (discrete in the spatial variable but continuous in time). We can solve the semi-discrete system to approximate transient distributions of the fluid queue or, as we do in Section~\ref{sec:DGSFFM}, we can extract and manipulate an approximation to the generator of the fluid queue to approximate performance measures of fluid-fluid queues. The DG method conserves probability. Here we construct the DG approximation to the matrix of operators \(\mathbb B\) which we use later to construct a DG approximation to \(\mathbb D(s)\) then \(\mathbb\Psi(s)\), and ultimately the limiting distribution of a stochastic fluid-fluid queue. 
+Discontinuous Galerkin (DG) methods can be used to approximate the solutions to systems of partial differential equations (PDEs). Here we describe how one can apply the DG method to approximate fluid queues and fluid-fluid queues. In finite-element methods we project the partial differential equations onto a set of piecewise polynomial functions. This projection leads to a new system of equations which represent a \textit{weak form} of the original system of PDEs. Next, we approximate the \textit{flux operator} which moves mass from one cell to another. This creates a system of ordinary differential equations which is known as a \emph{semi-discrete system} (discrete in the spatial variable but continuous in time). We can solve the semi-discrete system to approximate transient distributions of the fluid queue or, as we do in Section~\ref{sec:DGSFFM}, we can extract and manipulate an approximation to the generator of the fluid queue to approximate performance measures of fluid-fluid queues. The DG method conserves probability. Here we construct the DG approximation to the matrix of operators \(\mathbb B\) which we use later to construct a DG approximation to \(\mathbb D(s)\) then \(\mathbb\Psi(s)\), and ultimately the limiting distribution of a stochastic fluid-fluid queue. 
 
 \section{The partial differential equation}
-We start by introducing the PDE from which we will extract the approximation to the generator \(\mathbb B\). 
+We start by introducing the PDE (assuming the PDE exists) from which we will extract the approximation to the generator \(\mathbb B\). 
 
-Let $f_i(x,t)$ be the joint density of $(X_t, \varphi_t)$: 
+Let $f_i(x,t)$ be the joint density of an unbounded fluid queue $(\ddot X_t, \varphi_t)$ (assuming a density exists): 
 	% 
 	\begin{align*} 
-	    f_i(x,t) := \cfrac{\partial}{\partial x} 	\mathbb{P}\left(X(t) \leq x, \varphi(t) = i\right),\quad 0<x<b,\, i \in\calS,
+	    f_i(x,t) := \cfrac{\partial}{\partial x} 	\mathbb{P}\left(X(t) \leq x, \varphi(t) = i\right),\quad i \in\calS,
 	\end{align*} 
 which satisfies the system of partial differential equations 
 %
 \begin{align*}
-\cfrac{\partial}{\partial t} f_i(x,t)& = \sum_{j\in \mathcal{S}}  f_j(x,t)T_{ji} - c_i \cfrac{\partial}{\partial x} f_i(x,t), \quad 0<x<b,\, i\in\mathcal S,
+\cfrac{\partial}{\partial t} f_i(x,t)& = \sum_{j\in \mathcal{S}}  f_j(x,t)T_{ji} - c_i \cfrac{\partial}{\partial x} f_i(x,t), \quad i\in\mathcal S,
 \end{align*}
 % 
 subject to suitable boundary conditions. In matrix form, 
@@ -50,14 +50,14 @@ where \(\boldsymbol f(x,t) = \left(f_i(x,t)\right)_{i\in\mathcal S}\) is a row-v
 % on the interior of the space \([0,\infty)\). Thus, by approximating the operator on the right-hand side of Equation~(\ref{eqn:pde_density_matrix}) we can approximate the infinitesimal operator \(\mathbb B\). The DG method does exactly this, by approximating the operator with a matrix.
 
 \section{Cells, test functions, and weak formulation}
-To begin with, consider an unbounded first fluid level \(\{\ddot X_t,t\geq0\}\), \(\ddot X_t\in(-\infty,\infty)\). We will eventually truncate this space so that we have a finite dimensional approximation; however, this requires a discussion on boundary conditions which we save for later. Let \(\mathcal D_{k,i} = [y_k,y_{k+1}),\, k\in\mathbb Z\) for \(i\in\calS_+\cup\calS_0\) and \(\mathcal D_{k,i} = (y_k,y_{k+1}],\, k\in\mathbb Z\) for \(i\in\calS_-\), \(y_k<y_{k+1}\), partition the domain \((-\infty,\infty)\). We call the \(\calD_{k,i}\) \textit{cells} and define \(\Delta_k=y_{k+1}-y_k\). 
+To begin with, consider an unbounded fluid queue with fluid level \(\{\ddot X_t,t\geq0\}\), \(\ddot X_t\in(-\infty,\infty)\). Later, we will use the approximation to the generator of the fluid queue to approximate performance measures of fluid-fluid queues, but for now, we can consider just the driving fluid queue. We will eventually truncate the state space, \(\ddot X_t\in(-\infty,\infty)\), so that we have a finite dimensional approximation; however, this requires a discussion of boundary conditions which we save for later. Let \(\mathcal D_{k,i} = [y_k,y_{k+1}),\, k\in\mathbb Z\) for \(i\in\calS_+\cup\calS_0\) and \(\mathcal D_{k,i} = (y_k,y_{k+1}],\, k\in\mathbb Z\) for \(i\in\calS_-\), \(y_k<y_{k+1}\), partition the domain \((-\infty,\infty)\). We call the \(\calD_{k,i}\) \textit{cells} and define \(\Delta_k=y_{k+1}-y_k\). 
 
-For each \(k\) we choose \(p_k\) linearly independent functions \(\{\phi^r_k\}_{r=1}^{p_k}\), compactly supported on \(\calD_{k,i}\) (i.e.~\(\phi^r_k(x)=0\) for \(x\notin\calD_{k,i}\)) to form a basis for the space \(W_k\), in which we formulate the approximation. Here, as is standard in DG methods \citep{nodalDGBook}, we take \(\{\phi^r_k\}_{r=1}^{p_k}\) to be the space of polynomials of degree \(p_k-1\). For the sake of illustration, the reader may think of \(\{\phi^r_k\}_{r=1}^{p_k}\) as the Lagrange polynomials, but any polynomial basis can be used. On each cell \(\mathcal D_{k,i}\) we approximate 
+For each \(k\in \mathbb Z\) we choose \(p_k\) linearly independent functions \(\{\phi^r_k\}_{r=1}^{p_k}\), supported on \(\calD_{k,i}\) (i.e.~\(\phi^r_k(x)=0\) for \(x\notin\calD_{k,i}\)) for all \(i\in\calS\), to form a basis for the space \(W_k\), in which we formulate the approximation. Here, as is standard in DG methods \citep{nodalDGBook}, we take \(\{\phi^r_k\}_{r=1}^{p_k}\) to be a basis for the space of polynomials of degree \(p_k-1\). For the sake of illustration, the reader may think of \(\{\phi^r_k\}_{r=1}^{p_k}\) as the Lagrange polynomials, but any polynomial basis can be used. On each cell \(\mathcal D_{k,i}\) we approximate 
 \[f_i(x,t)\approx u_{k,i}(x,t)=\sum\limits_{r=1}^{p_k}a_{k,i}^r(t)\phi^r_k(x),\] 
 where \(a_{k,i}^r(t)\) are yet-to-be-determined time-dependent coefficients. We refer to \(u_{k,i}\) as the \textit{local} approximation on cell \(k\), while the \textit{global} approximation is given by \(\sum\limits_{k\in\mathbb Z}u_{k,i}\) on the whole domain. %The whole approximation space is \(\bigoplus\limits_{k\in\mathbb Z} W_k\), the direct sum of the spaces \(W_k\), \(k\in\mathbb Z\).
 
 Let \(\mathcal N_k := \left\{1,\dots,p_k\right\},\, k \in \mathbb Z\). For \(k\in\mathbb Z,\) define \textit{local} row-vectors 
-\[\boldsymbol \phi_k(x) = (\phi^r_k(x))_{r\in\mathcal N_k}, \quad \boldsymbol a_{k,i}(x) = (a_{k,i}^r(x))_{r\in\mathcal N_k},\,i\in\mathcal S.\]
+\[\boldsymbol \phi_k(x) = (\phi^r_k(x))_{r\in\mathcal N_k}, \quad \boldsymbol a_{k,i}(t) = (a_{k,i}^r(t))_{r\in\mathcal N_k},\,i\in\mathcal S.\]
 %Also define \textit{global} row-vectors 
 %\[\boldsymbol \phi(x) = (\boldsymbol\phi^k(x))_{k\in\{1,...,K\}},\quad \boldsymbol a_i(x) = (\boldsymbol a_{k,i}(x))_{k\in\{1,...,K\}},\,i\in\mathcal S.\]
 Note that we will always use the letter \(r\) to index the basis function within each cell.
@@ -69,15 +69,15 @@ The DG method proceeds by first considering the \textit{weak-formulation} of the
 	%
 	+  \int_{x\in\mathbb R} f_j(x,t)c_j\cfrac{\wrt}{\wrt x}\psi(x)\wrt x \\{}- [ f_j(x,t)c_j\psi(x)]_{x=-\infty}^{x=\infty}, \end{multlined}\label{eqn:weak form}
 \end{align}
-for \(j\in\calS\). It is common to choose \(W\) such that \(\psi(-\infty)=\psi(\infty)=0\), in which case the last term on the right is zero. Requiring (\ref{eqn:weak form}) to hold for every \(\psi\in W\) gives the weak-formulation of the PDE. Solutions to (\ref{eqn:weak form}) are known as \textit{weak} solutions and generalise the concept of a solution of the PDE. For example, this may allow discontinuities with respect to \(x\) in the solution -- something which is ill-defined for the strong form.
+for \(j\in\calS\). It is convenient to choose \(W\) such that \(\psi(-\infty)=\psi(\infty)=0\), in which case the last term on the right is zero. Requiring (\ref{eqn:weak form}) to hold for every \(\psi\in W\) gives the weak-formulation of the PDE. Solutions to (\ref{eqn:weak form}) are known as \textit{weak} solutions and generalise the concept of a solution of the PDE. For example, this may allow discontinuities with respect to \(x\) in the solution -- something which is ill-defined for the strong form.
 
-For the purpose of DG, we take the set of test functions to be \(W = \bigoplus\limits_{k\in\mathbb Z} W^k\) (the direct sum of \(W^k\)), the same as the set of basis functions of our solution space. Proceeding as described above, the weak formulation is 
+For the problem at hand, we take the set of test functions to be \(W = \bigoplus\limits_{k\in\mathbb Z} W^k\) (the direct sum of \(W^k\)), the same as the set of basis functions of our solution space. Proceeding as described above, for all \(j\in\mathcal S,\,r\in\mathcal N_k\), \(k\in\mathbb Z,\) the weak formulation is 
 \begin{align*}
 	\begin{multlined}[t]\int_{x=y_k}^{y_{k+1}}\cfrac{\partial}{\partial t} f_j(x,t)\phi^r_k(x)\wrt x = \int_{x=y_k}^{y_{k+1}}\sum_{i\in\calS}  f_i(x,t)T_{ij}\phi^r_k(x)\wrt x  
 	%
 	+  \int_{x=y_k}^{y_{k+1}} f_j(x,t)c_j\cfrac{\wrt}{\wrt x}\phi^r_k(x)\wrt x \\ {}- [f_j(x,t)c_j\phi^r_k(x)]_{x=y_k}^{x=y_{k+1}}, \end{multlined}
 \end{align*}
-since \(\phi^r_k\) is compactly supported on \(\calD_{k,j}\), for all \(j\in\mathcal S,\,r\in\mathcal N_k\), \(k\in\mathbb Z.\) Now, note that any function \(g(x)\) can be decomposed as \(g(x) = g^{W}(x)+g^\perp(x)\) where \(g^{W}\in W\) and \(g^\perp \in W^\perp\), and \(W^\perp\) is the orthogonal complement of \(W\). Since \(g^\perp\) is orthogonal to \(W\), \(\displaystyle\int_{x}g^\perp(x)\phi^r_k(x)\wrt x=0\) for \(r\in\mathcal N_k,\,k\in\mathbb Z\). Also, note that \(\cfrac{\wrt}{\wrt x}\phi^r_k(x)\in W\). Using this, we can write 
+since \(\phi^r_k\) is compactly supported on \(\calD_{k,j}\). Now, note that any function \(g(x)\) can be decomposed as \(g(x) = g^{W}(x)+g^\perp(x)\) where \(g^{W}\in W\) and \(g^\perp \in W^\perp\), the orthogonal complement of \(W\). Since \(g^\perp\) is orthogonal to \(W\), \(\displaystyle\int_{x}g^\perp(x)\phi^r_k(x)\wrt x=0\) for \(r\in\mathcal N_k,\,k\in\mathbb Z\). Also, note that \(\cfrac{\wrt}{\wrt x}\phi^r_k(x)\in W\). Using this, we can write 
 \begin{align*}
 	\begin{multlined}[t]\int_{x=y_{k}}^{y_{k+1}}\cfrac{\partial}{\partial t} \left(f_j^W(x,t)+f_j^\perp(x,t)\right)\phi^r_k(x)\wrt x 
 	= \int_{x=y_k}^{y_{k+1}}\sum_{i\in\calS} \left(f_i^W(x,t)+f_i^\perp(x,t)\right)T_{ij}\phi^r_k(x)\wrt x  
@@ -85,13 +85,13 @@ since \(\phi^r_k\) is compactly supported on \(\calD_{k,j}\), for all \(j\in\mat
 	\\ {}
 	+  \int_{x=y_k}^{y_{k+1}} \left(f_j^W(x,t)+f_j^\perp(x,t)\right)c_j\cfrac{\wrt}{\wrt x}\phi^r_k(x)\wrt x - [f_j(x,t)c_j\phi^r_k(x)]_{x=y_k}^{x=y_{k+1}}, \end{multlined}
 \end{align*}
-	which is equivalent to
+	which reduces to
 \begin{align}
 	\begin{multlined}[t]\int_{x=y_k}^{y_{k+1}}\cfrac{\partial}{\partial t} f_j^W(x,t)\phi^r_k(x)\wrt x = \int_{x=y_k}^{y_{k+1}}\sum_{i\in\calS} f_i^W(x,t)T_{ij}\phi^r_k(x)\wrt x  
 	%
 	\\{} + \int_{x=y_k}^{y_{k+1}} f_j^W(x,t)c_j\cfrac{\wrt}{\wrt x}\phi^r_k(x)\wrt x - [f_j(x,t)c_j\phi^r_k(x)]_{x=y_k}^{x=y_{k+1}}. \end{multlined} \label{eqn:hash}
 \end{align}
-Now, \(f_j^W(x,t)\in W\) so, on \(\mathcal D_{k,j}\), it can be expressed as \(u_{k,j}(x,t):=\boldsymbol a_{k,j}(t) \boldsymbol \phi_k(x)\tr{}\), where the prime, \({}\tr{}\), denotes the transpose, which we now substitute into (\ref{eqn:hash})
+Now, \(f_j^W(x,t)\in W\) so, on \(\mathcal D_{k,j}\), it can be expressed as \(u_{k,j}(x,t):=\boldsymbol a_{k,j}(t) \boldsymbol \phi_k(x)\tr{}\), where the prime denotes the transpose, which we now substitute into (\ref{eqn:hash})
 %\begin{align*}
 %	\begin{multlined}[t]\int_{x\in\calD_k}\cfrac{\wrt}{\wrt t} \boldsymbol a_{k,j}(t) \boldsymbol \phi^k(x)\tr{}\phi^r_k(x)\wrt x = \int_{x\in\calD_k}\sum_{i\in\calS} \boldsymbol a_{k,i}(t) \boldsymbol \phi^k(x)\tr{}T_{ij}\phi^r_k(x)\wrt x  
 %	%
@@ -221,7 +221,7 @@ The global system of equations is
 \end{align}
 
 \section{Boundary conditions}\label{subsec: boundary DG}
-To enable computation, this numerical approximation has to take place on a finite interval, which means we must consider a bounded domain and specify boundary conditions. Recall that we wish to impose lower and upper boundaries at \(0\) and \(b\), respectively. %In the numerics chapter, Chapter~\ref{sec: numerics}, we wish to approximate a fluid-fluid queue where the first fluid level, \(\dot X_t\), is bounded below at 0, only: in that case the first step in the approximation scheme is to approximate \(\dot X_t\) by \( X_t\). The truncation of \(X_t\) to \(\overline X_t\) will result in an artificial point mass at the upper bound, which we have to address properly. It is important to choose an \(b\) sufficiently large to control the error induced by the artificial upper bound, however, with larger \(b\) there comes increased computational burden. 
+To enable computation, the numerical approximation has to take place on a finite interval, which means we must consider a bounded domain and specify boundary conditions. Recall that we wish to impose lower and upper boundaries at \(0\) and \(b\), respectively. On the interior of the space, the PDE (\ref{eqn:pde_density_matrix}) (assuming it exists) still describes the evolution of the distribution of the fluid queue. Regarding the approximation, the constructions above can still be used to approximate the evolution of the fluid queue on the interior of the space. The imposition of boundary conditions amounts to truncating the operator \(\ddot{\bs B}\), adding boundary elements to the system and describing how mass moves between the boundary and the elements adjacent to the boundary.  %In the numerics chapter, Chapter~\ref{sec: numerics}, we wish to approximate a fluid-fluid queue where the first fluid level, \(\dot X_t\), is bounded below at 0, only: in that case the first step in the approximation scheme is to approximate \(\dot X_t\) by \( X_t\). The truncation of \(X_t\) to \(\overline X_t\) will result in an artificial point mass at the upper bound, which we have to address properly. It is important to choose an \(b\) sufficiently large to control the error induced by the artificial upper bound, however, with larger \(b\) there comes increased computational burden. 
 
 Let $[0,b]$ be the domain of the approximation, where $b < \infty$. We partition the space $[0,b]$ into \(\mathcal D_{-1}=\{0\},\) \(\mathcal D_{K+1}=\{b\},\) and \(K\) non-trivial intervals, \(\calD_{k,i}=[y_k,y_{k+1})\setminus \{0\},\,i\in\calS_+\cup\calS_0,\calD_{k,i}=(y_k,y_{k+1}]\setminus \{0\},\,i\in\calS_-,\, y_k<y_{k+1},\, k\in\mathcal K^\circ\), \(y_0=0,\,y_{K+1}=b\) and define \(\Delta_k := y_{k+1}-y_k\). 
 
@@ -526,12 +526,12 @@ Proceeding similarly to the derivation of the Riccati equation~(\ref{eqn:Riccati
 Essentially, we replace the theoretical operators in (\ref{eqn:xi1}) and (\ref{eqn:xi2}) with their DG counterparts. 
 
 Similarly, the coefficients \( {\boldsymbol{p}}\) are given by 
-	\begin{equation}\vligne{\bs{p}^{-}  & \bs{p}^{0}} = z \vligne{{\bs\xi} & \bs{0}} 
+	\begin{equation}\vligne{\bs{p}^{-}  & \bs{p}^{0}} = Z \vligne{{\bs\xi} & \bs{0}} 
 	\left(-\left[\begin{array}{ll} 
 		{\bs B}^{--} & {\bs B}^{-0} \\
 		{\bs B}^{0-} & {\bs B}^{00} 
 		\end{array} \right] \right)^{-1},\label{eqn:pisystem1}\end{equation}
-		where \(z\) is a normalising constant. The coefficients \(\bs \pi(y)\) are given by 
+		where \(Z\) is a normalising constant. The coefficients \(\bs \pi(y)\) are given by 
 \begin{align} 
 	\;  {\bs{\pi}}^{0}(y) &= \vligne{ {\bs{\pi}}^{+}(y) &  {\bs{\pi}}^{-}(y)}\left[\begin{array}{l} { {\bs B}}^{+0} \\ { {\bs B}}^{-0} \end{array} \right]\left(-{ {\bs B}}^{00}\right)^{-1}, \\ 
 	% 
@@ -634,7 +634,7 @@ Nonetheless, the DG scheme can be used to answer a very broad range of questions
 
 % APPLICATION TO INTERGRATING OVER TIME
 \section{Remarks on slope limiters, linear operators and application to fluid-fluid queues}\label{sec: limiting and linearity}
-The process of slope limiting, as described in Section~\ref{sec: slope limiting}, essentially amounts to a non-linear post-processing of the approximate solution after applying the operator \(\bs B\). Thus, the slope-limited scheme arrives at an approximation which is the action of a non-linear operator applied to the initial condition. The fact that the approximate operator is non-linear makes solving the Riccati Equation~(\ref{eqn:RiccatiPsi}) difficult/impossible, whereas there are efficient techniques to solve matrix-Riccati equations \cite{bot08}. Thus, for the application to fluid-fluid queues slope limiting is not a viable option. We could, however, proceed with a vanilla DG scheme (with no limiter) and, when we apply the operator \(\bs \Psi\) to some initial condition and realise an approximation to the distribution of the fluid queue when \(\{Y(t)\}\) first return to its initial level, we could then post-process the solution with a limiter or filter if oscillations are present in the approximation. The application of the limiter/filter is dependent on the initial condition, so the post-processing needs to be done for every initial condition under consideration. If there are many initial distributions to consider, this could result in an increased computational cost. We do not investigate this post-processing approach in this thesis. 
+The process of slope limiting, as described in Section~\ref{sec: slope limiting}, essentially amounts to a non-linear post-processing of the approximate solution after applying the operator \(\bs B\). Thus, the slope-limited scheme arrives at an approximation which is the action of a non-linear operator applied to the initial condition. The fact that the approximate operator is non-linear makes solving the Riccati Equation~(\ref{eqn:RiccatiPsi}) difficult/impossible, whereas there are efficient techniques to solve matrix-Riccati equations \cite{bot08}. Thus, for the application to fluid-fluid queues slope limiting is not a viable option. We could, however, proceed with a vanilla DG scheme (with no limiter) and, when we apply the operator \(\bs \Psi\) to some initial condition and realise an approximation to the distribution of the fluid queue when \(\{Y(t)\}\) first returns to its initial level, we could then post-process the solution with a limiter or filter if oscillations are present in the approximation. The application of the limiter/filter is dependent on the initial condition, so the post-processing needs to be done for every initial condition under consideration. If there are many initial distributions to consider, this could result in an increased computational cost. We do not investigate this post-processing approach in this thesis. 
 
 On a related note, the advantage of a linear approximation can also be useful if we want to approximate transient distributions of fluid queues for many initial conditions. For example, consider solving (\ref{eqn: DG ODE w BCs 3}) numerically with a forward-Euler scheme to integrate over time. To advance the coefficients from time \(t\) to time \(t+h\) we compute
 \begin{align*}
