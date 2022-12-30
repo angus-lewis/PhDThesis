@@ -79,7 +79,7 @@ Though it is a slight abuse of notation, for convenience, let us write
 \end{align*}
 where \(g\) is some function, in place of 
 \begin{align}
-	\int_{x\in E}f(x)\int_{\bs a \in\mathcal A}\mathbb P({\bs Y}(t) \in (\ell,\wrt \bs a, j)\mid \bs Y(0)=\bs y_0)\bs a\bs v_{\ell,j}(x)\wrt x \label{eqn:GSW}
+	\int_{x\in E}g(x)\int_{\bs a \in\mathcal A}\mathbb P({\bs Y}(t) \in (\ell,\wrt \bs a, j)\mid \bs Y(0)=\bs y_0)\bs a\bs v_{\ell,j}(x)\wrt x \label{eqn:GSW}
 \end{align}
 where \(\bs v_{\ell,j}(x)\) is a closing operator as defined in Section~\ref{sec: closing}. Expression~(\ref{eqn:GSW}) is an approximation to 
 \begin{align}
@@ -133,7 +133,7 @@ For times \(t\) such that \(\Gamma_m\leq t<\Sigma_{m+1}\), then \(\varphi(t)\in\
 
 With these stopping times, partition the sample paths of the QBD-RAP by the number of up-down and down-up transition as follows. For \(x_0\in\calD_{\ell_0,i},\) \(x\in\calD_{\ell_0,j},\) \(t\geq0,\) \(\ell_0\in\mathcal K^\circ,\) \(m\geq 0\), and for \(i\in\calS_+,j\in\mathcal S_+\cup\mathcal S_{+0}\), let 
 \begin{align}
-	&f^{\ell_0,(p)}_{m,+,+}(t)( x,j; x_0,i) 
+	&f^{\ell_0,(p)}_{m,+,+}(t)( x,j; x_0,i)  \nonumber
 	\\&=\int_{\bs a \in\mathcal A^{(p)}}\mathbb P\Big(\bs A^{(p)}(t)\in \wrt \bs a, \varphi(t) = j, t<\tau_1^{(p)}, \Gamma_m\leq t<\Sigma_{m+1} \nonumber
 	\mid \bs Y^{(p)}(0)=\bs y_0^{(p)}\Big)
 	\bs a{\bs v}_{\ell_0,j}^{(p)}(x) \nonumber
@@ -218,7 +218,7 @@ Consider the measures on the Borel sets of \(\calD_{\ell_0,j}\) given by
 \(\ell_0\in\mathcal K^\circ\), \(x_0 \in\mathcal D_{\ell_0,i}, i,j\in\mathcal S, t \geq 0. \)
 This is the distribution of the fluid queue at time \(t\) on the event that the fluid level remains within \(\mathcal D_{\ell_0}\) up to and including time \(t\) and is in phase \(j\) at time \(t\), given that it started at \(X(0)=x_0\in\mathcal D_{\ell_0,i}\) in phase \(i\). 
 
-I do not know of any simple expression for (\ref{eqn: sojourn}). There are expressions for the Laplace transform of (\ref{eqn: sojourn}) with respect to time. One is in terms of the of first return matrices \(\Psi(\lambda)\) and \(\Xi(\lambda)\) \citep{bean2009}. Here we opt for another expression for the Laplace transform which is obtained by partitioning as follows.
+I do not know of any simple expression for (\ref{eqn: sojourn}). There are expressions for the Laplace transform of (\ref{eqn: sojourn}) with respect to time. One is in terms of the first return matrices \(\Psi(\lambda)\) and \(\Xi(\lambda)\) \citep{bean2009}. Here we opt for another expression for the Laplace transform which is obtained by partitioning as follows.
 
 As before, we use the sequence of up-down transition times, \(\{\Sigma_m\}_{m\geq 1}\), and the sequence of down-up transition times, \(\{\Gamma_m\}_{m\geq 1},\) to partition sample paths. The events \(\{\Gamma_m\leq t< \Sigma_{m+1}\} , \mbox{ and } \{\Sigma_{m+1}\leq t< \Gamma_{m+1}\}, \) \(m\geq 0\), partition the sample paths of (\ref{eqn: sojourn}) into periods where the fluid is either non-decreasing or non-increasing, respectively; see Figure~\ref{fig: sample paths}.
 \begin{figure}
@@ -303,7 +303,7 @@ Then we can write (\ref{eqn: sojourn}) as
 	\end{cases}\label{eqn:ghghghghggg2}
 \end{align}
 
-For states \(k\in\mathcal S_{0}\), and \(q\in \{+,-\}, \, r\in\{+,-\}\), \(m\geq 0\), then
+For states \(k\in\mathcal S_{0}\), and \(q,r\in \{+,-\}\), \(m\geq 0\), then
 \begin{align}
 	\mu_{m,0,r}^{\ell_0}(t)(x,j;x_0,k)  
 	&:= \sum_{q\in\{+,-\}}\sum_{i\in\calS_q}\int_{t_0=0}^t \bs e_ke^{\bs T_{00}t_0} \bs T_{0i} \mu_{m+1(q\neq r),q,r}^{\ell_0}(t-t_0)(x,j;x_0,i)\wrt t_0 . \label{eqn: vma02}
@@ -492,7 +492,7 @@ for \(m\geq 1\), then analogous expressions can be shown for the Laplace transfo
 		\\&\times \bs a_{\ell_0,i}^{(p)}(x_0) \bs N^{2m+1,(p)}(\lambda,x_1,\dots,x_{2m+1}) {\bs v}_{\ell_0,j}^{(p)}( x)\wrt x_{2m+1}\dots\wrt x_1.
 \end{align*}
 
-In general, for \(k\in\calS_0\), \(q\in \{+,-\}, \, r\in\{+,-\}\), \(m\geq 0\),
+In general, for \(k\in\calS_0\), \(q,r\in \{+,-\},\), \(m\geq 0\),
 \begin{align}
 	\widehat f_{m,0,r}^{\ell_0}(\lambda)(x,j;x_0,k)  
 	&:= \sum_{q\in\{+,-\}}\sum_{i\in\calS_q}\bs e_k\vligne{\lambda \bs I - \bs T_{00}}^{-1}\bs T_{0i}\widehat f_{m+1(q\neq r),q,r}^{\ell_0}(\lambda)(x,j;x_0,i), \label{eqn: vma}

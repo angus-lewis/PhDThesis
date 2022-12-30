@@ -22,7 +22,7 @@ In this chapter we introduce the discontinuous Galerkin (DG) method applied to f
 
 % \section{Discontinuous Galerkin Approximation of the Generator of a Fluid Queue}
 	% \label{sec:DG}
-Discontinuous Galerkin (DG) methods can be used to approximate the solutions to systems of partial differential equations (PDEs). Here we describe how one can apply the DG method to approximate fluid queues and fluid-fluid queues. In finite-element methods we project the partial differential equations onto a set of piecewise polynomial functions. This projection leads to a new system of equations which represent a \textit{weak form} of the original system of PDEs. Next, we approximate the \textit{flux operator} which moves mass from one cell to another. This creates a system of ordinary differential equations which is known as a \emph{semi-discrete system} (discrete in the spatial variable but continuous in time). We can solve the semi-discrete system to approximate transient distributions of the fluid queue or, as we do in Section~\ref{sec:DGSFFM}, we can extract and manipulate an approximation to the generator of the fluid queue to approximate performance measures of fluid-fluid queues. The DG method conserves probability. Here we construct the DG approximation to the matrix of operators \(\mathbb B\) which we use later to construct a DG approximation to \(\mathbb D(s)\) then \(\mathbb\Psi(s)\), and ultimately the limiting distribution of a stochastic fluid-fluid queue. 
+Discontinuous Galerkin (DG) methods can be used to approximate the solutions to systems of partial differential equations (PDEs). Here we describe how one can apply the DG method to approximate fluid queues and fluid-fluid queues. In finite-element methods we project the partial differential equations onto a set of piecewise polynomial functions. This projection leads to a new system of equations which represent a \textit{weak form} of the original system of PDEs. Next, we approximate the \textit{flux operator} which moves mass from one cell to another. This creates a system of ordinary differential equations which is known as a \emph{semi-discrete system} (discrete in the spatial variable but continuous in time). We can solve the semi-discrete system to approximate transient distributions of the fluid queue or, as we do in Section~\ref{sec:DGSFFM}, we can extract and manipulate an approximation to the generator of the fluid queue to approximate performance measures of fluid-fluid queues. Here we construct the DG approximation to the matrix of operators \(\mathbb B\) which we use later to construct a DG approximation to \(\mathbb D(s)\) then \(\mathbb\Psi(s)\), and ultimately the limiting distribution of a stochastic fluid-fluid queue. The DG method is convenient for approximating stochastic processes as it conserves the total probability of the system (as shown in Corollary~\ref{cor: googgy}).
 
 \section{The partial differential equation}
 We start by recalling the PDE (assuming the PDE exists) from which we will extract the approximation to the generator \(\mathbb B\). 
@@ -71,7 +71,7 @@ The DG method proceeds by first considering the \textit{weak-formulation} of the
 \end{align}
 for \(j\in\calS\). It is convenient to choose \(W\) such that \(\psi(-\infty)=\psi(\infty)=0\), in which case the last term on the right is zero. %Requiring (\ref{eqn:weak form}) to hold for every \(\psi\in W\) gives the weak-formulation of the PDE. Solutions to (\ref{eqn:weak form}) are known as \textit{weak} solutions and generalise the concept of a solution of the PDE. %For example, this may allow discontinuities with respect to \(x\) in the solution -- something which is ill-defined for the strong form.
 
-For the problem at hand, we take the set of test functions to be \(W = \bigoplus\limits_{k\in\mathbb Z} W^k\) (the direct sum of \(W^k\)), the same as the set of basis functions of our solution space. Proceeding as described above, for all \(j\in\mathcal S,\,r\in\mathcal N_k\), \(k\in\mathbb Z,\) the weak formulation is 
+For the problem at hand, we take the set of test functions to be \(W = \bigoplus\limits_{k\in\mathbb Z} W_k\), the direct sum of \(W_k\), where \(W_k\) is the domain of the approximation on the interval \(\calD_k\). Further, we use the same basis functions for the test-function space and the approximation space. Proceeding as described above, for all \(j\in\mathcal S,\,r\in\mathcal N_k\), \(k\in\mathbb Z,\) the weak formulation is 
 \begin{align*}
 	\begin{multlined}[t]\int_{x=y_k}^{y_{k+1}}\cfrac{\partial}{\partial t} f_j(x,t)\phi^r_k(x)\wrt x = \int_{x=y_k}^{y_{k+1}}\sum_{i\in\calS}  f_i(x,t)T_{ij}\phi^r_k(x)\wrt x  
 	%
@@ -120,8 +120,8 @@ We can write (\ref{eqn:DG system}) as
 \end{align}
 
 It remains to approximate the \textit{flux}, \(f_j(x,t)\) at the cell edges \(y_k,\,k\in\mathbb Z\), so that we may evaluate the terms \([f_j(x,t)\phi^r_k(x)]_{x=y_k}^{x=y_{k+1}}\), \(r=1,...,p_k,\,k\in\mathbb Z\). %This is the key for DG -- it joins the local approximations on each cell into a global approximation on the whole domain of approximation. 
-The flux is the instantaneous rate (with respect to time) at which density moves across the boundaries \(y_k,\,k\in\mathbb Z\). There are different choices for the flux, and we refer the reader to \citep{c99,nodalDGBook}, and references therein, for some discussion of the topic. Here, we choose the \textit{upwind} scheme, which, as we shall see, closely resembles the flux terms from the generator \(\mathbb B\). The approximate flux, also known as the \textit{numerical flux}, is given by 
-\[f^*_j(x,t) = sign(c_j)\lim_{\varepsilon\to0^+}u_j(x-\varepsilon c_j,t),\]
+The flux is the instantaneous rate (with respect to time) at which density moves across the boundaries \(y_k,\,k\in\mathbb Z\). There are different choices for the numerical flux, and we refer the reader to \citep{c99,nodalDGBook}, and references therein, for some discussion of the topic. Here, we choose the \textit{upwind} scheme, which, as we shall see, closely resembles the flux terms from the generator \(\mathbb B\). The approximate flux, also known as the \textit{numerical flux}, is given by 
+\[f^*_j(x,t) = \mathrm{sign}(c_j)\lim_{\varepsilon\to0^+}u_j(x-\varepsilon c_j,t),\]
 at each \(x=y_k,\,k\in\mathbb Z\). 
 Intuitively, the upwind flux takes the value of the density immediately on the upwind side of each \(y_k\). 
 
@@ -264,7 +264,7 @@ for \(j\in\calS_-\).
 
 Thus, the DG approximation of the flux into the point mass \(q_{{K+1},j}(t)\) is 
 \[\sum_{i\in\calS_+}\boldsymbol a_{K,i}(t)\boldsymbol \phi_K(0)\tr{} p_{ij}^{K+1} c_i,\]
-\(j\in\calS_+\), the rate of transition of point mass within \(\bs q_{{K+1}}(t)\) is \(\bs T_{{K+1},{K+1}}\), the DG approximation of the transition of point mass to density is \(\sum\limits_{i\in\calS_{K+1}}q_{{K+1},i}(t)T_{ij}\boldsymbol\phi_K(b)\), \(j\in\calS_-\) and the DG approximation to reflection of density at the upper boundary is \(- \sum_{i\in\calS_+}c_ip_{ij}^{K+1}\bs a_{0,i}(t)\bs F_j^{0,0}\). 
+\(j\in\calS_+\), the rate of transition of point mass within \(\bs q_{{K+1}}(t)\) is \(\bs T_{{K+1},{K+1}}\), the DG approximation of the transition of point mass to density is \(\sum\limits_{i\in\calS_{K+1}}q_{{K+1},i}(t)T_{ij}\boldsymbol\phi_K(b)\), \(j\in\calS_-\) and the approximation to reflection of density at the upper boundary is \(- \sum_{i\in\calS_+}c_ip_{ij}^{K+1}\bs a_{0,i}(t)\bs F_j^{0,0}\). 
 
 To include the behaviour in the DG generator we truncate the doubly-infinite matrix \(\ddot{{\bs B}}\) at \(k=0\) and \(k=K\), then append \(|\mathcal S_{-1}|\) rows and columns to the top and left, and \(|\mathcal S_{K+1}|\) rows and columns to the bottom and right. These represent the point masses \(\bs q_{-1}(t)\) and \(\bs q_{K+1}(t)\), respectively. Given the discussion above, the truncated matrix is
 \[{{\bs B}} = \left[\begin{array}{llllll}
@@ -278,7 +278,7 @@ To include the behaviour in the DG generator we truncate the doubly-infinite mat
 \end{array}\right],\]
 where 
 \begin{align*}
-	{{\bs B}}^{k\ell} &= \ddot{{\bs B}}^{k\ell}, \mbox{ for \(k\in\mathcal K^\circ\), \(\ell\in\{k-1,k,k+1\}\), \(k=\ell\neq 0\) or \(k=\ell\neq K\),}
+	{{\bs B}}^{k\ell} &= \ddot{{\bs B}}^{k\ell}, \mbox{ for \(k\in\mathcal K^\circ\), \(\ell\in\{k-1,k,k+1\}\), \(k=\ell,\, k,\ell\notin \{0,K\}\),}
 	\\ \bs B^{00} &= \ddot{\bs B}^{00} - \left[c_ip_{ij}^{-1} 1(c_i<0, c_j>0)\right]_{i\in\calS,j\in\calS}\otimes \bs F_-^{00},
 	\\ \bs B^{KK} &= \ddot{\bs B}^{KK} + \left[c_ip_{ij}^{-1} 1(c_i>0, c_j<0)\right]_{i\in\calS,j\in\calS}\otimes \bs F_+^{00}, 
 	\\ {{\bs B}}^{{-1}0} &:= \bs T_{{-1}+}\otimes \boldsymbol\phi^0(0), 
@@ -335,7 +335,7 @@ Approximations \( \bs B^{mn}_{ij}\), \( \bs B_{ij}\), and \( \bs B^{mn}\) to \(\
 
 We prove the following result in Appendix~\ref{sec:properties}.
 %This transformation is not strictly necessary and all the following calculations can be done with either form, as long as week keep a consistent interpretation of the DG generator and related coefficients. However, it is convenient to prove properties of the generator.
-\begin{cor}
+\begin{cor} \label{cor: googgy}
 	The approximate generator \( \bs B\) conserves probability. That is, for all \(t\geq 0\),
 	\begin{align*}
 	\begin{multlined}[t]\sum_{i\in\calS_{-1}}q_{{-1},i}(t)+\sum_{i\in\calS_{K+1}}q_{{K+1},i}(t)+\sum_{i\in\calS} \int_{x\in[0,b]}u_i(x,t)\wrt x 
@@ -350,7 +350,7 @@ Given our approximation \(\bs B\) to the generator \(\mathbb B\) we now follow t
 
 It may be convenient to think of our approximations in terms of approximations of kernels. Recall that the operators in \citep{bo2014} can be thought of in terms of kernels. That is, for some function \(\bs g = (g_i(x))_{i\in\calS}\), we can write \(\bs \mu \mathbb B \boldsymbol g\tr{} = \displaystyle \sum\limits_{k,\ell\in\mathcal K}\sum\limits_{i,j\in\calS} \displaystyle \int_{x,y}\wrt \mu_i(x) \mathbb B_{ij}^{k\ell}(x,\wrt y)g_j(y)\) where \(\mathbb B_{ij}^{k\ell}(x,\wrt y)\) is the kernel of the operator \(\mathbb B_{ij}^{k\ell}\). 
 
-Let \(\boldsymbol a_{-1}(t):=\boldsymbol q_{-1}(t)\) and \(\boldsymbol a_{K+1}(t):=\boldsymbol q_{K+1}(t)\), and define basis functions \(\bs\phi_{-1}(x) = \phi_{-1}^1(x) = \delta(x)\) and \(\bs\phi_{K+1}(x) = \phi_{K+1}^1(x) = \delta(x-b)\), where \(\delta\) is the Dirac delta, \(p_{-1} = p_{K+1} = 1\), and \(\mathcal N_{-1} = \mathcal N_{K+1} = \{1\}\). Also define \({\bs M}_{-1}=\bs I_{|\calS_{-1}|}\), \({\bs M}_{K+1}=\bs I_{|\calS_{K+1}|}\), the block-diagonal matrix \(\bs M=diag(\bs M_k,k\in\mathcal K)\), and row-vectors 
+Let \(\boldsymbol a_{-1}(t):=\boldsymbol q_{-1}(t)\) and \(\boldsymbol a_{K+1}(t):=\boldsymbol q_{K+1}(t)\), and define basis functions \(\bs\phi_{-1}(x) = \phi_{-1}^1(x) = \delta(x)\) and \(\bs\phi_{K+1}(x) = \phi_{K+1}^1(x) = \delta(x-b)\), where \(\delta\) is the Dirac delta, \(p_{-1} = p_{K+1} = 1\), and \(\mathcal N_{-1} = \mathcal N_{K+1} = \{1\}\). Also define \({\bs M}_{-1}=\bs I_{|\calS_{-1}|}\), \({\bs M}_{K+1}=\bs I_{|\calS_{K+1}|}\), the block-diagonal matrix \(\bs M=\mathrm{diag}(\bs M_k,k\in\mathcal K)\), and row-vectors 
 \[\boldsymbol \phi(x) = (\bs\phi_k(x))_{k\in\mathcal K}, \quad \boldsymbol a_i(t) = (\bs a_{k,i}(t))_{k\in\mathcal K},\,i\in\calS.\]
 
 To pose the approximation \(\bs B\) in kernel form let \(\boldsymbol a_i \boldsymbol \phi(x)\tr{}\in W,\,i\in\calS\) be the initial density of the process, and \(\boldsymbol \phi(x)\bs b_i\tr{}\in W,\,i\in\calS\) be a test function. Observe that, from our DG construction earlier and the definition of \({\bs M}\), 
@@ -382,7 +382,7 @@ which implies
 Thus, we have the approximation 
 \[\boldsymbol a_{k,i} \boldsymbol \phi_k(x)\tr{}\mathbb R^k_i = \cfrac{\boldsymbol a_{k,i} \boldsymbol \phi_k(x)\tr{}}{|r_i(x)|}\approx \boldsymbol a_{k,i}\bs M_k^r\bs M_k^{-1}\bs\phi_k(x)\tr{}.\]
 Since \(\boldsymbol a_{k,i}\) is arbitrary, we see that we approximate \(\mathbb R_{k,i}\) by \(  \bs R_{k,i} = \bs M_k^r\bs M_k^{-1},\)
-and \(\mathbb R^k\) by \(  \bs R^k = diag(  \bs R_{k,i},{i\in\calS^\bullet_k})\).
+and \(\mathbb R^k\) by \(  \bs R^k = \mathrm{diag}(  \bs R_{k,i},{i\in\calS^\bullet_k})\).
 
 In practice, we implement a Gauss-Lobatto quadrature approximation to compute the elements of \(\bs M_k^r\).
 
@@ -399,7 +399,7 @@ Recalling Lemma~\ref{lemma: D(s)} and replacing the operators \(\mathbb R^k\) an
 
 Let \(\bs\phi_k(x){\bs M}_k^{-1}\bs \Psi_{ij}^{k\ell}(s)\bs\phi_\ell(y)\tr{}\wrt y\), \(i,j\in\calS,\) \(k\in\mathcal K_i^+\,, \ell\in\mathcal K_j^-\) be a finite-dimensional approximation of the operator kernel \(\mathbb\Psi_{ij}^{k\ell}(s)(x,\wrt y)\), where \(\bs \Psi_{ij}^{k\ell}(s)\) is a matrix of constants for a given \(s\). Construct an approximation to \(\mathbb\Psi(s)(x,\wrt y)\) by 
 \[\bs\phi^+(x){\bs M}_+^{-1}\bs \Psi(s)\bs\phi^-(y)\tr{}\wrt y = \bs \phi^+(x)\bs M_+ \left[\left[\bs \Psi_{ij}^{k\ell}\right]_{i\in\calS_k^+,j\in\calS_\ell^-}\right]_{k\in\mathcal K^+,\ell\in\mathcal K^-}\bs \phi^-(y)'\wrt y\]%\left[\left[\bs\phi^k(x)\bs {M}_k^{-1}\bs \Psi_{ij}^{k\ell}(s)\bs\phi^\ell(y)\tr{}\wrt y\right]_{i\in\calS_k^+,j\in\calS_\ell^-}\right]_{ k\in\mathcal K^+, \ell\in\mathcal K^-},\]
-where \(\bs\phi^+(x) = (\bs\phi_k(x))_{i\in\calS_k^+,k\in\mathcal K^+}\) and \(\bs\phi^-(y) = (\bs\phi_k(y))_{i\in\calS_k^-,k\in\mathcal K^-}\) are row-vectors, \(\bs \Psi(s)\) is a matrix of constants for a given \(s\) with the same size as \(\bs D^{+-}\), and \({\bs M}_m,\) \(m\in\{+,-,0\}\) is a block diagonal matrix \({\bs M}_m = diag\left(  \bs M_k, {i\in\calS_k^m}, {k\in\mathcal K^m}\right)\), \(m\in\{+,-,0\}\). Now replace the theoretical kernels in Theorem~\ref{theo:Psi} by their DG approximations to get 
+where \(\bs\phi^+(x) = (\bs\phi_k(x))_{i\in\calS_k^+,k\in\mathcal K^+}\) and \(\bs\phi^-(y) = (\bs\phi_k(y))_{i\in\calS_k^-,k\in\mathcal K^-}\) are row-vectors, \(\bs \Psi(s)\) is a matrix of constants for a given \(s\) with the same size as \(\bs D^{+-}\), and \({\bs M}_m,\) \(m\in\{+,-,0\}\) is a block diagonal matrix \({\bs M}_m = \mathrm{diag}\left(  \bs M_k, {i\in\calS_k^m}, {k\in\mathcal K^m}\right)\), \(m\in\{+,-,0\}\). Now replace the theoretical kernels in Theorem~\ref{theo:Psi} by their DG approximations to get 
 \begin{align*}
 &\bs\phi^+(x){\bs M}_+^{-1}  \bs D^{+-}(s)\bs\phi^-(y)\tr{}\wrt y
 \\&{}+ \int_{z_1,z_2}\bs\phi^+(x){\bs M}_+^{-1}\bs \Psi(s)\bs\phi^-(z_1)\tr{}\bs\phi^-(z_1) {\bs M}_-^{-1}  \bs D^{-+}(s)\bs\phi^+(z_2)

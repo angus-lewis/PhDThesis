@@ -1,0 +1,193 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage{soul}
+\usepackage{etoolbox}
+\AtBeginEnvironment{quote}{\itshape}
+
+\title{Response to Thesis Reviews}
+\author{Angus Lewis}
+
+\begin{document}
+\maketitle
+The reviewers comments are in plain text and not indented. 
+\begin{quote}
+    My comments follow are are in indented and are in italics. 
+\end{quote}
+Text that is \st{struck-out} has already been addressed.
+
+\section{Reviewer 2}
+
+\textbf{2 About the main sections}
+
+Section 2 is of slightly uneven level of detail. Maybe some of the more basic topics are not even necessary. I also suggest re-ordering the subsections from basic to advanced
+\begin{quote}
+    \begin{itemize}
+        \item I'm not sure what the reviewer means by "uneven level of detail" -- sure, some sections are more technical than others. But I think that's just the nature of the topics and the they are presented in the detail required to understand the relevant parts of the thesis. 
+
+        \item I don't think removing basic topics is the answer. I'd rather explain more and the reader can skip bits they don't think they need. 
+
+        \item I like the order of the introduction. It builds in a logical order: some fundamental mathematical concepts -- just enought to get going, then I introduce the fluid and fluid-fluid queue, then tools for their approximations, then other sundry mathematical concepts used in the thesis. I don't think suggested order would add value.  
+    \end{itemize}
+\end{quote}
+
+Section 3 presents the discontinuous Galerkin (DG) method. Unfortunately, no explicit error bounds are available.
+
+Section 4 presents the QBDRAP method. It uses concentrated matrix exponential (CME) functions. It is nice to see that certain properties of CME functions (such as identical real part of all eigenvalues) are utilised. 
+
+Sections 5 and 6 proves convergence for QBDRAP. These sections are rather long and heavy, but the arguments are mostly familiar from the literature. Everything is properly referenced. Sections 5 and 6 could be merged into a single section. Section 5 is difficult to follow; maybe arranging the calculations in Sections 5.2 and 5.3 into lemmas or steps would result in a better structure.
+\begin{quote}
+    \begin{itemize}
+        \item Yes, these sections are long and heavy. I think it's hard to avoid. We have talked about this a lot. I am happy with the content of these sections, but I know Peter objects to including some of the details which make the presentation more complex. 
+        \item Happy to merge 5 and 6. What do you think? I seperated them because they used distinct techniques, but they ultimately combine to prove a single result. 
+        \item Item, happy to add more steps and signposts in Sections 5.2/5.3 or convert them to Lemmas -- perhaps structuring as Lemmas is the way to go as it condeses the important points into a single statement and leaves details to a proof, allowing the reader to forget about the details.
+    \end{itemize}
+\end{quote}
+
+Section 7 presents numerical investigations for a fairly broad selection of examples. Despite the lack of explicit error bounds, we see DG performing well in many cases. Fluid-fluid models are welcome. A general remark: CME distributions only get really concentrated for high orders (dimension). Ideally, I would recommend using at least an order of 30, although I understand there are computational limitations. Either way, it should not be surprising that their performance is not great for orders below 10 or so.
+\begin{quote}
+    \begin{itemize}
+        \item   Not sure what ``fluid-fluid models are welcome'' means.
+        \item I went up to order 21 in the numerical investigations. For some of the more trivial examples in this section I could use higher-order approximations. However, for the interesting examples, simulation is required to measure accuracy and this is computationally expensive. I'm already doing \(5\times 10^{10}\) realisations! To me, it seems unlikely that investigation of higher-order examples would reveal much more insight -- my intuition is that the error decay of the QBD-RAP method is exponential in the order of the ME used. 
+    \end{itemize}
+\end{quote}
+
+\textbf{3 List of minor remarks and typos}
+
+Minor remarks/typos:
+\begin{itemize}
+\item general: definitions are sometimes in italics, sometimes not; defining formulas are
+sometimes denoted by :=, sometimes by =
+\begin{quote}
+    I'm lazy. Do I need to fix this?
+\end{quote}
+\item \st{general: in formulas, functions like diag, sign etc. should be in mathrm font}
+\item page 7 bottom, stopping time definition
+\begin{quote}
+    Not sure what's wrong with it...
+\end{quote}
+\item \st{page 13: 'otherwise it is reflected' - I understand why the word 'reflected' is used here, but usually a reflecting boundary condition means evolving with -ci instead of ci. Here, this is simply an absorbing boundary condition, with transition upon reaching the boundary.}
+\item page 15: Why is the Laplace domain variable sometimes \(s\), sometimes \(\lambda\)?
+\begin{quote}
+    I have change this on page 15. Should I change it throughout?
+\end{quote}
+\item \st{page 17, bottom formula: extra ) bracket}
+\item \st{page 18: 'which is only possibly'  'which is only possible'}
+\item page 19: 'Conditions on fluid-fluid queues to ensure that (2.20) will be differentiable with respect to y are not known, and here we just assume that it is.' - this seems like an innocent assumption. Why don't we have this at least for some nice cases? A few more words on this would be welcome.
+\begin{quote}
+    This is a large can of worms... how much do we want to open it?
+\end{quote}
+\item \st{page 20, third row from top: some ) brackets are missing}
+\item \st{page 20: a point masses to a point mass}
+\item \st{page 30, before (2.35): extra ) bracket in ()}
+\item page 35: Section 2.5.5. about accuracy is indeed very brief and seems highly non-
+rigorous.
+\begin{quote}
+    Hnnn. Yep, it is. I could tighten this up and quote the result from the reference I cite, but it requires some more preliminaries which are not relevant to the rest of the thesis. Thoughts? 
+\end{quote}
+\item \st{page 36, (2.39): m + 2 to m2 in the second sum}
+\item \st{page 36, bottom line: m + 1 to m1 in the first sum}
+\item \st{page 37: the term representation is used before its definition. The correct order
+would also help out Cor. 2.6.}
+\item \st{page 37, near bottom: possibility defective to possibly defective I recommend a
+thorough read-through of Section 2.6.1.}
+\item \st{page 39: 'the process may not actually jump at these times' - reword to something
+like 'the process does not necessarily jump at these times'}
+\item \st{page 42, Section 2.8: is this section even necessary? Laplace-Stieltjes transform has been used heavily earlier.}
+\begin{quote}
+    I have moved this section to section 2.3.
+\end{quote}
+\item \st{page 48, near the top: 'Fubini's Theorem us to' to 'Fubini's Theorem allows us to'}
+\item \st{page 53: 'The DG method conserves probability' - so any quantity from [0,1] remains
+in [0,1] after the approximation, or does it stay completely unchanged? Or does this
+mean something else? Maybe a reference to Cor. 3.1 on page 60? In any case, this
+should be clarified here.}
+\begin{quote}
+    I have clarified that it conerves total probability of the system and added a reference to cor 3.1.
+\end{quote}
+\item \st{page 55: W k or Wk? Both are used, but denote the same space. Also, it would be
+nice to recall the definition of Wk here.}
+\begin{quote}
+    Fixed and recalled.
+\end{quote}
+\item page 55: orthogonal complement spaces and such could be introduced earlier, in
+Section 2.
+\begin{quote}
+    They are only used here, in this specific place, and only takes up less than 2 lines. Do I need to move it?
+\end{quote}
+\item \st{page 56: There are different choices for the flux - rather, for the choice of approxi-
+mation for the flux, right?}
+\item page 60, middle of page: overlong line
+\begin{quote}
+    Fixed? Check once compiled.
+\end{quote}
+\item \st{page 60, bottom formula, first line: the 'or' part should be re-formulated (e.g.
+something like k = l 6 = 0 or K)}
+\item \st{page 70, middle: 'we can show even show' to 'we can even show'}
+\item \st{page 70: 'on the event that phi(t) is constant, then X(t) moves deterministically' -
+'then' is unnecessary}
+\item \st{page 80, near top: 'Other choices are possible' ... 'are other possible choices' -
+unnecessary repeat}
+\item \st{page 88, top line: 'events epochs' to 'event epochs'}
+\item \st{page 102, bottom: use the same function (e.g. g(x)) in both formulas}
+\item page 104: (5.10) and (5.11) seem to be a single formula broken into two parts
+unnecessarily.
+\begin{quote}
+    Check once compiled.
+\end{quote}
+\item \st{page 106, near bottom: 'in terms of the of first return matrices' to 'in terms of the
+first return matrices'}
+\item \st{page 108, line before (5.25): you could simply write q, r in +, - (later as well)}
+\item page 111: maybe Corollary D.3 from Appendix D could be moved to the main text
+\begin{quote}
+    It could be but I dont think it needs to be moved. Thoughts?
+\end{quote}
+\item \st{page 151: 'and the last inequality is the Law of total probability' to 'and the last
+equality is the Law of total probability'}
+\item \st{page 154: 'where the swap of the intergals' to 'where the swap of the integrals'}
+\item page 155: 'The probability of 1 is' - this looks a bit strange, maybe use A and B to
+denote those events
+\begin{quote}
+    Check once compiled.
+\end{quote}
+\item \st{page 161: the bottom formula can fit in a single line}
+\item page 162, about pointwise convergence: weak convergence is fine, that should cover
+the most relevant performance measures. That said, the subsequent remarks and
+Chapter 6.3 are welcome.
+\begin{quote}
+    Thanks?
+\end{quote}
+\item page 170, Fig. 1: good choice of plot markers, as the non-linear plot would be
+invisible otherwise
+\begin{quote}
+    Thanks?
+\end{quote}
+\item \st{page 171: 'as more mass at the left' to 'as more mass is to the left'}
+\item \st{page 175, Fig. 7.7: for the L1 error, QBDRAP seems to have a faster convergence
+rate than DG. It would be nice to see the plot for higher dimension too. Either
+way, I would be careful with conclusions about which method performs better in
+this case.}
+\begin{quote}
+    Reworded and clarified that the QBD-RAP performs worst for these dimension but may be better for higher dimensions (speculative). See comment on higher dims.
+\end{quote}
+\item page 182, Fig. 7.14: once again, it would be nice to go higher with the dimension
+\begin{quote}
+    See previous comment on higher dims.
+\end{quote}
+\item page 184, Fig. 7.15 explanation: 'Interestingly, the error curve for the DG scheme
+is not monotonic.' - any ideas why?
+\begin{quote}
+    added ``Interestingly, the error curve for the DG scheme
+    is not monotonic which is likely to be caused by the specific location of oscillations in the approximation for different dimension approximations.''
+\end{quote}
+\item page 187, Fig. 7.18: nice to see a plot with higher dimension.
+\begin{quote}
+    See previous comments on higher order.
+\end{quote}
+\item \st{page 265: Borthwick (n.d.) - why is there no date? I found a 2016 edition.}
+\end{itemize}
+
+\begin{thebibliography}{9}
+    \bibitem{bn2010}
+    Bean, N.~G.~and Nielsen, B.~F. (2010). {`Quasi-birth-and-death processes with rational arrival process components.}' \textit{Stochastic Models}, 26(3), 309-334.
+\end{thebibliography}
+\end{document} 

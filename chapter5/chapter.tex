@@ -348,7 +348,7 @@ Returning now to (\ref{eqn: mnebrb2}) and taking the limit as \(p\to \infty \),
 		\mid \bs X(0)=(x_0, i))
 	 \label{eqn: mnebrb22}
 \end{align}
-where the swapping of limits and sums in the first equality is justified as the sums are finite, the swapping limits and products in the first equality is justified as the product is finite and all limits exist, and the last inequality is the Law of total probability. 
+where the swapping of limits and sums in the first equality is justified as the sums are finite, the swapping limits and products in the first equality is justified as the product is finite and all limits exist, and the last equality is the Law of total probability. 
 
 Hence, we have proved the following result 
 \begin{lem}\label{lem: kKKJJJF}
@@ -486,7 +486,7 @@ Our aim is to prove convergence of
 	\\&=\sum_{n=0}^\infty\int_{t=0}^\infty e^{-\lambda t}\int_{x\in\calD_{\ell,j}}\mathbb P({\bs Y}^{(p)}(t) = (\ell,\wrt x, j), t\in\mathcal T_n^{(p)} \mid   
 	\bs Y(0) = \bs y_0)\psi(x)\wrt t \label{eqn:GHJKLKJHGHJKL}
 \end{align}
-where the swap of the intergals and sums is justified by the Fubini-Tonelli Theorem. Now, (\ref{eqn:GHJKLKJHGHJKL}) is an infinite sum of terms appearing in Lemma~\ref{lem: LAkAKFnvnb mav h}. Hence, upon taking the limit of (\ref{eqn:GHJKLKJHGHJKL}), if we can justify the swap of the sum and the limit, we will obtain the desired result. To this end, we show a domination condition in Corollary~\ref{vcor: cdks d} so that we may apply the Dominated Convergence Theorem. First, we need a couple of intermediate results. %The main result of this subsection is Lemma~\ref{lem: another bound 2} in which we show a bound which can serve as a dominating function so that we may apply the Dominated Convergence Theorem to justify the aforementioned swap of sum and limit. 
+where the swap of the integrals and sums is justified by the Fubini-Tonelli Theorem. Now, (\ref{eqn:GHJKLKJHGHJKL}) is an infinite sum of terms appearing in Lemma~\ref{lem: LAkAKFnvnb mav h}. Hence, upon taking the limit of (\ref{eqn:GHJKLKJHGHJKL}), if we can justify the swap of the sum and the limit, we will obtain the desired result. To this end, we show a domination condition in Corollary~\ref{vcor: cdks d} so that we may apply the Dominated Convergence Theorem. First, we need a couple of intermediate results. %The main result of this subsection is Lemma~\ref{lem: another bound 2} in which we show a bound which can serve as a dominating function so that we may apply the Dominated Convergence Theorem to justify the aforementioned swap of sum and limit. 
 
 % To extend Lemma~\ref{lem: LAkAKFnvnb mav h} to show a global convergence result we use the Dominated Convergence Theorem. Here we show some geometric bounds on the probability of \(n\) level changes of the QBD-RAP and fluid queue, which ultimately serve as a dominating function in the Dominated Convergence Theorem. 
 
@@ -513,7 +513,7 @@ Note that \(b\) and \(r_1\) depend on \(p\) which has been suppressed to simplif
 	\end{enumerate}
 	
 	Hence, for sample paths which contribute to the Laplace transform, one of two things must happen, either; 
-	\begin{enumerate}
+	\begin{enumerate}[a]
 		\item the phase remains \(i\) until there is an orbit restart epoch and \(E^\lambda\) does not occur before the orbit restart epoch, or, \label{item: 1}
 		\item the phase changes before there is an orbit restart epoch and \(E^\lambda\) does not occur before the orbit restart epoch. \label{item: 2}
 	\end{enumerate}
@@ -781,8 +781,8 @@ and the terms in the last line are those in Lemma~\ref{lem: KajPOw}.
 	\begin{align*}
 		F\sum_{\ell\in\mathcal K} \min\{B^{|\ell-\ell_0|-1},1\} 
 		&\leq2\sum_{n=1}^\infty B^{n-1}+1
-		\\&=\cfrac{2}{1-B}+1
-		\\&<\infty,
+		=\cfrac{2}{1-B}+1
+		<\infty,
 	\end{align*}
 	hence the dominating terms are summable. Hence, we may apply the Dominated Convergence Theorem to swap the necessary limits and sums, from which the result follows.
 \end{proof} 
