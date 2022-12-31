@@ -15,6 +15,126 @@ The reviewers comments are in plain text and not indented.
 \end{quote}
 Text that is \st{struck-out} has already been addressed.
 
+\pagebreak
+\section{Reviewer 1}
+
+\textbf{OVERVIEW} 
+
+This thesis considers approximations of fluid-fluid queues by approximating the dri-
+ving fluid process by either a QBD or RAP-QBD process. By discretizing the state-
+space of the driving fluid process, one does not obtain a QBD automatically, but by
+replacing the constant drifts with random ones, governed by birth- and death pro-
+cesses that mimic the drift, one can approximate the fluid flow process by a QBD.
+This is the content of Chapter 3, in which part the author is the co-author of a
+published paper.
+\begin{quote}
+    This is not the content of Chapter 3. 
+\end{quote}
+
+Since one is interested in approximating the deterministic hitting times caused by
+the constant drift, one might think that Erlangization is a good idea to improve on
+this. It turns out, however, that Erlangization is already a part of the QBD construc-
+tion, so nothing is gained in this direction.
+
+Then the author, in the second part of the thesis, considers an interesting and far
+from trivial approach by employing RAP-QBD's as replacements for the QBD appro-
+ximations for the sake of using concentrated matrix-exponential distribution as a
+more efficient approximation to the deterministic hitting times.
+
+The second chapter contains some background chosen by the author. It resumes ope-
+rator theory, weak convergence, Laplace transform and many other subjects that are
+readily available in the mathematical literature and might be considered as common
+background. When it comes to reviewing fluid and fluid-fluid models, then these are
+explained with the same level of detail. However, since this is much more advanced
+and more specialized, one might have hoped for a more rigorous introduction to both
+fluid queues and RAPs for the sake of readability. This, however, is not a compulsory
+request from my side.
+\begin{quote}
+    I'd be happy to add more to the background on fluid queus and RAP, but, personally, I don't think there is much more to say which is relevant to the thesis. This thesis does not have a great deal to do with the existing analyses of fluid queues. Thoughts?
+\end{quote}
+
+The thesis is large and contains a lot of material but lacks order. It is hard to find
+details on notation, for example, \(\phi\) and \(\varphi\). This makes the task of reading it much
+harder, in particular, if one does not read the whole thesis from scratch.
+\begin{quote}
+    Yes. Sorry about that. 
+\end{quote}
+
+I believe this is mainly due to the lack of structure. It would be useful to employ
+a more methodological approach using Definitions, Theorems, etc. and frequently
+pinpoint back to these results/definitions whenever used.
+\begin{quote}
+    IMO, I have used Theorem, Lemma, Corllary environments to help with this. Perhaps I could use Definition environments too, this might help. Thoughts? 
+\end{quote}
+
+Chapter 5 is long and technical, while Chapter 6 is short and more straightforward.
+Also, the ultimate aim of both chapters is the result of Chapter 6, so to me, it would
+make more sense to merge the two chapters.
+\begin{quote}
+    I'm happy either way. These two chapters were originally one long chapter but i decided to break them in two because they use distinct technical tools. Perhaps I should make them a single chapter with two main sections in the chapter.
+\end{quote}
+
+In conclusion, the thesis is long, highly technical, and somewhat unstructured, ma-
+king it non-accessible to a broader community.
+
+\textbf{ASSESSMENT}
+
+The author is a co-author of Chapter 3, the material of which is original and publis-
+hed. The material in Chapters 4,5 and 6 is original. The material of the thesis has a
+reasonable narrow scope. It considers an important approximation problem using a
+recent approach. The communication is very technical, and lacks some structure for
+a more smooth communication. The contribution is significant but could have been
+broader in its scope.
+\begin{quote}
+    Interesting that he didn't mention Chapter 7... perhaps he does not recognise numerical investigation in the same regard as the technical chapters, haha. 
+
+    Yes, the scope of the thesis is narrow. It was one of my main worries about the work. I could have added more, but, as he already pointed out, the thesis is already long and hard to read. 
+
+    Specific comments on structure to be addressed below. 
+\end{quote}
+
+\textbf{CHAPTER 1-3}
+
+\st{p. 8 l.end-6: restricted to t = 0.}
+
+p. 12 l.end-6: you have already used matices extensively.
+\begin{quote}
+    I have. I just wanted to clarify notation, and point out that matrices use square brackets. 
+\end{quote}
+
+p. 13 l.end-10: how can the underlying phase-process change state upon hitting a boun-
+dary? Then it should be level dependent?
+\begin{quote}
+    It is level-dependent. I have added some commentary: "Some boundary conditions may introduce a dependence of the phase process, \(\{\varphi(t)\}\), on the level process \(\{X(t)\}\). Specifically there may be a change of phase upon the event that the level process hits a boundary. When the phase process depends on the level process then the fluid queue is \emph{level-dependent}, otherwise it is \emph{level independent}. For a level-dependent fluid queue the phase process \(\{\varphi(t)\}\) is not the only random element of the fluid queue."
+\end{quote}
+
+\st{Formula (2.10): parenthesis.}
+
+\st{p.21: B(t), argument t missing at some places.}
+\begin{quote}
+    Actually, there shouldn't be a (t)
+\end{quote}
+
+\st{p.40: second last line, a D missing.}
+
+(2.42): one does announce a proof to a formula/equation. Why do you proved it all? Most other items around this section are left unproven.
+\begin{quote}
+    I don't think there is a need for the proof. Happy to omit it. Same for the MPR on the previous page?
+\end{quote}
+
+Section 2.4 reproduces some fluid-fluid theory. The section could have benefitted
+from including, at least some, proofs of the ascertions to gain a working knowled-
+ge.
+\begin{quote}
+    happy to add proofs, but they are relatively technical and not absolutely necessary for the thesis IMO. They could help the reader intuit the fluid queue and its operators. Thoughts?
+\end{quote}
+
+Chapter 3 is taken from a paper, reproduced as such and in a good shape.
+\begin{quote}
+    I disagree, but okay. IMO this is one of the hardest-to-read sections!
+\end{quote}
+
+\pagebreak
 \section{Reviewer 2}
 
 \textbf{2 About the main sections}

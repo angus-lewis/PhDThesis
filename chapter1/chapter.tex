@@ -95,14 +95,14 @@ Also, as in \cite[Section~1.3]{MEinAP}, we call \(\{X(t)\}_{t\geq 0}\) a \emph{c
 \end{align}
 and refer to (\ref{eqn: Markov property cmtc}) as the \emph{Markov property}. The process \(\{X(t)\}_{t\geq 0}\) is said to be time-homogeneous if 
 \(\mathbb P(X(t+s)=j \mid X(s)=i)\) does not depend on \(s\). For a time-homogeneous CTMC, the \emph{transition function} is the matrix function 
-\[\bs P(t) = [\mathbb P(X(t)=j \mid X(t)=i)]_{i,j\in\calS}.\]
+\[\bs P(t) = [\mathbb P(X(t)=j \mid X(0)=i)]_{i,j\in\calS}.\]
 The Chapman-Kolmogorov equations state that 
 \begin{align} 
 	&\nonumber \bs P(t+s)=\bs P(t)\bs P(s).
 \end{align}
 The \emph{infinitesimal generator} matrix of a CTMC is 
 \begin{align} 
-	&\nonumber \bs T = [T_{ij}]_{i,j\in\calS} = \cfrac{\wrt}{\wrt t}P(t),
+	&\nonumber \bs T = [T_{ij}]_{i,j\in\calS} = \left. \cfrac{\wrt}{\wrt t}P(t)\right|_{t=0},
 \end{align}
 and the elements \(T_{ij}\) are the \emph{transition rates}. A CTMC is said to be \emph{honest} if \(\bs P(t)\bs 1=\bs 1\) for all \(t\geq 0\) where \(\bs 1\) is a column vector of ones. 
 
@@ -291,9 +291,11 @@ where \(\mathrm{diag}(a_i,i\in\mathcal I)\) denotes a diagonal matrix with entri
 
 Now, back to fluid queues. The level process is given by 
 \[\ddot X(t) = \ddot X(0) + \int_{s=0}^t c_{\varphi(s)}\wrt s.\]
-Sample paths of \(\{\ddot X (t)\}\) are continuous and piecewise linear, with \(\cfrac{\wrt }{\wrt t} \ddot X(t) = c_\varphi(t)\), when \(\ddot X(t)\) is differentiable. Given sample paths of \(\{\varphi(t)\}\), then \(\{\ddot X(t)\}\) is deterministic, and in this sense, \(\{\varphi(t)\}\) is the only stochastic element of the fluid queue. 
+Sample paths of \(\{\ddot X (t)\}\) are continuous and piecewise linear, with \(\cfrac{\wrt }{\wrt t} \ddot X(t) = c_\varphi(t)\), when \(\ddot X(t)\) is differentiable. Given sample paths of \(\{\varphi(t)\}\), then \(\{\ddot X(t)\}\) is deterministic, and in this sense, \(\{\varphi(t)\}\) is the only stochastic element of the unbounded fluid queue. 
 
-Often, boundary conditions are imposed. We denote a fluid queue bounded below at \(0\) and unbounded above by \(\{\dot{\bs X}(t)\} = \{(\dot X(t),\varphi(t))\}_{t\geq0}\), and a fluid queue bounded below at \(0\) and above at \(b<\infty\) by \(\{{\bs X}(t)\} = \{( X(t),\varphi(t))\}_{t\geq0}\). Here, we consider a mixture of \emph{regulated} and \emph{reflecting} boundary conditions. Upon hitting a boundary we suppose that, with probability \(p_{ij},\,i,j\in\mathcal S\), the phase process instantaneously transitions from phase \(i\) to phase \(j\) (note that we might have \(i=j\) i.e.~no transition) and if \(\mathrm{sign}(c_i)=\mathrm{sign}(c_j)\) or \(\mathrm{sign}(c_j)=0\) then the process is absorbed in the boundary, otherwise it immediately leaves the boundary. At a lower boundary, if \(j\in\calS_0\cup\calS_-\), then \(\cfrac{\wrt}{\wrt t} X(t) = 0\), and the phase process continues to evolve according to the sub-generator 
+Often, boundary conditions are imposed. We denote a fluid queue bounded below at \(0\) and unbounded above by \(\{\dot{\bs X}(t)\} = \{(\dot X(t),\varphi(t))\}_{t\geq0}\), and a fluid queue bounded below at \(0\) and above at \(b<\infty\) by \(\{{\bs X}(t)\} = \{( X(t),\varphi(t))\}_{t\geq0}\). Here, we consider a mixture of \emph{regulated} and \emph{reflecting} boundary conditions. Some boundary conditions may introduce a dependence of the phase process, \(\{\varphi(t)\}\), on the level process \(\{X(t)\}\). Specifically there may be a change of phase upon the event that the level process hits a boundary. When the phase process depends on the level process then the fluid queue is \emph{level-dependent}, otherwise it is \emph{level independent}. For a level-dependent fluid queue the phase process \(\{\varphi(t)\}\) is not the only random element of the fluid queue.
+
+Upon hitting a boundary we suppose that, with probability \(p_{ij},\,i,j\in\mathcal S\), the phase process instantaneously transitions from phase \(i\) to phase \(j\) (note that we might have \(i=j\) i.e.~no transition) and if \(\mathrm{sign}(c_i)=\mathrm{sign}(c_j)\) or \(\mathrm{sign}(c_j)=0\) then the process is absorbed in the boundary, otherwise it immediately leaves the boundary. At a lower boundary, if \(j\in\calS_0\cup\calS_-\), then \(\cfrac{\wrt}{\wrt t} X(t) = 0\), and the phase process continues to evolve according to the sub-generator 
 \[\left[\begin{array}{cc} \bs T_{--} & \bs T_{-0} \\ \bs T_{0-} & \bs T_{00}  \end{array}\right],\]
 until such a time that \(\{\varphi(t)\}\) transitions to a phase \(k\in\calS_+\), at which time \(\{X(t)\}\) leaves the boundary. Similarly, at an upper boundary if \(j\in\calS_0\cup\calS_+\), then \(\cfrac{\wrt}{\wrt t} X(t) = 0\) and the phase process continues to evolve according to the sub-generator 
 \[\left[\begin{array}{cc} \bs T_{++} & \bs T_{+0} \\ \bs T_{0+} & \bs T_{00}  \end{array}\right],\]
@@ -320,7 +322,7 @@ One such analysis of fluid queues derives the Laplace transform of the time take
 
 Consider an unbounded fluid queue \(\{(\ddot X(t), \varphi(t))\}\). Let \(\zeta_X(E)\) be the random variable which is the first hitting time of \(\{\ddot X(t)\}\) on the set \(E\) and define the matrix \(\bs \Psi_X(\lambda)\) with elements \(\left[\bs \Psi_X(\lambda)\right]_{ij}\), \(i\in\calS_+\), \(j\in\calS_-\), given by
 \begin{align}
-	\left[\bs \Psi_X(\lambda)\right]_{ij} = \mathbb E\left[ e^{-\zeta_X(z)\lambda} 1(\zeta_X(z)<\infty, \varphi(\zeta_X(z)=j)\mid \ddot X(0)=z, \varphi(0)=i\right].
+	\left[\bs \Psi_X(\lambda)\right]_{ij} = \mathbb E\left[ e^{-\zeta_X(z)\lambda} 1(\zeta_X(z)<\infty, \varphi(\zeta_X(z)=j))\mid \ddot X(0)=z, \varphi(0)=i\right].
 \end{align}
 \(\left[\bs \Psi_X(\lambda)\right]_{ij}\) is the Laplace-Stieltjes transform of the time taken for the fluid queue to first return to level \(z\) and do so in phase \(j\in\calS_-\), given it started at level \(z\) in phase \(i\in\calS_+\). Define the in-out fluid level by $\beta_X(t) := \int_0^t \left| c_{\varphi(z)} \right|  \wrt z$, which is the total amount of fluid to flow in to or out of the buffer \(\{\ddot X(t)\}\) by time \(t\), and also define $\eta_X(y) := \inf \{t > 0: \beta_X(t) = y\}$ as the first hitting time of the in-out process \(\{\beta_X(t)\}\) on level \(y\geq 0\). Further, let \(\bs H(\lambda,y)\) be the matrix with elements \(h_{ij}(\lambda,y)\), \(i,j\in\calS_+\cup\calS_-\), given by
 \begin{align}
@@ -490,11 +492,11 @@ and the matrices of operators \(\mathbb V^{k\ell}(t) := \vligne{\mathbb V_{ij}^{
 %		&\reflectbox{\(\ddots\)}&&&&\ddots
 	\end{array}\right].\]
 Now define \(\mathbb B=\left.\cfrac{\wrt}{\wrt t}\mathbb V(t)\right|_{t=0}\) as the infinitesimal generator of \(\{\mathbb V(t)\}\), resulting in the tridiagonal matrix of operators 
-\[\mathbb B(t) = \left[
+\[\mathbb B = \left[
 	\begin{array}{ccccc}
-		\mathbb B^{{-1},{-1}}(t)&\mathbb B^{{-1},0}(t)& & & \\
-		\mathbb B^{0,{-1}}(t)&\mathbb B^{0,0}(t)&\mathbb B^{0,1}(t)&& \\
-		&\mathbb B^{1,0}(t)&\mathbb B^{1,1}(t)&\ddots& \\
+		\mathbb B^{{-1},{-1}}&\mathbb B^{{-1},0}& & & \\
+		\mathbb B^{0,{-1}}&\mathbb B^{0,0}&\mathbb B^{0,1}&& \\
+		&\mathbb B^{1,0}&\mathbb B^{1,1}&\ddots& \\
 		& & \ddots & \ddots & \mathbb B^{K,{K+1}}\\
 		& & & \mathbb B^{{K+1},K} & \mathbb B^{{K+1},{K+1}}
 	\end{array}\right],\]
@@ -507,7 +509,7 @@ Now define \(\mathbb B=\left.\cfrac{\wrt}{\wrt t}\mathbb V(t)\right|_{t=0}\) as 
 %		&&&&\ddots
 %	\end{array}\right],
 %\end{align*}
-where the blocks \(\mathbb B^{k\ell}:= \vligne{\mathbb B_{ij}^{k\ell}(t)}_{i,j\in\mathcal S},\,k,\ell\in\mathcal K\).\footnote{We use a blackboard bold font with an overline above the character (e.g.~\(\overline{\mathbb B}\) and \(\overline{\mathbb V}(t)\)) to represent theoretical operators derived in \citep{bo2014} which are constructed using the partition in (\ref{eqn:fil}). The operators denoted with an overline play a minor role in the introductory sections of this thesis, but do not appear again. We use a blackboard font sans overline (e.g.~\(\mathbb V(t)\) and \(\mathbb B\)) to represent the same operators but which are constructed with the finer partition defined by \(\mathcal D_k,\,k\in\mathcal K\). We use the letters \(i,j\in\mathcal S\) to represent states of the phase process, letters \(m,n,\in\mathcal \{+,-,0\}\) to refer to the partition in terms of the sets in Equations (\ref{eqn:fil}), and the letters \(k,\ell\in\mathcal K\) to refer to the finer partition into sets \(\{\calD_k\}_k\). With a slight abuse of notation, whenever we use the dummy variables \(k,\ell\) without qualification we imply \(k,\ell\in\mathcal K\), the dummy variables without qualification \(m,n\) imply \(m,n\in\{+,-,0\}\) and the dummy variables \(i,j\) without qualification imply \(i,j\in\calS\). E.g.~\(\mathbb B_{ij}^{k\ell}\) means \(\mathbb B_{ij}^{k\ell},\, i,j\in\calS, k,\ell\in\mathcal K\) and \(\mathbb B_{ij}^{mn}\) means \(\mathbb B_{ij}^{mn},\, i,j\in\calS, m,n\in\{+,-,0\}\).
+where the blocks \(\mathbb B^{k\ell}:= \vligne{\mathbb B_{ij}^{k\ell}}_{i,j\in\mathcal S},\,k,\ell\in\mathcal K\).\footnote{We use a blackboard bold font with an overline above the character (e.g.~\(\overline{\mathbb B}\) and \(\overline{\mathbb V}(t)\)) to represent theoretical operators derived in \citep{bo2014} which are constructed using the partition in (\ref{eqn:fil}). The operators denoted with an overline play a minor role in the introductory sections of this thesis, but do not appear again. We use a blackboard font sans overline (e.g.~\(\mathbb V(t)\) and \(\mathbb B\)) to represent the same operators but which are constructed with the finer partition defined by \(\mathcal D_k,\,k\in\mathcal K\). We use the letters \(i,j\in\mathcal S\) to represent states of the phase process, letters \(m,n,\in\mathcal \{+,-,0\}\) to refer to the partition in terms of the sets in Equations (\ref{eqn:fil}), and the letters \(k,\ell\in\mathcal K\) to refer to the finer partition into sets \(\{\calD_k\}_k\). With a slight abuse of notation, whenever we use the dummy variables \(k,\ell\) without qualification we imply \(k,\ell\in\mathcal K\), the dummy variables without qualification \(m,n\) imply \(m,n\in\{+,-,0\}\) and the dummy variables \(i,j\) without qualification imply \(i,j\in\calS\). E.g.~\(\mathbb B_{ij}^{k\ell}\) means \(\mathbb B_{ij}^{k\ell},\, i,j\in\calS, k,\ell\in\mathcal K\) and \(\mathbb B_{ij}^{mn}\) means \(\mathbb B_{ij}^{mn},\, i,j\in\calS, m,n\in\{+,-,0\}\).
 } The tridiagonal structure arises since, for \(|k-\ell|\geq2\) it is impossible for \(\{X(t)\}\) to move from \(\mathcal D_{k,i}\) to \(\mathcal D_{\ell,j}\) in an infinitesimal amount of time.
 
 By an appropriate choice of the intervals \(\{\mathcal D_{k,i}\}\), the partition used in \cite{bo2014} can be recovered. Intuitively, we must ensure that each of the boundaries of \(\calF_i^m,\, i\in\calS,\,m\in\{+,-,0\}\), align with a boundary of a cell \(\mathcal D_{k,i}\). Then, each set \(\calF_i^m,\, i\in\calS,\,m\in\{+,-,0\}\), can be written as a union of cells, \(\mathcal D_{k,i},\,k\in\mathcal K\), sans a collection of points which have measure zero for all measures in \(\mathcal M_{0,b}\), and this collection of points is inconsequential for the purposes of the approximations presented here. 
@@ -1022,15 +1024,16 @@ Let \(\bs{C},\bs{D}\)  be matrices with dimensions \(m\times k\) and \(m'\times 
 \begin{align}
 	\left(\bs A\otimes \bs{B}\right)\left(\bs{C}\otimes \bs{D}\right) &= \bs A\bs{C}\otimes \bs{B}\bs{D}.\label{eqn:mpr}\tag{Mixed Product Rule}
 \end{align}
-\begin{proof}
-	The proof follows from 
-	\begin{align*}
-		\left[\begin{array}{cccc}a_{i1}\bs{B} & a_{i2}\bs{B}&\dots&a_{in}\bs{B}\end{array}\right]\left[\begin{array}{c}c_{1j}\bs{D}\\c_{2j}\\\vdots\\c_{nj}\bs{D} \end{array}\right] 
-		%
-		&= \left(\sum_\ell a_{i\ell}c_{\ell j}\right) \bs{B}\bs{D}
-		\\&= \left(\bs A\bs{C}\right)_{ij}\bs{B}\bs{D}.
-	\end{align*}
-\end{proof}
+
+% \begin{proof}
+% 	The proof follows from 
+% 	\begin{align*}
+% 		\left[\begin{array}{cccc}a_{i1}\bs{B} & a_{i2}\bs{B}&\dots&a_{in}\bs{B}\end{array}\right]\left[\begin{array}{c}c_{1j}\bs{D}\\c_{2j} \bs D \\\vdots\\c_{nj}\bs{D} \end{array}\right] 
+% 		%
+% 		&= \left(\sum_\ell a_{i\ell}c_{\ell j}\right) \bs{B}\bs{D}
+% 		\\&= \left(\bs A\bs{C}\right)_{ij}\bs{B}\bs{D}.
+% 	\end{align*}
+% \end{proof}
 
 If \(\bs A\) and \(\bs{B}\) are invertible matrices, then 
 \begin{align}\label{eqn:kron inverse}
@@ -1046,21 +1049,21 @@ A property of the Kronecker sum is
 \begin{align}\label{eqn:kron exp}
 	e^{\bs A\oplus \bs{B}}= e^{\bs A}\otimes e^{\bs{B}}.
 \end{align}
-\begin{proof}
-	First, the matrices \(\bs A\otimes \bs{I}_m\) and \(\bs{I}_n\otimes \bs{B}\) commute; from the mixed product rule their product is \(\bs A\otimes \bs{B}\). Hence, 
-	\[e^{\bs A\oplus \bs{B}} = e^{\bs A\otimes \bs{I}_m}e^{\bs{I}_n\otimes \bs{B}}.\]
-	We now show that \(e^{\bs A\otimes \bs{I}_m} = e^{\bs A}\otimes \bs{I}_m\) and \(e^{\bs{I}_n\otimes \bs{B}}=\bs{I}_n\otimes e^{\bs{B}}\). The latter follows from the fact that \(\bs{I}_n\otimes \bs{B}\) is a block diagonal matrix with blocks \(\bs{B}\), hence its exponential is also block diagonal with blocks equal to the exponential of \(\bs{B}\). The former follows from 
-	\begin{align}
-	e^{\bs A\otimes \bs{I}_m} &= \sum_{n=0}^\infty \cfrac{1}{n!}\left(\bs A\otimes \bs{I}_m\right)^n \nonumber
-	\\&= \sum_{n=0}^\infty \cfrac{1}{n!}\left(\bs A^n\otimes \bs{I}_m\right) \nonumber
-	\\&=\left(\sum_{n=0}^\infty \cfrac{1}{n!}\bs A^n\otimes \bs{I}_m\right) \nonumber
-	\\&=e^{\bs A}\otimes \bs{I}_m.\label{eqn:09ksdjgah}
-	\end{align}
+% \begin{proof}
+% 	First, the matrices \(\bs A\otimes \bs{I}_m\) and \(\bs{I}_n\otimes \bs{B}\) commute; from the mixed product rule their product is \(\bs A\otimes \bs{B}\). Hence, 
+% 	\[e^{\bs A\oplus \bs{B}} = e^{\bs A\otimes \bs{I}_m}e^{\bs{I}_n\otimes \bs{B}}.\]
+% 	We now show that \(e^{\bs A\otimes \bs{I}_m} = e^{\bs A}\otimes \bs{I}_m\) and \(e^{\bs{I}_n\otimes \bs{B}}=\bs{I}_n\otimes e^{\bs{B}}\). The latter follows from the fact that \(\bs{I}_n\otimes \bs{B}\) is a block diagonal matrix with blocks \(\bs{B}\), hence its exponential is also block diagonal with blocks equal to the exponential of \(\bs{B}\). The former follows from 
+% 	\begin{align}
+% 	e^{\bs A\otimes \bs{I}_m} &= \sum_{n=0}^\infty \cfrac{1}{n!}\left(\bs A\otimes \bs{I}_m\right)^n \nonumber
+% 	\\&= \sum_{n=0}^\infty \cfrac{1}{n!}\left(\bs A^n\otimes \bs{I}_m\right) \nonumber
+% 	\\&=\left(\sum_{n=0}^\infty \cfrac{1}{n!}\bs A^n\otimes \bs{I}_m\right) \nonumber
+% 	\\&=e^{\bs A}\otimes \bs{I}_m.\label{eqn:09ksdjgah}
+% 	\end{align}
 	
-	Therefore 
-	\[e^{\bs A\oplus \bs{B}} = \left(e^{\bs A}\otimes \bs{I}_m\right)\left(\bs{I}_n\otimes e^{\bs{B}}\right),\]
-	and the result follows by the mixed product rule. 
-\end{proof}
+% 	Therefore 
+% 	\[e^{\bs A\oplus \bs{B}} = \left(e^{\bs A}\otimes \bs{I}_m\right)\left(\bs{I}_n\otimes e^{\bs{B}}\right),\]
+% 	and the result follows by the mixed product rule. 
+% \end{proof}
 
 \begin{lem}\label{lem: lst mpr}
 	Let \(\bs{T}\) and \(\bs{C}\) be \(n\times n\), square matrices with \(\bs{C}\) diagonal and invertible; let \(\bs{S}\) be a \(p\times p\) matrix. Further, suppose \(\left[\bs{T}\otimes \bs{I} + \bs{C}\otimes \bs{S} - \lambda \bs{I}\right]\) is invertible for \(\lambda>0\). Then
