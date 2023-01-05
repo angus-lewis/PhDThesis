@@ -67,7 +67,7 @@ We also need a sequence of closing operators which we denote by \({\bs v}^{(p)}\
 	where 
 	\[ \int_{u=0}^{\Delta}\left| r_{\bs v}^{(p)}(u,v)\right| \wrt u  \leq R_{{\bs v},1}^{(p)} \to 0\]
 	and 
-	\[ \int_{v=0}^{\Delta}\left| r_{\bs v}^{(p)}(u,v)\right| \wrt v  \leq R_{{\bs v},2}^{(p)} \to 0\]
+	\[ \int_{v=0}^{\Delta}\left| r_{\bs v}^{(p)}(u,v)\right| \wrt v  \leq R_{{\bs v},2}^{(p)} \to 0,\]
 	as \(\var(Z^{(p)})\to 0\). 
 \end{property}
 
@@ -131,9 +131,10 @@ For sample paths with \(\varphi(0)\in\mathcal S_-\), let \(\Sigma_1=0\), then fo
 For times \(t\) such that \(\Gamma_m\leq t<\Sigma_{m+1}\), then \(\varphi(t)\in\mathcal S_+\cup\calS_{+0}\). For times \(t\) such that \(\Sigma_{m+1}\leq t< \Gamma_{m+1}\), then \(\varphi(t)\in\mathcal S_-\cup\calS_{-0}\).
 
 
-With these stopping times, partition the sample paths of the QBD-RAP by the number of up-down and down-up transition as follows. For \(x_0\in\calD_{\ell_0,i},\) \(x\in\calD_{\ell_0,j},\) \(t\geq0,\) \(\ell_0\in\mathcal K^\circ,\) \(m\geq 0\), and for \(i\in\calS_+,j\in\mathcal S_+\cup\mathcal S_{+0}\), let 
+With these stopping times, we form a partition of the sample paths of the QBD-RAP by the number of up-down and down-up transition. Consider sample paths of the QBD-RAP that start in phase \(i\in\calS_+\) and end in \(j\in\calS_+\) at time \(t\) and have \(m\) up-down transitions by time \(t\). Let \(x_0\in\calD_{\ell_0,i},\) \(x\in\calD_{\ell_0,j},\) \(t\geq0,\) \(\ell_0\in\mathcal K^\circ,\) \(m\geq 0\) then, for \(i\in\calS_+,j\in\mathcal S_+\cup\mathcal S_{+0}\) define
 \begin{align}
-	&f^{\ell_0,(p)}_{m,+,+}(t)( x,j; x_0,i)  \nonumber
+	&\nonumber
+	\\&f^{\ell_0,(p)}_{m,+,+}(t)( x,j; x_0,i)  \nonumber
 	\\&=\int_{\bs a \in\mathcal A^{(p)}}\mathbb P\Big(\bs A^{(p)}(t)\in \wrt \bs a, \varphi(t) = j, t<\tau_1^{(p)}, \Gamma_m\leq t<\Sigma_{m+1} \nonumber
 	\mid \bs Y^{(p)}(0)=\bs y_0^{(p)}\Big)
 	\bs a{\bs v}_{\ell_0,j}^{(p)}(x) \nonumber
@@ -146,7 +147,8 @@ With these stopping times, partition the sample paths of the QBD-RAP by the numb
 	e^{\bs{B}^{(p)}_{++}(t-\gamma_m)}\left(\bs e_j\tr{}  \otimes {\bs v}_{\ell_0,j}^{(p)}(x)\right) 
 	\wrt \gamma_m\wrt \sigma_m\dots \wrt \gamma_1\wrt \sigma_1 , \label{eqn: approx end conv}
 \end{align}
-where \(\bs e_k\) is a row-vector of zeros except the \(k\)th position which is a 1. 
+where \(\bs e_k\) is a row-vector of zeros except the \(k\)th position which is a 1. The second equality in (\ref{eqn: approx end conv}) holds by Theorem~1 of \cite{bn2010}. The function \(f^{\ell_0,(p)}_{m,+,+}(t)( x,j; x_0,i)\) is the QBD-RAP approximation to the density of the fluid queue on the event that the phase process is in phase \(j\in\calS_+\) at time \(t\) and there are \(m\) up-down transitions by time \(t\), given the initial phase was \(i\in\calS_+\). 
+
 Analogously, for \(i\in\mathcal S_+ ,\,j\in\calS_{-}\cup\mathcal S_{-0}\), let 
 \begin{align}
 	&f^{\ell_0,(p)}_{m+1,+,-}(t)(  x, j; x_0,i) \nonumber
@@ -312,7 +314,7 @@ For states \(k\in\mathcal S_{0}\), and \(q,r\in \{+,-\}\), \(m\geq 0\), then
 \section{Laplace transforms of the distributions before \(\tau_1\)}\label{sec: lst on no change}
 In this section we take the Laplace transform with respect to time\footnote{Throughout this chapter we take Laplace transforms with respect to the time variable only. Whenever we say Laplace transform we actually mean Laplace transform with respect to the time variable.} of the densities \(f_{m,q,r}^{\ell_0,(p)}(t)(x,j;x_0,k)\), and measures \(\mu_{m,q,r}^{\ell_0}(t)(x,j;x_0,k)\), \(q\in\{+,-,0\}\), \(r\in\{+,-\}\). The Laplace transform is convenient as it allows us to manipulate the expressions for the QBD-RAP into one component related to the orbit process and one component related the phase process and the rates \(c_i,\,i\in\mathcal S\). 
 
-The following matrices play a key role in the analysis of fluid queues (see, for example, \cite{bean2009,dasilva2005}). Here, they appear in the Laplace transforms of the QBD-RAP and the fluid queue. Define matrices
+The following matrices play a key role in the analysis of fluid queues (see, for example, \cite{bean2009}). Here, they appear in the Laplace transforms of the QBD-RAP and the fluid queue. Define matrices
 \begin{align*}
 	\bs Q_{+0}(\lambda) &= \bs C_+^{-1}\bs T_{+0}\left[\lambda \bs I - \bs T_{00}\right]^{-1},
 	%
@@ -533,9 +535,10 @@ Let \(\Delta = \mathbb E[Z]\) be the mean of the matrix exponential random varia
 	Let \(\psi:[0,\Delta)\to \mathbb R\) be bounded, \(\psi(x)\leq F\). Then, for \(x_0\in\calD_{\ell_0,i}\), \(x\in\calD_{\ell_0,j}\), \(\ell_0\in\mathcal K^\circ\), \(\lambda > 0\), \(q\in\{+,-\}\), 
 	\begin{align}
 		&\left|\int_{x\in\mathcal D_{\ell_0,j}} \widehat f^{\ell_0,(p)}_{0,q,q}(\lambda)(x,j; x_0,i)\psi(x-y_{\ell_0})\wrt x - \int_{x\in\mathcal D_{\ell_0,j}} \mu^{\ell_0}_{0,q,q}(\lambda)(\wrt x,j; x_0,i)\psi(x-y_{\ell_0})\right| \nonumber 
-		\\&\leq \left(R_{{\bs v},2}^{(p)} + \varepsilon^{(p)}G\right) F.
+		\\&\leq \left(R_{{\bs v},2}^{(p)} + \varepsilon^{(p)}G\right) F,
 		\label{eqn: anue}
 	\end{align} 
+	where \( \int_{v=0}^\Delta r_v^{(p)}(u,v) \leq R_{{\bs v},2}^{(p)} \to 0\), \(\varepsilon^{(p)}=\var\left(Z^{(p)}\right)^{1/3}\), and \(|h_{ij}^{++}|\leq G\) and \(|h_{ij}^{++}|\) is defined in (\ref{eqn: lst 1}). 
 \end{lem}
 \begin{proof} 
 				Let us write \(x_0=y_{\ell_0}+u\), for \(u\in[0,\Delta)\). Recalling
@@ -1029,12 +1032,13 @@ We are now in a position to prove the desired bound on the difference between th
 	%
 		\\& =g^{*}_{1,n}(x_0,x) + r_4(n) + r_5(n), \label{eqn: rhs g 2}
 	\end{align}
-	where  
+	where \(|r_4(n)|\) and \(|r_5(n)|\) are error terms satisfying 
 	\begin{align*}
 		|r_4(n)|&= O\left(\max\left\{\delta,\varepsilon,\cfrac{\delta}{1-\delta},R_{{\bs v},1}\right\}\right),
 		%
-		\\|r_5(n)| &\leq \varepsilon^{n-1}G^{n-1}.
+		\\|r_5(n)| &\leq \varepsilon^{n-1}G^{n-1},
 	\end{align*}
+	and \(O(\cdot)\) is the usual \emph{big-O notation}.
 \end{lem}
 \begin{proof}
 	Rewriting the left-hand side of (\ref{eqn: rhs g 2}) as in (\ref{eqnL akfhcka}), we see that we can apply Corollary~\ref{cor: cond bnd 2} to all the integrals over \(x_k,\, k=1,\dots,n-1\) and use Property~\ref{properties: 2} of \({\bs v}(x)\) for the integral over \(x_n\), to get  
