@@ -11,5 +11,624 @@
 \author{Angus Lewis}
 
 \begin{document}
- 1
+\maketitle
+The reviewers comments are in plain text and not indented. 
+\begin{quote}
+    My comments follow are in indented and in \emph{italics}. 
+\end{quote}
+Text that is \st{struck-out} has already been addressed.
+
+\pagebreak
+\section{Reviewer 1}
+
+\noindent\textbf{OVERVIEW} 
+
+This thesis considers approximations of fluid-fluid queues by approximating the driving fluid process by either a QBD or RAP-QBD process. By discretizing the state space of the driving fluid process, one does not obtain a QBD automatically, but by
+replacing the constant drifts with random ones, governed by birth and death processes that mimic the drift, one can approximate the fluid flow process by a QBD.
+This is the content of Chapter 3, in which part the author is the co-author of a
+published paper.
+
+Since one is interested in approximating the deterministic hitting times caused by
+the constant drift, one might think that Erlangization is a good idea to improve on
+this. It turns out, however, that Erlangization is already a part of the QBD construction, so nothing is gained in this direction.
+
+Then the author, in the second part of the thesis, considers an interesting and far
+from trivial approach by employing RAP-QBD's as replacements for the QBD approximations for the sake of using concentrated matrix-exponential distribution as a
+more efficient approximation to the deterministic hitting times.
+
+The second chapter contains some background chosen by the author. It resumes operator theory, weak convergence, Laplace transform and many other subjects that are
+readily available in the mathematical literature and might be considered as common
+background. When it comes to reviewing fluid and fluid-fluid models, then these are
+explained with the same level of detail. However, since this is much more advanced
+and more specialized, one might have hoped for a more rigorous introduction to both
+fluid queues and RAPs for the sake of readability. This, however, is not a compulsory
+request from my side.
+\begin{quote}
+    Upon discussion with my supervisors, it was deemed that the introduction to fluid queues is sufficient for the purposes of this thesis.
+
+    Regarding RAPs (and Marked RAPs) I have added a formal definition of both (by their characterisation in terms of finite-dimensional basis of measures) and appropriate references. I have also added further characterisation of the ODE associated with these processes and also a property of the characterisation of the conditional distributions of the process. 
+
+    I thank the reviewer for this welcome feedback. 
+\end{quote}
+
+The thesis is large and contains a lot of material but lacks order. It is hard to find
+details on notation, for example, \(\phi\) and \(\varphi\). This makes the task of reading it much
+harder, in particular, if one does not read the whole thesis from scratch.
+\begin{quote}
+    To help clarify, we have added a glossary of the persistent notation used throughout the thesis. 
+
+    The notation \(\phi\) and \(\varphi\) has been clarified, and I have now made it explicit when we are referring to \(\phi\) or \(\varphi\). 
+\end{quote}
+
+I believe this is mainly due to the lack of structure. It would be useful to employ
+a more methodological approach using Definitions, Theorems, etc. and frequently
+pinpoint back to these results/definitions whenever used.
+\begin{quote}
+    [IMO, I have used Theorem, Lemma, Corllary environments to help with this. Perhaps I could use Definition environments too, this might help. Thoughts?]
+\end{quote}
+
+Chapter 5 is long and technical, while Chapter 6 is short and more straightforward.
+Also, the ultimate aim of both chapters is the result of Chapter 6, so to me, it would
+make more sense to merge the two chapters.
+\begin{quote}
+    I originally had Chapters 5 and 6 combined into one long chapter, however, I (after discussion with my supervisors), decided to break the chapter into two to help readability. The techniques in Chapter 5 emphasise matrix-exponential and QBD-RAP specific techniques/properties. In contrast, the techniques/properties in Chapter 6 are more typical such as the application of the law of total probability and (strong) Markov property. I have decided to leave this as two distinct chapters. Also, Chapter 5 relies on Appendix~D and is related to the results in Appendix~E, whereas Chapter 6 only depends on Chapter 5, via Lemma~5.13 and Corollary~5.15 only and is otherwise independent of the appendices.
+\end{quote}
+
+In conclusion, the thesis is long, highly technical, and somewhat unstructured, making it non-accessible to a broader community.
+
+\noindent\textbf{ASSESSMENT}
+
+The author is a co-author of Chapter 3, the material of which is original and published. The material in Chapters 4,5 and 6 is original. The material of the thesis has a
+reasonable narrow scope. It considers an important approximation problem using a
+recent approach. The communication is very technical, and lacks some structure for
+a more smooth communication. The contribution is significant but could have been
+broader in its scope.
+
+\noindent\textbf{CHAPTER 1-3}
+
+\st{p. 8 l.end-6: restricted to t = 0.}
+
+\st{p. 12 l.end-6: you have already used matrices extensively.}
+\begin{quote}
+    I have moved this section to a footnote and clarified matrix notation in the Glossary. 
+\end{quote}
+
+p. 13 l.end-10: how can the underlying phase-process change state upon hitting a boundary? Then it should be level dependent?
+\begin{quote}
+    It is level-dependent. I have added some commentary: "Some boundary conditions may introduce a dependence of the phase process, \(\{\varphi(t)\}\), on the level process \(\{X(t)\}\). Specifically there may be a change of phase upon the event that the level process hits a boundary. When the phase process depends on the level process then the fluid queue is \emph{level-dependent}, otherwise it is \emph{level independent}. For a level-dependent fluid queue the phase process \(\{\varphi(t)\}\) is not the only random element of the fluid queue."
+\end{quote}
+
+\st{Formula (2.10): parenthesis.}
+
+\st{p.21: B(t), argument t missing at some places.}
+\begin{quote}
+    Actually, there shouldn't be a (t) at all. This has been corrected.
+\end{quote}
+
+\st{p.40: second last line, a D missing.}
+
+\st{(2.42): one does announce a proof to a formula/equation. Why do you proved it all? Most other items around this section are left unproven.}
+\begin{quote}
+    I have omitted the proofs and also moved this section to the mathematical background appendix.
+\end{quote}
+
+Section 2.4 reproduces some fluid-fluid theory. The section could have benefitted
+from including, at least some, proofs of the assertions to gain a working knowledge.
+\begin{quote}
+    Section~2.4 summarises results of other authors, who also provide proof of these results. The proofs of these results are long, technical, and, in our opinion, do not add a great deal of insight into the results or process, so they are omitted. 
+\end{quote}
+
+Chapter 3 is taken from a paper, reproduced as such and in a good shape.
+
+%%%
+\noindent\textbf{CHAPTER 4}
+
+p. 68 l. end-11: Highly confusing use of \(\varphi\) and \(\phi\). It is probably misprinted here, but also later, it is never clear which one is which. Here definitions to point back to would be useful (or at least a page number).
+\begin{quote}
+    Fixed typo on p. 68.
+
+    I have clarified the notation \(\varphi\) and \(\phi\) and made references to these variables explicit throughout the thesis. A Glossary has been added to help clarify notation too. 
+\end{quote}
+
+\st{p. 69: You are in a new chapter, and suddenly T appears again (back from Sec. 2.3.). Refer back or set up the basic notation again.}
+\begin{quote}
+    I have defined \(T\) and \(c_i\) again. 
+\end{quote}
+
+p. 69: formula (4.2), why is the lower Erlang structure transposed as compared to the upper? Is this necessary? I suppose it is due to running the phases in reverse order. Perhaps commenting on this might be a good idea. Also, why are the rates \(\Delta/2\), implying 4 times longer holding time? Should they not be \(2\Delta\) for a \(\Delta/2\) grid?
+\begin{quote}
+    -I have added the comment ``Intuitively, the transposition of the Erlang sub-blocks, \(\left[\begin{array}{cc} -2\Delta & 2\Delta \\ 0 & -2\Delta \end{array}\right]\), in negative phases relative to positive phases is due to ``reversing'' the progression of the jump process associated with the Erlang variables in negative phases relative to positive phase.''
+    
+    -Corrected rates \(\Delta/2\) to \(2\Delta\).  
+\end{quote}
+
+p. 70 l. 14: \(\phi\) again. What does “phase-process” mean here? 
+\begin{quote}
+    I have now clarified: ``In this chapter we choose to use an equivalent, but slightly different, representation of the QBD-RAP, we write \(\{(L(t),\boldsymbol A(t),\phi(t))\}_{t\geq 0}\), where we refer to \(\{\phi(t)\}\) as the \emph{phase process} of the QBD-RAP. Such a representation does not always exist for a QBD-RAP. However, for the specific QBD-RAP introduced in this thesis such a representation does exist, by construction.''
+
+    I have also clarified the notation throughout. 
+\end{quote}
+
+p. 72 l. 10: seems that the symbol\(R_i(u)\) is used before introduced just below. I believe
+it should say \(Z_i\) instead and remove \(u\) from the interval.
+\begin{quote}
+    This has been corrected. 
+\end{quote}
+
+p. 73 l. end-9: It this the best trade-off between small \(\varepsilon\) and small variance (power)? Does
+the choice matter? Comment on the choice of \(\varepsilon\).
+\begin{quote}
+    I have added the comment ``Choose \(\varepsilon = \mbox{Var}(Z)^{1/3}\) (similar to the choice of \(\varepsilon\) in the proof of Theorem~4 of Horvath, Horvath \& Telek (2020)). Since we use Chebyshev's inequality to obtain the bound, which is general and likely to be far from sharp, we expect that the choice of \(\varepsilon\) is not important. All we require is that when \(\mbox{Var}(Z)\) is small, then \(\mbox{Var}(Z)/\varepsilon^2\) is also small. ''
+\end{quote}
+
+p. 75 l. 5: representations for matrix-exponential distributions are both denoted by a triple and a pair (with or with exit-rate vector). Since you always choose a representation with s = -Se you might as well use pair unless otherwise needed.
+\begin{quote}
+    I have used a pair unless otherwise needed. 
+\end{quote}
+
+\st{p. 84 l. end-1: something wrong in (4.18)? Perhaps wrongly placed closing parenthesis.}
+
+p. 84 l. end-1: where does this result come from? Earlier, you introduced this type of result only for the phase-type case, but I do not see where it comes from. You must refer back or justify why it should hold.
+\begin{quote}
+    This comment could refer to two possible things. 1) Justification of the ODE which describes the movement of the orbit. Or, 2) Justification of the parameters of the ODE. I have addressed them both in the following way. 
+
+    1) I have added a reference for the ODE and also added it to the preliminaries.
+
+    2) I have referenced back to the discussion about the choice of \(\boldsymbol S_i\) to model changes of level and the choice of \(-T_{ii}\) to model changes of phase. 
+\end{quote}
+
+p. 85: Why is A(t)D e = 1. Since the orbits and phases are independent, it is rather trivial what you are calculating. In fact, this could apply to the whole section up to Th. 4.1. Please check if this is not the case.
+\begin{quote}
+    \begin{itemize}
+        \item I have clarified that \(\boldsymbol A(t)\boldsymbol D\boldsymbol e=1\) as \(\boldsymbol D\boldsymbol e=1\) by assumption and \(\boldsymbol A(t)\boldsymbol e=1\) is a property of QBD-RAPs. 
+        \item This is the case. The calculations are rudimentary. However, I believe them to be insightful, so I have left them as it. 
+    \end{itemize}
+\end{quote}
+
+p. 86: Theorem 4.1. A lot of confusion regarding what is what (\(\varphi, \phi\), etc.). The first formula in the proof, where does that come from? Refer back.
+\begin{quote}
+    I have clarified what \(\varphi\) and \(\phi\) refer to in text. See also the other responses regarding \(\varphi\) and \(\phi\). 
+\end{quote}
+
+p. 88: Second half page, why these forms of the matrices? Refer back or deduce.
+\begin{quote}
+    I have removed the matrices which appeared earlier as they were a duplicate of those on p 88. 
+
+    I have now added a description of the generator. \textbf{Peter, Nigel,} please can you read the last 4 paragraphs of Section 4.4 and verify that it is accurate and sufficient.
+\end{quote}
+
+p. 89: There can't be a phase change exactly at the time upon hitting. Also, the notation \(p_{ij}^{-1}\) is terrible (or dangerous!). What does it mean? It should be explained. Again \(ij\)
+the probability seems to be independent of the rest (at best), and the calculations on page 90 seem, therefore, trivial. Do I miss something?
+\begin{quote}
+    \begin{itemize}
+        \item There can be a change upon hitting due to the boundary conditions we have specified. 
+        \item I have changed \(p_{ij}^{-1}\) to \(\widecheck p_{ij}\) and clarified notation with a glossary. 
+        \item You do not miss something. The calculations are rudimentary, however they describe and exhibit that we can model the phase dynamics of the fluid queue exactly with the phase of the QBD-RAP.
+    \end{itemize}
+\end{quote}
+
+p. 91: matrices are put up without explanation.
+\begin{quote}
+    I have added comments on how the parameters of the QBD-RAP relate to its generator as I describe the process dynamics. 
+
+    \textbf{Nigel}, could you please take a look at Section 4.4 and check that it makes sense. Also ready page 84, after the displayed matrices.
+\end{quote}
+
+\st{p. 92: k(x) suddenly appears again. Write its formula or refer to (4.5) since it has not been used since.}
+
+p. 93: Again, justify the matrix forms. How do we know that we can actually find such an augmentation which is still a RAP? This would be “trivial” for the QBD case, but for RAP is more delicate.
+\begin{quote}
+    \begin{itemize}
+        \item Similar to my comment about his feedback about matrices on p.~91 -- not sure what more he wants here.
+        \item I have added the following. ``Since \(\boldsymbol a_{\ell,i}(x)\in\mathcal A\) for all \(x\geq 0\) and \(\mu_k\) is a probability measure, then \(\boldsymbol a_\ell^r=\int_{\mathcal D_{\ell,i}}\boldsymbol a_{\ell,i}(x)d \mu_k\in \mathcal A\) is a convex combination of vectors in \(\mathcal A\) and, since \(\mathcal A\) is convex, so \(\boldsymbol a_\ell^r\in\mathcal A\). Therefore, the orbit after the transition out of the ephemeral set \(\mathcal S_{0}^{*,k}\) is in \(\mathcal A\) and therefore the QBD-RAP with the additional ephemeral states is a valid QBD-RAP.''
+    \end{itemize}
+\end{quote}
+
+p. 94 l. end-10: \(t + du\) is not an interval.
+\begin{quote}
+    Fixed. I replaced \(t+du\) by the infinitesimal interval \([t+u,t+u+du]\). 
+\end{quote}
+
+p. 93: Section 4.7 is quite messy, seems experimental, and lacks a conclusion or result. Again, introducing some definitions and theorems would help to understand what you would like to communicate.
+\begin{quote}
+   It is experimental. I have changed the name of the section to clarify its intent; the section title is now \textit{Recovering intra-level approximations to the distribution of \(X(t)\) using \(\boldsymbol A(t)\) -- some intuitive ideas}.
+
+   I have added some comments at the start to clarify the purpose of this section. 
+
+   I have also added a concluding paragraph: ``In this section we have established some intuitive ideas about how to extract an approximation to the density of \(X(t)\) from the orbit \(\boldsymbol A(t)\) using the idea of a closing operator, \(\boldsymbol v(x)\). As we shall see, given certain properties of \({\boldsymbol v}(x)\) we can prove that the approximation scheme converges, and ensures positivity. In the cases above, all the closing operators (4.25)-(4.26) lead to an approximation which converges and, due to their interpretation as probability densities, ensure positivity. Numerical experiments are used to investigate the closing operator from this section in Chapter~7.''
+\end{quote}
+
+p. 97: the whole point of all the previous work, as far as I understood, was 4.8. This section is rather inconclusive.
+\begin{quote}
+    I have moved this section to the preliminaries for Chapter~7 -- as we discussed, it fits better there.
+\end{quote}
+
+\st{p. 98: Section 4.9 the shortest section I have ever seen. May incorporate it into 4.8.} 
+
+\noindent\textbf{CHAPTER 5}
+
+One may wonder whether it is really necessary to apply such a long and tedious proof of convergence. Essentially, since it is before \(\tau_1\), it is the approximation of the time to the change of level that is approximated. This is ME distributed, which is dense, so only using this fact should be enough. Maybe the proof could be carried out for a general case of dense approximants and thereby gain transparency.
+\begin{quote}
+    The QBD-RAP approximation to the fluid queue approximates the distribution of the fluid queue at all times \(t\), including the time up to and including \(\tau_1\). The approximation to the distribution of the \(X(t)\) within a given band \(\mathcal D_k\) is obtained using the value of the orbit process of the QBD-RAP, \(\boldsymbol A(t)\) (the band which \(X(t)\) is in, and the phase are approximated by \(L(t)\) and \(\phi(t)\), respectively). So, in this sense, it is significantly more than just \(\tau_1\) which is approximated -- it is the entire transient distribution of the fluid queue. Further, while \(\tau_1\) is matrix exponentially distributed, the distributions of interest (the transient distributions and hitting times of fluid queues) are, in general, not matrix exponentially distributed. Indeed, MEs are dense, which implies that we can approximate the distribution of interest arbitrary well with an ME. However, the fact that MEs are dense is not constructive and gives now way to find such an ME. In contrast, we show that by choosing any matrix exponential distribution with sufficiently small variance, the distribution of the fluid queue can be approximated arbitrarily closely. We use the class of concentrated matrix exponential distributions for our numerical experiments. 
+
+    I would greatly appreciate a simpler, more general and more transparent proof. The proof shown here is, to me, the most natural, and also useful for our purpose as it suggests that all we need to do choose an ME with small variance, and we should obtain a decent approximation. 
+\end{quote}
+
+Much of the chapter continues the style by not structuring the exposition into notation, definition and theorems. For example in the announcement of Lemma 5.4, the \(R_{v,2}^{(p)}\), \(\varepsilon^{(p)}\) and \(G\) are not defined or referred back to. They do not appear in Section 5.4. above, and I could not find them browsing backwards either.
+\begin{quote}
+    I have now referenced them and all similar terms throughout that chapter. 
+
+    I have also added a glossary of terms to help the reader navigate the notation, and the glossary has a reference to where that notation is defined. 
+\end{quote}
+
+It is very, very hard to read this section, and I shall not go through it in more detail until it has been restructured. Here I pinpoint some details.
+
+p. 104: (5.10), what is the meaning of this expression? The same applies to the subsequent formulas. The reader is left wondering why you introduce these formulas and what they mean.
+\begin{quote}
+    I have added a sentence before defining \(f_{m,r,s}^{\ell_0,(p)}\) which states why we are interested in them and I have added a sentence after defining \(f_{m,+,+}^{\ell_0,(p)}\) which describes its meaning.
+\end{quote}
+
+p. 105: comment on how you obtain (5.11). Probabilistically it is clear if it would be a QBD, but less so if it is a RAP-QBD. So refer to the appropriate result you use. 
+\begin{quote}
+    I have now cited the characterisation of QBD-RAPs from Bean and Nielsen.
+\end{quote}
+
+p. 109: the formulas for \(Q_{++}(\lambda)\) have nice interpretations in terms of \(T -\lambda I\) in the QBD setting. Worth mentioning and providing intuition. Also, be more specific about their whereabouts in da Silva!
+\begin{quote}
+    \begin{itemize}
+        \item I have added interpretations to this section. \textbf{Nigel}, could you please take a look at the first 3 paragraphs of Section~5.3.
+        \item I believe that this is a typo or accidental reference as Da Silva does not consider time-dependent analysis. I have removed the reference. 
+    \end{itemize}
+\end{quote}
+
+p. 110: how do you deduce (5.31). There is a missing link from (5.26) which could be elaborated on.
+\begin{quote}
+    Yes, a link is missing which is not obvious. I have now elaborated.
+
+    \textbf{Nigel,} please read up to Equation (5.35). 
+\end{quote}
+
+p. 128: top, did I miss that you introduced the multivariate O-function somewhere previously? And concerning the error term r4(n), is that actually introduced here in this Lemma? Then you might clarify this by writing “...where r4(n) is an error term satisfying...”
+\begin{quote}
+    \begin{itemize}
+        \item I have now mentioned that this is big O notation (it is not multivariate). 
+        \item It is introduced in this Lemma -- all the \(r_\ell(n)\) terms are introduced in Lemmas. I have now clarified this for all \(r_\ell(n)\) terms.
+    \end{itemize}
+\end{quote}
+
+\noindent\textbf{CHAPTER 6}
+
+The first part of the chapter shows convergence of the discrete-time approximated level process to the embedded level process of the fluid queue. The second part is dedicated to the global convergence of the continuous-time processes. This can be achieved by the use of the results of Chapter 5, dominated convergence and tedious calculations! This chapter is easier to read since it has more structure.
+
+As you comment yourself at the end of the chapter, ideally would have liked to have pointwise convergence, but what you prove is weak convergence.
+
+(6.23): could you elaborate/comment on the insertion of the exponential r.v.? It seems you are integrating out over the tail, and a comment would be in place. Is there a “=” missing?
+\begin{quote}
+    \begin{itemize}
+        \item elaborated. ``The exponential random variable in the last line of (6.23) appears due to the interpretation of the Laplace transform as probability that \(\tau_n^{(p)}\) occurs before and exponential random variable, \(E^\lambda\).''
+        \item I don't think an = is missing.
+    \end{itemize}
+\end{quote}
+
+Several places: you carefully verify conditions in Tonelli's theorem for how to swap summation and integration. I think, alternatively, the Beppo-Levi theorem stating that you can always swap the order whenever the integrant is non-negative would apply.
+\begin{quote}
+    The Beppo-Levi Theorem applies to sequences of increasing, positive functions. Here, we do not, in general assume any monotonic properties of integrands, nor do we assume positivity. For example, we do not assume \(\psi\) in (6.23) is positive, and it is not known, in general, if the integrands in (6.32) are monotonic (in the sequence index \(p\). It may be possible to assume \(\psi\) is positive. In fact Wikipedia tells me that to show convergence in distribution (of a sequence of r.v.~\(X_p\) to \(X\)) using a positive \(\psi\) requires us to show 
+    \[\liminf E[\psi(X_p)]\geq E[\psi(X)].\]
+
+    I guess we could show \[\lim E[\psi(X_p)]= E[\psi(X)]\] for positive \(\psi\) which implies \[\liminf E[\psi(X_p)]\geq E[\psi(X)]\] and that would be simpler.... 
+    
+    Where possible, I have used the positiveness of an integrand to justify a swap of integrals via Tonelli's Theorem. 
+\end{quote}
+
+
+\noindent\textbf{CHAPTER 7}
+
+This chapter considers some numerical experiments. A general problem in this chap-ter is the quality of the plots up to 7.5, particularly the ones concerning the KS-error and L2-errors. It is hard to distinguish the different lines in the plots. From 7.5 on-wards, it is better though not full publishing quality.
+\begin{quote}
+    I have changed the markers and colours for plots 7.1-7.7 (and the captions to match) to make the plots clearer. 
+\end{quote}
+
+
+It remains a bit of mystery to me what is happening under the hood. How did you choose the parametrisation of the approximating QBD-RAP? How do they look like? Is 21 really enough? Only comparative graphs are presented, but no examples of representations of the approximations.
+\begin{quote}
+    \begin{itemize}
+        \item To demystify the computations two comments have been added, one in the introduction and one in Chapter~7. They both mention that once we have the parameters of the QBD-RAP and have constructed the generator, then we just use the usual formulae to approximate the fluid queue or fluid-fluid queue. 
+        \item Dimension 21 appears to be sufficient to give a reasonable indication about which methods perform better than others and to give some indication of what the convergence characteristics of the schemes might be. For the problems which use simulation to obtain a ground truth we are limited by computational resources -- we are already doing \(5\times 10^10\) simulations and even with this many the variance of the approximations is still significant relative to the errors (for example in Figure~7.23). For smaller problems like the travelling wave problems or hitting times problem, we do have enough resources to use higher-dimension schemes, but for problems like the transient distribution in Section~7.5 it takes at least a couple of days to run on my machine. 
+        \item Representative examples of the approximations are shown in Figures~7.3, 7.5, 7.8, 7.14, 7.18, 7.21, 7.27, 7.29, 7.31, and 7.35. Perhaps, \textbf{Nigel}, could you run your eye over these figures to see if they are sufficient? 
+    \end{itemize}
+\end{quote}
+
+
+In these static cases, you might be able to assess the size of the error and employ a Richardson extrapolation on the dimension (e.g. 10 and 20) to obtain a much better approximation. The same can probably be said about the other schemes.
+\begin{quote}
+    I'm not sure which `static cases' he refers to -- perhaps the stationary distribution and first return distribution? I am also unfamiliar with the Richardson extrapolation -- it appears to be a way to obtain better approximations given two coarse approximations which are constructed with different `step sizes'. An interesting idea for further research, but beyond the scope of the thesis. 
+\end{quote}
+
+
+You conclude overall that the QBD-RAP scheme performs better than the uniformisation scheme; however, in my perception through the examples, and also being very much example dependent, my view is a bit muddier. Also, everything seems to be a trade-off between convergence vs. quality. Of course, converging to a useless approximation might not be considered “convergence” at all.
+\begin{quote}
+    I disagree. For all examples except the trivial problem of approximating the initial condition, the QBD-RAP outperforms the Uniformisation method, often significantly. Indeed, the relative performance will be example dependent, but the QBD-RAP still outperforms the Uniformisation method in every example -- from smooth problems like the stationary distribution to hard problems like the hitting times problem.
+    
+    In all examples we have compared the approximations to a `ground truth'. Often the ground truth is known analytically, but sometimes it has to be simulated. We ensure that the measurements of performance are relatively accurate by doing many \(5\times 10^10\) simulations so that the variance of the estimates is sufficiently small. 
+\end{quote}
+
+p.177, mid: you mention the problem of integration errors. Those are, of course, present also in all other cases. How did you control these errors? Did you consider employing Richardson extrapolation to reduce the errors?
+\begin{quote}
+    I did not consider using Richardson extrapolation. 
+
+    To control for numerical errors I used the same SSPRK time integration scheme for all examples, keeping the time-step constant and sufficiently small to ensure stability. Double-precision floating point number were used. 
+\end{quote}
+
+\st{Example 7.9: what do you mean by a PDF 1(x < 1). Uniform dist. over (0, 1)?}
+
+What about CPU times for the different experiments? Was the limitation of 21 dimensions dictated by execution times?
+\begin{quote}
+    I did not measure CPU times. 
+
+    I could do higher than dimension 21 for most examples, except Example 7.13 which is limited by simulations.
+\end{quote}
+
+While Erlangization/Uniformisation is straightforward and hence automatic to implement, I believe this is not the case for the concentrated ME. Please comment on this.
+\begin{quote}
+    See my response to the computations being a mystery above. \textbf{Nigel}, please take a look at the first four paragraphs of the second subsection of Section~7.1 (titled \emph{On the application of the QBD-RAP...}). 
+\end{quote}
+
+\pagebreak
+\section{Reviewer 2}
+
+\noindent\textbf{2 About the main sections}
+
+
+Section 2 is of slightly uneven level of detail. Maybe some of the more basic topics are not even necessary. I also suggest re-ordering the subsections from basic to advanced
+\begin{quote}
+    \begin{itemize}
+        \item I have moved some of the more general mathematical preliminaries to the appendix and left the more essential sections. This should now be a more even level of detail.
+    \end{itemize}
+\end{quote}
+
+Section 3 presents the discontinuous Galerkin (DG) method. Unfortunately, no explicit error bounds are available.
+
+Section 4 presents the QBDRAP method. It uses concentrated matrix exponential (CME) functions. It is nice to see that certain properties of CME functions (such as identical real part of all eigenvalues) are utilised. 
+
+Sections 5 and 6 proves convergence for QBDRAP. These sections are rather long and heavy, but the arguments are mostly familiar from the literature. Everything is properly referenced. Sections 5 and 6 could be merged into a single section. Section 5 is difficult to follow; maybe arranging the calculations in Sections 5.2 and 5.3 into lemmas or steps would result in a better structure.
+\begin{quote}
+    \begin{itemize}
+        \item I have reorganised and rewritten Sections 5.1, 5.2 and 5.3 into lemmas and corollaries which should help readability. It also makes it more clear what is a definition and what is a result. 
+        \item I separated Chapters 5 and 6 to help readability and because the proof techniques use in each chapter accentuate different elements of their arguments.
+    \end{itemize}
+\end{quote}
+
+Section 7 presents numerical investigations for a fairly broad selection of examples. Despite the lack of explicit error bounds, we see DG performing well in many cases. Fluid-fluid models are welcome. A general remark: CME distributions only get really concentrated for high orders (dimension). Ideally, I would recommend using at least an order of 30, although I understand there are computational limitations. Either way, it should not be surprising that their performance is not great for orders below 10 or so.
+\begin{quote}
+    \begin{itemize}
+        \item See also my comment to Reviewer 1 about using approximations up to order 21. 
+        
+        \item I went up to order 21 in the numerical investigations. For some of the more trivial examples in this section I could use higher-order approximations. However, for the interesting examples, simulation is required to measure accuracy and this is computationally expensive. I'm already doing \(5\times 10^{10}\) realisations! To me, it seems unlikely that investigation of higher-order examples would reveal much more insight -my intuition is that the error decay of the QBD-RAP method is exponential in the order of the ME used. 
+    \end{itemize}
+\end{quote}
+
+\noindent\textbf{3 List of minor remarks and typos}
+% [IM UP TO HERE]
+
+Minor remarks/typos:
+\begin{itemize}
+\item general: definitions are sometimes in italics, sometimes not; defining formulas are
+sometimes denoted by :=, sometimes by =
+\begin{quote}
+    Changed := to =. 
+\end{quote}
+\item {general: in formulas, functions like diag, sign etc. should be in mathrm font}
+\begin{quote}
+    Fixed
+\end{quote}
+\item page 7 bottom, stopping time definition
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 13: 'otherwise it is reflected' I understand why the word 'reflected' is used here, but usually a reflecting boundary condition means evolving with -ci instead of ci. Here, this is simply an absorbing boundary condition, with transition upon reaching the boundary.}
+\begin{quote}
+    Good point. I have now clarified.
+\end{quote}
+\item page 15: Why is the Laplace domain variable sometimes \(s\), sometimes \(\lambda\)?
+\begin{quote}
+   It should be \(\lambda\). Fixed.
+\end{quote}
+\item page 17, bottom formula: extra ) bracket
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 18: 'which is only possibly'  'which is only possible'}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item page 19: 'Conditions on fluid-fluid queues to ensure that (2.20) will be differentiable with respect to y are not known, and here we just assume that it is.' this seems like an innocent assumption. Why don't we have this at least for some nice cases? A few more words on this would be welcome.
+\begin{quote}
+    I added ``For further reading, further theoretical developments and some examples of fluid-fluid queues are analysed in \cite{boz2022}.''
+\end{quote}
+\item {page 20, third row from top: some ) brackets are missing}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 20: a point masses to a point mass}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 30, before (2.35): extra ) bracket in ()}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item page 35: Section 2.5.5. about accuracy is indeed very brief and seems highly nonrigorous.
+\begin{quote}
+   I have rewritten this section completely. Please take a quick look.  
+\end{quote}
+\item {page 36, (2.39): m + 2 to m2 in the second sum}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 36, bottom line: m + 1 to m1 in the first sum}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 37: the term representation is used before its definition. The correct order
+would also help out Cor. 2.6.}
+\begin{quote}
+    I have reordered this entire section. 
+\end{quote}
+\item {page 37, near bottom: possibility defective to possibly defective I recommend a
+thorough read-through of Section 2.6.1.}
+\begin{quote}
+    Fixed \& read-through,
+\end{quote}
+\item {page 39: 'the process may not actually jump at these times' reword to something
+like 'the process does not necessarily jump at these times'}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 42, Section 2.8: is this section even necessary? Laplace-Stieltjes transform has been used heavily earlier.}
+\begin{quote}
+    I have moved this section to an appendix. 
+\end{quote}
+\item {page 48, near the top: 'Fubini's Theorem us to' to 'Fubini's Theorem allows us to'}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 53: 'The DG method conserves probability' so any quantity from [0,1] remains
+in [0,1] after the approximation, or does it stay completely unchanged? Or does this
+mean something else? Maybe a reference to Cor. 3.1 on page 60? In any case, this
+should be clarified here.}
+\begin{quote}
+    I have clarified that it conserves total probability of the system and added a reference to cor 3.1.
+\end{quote}
+\item {page 55: W k or Wk? Both are used, but denote the same space. Also, it would be
+nice to recall the definition of Wk here.}
+\begin{quote}
+    Fixed and recalled.
+\end{quote}
+\item page 55: orthogonal complement spaces and such could be introduced earlier, in
+Section 2.
+\begin{quote}
+    Added to the polynomials section in the appendix. 
+\end{quote}
+\item {page 56: There are different choices for the flux rather, for the choice of approximation for the flux, right?}
+\begin{quote}
+    Fixed grammar.
+\end{quote}
+\item {page 60, middle of page: overlong line}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 60, bottom formula, first line: the 'or' part should be re-formulated (e.g.
+something like k = l 6 = 0 or K)}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 70, middle: 'we can show even show' to 'we can even show'}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 70: 'on the event that phi(t) is constant, then X(t) moves deterministically' 'then' is unnecessary}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 80, near top: 'Other choices are possible' ... 'are other possible choices' unnecessary repeat}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 88, top line: 'events epochs' to 'event epochs'}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 102, bottom: use the same function (e.g. g(x)) in both formulae}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 104: (5.10) and (5.11) seem to be a single formula broken into two parts
+unnecessarily.}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 106, near bottom: 'in terms of the of first return matrices' to 'in terms of the
+first return matrices'}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 108, line before (5.25): you could simply write q, r in +, (later as well)}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item page 111: maybe Corollary D.3 from Appendix D could be moved to the main text
+\begin{quote}
+    The Corollary and proof are not insightful and are basically just algebraic manipulations, so I have left them in the appendix.
+\end{quote}
+\item {page 151: 'and the last inequality is the Law of total probability' to 'and the last
+equality is the Law of total probability'}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 154: 'where the swap of the intergals' to 'where the swap of the integrals'}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 155: 'The probability of 1 is' this looks a bit strange, maybe use A and B to
+denote those events}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 161: the bottom formula can fit in a single line}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item page 162, about pointwise convergence: weak convergence is fine, that should cover
+the most relevant performance measures. That said, the subsequent remarks and
+Chapter 6.3 are welcome.
+\begin{quote}
+    Excellent.
+\end{quote}
+\item page 170, Fig. 1: good choice of plot markers, as the non-linear plot would be
+invisible otherwise
+\begin{quote}
+    I updated these plots addressing Reviewer 1's comments.
+\end{quote}
+\item {page 171: 'as more mass at the left' to 'as more mass is to the left'}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\item {page 175, Fig. 7.7: for the L1 error, QBDRAP seems to have a faster convergence
+rate than DG. It would be nice to see the plot for higher dimension too. Either
+way, I would be careful with conclusions about which method performs better in
+this case.}
+\begin{quote}
+    Reworded and clarified that the QBD-RAP performs worst for these dimension but may be better for higher dimensions (speculative). See previous comments on higher dim approximation schemes.
+\end{quote}
+\item page 182, Fig. 7.14: once again, it would be nice to go higher with the dimension
+\begin{quote}
+    See previous comment on higher dims.
+\end{quote}
+\item page 184, Fig. 7.15 explanation: 'Interestingly, the error curve for the DG scheme
+is not monotonic.' any ideas why?
+\begin{quote}
+    added ``Interestingly, the error curve for the DG scheme is not monotonic which is likely to be caused by the specific location of oscillations in the approximation for different dimension approximations.''
+\end{quote}
+\item page 187, Fig. 7.18: nice to see a plot with higher dimension.
+\begin{quote}
+    See previous comments on higher order.
+\end{quote}
+\item {page 265: Borthwick (n.d.) why is there no date? I found a 2016 edition.}
+\begin{quote}
+    Fixed. 
+\end{quote}
+\end{itemize}
+
+
+% -----
+
+% Things to go back and do 
+% \begin{itemize}
+%     \item CPU times
+%     \item Re-read 5.1, 5.2, 5.3
+%     \item Reread 2.5.5
+% \end{itemize}
+
+% -----
+
 \end{document} 
