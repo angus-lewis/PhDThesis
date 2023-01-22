@@ -22,7 +22,7 @@ In this chapter we work with the augmented state space scheme to model phases wi
 
 Consider the embedded process formed by observing the QBD-RAP at the orbit restart epochs. Let \(\tau_0^{(p)}=0\), and
 \[\tau_{n}^{(p)} = \inf\left\{t\geq \tau_{n-1}^{(p)} \mid L^{(p)}(t)\neq L^{(p)}(\tau_{n-1}^{(p)}), \mbox{or \(\{\bs Y(t)\}\) hits a boundary}\right\},\]
-be orbit restart epochs. These are the (stopping) times at which the level process of the QBD-RAP, \(\{L^{(p)}(t)\}\), changes, or the boundary is hit, or, if the process is at the boundary, the process leaves the boundary. To simplify notation, we may drop the superscript \(p\) where it is not explicitly needed. Further, let \(\{\Ydp(n)\}_{n\geq 0, n \in \mathbb Z} = \{(L^{(p)}(\tau_n^{(p)}),\varphi(\tau_n^{(p)}))\}_{n\geq 0, n \in \mathbb Z}\) be the level and phase of the discrete-time process embedded at the orbit restart epochs. The subscript \(\bs \alpha \) refers to the fact that \(\bs A^{(p)}(\tau_n^{(p)})=\bs \alpha^{(p)}\) for \(n\geq 1\), unless the process is temporarily absorbed in a sticky boundary, in which case \(\bs A^{(p)}(\tau_n^{(p)})=1\). The process \(\{\Ydp(n)\}_{n\geq 0}\) is a discrete-time Markov chain, which is time-homogeneous for \(n\geq 1\). 
+be orbit restart epochs. These are the (stopping) times at which the level process of the QBD-RAP, \(\{L^{(p)}(t)\}\), changes, or the boundary is hit, or, if the process is at the boundary, the process leaves the boundary. To simplify notation, we may drop the superscript \(p\) where it is not explicitly needed. Further, let \(\{\Ydp(n)\}_{n\geq 0, n \in \mathbb Z} = \{(L^{(p)}(\tau_n^{(p)}),\rapphase(\tau_n^{(p)}))\}_{n\geq 0, n \in \mathbb Z}\) be the level and phase of the discrete-time process embedded at the orbit restart epochs. The subscript \(\bs \alpha \) refers to the fact that \(\bs A^{(p)}(\tau_n^{(p)})=\bs \alpha^{(p)}\) for \(n\geq 1\), unless the process is temporarily absorbed in a sticky boundary, in which case \(\bs A^{(p)}(\tau_n^{(p)})=1\). The process \(\{\Ydp(n)\}_{n\geq 0}\) is a discrete-time Markov chain, which is time-homogeneous for \(n\geq 1\). 
 
 Let \(\{\tau_n^X\}_{n\geq 0}\), be the sequence of (stopping) times with \(\tau_0^X=0\), and 
 \[\tau_{n+1}^X = \min\left\{\begin{array}{c}\inf\left\{t>\tau_n^X\mid X(t)=y_{\ell}, \ell\in\mathcal K\right\}, \\ \inf\left\{t>\tau_n^X \mid X(t) \neq 0, X(\tau_{n-1}^X)=0\right\}, \\ \inf\left\{t>\tau_n^X \mid X(t) \neq y_{K+1}, X(\tau_{n-1}^X)=y_{K+1}\right\} \end{array} \right\},\]
@@ -78,10 +78,10 @@ All that is left is to prove (\ref{eqn: ddddddd}). For \(n\geq 1\), consider the
 \end{align}
 since the QBD-RAP is time-homogeneous and the exponential random variable \(E^\lambda\) is memoryless. %The probability on the right of (\ref{eqn: aaannnn}) is equal to
 % \begin{align}
-% 	&\mathbb P(L^{(p)}(\tau_1^{(p)}) = \ell_0-1(j\in\calS_-)+1(j\in\calS_+), \varphi(\tau_1^{(p)}) = j
+% 	&\mathbb P(L^{(p)}(\tau_1^{(p)}) = \ell_0-1(j\in\calS_-)+1(j\in\calS_+), \rapphase(\tau_1^{(p)}) = j
 % 			 \mid \bs Y^{(p)}(0) = (\ell_0 ,\bs\alpha, i)).\nonumber
 % 	%  \intertext{for \(j\in\calS_+\)}
-% 	%  &\mathbb P(L^{(p)}(\tau_1^{(p)}) = \ell_0-1, \varphi(\tau_1^{(p)}) = j
+% 	%  &\mathbb P(L^{(p)}(\tau_1^{(p)}) = \ell_0-1, \rapphase(\tau_1^{(p)}) = j
 % 	% 		 \mid \bs Y^{(p)}(0) = \bs y_0^{(p)}) \nonumber
 % \end{align}
 % Thus, once again noting that \(\tau_1^{(p)}<\infty\) almost surely, then taking \(\lambda \to 0\) in 
@@ -158,7 +158,7 @@ This section is dedicated to proving a global convergence results of the QBD-RAP
 
 % Let \(\{\tau_n^{(p)}\}_{n\geq 0, n \in \mathbb Z}\), \(\tau_0^{(p)}=0\), and
 % \[\tau_{n}^{(p)} = \inf\left\{t\geq \tau_{n-1}^{(p)} \mid L^{(p)}(t)\neq L^{(p)}(\tau_{n-1}^{(p)})\right\},\]
-% be the (stopping) times at which \(\{L^{(p)}(t)\}\), the level process of the QBD-RAP, changes, or the boundary is hit, or, if the process is at the boundary, the process leaves the boundary. To simplify notation, we may drop the superscript \(p\) where it is not explicitly needed. Further, let \(\{\Ydp(n)\}_{n\geq 0, n \in \mathbb Z} = \{(L^{(p)}(\tau_n^{(p)}),\varphi^{(p)}(\tau_n^{(p)}))\}_{n\geq 0, n \in \mathbb Z}\) be the value of the level and phase of the discrete-time process embedded at the change-of-level epochs, \(\{\tau_n^{(p)}\}_{n\geq 0}\). The subscript \(\bs \alpha^{(p)}\) refers to the fact that \(\bs A^{(p)}(\tau_n^{(p)})=\bs \alpha^{(p)}\) for \(n\geq 1\). The process \(\{\Ydp(n)\}_{n\geq 0}\) is a discrete-time Markov chain, which is time-homogeneous for \(n\geq 1\). 
+% be the (stopping) times at which \(\{L^{(p)}(t)\}\), the level process of the QBD-RAP, changes, or the boundary is hit, or, if the process is at the boundary, the process leaves the boundary. To simplify notation, we may drop the superscript \(p\) where it is not explicitly needed. Further, let \(\{\Ydp(n)\}_{n\geq 0, n \in \mathbb Z} = \{(L^{(p)}(\tau_n^{(p)}),\rapphase^{(p)}(\tau_n^{(p)}))\}_{n\geq 0, n \in \mathbb Z}\) be the value of the level and phase of the discrete-time process embedded at the change-of-level epochs, \(\{\tau_n^{(p)}\}_{n\geq 0}\). The subscript \(\bs \alpha^{(p)}\) refers to the fact that \(\bs A^{(p)}(\tau_n^{(p)})=\bs \alpha^{(p)}\) for \(n\geq 1\). The process \(\{\Ydp(n)\}_{n\geq 0}\) is a discrete-time Markov chain, which is time-homogeneous for \(n\geq 1\). 
 
 % % The process \(\{L^{(p)}(\tau_n^{(p)})\}_{n\geq 0}\) is the level process of the (continuous-time) QBD-RAP process observed at changes of level. When \(\tau_n^{(p)}\) is a change of level, or the time when the process leaves a boundary, the value of orbit process at these times is \(\bs A^{(p)}(\tau_n^{(p)}) = \bs \alpha^{(p)}\). At time \(\tau_0^{(p)} =0\), \(\bs A^{(p)}(\tau_0^{(p)})=\bs A^{(p)}(0) = \bs   a_{\ell_0,i}^{(p)}(x_0)\). The process \(\{\Ydp(t)\} = \{(L^{(p)}(\tau_n^{(p)}),\phi^{(p)}(\tau_n^{(p)}))\}_{n\geq 0}\) is a time-inhomogeneous discrete-time QBD. Further, the process \(\{\phi^{(p)}(\tau_n^{(p)})\}_{n\geq 0}\) is a time-inhomogeneous discrete-time Markov chain on the state space \(\mathcal S\). For \(\bs   a_{\ell_0,i}^{(p)}(x_0) = \bs \alpha^{(p)}\), or for index \(n\geq 1\), then \(\{L^{(p)}(\tau_n^{(p)}),\phi^{(p)}(\tau_n^{(p)})\}_{n\geq 1}\), and \(\{\phi^{(p)}(\tau_n^{(p)})\}_{n\geq 1}\) are time-homogenous.
 
@@ -722,11 +722,11 @@ Thus, we have shown the following result.
 
 Lemma~\ref{lem: KajPOw} establishes a convergence for a given interval \(\mathcal D_\ell,\, \ell\in\mathcal K\), and phase \(j\in\mathcal S\). We now formally extend this to a global result. To do so, we find it convenient to re-write the problem in terms of expectations. 
  
-Let \(\mathcal R(L(t),\bs A(t),\varphi(t))\) be the random variable with density function \(\bs A(t)\bs v_{L(t),\varphi(t)}(x)\), \(x\in\calD_{L(t),\varphi(t)}\), then
+Let \(\mathcal R(L(t),\bs A(t),\rapphase(t))\) be the random variable with density function \(\bs A(t)\bs v_{L(t),\rapphase(t)}(x)\), \(x\in\calD_{L(t),\rapphase(t)}\), then
 \begin{align}
-	&\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\psi(\mathcal R(L(t),\bs A(t),\varphi(t)),\varphi(t) )  \mid \nonumber
+	&\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\psi(\mathcal R(L(t),\bs A(t),\rapphase(t)),\rapphase(t) )  \mid \nonumber
 	\bs Y (0)=\bs y_0 \Bigg] \wrt t 
-	% \\&=\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\int_{x\in\calD_{L(t),\varphi(t)}}\bs A(t)\bs v_{L(t),\varphi(t)}(x)\psi(x,\varphi(t)),\varphi(t) )\wrt x  \mid \nonumber
+	% \\&=\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\int_{x\in\calD_{L(t),\rapphase(t)}}\bs A(t)\bs v_{L(t),\rapphase(t)}(x)\psi(x,\rapphase(t)),\rapphase(t) )\wrt x  \mid \nonumber
 	% \bs Y^{(p)}(0)=\bs y_0^{(p)} \Bigg] \wrt t 
 	\\&=\int_{t=0}^\infty e^{-\lambda t}\sum_{\substack{\ell\in\mathcal K\\j\in\calS}}\int_{\bs a\in\mathcal A}\int_{x\in\calD_{\ell,j}}\mathbb P( {\bs Y}(t) \in (\ell,\wrt \bs a,j) \mid \bs Y(0)=\bs y_0)\bs a\bs v_{\ell,j}(x)  \psi(x)\wrt x\wrt t \nonumber 
 	\\&=\sum_{\substack{\ell\in\mathcal K\\j\in\calS}}\int_{t=0}^\infty e^{-\lambda t}\int_{x\in\mathcal D_{\ell,j}}\mathbb P( {\bs Y} (t) \in (\ell,\wrt x,j) \mid \bs Y (0)=\bs y_0 )  \psi(x)\wrt t,
@@ -734,10 +734,10 @@ Let \(\mathcal R(L(t),\bs A(t),\varphi(t))\) be the random variable with density
 and the terms in the last line are those in Lemma~\ref{lem: KajPOw}. 
 
 \begin{cor}\label{cor: lk}
-	Let \(\psi: \mathbb R\times \mathcal S \to \mathbb R\) be an arbitrary, bounded function with \(|\psi(\cdot,\cdot)|\leq F\). %Further, let \(\mathcal L(X(t)) = \sum_{k\in\mathcal K}k1(X(t)\in\mathcal D_k)\) and \(\widetilde{\bs X}(t) = (\mathcal L(X(t)),X(t),\varphi(t)))\). 
+	Let \(\psi: \mathbb R\times \mathcal S \to \mathbb R\) be an arbitrary, bounded function with \(|\psi(\cdot,\cdot)|\leq F\). %Further, let \(\mathcal L(X(t)) = \sum_{k\in\mathcal K}k1(X(t)\in\mathcal D_k)\) and \(\widetilde{\bs X}(t) = (\mathcal L(X(t)),X(t),\rapphase(t)))\). 
 	For each \(i\in\mathcal S\), \(\ell_0\in\mathcal K\), \(x_0\in\mathcal D_{\ell_0,i}\),
 	\begin{align}
-		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\psi(\mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\varphi(t)),\varphi(t) )  \mid \nonumber
+		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\psi(\mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\rapphase^{(p)}(t)),\rapphase^{(p)}(t) )  \mid \nonumber
 		\bs Y^{(p)}(0)=\bs y_0^{(p)} \Bigg] \wrt t \nonumber
 		\\&\to \int_{t=0}^\infty e^{-\lambda t}  \mathbb E\left[\psi({\bs X}(t))\mid \bs X(0)=(x_0, i) \right] \wrt t.\nonumber
 	\end{align}
@@ -746,16 +746,16 @@ and the terms in the last line are those in Lemma~\ref{lem: KajPOw}.
 \begin{proof}
 	Consider the left-hand side 
 	\begin{align}
-		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\varphi(t)),\varphi(t) )   \mid 
+		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\rapphase^{(p)}(t)),\rapphase^{(p)}(t) )   \mid 
 		  \bs Y^{(p)}(0)=\bs y_0^{(p)} \Bigg] \wrt t \nonumber 
-		\\&= \int_{t=0}^\infty e^{-\lambda t}\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\mathbb E\Bigg[\psi( \mathcal R(\ell,\bs A^{(p)}(t),j),j )  1({L}^{(p)}(t)=\ell,\varphi(t)=j))  \mid \nonumber
+		\\&= \int_{t=0}^\infty e^{-\lambda t}\sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\mathbb E\Bigg[\psi( \mathcal R(\ell,\bs A^{(p)}(t),j),j )  1({L}^{(p)}(t)=\ell,\rapphase^{(p)}(t)=j))  \mid \nonumber
 		 \bs Y^{(p)}(0)=\bs y_0^{(p)} \Bigg] \wrt t \nonumber 
-		\\&= \sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[ \psi( \mathcal R(\ell,\bs A^{(p)}(t),j),j )1({L}^{(p)}(t)=\ell,\varphi(t)=j))  \mid 
+		\\&= \sum_{\ell\in\mathcal K}\sum_{j\in\mathcal S}\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[ \psi( \mathcal R(\ell,\bs A^{(p)}(t),j),j )1({L}^{(p)}(t)=\ell,\rapphase^{(p)}(t)=j))  \mid 
 		 \bs Y^{(p)}(0)=\bs y_0^{(p)} \Bigg] \wrt t, \label{eqnL AKJF cjk ajhJK}
 	\end{align}
 	where the swap of the summations and integrals is on the last line justified since \(\psi\) is bounded and by the Fubini-Tonelli Theorem. By Lemma~\ref{lem: KajPOw}, for each \(\ell\in\mathcal K\), \(j\in\calS\), the terms 
 	 \begin{align}
-	 	&\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\psi( \mathcal R(\ell,\bs A^{(p)}(t),j), j )\wrt x 1({L}^{(p)}(t)=\ell,\varphi(t)=j))  \mid \nonumber
+	 	&\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\psi( \mathcal R(\ell,\bs A^{(p)}(t),j), j )\wrt x 1({L}^{(p)}(t)=\ell,\rapphase^{(p)}(t)=j))  \mid \nonumber
 		 \bs Y^{(p)}(0)=\bs y_0^{(p)} \Bigg] \wrt t
 	\end{align}
 		converge to 
@@ -765,10 +765,10 @@ and the terms in the last line are those in Lemma~\ref{lem: KajPOw}.
 	
 	If \(\mathcal K\) is countably infinite, then for a given \(k\in\mathcal K\), since \(\psi\) is bounded,
 	\begin{align}
-		&\Bigg|\sum_{j\in\mathcal S}\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\psi( \mathcal R(\ell,\bs A^{(p)}(t),j),\varphi(t) )  1({L}^{(p)}(t)=\ell,\varphi(t)=j))  \mid \nonumber
+		&\Bigg|\sum_{j\in\mathcal S}\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[\psi( \mathcal R(\ell,\bs A^{(p)}(t),j),\rapphase^{(p)}(t) )  1({L}^{(p)}(t)=\ell,\rapphase^{(p)}(t)=j))  \mid \nonumber
 		\bs Y^{(p)}(0)=\bs y_0^{(p)} \Bigg] \wrt t\Bigg| \nonumber 
 		%
-		\\&\leq F \sum_{j\in\mathcal S}\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[1({L}^{(p)}(t)=\ell,\varphi(t)=j))  \mid \nonumber
+		\\&\leq F \sum_{j\in\mathcal S}\int_{t=0}^\infty e^{-\lambda t}\mathbb E\Bigg[1({L}^{(p)}(t)=\ell,\rapphase^{(p)}(t)=j))  \mid \nonumber
 		\bs Y^{(p)}(0)=\bs y_0^{(p)}\Bigg] \wrt t \nonumber 
 		%
 		\\&= F  \int_{t=0}^\infty e^{-\lambda t}\mathbb P( {\bs Y}^{(p)}(t)\in(\ell,\mathcal D_{\ell,j},j) \mid   
@@ -792,7 +792,7 @@ Theorem~\ref{thm: ext cont thm}, The Extended Continuity Theorem for Laplace tra
 \begin{thm}\label{thm: big thm}
 	For all \(\bs y_0^{(p)}=(\ell,\bs a_{\ell_0,i}^{(p)}(x_0),i)\), \(\ell_0\in\mathcal K\), \(x_0\in\mathcal D_{\ell_0,i}\), \(i\in\calS\), and any bounded function \(\psi:\mathbb R\times \mathcal S \to \mathbb R\), then
 	\begin{align}
-			&\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\varphi(t)),\varphi(t) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right] \nonumber 
+			&\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\rapphase^{(p)}(t)),\rapphase^{(p)}(t) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right] \nonumber 
 			\to \mathbb E\left[\psi({\bs X}(t))\mid \bs X(0)=(x_0, i) \right] \nonumber
 	\end{align}
 	weakly in \(t\) as \(p\to \infty\). 
@@ -804,46 +804,46 @@ Theorem~\ref{thm: ext cont thm}, The Extended Continuity Theorem for Laplace tra
 Ideally, we would like to obtain a point-wise convergence result in the variable \(t\). However, to date, this has eluded me. Although 
 \[\mathbb E\left[\psi({\bs X}(t))\mid \bs X(0)=(x_0,i) \right]\] 
 is a continuous function of \(t\) (it is a Feller semigroup), and, for \(p<\infty\), 
-\[\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\varphi(t)),\varphi(t) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right]  \]
+\[\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\rapphase^{(p)}(t)),\rapphase^{(p)}(t) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right]  \]
  is continuous in \(t\), the limit 
- \[\lim\limits_{p\to\infty}\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\varphi(t)),\varphi(t) ) \mid \bs Y^{(p)}(0)=\bs y_0^{(p)}\right]  \] need not be continuous in \(t\). Nonetheless, we can claim that 
+ \[\lim\limits_{p\to\infty}\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\rapphase^{(p)}(t)),\rapphase^{(p)}(t) ) \mid \bs Y^{(p)}(0)=\bs y_0^{(p)}\right]  \] need not be continuous in \(t\). Nonetheless, we can claim that 
 \begin{align}
-		&\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\varphi(t)),\varphi(t) )    \mid \bs Y^{(p)}(0)=\bs y_0^{(p)}\right]  \nonumber
+		&\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\rapphase^{(p)}(t)),\rapphase^{(p)}(t) )    \mid \bs Y^{(p)}(0)=\bs y_0^{(p)}\right]  \nonumber
 		\to \mathbb E\left[\psi({\bs X}(t) )\mid \bs X(0)=(x_0, i) \right] \nonumber
 \end{align}
 for almost all \(t\geq 0\). At such values of \(t\), since \(\psi\) is arbitrary and bounded, then The Portmanteau Theorem \ref{thm: Portmanteau} states that the QBD-RAP approximation scheme converges in distribution to the fluid queue. 
 
 A sufficient condition to upgrade the convergence from weak to point-wise (in the variable \(t\)) is to show that for \(t\geq 0\) 
-\[\sup_{p}\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\varphi(t)),\varphi(t) )  \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right]  \leq M(t)<\infty\]
-and the sequence \(\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\varphi(t)),\varphi(t) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right]  \) is eventually equicontinuous in \(t\). That is, for every \(\varepsilon>0\) there exists a \(\delta(t,\varepsilon)>0\) and a \(p_0(t,\varepsilon)\) such that \(|t-u|<\delta(t,\varepsilon)\) implies that 
+\[\sup_{p}\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\rapphase^{(p)}(t)),\rapphase^{(p)}(t) )  \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right]  \leq M(t)<\infty\]
+and the sequence \(\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\rapphase^{(p)}(t)),\rapphase^{(p)}(t) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right]  \) is eventually equicontinuous in \(t\). That is, for every \(\varepsilon>0\) there exists a \(\delta(t,\varepsilon)>0\) and a \(p_0(t,\varepsilon)\) such that \(|t-u|<\delta(t,\varepsilon)\) implies that 
 \begin{align}
-	&\nonumber \Bigg|\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\varphi(t)),\varphi(t) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right] 
-	\\&{}-\mathbb E\left[\psi( \mathcal R(L^{(p)}(u),\bs A^{(p)}(u),\varphi(u)),\varphi(u) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)}\right] \Bigg| \nonumber 
+	&\nonumber \Bigg|\mathbb E\left[\psi( \mathcal R(L^{(p)}(t),\bs A^{(p)}(t),\rapphase^{(p)}(t)),\rapphase^{(p)}(t) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right] 
+	\\&{}-\mathbb E\left[\psi( \mathcal R(L^{(p)}(u),\bs A^{(p)}(u),\rapphase^{(p)}(u)),\rapphase^{(p)}(u) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)}\right] \Bigg| \nonumber 
 	<\varepsilon
 \end{align}
 for all \(p\geq p_0(t,\varepsilon)\). 
 
 % \begin{lem}
 % 	\begin{align}
-% 		&\Bigg|\mathbb E\left[\psi( \mathcal R(L(t),\bs A(t),\varphi(t)),\varphi(t) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right] 
-% 		\\&{}-\mathbb E\left[\psi( \mathcal R(L(u),\bs A(u),\varphi(u)),\varphi(u) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)}\right] \Bigg| < Lc_{max}|t-u| \nonumber
+% 		&\Bigg|\mathbb E\left[\psi( \mathcal R(L(t),\bs A(t),\rapphase^{(p)}(t)),\rapphase^{(p)}(t) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)} \right] 
+% 		\\&{}-\mathbb E\left[\psi( \mathcal R(L(u),\bs A(u),\rapphase^{(p)}(u)),\rapphase^{(p)}(u) )   \mid \bs Y^{(p)}(0)=\bs y_0^{(p)}\right] \Bigg| < Lc_{max}|t-u| \nonumber
 % 	\end{align}
 % 	i.e.~uniformly Lipschitz in \(t\), and this does not depend on \(p\). 
 % \end{lem}
 % \begin{proof}
 % 	Suppose \(i\in\calS_-\). 
 % 	\begin{align*}
-% 		&\mathbb E\left[\psi( \mathcal R(L(t+u),\bs A(t+u),\varphi(t+u)),\varphi(t+u) )   \mid L(t)=\ell,\bs A(t)=\bs a, \varphi(t)=i \right]
+% 		&\mathbb E\left[\psi( \mathcal R(L(t+u),\bs A(t+u),\rapphase^{(p)}(t+u)),\rapphase^{(p)}(t+u) )   \mid L(t)=\ell,\bs A(t)=\bs a, \rapphase^{(p)}(t)=i \right]
 % 		%
-% 		\\&=\mathbb E\left[\int_{x\in\calD_{L(t+u),\varphi(t+u)}}\bs A(t+u)\bs v_{L(t+u),\varphi(t+u)}\psi(x,\varphi(t+u) )\wrt x   \mid L(t)=\ell,\bs A(t)=\bs a, \varphi(t)=i \right]
+% 		\\&=\mathbb E\left[\int_{x\in\calD_{L(t+u),\rapphase^{(p)}(t+u)}}\bs A(t+u)\bs v_{L(t+u),\rapphase^{(p)}(t+u)}\psi(x,\rapphase^{(p)}(t+u) )\wrt x   \mid L(t)=\ell,\bs A(t)=\bs a, \rapphase^{(p)}(t)=i \right]
 % 		%
-% 		\\&=\int_{L(t+u),\varphi(t+u)}\bs a e^{(c_i\bs S + T_{ii}\bs I)u}\bs v_{\ell,i}(x)\psi(x,i)\wrt x 
+% 		\\&=\int_{L(t+u),\rapphase^{(p)}(t+u)}\bs a e^{(c_i\bs S + T_{ii}\bs I)u}\bs v_{\ell,i}(x)\psi(x,i)\wrt x 
 % 		%
-% 		\\&\quad{}+\sum_{j\in\calS_-}\int_{L(t+u),\varphi(t+u)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}T_{ij}e^{(c_j\bs S + T_{jj}\bs I)(u-v)}\bs v_{\ell,j}(x)\psi(x,j)\wrt v\wrt x 
+% 		\\&\quad{}+\sum_{j\in\calS_-}\int_{L(t+u),\rapphase^{(p)}(t+u)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}T_{ij}e^{(c_j\bs S + T_{jj}\bs I)(u-v)}\bs v_{\ell,j}(x)\psi(x,j)\wrt v\wrt x 
 % 		%
-% 		\\&\quad{}+\sum_{j\in\calS_+}\int_{L(t+u),\varphi(t+u)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}T_{ij}\bs D e^{(c_j\bs S + T_{jj}\bs I)(u-v)}\bs v_{\ell,j}(x)\psi(x,j)\wrt v\wrt x 
+% 		\\&\quad{}+\sum_{j\in\calS_+}\int_{L(t+u),\rapphase^{(p)}(t+u)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}T_{ij}\bs D e^{(c_j\bs S + T_{jj}\bs I)(u-v)}\bs v_{\ell,j}(x)\psi(x,j)\wrt v\wrt x 
 % 		%
-% 		\\&\quad{}+\int_{L(t+u),\varphi(t+u)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}c_i\bs s\bs \alpha e^{(c_i\bs S + T_{ii}\bs I)(u-v)}\bs v_{\ell+1,i}(x)\psi(x,i)\wrt x 
+% 		\\&\quad{}+\int_{L(t+u),\rapphase^{(p)}(t+u)} \int_{v=0}^u\bs a e^{(c_i\bs S + T_{ii}\bs I)v}c_i\bs s\bs \alpha e^{(c_i\bs S + T_{ii}\bs I)(u-v)}\bs v_{\ell+1,i}(x)\psi(x,i)\wrt x 
 % 		%
 % 		\\&\quad{}+o(u^2)
 % 		%
@@ -917,7 +917,7 @@ for all \(p\geq p_0(t,\varepsilon)\).
 
 % 	Therefore, consider the derivative
 % 	\begin{align*}
-% 		&\lim_{u\to 0^+}u^{-1}\Bigg(\mathbb E\left[\psi( \mathcal R(L(t+u),\bs A(t+u),\varphi(t+u)),\varphi(t+u) )   \mid L(t)=\ell,\bs A(t)=\bs a, \varphi(t)=i \right]
+% 		&\lim_{u\to 0^+}u^{-1}\Bigg(\mathbb E\left[\psi( \mathcal R(L(t+u),\bs A(t+u),\rapphase^{(p)}(t+u)),\rapphase^{(p)}(t+u) )   \mid L(t)=\ell,\bs A(t)=\bs a, \rapphase^{(p)}(t)=i \right]
 % 		\\&{}-\int_{x\in\calD_{\ell,i}}\bs a\bs v_{\ell,i}(x)\psi(x,i)\wrt x \Bigg)
 % 		\\&= \lim_{u\to 0^+} u^{-1}\Bigg(\int_{x\in[0,\infty)} \bs a e^{(c_i\bs S + T_{ii}\bs I)u}e^{\bs Sx}\bs s\psi(\ell\Delta+m(x),i)\wrt x 
 % 		%

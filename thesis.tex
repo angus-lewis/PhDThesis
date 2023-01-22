@@ -25,6 +25,7 @@
 \usepackage{amsfonts}
 \usepackage{blkarray}
 \usepackage[symbol]{footmisc}
+\usepackage{longtable}
 
 \newtheorem{defn}{Definition}[chapter] 
 \newtheorem{lem}[defn]{Lemma}
@@ -68,7 +69,7 @@
 \newcommand{\Mod}[1]{\ (\mathrm{mod}\ #1)}
 \newcommand{\wrt}{\, \mathrm{d}} 
 \newcommand{\diag}{\mathrm{diag}} 
-\newcommand{\var}{\mathrm{Var}} 
+\newcommand{\var}{\mathrm{Var}}
 \newcommand{\calD}{\mathcal{D}}
 \newcommand{\calF}{\mathcal{F}}
 \newcommand{\calS}{\mathcal{S}}
@@ -79,7 +80,15 @@
 \newcommand{\Ydp}{\bm{Y}_{\bm{\alpha}}^{(p)}}
 \newcommand{\Yd}{\bm{Y}_{\bm{\alpha}}}
 \newcommand{\tr}{'}%{^{\mbox{\tiny T}}}
+\newcommand{\rapphase}{\phi}%{^{\mbox{\tiny T}}}
+\newcommand{\hSigma}{\widehat{\Sigma}}%{^{\mbox{\tiny T}}}
+\newcommand{\hGamma}{\widehat{\Gamma}}%{^{\mbox{\tiny T}}}
 
+% widecheck command compatible with amsmath
+\DeclareFontFamily{U}{mathx}{}
+\DeclareFontShape{U}{mathx}{m}{n}{<-> mathx10}{}
+\DeclareSymbolFont{mathx}{U}{mathx}{m}{n}
+\DeclareMathAccent{\widecheck}{0}{mathx}{"71}
 
 \begin{document}
 \frontmatter
@@ -88,6 +97,7 @@
 
 % Make the following tables
 \tableofcontents
+\include{front/notation}
 \listoftables
 \listoffigures
 
@@ -113,12 +123,12 @@
 
 \appendix
 % Import the appendices 
-% \include{appendix_math_background/appendix}  
+\include{appendix_math_background/appendix}  
 \include{appendix_dg_toy/appendix} 
 \include{appendix_properties_of_B/appendix} 
 \include{appendix_closing_operators/appendix} 
 \include{appendix_convergence/appendix} 
-\include{appendix_kronecker/appendix} 
+\include{appendix_kronecker/appendix}
 
 \backmatter
 % Add the bibliography to the table of contents

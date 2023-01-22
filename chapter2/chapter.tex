@@ -30,7 +30,7 @@ We start by recalling the PDE (assuming the PDE exists) from which we will extra
 Let $f_i(x,t)$ be the joint density of an unbounded fluid queue $(\ddot X_t, \varphi_t)$ (assuming a density exists): 
 	% 
 	\begin{align*} 
-	    f_i(x,t) := \cfrac{\partial}{\partial x} 	\mathbb{P}\left(X(t) \leq x, \varphi(t) = i\right),\quad i \in\calS,
+	    f_i(x,t) = \cfrac{\partial}{\partial x} 	\mathbb{P}\left(X(t) \leq x, \varphi(t) = i\right),\quad i \in\calS,
 	\end{align*} 
 which satisfies the system of partial differential equations 
 %
@@ -52,46 +52,46 @@ where \(\boldsymbol f(x,t) = \left(f_i(x,t)\right)_{i\in\mathcal S}\) is a row-v
 \section{Cells, test functions, and weak formulation}
 To begin with, consider an unbounded fluid queue with fluid level \(\{\ddot X_t,t\geq0\}\), \(\ddot X_t\in(-\infty,\infty)\). Later, we will use the approximation to the generator of the fluid queue to approximate performance measures of fluid-fluid queues, but for now, we can consider just the driving fluid queue. We will eventually truncate the state space, \(\ddot X_t\in(-\infty,\infty)\), so that we have a finite dimensional approximation; however, this requires a discussion of boundary conditions which we save for later. Let \(\mathcal D_{k,i} = [y_k,y_{k+1}),\, k\in\mathbb Z\) for \(i\in\calS_+\cup\calS_0\) and \(\mathcal D_{k,i} = (y_k,y_{k+1}],\, k\in\mathbb Z\) for \(i\in\calS_-\), \(y_k<y_{k+1}\), partition the domain \((-\infty,\infty)\). We call the \(\calD_{k,i}\) \textit{cells} and define \(\Delta_k=y_{k+1}-y_k\). 
 
-For each \(k\in \mathbb Z\) we choose \(p_k\) linearly independent functions \(\{\phi^r_k\}_{r=1}^{p_k}\), supported on \(\calD_{k,i}\) (i.e.~\(\phi^r_k(x)=0\) for \(x\notin\calD_{k,i}\)) for all \(i\in\calS\), to form a basis for the space \(W_k\), in which we formulate the approximation. Here, as is standard in DG methods \citep{nodalDGBook}, we take \(\{\phi^r_k\}_{r=1}^{p_k}\) to be a basis for the space of polynomials of degree \(p_k-1\). For the sake of illustration, the reader may think of \(\{\phi^r_k\}_{r=1}^{p_k}\) as the Lagrange polynomials, but any polynomial basis can be used. On each cell \(\mathcal D_{k,i}\) we approximate 
+For each \(k\in \mathbb Z\) we choose \(p_k\) linearly independent functions \(\{\phi^r_k\}_{r=1}^{p_k}\), supported on \(\calD_{k,i}\) (i.e.~\(\phi^r_k(x)=0\) for \(x\notin\calD_{k,i}\)) for all \(i\in\calS\), to form a basis for the space \(U_k\), in which we formulate the approximation. Here, as is standard in DG methods \citep{nodalDGBook}, we take \(\{\phi^r_k\}_{r=1}^{p_k}\) to be a basis for the space of polynomials of degree \(p_k-1\). For the sake of illustration, the reader may think of \(\{\phi^r_k\}_{r=1}^{p_k}\) as the Lagrange polynomials, but any polynomial basis can be used. On each cell \(\mathcal D_{k,i}\) we approximate 
 \[f_i(x,t)\approx u_{k,i}(x,t)=\sum\limits_{r=1}^{p_k}a_{k,i}^r(t)\phi^r_k(x),\] 
 where \(a_{k,i}^r(t)\) are yet-to-be-determined time-dependent coefficients. We refer to \(u_{k,i}\) as the \textit{local} approximation on cell \(k\), while the \textit{global} approximation is given by \(\sum\limits_{k\in\mathbb Z}u_{k,i}\) on the whole domain. %The whole approximation space is \(\bigoplus\limits_{k\in\mathbb Z} W_k\), the direct sum of the spaces \(W_k\), \(k\in\mathbb Z\).
 
-Let \(\mathcal N_k := \left\{1,\dots,p_k\right\},\, k \in \mathbb Z\). For \(k\in\mathbb Z,\) define \textit{local} row-vectors 
+Let \(\mathcal N_k = \left\{1,\dots,p_k\right\},\, k \in \mathbb Z\). For \(k\in\mathbb Z,\) define \textit{local} row-vectors 
 \[\boldsymbol \phi_k(x) = (\phi^r_k(x))_{r\in\mathcal N_k}, \quad \boldsymbol a_{k,i}(t) = (a_{k,i}^r(t))_{r\in\mathcal N_k},\,i\in\mathcal S.\]
 %Also define \textit{global} row-vectors 
 %\[\boldsymbol \phi(x) = (\boldsymbol\phi^k(x))_{k\in\{1,...,K\}},\quad \boldsymbol a_i(x) = (\boldsymbol a_{k,i}(x))_{k\in\{1,...,K\}},\,i\in\mathcal S.\]
 Note that we will always use the letter \(r\) to index the basis function within each cell.
 
-The DG method proceeds by first considering the \textit{weak-formulation} of the PDE, which is constructed from the \textit{strong-form} of the PDE, Equation~(\ref{eqn:pde_density_matrix}). In general, to construct the weak-form we need a set of test functions, say \(W\). Now, take the strong form of the PDE, multiply it by some test function \(\psi(x)\in W\), integrate with respect to \(x\), and apply integration by parts to get 
+The DG method proceeds by first considering the \textit{weak-formulation} of the PDE, which is constructed from the \textit{strong-form} of the PDE, Equation~(\ref{eqn:pde_density_matrix}). In general, to construct the weak-form we need a set of test functions, say \(U\). Now, take the strong form of the PDE, multiply it by some test function \(\psi\in U\), integrate with respect to \(x\), and apply integration by parts to get 
 \begin{align}
 \begin{multlined}[t]
 	\int_{x\in\mathbb R}\cfrac{\partial}{\partial t} f_j(x,t)\psi(x)\wrt x = \int_{x\in\mathbb R} \sum_{i\in\calS}f_i(x,t)T_{ij}\psi(x)\wrt x 
 	%
 	+  \int_{x\in\mathbb R} f_j(x,t)c_j\cfrac{\wrt}{\wrt x}\psi(x)\wrt x \\{}- [ f_j(x,t)c_j\psi(x)]_{x=-\infty}^{x=\infty}, \end{multlined}\label{eqn:weak form}
 \end{align}
-for \(j\in\calS\). It is convenient to choose \(W\) such that \(\psi(-\infty)=\psi(\infty)=0\), in which case the last term on the right is zero. %Requiring (\ref{eqn:weak form}) to hold for every \(\psi\in W\) gives the weak-formulation of the PDE. Solutions to (\ref{eqn:weak form}) are known as \textit{weak} solutions and generalise the concept of a solution of the PDE. %For example, this may allow discontinuities with respect to \(x\) in the solution -- something which is ill-defined for the strong form.
+for \(j\in\calS\). It is convenient to choose \(U\) such that \(\psi(-\infty)=\psi(\infty)=0\), in which case the last term on the right is zero. %Requiring (\ref{eqn:weak form}) to hold for every \(\psi\in U\) gives the weak-formulation of the PDE. Solutions to (\ref{eqn:weak form}) are known as \textit{weak} solutions and generalise the concept of a solution of the PDE. %For example, this may allow discontinuities with respect to \(x\) in the solution -- something which is ill-defined for the strong form.
 
-For the problem at hand, we take the set of test functions to be \(W = \bigoplus\limits_{k\in\mathbb Z} W_k\), the direct sum of \(W_k\), where \(W_k\) is the domain of the approximation on the interval \(\calD_k\). Further, we use the same basis functions for the test-function space and the approximation space. Proceeding as described above, for all \(j\in\mathcal S,\,r\in\mathcal N_k\), \(k\in\mathbb Z,\) the weak formulation is 
+For the problem at hand, we take the set of test functions to be \(U = \bigoplus\limits_{k\in\mathbb Z} U_k\), the direct sum of \(U_k\), where \(U_k\) is the domain of the approximation on the interval \(\calD_k\). Further, we use the same basis functions for the test-function space and the approximation space. Proceeding as described above, for all \(j\in\mathcal S,\,r\in\mathcal N_k\), \(k\in\mathbb Z,\) the weak formulation is 
 \begin{align*}
 	\begin{multlined}[t]\int_{x=y_k}^{y_{k+1}}\cfrac{\partial}{\partial t} f_j(x,t)\phi^r_k(x)\wrt x = \int_{x=y_k}^{y_{k+1}}\sum_{i\in\calS}  f_i(x,t)T_{ij}\phi^r_k(x)\wrt x  
 	%
 	+  \int_{x=y_k}^{y_{k+1}} f_j(x,t)c_j\cfrac{\wrt}{\wrt x}\phi^r_k(x)\wrt x \\ {}- [f_j(x,t)c_j\phi^r_k(x)]_{x=y_k}^{x=y_{k+1}}, \end{multlined}
 \end{align*}
-since \(\phi^r_k\) is compactly supported on \(\calD_{k,j}\). Now, note that any function \(g(x)\) can be decomposed as \(g(x) = g^{W}(x)+g^\perp(x)\) where \(g^{W}\in W\) and \(g^\perp \in W^\perp\), the orthogonal complement of \(W\). Since \(g^\perp\) is orthogonal to \(W\), \(\displaystyle\int_{x}g^\perp(x)\phi^r_k(x)\wrt x=0\) for \(r\in\mathcal N_k,\,k\in\mathbb Z\). Also, note that \(\cfrac{\wrt}{\wrt x}\phi^r_k(x)\in W\). Using this, we can write 
+since \(\phi^r_k\) is compactly supported on \(\calD_{k,j}\). Now, as any function \(g(x)\) can be decomposed as \(g(x) = g^{U}(x)+g^\perp(x)\) where \(g^{U}\in U\) and \(g^\perp \in U^\perp\), the orthogonal complement of \(U\). Since \(g^\perp\) is orthogonal to \(U\), \(\displaystyle\int_{x}g^\perp(x)\phi^r_k(x)\wrt x=0\) for \(r\in\mathcal N_k,\,k\in\mathbb Z\). Also, note that \(\cfrac{\wrt}{\wrt x}\phi^r_k(x)\in U\). Using this, we can write 
 \begin{align*}
-	\begin{multlined}[t]\int_{x=y_{k}}^{y_{k+1}}\cfrac{\partial}{\partial t} \left(f_j^W(x,t)+f_j^\perp(x,t)\right)\phi^r_k(x)\wrt x 
-	= \int_{x=y_k}^{y_{k+1}}\sum_{i\in\calS} \left(f_i^W(x,t)+f_i^\perp(x,t)\right)T_{ij}\phi^r_k(x)\wrt x  
+	\begin{multlined}[t]\int_{x=y_{k}}^{y_{k+1}}\cfrac{\partial}{\partial t} \left(f_j^U(x,t)+f_j^\perp(x,t)\right)\phi^r_k(x)\wrt x 
+	= \int_{x=y_k}^{y_{k+1}}\sum_{i\in\calS} \left(f_i^U(x,t)+f_i^\perp(x,t)\right)T_{ij}\phi^r_k(x)\wrt x  
 	%
 	\\ {}
-	+  \int_{x=y_k}^{y_{k+1}} \left(f_j^W(x,t)+f_j^\perp(x,t)\right)c_j\cfrac{\wrt}{\wrt x}\phi^r_k(x)\wrt x - [f_j(x,t)c_j\phi^r_k(x)]_{x=y_k}^{x=y_{k+1}}, \end{multlined}
+	+  \int_{x=y_k}^{y_{k+1}} \left(f_j^U(x,t)+f_j^\perp(x,t)\right)c_j\cfrac{\wrt}{\wrt x}\phi^r_k(x)\wrt x - [f_j(x,t)c_j\phi^r_k(x)]_{x=y_k}^{x=y_{k+1}}, \end{multlined}
 \end{align*}
 	which reduces to
 \begin{align}
-	\begin{multlined}[t]\int_{x=y_k}^{y_{k+1}}\cfrac{\partial}{\partial t} f_j^W(x,t)\phi^r_k(x)\wrt x = \int_{x=y_k}^{y_{k+1}}\sum_{i\in\calS} f_i^W(x,t)T_{ij}\phi^r_k(x)\wrt x  
+	\begin{multlined}[t]\int_{x=y_k}^{y_{k+1}}\cfrac{\partial}{\partial t} f_j^U(x,t)\phi^r_k(x)\wrt x = \int_{x=y_k}^{y_{k+1}}\sum_{i\in\calS} f_i^U(x,t)T_{ij}\phi^r_k(x)\wrt x  
 	%
-	\\{} + \int_{x=y_k}^{y_{k+1}} f_j^W(x,t)c_j\cfrac{\wrt}{\wrt x}\phi^r_k(x)\wrt x - [f_j(x,t)c_j\phi^r_k(x)]_{x=y_k}^{x=y_{k+1}}. \end{multlined} \label{eqn:hash}
+	\\{} + \int_{x=y_k}^{y_{k+1}} f_j^U(x,t)c_j\cfrac{\wrt}{\wrt x}\phi^r_k(x)\wrt x - [f_j(x,t)c_j\phi^r_k(x)]_{x=y_k}^{x=y_{k+1}}. \end{multlined} \label{eqn:hash}
 \end{align}
-Now, \(f_j^W(x,t)\in W\) so, on \(\mathcal D_{k,j}\), it can be expressed as \(u_{k,j}(x,t):=\boldsymbol a_{k,j}(t) \boldsymbol \phi_k(x)\tr{}\), where the prime denotes the transpose, which we now substitute into (\ref{eqn:hash})
+Now, \(f_j^U(x,t)\in U\) so, on \(\mathcal D_{k,j}\), it can be expressed as \(u_{k,j}(x,t)=\boldsymbol a_{k,j}(t) \boldsymbol \phi_k(x)\tr{}\), where the prime denotes the transpose, which we now substitute into (\ref{eqn:hash})
 %\begin{align*}
 %	\begin{multlined}[t]\int_{x\in\calD_k}\cfrac{\wrt}{\wrt t} \boldsymbol a_{k,j}(t) \boldsymbol \phi^k(x)\tr{}\phi^r_k(x)\wrt x = \int_{x\in\calD_k}\sum_{i\in\calS} \boldsymbol a_{k,i}(t) \boldsymbol \phi^k(x)\tr{}T_{ij}\phi^r_k(x)\wrt x  
 %	%
@@ -104,13 +104,13 @@ and repeat this for all test functions \(\phi^r_k(x)\), \(r=1,...,p_k\), to get 
 	\\{}+  \int_{x=y_k}^{y_{k+1}}\boldsymbol a_{k,j}(t) \boldsymbol \phi_k(x)\tr{}c_j\cfrac{\wrt}{\wrt x}\boldsymbol\phi_k(x)\wrt x - c_j[f_j(x,t) \boldsymbol\phi_k(x)]_{x=y_k}^{x=y_{k+1}},\quad k\in\mathbb Z. \end{multlined} \label{eqn:DG system}
 \end{align}
 
-\section{Mass, stiffness, and flux matrices}
+\section{Mass, stiffness, and flux matrices}\label{sec:llaaksksbnnn}
 Recall, for \(k\in\mathbb Z\), we defined local \textit{mass} and \textit{stiffness} matrices \(\bs M_k\) and \(\bs G_k\) by 
-\[\bs M_k := \int_{x\in\calD_k}\boldsymbol \phi_k(x)\tr{}\boldsymbol \phi_k(x)\wrt x,\quad \bs G_k := \int_{x\in\calD_k}\boldsymbol \phi_k(x)\tr{}\cfrac{\wrt}{\wrt x} \boldsymbol \phi_k(x)\wrt x.\]
+\[\bs M_k = \int_{x\in\calD_k}\boldsymbol \phi_k(x)\tr{}\boldsymbol \phi_k(x)\wrt x,\quad \bs G_k = \int_{x\in\calD_k}\boldsymbol \phi_k(x)\tr{}\cfrac{\wrt}{\wrt x} \boldsymbol \phi_k(x)\wrt x.\]
 %and global mass and stiffness matrices by
 %\begin{align*}
-%	M &:= \left[\begin{array}{ccc} M_1 & & \\ & \ddots & \\ & & M_K \end{array}\right] = \int_{x\inb}\boldsymbol \phi(x)\tr{}\boldsymbol \phi(x)\wrt x,
-%	\\G &:= \left[\begin{array}{ccc} G_1 & & \\ & \ddots & \\ & & G_K \end{array}\right] = \int_{x\inb}\boldsymbol \phi(x)\tr{}\cfrac{\wrt}{\wrt x}\boldsymbol \phi(x)\wrt x,
+%	M &= \left[\begin{array}{ccc} M_1 & & \\ & \ddots & \\ & & M_K \end{array}\right] = \int_{x\inb}\boldsymbol \phi(x)\tr{}\boldsymbol \phi(x)\wrt x,
+%	\\G &= \left[\begin{array}{ccc} G_1 & & \\ & \ddots & \\ & & G_K \end{array}\right] = \int_{x\inb}\boldsymbol \phi(x)\tr{}\cfrac{\wrt}{\wrt x}\boldsymbol \phi(x)\wrt x,
 %\end{align*}
 We can write (\ref{eqn:DG system}) as 
 \begin{align}
@@ -139,7 +139,7 @@ In matrix form,
 	\\& = -c_j\boldsymbol a_{k,j}(t)\boldsymbol \phi_k(y_{k+1}^-)\tr{}\boldsymbol\phi_k(y_{k+1}) + c_j\boldsymbol a_{k-1,j}(t)\boldsymbol \phi_{k-1}(y_{k}^-)\tr{}\boldsymbol\phi_k(y_{k})
 	\\& = c_j\boldsymbol a_{k,j}(t)F_j^{k,k}+c_j\boldsymbol a_{k-1,j}(t)F_j^{k-1,k},
 \end{align*}
-where, for \(j\in \calS\) with \(c_j>0\), we define \(\bs F_+^{k,k}=\bs F_j^{k,k} := -\boldsymbol \phi_k(y_{k+1}^-)\tr{}\boldsymbol\phi_k(y_{k+1}),\,k\in\mathbb Z\) and \(\bs F_j^{k-1,k} := \boldsymbol \phi_{k-1}(y_{k}^-)\tr{}\boldsymbol\phi_k(y_{k}),\,k\in\mathbb Z\).
+where, for \(j\in \calS\) with \(c_j>0\), we define \(\bs F_+^{k,k}=\bs F_j^{k,k} = -\boldsymbol \phi_k(y_{k+1}^-)\tr{}\boldsymbol\phi_k(y_{k+1}),\,k\in\mathbb Z\) and \(\bs F_j^{k-1,k} = \boldsymbol \phi_{k-1}(y_{k}^-)\tr{}\boldsymbol\phi_k(y_{k}),\,k\in\mathbb Z\).
 
 Now proceed similarly for \(c_j<0\) to get the approximation 
 \begin{align*}
@@ -147,7 +147,7 @@ Now proceed similarly for \(c_j<0\) to get the approximation
 	\\& = -c_j\boldsymbol a_{k+1,j}(t)\boldsymbol \phi_{k+1}(y_{k+1}^+)\tr{}\boldsymbol\phi_k(y_{k+1}) + c_j\boldsymbol a_{k,j}(t)\boldsymbol \phi_{k}(y_{k}^+)\tr{}\boldsymbol\phi_k(y_{k})
 	\\& = c_j\boldsymbol a_{k+1,j}(t)\bs F_j^{k+1,k}+c_j\boldsymbol a_{k,j}(t)\bs F_j^{k,k},
 \end{align*}
-where, for \(j\in \calS\) with \(c_j<0\), we define \(\bs F_j^{k+1,k} := -\boldsymbol \phi_{k+1}(y_{k+1}^+)\tr{}\boldsymbol\phi_k(y_{k+1}),\,k\in\mathbb Z,\) and \(\bs F_-^{k,k}=\bs F_j^{k,k} := \boldsymbol \phi_{k}(y_{k}^+)\tr{}\boldsymbol\phi_k(y_{k}),\,k\in\mathbb Z\).
+where, for \(j\in \calS\) with \(c_j<0\), we define \(\bs F_j^{k+1,k} = -\boldsymbol \phi_{k+1}(y_{k+1}^+)\tr{}\boldsymbol\phi_k(y_{k+1}),\,k\in\mathbb Z,\) and \(\bs F_-^{k,k}=\bs F_j^{k,k} = \boldsymbol \phi_{k}(y_{k}^+)\tr{}\boldsymbol\phi_k(y_{k}),\,k\in\mathbb Z\).
 
 The matrices \(\bs F_j^{k-1,k},\,\bs F_j^{k,k},\) and \(\bs F_j^{k+1,k}\) are the local flux matrices. For convenience, we also define the matrices \(\bs F_j^{k,k+1}=0\) for \(j\in\calS_-\) and \(\bs F_j^{k,k-1}=0\) for \(j\in\calS_+\), \(k\in\mathbb Z\).
 
@@ -224,7 +224,7 @@ The global system of equations is
 \section{Boundary conditions}\label{subsec: boundary DG}
 To enable computation, the numerical approximation has to take place on a finite interval, which means we must consider a bounded domain and specify boundary conditions. Recall that we wish to impose lower and upper boundaries at \(0\) and \(b\), respectively. On the interior of the space, the PDE (\ref{eqn:pde_density_matrix}) (assuming it exists) still describes the evolution of the distribution of the fluid queue. Regarding the approximation, the constructions above can still be used to approximate the evolution of the fluid queue on the interior of the space. The imposition of boundary conditions amounts to truncating the operator \(\ddot{\bs B}\), adding boundary elements to the system and describing how mass moves between the boundary and the elements adjacent to the boundary.  %In the numerics chapter, Chapter~\ref{sec: numerics}, we wish to approximate a fluid-fluid queue where the first fluid level, \(\dot X_t\), is bounded below at 0, only: in that case the first step in the approximation scheme is to approximate \(\dot X_t\) by \( X_t\). The truncation of \(X_t\) to \(\overline X_t\) will result in an artificial point mass at the upper bound, which we have to address properly. It is important to choose an \(b\) sufficiently large to control the error induced by the artificial upper bound, however, with larger \(b\) there comes increased computational burden. 
 
-Let $[0,b]$ be the domain of the approximation, where $b < \infty$. We partition the space $[0,b]$ into \(\mathcal D_{-1}=\{0\},\) \(\mathcal D_{K+1}=\{b\},\) and \(K\) non-trivial intervals, \(\calD_{k,i}=[y_k,y_{k+1})\setminus \{0\},\,i\in\calS_+\cup\calS_0,\calD_{k,i}=(y_k,y_{k+1}]\setminus \{0\},\,i\in\calS_-,\, y_k<y_{k+1},\, k\in\mathcal K^\circ\), \(y_0=0,\,y_{K+1}=b\) and define \(\Delta_k := y_{k+1}-y_k\). 
+Let $[0,b]$ be the domain of the approximation, where $b < \infty$. We partition the space $[0,b]$ into \(\mathcal D_{-1}=\{0\},\) \(\mathcal D_{K+1}=\{b\},\) and \(K\) non-trivial intervals, \(\calD_{k,i}=[y_k,y_{k+1})\setminus \{0\},\,i\in\calS_+\cup\calS_0,\calD_{k,i}=(y_k,y_{k+1}]\setminus \{0\},\,i\in\calS_-,\, y_k<y_{k+1},\, k\in\mathcal K^\circ\), \(y_0=0,\,y_{K+1}=b\) and define \(\Delta_k = y_{k+1}-y_k\). 
 
 For states with \(c_i\leq 0\), there is the possibility of point mass accumulating at the boundary at~\(0\). Denote these point masses by \(q_{{-1},i}(t)\) for \(i\in\mathcal S_{-1}\). For states with \(c_i>0\) there is no possibility of a point mass at \(0\). Similarly, for \(c_i\geq 0\) there is the possibility of a point mass at \(b\). Denote these point masses by \(q_{{K+1},i}(t)\), for \(i\in\mathcal S_{K+1}\). For states with \(c_i<0\) there is no possibility of a point mass at \(b\). Let \(\bs q_{-1}(t)=(q_{{-1},i}(t))_{i\in\calS_{-1}}\) and \(\bs q_{K+1}(t) = (q_{{K+1},i}(t))_{i\in\calS_{K+1}}\) and \(\bs f_m(x,t) = (f_i(x,t))_{i\in\calS_m}\), \(m\in\{+,-,0\}\). 
 
@@ -234,43 +234,43 @@ Let us first consider the boundary at \( X_t=0\). The boundary conditions that d
 \\\label{eqn:BC2}
 \bs f_-(0^+,t)\bs C_-\bs P_{-,+} + \bs q_{-1}(t)\bs T_{{-1},+}&=\bs f_+(0,t)\bs C_+,
 \end{align}
-where \(\bs P_{-,+} = \left[p_{ij}^{-1}\right]_{i\in\calS_-,j\in\calS_{+}}\), \(\bs P_{-,{-1}} = \left[p_{ij}^{-1}\right]_{i\in\calS_-,j\in\calS_{-1}}\) and \(p_{ij}^{-1}\) is the probability of instantaneous transition of the phase process from Phase \(i\) to Phase \(j\) upon the process hitting the lower boundary. Equation~(\ref{eqn:BC1}) states that point mass moves between phases according to the sub-generator matrix \(\bs T_{{-1},{-1}}\), and that the flux of probability density into the point masses is \(\boldsymbol f_-(0,t)\bs P_{-,{-1}}\bs C_{-1}\). Substituting the DG approximation for \(\boldsymbol f_-(0,t)\) into (\ref{eqn:BC1}) gives, for \(j\in\calS_{-1}\), 
+where \(\bs P_{-,+} = \left[\widecheck p_{ij}\right]_{i\in\calS_-,j\in\calS_{+}}\), \(\bs P_{-,{-1}} = \left[\widecheck p_{ij}\right]_{i\in\calS_-,j\in\calS_{-1}}\) and \(\widecheck p_{ij}\) is the probability of instantaneous transition of the phase process from Phase \(i\) to Phase \(j\) upon the process hitting the lower boundary. Equation~(\ref{eqn:BC1}) states that point mass moves between phases according to the sub-generator matrix \(\bs T_{{-1},{-1}}\), and that the flux of probability density into the point masses is \(\boldsymbol f_-(0,t)\bs P_{-,{-1}}\bs C_{-1}\). Substituting the DG approximation for \(\boldsymbol f_-(0,t)\) into (\ref{eqn:BC1}) gives, for \(j\in\calS_{-1}\), 
 \begin{equation*}\label{eqn:DGBC1}
-\cfrac{\wrt}{\wrt t} q_{{-1},j}(t) = \sum_{i\in\calS_{-1}} q_{{-1},i}(t) T_{i j} - \sum_{i\in\calS_-}\boldsymbol a_{0,i}(t)\boldsymbol \phi_0(0^+)\tr{}p_{ij}^{-1} c_i.
+\cfrac{\wrt}{\wrt t} q_{{-1},j}(t) = \sum_{i\in\calS_{-1}} q_{{-1},i}(t) T_{i j} - \sum_{i\in\calS_-}\boldsymbol a_{0,i}(t)\boldsymbol \phi_0(0^+)\tr{}\widecheck p_{ij} c_i.
 \end{equation*}
 Equation~(\ref{eqn:BC2}) describes the reflection of process at \(0\), plus the flux of probability mass to density upon a transition from a phase in \(\calS_{-1}\) to a phase in \(\calS_+\). Thus, the flux into the left-hand edge of \(\calD_{0,j}\) in phase \(j\in\calS_+\) is, \(\sum\limits_{i\in\calS_{-1}} q_{{-1},i}(t)T_{ij}\). Therefore, we can now evaluate 
 \begin{align*}
 	&-c_j[f_j(x,t)\boldsymbol\phi_0(x)]_{x=0}^{x=y_{0}} 
-	\\& =  -c_jf_j(y_0^-,t)\boldsymbol\phi_0(y_0)+c_jf_j(0^+,t)\boldsymbol\phi_0(0) - \sum_{i\in\calS_-}c_if_i(0^+,t)p_{ij}^{-1}\bs \phi_0(0)
-	\\& \approx -c_j f_j^*(y_0,t)\boldsymbol\phi_0(y_0)+\sum_{i\in\calS_{-1}}q_{{-1},i}(t)T_{ij}\boldsymbol\phi_0(0) - \sum_{i\in\calS_-}c_ip_{ij}^{-1}\bs a_{0,i}(t)\bs \phi_0(0)\tr{}\bs \phi_0(0)
-	\\& = c_j\boldsymbol a_{0,j}(t)\bs F_j^{0,0}+\sum_{i\in\calS_{-1}}q_{{-1},i}(t)T_{ij}\boldsymbol\phi_0(0) - \sum_{i\in\calS_-}c_ip_{ij}^{-1}\bs a_{0,i}(t)\bs F_j^{0,0},
+	\\& =  -c_jf_j(y_0^-,t)\boldsymbol\phi_0(y_0)+c_jf_j(0^+,t)\boldsymbol\phi_0(0) - \sum_{i\in\calS_-}c_if_i(0^+,t)\widecheck p_{ij}\bs \phi_0(0)
+	\\& \approx -c_j f_j^*(y_0,t)\boldsymbol\phi_0(y_0)+\sum_{i\in\calS_{-1}}q_{{-1},i}(t)T_{ij}\boldsymbol\phi_0(0) - \sum_{i\in\calS_-}c_i\widecheck p_{ij}\bs a_{0,i}(t)\bs \phi_0(0)\tr{}\bs \phi_0(0)
+	\\& = c_j\boldsymbol a_{0,j}(t)\bs F_j^{0,0}+\sum_{i\in\calS_{-1}}q_{{-1},i}(t)T_{ij}\boldsymbol\phi_0(0) - \sum_{i\in\calS_-}c_i\widecheck p_{ij}\bs a_{0,i}(t)\bs F_j^{0,0},
 \end{align*}
 for \(j \in \calS_+\). 
 
-Thus, the DG approximation of the flux into point masses \(q_{{-1},j}(t)\) is \[-\sum_{i\in\calS_-}\boldsymbol a_{0,i}(t)\boldsymbol \phi_0(0)\tr{} p_{ij}^{-1} c_i,\,j\in\calS_-,\] the rate of transition of point mass within \(\bs q_{{-1}}(t)\) is \(\bs T_{{-1},{-1}}\), the DG approximation of the transition of point mass to density is \(\sum\limits_{i\in\calS_{-1}}q_{{-1},i}(t)T_{ij}\boldsymbol\phi_0(0),\,j\in\calS_+\), and the DG approximation to density reflected at the lower boundary is \(\sum_{i\in\calS_-}c_ip_{ij}^{-1}\bs a_{0,i}(t)\bs F_j^{0,0}\). 
+Thus, the DG approximation of the flux into point masses \(q_{{-1},j}(t)\) is \[-\sum_{i\in\calS_-}\boldsymbol a_{0,i}(t)\boldsymbol \phi_0(0)\tr{} p_{ij}^{-1} c_i,\,j\in\calS_-,\] the rate of transition of point mass within \(\bs q_{{-1}}(t)\) is \(\bs T_{{-1},{-1}}\), the DG approximation of the transition of point mass to density is \(\sum\limits_{i\in\calS_{-1}}q_{{-1},i}(t)T_{ij}\boldsymbol\phi_0(0),\,j\in\calS_+\), and the DG approximation to density reflected at the lower boundary is \(\sum_{i\in\calS_-}c_i\widecheck p_{ij}\bs a_{0,i}(t)\bs F_j^{0,0}\). 
 
 Similarly, for the upper boundary at \(b\) the boundary conditions are 
 \begin{align*}
 \cfrac{\wrt}{\wrt t}\bs q_{K+1}(t) &= \bs q_{K+1}(t) T_{{K+1}, {K+1}} + \boldsymbol f_+(b,t)\bs C_+\bs P_{+,{K+1}},\\
 \bs f_+(b^-,t)\bs C_+\bs P_{+,-} + \bs q_{K+1}(t)T_{{K+1}-}&=\bs f_-(b,t)\bs C_-,
 \end{align*}
-where \(\bs P_{+,-} = \left[p_{ij}^{K+1}\right]_{i\in\calS_+,j\in\calS_{-}}\), \(\bs P_{+,K+1} = \left[p_{ij}^{K+1}\right]_{i\in\calS_+,j\in\calS_{K+1}}\) and \(p_{ij}^{K+1}\) is the probability of instantaneous transition of the phase process from Phase \(i\) to Phase \(j\) upon the process hitting the lower boundary. Using the same arguments as above, 
+where \(\bs P_{+,-} = \left[\widehat p_{ij}\right]_{i\in\calS_+,j\in\calS_{-}}\), \(\bs P_{+,K+1} = \left[\widehat p_{ij} \right]_{i\in\calS_+,j\in\calS_{K+1}}\) and \(\widehat p_{ij} \) is the probability of instantaneous transition of the phase process from Phase \(i\) to Phase \(j\) upon the process hitting the lower boundary. Using the same arguments as above, 
 \begin{align*}
-\cfrac{\wrt}{\wrt t} q_{{K+1},j}(t) &= \sum_{i\in\calS_{K+1}}q_{{K+1},i}(t) T_{ij} + \sum_{i\in\calS_+}\boldsymbol a_{K,i}(t)\boldsymbol \phi_K(b)\tr{}p_{ij}^{K+1} c_i,
-\\-c_j[f_j(x,t)\boldsymbol\phi_K(x)]_{x=y_K}^{x=b} & \approx c_j\boldsymbol a_{K,j}(t)F_j^{K,K}+\sum_{i\in\calS_{K+1}}q_{{K+1},i}(t)T_{ij}\boldsymbol\phi_K(b) 
-\\&\quad{} - \sum_{i\in\calS_+}c_ip_{ij}^{K+1}\bs a_{0,i}(t)\bs F_j^{0,0}
+\cfrac{\wrt}{\wrt t} q_{{K+1},j}(t) &= \sum_{i\in\calS_{K+1}}q_{{K+1},i}(t) T_{ij} + \sum_{i\in\calS_+}\boldsymbol a_{K,i}(t)\boldsymbol \phi_K(b)\tr{}\widehat p_{ij} c_i,
+\\-c_j[f_j(x,t)\boldsymbol\phi_K(x)]_{x=y_K}^{x=b} & \approx c_j\boldsymbol a_{K,j}(t)\bs F_j^{K,K}+\sum_{i\in\calS_{K+1}}q_{{K+1},i}(t)T_{ij}\boldsymbol\phi_K(b) 
+\\&\quad{} - \sum_{i\in\calS_+}c_i\widehat p_{ij} \bs a_{0,i}(t)\bs F_j^{0,0}
 \end{align*}
 for \(j\in\calS_-\). 
 
 Thus, the DG approximation of the flux into the point mass \(q_{{K+1},j}(t)\) is 
-\[\sum_{i\in\calS_+}\boldsymbol a_{K,i}(t)\boldsymbol \phi_K(0)\tr{} p_{ij}^{K+1} c_i,\]
-\(j\in\calS_+\), the rate of transition of point mass within \(\bs q_{{K+1}}(t)\) is \(\bs T_{{K+1},{K+1}}\), the DG approximation of the transition of point mass to density is \(\sum\limits_{i\in\calS_{K+1}}q_{{K+1},i}(t)T_{ij}\boldsymbol\phi_K(b)\), \(j\in\calS_-\) and the approximation to reflection of density at the upper boundary is \(- \sum_{i\in\calS_+}c_ip_{ij}^{K+1}\bs a_{0,i}(t)\bs F_j^{0,0}\). 
+\[\sum_{i\in\calS_+}\boldsymbol a_{K,i}(t)\boldsymbol \phi_K(0)\tr{} \widehat p_{ij} c_i,\]
+\(j\in\calS_+\), the rate of transition of point mass within \(\bs q_{{K+1}}(t)\) is \(\bs T_{{K+1},{K+1}}\), the DG approximation of the transition of point mass to density is \(\sum\limits_{i\in\calS_{K+1}}q_{{K+1},i}(t)T_{ij}\boldsymbol\phi_K(b)\), \(j\in\calS_-\) and the approximation to reflection of density at the upper boundary is \(- \sum_{i\in\calS_+}c_i\widehat p_{ij} \bs a_{0,i}(t)\bs F_j^{0,0}\). 
 
 To include the behaviour in the DG generator we truncate the doubly-infinite matrix \(\ddot{{\bs B}}\) at \(k=0\) and \(k=K\), then append \(|\mathcal S_{-1}|\) rows and columns to the top and left, and \(|\mathcal S_{K+1}|\) rows and columns to the bottom and right. These represent the point masses \(\bs q_{-1}(t)\) and \(\bs q_{K+1}(t)\), respectively. Given the discussion above, the truncated matrix is
 \[{{\bs B}} = \left[\begin{array}{llllll}
-	\bs T_{{-1},{-1}}& {{\bs B}}^{{-1}0} & & & & \\
-	{{\bs B}}^{0{-1}} & {{\bs B}}^{00} & {{\bs B}}^{01} & & & \\
-	& {{\bs B}}^{10} & {{\bs B}}^{11} & {{\bs B}}^{12} & & \\
+	\bs T_{{-1},{-1}}& {{\bs B}}^{{-1},0} & & & & \\
+	{{\bs B}}^{0,{-1}} & {{\bs B}}^{0,0} & {{\bs B}}^{0,1} & & & \\
+	& {{\bs B}}^{1,0} & {{\bs B}}^{1,1} & {{\bs B}}^{1,2} & & \\
 	& & \ddots & \ddots & \ddots & \\
 	& & {{\bs B}}^{K-1,K-2} &{{\bs B}}^{K-1,K-1} & {{\bs B}}^{K-1,K} & \\
 	& & &{{\bs B}}^{K,K-1} & {{\bs B}}^{K,K} & {{\bs B}}^{K,{K+1}} \\
@@ -278,25 +278,25 @@ To include the behaviour in the DG generator we truncate the doubly-infinite mat
 \end{array}\right],\]
 where 
 \begin{align*}
-	{{\bs B}}^{k\ell} &= \ddot{{\bs B}}^{k\ell}, \mbox{ for \(k\in\mathcal K^\circ\), \(\ell\in\{k-1,k,k+1\}\), \(k=\ell,\, k,\ell\notin \{0,K\}\),}
-	\\ \bs B^{00} &= \ddot{\bs B}^{00} - \left[c_ip_{ij}^{-1} 1(c_i<0, c_j>0)\right]_{i\in\calS,j\in\calS}\otimes \bs F_-^{00},
-	\\ \bs B^{KK} &= \ddot{\bs B}^{KK} + \left[c_ip_{ij}^{-1} 1(c_i>0, c_j<0)\right]_{i\in\calS,j\in\calS}\otimes \bs F_+^{00}, 
-	\\ {{\bs B}}^{{-1}0} &:= \bs T_{{-1}+}\otimes \boldsymbol\phi^0(0), 
-	\\ {{\bs B}}^{0{-1}} &:=-\left[c_ip_{ij}^{-1} 1{(c_i<0)}\right]_{i\in\calS,j\in\calS_{{-1}}} \otimes \boldsymbol \phi^0(0)\tr{}, 
-	\\ {{\bs B}}^{{K+1} K} &:= \bs T_{{K+1}-}\otimes \boldsymbol\phi^K(b),
-	\\ {{\bs B}}^{K,{K+1}} &:= \left[c_ip_{ij}^{K+1} 1{(c_i>0)}\right]_{i\in\calS,j\in\calS_{K+1}} \otimes \boldsymbol \phi^K(b)\tr{},
+	{{\bs B}}^{k,\ell} &= \ddot{{\bs B}}^{k,\ell}, \mbox{ for \(k\in\mathcal K^\circ\), \(\ell\in\{k-1,k,k+1\}\), \(k=\ell,\, k,\ell\notin \{0,K\}\),}
+	\\ \bs B^{0,0} &= \ddot{\bs B}^{0,0} - \left[c_i\widecheck p_{ij}1(c_i<0, c_j>0)\right]_{i\in\calS,j\in\calS}\otimes \bs F_-^{0,0},
+	\\ \bs B^{K,K} &= \ddot{\bs B}^{K,K} + \left[c_i\widecheck p_{ij} 1(c_i>0, c_j<0)\right]_{i\in\calS,j\in\calS}\otimes \bs F_+^{0,0}, 
+	\\ {{\bs B}}^{{-1},0} &= \bs T_{{-1},+}\otimes \boldsymbol\phi^0(0), 
+	\\ {{\bs B}}^{0,{-1}} &=-\left[c_i \widecheck p_{ij}  1{(c_i<0)}\right]_{i\in\calS,j\in\calS_{{-1}}} \otimes \boldsymbol \phi^0(0)\tr{}, 
+	\\ {{\bs B}}^{{K+1}, K} &= \bs T_{{K+1},-}\otimes \boldsymbol\phi^K(b),
+	\\ {{\bs B}}^{K,{K+1}} &= \left[c_i\widehat p_{ij}  1{(c_i>0)}\right]_{i\in\calS,j\in\calS_{K+1}} \otimes \boldsymbol \phi^K(b)\tr{},
 \end{align*} 
 and \(\otimes\) is the Kronecker product. 
 
-For future reference, we also define the matrices \({{\bs B}}^{k\ell}_{ij}\) for \(k\in\{2,\dots,K-1\}\), \(\ell\in\{k-1,k\},\) \(i,j\in\calS\), by
+For future reference, we also define the matrices \({{\bs B}}^{k,\ell}_{ij}\) for \(k\in\{2,\dots,K-1\}\), \(\ell\in\{k-1,k\},\) \(i,j\in\calS\), by
 \begin{align*}
-	{{\bs B}}^{kk}_{ij} &= \begin{cases}T_{ij}\bs I_{p_k} + c_i(\bs F_i^{kk}+\bs G_k)\bs M_k^{-1} & i=j,\\T_{ij} \bs I_{p_k}& i\neq j,\end{cases}
-\\	{{\bs B}}^{k\ell}_{ij} &= \begin{cases}c_i\bs F_i^{k\ell}\bs M_\ell^{-1} & i=j,\\\bs 0 & i\neq j,\end{cases}\quad \ell \in \{k-1,k\}
+	{{\bs B}}^{k,k}_{ij} &= \begin{cases}T_{ij}\bs I_{p_k} + c_i(\bs F_i^{k,k}+\bs G_k)\bs M_k^{-1} & i=j,\\T_{ij} \bs I_{p_k}& i\neq j,\end{cases}
+\\	{{\bs B}}^{k,\ell}_{ij} &= \begin{cases}c_i\bs F_i^{k,\ell}\bs M_\ell^{-1} & i=j,\\\bs 0 & i\neq j,\end{cases}\quad \ell \in \{k-1,k\}
 \end{align*}
 and
 \begin{align*}
-	{{\bs B}}^{00}_{ij} &= \begin{cases}T_{ij}\bs I_{p_k} + c_i(\bs F_i^{00}+\bs G_0)\bs M_0^{-1} & i=j,\\T_{ij}\bs I_{p_k} - 1(c_i<0,c_j>0)c_ip_{ij}^{-1} \bs F_i^{00}\bs M_0^{-1} & i\neq j,\end{cases}
-\\	{{\bs B}}^{KK}_{ij} &= \begin{cases}T_{ij}\bs I_{p_k} + c_i(\bs F_i^{KK}+\bs G_K)\bs M_K^{-1} & i=j,\\T_{ij}\bs I_{p_K} + 1(c_i>0,c_j<0)c_ip_{ij}^{K+1} \bs F_i^{KK}\bs M_K^{-1} & i\neq j.\end{cases}
+	{{\bs B}}^{0,0}_{ij} &= \begin{cases}T_{ij}\bs I_{p_k} + c_i(\bs F_i^{0,0}+\bs G_0)\bs M_0^{-1} & i=j,\\T_{ij}\bs I_{p_k} - 1(c_i<0,c_j>0)c_i\widecheck p_{ij} \bs F_i^{0,0}\bs M_0^{-1} & i\neq j,\end{cases}
+\\	{{\bs B}}^{K,K}_{ij} &= \begin{cases}T_{ij}\bs I_{p_k} + c_i(\bs F_i^{K,K}+\bs G_K)\bs M_K^{-1} & i=j,\\T_{ij}\bs I_{p_K} + 1(c_i>0,c_j<0)c_i\widehat p_{ij} \bs F_i^{K,K}\bs M_K^{-1} & i\neq j.\end{cases}
 \end{align*}
 
 After the addition of the boundary conditions, the system of ODEs (\ref{eqn:DG ODE}) can now be written as 
@@ -350,27 +350,27 @@ Given our approximation \(\bs B\) to the generator \(\mathbb B\) we now follow t
 
 It may be convenient to think of our approximations in terms of approximations of kernels. Recall that the operators in \citep{bo2014} can be thought of in terms of kernels. That is, for some function \(\bs g = (g_i(x))_{i\in\calS}\), we can write \(\bs \mu \mathbb B \boldsymbol g\tr{} = \displaystyle \sum\limits_{k,\ell\in\mathcal K}\sum\limits_{i,j\in\calS} \displaystyle \int_{x,y}\wrt \mu_i(x) \mathbb B_{ij}^{k\ell}(x,\wrt y)g_j(y)\) where \(\mathbb B_{ij}^{k\ell}(x,\wrt y)\) is the kernel of the operator \(\mathbb B_{ij}^{k\ell}\). 
 
-Let \(\boldsymbol a_{-1}(t):=\boldsymbol q_{-1}(t)\) and \(\boldsymbol a_{K+1}(t):=\boldsymbol q_{K+1}(t)\), and define basis functions \(\bs\phi_{-1}(x) = \phi_{-1}^1(x) = \delta(x)\) and \(\bs\phi_{K+1}(x) = \phi_{K+1}^1(x) = \delta(x-b)\), where \(\delta\) is the Dirac delta, \(p_{-1} = p_{K+1} = 1\), and \(\mathcal N_{-1} = \mathcal N_{K+1} = \{1\}\). Also define \({\bs M}_{-1}=\bs I_{|\calS_{-1}|}\), \({\bs M}_{K+1}=\bs I_{|\calS_{K+1}|}\), the block-diagonal matrix \(\bs M=\mathrm{diag}(\bs M_k,k\in\mathcal K)\), and row-vectors 
+Let \(\boldsymbol a_{-1}(t)=\boldsymbol q_{-1}(t)\) and \(\boldsymbol a_{K+1}(t)=\boldsymbol q_{K+1}(t)\), and define basis functions \(\bs\phi_{-1}(x) = \phi_{-1}^1(x) = \delta(x)\) and \(\bs\phi_{K+1}(x) = \phi_{K+1}^1(x) = \delta(x-b)\), where \(\delta\) is the Dirac delta, \(p_{-1} = p_{K+1} = 1\), and \(\mathcal N_{-1} = \mathcal N_{K+1} = \{1\}\). Also define \({\bs M}_{-1}=\bs I_{|\calS_{-1}|}\), \({\bs M}_{K+1}=\bs I_{|\calS_{K+1}|}\), the block-diagonal matrix \(\bs M=\mathrm{diag}(\bs M_k,k\in\mathcal K)\), and row-vectors 
 \[\boldsymbol \phi(x) = (\bs\phi_k(x))_{k\in\mathcal K}, \quad \boldsymbol a_i(t) = (\bs a_{k,i}(t))_{k\in\mathcal K},\,i\in\calS.\]
 
-To pose the approximation \(\bs B\) in kernel form let \(\boldsymbol a_i \boldsymbol \phi(x)\tr{}\in W,\,i\in\calS\) be the initial density of the process, and \(\boldsymbol \phi(x)\bs b_i\tr{}\in W,\,i\in\calS\) be a test function. Observe that, from our DG construction earlier and the definition of \({\bs M}\), 
+To pose the approximation \(\bs B\) in kernel form let \(\boldsymbol a_i \boldsymbol \phi(x)\tr{}\in U,\,i\in\calS\) be the initial density of the process, and \(\boldsymbol \phi(x)\bs b_i\tr{}\in U,\,i\in\calS\) be a test function. Observe that, from our DG construction earlier and the definition of \({\bs M}\), 
 \[\sum_{i,j\in\calS}\int_{x,y\in[0,b]} \boldsymbol a_i \boldsymbol \phi(x)\tr{} \boldsymbol \phi (x) \wrt x {\bs M}^{-1}{  \bs B}_{ij} \bs \phi(y)\tr{} \bs \phi(y)\bs b_j \wrt y= \sum_{i,j\in\calS} \boldsymbol a_i {  \bs B}_{ij} {\bs M} \bs b_j .\]
 Thus, we can think of 
 \[\boldsymbol \phi (x) {\bs M}^{-1}{  \bs B}_{ij} \bs \phi(y)\tr{}\wrt y,\]
 as an approximation to the kernel \(\mathbb B_{ij}(x,\wrt y)\). This concept can be extended to all the approximations of operators considered in this work. 
 
 \subsection{Approximating the operator \(\mathbb R\)}\label{sec: approx r}
-Recall the operator \(\mathbb R^k\) from Lemma~\ref{lemma: D(s)}. Essentially, the operator \(\mathbb R^k\) takes an initial measure \(\boldsymbol \mu_k\) and multiplies each element by \(1/|r_i(x)|\) on cells \(\calD_k\) where \(r_i(x)\neq 0\). In the context of DG the initial distribution is given by \(\boldsymbol a_i \boldsymbol \phi(x)\tr{}\in W,\,i\in\calS\). Thus, for \(k\in\mathcal K\) such that \(r_i(x)\neq0\) on \(\calD_k\), we have 
+Recall the operator \(\mathbb R^k\) from Lemma~\ref{lemma: D(s)}. Essentially, the operator \(\mathbb R^k\) takes an initial measure \(\boldsymbol \mu_k\) and multiplies each element by \(1/|r_i(x)|\) on cells \(\calD_k\) where \(r_i(x)\neq 0\). In the context of DG the initial distribution is given by \(\boldsymbol a_i \boldsymbol \phi(x)\tr{}\in U,\,i\in\calS\). Thus, for \(k\in\mathcal K\) such that \(r_i(x)\neq0\) on \(\calD_k\), we have 
 \[\boldsymbol a_{k,i} \boldsymbol \phi_k(x)\tr{}\mathbb R^k_i = \cfrac{\boldsymbol a_{k,i} \boldsymbol \phi_k(x)\tr{}}{|r_i(x)|}.\]
-Decompose the right-hand side into a component which lies in \(W\) and another orthogonal to \(W\): 
-\[\cfrac{\boldsymbol a_{k,i} \boldsymbol \phi_k(x)\tr{}}{|r_i(x)|} = \bs \rho_{k,i} \bs \phi_k(x)\tr{} + g_i^\perp(x),\] where \(\bs \rho_{k,i} \bs\phi_k(x)\tr{}\in W\), \(g_i^\perp \in W^\perp\). Now, multiply by test functions \(\{\phi^r_k(x)\}_{r=1}^{p_k}\) and integrate over \([0,b]\):
+Decompose the right-hand side into a component which lies in \(U\) and another orthogonal to \(U\): 
+\[\cfrac{\boldsymbol a_{k,i} \boldsymbol \phi_k(x)\tr{}}{|r_i(x)|} = \bs \rho_{k,i} \bs \phi_k(x)\tr{} + g_i^\perp(x),\] where \(\bs \rho_{k,i} \bs\phi_k(x)\tr{}\in U\), \(g_i^\perp \in U^\perp\). Now, multiply by test functions \(\{\phi^r_k(x)\}_{r=1}^{p_k}\) and integrate over \([0,b]\):
 \begin{align*}
 	\boldsymbol a_{k,i}\int_{x\in[0,b]} \cfrac{ \boldsymbol \phi_k(x)\tr{}\bs \phi_k(x)}{|r_i(x)|}\wrt x
 	&=\bs \rho_{k,i} \int_{x\in[0,b]}\bs \phi_k(x)\tr{}\bs \phi_k(x)\wrt x + \int_{x\in[0,b]} g_i^\perp(x)\bs\phi_k(x)\wrt x 
 	%
 	\\&= \bs \rho_{k,i} \int_{x\in[0,b]}\bs \phi_k(x)\tr{}\bs \phi_k(x)\wrt x = \bs \rho_{k,i}\bs M_k,
 \end{align*}
-since \(g_i(x)^\perp\in W^\perp\). Define the matrix \(\bs M_k^r := \displaystyle\int_{x\in[0,b]} \cfrac{ \boldsymbol \phi_k(x)\tr{}\bs \phi_k(x)}{|r_i(x)|}\wrt x\), then 
+since \(g_i(x)^\perp\in U^\perp\). Define the matrix \(\bs M_k^r = \displaystyle\int_{x\in[0,b]} \cfrac{ \boldsymbol \phi_k(x)\tr{}\bs \phi_k(x)}{|r_i(x)|}\wrt x\), then 
 \(
 	\boldsymbol a_{k,i}\bs M_k^r
 	= \bs \rho_{k,i} \bs M_k,
@@ -430,31 +430,31 @@ We find an approximation to the limiting distribution by replacing the theoretic
  \begin{tabular}{c|c|c|c}
 	\begin{tabular}{c}Exact\end{tabular} & Operator indices & \begin{tabular}{c}Approximation \\ notation\end{tabular} & Approximations \\\hline 
 	%
-	\( \bbxi_{k,i} \) & \(i\in\calS_k^-,\,k\in\mathcal K^-\)  & \(\bs \xi_{k,i} := (\xi_{k,i}^r)_{r\in\mathcal N_k}\) & 
+	\( \bbxi_{k,i} \) & \(i\in\calS_k^-,\,k\in\mathcal K^-\)  & \(\bs \xi_{k,i} = (\xi_{k,i}^r)_{r\in\mathcal N_k}\) & 
 	\(%\begin{array}{c}
 	\bbxi_{k,i}(\wrt x)\approx  \bs{\xi}_{k,i} \bs \phi^k(x)\tr{}\wrt x,
-	 %\\\bbxi_i^{-1}(\{0\}) %:=\lim\limits_{n\to\infty}\mathbb{P}\left[X_{\theta_n} = 0, \varphi_{\theta_n} = i\right]
+	 %\\\bbxi_i^{-1}(\{0\}) %=\lim\limits_{n\to\infty}\mathbb{P}\left[X_{\theta_n} = 0, \varphi_{\theta_n} = i\right]
 	%\approx \bs\xi_{i}^{-1},
-	%\\\bbxi_i^{K+1}(\{b\}) %:= \lim\limits_{n\to\infty}\mathbb{P}\left[X_{\theta_n} = b, \varphi_{\theta_n} = i\right]
+	%\\\bbxi_i^{K+1}(\{b\}) %= \lim\limits_{n\to\infty}\mathbb{P}\left[X_{\theta_n} = b, \varphi_{\theta_n} = i\right]
 	%\approx \bs\xi_{i}^{K+1}.%\end{array}
 	\)
 	 \\\hline
 %
 %
-	\(\mathbb p_{k,i}\) & \(\begin{array}{c}i\in\calS_k^-\cup\calS_k^0,\\k\in\bigcup\limits_{m\in\{-,0\}}\mathcal K_m\end{array}\) & \(\bs p_{k,i} := (p_{k,i}^r)_{r\in\mathcal N_k}\) & \(%\begin{array}{c}
-	\mathbb p_{k,i}(\wrt x) %:= \lim\limits_{t\to\infty}\mathbb{P}\left[Y_t = 0, X_{t} \in \wrt x, \varphi_{t} = i\right]\\
+	\(\mathbb p_{k,i}\) & \(\begin{array}{c}i\in\calS_k^-\cup\calS_k^0,\\k\in\bigcup\limits_{m\in\{-,0\}}\mathcal K_m\end{array}\) & \(\bs p_{k,i} = (p_{k,i}^r)_{r\in\mathcal N_k}\) & \(%\begin{array}{c}
+	\mathbb p_{k,i}(\wrt x) %= \lim\limits_{t\to\infty}\mathbb{P}\left[W_t = 0, X_{t} \in \wrt x, \varphi_{t} = i\right]\\
 	\approx\bs{p}_{k,i} \bs\phi_k(x)\tr{}\wrt x
-	%\\ \mathbb p_{i}^{-1}(\{0\}) %:= \lim\limits_{t\to\infty}\mathbb{P}\left[Y_t=0, X_{t} = 0, \varphi_{t} = i\right]
-	%\approx \bs p_{i}^{-1},\\ \mathbb p_{i}^{K+1}(\{b\}) %:= \lim\limits_{t\to\infty}\mathbb{P}\left[Y_t=0, X_{t} = b, \varphi_{t} = i\right]
+	%\\ \mathbb p_{i}^{-1}(\{0\}) %= \lim\limits_{t\to\infty}\mathbb{P}\left[W_t=0, X_{t} = 0, \varphi_{t} = i\right]
+	%\approx \bs p_{i}^{-1},\\ \mathbb p_{i}^{K+1}(\{b\}) %= \lim\limits_{t\to\infty}\mathbb{P}\left[W_t=0, X_{t} = b, \varphi_{t} = i\right]
 	%\approx \bs p_{i}^{K+1}.% \end{array}
 	\)\\\hline
 %
 %
-	 \(\bbpi_{k,i}(y)\)  & \(\begin{array}{c}i\in\calS,\\k\in\mathcal K\end{array}\) & \(\bs \pi_{k,i}(y) := (\pi_{k,i}^r(y))_{r\in\mathcal N_k}\) & \(%\begin{array}{c}
-	 \bbpi_{k,i}(y)(\wrt x) %:= \lim\limits_{t\to\infty}\mathbb{P}\left[Y_t \in \wrt y, X_{t} \in \wrt x, \varphi_{t} = i\right]\\
+	 \(\bbpi_{k,i}(y)\)  & \(\begin{array}{c}i\in\calS,\\k\in\mathcal K\end{array}\) & \(\bs \pi_{k,i}(y) = (\pi_{k,i}^r(y))_{r\in\mathcal N_k}\) & \(%\begin{array}{c}
+	 \bbpi_{k,i}(y)(\wrt x) %= \lim\limits_{t\to\infty}\mathbb{P}\left[W_t \in \wrt y, X_{t} \in \wrt x, \varphi_{t} = i\right]\\
 	\approx\bs{\pi}_{k,i}(y) \bs \phi_k(x)\tr{}\wrt x
-	%\\ \bbpi_{i}^{-1}(y)(\{0\}) %:= \lim\limits_{t\to\infty}\mathbb{P}\left[Y_t=0, X_{t} = 0, \varphi_{t} = i\right]
-	%\approx \bs \pi_{i}^{-1}(y),\\ \bbpi_{i}^{K+1}(y)(\{b\}) %:= \lim\limits_{t\to\infty}\mathbb{P}\left[Y_t=0, X_{t} = b, \varphi_{t} = i\right]
+	%\\ \bbpi_{i}^{-1}(y)(\{0\}) %= \lim\limits_{t\to\infty}\mathbb{P}\left[W_t=0, X_{t} = 0, \varphi_{t} = i\right]
+	%\approx \bs \pi_{i}^{-1}(y),\\ \bbpi_{i}^{K+1}(y)(\{b\}) %= \lim\limits_{t\to\infty}\mathbb{P}\left[W_t=0, X_{t} = b, \varphi_{t} = i\right]
 	%\approx \bs \pi_{i}^{K+1}(y). \end{array}
 	\)\\\hline
  \end{tabular}
@@ -466,22 +466,22 @@ We find an approximation to the limiting distribution by replacing the theoretic
 % \begin{tabular}{c|c|c|c}
 %	\begin{tabular}{c}Exact \\Operator\end{tabular} & Notation & Set of indices & Approximation \\\hline 
 %	%
-%	\( \bbxi_{k,i}(\wrt x) \) & \(\xi_{k,i}^r\) & \(\begin{array}{l}i\in\calS,\,r\in\{1,...,N_k\},\\k\in\mathcal K_i^-\setminus \{{-1}\cup{K+1}\}.\end{array}\) & \(%:= \lim\limits_{n\to\infty}\mathbb{P}\left[X_{\theta_n} \in \wrt x, \varphi_{\theta_n} = i\right]\\
+%	\( \bbxi_{k,i}(\wrt x) \) & \(\xi_{k,i}^r\) & \(\begin{array}{l}i\in\calS,\,r\in\{1,...,N_k\},\\k\in\mathcal K_i^-\setminus \{{-1}\cup{K+1}\}.\end{array}\) & \(%= \lim\limits_{n\to\infty}\mathbb{P}\left[X_{\theta_n} \in \wrt x, \varphi_{\theta_n} = i\right]\\
 %	 \displaystyle\sum\limits_{r=1}^{N_k} {\xi}_{k,i}^r \phi^r_k(x)\wrt x,\,x\in\calD_k.\)\\\hline
 %
-%	&\(\xi_{k,i}^r\) & \(\begin{array}{l}i\in\calS,\,r=1,\\k\in\mathcal K_i^-\cap \{{-1}\cup{K+1}\}.\end{array}\) & \(\begin{array}{l}\bbxi_{k,i}(\{0\}) %:=\lim\limits_{n\to\infty}\mathbb{P}\left[X_{\theta_n} = 0, \varphi_{\theta_n} = i\right]
+%	&\(\xi_{k,i}^r\) & \(\begin{array}{l}i\in\calS,\,r=1,\\k\in\mathcal K_i^-\cap \{{-1}\cup{K+1}\}.\end{array}\) & \(\begin{array}{l}\bbxi_{k,i}(\{0\}) %=\lim\limits_{n\to\infty}\mathbb{P}\left[X_{\theta_n} = 0, \varphi_{\theta_n} = i\right]
 %	\approx \xi_{i,r}^{-1},
-%	\\\bbxi_{k,i}(\{b\}) %:= \lim\limits_{n\to\infty}\mathbb{P}\left[X_{\theta_n} = b, \varphi_{\theta_n} = i\right]
+%	\\\bbxi_{k,i}(\{b\}) %= \lim\limits_{n\to\infty}\mathbb{P}\left[X_{\theta_n} = b, \varphi_{\theta_n} = i\right]
 %	\approx \xi_{i,r}^{K+1}.\end{array}\)\\\hline 
 %
-%	&\(p_{k,i}^r\) & \(\begin{array}{l}i\in\calS,\,r\in\{1,...,N_k\},\\k\in\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m\setminus \{{-1}\cup{K+1}\}.\end{array}\) & \(\mathbb p_{k,i}(\wrt x) %:= \lim\limits_{t\to\infty}\mathbb{P}\left[Y_t = 0, X_{t} \in \wrt x, \varphi_{t} = i\right]\\
+%	&\(p_{k,i}^r\) & \(\begin{array}{l}i\in\calS,\,r\in\{1,...,N_k\},\\k\in\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m\setminus \{{-1}\cup{K+1}\}.\end{array}\) & \(\mathbb p_{k,i}(\wrt x) %= \lim\limits_{t\to\infty}\mathbb{P}\left[W_t = 0, X_{t} \in \wrt x, \varphi_{t} = i\right]\\
 %	\approx\displaystyle\sum\limits_{r=1}^{N_k} {p}_{k,i}^r \phi^r_k(x)\wrt x,\,x\in\calD_k.\)\\\hline
 %
-%	&\(p_{k,i}^r\) & \(\begin{array}{l}i\in\calS,\,r=1,\\k\in\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m\cap \{{-1}\cup{K+1}\}.\end{array}\) & \(\begin{array}{l} \mathbb p_{k,i}(\{0\}) %:= \lim\limits_{t\to\infty}\mathbb{P}\left[Y_t=0, X_{t} = 0, \varphi_{t} = i\right]
-%	\approx p_{i,r}^{-1},\\ \mathbb p_{k,i}(\{b\}) %:= \lim\limits_{t\to\infty}\mathbb{P}\left[Y_t=0, X_{t} = b, \varphi_{t} = i\right]
+%	&\(p_{k,i}^r\) & \(\begin{array}{l}i\in\calS,\,r=1,\\k\in\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m\cap \{{-1}\cup{K+1}\}.\end{array}\) & \(\begin{array}{l} \mathbb p_{k,i}(\{0\}) %= \lim\limits_{t\to\infty}\mathbb{P}\left[W_t=0, X_{t} = 0, \varphi_{t} = i\right]
+%	\approx p_{i,r}^{-1},\\ \mathbb p_{k,i}(\{b\}) %= \lim\limits_{t\to\infty}\mathbb{P}\left[W_t=0, X_{t} = b, \varphi_{t} = i\right]
 %	\approx p_{i,r}^{K+1}. \end{array}\) \\\hline
 %
-%	&\(\pi_{k,i}^r(y)\) & \(\begin{array}{l}i\in\calS,\,r\in\{1,...,N_k\},\\k\in\bigcup\limits_{m\in\{+,-,0\}}\mathcal K_i^m\setminus \{{-1}\cup{K+1}\}.\end{array}\) & \(\bbpi_{k,i}(y)(\wrt x) %:= \lim\limits_{t\to\infty}\mathbb{P}\left[Y_t \in \wrt y, X_{t} \in \wrt x, \varphi_{t} = i\right]\\
+%	&\(\pi_{k,i}^r(y)\) & \(\begin{array}{l}i\in\calS,\,r\in\{1,...,N_k\},\\k\in\bigcup\limits_{m\in\{+,-,0\}}\mathcal K_i^m\setminus \{{-1}\cup{K+1}\}.\end{array}\) & \(\bbpi_{k,i}(y)(\wrt x) %= \lim\limits_{t\to\infty}\mathbb{P}\left[W_t \in \wrt y, X_{t} \in \wrt x, \varphi_{t} = i\right]\\
 %	\approx\displaystyle\sum\limits_{r=1}^{N_k} {\pi}_{k,i}^r(y) \phi^r_k(x)\wrt x,\,y>0,\, x\in\calD_k.\)\\\hline
 % \end{tabular}
 % \caption{Notation for the approximation of the limiting operators of an SFFM.\label{table:notations}}
@@ -491,25 +491,25 @@ With the notation in Table~\ref{table:notations} define row-vectors
  \begin{align*}
 	%{\bs{\xi}}_{k,i} &= ( \xi_{k,i}^r)_{r\in\{1,...,N_k\}}, \quad  { i\in\calS,\,k\in\mathcal K_i^-},
 	%
-	{\bs{\xi}}_k &:= ( \bs\xi_{k,i})_{i\in\calS_k^-}, \quad  {k\in\mathcal K_i^-},
+	{\bs{\xi}}_k &= ( \bs\xi_{k,i})_{i\in\calS_k^-}, \quad  {k\in\mathcal K_i^-},
 	%
-	\\ {\bs{\xi}}& := ( \bs \xi_k)_{k\in\mathcal K^-},
+	\\ {\bs{\xi}}& = ( \bs \xi_k)_{k\in\mathcal K^-},
 	% 
 	%\\{\bs{p}}_{k,i} &= (  p_{k,i}^r)_{r\in\{1,...,N_k\}}, \quad  {i\in\calS,\,k\in\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m},
 	%
-	\\\bs{p}^{m}_k &:= (  \bs p_{k,i})_{i\in\calS_k^m}, \quad  k\in{\mathcal K^m},\, m\in\{-,0\},
+	\\\bs{p}^{m}_k &= (  \bs p_{k,i})_{i\in\calS_k^m}, \quad  k\in{\mathcal K^m},\, m\in\{-,0\},
 	%
-	\\ {\bs{p}^m} &:= (  \bs p^{m}_k)_{k\in\mathcal K^m},\quad m\in\{-,0\},
+	\\ {\bs{p}^m} &= (  \bs p^{m}_k)_{k\in\mathcal K^m},\quad m\in\{-,0\},
 	%
-	\\ {\bs{p}} &:= (  \bs p^m)_{m\in\{-,0\}},
+	\\ {\bs{p}} &= (  \bs p^m)_{m\in\{-,0\}},
 	%
 	%\\{\bs{\pi}}_{k,i}(y) &= (  \pi_{k,i}^r(y))_{r\in\{1,...,N_k\}},\quad  i\in\calS,\,k\in\bigcup\limits_{m\in\{+,-,0\}}\mathcal K_i^m,
 	%
-	\\{\bs{\pi}}^{k}_m(y) &:= (  \bs \pi_{k,i}(y))_{i\in\calS_k^m},\quad  k\in\mathcal K,\,m\in\{+,-,0\},
+	\\{\bs{\pi}}^{k}_m(y) &= (  \bs \pi_{k,i}(y))_{i\in\calS_k^m},\quad  k\in\mathcal K,\,m\in\{+,-,0\},
 	%
-	\\{\bs{\pi}}^m(y) &:= (\bs \pi^{k}_m(y))_{k\in\mathcal K^m},\quad  m\in\{+,-,0\},
+	\\{\bs{\pi}}^m(y) &= (\bs \pi^{k}_m(y))_{k\in\mathcal K^m},\quad  m\in\{+,-,0\},
 	%
-	\\ {\bs{\pi}}(y) &:= (  \bs \pi^m(y))_{m\in\{+,-,0\}}.
+	\\ {\bs{\pi}}(y) &= (  \bs \pi^m(y))_{m\in\{+,-,0\}}.
  \end{align*}
  
 Proceeding similarly to the derivation of the Riccati equation~(\ref{eqn:RiccatiPsi}), we can argue that the coefficients \( {\boldsymbol{\xi}}\) are the solution to the matrix system 
@@ -543,7 +543,7 @@ Similarly, the coefficients \( {\boldsymbol{p}}\) are given by
 	 \\&{}+  \sum_{i \in \mathcal{S}}\sum_{\ell \in \{-,0\}}\sum_{k\in \mathcal K_i^\ell}  \int_{x \in [0,b]}  \bs p_{k,i}\bs\phi_k(x)\tr{}\wrt x = 1,\label{eqn:pisystem2}
 	\end{align}
 	% 
-	where $ {\bs K} :=  {\bs D}^{++}(0) + \bs \Psi(0) {\bs D}^{(-+)}(0)$, and $z$ is a normalising constant.
+	where $ {\bs K} =  {\bs D}^{++}(0) + \bs \Psi(0) {\bs D}^{(-+)}(0)$, and $z$ is a normalising constant.
 
 %For \(i,k,r\) such that \(i\in\calS,\,r\in\{1,...,N_k\},\,k\in\mathcal K_i^-\setminus \{{-1}\cup{K+1}\}\), define coefficients \(  \xi_{k,i}^r\) to be determined later such that 
 %\[\displaystyle\sum\limits_{r\in\{1,...,N_k\}} {\xi}_{k,i}^r \phi^r_k(x),\quad x \in \calD_k,\]
@@ -568,7 +568,7 @@ Similarly, the coefficients \( {\boldsymbol{p}}\) are given by
 %	
 %	Next, we seek to approximate the limiting operators \(\bs p\) defined in (\ref{eqn:jointmass}). For \(i,k,r\) such that \(i\in\calS,\,r\in\{1,...,N_k\},\,k\in\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m\setminus \{{-1}\cup{K+1}\}\), coefficients \(p_{k,i}^r\) to be determined later, such that 
 %\[\displaystyle\sum\limits_{r\in\{1,...,N_k\}}p_{k,i}^r \phi^r_k(x),\quad x \in \calD_k,\]
-%is an approximation to the density of \(\lim\limits_{t\to\infty}\mathbb{P}\left[Y_t = 0, X_{t} \in \wrt x, \varphi_{t} = i\right]\) on \(x\in\calD_k\). For \(i,k,r\) such that \(i\in\calS,\,r=1,\,k\in\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m\cap \{{-1}\cup{K+1}\},\) define point masses \(p_{k,i}^r\) such that \(p_{i,r}^{-1}\) and \(p_{i,r}^{K+1}\) approximate the point masses \(\lim\limits_{t\to\infty}\mathbb{P}\left[Y_t=0, X_{t} = 0, \varphi_{t} = i\right]\) and \(\lim\limits_{t\to\infty}\mathbb{P}\left[Y_t = 0, X_{t} = b, \varphi_{t} = i\right]\), respectively. In vector form, for \(i,k\) such that \(i\in\calS,\,k\in\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m\), let \( {\bs{p}}_{k,i} = (  p_{k,i}^r)_{r\in\{1,...,N_k\}}\), for \(k\in\bigcup\limits_{i\in\calS}\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m\), let \( {\bs{p}}^k = (  p_{k,i})_{\{i\in\calS\mid r_i(x)\leq 0,x\in\calD_k\}}\) and let \( {\bs{p}} = (  p^k)_{k\in\bigcup\limits_{i\in\calS}\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m}\). Again, by proceeding similarly to the derivation of (\ref{eqn:RiccatiPsi}), that the DG approximation to \( {\boldsymbol{p}}\) is 
+%is an approximation to the density of \(\lim\limits_{t\to\infty}\mathbb{P}\left[W_t = 0, X_{t} \in \wrt x, \varphi_{t} = i\right]\) on \(x\in\calD_k\). For \(i,k,r\) such that \(i\in\calS,\,r=1,\,k\in\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m\cap \{{-1}\cup{K+1}\},\) define point masses \(p_{k,i}^r\) such that \(p_{i,r}^{-1}\) and \(p_{i,r}^{K+1}\) approximate the point masses \(\lim\limits_{t\to\infty}\mathbb{P}\left[W_t=0, X_{t} = 0, \varphi_{t} = i\right]\) and \(\lim\limits_{t\to\infty}\mathbb{P}\left[W_t = 0, X_{t} = b, \varphi_{t} = i\right]\), respectively. In vector form, for \(i,k\) such that \(i\in\calS,\,k\in\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m\), let \( {\bs{p}}_{k,i} = (  p_{k,i}^r)_{r\in\{1,...,N_k\}}\), for \(k\in\bigcup\limits_{i\in\calS}\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m\), let \( {\bs{p}}^k = (  p_{k,i})_{\{i\in\calS\mid r_i(x)\leq 0,x\in\calD_k\}}\) and let \( {\bs{p}} = (  p^k)_{k\in\bigcup\limits_{i\in\calS}\bigcup\limits_{m\in\{-,0\}}\mathcal K_i^m}\). Again, by proceeding similarly to the derivation of (\ref{eqn:RiccatiPsi}), that the DG approximation to \( {\boldsymbol{p}}\) is 
 %	\[\vligne{\bs{p}^{-}  & \bs{p}^{0}} = z \vligne{{\bbxi} & \bs{0}} 
 %	\left(-\left[\begin{array}{ll} 
 %		{B}^{--} & {B}^{-0} \\
@@ -577,17 +577,17 @@ Similarly, the coefficients \( {\boldsymbol{p}}\) are given by
 %		where \(z\) is a normalising constant. 
 %That is, we substitute the DG approximations of the operators into the corresponding equation in Theorem~\ref{theo:density}.
 %%	
-%%	For \(i\in\calS_{-1}, m\in\{-,0\}\) define \(  p^m_{{-1},i}\) as the approximation to \( \lim\limits_{t\to\infty}\mathbb{P}\left[X_{t} =0, Y_t=0, \varphi_{t} = i\right]\).
+%%	For \(i\in\calS_{-1}, m\in\{-,0\}\) define \(  p^m_{{-1},i}\) as the approximation to \( \lim\limits_{t\to\infty}\mathbb{P}\left[X_{t} =0, W_t=0, \varphi_{t} = i\right]\).
 %%	
 %%	 \( {\bs p}^-_{{-1}}=(  p^-_{{-1},i})_{\{i\in\calS_{-1}\mid r_i(0)<0\}}\) and \( {\bs p}^0_{{-1}}=(  p^0_{{-1},i})_{\{i\in\calS_{-1}\mid r_i(0)=0\}}\). 
 %%	Now define \( {\bs p}^m_{{-1}},\, {\bs p}^m_{\circ},\, {\bs p}^m_{{K+1}}\) as the approximation to \(\bs p\) at the left-hand boundary, interior, and on the right-hand boundary of \([0,b]\), respectively.
-%%	\[ {\bs p}^m := \vligne{ {\bs p}^m_{-1}(y) &  {\bs p}^m_\circ(y) &  {\bs p}^m_{K+1}(y)},\quad m\in\{-,0\},\]
+%%	\[ {\bs p}^m = \vligne{ {\bs p}^m_{-1}(y) &  {\bs p}^m_\circ(y) &  {\bs p}^m_{K+1}(y)},\quad m\in\{-,0\},\]
 %%where Specifically,  
 %
 %	
 %	Next we approximate the operator \({{\bbpi}}(y)\). For \(i,k,r\) such that \(i\in\calS,\,r\in\{1,...,N_k\},\,k\in\bigcup\limits_{m\in\{+,-,0\}}\mathcal K_i^m\setminus \{{-1}\cup{K+1}\}\), define \(\pi_{k,i}^r(y)\), to be determined later, such that 
 %\[\displaystyle\sum\limits_{r\in\{1,...,N_k\}}\pi_{k,i}^r(y) \phi^r_k(x),\quad x \in \calD_k,\]
-%is an approximation to the density of \(\lim\limits_{t\to\infty}\mathbb{P}\left[Y_t \in\wrt y, X_{t} \in \wrt x, \varphi_{t} = i\right]\) on \(x\in\calD_k\). For \(i,k,r\) such that \(i\in\calS,\,r=1,\,k\in\bigcup\limits_{m\in\{+,-,0\}}\mathcal K_i^m\cap \{{-1}\cup{K+1}\}\) define point masses \(\pi_{k,i}^r(y)\) such that \(\pi_{i,r}^{-1}(y)\) and \(\pi_{i,r}^{K+1}(y)\) approximate the point masses \(\lim\limits_{t\to\infty}\mathbb{P}\left[Y_t\in\wrt y, X_{t} = 0, \varphi_{t} = i\right]\) and \(\lim\limits_{t\to\infty}\mathbb{P}\left[Y_t \in\wrt y, X_{t} = b, \varphi_{t} = i\right]\), respectively. In vector form, for \(i,k\) such that \(i\in\calS,\,k\in\bigcup\limits_{m\in\{+,-,0\}}\mathcal K_i^m\), let \( {\bs{\pi}}_{k,i}(y) = (  \pi_{k,i}^r(y))_{r\in\{1,...,N_k\}}\), for \(k\in\bigcup\limits_{i\in\calS}\bigcup\limits_{m\in\{+,-,0\}}\mathcal K_i^m\), let \( {\bs{\pi}}^k(y) = (  \pi_{k,i}(y))_{\{i\in\calS\mid r_i(x)\leq 0,x\in\calD_k\}}\) and let \( {\bs{\pi}}(y) = (  \pi^k(y))_{k\in\bigcup\limits_{i\in\calS}\bigcup\limits_{m\in\{+,-,0\}}\mathcal K_i^m}\). Again, we can argue that the DG approximation to \( {\boldsymbol{\pi}}(y)\) is given by substituting the DG operators for their theoretical counterparts in Theorem~\ref{theo:density}
+%is an approximation to the density of \(\lim\limits_{t\to\infty}\mathbb{P}\left[W_t \in\wrt y, X_{t} \in \wrt x, \varphi_{t} = i\right]\) on \(x\in\calD_k\). For \(i,k,r\) such that \(i\in\calS,\,r=1,\,k\in\bigcup\limits_{m\in\{+,-,0\}}\mathcal K_i^m\cap \{{-1}\cup{K+1}\}\) define point masses \(\pi_{k,i}^r(y)\) such that \(\pi_{i,r}^{-1}(y)\) and \(\pi_{i,r}^{K+1}(y)\) approximate the point masses \(\lim\limits_{t\to\infty}\mathbb{P}\left[W_t\in\wrt y, X_{t} = 0, \varphi_{t} = i\right]\) and \(\lim\limits_{t\to\infty}\mathbb{P}\left[W_t \in\wrt y, X_{t} = b, \varphi_{t} = i\right]\), respectively. In vector form, for \(i,k\) such that \(i\in\calS,\,k\in\bigcup\limits_{m\in\{+,-,0\}}\mathcal K_i^m\), let \( {\bs{\pi}}_{k,i}(y) = (  \pi_{k,i}^r(y))_{r\in\{1,...,N_k\}}\), for \(k\in\bigcup\limits_{i\in\calS}\bigcup\limits_{m\in\{+,-,0\}}\mathcal K_i^m\), let \( {\bs{\pi}}^k(y) = (  \pi_{k,i}(y))_{\{i\in\calS\mid r_i(x)\leq 0,x\in\calD_k\}}\) and let \( {\bs{\pi}}(y) = (  \pi^k(y))_{k\in\bigcup\limits_{i\in\calS}\bigcup\limits_{m\in\{+,-,0\}}\mathcal K_i^m}\). Again, we can argue that the DG approximation to \( {\boldsymbol{\pi}}(y)\) is given by substituting the DG operators for their theoretical counterparts in Theorem~\ref{theo:density}
 %	\begin{align} 
 %	& \;  {\bs{\pi}}^{0}(y) = \vligne{ {\bs{\pi}}^{+}(y) &  {\bs{\pi}}^{-}(y)}\left[\begin{array}{l} { {B}}^{+0} \\ { {B}}^{-0} \end{array} \right]\left(-{ {B}}^{00}\right)^{-1}, \label{eqn:pisystem1} \\ 
 %	% 
@@ -596,20 +596,20 @@ Similarly, the coefficients \( {\boldsymbol{p}}\) are given by
 %	 &\sum_{r \in \{{-1},1,...,K,{K+1}\}}\sum_{i \in \mathcal{S}_{\ell}} \int_{y = 0}^{\infty}  \pi_{i,r}^{k}(y)\phi_{k}^r(x)\wrt x\wrt y + \sum_{\ell \in \{-,0\}} \sum_{i \in \mathcal{S}}\sum_{r\in \mathcal K_i^\ell}   p^{r}_i(\mathcal{F}^{\ell}_i) = 1,\label{eqn:pisystemend}
 %	\end{align}
 %	% 
-%	where $ {K} :=  {D}^{++}(0) + \Psi(0) {D}^{(-+)}(0)$, and $z$ is a normalising constant.
+%	where $ {K} =  {D}^{++}(0) + \Psi(0) {D}^{(-+)}(0)$, and $z$ is a normalising constant.
 %	%
-%%Also \( {\bs p}^-_{{K+1}}=(  p^-_{{K+1},i})_{\{i\in\calS_{K+1}\mid r_i(b)<0\}}\) and \( {\bs p}^0_{{K+1}}=(  p^0_{{K+1},i})_{\{i\in\calS_{K+1}\mid r_i(b)=0\}}\) where \(  p^m_{{K+1},i},\,m\in\{-,0\}\) are approximations to \( \lim\limits_{t\to\infty}\mathbb{P}\left[X_{t} =b, Y_t=0, \varphi_{t} = i\right]\). On the interior, we have 
-%%\( {\bs p}^m_{\circ}=( {\bs p}_{k,i})_{i\in\calS,k\in\mathcal K_i^m}\) where \( {\bs p}_{k,i}=( {p}_{k,i}^r)_{r=1,...,N_k}\). On \(\mathcal D_k\) an approximation to the density of \(\lim\limits_{t\to\infty}\mathbb{P}\left[X_{t} =\wrt x, Y_t=0, \varphi_{t} = i\right]\) is given by \( {\bs p}_{k,i}\bs \phi^k(x)\tr{}\).
+%%Also \( {\bs p}^-_{{K+1}}=(  p^-_{{K+1},i})_{\{i\in\calS_{K+1}\mid r_i(b)<0\}}\) and \( {\bs p}^0_{{K+1}}=(  p^0_{{K+1},i})_{\{i\in\calS_{K+1}\mid r_i(b)=0\}}\) where \(  p^m_{{K+1},i},\,m\in\{-,0\}\) are approximations to \( \lim\limits_{t\to\infty}\mathbb{P}\left[X_{t} =b, W_t=0, \varphi_{t} = i\right]\). On the interior, we have 
+%%\( {\bs p}^m_{\circ}=( {\bs p}_{k,i})_{i\in\calS,k\in\mathcal K_i^m}\) where \( {\bs p}_{k,i}=( {p}_{k,i}^r)_{r=1,...,N_k}\). On \(\mathcal D_k\) an approximation to the density of \(\lim\limits_{t\to\infty}\mathbb{P}\left[X_{t} =\wrt x, W_t=0, \varphi_{t} = i\right]\) is given by \( {\bs p}_{k,i}\bs \phi^k(x)\tr{}\).
 %%
 %%Similarly for \( {\bs\pi}\) we write \[ {\bs \pi}^m =\vligne{ {\bs \pi}^m_{-1}(y) &  {\bs \pi}^m_\circ(y) &  {\bs \pi}^m_{K+1}(y)},\quad m\in\{+,-,0\},\]
 %%where \( {\bs \pi}^m_{{-1}}(y),\, {\bs \pi}^m_{\circ}(y),\, {\bs \pi}^m_{{K+1}}(y)\) correspond to the approximation at the left-boundary, interior, and on the right boundary of \(x\in[0,b]\), respectively. 
 %%%
-%%Specifically, \( {\bs \pi}^+_{{-1}}(y)=(  \pi^+_{{-1},i}(y))_{\{i\in\calS_{-1}\mid r_i(0)>0\}}\), \( {\bs \pi}^-_{{-1}}(y)=(  \pi^-_{{-1},i}(y))_{\{i\in\calS_{-1}\mid r_i(0)<0\}}\) and \( {\bs \pi}^0_{{-1}}(y)=(  \pi^0_{{-1},i}(y))_{\{i\in\calS_{-1}\mid r_i(0)=0\}}\) where \(  \pi^m_{{-1},i}(y),\,m\in\{+,-,0\}\) are approximations to \( \lim\limits_{t\to\infty}\mathbb{P}\left[X_{t} =0, Y_t=\wrt y, \varphi_{t} = i\right]\). 
+%%Specifically, \( {\bs \pi}^+_{{-1}}(y)=(  \pi^+_{{-1},i}(y))_{\{i\in\calS_{-1}\mid r_i(0)>0\}}\), \( {\bs \pi}^-_{{-1}}(y)=(  \pi^-_{{-1},i}(y))_{\{i\in\calS_{-1}\mid r_i(0)<0\}}\) and \( {\bs \pi}^0_{{-1}}(y)=(  \pi^0_{{-1},i}(y))_{\{i\in\calS_{-1}\mid r_i(0)=0\}}\) where \(  \pi^m_{{-1},i}(y),\,m\in\{+,-,0\}\) are approximations to \( \lim\limits_{t\to\infty}\mathbb{P}\left[X_{t} =0, W_t=\wrt y, \varphi_{t} = i\right]\). 
 %%%
-%%Also \( {\bs \pi}^+_{{K+1}}(y)=(  \pi^+_{{K+1},i}(y))_{\{i\in\calS_{K+1}\mid r_i(b)>0\}}\), \( {\bs \pi}^-_{{K+1}}(y)=(  \pi^-_{{K+1},i}(y))_{\{i\in\calS_{K+1}\mid r_i(b)<0\}}\) and \( {\bs \pi}^0_{{K+1}}(y)=(  \pi^0_{{K+1},i}(y))_{\{i\in\calS_{K+1}\mid r_i(b)=0\}}\) where \(  \pi^m_{{K+1},i}(y),\,m\in\{+,-,0\}\) are approximations to \( \lim\limits_{t\to\infty}\mathbb{P}\left[X_{t} =b, Y_t\in\wrt y, \varphi_{t} = i\right]\). 
+%%Also \( {\bs \pi}^+_{{K+1}}(y)=(  \pi^+_{{K+1},i}(y))_{\{i\in\calS_{K+1}\mid r_i(b)>0\}}\), \( {\bs \pi}^-_{{K+1}}(y)=(  \pi^-_{{K+1},i}(y))_{\{i\in\calS_{K+1}\mid r_i(b)<0\}}\) and \( {\bs \pi}^0_{{K+1}}(y)=(  \pi^0_{{K+1},i}(y))_{\{i\in\calS_{K+1}\mid r_i(b)=0\}}\) where \(  \pi^m_{{K+1},i}(y),\,m\in\{+,-,0\}\) are approximations to \( \lim\limits_{t\to\infty}\mathbb{P}\left[X_{t} =b, W_t\in\wrt y, \varphi_{t} = i\right]\). 
 %%%
 %%On the interior, we have 
-%%\( {\bs \pi}^m_{\circ}(y)=( {\bs \pi}_{k,i}(y))_{i\in\calS,k\in\mathcal K_i^m}\) where \( {\bs \pi}_{k,i}(y)=( {\pi}_{k,i}^r(y))_{r=1,...,N_k}\). On \(\mathcal D_k\) an approximation to the density of \(\lim\limits_{t\to\infty}\mathbb{P}\left[X_{t} =\wrt x, Y_t\in\wrt y, \varphi_{t} = i\right]\) is given by \( {\bs \pi}_{k,i}(y)\bs \phi^k(x)\tr{}\).
+%%\( {\bs \pi}^m_{\circ}(y)=( {\bs \pi}_{k,i}(y))_{i\in\calS,k\in\mathcal K_i^m}\) where \( {\bs \pi}_{k,i}(y)=( {\pi}_{k,i}^r(y))_{r=1,...,N_k}\). On \(\mathcal D_k\) an approximation to the density of \(\lim\limits_{t\to\infty}\mathbb{P}\left[X_{t} =\wrt x, W_t\in\wrt y, \varphi_{t} = i\right]\) is given by \( {\bs \pi}_{k,i}(y)\bs \phi^k(x)\tr{}\).
 
 To assist the reader in understanding these constructions and the notation we provide an explicitly worked toy-example in Appendix~\ref{appendix:example}.
 
@@ -633,7 +633,7 @@ Indeed, the DG scheme has the potential to answer many mathematical questions fo
 
 % APPLICATION TO INTERGRATING OVER TIME
 % \section{Remarks on slope limiters, linear operators and application to fluid-fluid queues}\label{sec: limiting and linearity}
-% The process of slope limiting, as described in Section~\ref{sec: slope limiting}, essentially amounts to a non-linear post-processing of the approximate solution after applying the operator \(\bs B\). Thus, the slope-limited scheme arrives at an approximation which is the action of a non-linear operator applied to the initial condition. The fact that the approximate operator is non-linear makes solving the Riccati Equation~(\ref{eqn:RiccatiPsi}) difficult/impossible, whereas there are efficient techniques to solve matrix-Riccati equations \cite{bot08}. Thus, for the application to fluid-fluid queues, slope limiting is not a viable option. %We could, however, proceed with a vanilla DG scheme (with no limiter) and, when we apply the operator \(\bs \Psi\) to some initial condition and realise an approximation to the distribution of the fluid queue when \(\{Y(t)\}\) first returns to its initial level, we could then post-process the solution with a limiter or filter if oscillations are present in the approximation. The application of the limiter/filter is dependent on the initial condition, so the post-processing needs to be done for every initial condition under consideration. If there are many initial distributions to consider, this could result in an increased computational cost. We do not investigate this post-processing approach in this thesis. 
+% The process of slope limiting, as described in Section~\ref{sec: slope limiting}, essentially amounts to a non-linear post-processing of the approximate solution after applying the operator \(\bs B\). Thus, the slope-limited scheme arrives at an approximation which is the action of a non-linear operator applied to the initial condition. The fact that the approximate operator is non-linear makes solving the Riccati Equation~(\ref{eqn:RiccatiPsi}) difficult/impossible, whereas there are efficient techniques to solve matrix-Riccati equations \cite{bot08}. Thus, for the application to fluid-fluid queues, slope limiting is not a viable option. %We could, however, proceed with a vanilla DG scheme (with no limiter) and, when we apply the operator \(\bs \Psi\) to some initial condition and realise an approximation to the distribution of the fluid queue when \(\{W(t)\}\) first returns to its initial level, we could then post-process the solution with a limiter or filter if oscillations are present in the approximation. The application of the limiter/filter is dependent on the initial condition, so the post-processing needs to be done for every initial condition under consideration. If there are many initial distributions to consider, this could result in an increased computational cost. We do not investigate this post-processing approach in this thesis. 
 
 % On a related note, a linear-operator can also be useful if we want to approximate transient distributions of fluid queues for many initial conditions. For example, consider solving (\ref{eqn: DG ODE w BCs 3}) numerically with a forward-Euler scheme to integrate over time. To advance the coefficients from time \(t\) to time \(t+h\) we compute
 % \begin{align*}

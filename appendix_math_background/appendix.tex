@@ -1,2 +1,303 @@
 %!TEX root = ../thesis.tex
-\chapter{More mathematical background}\label{app: math background}
+\chapter{Mathematical background}\label{app: math background}
+\section{Laplace Transforms}
+The Laplace transform is an important tool in many areas of mathematics, and is particularly useful in the analysis of fluid queues and fluid-fluid queues. Furthermore, in Chapters~\ref{sec: conv} and~\ref{ch: global results} we work with {Laplace transforms} to prove convergence of the QBD-RAP scheme. 
+
+For a measure \( \mu\), defined on the Borel sets of \([0,\infty)\), we define the Laplace transform of \(\mu\) to be
+\[\widehat \mu(\lambda) = \mathcal L(\mu)(\lambda) = \int_{t=0}^\infty e^{-\lambda t}\wrt \mu,\]
+where the \emph{region of convergence} is the set of values of \(\lambda\in\mathbb R\) such that the integral is finite. When \(\mu\) has a density, \(v\), then the Laplace transform is 
+\[\widehat \mu(\lambda) = \widehat v(\lambda) = \mathcal L(v)(\lambda) = \int_{t=0}^\infty e^{-\lambda t}v(x)\wrt x.\]
+When \(\mu\) is the probability measure associated with a random variable, \(Z\), say, then we may write 
+\[\widehat \mu(\lambda)=\mathbb E[e^{-\lambda Z}],\]
+and the region of convergence is at least \([0,\infty)\). 
+Further, letting \(E^\lambda\) be an exponentially distributed random variable with rate \(\lambda\) and noting that \(\mathbb P(E^\lambda >t ) = e^{-\lambda t}\), then 
+\[\widehat \mu(\lambda)=\mathbb P(Z<E^\lambda),\]
+which gives a probabilistic interpretation of the Laplace transform. That is, the Laplace transform with parameter \(\lambda >0\) is the probability that \(Z\) occurs before \(E^\lambda\), an independent random exponential time with rate \(\lambda\), occurs. 
+
+A convenient property of the Laplace transform which we utilise is the Convolution Theorem. 
+\begin{thm}[Convolution Theorem]
+	Let \(f,g: [0,\infty) \to \mathbb R\) be integrable functions, then 
+	\[\mathcal L\left(\int_{u=0}^tf(u)g(t-u)\wrt u\right)(\lambda) = \mathcal L\left(f\right)\cdot \mathcal L\left(g\right).\]
+\end{thm}
+The Convolution Theorem states that the Laplace transform of the convolution, given by \(\displaystyle \int_{u=0}^tf(u)g(t-u)\wrt u\), is equal to the product of the Laplace transform of \(f\) and \(g\). 
+
+The Laplace transform is unique in the sense that, if \(\mu\) and \(\nu\) are two measures on the Borel sets of \([0,\infty)\) and 
+\[\widehat \mu(\lambda) = \widehat \nu(\lambda)\] 
+for all \(\lambda > a\) with \(a<\infty\), then \(\mu\) and \(\nu\) are the same. In terms of functions, \(f,g: [0,\infty) \to \mathbb R\), if 
+\[\mathcal L(f)(\lambda) = \mathcal L(g)(\lambda),\]
+for all \(\lambda > a\) with \(a<\infty\), and \(f\) and \(g\) are continuous, then \(f(t)=g(t)\) for all \(t\geq 0\). Without knowing \(f\) and \(g\) are continuous, then we can only claim that 
+\(f(t)=g(t)\) for all \(t\geq 0, t\notin \mathcal N,\) where \(\mathcal N\) is a \emph{null set} with respect to Lebesgue measure. 
+
+
+\section{Kronecker products and related results}\label{sec:ksdfkkakaaaaaa}
+Here we describe Kronecker products and sums and some of their properties (see \cite{MEinAP}, and also Appendix A.4, for further details). We use the results in this section to manipulate certain matrix expressions in Chapter~\ref{sec: conv}.
+
+Let 
+\[\bs A = \left[\begin{array}{ccc}a_{11} & \dots & a_{1m}\\\hdots & & \hdots \\ a_{n1}&\dots & a_{nm}\end{array}\right]
+\qquad
+\bs{B} = \left[\begin{array}{ccc}b_{11} & \dots & b_{1m'}\\\hdots & & \hdots \\ b_{n'1}&\dots & b_{n'm'}\end{array}\right]\]
+be matrices with dimensions \(n\times m\) and \(n'\times m'\), respectively. The operator \(\otimes\) is the Kronecker product of two matrices; 
+\[\bs A\otimes \bs{B} = \left[\begin{array}{ccc}a_{11}\bs{B} & \dots & a_{1m}\bs{B}\\\hdots & & \hdots \\ a_{n1}\bs{B}&\dots & a_{nm}\bs{B}\end{array}\right],\]
+which is an \(nn'\times mm'\) matrix. 
+
+Let \(\bs{C},\bs{D}\)  be matrices with dimensions \(m\times k\) and \(m'\times k'\). A property of the Kronecker Product is 
+\begin{align}
+	\left(\bs A\otimes \bs{B}\right)\left(\bs{C}\otimes \bs{D}\right) &= \bs A\bs{C}\otimes \bs{B}\bs{D}.\label{eqn:mpr}\tag{Mixed Product Rule}
+\end{align}
+
+% \begin{proof}
+% 	The proof follows from 
+% 	\begin{align*}
+% 		\left[\begin{array}{cccc}a_{i1}\bs{B} & a_{i2}\bs{B}&\dots&a_{in}\bs{B}\end{array}\right]\left[\begin{array}{c}c_{1j}\bs{D}\\c_{2j} \bs D \\\vdots\\c_{nj}\bs{D} \end{array}\right] 
+% 		%
+% 		&= \left(\sum_\ell a_{i\ell}c_{\ell j}\right) \bs{B}\bs{D}
+% 		\\&= \left(\bs A\bs{C}\right)_{ij}\bs{B}\bs{D}.
+% 	\end{align*}
+% \end{proof}
+
+If \(\bs A\) and \(\bs{B}\) are invertible matrices, then 
+\begin{align}\label{eqn:kron inverse}
+	\left(\bs A\otimes \bs{B}\right)^{-1} = \bs A^{-1}\otimes \bs{B}^{-1}.
+\end{align}
+
+Let \(\bs A\) and \(\bs{B}\) be \(n\times n\) and \(m\times m\) matrices, respectively. The Kronecker sum of \(\bs A\) and \(\bs{B}\) is denoted by \(\oplus\) and defined as 
+\[\bs A\oplus \bs{B} = \bs A\otimes \bs{I}_{m} + \bs{I}_{n}\otimes \bs{B}.\]
+
+The exponential of a square matrix \(\bs B\) is \[e^{\bs B} = \sum_{n=0}^\infty \cfrac{1}{n!}\bs B^n.\]
+
+A property of the Kronecker sum is 
+\begin{align}\label{eqn:kron exp}
+	e^{\bs A\oplus \bs{B}}= e^{\bs A}\otimes e^{\bs{B}}.
+\end{align}
+% \begin{proof}
+% 	First, the matrices \(\bs A\otimes \bs{I}_m\) and \(\bs{I}_n\otimes \bs{B}\) commute; from the mixed product rule their product is \(\bs A\otimes \bs{B}\). Hence, 
+% 	\[e^{\bs A\oplus \bs{B}} = e^{\bs A\otimes \bs{I}_m}e^{\bs{I}_n\otimes \bs{B}}.\]
+% 	We now show that \(e^{\bs A\otimes \bs{I}_m} = e^{\bs A}\otimes \bs{I}_m\) and \(e^{\bs{I}_n\otimes \bs{B}}=\bs{I}_n\otimes e^{\bs{B}}\). The latter follows from the fact that \(\bs{I}_n\otimes \bs{B}\) is a block diagonal matrix with blocks \(\bs{B}\), hence its exponential is also block diagonal with blocks equal to the exponential of \(\bs{B}\). The former follows from 
+% 	\begin{align}
+% 	e^{\bs A\otimes \bs{I}_m} &= \sum_{n=0}^\infty \cfrac{1}{n!}\left(\bs A\otimes \bs{I}_m\right)^n \nonumber
+% 	\\&= \sum_{n=0}^\infty \cfrac{1}{n!}\left(\bs A^n\otimes \bs{I}_m\right) \nonumber
+% 	\\&=\left(\sum_{n=0}^\infty \cfrac{1}{n!}\bs A^n\otimes \bs{I}_m\right) \nonumber
+% 	\\&=e^{\bs A}\otimes \bs{I}_m.\label{eqn:09ksdjgah}
+% 	\end{align}
+	
+% 	Therefore 
+% 	\[e^{\bs A\oplus \bs{B}} = \left(e^{\bs A}\otimes \bs{I}_m\right)\left(\bs{I}_n\otimes e^{\bs{B}}\right),\]
+% 	and the result follows by the mixed product rule. 
+% \end{proof}
+
+\begin{lem}\label{lem: lst mpr}
+	Let \(\bs{T}\) and \(\bs{C}\) be \(n\times n\), square matrices with \(\bs{C}\) diagonal and invertible; let \(\bs{S}\) be a \(p\times p\) matrix. Further, suppose \(\left[\bs{T}\otimes \bs{I} + \bs{C}\otimes \bs{S} - \lambda \bs{I}\right]\) is invertible for \(\lambda>0\). Then
+\begin{align}
+	&\int_{t=0}^\infty e^{-\lambda t}  e^{{\left(\bs{T}\otimes \bs{I} + \bs{C}\otimes \bs{S}\right)t}} \wrt t 
+	%
+	=   \int_{x=0}^\infty e^{{\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)x}}\otimes e^{\bs{S}x} \wrt x \left(\bs{C}\otimes \bs{I}\right)^{-1}.  \label{eqn:lstsimplify}\end{align}
+\end{lem}
+\begin{proof}
+	Computing the integral on the left-hand side and then factorising the result and using the~\ref{eqn:mpr} multiple times gives
+	\begin{align}
+            	\int_{t=0}^\infty e^{-\lambda t} e^{\left(\bs{T}\otimes \bs{I} + \bs{C}\otimes \bs{S}\right)t} \wrt t\nonumber 
+            	%
+            	&= - \left[\bs{T}\otimes \bs{I} + \bs{C}\otimes \bs{S} - \lambda \bs{I}\right]^{-1}
+		%
+		\\&= -  \left[\bs{T}\otimes \bs{I} + \left(\bs{C}\otimes \bs{I}\right)\left(\bs{I}\otimes \bs{S}\right) - \lambda \bs{I}\right]^{-1}\nonumber
+		%
+		\\&= -  \left[\left(\bs{C}\otimes \bs{I}\right)\left(\left(\bs{C}\otimes \bs{I}\right)^{-1}\left(\bs{T}\otimes \bs{I} \right)+ \bs{I}\otimes \bs{S} - \left(\bs{C}\otimes \bs{I}\right)^{-1}\lambda \bs{I}\right)\right]^{-1}. \label{eqn: ref this one 12}
+		%
+	\end{align}
+	By Equation~(\ref{eqn:kron inverse}) and since \(\bs{C}\) is invertible, (\ref{eqn: ref this one 12}) is equal to
+	\begin{align}
+		& - \left[\left(\bs{C}\otimes \bs{I}\right)\left(\left(\bs{C}^{-1}\otimes \bs{I}\right)\left(\bs{T}\otimes \bs{I} \right)+ \bs{I}\otimes \bs{S} - \left(\bs{C}^{-1}\otimes \bs{I}\right)\lambda \bs{I}\right)\right]^{-1}. \label{eqn: ref this one 13}
+		%
+	\end{align}
+	{Using the~\ref{eqn:mpr} and algebraic manipulation, (\ref{eqn: ref this one 13}) is equal to }
+	\begin{align}
+		&- \left[\left(\bs{C}\otimes \bs{I}\right)\left(\left(\bs{C}^{-1}\bs{T}\right)\otimes \bs{I} + \bs{I}\otimes \bs{S} - \left(\bs{C}^{-1}\lambda \bs{I}\right)\otimes \bs{I}\right)\right]^{-1} \nonumber
+		%
+		\\&= - \left[\left(\bs{C}\otimes \bs{I}\right)\left(\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)\right)\otimes \bs{I} + \bs{I}\otimes \bs{S}\right)\right]^{-1} \nonumber
+		%
+		\\&= - \left[\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)\right)\otimes \bs{I} + \bs{I}\otimes \bs{S}\right]^{-1}\left(\bs{C}\otimes \bs{I}\right)^{-1} \nonumber
+		\\&= - \left[\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)\right)\oplus \bs{S}\right]^{-1}\left(\bs{C}\otimes \bs{I}\right)^{-1},\label{eqn: is an integral}
+	\end{align}
+	by definition of the Kronecker sum.
+	
+	Now, for an invertible matrix \(\bs A\) we can write \(-\bs A^{-1} = \displaystyle\int_{x=0}^\infty e^{\bs Ax}\wrt x\). Therefore, (\ref{eqn: is an integral}) is 
+	\begin{align*}
+		-\left[\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)\right)\oplus \bs{S}\right]^{-1}\left(\bs{C}\otimes \bs{I}\right)^{-1}
+		&= \int_{x=0}^\infty e^{\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)x\right)\oplus \bs{S}x}\wrt x\left(\bs{C}\otimes \bs{I}\right)^{-1}.
+	\end{align*}
+	{Using the rule in Equation~(\ref{eqn:kron exp}) gives }
+	\begin{align*}
+		&\int_{x=0}^\infty e^{\left(\bs{C}^{-1}\left(\bs{T}-\lambda \bs{I}\right)\right)x}\otimes e^{ \bs{S}x}\wrt x\left(\bs{C}\otimes \bs{I}\right)^{-1},
+	\end{align*}
+	which is the result.
+\end{proof}
+
+% vector space? Polynomial basis?
+% me basis? semigroup? generator? 
+
+%Laplace transforms of probability measures with non-negative support and where the Laplace transform variable, \(\lambda\), is real and non-negative can be given a stochastic interpretation. Let \(W\) be a random variable with distribution function \(F_W(w)= \mathbb P(W<w)\), then \(\displaystyle\int_{w=0}^\infty e^{-\lambda w} \wrt F_W(w) = \mathbb P(W < E^{\lambda})\). That is, the Laplace transform with parameter \(\lambda >0\) is the probability that \(W\) occurs before \(E^\lambda\), an independent random exponential time with rate \(\lambda\), occurs. 
+
+\section{Convergence theorems}
+We use the following convergence theorems to help us prove that the QBD-RAP scheme converges weakly to the distribution of the fluid queue. The first result we state, the Portmanteau Theorem, is a sweeping statement about convergence of measures. First, let's define the notion of weak convergence. We follow \cite{billingsleyconvergence}.
+
+Let \(S\) be a metric space and let \(\mathcal S\) be the Borel \(\sigma\)-algebra generated by the open sub-sets of \(S\). A probability measure, \(P\), is a function which maps elements of \(\mathcal S\) (elements of \(\mathcal S\) are sets) to real numbers in the interval \([0,1]\), with \(P(S)=1\). Further, \(P\) is \emph{countably-additive}, which means that for any countable collection of \emph{disjoint} sets \(A_1, A_2,...\in\mathcal S\), then 
+\[P\left(\bigcup\limits_{n=1}^\infty A_n\right) = \sum\limits_{n=1}^\infty P\left(A_n\right).\]
+Define the notation \(Pf = \int_S f \wrt P\) where \(f:S\to \mathbb R\) is a function. Let \(P_1,P_2,...\), be a sequence of probability measures. For a given function \(f\), the sequence \(P_1f,P_2f,...\), is simply a sequence of real numbers. The sequence of probability measures \(P_1,P_2,....\), is said to \emph{converge weakly} to \(P\) if \(P_nf\to Pf\) for every bounded continuous real function \(f\). \cite{billingsleyconvergence} uses the notation \(P_n\Rightarrow P\) to denote this weak convergence. 
+
+We need a few more definitions before stating The Portmanteau Theorem. A set \(A\in\mathcal S\) is said to be a \(P\)-\emph{continuity set} if \(\partial A\) (the boundary of the set \(A\)) satisfies \(P(\partial A)=0\). Define the \emph{limit inferior} and \emph{limit superior} of a sequence of real numbers \(x_1,x_2,...,\) as
+\begin{align*}
+	\liminf_{n\to\infty} x_n &= \lim_{n\to \infty}	\left(\inf_{m\geq n}x_m\right)
+	\intertext{and}
+	\\\limsup_{n\to\infty} x_n &= \lim_{n\to \infty}	\left(\sup_{m\geq n}x_m\right),
+\end{align*}
+respectively. 
+
+\begin{thm}[Portmanteau Theorem I, Theorem~2.1 of \cite{billingsleyconvergence}]
+	These five conditions are equivalent.
+	\begin{enumerate}
+		\item[(i)] \(P_n\Rightarrow P\). 
+		\item[(ii)] \(P_nf\to Pf\) for all bounded, uniformly continuous \(f\).
+		\item[(iii)] \(\limsup_n P_n F \leq P F\) for all closed [sets] \(F\).
+		\item[(iv)] \(\liminf_n P_n G \leq P G\) for all open [sets] \(G\).
+		\item[(v)] \(P_n A \to P A\) for all \(P\)-continuity sets \(F\).
+	\end{enumerate}
+\end{thm}
+Some authors, such as \cite{portmanteaubook}, also include the following equivalent condition in the Portmanteau Theorem. 
+\begin{thm}[Portmanteau Theorem II, Theorem~13.16 of \cite{portmanteaubook}]\label{thm: Portmanteau}
+	\(\,\)
+	\begin{enumerate}
+		\item[(vi)] \(P_nf \to P f\) for all bounded, Lipschitz continuous \(f\).
+	\end{enumerate}
+\end{thm}
+
+Recall that a stochastic process is a sequence of random variables \(\{X(t)\}_{t\in\mathcal T}\). The \emph{finite-dimensional distributions} of \(\{X(t)\}_{t\in\mathcal T}\) are the joint distributions of the random vector \((X(t_1),X(t_2),...,X(t_n))\), where \(t_1,t_2,...,t_n\in \mathcal T\) is a finite collection of times. 
+
+Key concepts in establishing weak convergence of stochastic processes are the notions \emph{tight} and \emph{relatively compact}. Again, we follow \cite{billingsleyconvergence}. A probability measure \(P\) is said to be \emph{tight} if for each \(\varepsilon\) there exists a compact set \(K\) such that \(P(K)>1-\varepsilon\). A family of probability measures, \(\Pi\), is said to be tight if for every \(\varepsilon\) there exists a compact set \(K\) such that \(P(K)>1-\varepsilon\) for every probability measure \(P\) in \(\Pi\). The family \(\Pi\) is \emph{relatively compact} if every sequence of elements of \(\Pi\) contains a subsequence which converges weakly. 
+
+Let \(P_1,P_2,...,\) and \(P\) be probability measures of stochastic processes. \cite{billingsleyconvergence} provides the following result.
+\begin{thm}\label{thm: aofaa}
+	If \(\{P_n\}\) is relatively compact and the finite-dimensional distributions of \(P_n\) converge weakly to those of \(P\), then \(P_n\Rightarrow_n P\). 
+\end{thm}
+Further, the condition that \(\{P_n\}\) is relatively compact can be replaced by tightness due Prohorov's Theorem \citep{billingsleyconvergence}. 
+\begin{thm}
+	If \(\Pi\) is tight, then it is relatively compact.
+\end{thm}
+
+
+% Denote by \(\mathcal M_f(E)\) the set of all finite measures on \((E,\mathcal E)\), where \(E\) is a non-empty set and \(\mathcal E\) is a \(\sigma\)-algebra. Further, denote by \(C_b(E)\) the set of continuous bounded functions on \(E\). Let \(\mu,\,\mu_1,\,\mu_2,...\in \mathcal M_f(E)\). We say that \(\{\mu_n\}_{n\in\mathbb N}\) converges weakly to \(\mu\), formally \(\mu_n\to \mu\) weakly as \(n\to\infty\), if 
+% \[\int f \wrt \mu_n \to \int f\wrt \mu,\mbox{ for all }f \in C_b(E).\]
+% We use part of The Portmanteau Theorem in Chapter~\ref{ch: global results}. Let \(\mathcal M_{\leq 1}(E)=\{\mu \in \mathcal M_f(E)\mid \mu(E)\leq 1\},\) the set of all sub-probability measures on \((E,\mathcal E)\). 
+% \begin{thm}[(Part of) The Portmanteau Theorem, Theorem~13.16 of \cite{portmanteaubook}]
+% 	Let \(E\) be a metric space and let \(\mu,\, \mu_1,\,\mu_2,... \in \mathcal M_{\leq 1}(E)\). The following are equivalent.
+% 	\begin{enumerate}
+% 		\item[(i)] \(\mu_n\to \mu\) weakly as \(n\to \infty\). 
+% 		\item[(ii)] \(\int f\wrt \mu_n \to \int f\wrt \mu\) for all bounded, Lipschitz continuous \(f\).
+% 		\\ \(\vdots\) 
+% 	\end{enumerate}
+% \end{thm}
+% There are 8 parts to The Portmanteau Theorem in \cite{portmanteaubook}, Theorem~13.16. Here we only quote to relevant parts; the other 6 parts require us to define other concepts which are not relevant to this thesis, so they are omitted. See \cite{portmanteaubook}, Theorem~13.16 for details. 
+
+Another tool we can use to show convergence of measures is to show that the Laplace transforms converge, as stated in the following theorem.
+\begin{thm}[Extended Continuity Theorem, \cite{feller1957}, Theorem 2a]\label{thm: ext cont thm}
+	For \(p=1,2,...,\) let \(U_p\) be a measure with Laplace transform \(\zeta_p\). If \(\zeta_p(\lambda)\to\zeta(\lambda)\) for \(\lambda > a\geq 0\), then \(\zeta\) is the Laplace transform of a measure \(U\) and \(U_p\to U\) [weakly].
+	
+	Conversely, if \(U_p\to U\)[weakly] and the sequence \(\{\zeta_p(a)\}\) is bounded, then \(\zeta_p(\lambda)\to\zeta(\lambda)\) for \(\lambda >a\). 
+\end{thm}
+
+In Chapters~\ref{sec: conv} and~\ref{ch: global results} we use the Dominated Convergence Theorem to aid our convergence arguments. In applied probability we often want to prove convergence of certain expressions. An approach which can simplify matters is to partition the expression on certain events where we have a simpler characterisation, thereby enabling us to prove convergence on each element in the partition. The original expression can be written as an integral over the partition. To establish the convergence result we initially desired, we can use the convergence of each element of the partition and the Dominated Convergence Theorem. I have taken the following from Theorem~1.13~\cite{steinreal}. \cite{steinreal} use the notation 
+\[\int f = \int f \wrt x = \int f \wrt m(x),\]
+where \(m\) denotes Lebesgue measure, to denote the Lebesgue integral. 
+\begin{thm}[Dominated Convergence Theorem]
+	Suppose \(\{f_n\}\) is a sequence of measurable functions such that \(f_n(x)\to f(x)\) almost everywhere with respect to \(x\), as \(n\) tends to infinity. If \(|f_n(x)|\leq g(x)\), where \(g\) is integrable, then 
+	\[\int|f_n-f|\to 0 \mbox{ as } n \to \infty,\]
+	and consequently 
+	\[\int f_n\to\int f \mbox{ as } n\to \infty.\]
+\end{thm}
+
+Also in Chapters~\ref{sec: conv} and~\ref{ch: global results} we want to manipulate infinite sums or integrals and rearrange the order of summation or integration. However, things can go awry when we swap the order of integration/summation if we are not careful. The next few results give some conditions under which we have equality under before and after swapping the order of summation/integration. Once again, we follow \cite{steinreal} quoting their Theorem~2.13. If \(f\) is a function in \(\mathbb R^{d}=\mathbb R^{d_1}\times \mathbb R^{d_2}\), the \emph{slice} of \(f\) corresponding to \(y\in\mathbb R^{d_2}\) is the function \(f^y\) of the \(x\in\mathbb R^{d_1}\) variable, given by 
+\[f^y(x)=f(x,y).\]
+Similarly, the slice of \(f\) for a fixed \(x\in\mathbb R^{d_1}\) is \(f_x(y)=f(x,y)\). 
+\begin{thm}[Fubini's Theorem]\label{Fubini}
+	Suppose \(f(x,y)\) is integrable on \(\mathbb R^{d_1}\times \mathbb R^{d_2}\). Then for almost every \(y\in\mathbb R^{d_2}\):
+	\begin{itemize}
+		\item The slice \(f^y\) is integrable on \(\mathbb R^{d_1}\).
+		\item The function defined by \(\int_{R^{d_1}} f^y(x)\wrt x\) is integrable on \(\mathbb R^{d_2}\). 
+	\end{itemize}
+	Moreover:
+	\begin{itemize}
+		\item[(iii)] \(\displaystyle\int_{R^{d_2}}\left(\int_{R^{d_1}}f(x,y)\wrt x\right)\wrt y = \int_{\mathbb R^d}f.\)
+	\end{itemize}
+\end{thm}
+\cite{steinreal} then state \begin{quotation}``Clearly, the [Fubini] theorem is symmetric in \(x\) and \(y\) so that we also may conclude that the slice \(f_x\) is integrable on \(\mathbb R^{d_2}\) for almost every \(x\). Moreover, \(\int_{\mathbb R^{d_2}}f_x(y)\wrt y\) is integrable and 
+\[\displaystyle\int_{R^{d_1}}\left(\int_{R^{d_2}}f(x,y)\wrt y\right)\wrt x = \int_{\mathbb R^d}f.\]
+In particular, Fubini's theorem states that the integral of \(f\) on \(\mathbb R^d\) can be computed by iterating lower-dimensional integrals, and that the iterations can be taken in any order
+\[\int_{R^{d_2}}\left(\int_{R^{d_1}}f(x,y)\wrt x\right)\wrt y=\displaystyle\int_{R^{d_1}}\left(\int_{R^{d_2}}f(x,y)\wrt y\right)\wrt x = \int_{\mathbb R^d}f.\mbox{''}\]
+\end{quotation}
+It is this last statement which is most powerful. Effectively, if either
+\[\int_{R^{d_2}}\left(\int_{R^{d_1}}|f(x,y)|\wrt x\right)\wrt y<\infty,\]
+or
+\[\int_{R^{d_1}}\left(\int_{R^{d_2}}|f(x,y)|\wrt y\right)\wrt x<\infty,\]
+then we can swap the order of integration. 
+
+A closely related theorem which is often used alongside Fubini's Theorem is Tonelli's Theorem. Define the \emph{extended Lebesgue integral} of an extended valued (it can take the value \(+\infty\)) non-negative function \(f\) by 
+\[\int f(x)\wrt x = \sup_{g}\int g(x)\wrt x.\]
+\begin{thm}[Tonelli's Theorem]\label{Tonelli}
+	Suppose \(f(x,y)\) is a non-negative measurable function on \(\mathbb R^{d_1}\times \mathbb R^{d_2}\). Then for almost every \(y\in\mathbb R^{d_2}\):
+	\begin{itemize}
+		\item The slice \(f^y\) is integrable on \(\mathbb R^{d_1}\).
+		\item The function defined by \(\int_{R^{d_1}} f^y(x)\wrt x\) is integrable on \(\mathbb R^{d_2}\). 
+	\end{itemize}
+	Moreover:
+	\begin{itemize}
+		\item[(iii)] \(\displaystyle\int_{R^{d_2}}\left(\int_{R^{d_1}}f(x,y)\wrt x\right)\wrt y = \int_{\mathbb R^d}f(x,y)\wrt x\wrt y \mbox{ in the extended sense}.\)
+	\end{itemize}
+\end{thm}
+
+Once again, we note that the theorem is symmetric in \(x\) and \(y\), so we can establish that we may swap the order of integration provided that \(f\) is non-negative. Tonelli's Theorem allows us to exchange the order of integration for any non-negative extended real-valued function, and includes the case where the value of the integral is infinite. In contrast, Fubini's Theorem allows us to exchange the order of integration for any real-valued function, provided that the integral is finite. 
+
+Collectively, we refer to Theorems~\ref{Fubini} and~\ref{Tonelli} together as the Fubini-Tonelli Theorem, but they are otherwise known collectively as just Fubini's Theorem. Often, they are used in conjunction. Since \(|f|\) is a non-negative function, then we may use Tonelli's Theorem and compute (or bound) the integral \(\int |f|\) via computing an iterated integral. If this is found to be finite, then Fubini's Theorem applies so \(f\) is integrable, and we may evaluate \(\int f\) via an iterated integral. 
+
+In the context of probability, the function \(f\) which we are integrating is often positive, so Tonelli's Theorem is all that is required to justify a swap of iterated integrals. 
+
+\section{Sundry mathematical concepts}\label{eqn: la}
+\subsection*{Polynomials}
+The discontinuous Galerkin method involves projecting the operator equation onto a basis of functions, typically polynomials. A convenient basis with which to work is the interpolating Lagrange polynomials. The order \(p-1\) Lagrange polynomials are defined by a set of points, \(\xi_i, i=1,...,p\), (the \(\xi_i\)'s must be distinct), and are given by 
+\[\ell_i(r)=\prod_{\substack{j=1\\j\neq i}}^p \cfrac{r-\xi_j}{\xi_i-\xi_j},\, i=1,...,p.\]
+A convenient property of the Lagrange polynomials is 
+\[l_i(\xi_j)=\begin{cases}1 & \mbox{ if } i=j, \\ 0 & \mbox{ otherwise.} \end{cases}\]
+
+Sometimes it is more convenient to work with \emph{orthogonal} polynomials. Two functions \(f\) and \(g\) are orthogonal on a set \(\calD\) if \(\int_{x\in\calS}f(x)g(x)\wrt x = 0\). Let \(U\) be a vector space of functions (for example, the space of polynomials of order \(p-1\)). The orthogonal complement of \(U\), denoted \(U^\perp\), is the set of functions \(f\) such that \(f\) is orthogonal to every \(g\in U\), \(\int_{x\in\calD} f(x)g(x)\wrt x\). Any function \(h(x)\) can be decomposed into \(h(x) = h^{U}(x)+h^\perp(x)\) where \(h^{U}\in U\) and \(h^\perp \in U^\perp\), the orthogonal complement of \(U\). 
+
+The Legendre polynomials are a set of orthogonal polynomial which are defined recursively by 
+\begin{align*}
+	P_0(x)&=1,
+	\\P_1(x)&=x, 
+	\\(n+1)P_{n+1}(x)&=(2n+1)xP_n(x)-nP_{n-1}(x),
+\end{align*}
+and are orthogonal on \([-1,1]\). 
+
+The zeros of \((1-x^2)P_n'(x)\) define the \emph{Legendre-Gauss-Lobatto} points, which are used, among other things, for numerically approximating integrals via quadrature.
+
+\subsection*{Numerical integration}
+To numerically approximate integrals in the discontinuous Galerkin schemes in this thesis we can use Gauss-Lobatto quadrature. Consider the integral of some function \(f\) over the interval \([-1,1]\). Quadrature approximates the integral by evaluating the function on a set of points, \(x_i,\, i=1,...,p\), and computing the weighted sum
+\[\int_{-1}^1f(x)\wrt x \approx \sum_{i=1}^p f(x_i)w_i,\]
+where \(w_i\) are weights. There are various quadrature schemes which one can use. 
+
+For the discontinuous Galerkin method, Gauss-Lobatto quadrature is convenient as in both we evaluate the function at the end points of the interval. For Gauss-Lobatto quadrature, the nodes, \(x_i, i=1,...,p\) is the zero of \((1-x^2)P_n'(x)\) where \(P_n\) is the \(n\)th Legendre polynomial, the weights are given by 
+\begin{align*}
+	w_1&=1,
+	\\w_i&=\cfrac{2}{n(n-1)[P_{n-1}(x_i)]^2}, \, i\neq 1, p,
+	\\w_p&=1.
+\end{align*}
+Gauss-Lobatto quadrature is accurate for polynomials up to degree \(2p-3\). An integral over the interval \([a,b]\) can be approximated by 
+\[\int_{a}^bf(x)\wrt x \approx \cfrac{b-a}{2}\sum_{i=1}^p f\left(\cfrac{b-a}{2}x_i+\cfrac{a+b}{2}\right)w_i.\]
+
+We also use a trapezoidal integration rule at times. Consider the integral \(\int_{a}^bf(x)\wrt x\). A trapezoidal rule with \(p\) evenly spaced grid-points approximates the integral via 
+\[\int_{a}^bf(x)\wrt x \approx \sum_{i=2}^p \cfrac{f(x_{i-1}+f(x_i))}{2}\Delta,\]
+where \(x_i=a+(i-1)\Delta\), \(i=1,...,p\), and \(\Delta = \cfrac{b-a}{p-1}.\) 
+
+\subsection*{Measuring the difference between distributions}
+In the numerical investigations in this thesis we evaluate approximation schemes by comparing the resulting approximations they produce with a ground truth. For comparing distributions we use \(L^p\) \emph{norms} and the Kolmogorov-Smirnov distance. The \(L^p\) norm of a function \(f\) is given by 
+\[\left(\int |f(x)|^p\wrt x\right)^{1/p}.\]
+The Kolmogorov-Smirnov distance between two distribution functions, \(F_1\), \(F_2\) is 
+\[\sup_{x}|F_1(x)-F_2(x)|.\]

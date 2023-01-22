@@ -1,7 +1,7 @@
 \chapter{Properties of the DG operator \(\bs B\)\label{sec:properties}}
 In this section we prove that the DG approximation \(\bs B\) conserves probability. 
 
-Recall that the coefficients \({\boldsymbol a}_{k,i}(t)\) can be used to construct an approximate solution to a differential equation at time \(t\) as \(u_{k,i}(x,t)={\boldsymbol a}_{k,i}(t)\boldsymbol \phi_k(x)\tr{}.\) For \(i\in\calS,\,k\in\mathcal K,\,r\in\{1,...,p_k\}\), define \(\alpha_{k,i}^r(t) := a_{k,i}^r(t)\displaystyle\int_{x=y_k}^{y_{k+1}}\phi^r_k(x)\wrt x,\) and row-vectors \(\boldsymbol \alpha_{k,i}(t)=(\alpha_{k,i}^r(t))_{r\in\{1,...,p_k\}}\). Motivated by the fact that we may be interested in approximations of the probabilities \(\mathbb P(X(t)\in\calD_{k,i},\varphi(t)=i)\) rather than the function \(u_{k,i}\) itself, we can pose the problem equivalently in terms of the integrals 
+Recall that the coefficients \({\boldsymbol a}_{k,i}(t)\) can be used to construct an approximate solution to a differential equation at time \(t\) as \(u_{k,i}(x,t)={\boldsymbol a}_{k,i}(t)\boldsymbol \phi_k(x)\tr{}.\) For \(i\in\calS,\,k\in\mathcal K,\,r\in\{1,...,p_k\}\), define \(\alpha_{k,i}^r(t) = a_{k,i}^r(t)\displaystyle\int_{x=y_k}^{y_{k+1}}\phi^r_k(x)\wrt x,\) and row-vectors \(\boldsymbol \alpha_{k,i}(t)=(\alpha_{k,i}^r(t))_{r\in\{1,...,p_k\}}\). Motivated by the fact that we may be interested in approximations of the probabilities \(\mathbb P(X(t)\in\calD_{k,i},\varphi(t)=i)\) rather than the function \(u_{k,i}\) itself, we can pose the problem equivalently in terms of the integrals 
 \[\mathbb P\left(X(t)\in\calD_{k,i},\varphi(t)=i\right)\approx{\boldsymbol a}_{k,i}(t)\int_{x\in\calD_{k,i}}\boldsymbol \phi_k(x)\tr{}\wrt x={\boldsymbol \alpha}_{k,i}(t)\boldsymbol 1.\] 
 Define
 \[\boldsymbol \alpha_k(t) = (\boldsymbol \alpha_{k,i}(t))_{i\in\calS},\mbox{ and } \boldsymbol \alpha(t)=(\boldsymbol \alpha_k(t)))_{k\in\mathcal K},\]
@@ -36,35 +36,35 @@ where
 	\end{array}\right].\] 
 Let
 \begin{align*}
- {  {\mathfrak{\bs B}}}^{{-1}0} &:= \bs T_{{-1}+}\otimes\left( \boldsymbol\phi_0(0)\bs M_0^{-1}\bs P_0\right),
+ {  {\mathfrak{\bs B}}}^{{-1}0} &= \bs T_{{-1}+}\otimes\left( \boldsymbol\phi_0(0)\bs M_0^{-1}\bs P_0\right),
  %
- \\ {  {\mathfrak{\bs B}}}^{0{-1}} &:=-\left[c_ip_{ij}^{-1} 1{(c_i<0)}\right]_{i\in\calS,j\in\calS_{{-1}}}\otimes \bs P_0^{-1}\boldsymbol \phi_0(0)\tr{},
+ \\ {  {\mathfrak{\bs B}}}^{0{-1}} &=-\left[c_i\widecheck p_{ij} 1{(c_i<0)}\right]_{i\in\calS,j\in\calS_{{-1}}}\otimes \bs P_0^{-1}\boldsymbol \phi_0(0)\tr{},
  %
- \\ {  {\mathfrak{\bs B}}}^{{K+1} K} &:= \bs T_{{K+1}-}\otimes \left(\boldsymbol\phi_K(b)\bs M_K^{-1}\bs P_K\right)
+ \\ {  {\mathfrak{\bs B}}}^{{K+1} K} &= \bs T_{{K+1}-}\otimes \left(\boldsymbol\phi_K(b)\bs M_K^{-1}\bs P_K\right)
  %
- \\ {  {\mathfrak{\bs B}}}^{K {K+1}} &:= \left[c_ip_{ij}^{K+1} 1{(c_i>0)}\right]_{i\in\calS,j\in\calS_{K+1}} \otimes  \bs P_K^{-1} \boldsymbol\phi_K(b)\tr{},
+ \\ {  {\mathfrak{\bs B}}}^{K {K+1}} &= \left[c_i\widehat p_{ij}  1{(c_i>0)}\right]_{i\in\calS,j\in\calS_{K+1}} \otimes  \bs P_K^{-1} \boldsymbol\phi_K(b)\tr{},
  %
- \\\mathfrak{\bs B}^{kk}_{ij} &:= \begin{cases}
+ \\\mathfrak{\bs B}^{kk}_{ij} &= \begin{cases}
     	T_{ii}\bs I_{p_k} + c_i\bs P_k^{-1}(\bs F_i^{kk}+\bs G_k)\bs M_k^{-1}\bs P_k & i = j, \\
 	T_{ij}\bs I_{p_k} & i \neq j,
     \end{cases}\quad \mbox{ for \(k=1,2,\dots K-1\),}
  %
- \\\mathfrak{\bs B}^{00}_{ij} &:= \begin{cases}
+ \\\mathfrak{\bs B}^{00}_{ij} &= \begin{cases}
 	T_{ii}\bs I_{p_0} + c_i\bs P_0^{-1}(\bs F_i^{00}+\bs G_0)\bs M_0^{-1}\bs P_0 & i = j, \\
-T_{ij}\bs I_{p_0} - c_ip_{ij}^{-1} 1(c_i<0)\bs F_i^{00}\bs M_0^{-1}\bs P_0 & i \neq j,
+T_{ij}\bs I_{p_0} - c_i\widecheck p_{ij} 1(c_i<0)\bs F_i^{00}\bs M_0^{-1}\bs P_0 & i \neq j,
 \end{cases}
 %
-\\\mathfrak{\bs B}^{KK}_{ij} &:= \begin{cases}
+\\\mathfrak{\bs B}^{KK}_{ij} &= \begin{cases}
 	T_{ii}\bs I_{p_K} + c_i\bs P_K^{-1}(\bs F_i^{KK}+\bs G_K)\bs M_K^{-1}\bs P_K & i = j, \\
-T_{ij}\bs I_{p_K} + c_ip_{ij}^{K+1} 1(c_i>0)\bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K & i \neq j,
+T_{ij}\bs I_{p_K} + c_i\widehat p_{ij} 1(c_i>0)\bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K & i \neq j,
 \end{cases}
 %
- \\\mathfrak{\bs B}^{k,k+1}_{ij} &:= \begin{cases}
+ \\\mathfrak{\bs B}^{k,k+1}_{ij} &= \begin{cases}
 	c_i\bs P_k^{-1}\bs F_i^{k,k+1}\bs M_{k+1}^{-1}\bs P_{k+1} & i = j, \\
 	\bs 0_{p_k} & i \neq j,
     \end{cases}\quad \mbox{ for \(k=0,1,\dots K-1\),}
  %
- \\\mathfrak{\bs B}^{k-1,k}_{ij} &:= \begin{cases}
+ \\\mathfrak{\bs B}^{k-1,k}_{ij} &= \begin{cases}
     	c_i\bs P_k^{-1}\bs F_i^{k,k-1}\bs M_{k-1}^{-1}\bs P_{k-1} & i = j, \\
 	\bs 0_{p_k} & i \neq j,
     \end{cases},\quad \mbox{ for \(k=2,\dots K\),}
@@ -161,10 +161,10 @@ Then
 	For \(c_i>0\) and \(k=K\), 
 	\begin{align*}
 		&\sum_{j\in\calS}\mathfrak{\bs B}^{KK}_{ij}\bs 1 + \mathfrak{\bs B}^{K{K+1}}_{ij}\bs 1
-		\\&= \sum_{j\in\calS}T_{ij}\bs I_{p_K}\bs 1-\sum_{j\in\calS_-} c_ip_{ij}^{K+1} \bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K \bs 1 -\sum_{j\in\calS_{{K+1} }}c_ip_{ij}^{K+1} \bs P_K^{-1}\boldsymbol \phi_K(0)\tr{}\bs 1 
+		\\&= \sum_{j\in\calS}T_{ij}\bs I_{p_K}\bs 1-\sum_{j\in\calS_-} c_i\widehat p_{ij}  \bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K \bs 1 -\sum_{j\in\calS_{{K+1} }}c_i\widehat p_{ij} \bs P_K^{-1}\boldsymbol \phi_K(0)\tr{}\bs 1 
 		\\&\quad{} + c_i \bs P_K^{-1}(\bs F_i^{KK}+\bs G_K)\bs M_K^{-1}\bs P_K\boldsymbol 1 
-		\\&= -\sum_{j\in\calS_-} c_ip_{ij}^{K+1} \bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K \bs 1 
-		\\&{}\quad-\sum_{j\in\calS_{{K+1}}}c_ip_{ij}^{K+1} \bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K\bs 1+ c_i \bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K\boldsymbol 1
+		\\&= -\sum_{j\in\calS_-} c_i\widehat p_{ij} \bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K \bs 1 
+		\\&{}\quad-\sum_{j\in\calS_{{K+1}}}c_i\widehat p_{ij} \bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K\bs 1+ c_i \bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K\boldsymbol 1
 		\\&\quad{}+ c_i \bs P_K^{-1}\bs G_K\bs M_K^{-1}\bs P_K\boldsymbol 1
 		%
 		\\&= - c_i \bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K \bs 1 + c_i \bs P_K^{-1}\bs F_i^{KK}\bs M_K^{-1}\bs P_K\boldsymbol 1 + c_i \bs P_K^{-1}\bs G_K\boldsymbol 1
@@ -190,7 +190,7 @@ Then
 	For \(c_i<0\) and \(k=K\), 
 	\begin{align*}
 		\sum_{j\in\calS}\mathfrak{\bs B}^{00}_{ij}\bs 1 + \mathfrak{\bs B}^{0{-1}}_{ij}\bs 1
-		&= \sum_{j\in\calS}T_{ij}\bs I_{p_0}\bs 1-\sum_{j\in\calS_+} c_ip_{ij}^{-1} \bs P_0^{-1}\bs F_i^{00}\bs M_0^{-1}\bs P_0 \bs 1 -\sum_{j\in\calS_{{-1} }}c_ip_{ij}^{-1} \bs P_0^{-1}\boldsymbol \phi_0(0)\tr{}\bs 1 
+		&= \sum_{j\in\calS}T_{ij}\bs I_{p_0}\bs 1-\sum_{j\in\calS_+} c_i\widecheck p_{ij} \bs P_0^{-1}\bs F_i^{00}\bs M_0^{-1}\bs P_0 \bs 1 -\sum_{j\in\calS_{{-1} }}c_i\widecheck p_{ij} \bs P_0^{-1}\boldsymbol \phi_0(0)\tr{}\bs 1 
 		\\&\quad{} + c_i \bs P_0^{-1}(\bs F_i^{0,0}+\bs G_0)\bs M_0^{-1}\bs P_0\boldsymbol 1 
 		% \\&= -\sum_{j\in\calS_+} c_ip_{ij}^{-1} \bs P_1^{-1}\bs F_i^{11}\bs M_1^{-1}\bs P_1 \bs 1 -\sum_{j\in\calS_{{-1} }}c_ip_{ij}^{-1} \bs P_1^{-1}\bs F_i^{11}\bs M_1^{-1}\bs P_1\bs 1+ c_i \bs P_1^{-1}\bs F_i^{1,1}\bs M_1^{-1}\bs P_1\boldsymbol 1
 		% \\&\quad{}+ c_i \bs P_1^{-1}\bs G_1\bs M_1^{-1}\bs P_1\boldsymbol 1

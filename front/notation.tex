@@ -1,0 +1,284 @@
+\chapter*{Notation}
+\subsection*{General notation}
+\begin{longtable}{p{0.45\textwidth}p{0.55\textwidth}}
+  \(\bs u = (u_h)_{h\in \mathcal H}\)
+      & Denotes a row-vector, \(\bs u\), defined by its elements, \(u_h\), indexed by \(h\in\mathcal H\), where \(\mathcal H\) is some index set. \\
+  \(\bs u = (\bs u_h)_{h\in\mathcal H}\) 
+      & A row-vector defined by a collection of row-vectors \(\bs u_h\). The notation \(\bs u_m=(u_h)_{h\in\mathcal H_m}\) refers to the vector containing the subset of elements corresponding to \(\mathcal H_m\subseteq \mathcal H\). When the index set is empty, the resulting vector \(\bs u_m\) is a vector of dimension 0. In cases when there are two indices, we order the elements of the vector according to the first index, then the second; i.e.~\(\bs u = (u_{g}^h)_{g\in\mathcal G,h\in\mathcal H} = ((u_g^h)_{g\in\mathcal G})_{h\in\mathcal H}\). Here we use the convention that for a vector \(\bs u=(u)_{h\in \mathcal H}\) where the elements \(u\) do not depend on the index \(h\) and \(H\) is some index set, then we repeat \(u\) \(h\)-times; i.e.~\(\bs u = (u)_{h\in \mathcal H} =\underbrace{(u,\dots,u)}_{h-\mbox{times}}\). \\
+  \(\bs U = [u_{gh}]_{g\in\mathcal G, h\in\mathcal H}\) (square brackets) 
+      & Denotes a matrix defined by its elements, or sub-blocks, \(u_{gh}\). \\
+  \(\diag(v_n, n\in N)\) 
+      & A matrix with diagonal elements \(\{v_n, n\in N\}\), and all off-diagonal elements are zero. \\
+  \(\{\cdot\}_{t\in I}\) e.g.~(\(\{X(t)\}_{t\geq}\))
+      & Curly braces denote a sequence and the subscript denote the index set for the sequence. The subscript may be omitted in it is not necessary. \\
+  \(x^-\) 
+      & The left limit at \(x\). \\ 
+  \(x^+\) 
+      & The right limit at \(x\). \\ 
+  \({}'\) 
+      & The transpose of a vector or matrix (e.g.~\(\bs v'\) denotes the transpose of \(\bs v\)). \\ 
+  \(\otimes, \oplus\) 
+      & The Kronecker product and sum, e.g.~\(\bs A\otimes \bs B\) the Kronecker product of matrices \(A\) and \(B\). See Appendix~\ref{sec:ksdfkkakaaaaaa}. \\ 
+\end{longtable}
+
+\subsection*{Glossary of Symbols}
+\begin{longtable}{p{0.45\textwidth}p{0.55\textwidth}}
+  \(1(\cdot)\) 
+      & The indicator function (equal to 1 when the argument is true, otherwise equal to 0) \\ 
+   \(\bs\alpha^{(p)}\) 
+      & See entry for \(\{Z^{(p)}\}\). \\
+  \(\beta(t)= \int_0^t \left| r_{\varphi(z)}(X(z)) \right|  \wrt z \)
+      & The total unregulated amount of fluid that has flowed into or out of the second buffer during $[0,t]$. See Section~\ref{subsec: afjakje}. \\
+  \(\beta_X(t)\)
+      & The in-out fluid level (equal to \(\int_0^t \left| c_{\varphi(z)} \right|  \wrt z\)). See Section~\ref{sec: transient ffq intro}. \\
+  $\eta(w) = \inf \{t > 0: \beta(t) = w\}$ 
+      & The first time the accumulated in-out amount for the second fluid hits level $w$. See Section~\ref{subsec: afjakje}. \\ 
+  \(\eta_X(y)\) 
+      & The first hitting time of the in-out process \(\{\beta_X(t)\}\) on level \(y\geq 0\). See Section~\ref{sec: transient ffq intro}. \\
+  \(\varepsilon^{(p)}\) 
+      & A ``small'' error term which we get to choose so long as it tends to zero as \(p\to\infty\). This is set to \(\var\left(Z^{(p)}\right)^{1/3}\) in the convergence arguments. It arises in the application of Chebyshev's inequality. \\ 
+  \(\Gamma_m,\, \Sigma_m\) 
+      & The time of the \(m\)th down-up and up-down transition of the QBD-RAP, respectively. See Section~\ref{sec: qbd dists}. \\ 
+  \(\hGamma_m,\, \hSigma_m\) 
+      & The time of the \(m\)th down-up and up-down transition of the fluid queue, respectively. See Section~\ref{sec: no change}. \\ 
+  \(\mu^{\ell_0}(t)(\cdot,j; x_0,i)\) 
+      & The joint density/mass function of the fluid queue restricted to level \(\ell_0\). See Section~\ref{sec: no change}. \\
+  \(\mu^{\ell_0}(t)(\cdot,j; x_0,i)\) 
+      & The joint density/mass function of the fluid queue restricted to level \(\ell_0\) partitioned on the event that there are \(m\) down-up or up-down transitions, and \(i\in\calS_r\), \(j\in\calS_s\). See Section~\ref{sec: no change}. \\
+  \(\widehat \mu^{\ell_0}(\lambda)(\cdot,j; x_0,i)\) 
+      & The Laplace transform with respect to time of \(\mu^{\ell_0}(t)(\cdot,j; x_0,i)\). \\ 
+  \(\widehat \mu^{\ell_0}(\lambda)(\cdot,j; x_0,i)\) 
+      & The Laplace transform with respect to time of \(\mu^{\ell_0}(t)(\cdot,j; x_0,i)\). \\  
+  \(\bbpi_i(y)(\mathcal{E})\) 
+      & The stationary density operator of a fluid-fluid queue. See Equation (\ref{eqn:jointpi}). \\
+  \(\{\phi(t)\}_{t\geq 0}\)   
+      & The phase variable of the QBD-RAP approximation to a fluid queue. \\
+  \(\phi_k^r\) 
+      & The \(r\)th basis function of the DG approximation scheme on cell \(k\) (i.e.~the \(r\)th basis function of \(W_k\)). See Section~\ref{sec: dgdgdgdg}. \\ 
+  \(\bs \phi_k\) 
+      & A row vector of the basis functions on cell \(k\). See Section~\ref{sec: dgdgdgdg}. \\ 
+  \(\{\varphi(t)\}_{t\geq0}\) 
+      & Phase process of the fluid process. \\ 
+  \(\{\varphi^*(t)\}_{t\geq0}\) 
+      & Phase process of the augmented state space fluid process. See Section~\ref{sec: zero states} \\ 
+  \(\mathbb \Psi(s)\) 
+      & The first-return operator of the second fluid level which maps initial distributions of the driving fluid queue, to the distribution of the fluid queue at the time that the second fluid level first returns to its initial level. See Section~\ref{sec: intro Psi}. \\
+  \(\psi(\cdot)\) 
+      & A test function. \\ 
+  \(\bs \Psi_X(\lambda)=\left[\bs \Psi_X(\lambda)\right]_{i\in\calS_+,j\in\calS_-}\)
+      & The Laplace transform of the first return time to a fluid queue. See Section~\ref{sec: transient ffq intro}. \\
+  \(\tau_1^{(p)}\) 
+      & The first orbit restart epoch of the approximating QBD-RAP. See Section~\ref{sec: qbd dists}. \\
+  \(\tau_n^{(p)}\) 
+      & The \(n\)th orbit restart epoch of the QBD-RAP. See Section~\ref{sec: embedded}. \\ 
+  \(\tau_1^X\)
+      & The minimum of the first time the level variable of the fluid queue hits the cell edges \(y_0,...,y_{K+1}\), or the fluid queue leaves the boundary. See Section~\ref{sec: qbd dists}. \\ 
+  \(\tau_{n}^X\).  
+      & The \(n\)th time the level process of the fluid queue hits \(y_0,...,y_{K+1}\), or leaves the boundary. See Section~\ref{sec: embedded}. \\ 
+  \(\zeta_W(E)= \inf \{t > 0: \dot W(t) \in E\}\) 
+      & The stopping time which is the first time that the second fluid level hits the set \(E\).\\
+  \(\zeta_X(E)\) \\
+      & The random variable which is the first hitting time of \(\{\ddot X(t)\}\) on a set \(E\). See Section~\ref{sec: transient ffq intro}. \\
+  \(\mathcal A\) 
+      & The space of initial vectors \(\bs a\in\mathcal A\) such that \(\bs ae^{\bs Sx}\bs s\) is a valid probability density function. See Section~\ref{qbd-rap intro}. \\ 
+  \(\{\bs A(t)\}_{t\geq 0}\) 
+      & The orbit process of a QBD-RAP (or RAP). See Section~\ref{qbd-rap intro}. \\ 
+  \(\mathbb B\) 
+      & The generator of a fluid queue. See Section~\ref{subsec: operatorsoffq}. \\
+  \(\ddot{\bs B}\) 
+      & An approximation to the generator of an unbounded fluid queue. \\ 
+  \({\bs B}\) 
+      & An approximation to the generator of a bounded fluid queue. \\ 
+  \(b^{(p)}\) 
+      & A bound defined in Lemma~\ref{lem: another bound}. The dependence on \(p\) may be omitted. \\ 
+  \(\bs C_m=\diag(|c_i|, i\in\calS_m),\) \(m\in\{+,-,0\}\)
+      & A diagonal matrix of the absolute value of rates of a fluid queue for a subset of phases. \\
+  \(\bs C=\left[\begin{array}{ccc}\bs C_+ && \\ &\bs C_-& \\ &&\bs C_0\end{array}\right]\)
+      & A diagonal matrix of the absolute value of rates of a fluid queue. \\
+  \(\widehat{\bs C}_m=\diag(c_i, i\in\calS_m),\) \( m\in\{+,-,0\}\)
+      & A diagonal matrix of fluid queue rates for a subset of phases. \\
+  \(\widehat{\bs C}=\left[\begin{array}{ccc}\widehat{\bs C}_+ && \\ &\widehat{\bs C}_-& \\ &&\widehat{\bs C}_0\end{array}\right]\)
+      & A diagonal matrix of fluid queue rates. \\
+  \(c_i\) 
+      & The rate of change (with respect to time) of the level variable of a fluid queue when the phase variable is \(i\). \\ 
+  \(\bs D\) 
+      & The jump matrix of the QBD-RAP approximation. See the end of Section~\ref{sec:kkkrjrjrjjrj}. \\
+  \(\mathbb D(s)\)  
+      & The generator of \(\mathbb U(y,s)\). \\ 
+  \(\mathcal D_{-1} = {0}\)
+      & Convenient notation for the approximation cell at the lower boundary of a bounded fluid queue. \\
+  \(\mathcal D_{K+1} = {b}\)
+      & Convenient notation for the approximation cell at the upper boundary of a bounded fluid queue. \\
+  \(\mathcal D_{k,i},\, i\in\calS\) 
+      & The ``cells'' of the approximation schemes. Equal to \([y_k,y_{k+1})\) for \(i\in\calS_+\cup\calS_0\) or \((y_k,y_{k+1}]\) for \(i\in\calS_-\). \\
+  \(\mathcal D_k\) 
+      & The \(k\)th cell of the approximation scheme, \(\mathcal D_k=[y_k,y_{k+1}]\). \\
+  \(\Delta_k\)
+      & The width of approximation cell \(k\). The subscript \(k\) may be dropped when \(\Delta_k\) is equal for all cells. \\ 
+  \(\bs e\) 
+      & A vector of all ones. \\
+  \(\bs e_i\) 
+      & A vector of all zeros except there is a 1 in the \(i\)th position. \\ 
+  \(E^\lambda\) 
+      & An exponential random variable with rate \(\lambda>0\). \\
+  \(\mathcal F_i^+={u\in[0,b]: r_i(u)>0}\)
+      & The set of values \(u\in[0,b]\) such that the second fluid rate for phase \(i\in\calS\) is positive. See Equation (\ref{eqn:fil}). \\
+  \(\mathcal F_i^-={u\in[0,b]: r_i(u)<0}\)
+      & The set of values \(u\in[0,b]\) such that the second fluid rate for phase \(i\in\calS\) is negative. See Equation (\ref{eqn:fil}). \\
+  \(\mathcal F_i^0={u\in[0,b]: r_i(u)>0}\)
+      & The set of values \(u\in[0,b]\) such that the second fluid rate for phase \(i\in\calS\) is zero. See Equation (\ref{eqn:fil}). \\
+  \(\bs F_{k,\ell}\) 
+      & The flux matrix for the flow of mass from cell \(k\) to cell \(l\in\{k-1,k+1\}\), for the DG scheme. See Sections~\ref{sec: dgdgdgdg} and \ref{sec:llaaksksbnnn}. \\ 
+  \(f_i(x,t)\) 
+      & The density of a fluid queue at time \(t\) evaluated at \(\bs X(t)=(X(t),\varphi(t))=(x,i)\). \\ 
+  \(\bs f(x,t)=(f_i(x,t))_{i\in\calS}\) 
+      & A vector of density functions of a fluid queue. \\ 
+  \(f^{\ell_0,(p)}(t)(x,j;x_0,i)\) 
+      & The QBD-RAP approximation to the joint density/mass function of the fluid queue restricted to level \(\ell_0\). See Section~\ref{sec: qbd dists}. \\
+  \(f^{\ell_0,(p)}_{m,r,s}(t)(x,j;x_0,i)\) 
+      & The QBD-RAP approximation to the joint density/mass function of the fluid queue restricted to level \(\ell_0\) partitioned on the event that there are \(m\) down-up or up-down transitions, and \(i\in\calS_r\), \(j\in\calS_s\). See Section~\ref{sec: qbd dists}. \\ 
+  \(\widehat f^{\ell_0,(p)}(\lambda)(x,j;x_0,i)\) 
+      & The Laplace transform with respect to time of \(f^{\ell_0,(p)}(t)(x,j;x_0,i)\). \\ 
+  \(\widehat f^{\ell_0,(p)}_{m,r,s}(\lambda)(x,j;x_0,i)\) 
+      & The Laplace transform with respect to time of \(f^{\ell_0,(p)}_{m,r,s}(t)(x,j;x_0,i)\). \\ 
+  \(g(x),\, g_1,g_2,...\) 
+      & Arbitrary functions satisfying Assumptions~\ref{asu: g}. \\ 
+  \(G\) 
+      & A bound on \(g,g_1,g_2,....<G\). See Assumptions~\ref{asu: g}. \\
+  \(\widehat G\) 
+      & A bound on \(\int_{x=0}^\infty g(x) \wrt x\leq \widehat G\), \(\int_{x=0}^\infty g_k(x) \wrt x\leq \widehat G, \, k=1,2,....\) See Assumptions~\ref{asu: g}. \\ 
+  \(G_{\bs v}, \, \widetilde G_{\bs v}\) 
+      & Bounds on closing operators. See Properties~\ref{properties: some props}. \\
+  \(\bs G_k\) 
+      & The stiffness matrix for cell \(k\) of the DG scheme. See Sections~\ref{sec: dgdgdgdg} and \ref{sec:llaaksksbnnn}. \\ 
+  \(\bs H(\lambda, y)=\left[h_{ij}(\lambda,y)\right]_{i,j\in\calS_+\cup\calS_-}\)
+      & The Laplace-Stieltjes transform of the time taken for \(y\) amount of fluid to flow in or out of the fluid queue and to be in phase \(j\) at this time, given the initial level of the fluid queue was \(0\) and the initial phase was \(i\). See Section~\ref{sec: transient ffq intro} and \ref{sec: lst on no change}. \\
+  \(\bs H^{mm}(\lambda, y)=\left[h^{mm}_{ij}(\lambda,y)\right]_{i,\in\calS_m,j\in\calS_m},\) \( m\in\{+,-\}\) 
+      & The Laplace transform (with respect to time) of the time taken for the fluid level to shift by an amount \(y\) whilst remaining in phases in \(\mathcal S_m\cup\calS_{m0}\), given the phase was initially \(i\in\mathcal S_m\). See Section~\ref{sec: transient ffq intro} and \ref{sec: lst on no change}. \\
+  \(\bs H^{mn}(\lambda, y)=\left[h^{mn}_{ij}(\lambda,y)\right]_{i,\in\calS_m\cup\in\calS_n},\) \( m,n\in \{+,-\}, m\neq n\)
+      & The Laplace transform (with respect to time) of the time taken for the fluid level to shift by an amount \(y\) whilst remaining in phases in \(\mathcal S_m\cup\calS_{m0}\), after which time the phase instantaneously changes to \(j\in\mathcal S_n\), given the phase was initially \(i\in\mathcal S_m\). See Section~\ref{sec: transient ffq intro} and \ref{sec: lst on no change}. \\ 
+  \(\bs k(t)=\bs \alpha e^{\bs St}/(\bs \alpha e^{\bs St}\bs e)\)
+      & A row-vector valued function related to the orbit process of the QBD-RAP. \\
+  \(\mathcal K^\circ=\{0,1,...,K\}\)
+      & The index set for the interior cells/intervals for the approximation schemes. \\
+  \(\mathcal K=\{-1,K+1\}\cup\{0,1,...,K\}\)
+      & The index set for the cells/intervals for the approximation schemes. \\
+  \(\mathcal K^m_i = \{k\in\mathcal K\mid  l(\calD_{k,i}\cap\calF_i^m)\) where \(l\) is Lebesgue measure.
+      & The set of indices of the cells which are subsets of \(\calF_i^m\). Then \(\bigcup\limits_{k\in\mathcal K_i^m} \calD_{k,i}\) and \(\mathcal F_i^m\) are equal up to a set of \(\mathcal M_{0,b}\)-measure 0. \\
+  \(\mathcal K^m = \bigcup\limits_{i\in\calS}\mathcal K_i^m\), \(m\in\{+,-,0\}\). 
+      & \\ 
+  \(\{\bs L(t)\}_{t\geq 0}\) 
+      & The level process of a QBD-RAP. See Section~\ref{qbd-rap intro}. \\ 
+  \(L\) 
+      & The Lipschitz constant of \(g, g_1,g_2,...\). See Assumptions~\ref{asu: g}. \\ 
+  \(\bs M_k\) 
+      & The mass matrix for cell \(k\) of the DG scheme. See Sections~\ref{sec: dgdgdgdg} and \ref{sec:llaaksksbnnn}. \\ 
+  \(ME(\bs\alpha, \bs S, \bs s)\) (or \(ME(\bs\alpha, \bs S)\))
+      & A matrix exponential distribution with initial vector \(\bs \alpha\), generator \(\bs S\), and closing vector \(\bs s\). The closing vector may be dropped from the notation when it is assumed that \(\bs s=-\bs S\bs e\). See Section~\ref{qbd-rap intro}. \\
+  \({\mathbb p}_i(\mathcal{E})\) 
+      & The stationary point-mass operator of a fluid-fluid queue. See Equation (\ref{eqn:jointmass}). \\
+  \(\widecheck p_{ij},\,i,j\in\calS,\,k\in\{-1,K+1\}\) 
+      & The probability of a phase change of a fluid queue from phase \(i\) to phase \(j\) which occurs instantaneously upon the fluid queue hitting the lower boundary at \(0\). \\
+  \(\widehat p_{ij},\,i,j\in\calS,\,k\in\{-1,K+1\}\) 
+      & The probability of a phase change of a fluid queue from phase \(i\) to phase \(j\) which occurs instantaneously upon the fluid queue hitting the upper boundary. \\
+  \(\widecheck{\bs P}_{-+} = [\widecheck p_{ij}]_{i\in\calS_-,j\in\calS_+}\) 
+      & A matrix describing the probability of transitioning from a negative phase to a positive phase upon the first fluid level hitting the lower boundary. \\
+  \(\widecheck{\bs P}_{-0} = [\widecheck p_{ij}]_{i\in\calS_-,j\in\calS_0}\)  
+      & A matrix describing the probability of transitioning from a negative phase to a phase with rate zero upon the first fluid level hitting the lower boundary. \\
+  \(\widecheck{\bs P}_{--} = [\widecheck p_{ij}]_{i\in\calS_-,j\in\calS_-}\)
+      & A matrix describing the probability of transitioning from a negative phase to a negative phase upon the first fluid level hitting the lower boundary. \\ 
+  \(\widehat{\bs P}_{+-} = [\widehat p_{ij}]_{i\in\calS_+,j\in\calS_{-}}\) 
+      & A matrix describing the probability of transitioning from a positive phase to a negative phase upon the first fluid level hitting the upper boundary. \\
+  \(\widehat{\bs P}_{+0} = [\widehat p_{ij}]_{i\in\calS_+,j\in\calS_0}\) 
+      & A matrix describing the probability of transitioning from a positive phase to a phase with rate zero upon the first fluid level hitting the upper boundary. \\ 
+  \(\widehat{\bs P}_{++}^{K+1} = [\widehat p_{ij}]_{i\in\calS_+,j\in\calS_+}\) 
+      & A matrix describing the probability of transitioning from a positive phase to a positive phase upon the first fluid level hitting the upper boundary. \\
+  \(\bs Q(\lambda),\, m\in\{+,-\}\)  
+      & The generator of \(\bs H(\lambda,y)\). See Section~\ref{sec: transient ffq intro} and \ref{sec: lst on no change}. \\ 
+  \(\bs R(x)=\diag(r_i(x))\)
+      & The diagonal matrix function of rates of the second level process of a fluid-fluid queue. \\
+  \(\mathbb R\) 
+      & The operator which maps measures to the same measures divided by the rate of the second fluid level. See Section~\ref{subsec: afjakje}. \\
+  \(r_i(x)\) 
+      & The rate of change of the second fluid level of a fluid-fluid queue when the phase is \(i\) and the first level is \(x\). \\
+  \(R_i(u)\) 
+      & The residual time of \(Z_i\) given \(Z_i>u\). \\ 
+  \( R_{\bs v,1}^{(p)}, \, R_{\bs v,2}^{(p)}\) 
+      & Bounds on closing operators which tend to \(0\) as \(p\to \infty\). See Properties~\ref{properties: some props}. \\
+  \(r_1(n)^{(p)}\) 
+      & An error term defined in Corollary~\ref{cor: lh and rh}. The dependence on \((p)\) may be suppressed. \\
+  \(r_2(n)^{(p)}\) 
+      & An error term defined in Lemma~\ref{lemma:bound}. The dependence on \((p)\) may be suppressed. \\
+  \(r_3(u+v)\) 
+      & An error term defined in Corollary~\ref{cor: cond bnd 2}. The dependence on \((p)\) may be suppressed. \\ 
+  \(r_4(n)\) 
+      & An error term defined in Lemma~\ref{lem: lst convergence}. The dependence on \((p)\) may be suppressed. \\ 
+  \(r_5(n)\) 
+      & An error term defined in Lemma~\ref{lem: lst convergence}. The dependence on \((p)\) may be suppressed. \\ 
+  \(r_6^M\) 
+      & An error term defined in Lemma~\ref{lem: gkjljklgagjklagsjlk}. (There is no dependence on \(p\).) \\ 
+  \(\bs S^{(p)}\) 
+      & See entry for \(\{Z^{(p)}\}\). \\
+  \(\calS=\{1,...,N\}\) 
+      & The state space of \(\{\varphi(t)\}\) and \(\{\phi(t)\}\). \\
+  \(\bs S_i,\, \bs s_i\) 
+      & \(|c_i|\bs S\) and \(|c_i|\bs s\). \\ 
+  \(\calS_+=\{i\in\calS \mid c_i>0\}\) 
+      & The set of phases of a fluid queue for which the rate of change of the fluid level is positive. \\
+  \(\calS_-=\{i\in\calS \mid c_i<0\}\) 
+      & The set of phases of a fluid queue for which the rate of change of the fluid level is negative. \\
+  \(\calS_0=\{i\in\calS \mid c_i=0\}\) 
+      & The set of phases of a fluid queue for which the rate of change of the fluid level is equal to 0. \\
+  \(\bs s^{(p)}\) 
+      & See entry for \(\{Z^{(p)}\}\). \\
+  \(\calS_{m0}\) 
+      & A copy of \(\calS_0\) which is only accessible via \(\calS_m\), \(m\in{+,-}\). \\ 
+  \(\calS_k^+=\{i\in\calS\mid r_i(x)>0,\,\forall x \in\calD_{k,i}\}\) 
+      & Phase of a fluid queue where the rates of the second fluid are positive on the sets \(\mathcal D_{k,i},\, i\in\calS\). \\
+  \(\calS_k^0=\{i\in\calS\mid r_i(x)=0,\,\forall x \in\calD_{k,i}\}\)
+      & Phase of a fluid queue where the rates of the second fluid are positive on the sets \(\mathcal D_{k,i},\, i\in\calS\).\\
+  \(\calS_k^-=\{i\in\calS\mid r_i(x)<0,\,\forall x \in\calD_{k,i}\}\)
+      & Phase of a fluid queue where the rates of the second fluid are positive on the sets \(\mathcal D_{k,i},\, i\in\calS\).\\
+  \(\calS_k^\bullet=\{i\in\calS\mid r_i(x)\neq0,\,\forall x \in\calD_{k,i}\}\). 
+      & Phase of a fluid queue where the rates of the second fluid are non-zero on the sets \(\mathcal D_{k,i},\, i\in\calS\).\\ 
+  \(\bs T=[T_{ij}]\) 
+      & The generator of a CTMC which is the driving process of the fluid queue. \\
+  \(U_k\) 
+      & The space of function in which we formulate the DG approximation for cell \(k\) (the set of polynomials of order \(p_k\)). \\ 
+  \(U=\bigoplus_{k=0,...,K} U_k\) 
+      & The space of function in which we formulate the DG approximation (also used as the set of test functions). \\
+  $\mathbb{U}_{ij}^{k\ell}(y,s)$ 
+      & The Laplace transform of the operator which maps the initial distribution of a fluid queue to the distribution of the fluid queue at the time that the in-out fluid if the second fluid level, \(\beta(t)\), reaches \(y\), given \(W(0)=0\) and the driving fluid process was initially at \(\varphi(0)=i\) and \(X(0)=x\). Defined for indices $k\in\mathcal K^+\cup\mathcal K^-$,  $\ell\in\mathcal K^+\cup\mathcal K^-$, and $i \in \mathcal{S}_k^\bullet,\,j \in \mathcal{S}_\ell^\bullet$. See Section~\ref{subsec: afjakje}. \\
+  \(\mathbb U(y,s) = \left[[\mathbb U_{ij}^{k\ell}(y,s)]_{i\in\calS_k^\bullet,j\in\calS_\ell^\bullet}\right]_{k,\ell\in\mathcal K^+\cup\mathcal K^-}\) 
+      & The operators \(\mathbb{U}_{ij}^{k\ell}(y,s)\) assembled into a matrix. See Section~\ref{subsec: afjakje}.\\
+  \(\mathbb V(t)\) 
+      & The semigroup which maps the initial distribution of a fluid queue to the distribution at time \(t\). (The transition operator). See Section~\ref{subsec: operatorsoffq}. \\
+  \(\var(\cdot)\) 
+      & The variance operator. \\ 
+  \(\bs v(x)\)
+      & A closing operator. See Section~\ref{sec: closing}. \\
+  \(\{\bs v^{(p)}\}_p \)
+      & A sequence of closing operators. See Properties~\ref{properties: some props}. \\
+  \(\{\dot W(t)\}_{t\geq 0}\) 
+      & The second fluid level of a fluid-fluid queue which is bounded below at 0.  \\
+  \(\{\ddot W(t)\}_{t\geq 0}\) 
+      & The second fluid level of a fluid-fluid queue which is unbounded.  \\
+  \(\{X(t)\}_{t\geq 0}\)   
+      & The fluid level of a fluid queue which is bounded below at \(0\) and above at \(b>0\).  \\
+  \(\{\dot X(t)\}_{t\geq 0}\)   
+      & The fluid level of a fluid queue which is bounded below at \(0\) and unbounded above.  \\
+  \(\{\ddot X(t)\}_{t\geq 0}\)   
+      & The fluid level of a fluid queue which is unbounded.  \\
+  \(\{\bs X(t)\}_{t\geq 0}\) & The fluid process \(\bs X(t)=(X(t),\varphi(t))\). \\
+  \(\{\bs Y(t)\}_{t\geq0}=\{(L(t), \bs A(t), \phi(t))\}_{t\geq 0}\) 
+      & The QBD-RAP approximation to a fluid queue. \\ 
+  \(\{\Ydp(n)\}_{n\geq 0, n \in \mathbb Z}\)
+      & The process formed by observing the QBD-RAP at the orbit restart epochs \(\{\Ydp(n)\}_{n\geq 0, n \in \mathbb Z}=\{(L^{(p)}(\tau_n^{(p)}),\varphi(\tau_n^{(p)}))\}_{n\geq 0, n \in \mathbb Z}\). \\
+  \(Z\) 
+      & A ME distributed random variable with parameters \((\bs \alpha, \bs S)\). \\ 
+  \(Z_i\) 
+      & A ME distributed random variable with parameters \((\bs \alpha, |c_i|\bs S)\). \\ 
+  \(\{Z^{(p)}\}_{p}\) 
+      & A sequence of ME random variables with \(\var\left(Z^{(p)}\right)\to 0\) as \(p\to \infty\), where each 
+      \(Z^{(p)}\) has parameters \(\bs \alpha^{(p)},\, \bs S^{(p)},\, \bs s^{(p)}\). \\
+\end{longtable}

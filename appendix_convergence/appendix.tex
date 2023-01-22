@@ -2,10 +2,10 @@
 \chapter{Convergence without ephemeral phases\label{app:extend conv}}
 For completeness, we include here results needed to prove a convergence of the QBD-RAP scheme to the fluid queue without the need for the ephemeral initial states. Note that we only need to prove convergence up to, and at, the time of the first change of level of the QBD-RAP, then we can use the results from Chapter~\ref{ch: global results} to obtain global convergence results. 
 
-For \(\varphi(0)=k\in\mathcal S_{-0}\) (or \(\varphi(0)=k\in\mathcal S_{+0}\)) the added complexity comes from the fact, upon the phase process first leaving \(\mathcal S_{-0}\) (\(\mathcal S_{+0}\)), that it is possible the phase transitions to a state in \(\mathcal S_+\) (\(\mathcal S_-\)). Since the orbit of the QBD-RAP is constant on \(\varphi(t)\in\mathcal S_{-0}\) (\(\varphi(t)\in\mathcal S_{+0}\)), then upon a first transition out of \(\mathcal S_{-0}\) (\(\mathcal S_{+0}\)) and into \(\mathcal S_+\) (\(\mathcal S_-\)) the orbit jumps to \(\bs   a_{\ell_0,i}^{(p)}(x_0)\bs D^{(p)}\). For \(k\in\mathcal S_{-0}\), \(m\geq 0\), the corresponding Laplace transform of the QBD-RAP is
+For \(\rapphase(0)=k\in\mathcal S_{-0}\) (or \(\rapphase(0)=k\in\mathcal S_{+0}\)) the added complexity comes from the fact, upon the phase process first leaving \(\mathcal S_{-0}\) (\(\mathcal S_{+0}\)), that it is possible the phase transitions to a state in \(\mathcal S_+\) (\(\mathcal S_-\)). Since the orbit of the QBD-RAP is constant on \(\rapphase(t)\in\mathcal S_{-0}\) (\(\rapphase(t)\in\mathcal S_{+0}\)), then upon a first transition out of \(\mathcal S_{-0}\) (\(\mathcal S_{+0}\)) and into \(\mathcal S_+\) (\(\mathcal S_-\)) the orbit jumps to \(\bs   a_{\ell_0,i}^{(p)}(x_0)\bs D^{(p)}\). For \(k\in\mathcal S_{-0}\), \(m\geq 0\), the corresponding Laplace transform of the QBD-RAP is
 \begin{align}
 	&\widehat{f}_{m,-0,+}^{\ell_0,(p)}(\lambda)(x,j;x_0,k)\wrt x\nonumber 
-	\\&:=\int_{x_1=0}^\infty \dots \int_{x_{2m+1}=0}^\infty  \bs e_k [\bs I - \bs T_{00}]^{-1}\bs T_{0+}\bs M^m_{++}(\lambda,x_1,\dots,x_{2m+1})\bs e_j\tr{} \nonumber
+	\\&=\int_{x_1=0}^\infty \dots \int_{x_{2m+1}=0}^\infty  \bs e_k [\bs I - \bs T_{00}]^{-1}\bs T_{0+}\bs M^m_{++}(\lambda,x_1,\dots,x_{2m+1})\bs e_j\tr{} \nonumber
 	\\& \bs a_{\ell_0,k}^{(p)}(x_0) \bs D^{(p)} \bs N^{2m+1,(p)}(\lambda,x_1,\dots,x_{2m+1}) {\bs v}_{\ell_0,j}^{(p)}(x)\wrt x_{2m+1}\dots\wrt x_2 \wrt x_1 \wrt x \nonumber
 	\\& + \int_{x_1=0}^\infty \dots \int_{x_{2m+2}=0}^\infty  \bs e_k [\bs I - \bs T_{00}]^{-1}\bs T_{0-}\bs M^{m+1}_{-+}(\lambda,x_1,\dots,x_{2m+2})\bs e_j\tr{} \nonumber
 	\\& \bs a_{\ell_0,k}^{(p)}(x_0)\bs N^{2m+2,(p)}(\lambda,x_1,\dots,x_{2m+2}) {\bs v}_{\ell_0,j}^{(p)}(x)\wrt x_{2m+2}\dots\wrt x_2 \wrt x_1 \wrt x.
@@ -15,7 +15,7 @@ For \(\varphi(0)=k\in\mathcal S_{-0}\) (or \(\varphi(0)=k\in\mathcal S_{+0}\)) t
 The Laplace transform of the fluid queue corresponding to (\ref{eqn: k0jJ0}) is 
 \begin{align}  
 	\widehat \mu_{m,-0,+}^{\ell_0}(\lambda)(\wrt x,j;x_0,k) \nonumber 
-	&:= \sum_{i\in\calS_+}\bs e_k\vligne{\lambda \bs I - \bs T_{00}}^{-1}\bs T_{0i}\widehat \mu_{m,+,+}^{\ell_0}(\lambda)(\wrt x,j;x_0,i) 
+	&= \sum_{i\in\calS_+}\bs e_k\vligne{\lambda \bs I - \bs T_{00}}^{-1}\bs T_{0i}\widehat \mu_{m,+,+}^{\ell_0}(\lambda)(\wrt x,j;x_0,i) 
 	\\&{}+ \sum_{i\in\calS_-}\bs e_k\vligne{\lambda \bs I - \bs T_{00}}^{-1}\bs T_{0i}\widehat \mu_{m+1,-,+}^{\ell_0}(\lambda)(\wrt x,j;x_0,i), \label{eqn: s0- actual}
 \end{align}
 \(m\geq 0\).
@@ -25,7 +25,7 @@ The second term of (\ref{eqn: k0jJ0}) is a linear combination of \(\widehat{f}_{
 Analogously, for \(k\in\calS_{-0}\), \(m\geq 0\), we also have 
 \begin{align*}
 	\widehat{f}_{m,-0,-}^{\ell_0,(p)}(\lambda)(x,j;x_0,k)\nonumber 
-	&:=\int_{x_1=0}^\infty \dots \int_{x_{2m+2}=0}^\infty  \bs e_k [\bs I - \bs T_{00}]^{-1}\bs T_{0+} \bs M^{m+1}_{+-}(\lambda,x_1,\dots,x_{2m+2})\bs e_j\tr{} \nonumber
+	&=\int_{x_1=0}^\infty \dots \int_{x_{2m+2}=0}^\infty  \bs e_k [\bs I - \bs T_{00}]^{-1}\bs T_{0+} \bs M^{m+1}_{+-}(\lambda,x_1,\dots,x_{2m+2})\bs e_j\tr{} \nonumber
 	\\& \bs a_{\ell_0,k}^{(p)}(x_0) \bs D^{(p)} \bs N^{2m+2,(p)}(\lambda,x_1,\dots,x_{2m+2}) {\bs v}_{\ell_0,j}^{(p)}(x)\wrt x_{2m+2}\dots  \wrt x_1  \nonumber
 	\\& + \int_{x_1=0}^\infty \dots \int_{x_{2m+1}=0}^\infty  \bs e_k [\bs I - \bs T_{00}]^{-1}\bs T_{0-} \bs M^{m}_{--}(\lambda,x_1,\dots,x_{2m+1})\bs e_j\tr{} \nonumber
 	\\& \bs a_{\ell_0,k}^{(p)}(x_0)\bs N^{2m+1,(p)}(\lambda,x_1,\dots,x_{2m+1}) {\bs v}_{\ell_0,j}^{(p)}(x)\wrt x_{2m+1}\dots\wrt x_1.
@@ -33,7 +33,7 @@ Analogously, for \(k\in\calS_{-0}\), \(m\geq 0\), we also have
 For \(k\in\calS_{+0}\), \(m\geq 0\), we have 
 \begin{align*}
 	\widehat{f}_{m,+0,+}^{\ell_0,(p)}(\lambda)(x,j;x_0,k)\nonumber 
-	&:=\int_{x_1=0}^\infty \dots \int_{x_{2m+2}=0}^\infty \bs e_k [\bs I - \bs T_{00}]^{-1}\bs T_{0-} \bs M^{m+1}_{-+}(\lambda,x_1,\dots,x_{2m+2})\bs e_j\tr{} \nonumber
+	&=\int_{x_1=0}^\infty \dots \int_{x_{2m+2}=0}^\infty \bs e_k [\bs I - \bs T_{00}]^{-1}\bs T_{0-} \bs M^{m+1}_{-+}(\lambda,x_1,\dots,x_{2m+2})\bs e_j\tr{} \nonumber
 	\\& \bs a_{\ell_0,k}^{(p)}(x_0) \bs D^{(p)} \bs N^{2m+2,(p)}(\lambda,x_1,\dots,x_{2m+2}) {\bs v}_{\ell_0,j}^{(p)}(x)\wrt x_{2m+2}\dots  \wrt x_1  \nonumber
 	\\& + \int_{x_1=0}^\infty \dots \int_{x_{2m+1}=0}^\infty  \bs e_k [\bs I - \bs T_{00}]^{-1}\bs T_{0+} \bs M^m_{++}(\lambda,x_1,\dots,x_{2m+1})\bs e_j\tr{} \nonumber
 	\\& \bs a_{\ell_0,k}^{(p)}(x_0)\bs N^{2m+1,(p)}(\lambda,x_1,\dots,x_{2m+1}) {\bs v}_{\ell_0,j}^{(p)}(x)\wrt x_{2m+1}\dots  \wrt x_1,
@@ -41,7 +41,7 @@ For \(k\in\calS_{+0}\), \(m\geq 0\), we have
 and 
 \begin{align*}
 	\widehat{f}_{m,+0,-}^{\ell_0,(p)}(\lambda)(x,j;x_0,k)\nonumber 
-	&:=\int_{x_1=0}^\infty \dots \int_{x_{2m+1}=0}^\infty  \bs e_k [\bs I - \bs T_{00}]^{-1}\bs T_{0-} \bs M^m_{--}(\lambda,x_1,\dots,x_{2m+1})\bs e_j\tr{} \nonumber
+	&=\int_{x_1=0}^\infty \dots \int_{x_{2m+1}=0}^\infty  \bs e_k [\bs I - \bs T_{00}]^{-1}\bs T_{0-} \bs M^m_{--}(\lambda,x_1,\dots,x_{2m+1})\bs e_j\tr{} \nonumber
 	\\& \bs a_{\ell_0,k}^{(p)}(x_0) \bs D^{(p)} \bs N^{2m+1,(p)}(\lambda,x_1,\dots,x_{2m+1}) {\bs v}_{\ell_0,j}^{(p)}(x)\wrt x_{2m+1}\dots  \wrt x_1  \nonumber
 	\\& + \int_{x_1=0}^\infty \dots \int_{x_{2m+2}=0}^\infty  \bs e_k [\bs I - \bs T_{00}]^{-1}\bs T_{0+} \bs M^{m+1}_{+-}(\lambda,x_1,\dots,x_{2m+2})\bs e_j\tr{} \nonumber
 	\\& \bs a_{\ell_0,k}^{(p)}(x_0)\bs N^{2m+2,(p)}(\lambda,x_1,\dots,x_{2m+2}) {\bs v}_{\ell_0,j}^{(p)}(x)\wrt x_{2m+2}\dots  \wrt x_1.
@@ -49,11 +49,11 @@ and
 In general, for \(q\in \{+,-\}, \, q'\in\{+,-\}\), \(m\geq 0\),
 \begin{align*}
 	\widehat \mu_{m,q0,q'}^{\ell_0}(\lambda)(\wrt x,j;x_0,k) \nonumber 
-	&:= \sum_{r\in\{+,-\}}\sum_{i\in\calS_r}\bs e_k\vligne{\lambda \bs I - \bs T_{00}}^{-1}\bs T_{0i}\widehat \mu_{m+1(r\neq q'),r,q'}^{\ell_0}(\lambda)(\wrt x,j;x_0,i).
+	&= \sum_{r\in\{+,-\}}\sum_{i\in\calS_r}\bs e_k\vligne{\lambda \bs I - \bs T_{00}}^{-1}\bs T_{0i}\widehat \mu_{m+1(r\neq q'),r,q'}^{\ell_0}(\lambda)(\wrt x,j;x_0,i).
 \end{align*}
 
 \begin{rem}
-For technical reasons we should not have point masses at \(x_0\in{y_{\ell_0},y_{\ell_0+1}}\) when \(\varphi(0)\in\calS_{+0}\cup\calS_{-0}\). Intuitively, if \(\varphi(0)=k\in\calS_{+0}\) and \(x_0 = y_{\ell_0}\) then, upon exiting \(\calS_{+0}\), if the phase process transitions to \(\calS_-\) then the fluid queue will instantaneously leave the interval \(\calD_{\ell_0}\) upon this transition. On the same event, the orbit of the QBD-RAP will be \(\bs \alpha^{(p)} \bs D^{(p)}\) at the instant of the transition to \(\calS_-\). Roughly speaking \(\bs D^{(p)}\) maps \(\bs \alpha^{(p)}\) to approximately \(\cfrac{\bs \alpha^{(p)} e^{\bs S^{(p)}\Delta}}{\bs \alpha^{(p)} e^{\bs S^{(p)}\Delta}\bs e}\) (asymptotically). Our asymptotic arguments rely on Chebyshev's inequality, in the form of a bound in terms of the distance of the random variable \(Z^{(p)}\sim ME(\bs\alpha^{(p)},\bs S^{(p)})\) from its mean \(\Delta\). However, we cannot use such a technique to bound terms such as \(\cfrac{\bs \alpha^{(p)} e^{\bs S^{(p)}\Delta}}{\bs \alpha^{(p)} e^{\bs S^{(p)}\Delta}\bs e}e^{\bs S^{(p)}z}\bs s^{(p)}\). %Furthermore, for the QBD-RAP to capture the fact that the fluid queue instantaneously leaves \(\calD_{\ell_0}\) at the instant it the phase process transitions to \(\calS_-\), we need the intensity of a change of level of the QBD-RAP to become arbitrarily large in our limiting arguments. That is, we need \(\bs \alpha \bs D\bs s\) to become arbitrarily large. It is unknown, in general, whether that this is the case. %In these cases the initial condition \(\bs   a_{\ell_0,i}(x_0)\) has a non-negligible contribution from \(\bs \alpha e^{\bs S\Delta}/\bs \alpha e^{\bs S\Delta}\bs e\) and, to our knowledge, there is no way to ensure the denominator is bounded away from \(0\) when we construct limiting arguments. This issue is present when we try to do analysis on 
+For technical reasons we should not have point masses at \(x_0\in{y_{\ell_0},y_{\ell_0+1}}\) when \(\rapphase(0)\in\calS_{+0}\cup\calS_{-0}\). Intuitively, if \(\rapphase(0)=k\in\calS_{+0}\) and \(x_0 = y_{\ell_0}\) then, upon exiting \(\calS_{+0}\), if the phase process transitions to \(\calS_-\) then the fluid queue will instantaneously leave the interval \(\calD_{\ell_0}\) upon this transition. On the same event, the orbit of the QBD-RAP will be \(\bs \alpha^{(p)} \bs D^{(p)}\) at the instant of the transition to \(\calS_-\). Roughly speaking \(\bs D^{(p)}\) maps \(\bs \alpha^{(p)}\) to approximately \(\cfrac{\bs \alpha^{(p)} e^{\bs S^{(p)}\Delta}}{\bs \alpha^{(p)} e^{\bs S^{(p)}\Delta}\bs e}\) (asymptotically). Our asymptotic arguments rely on Chebyshev's inequality, in the form of a bound in terms of the distance of the random variable \(Z^{(p)}\sim ME(\bs\alpha^{(p)},\bs S^{(p)})\) from its mean \(\Delta\). However, we cannot use such a technique to bound terms such as \(\cfrac{\bs \alpha^{(p)} e^{\bs S^{(p)}\Delta}}{\bs \alpha^{(p)} e^{\bs S^{(p)}\Delta}\bs e}e^{\bs S^{(p)}z}\bs s^{(p)}\). %Furthermore, for the QBD-RAP to capture the fact that the fluid queue instantaneously leaves \(\calD_{\ell_0}\) at the instant it the phase process transitions to \(\calS_-\), we need the intensity of a change of level of the QBD-RAP to become arbitrarily large in our limiting arguments. That is, we need \(\bs \alpha \bs D\bs s\) to become arbitrarily large. It is unknown, in general, whether that this is the case. %In these cases the initial condition \(\bs   a_{\ell_0,i}(x_0)\) has a non-negligible contribution from \(\bs \alpha e^{\bs S\Delta}/\bs \alpha e^{\bs S\Delta}\bs e\) and, to our knowledge, there is no way to ensure the denominator is bounded away from \(0\) when we construct limiting arguments. This issue is present when we try to do analysis on 
 %\[\cfrac{\bs \alpha e^{\bs S\Delta}}{\bs \alpha e^{\bs S\Delta}\bs e}\bs D = \cfrac{\bs \alpha e^{\bs S\Delta}}{\bs \alpha e^{\bs S\Delta}\bs e} \int_{u=0}^\infty e^{\bs Su}\bs s \cfrac{\bs \alpha e^{\bs Su}}{\bs \alpha e^{\bs Su}\bs e}\wrt u.\]
 
 In practice, it may be possible to avoid this issue by choosing the intervals \(\{\mathcal D_\ell\}\) so that the boundaries do not align with any point masses. Another option is to append an ephemeral class of phases to the fluid queue as previously stated. 
@@ -73,7 +73,7 @@ Theorem~\ref{thm: a thm2!} below is analogous to Theorem~\ref{thm: a thm!} and p
 	\textit{Cases \((q,r) \in \{(+0,-),(-0,+)\}\), and \(m=0\).} First, take \(q=-0\) and \(r=+\), then 
 	\begin{align}
 		&\int_{x\in\calD_k}\widehat{f}_{0,-0,+}^{\ell_0,(p)}(\lambda)(x,j;x_0,k)\psi(x)\wrt x \nonumber 
-		\\&:=\int_{x_1=0}^\infty \int_{x\in\calD_k} \bs e_k [\bs I - \bs T_{00}]^{-1}\bs T_{0+} \bs M^0_{++}(\lambda,x_1)\bs e_j\tr{} \nonumber
+		\\&=\int_{x_1=0}^\infty \int_{x\in\calD_k} \bs e_k [\bs I - \bs T_{00}]^{-1}\bs T_{0+} \bs M^0_{++}(\lambda,x_1)\bs e_j\tr{} \nonumber
 		\bs a_{\ell_0,k}^{(p)}(x_0) \bs D^{(p)} \bs N^{1,(p)}(\lambda,x_1) 
 		\\& {\bs v}_{\ell_0,j}^{(p)}(x)\psi(x)\wrt x\wrt x_{1}  \nonumber
 		\\& + \int_{x_1=0}^\infty\int_{x_2=0}^\infty \int_{x\in\calD_k}  \bs e_k [\bs I - \bs T_{00}]^{-1}\bs T_{0-} \bs M^1_{-+}(\lambda,x_1,x_{2})\bs e_j\tr{} \nonumber
@@ -94,7 +94,7 @@ Theorem~\ref{thm: a thm2!} below is analogous to Theorem~\ref{thm: a thm!} and p
 	\textit{Cases \(q\in\{+0,-0\},\,r \in \{+,-\}\) and \(m\geq 1\).} First, take \(q=+0\) and \(r=+\), then 
 	\begin{align}
 		&\int_{x\in\calD_k}\widehat{f}_{m,-0,+}^{\ell_0,(p)}(\lambda)(x,j;x_0,k)\psi(x)\wrt x \nonumber 
-		\\&:=\int_{x\in\calD_k}\int_{x_1=0}^\infty \dots \int_{x_{2m+1}=0}^\infty   \bs e_k [\bs I - \bs T_{00}]^{-1}\bs T_{0+}\bs M^m_{++}(\lambda,x_1,\dots,x_{2m+1})\bs e_j\tr{} \nonumber
+		\\&=\int_{x\in\calD_k}\int_{x_1=0}^\infty \dots \int_{x_{2m+1}=0}^\infty   \bs e_k [\bs I - \bs T_{00}]^{-1}\bs T_{0+}\bs M^m_{++}(\lambda,x_1,\dots,x_{2m+1})\bs e_j\tr{} \nonumber
 		\\& \bs a_{\ell_0,k}^{(p)}(x_0) \bs D^{(p)} \bs N^{2m+1,(p)}(\lambda,x_1,\dots,x_{2m+1}) {\bs v}_{\ell_0,j}^{(p)}(x)\psi(x)\wrt x_{2m+1}\dots\wrt x_2 \wrt x_1  \wrt x\nonumber
 		\\& + \int_{x\in\calD_k}\int_{x_1=0}^\infty \dots \int_{x_{2m+2}=0}^\infty   \bs e_k [\bs I - \bs T_{00}]^{-1}\bs T_{0-}\bs M^{m+1}_{-+}(\lambda,x_1,\dots,x_{2m+2})\bs e_j\tr{} \nonumber
 		\\& \bs a_{\ell_0,k}^{(p)}(x_0)\bs N^{2m+2,(p)}(\lambda,x_1,\dots,x_{2m+2}) {\bs v}_{\ell_0,j}^{(p)}(x)\psi(x)\wrt x_{2m+2}\dots\wrt x_2 \wrt x_1 \wrt x.
@@ -324,7 +324,7 @@ For later use, observe that
  %
  	\\&\leq G^{n-1}\int_{u_2=0}^{\Delta-u_1}\wrt u_1 \dots\nonumber
             	\int_{u_{n-1}=0}^{\Delta-u_{n-2}}  \wrt u_{n-1}
-		\\&\leq G^{n-1}\Delta^{n-2}:=G^*_n.
+		\\&\leq G^{n-1}\Delta^{n-2}=G^*_n.
 \end{align}
 % Also, 
 % \begin{align}
@@ -334,7 +334,7 @@ For later use, observe that
 %  %
 %  	\\&\leq G^{n-1}\int_{u_2=0}^{\Delta-u_1}\wrt u_1 \dots\nonumber
 %             	\int_{u_{n-1}=0}^{\Delta-u_{n-2}}  \wrt u_{n-1}
-% 		\\&\leq G^{n-1}\Delta^{n-2}:=G^*_n.
+% 		\\&\leq G^{n-1}\Delta^{n-2}=G^*_n.
 % \end{align}
 
 \begin{cor}\label{cor: awrg}
@@ -733,7 +733,7 @@ We are not quite done yet. If we want to use Theorem~\ref{thm: a thm2!} to prove
 	% Now consider \(\widehat\mu_{m,-0,+}^{\ell_0}(\lambda)( \wrt x,j;x_0,i) \) which given by 
 	% \begin{align*}
 	% 	\widehat \mu_{m,-0,+}^{\ell_0}(\lambda)(\wrt x,j;x_0,i) \nonumber 
-	% 	&:= \sum_{r\in\{+,-\}}\sum_{k\in\calS_r}\bs e_i\vligne{\lambda \bs I - \bs T_{00}}^{-1}\bs T_{0k}\widehat \mu_{m+1(r\neq +),r,+}^{\ell_0}(\lambda)(\wrt x,j;x_0,k).
+	% 	&= \sum_{r\in\{+,-\}}\sum_{k\in\calS_r}\bs e_i\vligne{\lambda \bs I - \bs T_{00}}^{-1}\bs T_{0k}\widehat \mu_{m+1(r\neq +),r,+}^{\ell_0}(\lambda)(\wrt x,j;x_0,k).
 	% \end{align*}
 	% which is a linear combination of \(\widehat\mu_{m+1(r\neq +),r,+}^{\ell_0}(\lambda)( \wrt x,j;x_0,k)\) for \(k\in\calS_r\), \(r\in\{+,-\}\). From the proof of Lemma~\ref{lem: gkjljklgagjklagsjlk}, \(\widehat\mu_{m+1(r\neq +),r,+}^{\ell_0}(\lambda)( \wrt x,j;x_0,k)\) is bounded by \(G\Delta F(\frac{\gamma}{\gamma+\lambda})^{2m}\). Hence,
 	% \begin{align}
@@ -831,7 +831,7 @@ We conclude this appendix but stating the convergence results formally.
 	
 \begin{cor}\label{cor: aln2222a} Recall \(\bs y_{0}^{(p)} = (\ell_0, \bs a_{\ell_0,j}^{(p)}(x_0), i)\). For \(\ell_0\in\mathcal K\) \(x_0\in\mathcal D_{\ell_0,i}\), \(i\in\mathcal S_{+0}\cup\calS_{0-},\) \(j\in\calS_+\cup\calS_-\), 
 	\begin{align}
-		&\mathbb P(L^{(p)}(\tau_1^{(p)}) = \ell(\ell_0,j), \varphi(\tau_1^{(p)}) = j, \tau_{1}^{(p)}\leq E^\lambda 
+		&\mathbb P(L^{(p)}(\tau_1^{(p)}) = \ell(\ell_0,j), \rapphase^{(p)}(\tau_1^{(p)}) = j, \tau_{1}^{(p)}\leq E^\lambda 
             	 \mid \bs Y^{(p)}(0) = \bs y_0^{(p)}) \nonumber
 	 	%
 		\\&\to \mathbb P(\bs X(\tau_1^X) = (y_{\ell(\ell_0,j)+1(j\in\calS_-)}, j), \tau_{1}^X\leq E^\lambda 
@@ -858,9 +858,9 @@ We conclude this appendix but stating the convergence results formally.
 %\begin{lem}
 %	Let \(f:[0,\Delta)\to \mathbb R\) be any bounded, Lipschitz continuous function with \(|\psi(x)|\leq F\). Then for \(u\leq \Delta-\varepsilon\), \(v\in[0,\Delta)\)
 %	\begin{align}
-%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E[f(\bar X(t))1(\varphi(t)=j, L(t)=\ell_0, L(s)=\ell_0, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid L(0)=\ell_0, \nonumber
-%		\\&\qquad{} \bs A(0)=\bs a_{\ell_0,i}(x_0), \varphi(0)=i]\wrt t \nonumber
-%		\\&= \int_{t=0}^\infty e^{-\lambda t}\mathbb E[\psi(X(t))1(\varphi(t)=j,X(s)\in\calD_{\ell_0}, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid X(0)=x_0, \varphi(0)=i]\wrt t \nonumber
+%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E[f(\bar X(t))1(\rapphase^{(p)}(t)=j, L(t)=\ell_0, L(s)=\ell_0, \rapphase^{(p)}(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid L(0)=\ell_0, \nonumber
+%		\\&\qquad{} \bs A(0)=\bs a_{\ell_0,i}(x_0), \rapphase^{(p)}(0)=i]\wrt t \nonumber
+%		\\&= \int_{t=0}^\infty e^{-\lambda t}\mathbb E[\psi(X(t))1(\rapphase^{(p)}(t)=j,X(s)\in\calD_{\ell_0}, \rapphase^{(p)}(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid X(0)=x_0, \rapphase^{(p)}(0)=i]\wrt t \nonumber
 %		\\&\qquad {} + r_{11}^{(p)}
 %	\end{align}
 %	where 
@@ -869,13 +869,13 @@ We conclude this appendix but stating the convergence results formally.
 %\begin{proof}
 %	Assume, without loss of generality \(\ell_0=0\) so \(\calD_{\ell_0}=[0,\Delta]\). First observe that 
 %	\begin{align}
-%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E[f(\bar X(t))1(\varphi(t)=j, L(t)=\ell_0, L(s)=\ell_0, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid L(0)=\ell_0, \nonumber
-%		\\&\qquad{} \bs A(0)=\bs a_{\ell_0,i}(x_0), \varphi(0)=i]\wrt t \nonumber 
+%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E[f(\bar X(t))1(\rapphase^{(p)}(t)=j, L(t)=\ell_0, L(s)=\ell_0, \rapphase^{(p)}(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid L(0)=\ell_0, \nonumber
+%		\\&\qquad{} \bs A(0)=\bs a_{\ell_0,i}(x_0), \rapphase^{(p)}(0)=i]\wrt t \nonumber 
 %		\\&= \int_{x_1=0}^\infty \int_{x=[0,\Delta)} \cfrac{\bs \alpha e^{\bs S(x_1+x_0+x)}\bs s}{\bs \alpha e^{\bs S x_0} \bs e}h_{ij}^{++}(\lambda, x_1)f(\Delta-x)\wrt x\wrt x_1
 %	\end{align}
 %	and 
 %	\begin{align}
-%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E[\psi(X(t))1(\varphi(t)=j,X(s)\in\calD_{\ell_0}, \varphi(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid X(0)=x_0, \varphi(0)=i]\wrt t \nonumber
+%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb E[\psi(X(t))1(\rapphase^{(p)}(t)=j,X(s)\in\calD_{\ell_0}, \rapphase^{(p)}(s)\in\calS_+\cup\calS_{+0},s\in[0,t])\mid X(0)=x_0, \rapphase^{(p)}(0)=i]\wrt t \nonumber
 %		\\&=  \int_{x=0}^{\Delta-x_0} h_{ij}^{++}(\lambda, x)\psi(X_0 + x)\wrt x
 %	\end{align}
 %	In Property~\ref{properties: 2} take \(g(x) = h_{ij}^{--}(\lambda, x)\), which states 
@@ -928,34 +928,34 @@ We conclude this appendix but stating the convergence results formally.
 %
 %\begin{cor}\label{corL Tta} For \(i\in\mathcal S_-,j\in\mathcal S_-\cup\calS_{-0}\), \(x_0\in[0,\Delta)\), 
 %	\begin{align}
-%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb P(\bar X^{(p)}(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \varphi(0)=i) \wrt t \nonumber 
+%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb P(\bar X^{(p)}(t) \in \cdot, \rapphase^{(p)}(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \rapphase^{(p)}(t)=j\mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \rapphase^{(p)}(0)=i) \wrt t \nonumber 
 %		%
-%		\\& \to \int_{t=0}^\infty e^{-\lambda t}\mathbb P( X(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid X(0)= x_0, \varphi(0)=i) \wrt t \label{eqn: ffaA}
+%		\\& \to \int_{t=0}^\infty e^{-\lambda t}\mathbb P( X(t) \in \cdot, \rapphase^{(p)}(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \rapphase^{(p)}(t)=j\mid X(0)= x_0, \rapphase^{(p)}(0)=i) \wrt t \label{eqn: ffaA}
 %	\end{align}
 %	as \(p\to\infty\).
 %\end{cor}
 %\begin{proof}
 %	From the convergence of Laplace transforms in Lemma~\ref{lem: ppp} and the Continuity Theorem~\ref{thm: ext cont thm} then 
 %	\begin{align}
-%		&  \mathbb E[f(\bar X^{(p)}(t))1(\varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j) \mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \varphi(0)=i]  \nonumber 
-%		\\& \to \mathbb E[\psi(X(t)) 1(\varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j) \mid X(0)=x_0, \varphi(0)=i],
+%		&  \mathbb E[f(\bar X^{(p)}(t))1(\rapphase^{(p)}(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \rapphase^{(p)}(t)=j) \mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \rapphase^{(p)}(0)=i]  \nonumber 
+%		\\& \to \mathbb E[\psi(X(t)) 1(\rapphase^{(p)}(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \rapphase^{(p)}(t)=j) \mid X(0)=x_0, \rapphase^{(p)}(0)=i],
 %	\end{align}
 %	as \(p\to\infty\), for every bounded, Lipschitz function \(f\). By the Portmanteau Theorem, then 
 %	\begin{align}
-%		& \mathbb P(\bar X^{(p)}(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \varphi(0)=i)   \nonumber 
+%		& \mathbb P(\bar X^{(p)}(t) \in \cdot, \rapphase^{(p)}(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \rapphase^{(p)}(t)=j\mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \rapphase^{(p)}(0)=i)   \nonumber 
 %		%
-%		\\& \to \mathbb P( X(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid X(0)= x_0, \varphi(0)=i) 
+%		\\& \to \mathbb P( X(t) \in \cdot, \rapphase^{(p)}(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \rapphase^{(p)}(t)=j\mid X(0)= x_0, \rapphase^{(p)}(0)=i) 
 %	\end{align}
 %	weakly as \(p\to\infty\). In addition 
 %	\begin{align}
-%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb P(\bar X^{(p)}(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \varphi(0)=i) \wrt t\nonumber 
+%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb P(\bar X^{(p)}(t) \in \cdot, \rapphase^{(p)}(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \rapphase^{(p)}(t)=j\mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \rapphase^{(p)}(0)=i) \wrt t\nonumber 
 %		\\& \leq \int_{x=0}^\infty  h_{ij}^{--}(\lambda, x)\wrt x ,
 %	\end{align}
 %	which is bounded as a function of \(p\). Hence we can apply the Continuity Theorem~\ref{thm: ext cont thm} again and claim that 
 %	\begin{align}
-%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb P(\bar X^{(p)}(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \varphi(0)=i) \wrt t \nonumber 
+%		&\int_{t=0}^\infty e^{-\lambda t}\mathbb P(\bar X^{(p)}(t) \in \cdot, \rapphase^{(p)}(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \rapphase^{(p)}(t)=j\mid \bs A^{(p)}(0)=\bs k^{(p)}(x_0)\bs D^{(p)}, \rapphase^{(p)}(0)=i) \wrt t \nonumber 
 %		%
-%		\\& \to \int_{t=0}^\infty e^{-\lambda t}\mathbb P( X(t) \in \cdot, \varphi(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \varphi(t)=j\mid X(0)= x_0, \varphi(0)=i) \wrt t
+%		\\& \to \int_{t=0}^\infty e^{-\lambda t}\mathbb P( X(t) \in \cdot, \rapphase^{(p)}(s)\in\mathcal S_-\cup\mathcal S_{-0}, s\in[0,t], \rapphase^{(p)}(t)=j\mid X(0)= x_0, \rapphase^{(p)}(0)=i) \wrt t
 %	\end{align}
 %	as \(p\to\infty,\) as required. 
 %\end{proof}

@@ -9,7 +9,7 @@
 \renewcommand\thefigure{\arabic{figure}}
 Here we include a small toy example to show how we construct a DG approximation and to help clarify the notation. 
 
-Consider a process \(\{( \dot Y(t),X(t),\varphi(t))\}_{t\geq 0}\) with two phases, \(\varphi(t)\in\calS=\{1,2\}\) and generator matrix \(\bs T\). Let \(b = 1.8\), and the cell edges be \(y_0=0,\,y_1=1,\,y_2=1.8\). We choose a basis of Lagrange polynomials of order 1 to define our approximation space. That is, 
+Consider a process \(\{( \dot W(t),X(t),\varphi(t))\}_{t\geq 0}\) with two phases, \(\varphi(t)\in\calS=\{1,2\}\) and generator matrix \(\bs T\). Let \(b = 1.8\), and the cell edges be \(w_0=0,\,w_1=1,\,w_2=1.8\). We choose a basis of Lagrange polynomials of order 1 to define our approximation space. That is, 
 \begin{align*}
 	\phi_{0}^1(x) &= 1-x,& \phi_0^2(x) &= x, & &x \in(0,1),\\
 	\phi_{1}^1(x) &= \cfrac{1.8-x}{0.8},& \phi_1^2(x) &= \cfrac{x-1}{0.8}, & & x \in(1,1.8).
@@ -39,7 +39,7 @@ The mesh and basis functions are shown in Figure~\ref{fig: mesh}.
     \filldraw (1,1) circle (0pt) node[align=center, right] {\color{blue}\(\phi_1^1(x)\)};    
     \filldraw (1.8,1) circle (0pt) node[align=center, left] {\color{red}\(\phi_1^2(x)\)};    
 \end{tikzpicture}
-\caption{A mesh with nodes \(y_0=0\), \(y_1=1\) and \(y_2=1.8\). There are two basis functions on each cell. Boundaries are located at \(y_0=0\) and \(y_2=1.8\).\label{fig: mesh}}
+\caption{A mesh with nodes \(w_0=0\), \(w_1=1\) and \(w_2=1.8\). There are two basis functions on each cell. Boundaries are located at \(w_0=0\) and \(w_2=1.8\).\label{fig: mesh}}
 \end{figure}
 We can verify that the matrices \(\bs M\) and \(\bs G\) are given by 
 \begin{align*}
@@ -295,27 +295,27 @@ Now, to find \( {\bs\xi}\), we solve the linear system in Equations \eqref{eqn:x
 \[ {\bs\xi} = \left[\begin{array}{c|cc|cc|c} {\xi}_{-1,2} &  {\xi}_{0,2}^1 &  {\xi}_{0,2}^2 &  {\xi}_{1,1}^1 &  {\xi}_{1,1}^2 &  {\xi}_{K+1,1} \end{array}\right],\]
 where \( {\xi}_{-1,2}\) is an approximation to \( \lim\limits_{n\to\infty}\mathbb{P}\left( X{(\theta_n)} =0, \varphi({\theta_n}) = 2\right)\) and \( {\xi}_{K+1,1}\) is an approximation to the artificial point mass \( \lim\limits_{n\to\infty}\mathbb{P}\left( X({\theta_n}) =1.8, \varphi({\theta_n}) = 1\right)\). For \(x\in\calD_{0,2}\) an approximation to the density of \( \lim\limits_{n\to\infty}\mathbb{P}\left( X({\theta_n}) \in \wrt x, \varphi({\theta_n}) = 2\right)\), is constructed as \( {\xi}_{0,2}^0\phi_0^1(x) +  {\xi}_{0,2}^0\phi_0^1(x)\). For \(x\in\calD_{1,1}\) an approximation to the density of \( \lim\limits_{n\to\infty}\mathbb{P}\left(X({\theta_n}) \in \wrt x, \varphi({\theta_n}) = 1\right)\), is constructed as \( {\xi}_{1,1}^1\phi_1^1(x) +  {\xi}_{1,1}^2\phi_1^2(x).\)
 
-Next, given a value of \(y\), we solve the system \eqref{eqn:pisystem1}-\eqref{eqn:pisystem2} to find \( {\bs p}= {\bs p}^-\) and \( {\bs \pi}(y)\). 
+Next, given a value of \(w\), we solve the system \eqref{eqn:pisystem1}-\eqref{eqn:pisystem2} to find \( {\bs p}= {\bs p}^-\) and \( {\bs \pi}(w)\). 
 
 For the point masses we have 
 \[ {\bs p}^- = \left[\begin{array}{c|cc|cc|c} {p}_{-1,2} &  {p}_{0,2}^1 &  {p}_{0,2}^2 &  {p}_{1,1}^1 &  {p}_{1,1}^2 &  {p}_{K+1,1} \end{array}\right],\]
-where \( {p}_{-1,2}\) is an approximation to \( \lim\limits_{t\to\infty}\mathbb{P}\left(Y(t)=0,X({t}) =0, \varphi_{t} = 2\right)\) and \( {p}_{K+1,1}\) is an approximation to the artificial point mass \( \lim\limits_{t\to\infty}\mathbb{P}\left(Y(t)=0, X(t) =1.8, \varphi({t}) = 1\right)\). For \(x\in\calD_{0,2}\), an approximation to the density of \( \lim\limits_{t\to\infty}\mathbb{P}\left( Y(t)=0, X(t) \in \wrt x, \varphi({t}) = 2\right)\), is constructed as \( {p}_{0,2}^1\phi_0^1(x) +  {p}_{0,2}^2\phi_0^2(x)\). For \(x\in\calD_{1,1}\), an approximation to the density of \( \lim\limits_{t\to\infty}\mathbb{P}\left(Y(t)=0, X(t) \in \wrt x, \varphi({t}) = 1\right)\), is constructed as \( {p}_{1,1}^1\phi_1^1(x) +  {p}_{1,1}^2\phi_1^2(x).\)
+where \( {p}_{-1,2}\) is an approximation to \( \lim\limits_{t\to\infty}\mathbb{P}\left(\dot W(t)=0,X({t}) =0, \varphi_{t} = 2\right)\) and \( {p}_{K+1,1}\) is an approximation to the artificial point mass \( \lim\limits_{t\to\infty}\mathbb{P}\left(\dot W(t)=0, X(t) =1.8, \varphi({t}) = 1\right)\). For \(x\in\calD_{0,2}\), an approximation to the density of \( \lim\limits_{t\to\infty}\mathbb{P}\left( \dot W(t)=0, X(t) \in \wrt x, \varphi({t}) = 2\right)\), is constructed as \( {p}_{0,2}^1\phi_0^1(x) +  {p}_{0,2}^2\phi_0^2(x)\). For \(x\in\calD_{1,1}\), an approximation to the density of \( \lim\limits_{t\to\infty}\mathbb{P}\left(\dot W(t)=0, X(t) \in \wrt x, \varphi({t}) = 1\right)\), is constructed as \( {p}_{1,1}^1\phi_1^1(x) +  {p}_{1,1}^2\phi_1^2(x).\)
 
-Similarly, for \( {\bs\pi}^-(y)\), we have 
-\[ {\bs \pi}^-(y) = \left[\begin{array}{c|cc|cc|c} {\pi}_{-1,2}(y) &  {\pi}_{0,2}^1(y) &  {\pi}_{0,2}^2(y) &  {\pi}_{1,1}^1(y) &  {\pi}_{1,1}^2(y) &  {\pi}_{K+1,1}(y) \end{array}\right],\]
-where \( {\pi}_{-1,2}(y)\) is an approximation to \( \lim\limits_{t\to\infty}\mathbb{P}\left(  Y(t)\in\wrt y, X(t) =0, \varphi({t}) = 2\right)\) and \( {\pi}_{K+1,1}(y)\) is an approximation to the artificial point mass \( \lim\limits_{t\to\infty}\mathbb{P}\left( Y(t)\in \wrt y, X(t) =1.8, \varphi({t}) = 1\right)\). For \(x\in\calD_{0,2}\) an approximation to the density of \( \lim\limits_{t\to\infty}\mathbb{P}\left(Y(t) \in \wrt y, X(t) \in \wrt x, \varphi({t}) = 2\right)\), is constructed as \( {\pi}_{0,2}^1(y)\phi_0^1(x) +  {\pi}_{0,2}^2(y)\phi_0^2(x)\). For \(x\in\calD_{1,1}\) an approximation to the density of \( \lim\limits_{t\to\infty}\mathbb{P}\left( Y(t) \in \wrt y, X(t) \in \wrt x, \varphi({t}) = 1\right)\), is constructed as \( {\pi}_{1,1}^1(y)\phi_1^1(x) +  {\pi}_{1,1}^2(y)\phi_1^2(x).\)
+Similarly, for \( {\bs\pi}^-(w)\), we have 
+\[ {\bs \pi}^-(w) = \left[\begin{array}{c|cc|cc|c} {\pi}_{-1,2}(w) &  {\pi}_{0,2}^1(w) &  {\pi}_{0,2}^2(w) &  {\pi}_{1,1}^1(w) &  {\pi}_{1,1}^2(w) &  {\pi}_{K+1,1}(w) \end{array}\right],\]
+where \( {\pi}_{-1,2}(w)\) is an approximation to \( \lim\limits_{t\to\infty}\mathbb{P}\left(  \dot W(t)\in\wrt w, X(t) =0, \varphi({t}) = 2\right)\) and \( {\pi}_{K+1,1}(w)\) is an approximation to the artificial point mass \( \lim\limits_{t\to\infty}\mathbb{P}\left( \dot W(t)\in \wrt w, X(t) =1.8, \varphi({t}) = 1\right)\). For \(x\in\calD_{0,2}\) an approximation to the density of \( \lim\limits_{t\to\infty}\mathbb{P}\left(\dot W(t) \in \wrt w, X(t) \in \wrt x, \varphi({t}) = 2\right)\), is constructed as \( {\pi}_{0,2}^1(w)\phi_0^1(x) +  {\pi}_{0,2}^2(w)\phi_0^2(x)\). For \(x\in\calD_{1,1}\) an approximation to the density of \( \lim\limits_{t\to\infty}\mathbb{P}\left( \dot W(t) \in \wrt w, X(t) \in \wrt x, \varphi({t}) = 1\right)\), is constructed as \( {\pi}_{1,1}^1(w)\phi_1^1(x) +  {\pi}_{1,1}^2(w)\phi_1^2(x).\)
 
-For \( {\bs\pi}^+(y)\), we have 
-\[ {\bs \pi}^+(y) = \left[\begin{array}{cc|cc}  {\pi}_{0,1}^1(y) &  {\pi}_{0,1}^2(y) &  {\pi}_{1,2}^1(y) &  {\pi}_{1,2}^2(y) \end{array}\right].\]
-For \(x\in\calD_{0,1}\) an approximation to the joint density of \( \lim\limits_{t\to\infty}\mathbb{P}\left(Y(t) \in \wrt y, X_t \in \wrt x, \varphi({t}) = 1\right)\) is constructed as \( {\pi}_{0,1}^1(y)\phi_0^1(x) +  {\pi}_{0,1}^2(y)\phi_0^2(x)\). For \(x\in\calD_{1,2}\) an approximation to the density of \( \lim\limits_{t\to\infty}\mathbb{P}\left(Y(t) \in \wrt y,  X(t) \in \wrt x, \varphi({t}) = 2\right)\) is constructed as \( {\pi}_{1,2}^1(y)\phi_1^1(x) +  {\pi}_{1,2}^2(y)\phi_1^2(x).\)
+For \( {\bs\pi}^+(w)\), we have 
+\[ {\bs \pi}^+(w) = \left[\begin{array}{cc|cc}  {\pi}_{0,1}^1(w) &  {\pi}_{0,1}^2(w) &  {\pi}_{1,2}^1(w) &  {\pi}_{1,2}^2(w) \end{array}\right].\]
+For \(x\in\calD_{0,1}\) an approximation to the joint density of \( \lim\limits_{t\to\infty}\mathbb{P}\left(\dot W(t) \in \wrt w, X_t \in \wrt x, \varphi({t}) = 1\right)\) is constructed as \( {\pi}_{0,1}^1(w)\phi_0^1(x) +  {\pi}_{0,1}^2(w)\phi_0^2(x)\). For \(x\in\calD_{1,2}\) an approximation to the density of \( \lim\limits_{t\to\infty}\mathbb{P}\left(\dot W(t) \in \wrt w,  X(t) \in \wrt x, \varphi({t}) = 2\right)\) is constructed as \( {\pi}_{1,2}^1(w)\phi_1^1(x) +  {\pi}_{1,2}^2(w)\phi_1^2(x).\)
 
 In summary, for \(i\in\calS\), a global approximation of the joint stationary distribution is
 \begin{align*}
-	\lim\limits_{t\to\infty}\mathbb{P}\left(Y(t) \in \wrt y,  X(t) \in \wrt x, \varphi({t}) = i\right) &\approx \displaystyle \sum_{r\in\{1,2\},k\in\{0,1\}}  {\pi}_{i,k}^r(y)\phi_k^r(x)\wrt x \wrt y ,\intertext{ for \(x\in(0,1.8),\, y>0, and\)}
-	\lim\limits_{t\to\infty}\mathbb{P}\left( Y(t)=0, X(t) \in \wrt x, \varphi({t}) = i\right) & \approx \displaystyle \sum_{r\in\{1,2\},k\in\{0,1\}}  {p}_{k,i}^r\phi_k^r(x)\wrt x ,\quad x\in(0,1.8),\\
-	 \lim\limits_{t\to\infty}\mathbb{P}\left(Y(t) \in \wrt y,X(t) =0 ,\varphi({t}) = i\right) & \approx{\pi}_{-1,i}(y)\wrt y,\quad y>0, \\
-	 \lim\limits_{t\to\infty}\mathbb{P}\left( Y(t) =0, X(t) =0,\varphi({t}) = i\right) & \approx {p}_{-1,i},\quad \\ 
-	 \lim\limits_{t\to\infty}\mathbb{P}\left(  Y(t) \in \wrt y, X(t) = 1.8, \varphi({t}) = i\right) & \approx {\pi}_{K+1,i}(y)\wrt y,\quad y>0, \\
-	 \lim\limits_{t\to\infty}\mathbb{P}\left( Y(t) = 0, X(t) = 1.8, \varphi({t}) = i\right) & \approx {p}_{K+1,i}.\quad
+	\lim\limits_{t\to\infty}\mathbb{P}\left(\dot W(t) \in \wrt w,  X(t) \in \wrt x, \varphi({t}) = i\right) &\approx \displaystyle \sum_{r\in\{1,2\},k\in\{0,1\}}  {\pi}_{i,k}^r(w)\phi_k^r(x)\wrt x \wrt w ,\intertext{ for \(x\in(0,1.8),\, w>0, and\)}
+	\lim\limits_{t\to\infty}\mathbb{P}\left( \dot W(t)=0, X(t) \in \wrt x, \varphi({t}) = i\right) & \approx \displaystyle \sum_{r\in\{1,2\},k\in\{0,1\}}  {p}_{k,i}^r\phi_k^r(x)\wrt x ,\quad x\in(0,1.8),\\
+	 \lim\limits_{t\to\infty}\mathbb{P}\left(\dot W(t) \in \wrt w,X(t) =0 ,\varphi({t}) = i\right) & \approx{\pi}_{-1,i}(w)\wrt w,\quad w>0, \\
+	 \lim\limits_{t\to\infty}\mathbb{P}\left( \dot W(t) =0, X(t) =0,\varphi({t}) = i\right) & \approx {p}_{-1,i},\quad \\ 
+	 \lim\limits_{t\to\infty}\mathbb{P}\left(  \dot W(t) \in \wrt w, X(t) = 1.8, \varphi({t}) = i\right) & \approx {\pi}_{K+1,i}(w)\wrt w,\quad w>0, \\
+	 \lim\limits_{t\to\infty}\mathbb{P}\left( \dot W(t) = 0, X(t) = 1.8, \varphi({t}) = i\right) & \approx {p}_{K+1,i}.\quad
 \end{align*}
-%\[\left[\begin{array}{c|cc|cc|cc|cc|c} {\pi}_{2,{-1}}(y) &  {\pi}_{1,1}^1(y) &  {\pi}_{1,2}^1(y) &  {\pi}_{2,1}^1(y) &  {\pi}_{2,2}^1(y) &  {\pi}_{1,1}^2(y) &  {\pi}_{1,2}^2(y) &  {\pi}_{2,1}^2(y) &  {\pi}_{2,2}^2(y) &  {\pi}_{1,{K+1}}(y) \end{array}\right]\]
+%\[\left[\begin{array}{c|cc|cc|cc|cc|c} {\pi}_{2,{-1}}(w) &  {\pi}_{1,1}^1(w) &  {\pi}_{1,2}^1(w) &  {\pi}_{2,1}^1(w) &  {\pi}_{2,2}^1(w) &  {\pi}_{1,1}^2(w) &  {\pi}_{1,2}^2(w) &  {\pi}_{2,1}^2(w) &  {\pi}_{2,2}^2(w) &  {\pi}_{1,{K+1}}(w) \end{array}\right]\]
